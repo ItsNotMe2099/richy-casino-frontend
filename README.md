@@ -1,0 +1,2 @@
+# richy-casino-frontend
+
