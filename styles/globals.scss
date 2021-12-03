@@ -1,0 +1,29 @@
+@import "styles/index";
+
+html, body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+}
+
+a{
+  color: #000;
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+input{
+  outline: none;
+}
+
+button{
+  outline: none;
+}

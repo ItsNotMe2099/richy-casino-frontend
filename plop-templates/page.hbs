@@ -1,0 +1,30 @@
+import { GetServerSideProps } from 'next'
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import styles from './index.module.scss'
+
+interface Props {}
+
+export default function {{ properCase name }}Page(props: Props) {
+  const { t } = useTranslation('common')
+
+  return (
+    <div className={styles.root}>
+      {{ properCase name }}Page
+    </div>
+  )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context ) => {
+  return {
+    props: {
+      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+    },
+  }
+}
+
+// export const getStaticProps = async (context: GetStaticPropsContext) => ({
+//   props: {
+//     ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+//   },
+// })
