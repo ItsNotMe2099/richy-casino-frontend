@@ -1,5 +1,5 @@
 {
-  "name": "nextjs_boilerplate",
+  "name": "richy-casino-frontend",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -16,6 +16,7 @@
     "normalize.css": "8.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-grid-system": "^8.0.1",
     "sass": "1.43.4",
     "spinners-react": "^1.0.6"
   },
