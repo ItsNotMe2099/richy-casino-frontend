@@ -1,4 +1,4 @@
-// breakpoints
+// Breakpoints
 $xs-max: 768px;
 $sm-min: 769px;
 $sm-max: 1200px;
@@ -6,6 +6,15 @@ $md-min: 1201px;
 $md-max: 1850px;
 $lg-min: 1851px;
 
-// colors
+// Spacing
+$space-base: 20px;
+
+// Colors
 $primary500: #427BF8;
+$white: #ffffff;
 $grey500: #1D1E25;
+$grey600: #1D1E25;
+$grey700: #14151B;
+
+$border-radius-base: 8px;
+$border-radius-large: 18px;

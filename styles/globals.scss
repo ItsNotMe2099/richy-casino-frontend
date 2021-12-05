@@ -1,9 +1,12 @@
 @import "styles/index";
 
 html, body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Gilroy', sans-serif;
   font-size: 14px;
-  line-height: 1.4;
+  font-weight: 500;
+  line-height: 1.3;
+  background: $grey700;
+  color: $white;
 }
 
 *{
@@ -11,7 +14,7 @@ html, body {
 }
 
 h1, h2, h3 {
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
 a{
@@ -26,4 +29,25 @@ input{
 
 button{
   outline: none;
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url(/fonts/Gilroy/Gilroy-Medium.ttf) format('truetype');
+  src: url(/fonts/Gilroy/Gilroy-Medium.woff2) format('woff2');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url(/fonts/Gilroy/Gilroy-Semibold.ttf) format('truetype');
+  src: url(/fonts/Gilroy/Gilroy-Semibold.woff2) format('woff2');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url(/fonts/Gilroy/Gilroy-Bold.ttf) format('truetype');
+  src: url(/fonts/Gilroy/Gilroy-Bold.woff2) format('woff2');
+  font-weight: 700;
 }
