@@ -18,7 +18,7 @@ export const colors = {
   balance500: '#FFD12F',
   lottery500: '#5960FF',
   fortune500: '#F81AAC',
-  bonuse500: '#8572FF',
+  bonus500: '#8572FF',
 }
 
 export const breakpoints = {

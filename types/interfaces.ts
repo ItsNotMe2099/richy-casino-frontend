@@ -20,4 +20,14 @@ export interface IButton {
   form?: string
   spinner?: boolean
   onClick?: MouseEventHandler
+  children?: React.ReactNode
+  variant?: 'outlined' 
+  color?: 'fill'
+  size?: 'extraSmall' | 'small' | 'normal' | 'large'
+  fluid?: boolean
+  href?: string
+  target?: string
+  className?: string
+  image?: string
+  background?: 'dark700' | 'payGradient500'
 }

@@ -1,0 +1,44 @@
+
+@import "scss/index";
+
+    .link, .btn{
+
+        cursor: pointer;
+        outline: none;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        -webkit-appearance: none;
+        -webkit-tap-highlight-color: transparent;
+        border-radius: 8px;
+        border: 0;
+        text-align: center;
+    }
+
+.sizeExtraSmall{
+    width: 41px;
+    height: 41px;
+}
+
+.sizeSmall{
+    padding: 13px 22px;
+}
+.sizeNormal{
+    padding: 12px 15px;
+}
+.sizeLarge{
+    padding: 25px 130px;
+}
+
+.dark700{
+    background-color: $dark700;
+}
+
+.payGradient500{
+   background: linear-gradient(270deg, #6ABD37 -6.01%, #8EDC5D 114.87%);
+}
+
+.variantOutlined{
+    border: 2px solid #fff;
+}

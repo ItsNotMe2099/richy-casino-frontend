@@ -1,0 +1,56 @@
+@import "scss/index";
+
+.root{
+  position: relative;
+}
+
+.dots{
+  margin: auto;
+  display: flex;
+  svg{
+    circle{
+      
+    }
+  }
+}
+
+.dropDownTrigger{
+  width: 50px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: $dark600;
+}
+
+.dropDown {
+  background: #fff;
+  position: absolute;
+  top: 100%;
+  margin-top: 4px;
+  opacity: 0;
+  visibility: hidden;
+  border-radius: 3px;
+  z-index: 5;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  right: 0px;
+  a{
+    color: #000 !important;
+    padding: 5px 10px;
+  }
+}
+
+.dropDownActive{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  background: #fff;
+  border-radius: 3px;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

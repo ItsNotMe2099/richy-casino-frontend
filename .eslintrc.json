@@ -3,6 +3,7 @@
   "plugins": ["unused-imports"],
   "rules": {
     "semi": ["error", "never"],
+    "react/jsx-key": "off",
     "unused-imports/no-unused-imports": "error",
     "@next/next/no-img-element": "off",
     "no-console": "warn",

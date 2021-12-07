@@ -1,0 +1,14 @@
+@import "scss/index";
+
+.root{
+  display: flex;
+  background-color: $dark700;
+  padding: 15px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  img{
+    margin-right: 10px;
+  }
+}
+
+

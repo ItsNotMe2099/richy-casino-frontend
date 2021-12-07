@@ -1,0 +1,194 @@
+@import "scss/index";
+
+.top{
+  display: flex;
+  padding: 18px 0 23px 0;
+  justify-content: space-between;
+  @media screen and (max-width: 920px){
+    padding: 12px 18px;
+  }
+  @media screen and (max-width: 610px){
+    margin: 0 -10px;
+  }
+}
+
+.left{
+  display: flex;
+  height: 41px;
+  @media screen and (max-width: 920px){
+    display: none;
+  }
+}
+
+.right{
+  display: flex;
+}
+
+.apps{
+    display: flex;
+    margin-right: 20px;
+}
+
+.bonuses{
+    display: flex;
+}
+
+.bonus{
+  padding: 7px 12px 7px 7px;
+  background: $dark700;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  position: relative;
+  cursor: pointer;
+}
+
+.gift{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 27px;
+  background: linear-gradient(49.89deg, #665AFF -5.54%, #8C18FF 128.26%);
+  box-shadow: 0px 0px 20px rgba(151, 51, 254, 0.58);
+  border-radius: 6px;
+}
+
+.textGift{
+  @include textStyle14600;
+  margin-left: 12px;
+  color: $bonus500;
+}
+
+.bitcoin{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 23px;
+  height: 23px;
+  border-radius: 100%;
+  background: #FFBB03;
+  box-shadow: 0px 0px 13px rgba(245, 179, 0, 0.5);
+}
+
+.textBitcoin{
+  @include textStyle14600;
+  margin-left: 12px;
+  color: $balance500;
+}
+
+.wheel{
+  width: 26px;
+  height: 26px;
+  background-image: url('../../../public/img/layout/top/wheel.svg');
+  background-position-x: center;
+  background-position-y: center;
+}
+
+.textWheel{
+  @include textStyle14600;
+  margin-left: 12px;
+  color: $tickets500;
+}
+
+.free{
+  background: #F30058;
+  border-radius: 8px 0px 5.5px;
+  padding: 2px 4px;
+  font-weight: 600;
+  font-size: 8px;
+  color: #FFFFFF;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.btn{
+  margin-right: 8px;
+}
+
+.login{
+  margin-right: 6px;
+  button{
+  font-weight: 600;
+  font-size: 16px;  
+  color: #FFFFFF;
+  }
+  @media screen and (max-width: 610px){
+    button{
+      font-size: 10px;
+    }
+  }
+}
+
+.reg{
+  margin-right: 11px;
+  button{
+    font-weight: 600;
+    font-size: 16px;  
+    color: #FFFFFF;
+    img{
+      margin-right: 14px;
+      @media screen and (max-width: 610px){
+        width: 16px;
+        margin-right: 6px;
+      }
+    }
+    }
+    @media screen and (max-width: 610px){
+      margin-right: 0;
+      button{
+        font-size: 10px;
+      }
+    }
+}
+
+.lang{
+  margin-right: 11px;
+  @media screen and (max-width: 610px){
+    display: none;
+  }
+}
+
+.chat{
+  @media screen and (max-width: 610px){
+    display: none !important;
+  }
+}
+
+.menu{
+  padding: 13px 29px 10px 29px;
+  border-radius: 10px;
+  background: $dark700;
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 950px){
+    border-radius: 0;
+    margin: 0 -10px;
+    padding: 13px 0 10px 18px;
+  }
+  @media screen and (max-width: 920px){
+    padding: 0 0 0 18px;
+    border: 1px solid #272832;
+  }
+}
+
+.logo{
+  margin-right: 36px;
+  @media screen and (max-width: 1475px){
+    display: none;
+  }
+}
+
+.logoMobile{
+  align-self: center;
+  @media screen and (min-width: 921px){
+    display: none;
+  }
+  @media screen and (max-width: 610px){
+    svg{
+      width: 60px;
+    }
+  }
+}
