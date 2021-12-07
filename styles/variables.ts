@@ -1,8 +1,24 @@
 export const colors = {
-  orange500: '#F85D34',
-  orange600: '#FF3B07',
-  yellow500: '#FECE00',
-  grey700: '#333333',
+  white: '#ffffff',
+  dark800: '#14151B',
+  dark700: '#1D1E25',
+  dark600: '#272832',
+  dark500: '#2D2E38',
+  dark400: '#41424F',
+  dark300: '#484B5C',
+  dark200: '#484B5C',
+  dark100: '#797C86',
+  grey500: '#C4C4C4',
+  blue500: '#427BF8',
+  lose500: '#427BF8',
+  pay500: '#7BD245',
+  tickets500: '#6BFFA6',
+  balance700: '#EEAF4D',
+  balance600: '#FFC700',
+  balance500: '#FFD12F',
+  lottery500: '#5960FF',
+  fortune500: '#F81AAC',
+  bonuse500: '#8572FF',
 }
 
 export const breakpoints = {
