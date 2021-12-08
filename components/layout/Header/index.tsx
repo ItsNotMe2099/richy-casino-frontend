@@ -30,8 +30,6 @@ export default function Header(props: Props) {
 
   return (
     <>
-    <Row>
-      <Col>
       <div className={styles.top}>
       <div className={styles.left}>
         <div className={styles.apps}>
@@ -69,16 +67,10 @@ export default function Header(props: Props) {
         <Button className={styles.chat} size='normal' background='dark700'><img src='/img/layout/top/chat.svg' alt=''/></Button>
       </div>
     </div>
-      </Col>
-    </Row>
-    <Row>
-      <Col>
         <div className={styles.menu}>
           <div className={styles.logo}><Logo/></div>
           <Overflow currentPath={currentPath} currentRoute={currentRoute} options={options}/>
         </div>
-      </Col>
-    </Row>
     </>
   )
 }

@@ -26,3 +26,11 @@
   font-weight: 600;
   font-size: 14px;
 }
+
+@mixin giftGradient {
+  background: linear-gradient(49.89deg, #665AFF -5.54%, #8C18FF 128.26%);
+}
+
+@mixin overflowGradient {
+  background: linear-gradient(270deg, #14151B 23.73%, rgba(20, 21, 27, 0) 100%);
+}

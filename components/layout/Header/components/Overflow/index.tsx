@@ -1,12 +1,17 @@
 import styles from './index.module.scss'
-import cx from 'classnames'
+import classNames from 'classnames'
 import Link from 'next/link'
 import ButtonDotsWithOverflow from 'components/ui/Button/ButtonDotsWithOverflow'
+
+interface IOption{
+  label: string
+  link: string
+}
 
 interface Props {
   children?: React.ReactNode
   className?: string
-  options: any[]
+  options: IOption[]
   currentRoute: string
   currentPath: string
 }
@@ -18,7 +23,7 @@ export default function Overflow(props: Props) {
     return(
       <Link href={item.link}>
           <a
-            className={cx(styles.item, {
+            className={classNames(styles.item, {
             [styles.itemActive]: props.currentRoute === item.link || props.currentPath === item.link,
             })}
             href={item.link}

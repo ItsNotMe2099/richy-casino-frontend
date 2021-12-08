@@ -1,7 +1,7 @@
 import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
 import { useRef } from 'react'
 import styles from './index.module.scss'
-import cx from 'classnames'
+import classNames from 'classnames'
 import Dots from 'components/svg/Dots'
 
 
@@ -28,7 +28,7 @@ export const ButtonDotsWithOverflow = (props: Props, ref) => {
           <Dots/>
         </div>
       </div>
-      <nav ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>
+      <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
         {props.children && props.children}
       </nav>
     </div>

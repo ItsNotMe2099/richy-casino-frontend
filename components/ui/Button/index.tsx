@@ -1,13 +1,24 @@
 import styles from './index.module.scss'
 import Link from 'next/link'
-import cx from 'classnames'
+import classNames from 'classnames'
 import { IButton } from 'types/interfaces'
 
-export default function Button(props: IButton) {
+interface Props extends IButton {
+  children?: React.ReactNode
+  variant?: 'outlined' 
+  color?: 'fill'
+  size?: 'extraSmall' | 'small' | 'normal' | 'large'
+  fluid?: boolean
+  href?: string
+  target?: string
+  className?: string
+  image?: string
+  background?: 'dark700' | 'payGradient500'
+}
 
-  const getClassName = () => {
-    return {
+export default function Button(props: Props) {
 
+  const btnClass = classNames({
       [styles.sizeExtraSmall]: props.size === 'extraSmall',
       [styles.sizeSmall]: props.size === 'small',
       [styles.sizeNormal]: props.size === 'normal',
@@ -17,8 +28,8 @@ export default function Button(props: IButton) {
       [styles.fluid]: props.fluid,
       [styles.dark700]: props.background === 'dark700',
       [styles.payGradient500]: props.background === 'payGradient500'
-    }
-  }
+  })
+
   return (
   <>
   {props.href ? (
@@ -27,7 +38,7 @@ export default function Button(props: IButton) {
         onClick={props.onClick}
         href={props.href}
         target={props.target}
-        className={cx(styles.link, getClassName(), props.className)}
+        className={classNames(styles.link, btnClass, props.className)}
       >
         {props.image ? <img src={props.image} alt=""/> : props.children}
       </a>
@@ -36,7 +47,7 @@ export default function Button(props: IButton) {
     <button
       type={props.type}
       onClick={props.onClick}
-      className={cx(styles.btn, getClassName(), props.className)}
+      className={classNames(styles.btn, btnClass, props.className)}
     >
       {props.image ? <img src={props.image} alt=""/> : props.children}
     </button>

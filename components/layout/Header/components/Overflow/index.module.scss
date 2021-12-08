@@ -163,5 +163,5 @@
   position: fixed;
   height: 41px;
   right: 0;
-  background: linear-gradient(270deg, #14151B 23.73%, rgba(20, 21, 27, 0) 100%);
+  @include overflowGradient;
 }
