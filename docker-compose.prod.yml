@@ -1,0 +1,41 @@
+version: '3'
+
+networks:
+  app:
+    driver: bridge
+  nginx-proxy:
+    external: true
+services:
+    app:
+        build:
+          context: .
+          dockerfile: docker/app/Dockerfile
+          args:
+            - ENV_FILE=.env.prod
+        image: ${APP_IMAGE}
+        container_name: arbi-hunter-front-app
+        restart: ${DK_RESTART}
+        networks:
+          - app
+    nginx:
+        build:
+          context: .
+          dockerfile: docker/nginx/Dockerfile
+          args:
+            - APP_IMAGE=${APP_IMAGE}
+        image: ${NGINX_IMAGE}
+        container_name: arbi-hunter-front-nginx
+        restart: ${DK_RESTART}
+        networks:
+          - app
+          - nginx-proxy
+        depends_on:
+          - app
+        environment:
+          API_HOST: http://yt-api-nginx
+          ADMIN_HOST: http://yt-admin
+          VIRTUAL_HOST: arbihunter.ru
+          LETSENCRYPT_HOST: arbihunter.ru
+          LETSENCRYPT_EMAIL: sites.globcom@yandex.ru
+          VIRTUAL_PORT: 80
+
