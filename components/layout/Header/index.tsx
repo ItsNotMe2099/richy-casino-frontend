@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import { Row, Col } from 'react-grid-system'
 import Button from 'components/ui/Button'
 import LangSelect from 'components/LangSelect'
 import Logo from 'components/svg/Logo'
@@ -29,7 +28,7 @@ export default function Header(props: Props) {
   ]
 
   return (
-    <>
+    <div className={styles.root} id='top'>
       <div className={styles.top}>
       <div className={styles.left}>
         <div className={styles.apps}>
@@ -53,7 +52,7 @@ export default function Header(props: Props) {
           </div>
           <div className={styles.bonus}>
             <div className={styles.wheel}>
-      
+              <img src='/img/layout/top/wheel.svg' alt=''/>
             </div>
             <div className={styles.textWheel}>Wheel of Fortune</div>
           </div>
@@ -71,7 +70,7 @@ export default function Header(props: Props) {
           <div className={styles.logo}><Logo/></div>
           <Overflow currentPath={currentPath} currentRoute={currentRoute} options={options}/>
         </div>
-    </>
+    </div>
   )
 }
 

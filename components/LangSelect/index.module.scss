@@ -11,4 +11,12 @@
   }
 }
 
+.other{
+  background-color: $dark500;
+  padding: 12px 14px;
+  @media screen and (max-width: 900px){
+    padding: 7px 9px;
+  }
+}
+
 

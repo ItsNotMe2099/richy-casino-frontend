@@ -2,13 +2,15 @@ import { GetStaticProps, GetStaticPropsContext } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import styles from 'pages/index.module.scss'
 import { Container } from 'react-grid-system'
-import Header from 'components/layout/Header'
+import Layout from 'components/layout/Layout'
 
 export default function IndexPage() {
   return (
     <div className={styles.root}>
-      <Container>
-        <Header/>
+      <Container style={{height: '100%', minHeight: '100%'}}>
+        <Layout>
+          
+        </Layout>
       </Container>
     </div>
   )

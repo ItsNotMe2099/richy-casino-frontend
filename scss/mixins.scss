@@ -34,3 +34,7 @@
 @mixin overflowGradient {
   background: linear-gradient(270deg, #14151B 23.73%, rgba(20, 21, 27, 0) 100%);
 }
+
+@mixin blueGradient500 {
+  background: linear-gradient(270deg, #2C50FF -6.01%, #4785F6 114.87%);
+}

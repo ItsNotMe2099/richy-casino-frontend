@@ -21,3 +21,15 @@ export interface IButton {
   spinner?: boolean
   onClick?: MouseEventHandler
 }
+
+export const CONTACTS = {
+  email: 'support@richy.com',
+  facebook: '#',
+  youtube: '#',
+  twitter: '#',
+  linkedIn: '#'
+}
+
+export const LINKS = {
+
+}
