@@ -4,6 +4,11 @@
 }
 
 // Font Style
+@mixin textStyle22Bold {
+  font-weight: bold;
+  font-size: 22px;
+}
+
 @mixin textStyle26Bold {
   font-weight: bold;
   font-size: 26px;

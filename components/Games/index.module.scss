@@ -1,0 +1,128 @@
+@import "scss/index";
+
+.root {
+  margin-top: 20px;
+  padding: 28px;
+  border-radius: 18px;
+  background-color: $dark700;
+  @media screen and (max-width: 400px){
+    padding: 16px 21px;
+  }
+}
+
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.block{
+  display: flex;
+  align-items: center;
+}
+
+.gamepad{
+  margin-right: 18px;
+  display: flex;
+  img{
+    background: radial-gradient(50% 50% at 50% 50%, #3058FE 0%, rgba(29, 30, 37, 0.6) 100%);
+  }
+  @media screen and (max-width: 480px){
+    margin-right: 9px;
+    img{
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.games{
+  font-weight: bold;
+  font-size: 26px;
+  color: $white;
+  @media screen and (max-width: 480px){
+    font-size: 18px;
+  }
+}
+
+.all{
+  padding: 13px 17px;
+  border-radius: 8px;
+  background-color: $dark600;
+  color: $white;
+  font-weight: 600;
+  font-size: 12px;
+  margin-right: 13px;
+  @media screen and (max-width: 500px){
+    padding: 8px 12px;
+    span{
+      display: none;
+    }
+  }
+}
+
+.length{
+  @media screen and (min-width: 401px){
+    display: none;
+  }
+  font-weight: 500;
+  font-size: 13px;
+  color: #45454D;
+  margin-right: 10px;
+}
+
+.controls{
+  display: flex;
+  @media screen and (max-width: 400px){
+    display: none;
+  }
+}
+
+.next, .prev{
+  padding: 15px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $dark600;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.prev{
+  margin-right: 5px;
+  svg{
+    transform: rotate(180deg);
+  }
+}
+
+.slider{
+  margin-top: 28px;
+  :global .slick-list{
+    .slick-track{
+      .slick-slide{
+        div{
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 400px){
+    display: none;
+  }
+}
+
+.overflowSlider{
+  @media screen and (min-width: 401px){
+    display: none;
+  }
+  flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  overflow-x: scroll;
+  clip: auto;
+  position: relative;
+  margin-top: 15px;
+}
+

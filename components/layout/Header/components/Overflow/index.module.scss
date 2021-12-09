@@ -158,7 +158,7 @@
 
 .transparent{
   width: 18px;
-  position: fixed;
+  position: absolute;
   height: 41px;
   right: 0;
   @include overflowGradient;

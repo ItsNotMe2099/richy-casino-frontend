@@ -1,0 +1,96 @@
+@import "scss/index";
+
+.root{
+  margin-top: 20px;
+  flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: clip;
+  clip: auto;
+  position: relative;
+  @media screen and (max-width: 960px){
+    overflow-x: scroll;
+    overflow-y: hidden;
+    margin-right: -10px;
+    margin-left: -10px;
+    padding-left: 18px;
+  }
+}
+
+.wrapper{
+  position: relative;
+}
+
+.item{
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+  padding-bottom: 24px;
+  align-items: center;
+  border-radius: 18px;
+  background-color: $dark700;
+  width: 200px;
+  flex-shrink: 0;
+  @media screen and (max-width: 1360px){
+    width: 150px;
+  }
+  @media screen and (max-width: 950px){
+    margin-right: 10px;
+  }
+  @media screen and (max-width: 375px){
+    width: 108px;
+  }
+}
+
+.image{
+  img{
+    @media screen and (max-width: 375px){
+      width: 42px;
+      height: 42px;
+    }
+  }
+}
+
+.label{
+  margin-top: 10px;
+  @include textStyle22Bold;
+  color: $white;
+  text-align: center;
+  @media screen and (max-width: 1360px){
+    font-size: 16px;
+  }
+  @media screen and (max-width: 375px){
+    font-size: 13px;
+  }
+}
+
+.desc{
+  margin-top: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  color: $dark100;
+  text-align: center;
+  @media screen and (max-width: 1360px){
+    font-size: 10px;
+  }
+  @media screen and (max-width: 375px){
+    display: none;
+  }
+}
+
+.transparent{
+  width: 59px;
+  position: absolute;
+  height: 160px;
+  right: -10px;
+  @include overflowGradient;
+  z-index: 1;
+  bottom: 0;
+  @media screen and (min-width: 961px){
+    display: none;
+  }
+  @media screen and (max-width: 375px){
+    height: 150px;
+  }
+}

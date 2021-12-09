@@ -4,6 +4,8 @@ import type { AppProps } from 'next/app'
 import { appWithTranslation } from 'next-i18next'
 import { setConfiguration } from 'react-grid-system'
 import { AppWrapper } from 'context/state'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   setConfiguration({
