@@ -1,0 +1,38 @@
+<svg width="134" height="134" viewBox="0 0 134 134" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="67" cy="67" r="67" fill="url(#paint0_radial_1309_108961)"/>
+<rect width="18.7917" height="27.3333" transform="matrix(-1 0 0 1 85.7915 49.9167)" fill="#C7CFEF"/>
+<rect x="48.2084" y="49.9167" width="18.7917" height="27.3333" fill="#ECEEF6"/>
+<rect width="29.0417" height="8.54167" transform="matrix(-1 0 0 1 96.0415 34.5417)" fill="#8B9AD6"/>
+<rect x="36.25" y="34.5417" width="30.75" height="8.54167" fill="#B4BCDE"/>
+<rect width="8.54167" height="8.54167" transform="matrix(-1 0 0 1 75.5415 26)" fill="#B7BEE6"/>
+<rect x="58.4584" y="26" width="8.54167" height="8.54167" fill="white"/>
+<path d="M96.0415 27.9363C96.0415 26.8669 95.1746 26 94.1052 26H80.6665V34.5417H96.0415V27.9363Z" fill="#B7BEE6"/>
+<path d="M36.25 27.9363C36.25 26.8669 37.1169 26 38.1863 26L53.3333 26V34.5417H36.25V27.9363Z" fill="white"/>
+<rect width="27.3333" height="8.54167" transform="matrix(-1 0 0 1 94.3335 85.7917)" fill="#8B9AD6"/>
+<rect x="39.6666" y="85.7917" width="27.3333" height="8.54167" fill="#B4BCDE"/>
+<path d="M102.875 96.2696C102.875 95.2002 102.008 94.3333 100.939 94.3333H67V108H100.939C102.008 108 102.875 107.133 102.875 106.064V96.2696Z" fill="#B7BEE6"/>
+<path d="M31.125 96.2696C31.125 95.2002 31.9919 94.3333 33.0613 94.3333H67V108H33.0613C31.9919 108 31.125 107.133 31.125 106.064V96.2696Z" fill="#ECEEF6"/>
+<path d="M85.7918 77.25H67.0002V85.7917H94.3335L85.7918 77.25Z" fill="#DCE0F0"/>
+<path d="M48.2082 77.25H66.9999V85.7917H39.6666L48.2082 77.25Z" fill="white"/>
+<path d="M85.7915 49.9167L66.9998 49.9167V43.0834L96.0415 43.0834V44.1028C96.0415 44.868 95.5909 45.5615 94.8916 45.8722L85.7915 49.9167Z" fill="#697BC6"/>
+<path d="M48.2083 49.9167H67V43.0834H36.25V44.0268C36.25 44.8302 36.7462 45.5502 37.497 45.8362L48.2083 49.9167Z" fill="#A9B3D9"/>
+<rect x="37.9584" y="94.3333" width="6.83333" height="13.6667" fill="white"/>
+<rect opacity="0.5" x="37.9584" y="34.5417" width="6.83333" height="8.54167" fill="#EEEEEE"/>
+<rect opacity="0.5" x="48.2084" y="34.5417" width="6.83333" height="8.54167" fill="#EEEEEE"/>
+<rect x="49.9166" y="94.3333" width="6.83333" height="13.6667" fill="white"/>
+<rect x="51.6251" y="49.9167" width="6.83334" height="27.3333" fill="white"/>
+<rect opacity="0.4" x="63.5834" y="94.3333" width="6.83333" height="13.6667" fill="#8090D2"/>
+<rect opacity="0.4" x="63.5834" y="49.9167" width="6.83333" height="27.3333" fill="#8090D2"/>
+<rect opacity="0.4" x="63.5834" y="26" width="6.83333" height="8.54167" fill="#8090D2"/>
+<rect opacity="0.4" x="44.7916" y="26" width="8.54167" height="8.54167" fill="#ECEEF6"/>
+<rect opacity="0.4" x="75.5415" y="49.9167" width="6.83333" height="27.3333" fill="#AAB5E3"/>
+<rect opacity="0.4" x="78.9585" y="34.5417" width="6.83333" height="8.54167" fill="#9FAEE8"/>
+<rect x="78.9585" y="94.3333" width="6.83333" height="13.6667" fill="#9FAEE8"/>
+<rect width="3.41667" height="13.6667" transform="matrix(-1 0 0 1 94.3335 94.3333)" fill="#9FAEE8"/>
+<defs>
+<radialGradient id="paint0_radial_1309_108961" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(67 67) rotate(90) scale(67)">
+<stop stop-color="#3058FE"/>
+<stop offset="1" stop-color="#1D1E25" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>

@@ -43,3 +43,7 @@
 @mixin blueGradient500 {
   background: linear-gradient(270deg, #2C50FF -6.01%, #4785F6 114.87%);
 }
+
+@mixin payGradient500{
+  background: linear-gradient(270deg, #6ABD37 -6.01%, #8EDC5D 114.87%);
+}

@@ -42,7 +42,7 @@ export default function Games(props: Props) {
     variableWidth: false,
     adaptiveHeight: false,
     arrows: false,
-    beforeChange: (current, next) => setCurrentIndex(next),
+    beforeChange: (current: number, next: number) => setCurrentIndex(next),
     responsive: [
       {
         breakpoint: 570,
@@ -90,13 +90,13 @@ export default function Games(props: Props) {
         </div>
         </div>
         <Slider {...settings} ref={slider1 => (slider = slider1)}>
-          {items.map(item => 
-            <Slide item={item}/>
+          {items.map((item, index) => 
+            <Slide item={item} key={index}/>
           )}
         </Slider>
         <div className={styles.overflowSlider}>
-          {items.map(item => 
-            <Slide item={item}/>
+          {items.map((item, index) => 
+            <Slide item={item} key={index}/>
           )}
         </div>
       </div>

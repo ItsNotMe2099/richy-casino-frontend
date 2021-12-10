@@ -23,8 +23,8 @@ export default function Contents(props: Props) {
     <div className={styles.wrapper}>
       <div className={styles.transparent}></div>
     <div className={styles.root}>
-      {items.map(item =>
-          <Link href={item.link}>
+      {items.map((item, index) =>
+          <Link href={item.link} key={index}>
           <a className={styles.item}>
             <div className={styles.image}>
               <img src={item.image} alt=''/>

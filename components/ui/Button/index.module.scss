@@ -31,6 +31,10 @@
     padding: 25px 130px;
 }
 
+.sizePlay{
+    padding: 15px 21px;
+}
+
 .dark700{
     background-color: $dark700;
 }
@@ -40,7 +44,11 @@
 }
 
 .payGradient500{
-   background: linear-gradient(270deg, #6ABD37 -6.01%, #8EDC5D 114.87%);
+   @include payGradient500;
+}
+
+.blueGradient500{
+    @include blueGradient500;
 }
 
 .variantOutlined{

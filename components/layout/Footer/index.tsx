@@ -75,8 +75,8 @@ export default function Footer(props: Props) {
           </div>
         <div className={styles.top}>
           <div className={styles.mobile}>
-            {(showAllItems ? allItems : allItems.slice(0, 3)).map(item => 
-              <Link href={item.link}>
+            {(showAllItems ? allItems : allItems.slice(0, 3)).map((item, index) => 
+              <Link href={item.link} key={index}>
               <a className={styles.item}>
                 {item.label}
               </a>
@@ -112,8 +112,8 @@ export default function Footer(props: Props) {
             </div>
             </div>
             <div className={styles.list}>
-            {options.map(option =>
-              <Link href={option.link}>
+            {options.map((option, index) =>
+              <Link href={option.link} key={index}>
                 <a className={styles.item}>
                   {option.label}
                 </a>
@@ -121,9 +121,9 @@ export default function Footer(props: Props) {
             )}
             </div>
             <div className={styles.list}>
-            {items.map(option =>
-              <Link href={option.link}>
-                <a className={styles.item}>
+            {items.map((option, index) =>
+              <Link href={option.link} key={index}>
+                <a className={styles.item} >
                   {option.label}
                 </a>
               </Link>
@@ -162,15 +162,15 @@ export default function Footer(props: Props) {
         </div>
         <div className={styles.sliders}>
             <div className={styles.sliderTop}>
-              {slidesTop.map(slide => 
-                <div className={styles.slide}>
+              {slidesTop.map((slide, index) => 
+                <div className={styles.slide} key={index}>
                   <img src={slide.image} alt=''/>
                 </div>
               )}
             </div>
             <div className={styles.sliderBottom}>
-              {slidesBottom.map(slide => 
-                <div className={styles.slide}>
+              {slidesBottom.map((slide, index) => 
+                <div className={styles.slide} key={index}>
                   <img src={slide.image} alt=''/>
                 </div>
               )}

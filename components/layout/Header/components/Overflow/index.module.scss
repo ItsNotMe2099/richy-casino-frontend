@@ -162,4 +162,7 @@
   height: 41px;
   right: 0;
   @include overflowGradient;
+  @media screen and (min-width: 921px){
+    display: none;
+  }
 }
