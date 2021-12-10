@@ -75,6 +75,18 @@
         background-color: transparent;
         }
     }
+    .row:last-child{
+        .cell:first-child{
+            @media screen and (max-width: 550px){
+                border-bottom-left-radius: 18px;
+            }
+            }
+        .cell:last-child{
+        @media screen and (max-width: 550px){
+            border-bottom-right-radius: 18px;
+        }
+        }
+}
     @media screen and (max-width: 550px){
         padding: 0;
     }
