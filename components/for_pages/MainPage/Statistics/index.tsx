@@ -62,7 +62,7 @@ export default function Statistics(props: Props) {
                     <div className={styles.gameImg}>
                       <img src={item.gameImg} alt=''/>
                     </div>
-                    <div className={styles.gameLbl}>
+                    <div className={styles.gameLbl} title={item.game}>
                       {item.game}
                     </div>
                   </div>
@@ -73,7 +73,7 @@ export default function Statistics(props: Props) {
                   </div>
                 </div>
                 <div className={styles.cell}>
-                  <div className={styles.id}>
+                  <div className={styles.id} title={item.id.toString()}>
                     {item.id}
                   </div>
                 </div>
