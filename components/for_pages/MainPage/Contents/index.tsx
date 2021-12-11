@@ -1,5 +1,6 @@
 import styles from './index.module.scss'
 import Link from 'next/link'
+import { Row, Col } from 'react-grid-system'
 
 
 
@@ -21,9 +22,11 @@ export default function Contents(props: Props) {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.transparent}></div>
+    <Row className={styles.row}>
     <div className={styles.root}>
+    <div className={styles.transparent}></div>
       {items.map((item, index) =>
+          <Col>
           <Link href={item.link} key={index}>
           <a className={styles.item}>
             <div className={styles.image}>
@@ -37,8 +40,10 @@ export default function Contents(props: Props) {
             </div>
           </a>
           </Link>
+          </Col>
       )}
     </div>
+    </Row>
     </div>
   )
 }

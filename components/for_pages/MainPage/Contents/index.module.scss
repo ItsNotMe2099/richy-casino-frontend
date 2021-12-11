@@ -8,14 +8,17 @@
   justify-content: space-between;
   overflow-x: clip;
   clip: auto;
-  position: relative;
+  flex:1;
   @media screen and (max-width: 960px){
-    overflow-x: scroll;
-    overflow-y: hidden;
     margin-right: -10px;
     margin-left: -10px;
     padding-left: 18px;
   }
+}
+
+.row{
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .wrapper{
@@ -30,16 +33,13 @@
   align-items: center;
   border-radius: 18px;
   background-color: $dark700;
-  width: 200px;
+  min-width: 200px;
   flex-shrink: 0;
   @media screen and (max-width: 1360px){
-    width: 150px;
-  }
-  @media screen and (max-width: 950px){
-    margin-right: 10px;
+    min-width: 150px;
   }
   @media screen and (max-width: 375px){
-    width: 108px;
+    min-width: 108px;
   }
 }
 
@@ -87,7 +87,7 @@
   @include overflowGradient;
   z-index: 1;
   bottom: 0;
-  @media screen and (min-width: 961px){
+  @media screen and (min-width: 1361px){
     display: none;
   }
   @media screen and (max-width: 375px){

@@ -5,8 +5,10 @@
     border-radius: 18px;
     background-color: $dark700;
     margin-top: 18px;
+    margin-bottom: 93px;
     @media screen and (max-width: 550px){
         padding: 16px 0 0 0;
+        margin-bottom: 32px;
     }
 }
 
