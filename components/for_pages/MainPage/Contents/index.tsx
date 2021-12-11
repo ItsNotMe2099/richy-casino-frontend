@@ -26,8 +26,8 @@ export default function Contents(props: Props) {
     <div className={styles.root}>
     <div className={styles.transparent}></div>
       {items.map((item, index) =>
-          <Col>
-          <Link href={item.link} key={index}>
+          <Col key={index}>
+          <Link href={item.link}>
           <a className={styles.item}>
             <div className={styles.image}>
               <img src={item.image} alt=''/>
