@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
+import { useRef } from 'react'
+import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
 import styles from './index.module.scss'
 import classNames from 'classnames'
 
@@ -18,11 +18,11 @@ interface Props {
 }
 
 export const TabSelect = ({tabs, label, onChange, activeTab, type, allOption, onAll }: Props) => {
-  const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const dropdownRef = useRef(null)
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
   const handleClick = (e) => {
     e.preventDefault()
-    setIsActive(!isActive);
+    setIsActive(!isActive)
   }
 
   return (
@@ -32,13 +32,13 @@ export const TabSelect = ({tabs, label, onChange, activeTab, type, allOption, on
         {type && <img src={type === 'category' ? '/img/TabSelect/arrows.svg' : '/img/TabSelect/pacman.svg'} alt=''/>}
         {activeTab ? <span>{activeTab}</span> : <span>{label}</span>}
         </div>
-        <div className={classNames(styles.arrow, {[styles.active]: isActive})}><img src="/img/TabSelect/arrow.svg" alt=""/></div>
+        <div className={classNames(styles.arrow, {[styles.active]: isActive})}><img src='/img/TabSelect/arrow.svg' alt=''/></div>
       </a>
        <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
        {allOption && <div className={styles.option} onClick={() => onAll()}><a onClick={() => setIsActive(false)}>Все</a></div>}
-       {tabs.map((item, index) => <div className={styles.option} onClick={() => onChange(item)}>
-         <a key={index} onClick={() => setIsActive(false)}>{item.label}</a></div>)}
+       {tabs.map((item, index) => <div key={index} className={styles.option} onClick={() => onChange(item)}>
+         <a  onClick={() => setIsActive(false)}>{item.label}</a></div>)}
        </nav>
     </div>
-  );
-};
+  )
+}

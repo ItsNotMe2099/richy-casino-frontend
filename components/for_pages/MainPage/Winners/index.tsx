@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import Link from 'next/link'
 import Header from '../Header'
 
 interface Props {

@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import Link from 'next/link'
 import classNames from 'classnames'
 import Header from '../Header'
 
