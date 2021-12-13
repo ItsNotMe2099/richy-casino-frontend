@@ -3,7 +3,7 @@ import Header from '../Header'
 import { TabSelect } from 'components/ui/TabSelect'
 import { useState } from 'react'
 import classNames from 'classnames'
-import Slider from 'react-slick'
+import Button from 'components/ui/Button'
 
 interface IItem {
   image: string
@@ -19,6 +19,32 @@ interface Props {
 }
 
 export default function GamesList(props: Props) {
+
+  const Item = (prop:{item: IItem}) => {
+
+    const [inFavorite, setInFavorite] = useState(false)
+
+    return(
+    <div className={styles.item}>
+              <div className={styles.shade}></div>
+              <Button 
+              onClick={() => inFavorite ? setInFavorite(false) : setInFavorite(true)} 
+              className={classNames(styles.favorite, {[styles.active]: inFavorite})} 
+              size='superExtraSmall' 
+              background='blackTransparent'>
+                {inFavorite ? 
+                <img src='/img/GamesList/star-fill.svg' alt=''/> 
+                : 
+                <img src='/img/GamesList/star-stroke.svg' alt=''/>}
+              </Button>
+              <div className={styles.btns}>
+                <Button className={styles.btn} size='small' background='blueGradient500'>Играть</Button>
+                <Button className={styles.btn} size='small' background='blackTransparent'>Демо</Button>
+              </div>
+              <img src={prop.item.image} alt=''/>
+            </div>
+    )
+  }
 
   const categories = [
     {label: 'category1'},
@@ -41,33 +67,6 @@ export default function GamesList(props: Props) {
   (provider === '' && category === '')
   ))
 
-  const settings = {
-    className: `${styles.slider}`,
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: items.length < 9 ? items.length : 9,
-    slidesToScroll: 1,
-    rows: 2,
-    variableWidth: false,
-    adaptiveHeight: false,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 570,
-        settings: {
-          slidesToShow: items.length < 4 ? items.length : 4,
-        }
-      },
-      {
-        breakpoint: 400,
-        settings: {
-          slidesToShow: items.length < 3 ? items.length : 3,
-        },
-      }
-    ]
-  }
-
   return (
       <div className={classNames(styles.root, {[styles.none]: props.items.length === 0})}>
         <Header icon={props.icon} label={props.label} games length={props.items.length}/>
@@ -80,19 +79,20 @@ export default function GamesList(props: Props) {
         </div>
         <div className={styles.list}>
           {items.slice(0, 9).map((item, index) =>
-            <div className={styles.item} key={index}>
-              <img src={item.image} alt=''/>
-            </div>
+            <Item item={item} key={index}/>
           )}
         </div>
         <div className={styles.mobile}>
-          <Slider {...settings}>
-          {items.map((item, index) =>
-            <div className={styles.item} key={index}>
-              <img src={item.image} alt=''/>
-            </div>
+          <div className={styles.row}>
+          {items.slice(0, (props.items.length/2)).map((item, index) =>
+            <Item item={item} key={index}/>
           )}
-          </Slider>
+          </div>
+          <div className={styles.row}>
+          {items.slice(((props.items.length/2) + 1), props.items.length).map((item, index) =>
+            <Item item={item} key={index}/>
+          )}
+          </div>
         </div>
       </div>
   )

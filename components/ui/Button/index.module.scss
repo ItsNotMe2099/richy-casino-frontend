@@ -16,6 +16,11 @@
         text-align: center;
     }
 
+.sizeSuperExtraSmall{
+    width: 28px;
+    height: 28px;
+}
+
 .sizeExtraSmall{
     width: 41px;
     height: 41px;
@@ -49,6 +54,10 @@
 
 .blueGradient500{
     @include blueGradient500;
+}
+
+.blackTransparent{
+   background: rgba(39, 40, 50, 0.8);
 }
 
 .variantOutlined{

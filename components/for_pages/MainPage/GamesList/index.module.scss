@@ -19,6 +19,18 @@
 }
 
 .item{
+  position: relative;
+  &:hover{
+    .shade{
+      visibility: visible;
+    }
+    .btns{
+      visibility: visible;
+    }
+    .favorite{
+      visibility: visible;
+    }
+  }
     @media screen and (max-width: 400px){
         display: flex !important;
         justify-content: center;
@@ -32,6 +44,95 @@
         
       }
 }
+}
+
+.shade{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  visibility: hidden;
+  background: rgba(0, 0, 0, 0.9);
+  opacity: 0.4;
+  border-radius: 12px;
+}
+
+.btns{
+  position: absolute;
+  visibility: hidden;
+  right: 0;
+  left: 0;
+  bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  @media screen and (max-width: 1360px){
+    bottom: 0;
+  }
+  @media screen and (max-width: 800px){
+    bottom: 65px;
+  }
+  @media screen and (max-width: 550px){
+    bottom: 15px;
+  }
+  @media screen and (max-width: 400px){
+    bottom: 0;
+  }
+}
+
+.btn{
+  font-weight: 600;
+  font-size: 12px;
+  color: $white;
+  min-width: 80px;
+  margin-bottom: 21px;
+  @media screen and (max-width: 1360px){
+    min-width: auto;
+    margin-bottom: 11px;
+    max-width: 50px;
+  }
+  @media screen and (max-width: 800px){
+    max-width: 100%;
+  }
+  @media screen and (max-width: 550px){
+    max-width: 50px;
+  }
+  @media screen and (max-width: 450px){
+    max-width: 30px;
+    padding: 8px 20px;
+    font-size: 8px;
+  }
+  @media screen and (max-width: 400px){
+    padding: 8px 10px;
+  }
+}
+
+.favorite{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  visibility: hidden;
+  z-index: 1;
+  @media screen and (max-width: 1360px){
+    right: 5px;
+    top: 5px;
+  }
+  @media screen and (max-width: 920px){
+    width: 18px;
+    height: 18px;
+  }
+  @media screen and (max-width: 800px){
+    width: 28px;
+    height: 28px;
+  }
+  @media screen and (max-width: 450px){
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.active{
+  visibility: visible;
 }
 
 .none{
@@ -50,7 +151,17 @@
 
 .mobile{
     margin-top: 15px;
+    overflow-x: auto;
+    overflow-y: hidden;
     @media screen and (min-width: 401px){
         display: none;
       } 
+}
+
+.row{
+  display: flex;
+}
+
+.row > div{
+  margin-right: 8px;
 }

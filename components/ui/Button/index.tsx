@@ -7,18 +7,19 @@ interface Props extends IButton {
   children?: React.ReactNode
   variant?: 'outlined' 
   color?: 'fill'
-  size?: 'extraSmall' | 'small' | 'normal' | 'large' | 'play'
+  size?: 'extraSmall' | 'small' | 'normal' | 'large' | 'play' | 'superExtraSmall'
   fluid?: boolean
   href?: string
   target?: string
   className?: string
   image?: string
-  background?: 'dark700' | 'payGradient500' | 'dark500' | 'blueGradient500'
+  background?: 'dark700' | 'payGradient500' | 'dark500' | 'blueGradient500' | 'blackTransparent' 
 }
 
 export default function Button(props: Props) {
 
   const btnClass = classNames({
+      [styles.sizeSuperExtraSmall]: props.size === 'superExtraSmall',
       [styles.sizeExtraSmall]: props.size === 'extraSmall',
       [styles.sizeSmall]: props.size === 'small',
       [styles.sizeNormal]: props.size === 'normal',
@@ -30,7 +31,8 @@ export default function Button(props: Props) {
       [styles.dark700]: props.background === 'dark700',
       [styles.dark500]: props.background === 'dark500',
       [styles.payGradient500]: props.background === 'payGradient500',
-      [styles.blueGradient500]: props.background === 'blueGradient500'
+      [styles.blueGradient500]: props.background === 'blueGradient500',
+      [styles.blackTransparent]: props.background === 'blackTransparent'
   })
 
   return (
