@@ -47,3 +47,13 @@
 @mixin payGradient500{
   background: linear-gradient(270deg, #6ABD37 -6.01%, #8EDC5D 114.87%);
 }
+
+@mixin componentRoot{
+    margin-top: 20px;
+    padding: 5px 28px 28px 10px;
+    border-radius: 18px;
+    background-color: $dark700;
+    @media screen and (max-width: 400px){
+      padding: 16px 16px 16px 10px;
+    }
+}

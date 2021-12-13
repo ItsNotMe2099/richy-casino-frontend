@@ -8,7 +8,7 @@ import Dots from 'components/svg/Dots'
 import { useRouter } from 'next/router'
 
 interface Props {
-  children?: any[]
+  children?: React.ReactNode
 }
 
 export const ButtonDotsWithOverflow = (props: Props, ref) => {

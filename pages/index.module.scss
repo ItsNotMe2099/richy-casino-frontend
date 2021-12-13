@@ -14,3 +14,9 @@
         flex-basis: auto !important;
     }
 }
+
+.gamesLists{
+    @media screen and (max-width: 800px){
+        display:  block !important;
+    } 
+}

@@ -1,6 +1,7 @@
 import styles from './index.module.scss'
 import Link from 'next/link'
 import classNames from 'classnames'
+import Header from '../Header'
 
 interface Props {
   
@@ -20,22 +21,7 @@ export default function Statistics(props: Props) {
   return (
       <div className={styles.root}>
           <div className={styles.header}>
-            <div className={styles.left}>
-            <div className={styles.image}>
-              <img src='/img/Statistics/stats.svg' alt=''/>
-            </div>
-            <div className={styles.label}>
-              Общая статистика
-            </div>
-            </div>
-            <div>
-            <Link href='#'>
-              <a className={styles.all}>
-                <span className={styles.desktop}>Полная статистика</span>
-                <span className={styles.mobile}>Все</span>
-              </a>
-            </Link>
-            </div>
+            <Header icon='/img/Statistics/stats.svg' label='Общая статистика' allDesktop='Полная статистика' allMobile='Все'/>
           </div>
           <div className={styles.table}>
             <div className={styles.row}>

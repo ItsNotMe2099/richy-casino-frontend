@@ -1,5 +1,6 @@
 import styles from './index.module.scss'
 import Link from 'next/link'
+import Header from '../Header'
 
 interface Props {
   
@@ -16,21 +17,7 @@ export default function Winners(props: Props) {
   return (
       <div className={styles.root}>
           <div className={styles.header}>
-            <div className={styles.left}>
-            <div className={styles.image}>
-              <img src='/img/Winners/icon.svg' alt=''/>
-            </div>
-            <div className={styles.label}>
-              ТОП-3 победителей за сегодня
-            </div>
-            </div>
-            <div>
-            <Link href='#'>
-              <a className={styles.all}>
-                <span>Смотреть</span> ТОП-100
-              </a>
-            </Link>
-            </div>
+            <Header icon='/img/Winners/icon.svg' label='ТОП-3 победителей за сегодня' top/>
           </div>
           <div className={styles.content}>
             <div className={styles.illustration}>

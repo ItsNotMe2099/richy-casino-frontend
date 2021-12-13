@@ -1,19 +1,10 @@
 @import "scss/index";
 
 .root {
-    padding: 0 24px 27px 11px;
-    border-radius: 18px;
-    background-color: $dark700;
-    margin-top: 18px;
-    @media screen and (max-width: 450px){
-        padding: 0 16px 16px 10px;
-    }
+    @include componentRoot;
 }
 
 .header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 .all{
