@@ -43,8 +43,8 @@ export default function TopSlider(props: Props) {
       <Slider {...settings}>
         <ConstantSlide/>
         {items.map((item, index) =>
-        <div className={styles.rootSlide}>
-        <div key={index} className={styles.item} style={{backgroundImage: `url(${items[currentIndex].image})`}}>
+        <div className={styles.rootSlide} key={index}>
+        <div className={styles.item} style={{backgroundImage: `url(${items[currentIndex].image})`}}>
         <div className={styles.left}>
           <div className={styles.label}>
             {item.label}
