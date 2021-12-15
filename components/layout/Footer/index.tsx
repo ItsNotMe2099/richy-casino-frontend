@@ -8,7 +8,7 @@ import Youtube from 'components/svg/Youtube'
 import LinkedIn from 'components/svg/LinkedIn'
 import Twitter from 'components/svg/Twitter'
 import Logo from 'components/svg/Logo'
-import LangSelect from 'components/LangSelect'
+import LangSelect from 'components/for_pages/Common/LangSelect'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 

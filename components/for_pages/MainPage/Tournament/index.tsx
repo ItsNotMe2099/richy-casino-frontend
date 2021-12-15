@@ -1,4 +1,4 @@
-import Timer from 'components/Timer'
+import Timer from 'components/for_pages/Common/Timer'
 import Button from 'components/ui/Button'
 import styles from './index.module.scss'
 

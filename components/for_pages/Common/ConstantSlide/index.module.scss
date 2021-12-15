@@ -1,0 +1,116 @@
+@import "scss/index";
+
+.root{
+  background: linear-gradient(46.89deg, #4A16E4 2.09%, #933288 11.47%, #C1444E 32.44%, #FF5C00 108.03%);
+  border-radius: 18px;
+  padding: 20px 0 13px 28px;
+  position: relative;
+  max-height: 250px;
+  overflow: hidden;
+  @media screen and (max-width: 1360px){
+    padding-left: 18px;
+  }
+  @media screen and (max-width: 800px){
+    max-height: 200px;
+    min-height: 200px;
+    padding: 20px 0 9px 15px;
+  }
+}
+
+.title{
+  font-weight: bold;
+  font-size: 26px;
+  @media screen and (max-width: 800px){
+    font-size: 18px;
+  }
+}
+
+.bonus{
+  font-weight: 800;
+  font-size: 49px;
+  color: #AAFF55;
+  position: relative;
+  z-index: 3;
+  @media screen and (max-width: 800px){
+    font-size: 28px;
+  }
+}
+
+.fs{
+  font-weight: 800;
+  font-size: 22px;
+  color: #AAFF55;
+  @media screen and (max-width: 800px){
+    font-size: 14px;
+  }
+}
+
+.btn{
+  margin-top: 13px;
+  position: relative;
+  z-index: 3;
+  button{
+    @include textStyle14Bold;
+    color: $white;
+    padding-right: 55px;
+    padding-left: 55px;
+  }
+  @media screen and (max-width: 800px){
+    margin-top: 8px;
+  }
+}
+
+.bottom{
+  display: flex;
+  margin-top: 14px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(9.04865px);
+  border-radius: 4px;
+  width: 45%;
+  position: relative;
+  z-index: 3;
+  @media screen and (max-width: 1360px){
+    width: 63%;
+  }
+  @media screen and (max-width: 950px){
+    width: 100%;
+  }
+}
+
+.satoshi{
+  padding: 3px 12px;
+  @media screen and (max-width: 800px){
+    font-size: 10px;
+  }
+}
+
+.hero{
+  position: absolute;
+  top: 0;
+  right: 10%;
+  z-index: 1;
+  img{
+    width: 100%;
+    @media screen and (max-width: 800px){
+      width: 80%;
+    }
+  }
+  @media screen and (max-width: 1360px){
+    right: -10%;
+  }
+}
+
+.money{
+  position: absolute;
+  right: 0;
+  bottom: -5px;
+  img{
+    width: 100%;
+    @media screen and (max-width: 800px){
+      width: 70%;
+    }
+  }
+  @media screen and (max-width: 1360px){
+    right: -35%;
+  }
+}

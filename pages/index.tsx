@@ -10,6 +10,7 @@ import Winners from 'components/for_pages/MainPage/Winners'
 import Statistics from 'components/for_pages/MainPage/Statistics'
 import GamesList from 'components/for_pages/MainPage/GamesList'
 import Tournament from 'components/for_pages/MainPage/Tournament'
+import TopSlider from 'components/for_pages/MainPage/TopSlider'
 
 const casinos = [
   {image: '/img/GamesList/hotline.png', label: 'hotline', provider: 'provider1', category: 'category1'},
@@ -42,6 +43,7 @@ export default function IndexPage() {
     <div className={styles.root}>
       <Container style={{height: '100%', minHeight: '100%'}}>
         <Layout>
+          <TopSlider/>
           <Contents/>
           <Games/>
           <Row className={styles.gamesLists}>

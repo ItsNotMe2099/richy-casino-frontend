@@ -48,6 +48,10 @@
     background-color: $dark500;
 }
 
+.white{
+    background-color: $white;
+}
+
 .payGradient500{
    @include payGradient500;
 }

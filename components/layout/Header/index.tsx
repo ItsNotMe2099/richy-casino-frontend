@@ -1,10 +1,10 @@
 import styles from './index.module.scss'
 import Button from 'components/ui/Button'
-import LangSelect from 'components/LangSelect'
 import Logo from 'components/svg/Logo'
 import { useRouter } from 'next/router'
 import Overflow from './components/Overflow'
 import Link from 'next/link'
+import LangSelect from 'components/for_pages/Common/LangSelect'
 
 interface Props {
   children?: React.ReactNode
