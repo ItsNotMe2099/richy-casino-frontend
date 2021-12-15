@@ -4,9 +4,15 @@ import Button from 'components/ui/Button'
 import { useState } from 'react'
 import Slider from 'react-slick'
 
+interface IItem {
+  label: string
+  image: string
+}
+
 interface Props {
   className?: string
   slider?: any
+  items: IItem[]
 }
 
 const SliderArrow = () => {
@@ -33,18 +39,13 @@ export default function SlideSlider(props: Props) {
     variableWidth: false,
     adaptiveHeight: false,
     arrows: false,
+    dotsClass: `${styles.dots}`,
     beforeChange: (current: number, next: number) => setCurrentIndex(next),
   }
 
-  const items =[
-    {label: 'Лучшие игры на Richy', image: '/img/TopSlider/banner.svg'},
-    {label: 'Лучшие игры на Richy', image: '/img/TopSlider/banner.svg'},
-    {label: 'Лучшие игры на Richy', image: '/img/TopSlider/d.jpg'},
-  ]
-
   return (
       <Col className={styles.col}>
-      <div className={styles.root} style={{backgroundImage: `url(${items[currentIndex].image})`}}>
+      <div className={styles.root} style={{backgroundImage: `url(${props.items[currentIndex].image})`}}>
       <div className={styles.controls}>
         <div className={styles.prev} onClick={() => slider.slickGoTo(currentIndex - 1)}>
           <SliderArrow/>
@@ -54,7 +55,7 @@ export default function SlideSlider(props: Props) {
         </div>
       </div>
       <Slider {...settings} ref={slider1 => (slider = slider1)}>
-        {items.map((item, index) =>
+        {props.items.map((item, index) =>
         <div key={index} className={styles.item}>
         <div className={styles.left}>
           <div className={styles.label}>

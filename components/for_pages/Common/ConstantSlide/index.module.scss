@@ -20,6 +20,8 @@
 .title{
   font-weight: bold;
   font-size: 26px;
+  position: relative;
+  z-index: 2;
   @media screen and (max-width: 800px){
     font-size: 18px;
   }
@@ -75,6 +77,15 @@
   @media screen and (max-width: 950px){
     width: 100%;
   }
+  @media screen and (max-width: 650px){
+    width: 35%;
+  }
+  @media screen and (max-width: 550px){
+    width: 45%;
+  }
+  @media screen and (max-width: 500px){
+    width: 100%;
+  }
 }
 
 .satoshi{
@@ -98,6 +109,9 @@
   @media screen and (max-width: 1360px){
     right: -10%;
   }
+  @media screen and (max-width: 650px){
+    right: -5%;
+  }
 }
 
 .money{
@@ -112,5 +126,17 @@
   }
   @media screen and (max-width: 1360px){
     right: -35%;
+  }
+  @media screen and (max-width: 650px){
+    right: -19%;
+  }
+  @media screen and (max-width: 550px){
+    right: -25%;
+  }
+  @media screen and (max-width: 550px){
+    right: -30%;
+  }
+  @media screen and (max-width: 375px){
+    right: -40%;
   }
 }

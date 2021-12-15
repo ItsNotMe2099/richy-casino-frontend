@@ -3,3 +3,57 @@
 .root{
   margin-top: 28px;
 }
+
+.desktop{
+  @media screen and (max-width: 650px){
+    display: none !important;
+  }
+}
+
+.slider{
+  @media screen and (min-width: 651px){
+    display: none !important;
+  }
+}
+
+.label{
+  font-weight: bold;
+  font-size: 36px;
+  color: $white;
+  line-height: 100%;
+  width: 70%;
+}
+
+.btn{
+  margin-top: 23px;
+  button{
+    color: $blue500;
+    @include textStyle14Bold;
+    padding-right: 38px;
+    padding-left: 38px;
+  }
+}
+
+.left{
+  align-self: center;
+  margin-left: 28px;
+}
+
+.item{
+  display: flex !important;
+  border-radius: 18px;
+  padding: 20px 0 13px 0;
+  position: relative;
+  max-height: 250px;
+  overflow: hidden;
+  min-height: 250px;
+  background-position: center center;
+  @media screen and (max-width: 1360px){
+    padding-left: 18px;
+  }
+  @media screen and (max-width: 800px){
+    max-height: 200px;
+    min-height: 200px;
+    padding: 20px 0 9px 15px;
+  }
+}
