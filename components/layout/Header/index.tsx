@@ -4,6 +4,7 @@ import LangSelect from 'components/LangSelect'
 import Logo from 'components/svg/Logo'
 import { useRouter } from 'next/router'
 import Overflow from './components/Overflow'
+import Link from 'next/link'
 
 interface Props {
   children?: React.ReactNode
@@ -58,7 +59,13 @@ export default function Header(props: Props) {
           </div>
         </div>
       </div>
+      {currentRoute === '/' || currentPath === '/' ?
       <div className={styles.logoMobile}><Logo/></div>
+      :
+      <Link href='/'>
+        <a className={styles.logoMobile}><Logo/></a>
+      </Link>
+      }
       <div className={styles.right}>
         <div className={styles.login}><Button size='small' background='dark700'>Войти</Button></div>
         <div className={styles.reg}><Button size='normal' background='payGradient500'><img src='/img/layout/top/person.svg' alt=''/>Регистрация</Button></div>
@@ -67,7 +74,13 @@ export default function Header(props: Props) {
       </div>
     </div>
         <div className={styles.menu}>
+        {currentRoute === '/' || currentPath === '/' ?
           <div className={styles.logo}><Logo/></div>
+            :
+          <Link href='/'>
+            <a className={styles.logo}><Logo/></a>
+          </Link>
+        }
           <Overflow currentPath={currentPath} currentRoute={currentRoute} options={options}/>
         </div>
     </div>

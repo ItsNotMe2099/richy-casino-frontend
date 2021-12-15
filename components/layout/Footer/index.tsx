@@ -10,6 +10,7 @@ import Twitter from 'components/svg/Twitter'
 import Logo from 'components/svg/Logo'
 import LangSelect from 'components/LangSelect'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 
 interface Props {
@@ -67,12 +68,18 @@ export default function Footer(props: Props) {
 
   const [showAllItems, setShowAllItems] = useState(false)
 
+  const { route: currentRoute, asPath: currentPath } = useRouter()
+
   return (
     <div className={styles.root}>
         <div className={styles.wrapper}>
-        <div className={styles.logo}>
-            <Logo/>
-          </div>
+        {currentRoute === '/' || currentPath === '/' ?
+          <div className={styles.logo}><Logo/></div>
+            :
+          <Link href='/'>
+            <a className={styles.logo}><Logo/></a>
+          </Link>
+        }
         <div className={styles.top}>
           <div className={styles.mobile}>
             {(showAllItems ? allItems : allItems.slice(0, 3)).map((item, index) => 

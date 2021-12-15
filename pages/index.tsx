@@ -9,6 +9,7 @@ import GameCard from 'components/for_pages/MainPage/GameCard'
 import Winners from 'components/for_pages/MainPage/Winners'
 import Statistics from 'components/for_pages/MainPage/Statistics'
 import GamesList from 'components/for_pages/MainPage/GamesList'
+import Tournament from 'components/for_pages/MainPage/Tournament'
 
 const casinos = [
   {image: '/img/GamesList/hotline.png', label: 'hotline', provider: 'provider1', category: 'category1'},
@@ -60,6 +61,7 @@ export default function IndexPage() {
             </Col>
           </Row>
           <Winners/>
+          <Tournament balance='0,00000001 BTC'/>
           <Statistics/>
         </Layout>
       </Container>

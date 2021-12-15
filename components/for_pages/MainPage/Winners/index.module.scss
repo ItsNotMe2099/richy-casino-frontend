@@ -61,7 +61,7 @@
 .userLeft{
     display: flex;
     align-items: center;
-    width: 33%;
+    flex: 1;
 }
 
 .first{
@@ -110,7 +110,7 @@
     font-weight: 500;
     font-size: 14px;
     color: $pay500;
-    width: 33%;
+    flex: 1;
     display: flex;
     justify-content: flex-end;
     @media screen and (max-width: 450px){
@@ -135,7 +135,7 @@
     font-weight: 500;
     font-size: 14px;
     color: $dark200;
-    width: 33%;
+    flex: 1;
     display: flex;
     justify-content: center;
     @media screen and (max-width: 1360px){

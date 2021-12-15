@@ -89,7 +89,7 @@ export default function GamesList(props: Props) {
           )}
           </div>
           <div className={styles.row}>
-          {items.slice(((props.items.length/2) + 1), props.items.length).map((item, index) =>
+          {items.slice((props.items.length/2), props.items.length).map((item, index) =>
             <Item item={item} key={index}/>
           )}
           </div>
