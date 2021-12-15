@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import { Row, Col } from 'react-grid-system'
+import { Col } from 'react-grid-system'
 import Button from 'components/ui/Button'
 
 interface Props {
