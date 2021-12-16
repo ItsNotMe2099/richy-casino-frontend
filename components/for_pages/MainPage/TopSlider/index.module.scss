@@ -22,6 +22,9 @@
   color: $white;
   line-height: 100%;
   width: 70%;
+  @media screen and (max-width: 400px){
+    font-size: 26px;
+  }
 }
 
 .btn{
@@ -48,6 +51,7 @@
   overflow: hidden;
   min-height: 250px;
   background-position: center center;
+  margin: 0 5px;
   @media screen and (max-width: 1360px){
     padding-left: 18px;
   }

@@ -13,19 +13,16 @@ interface Props {
 
 export default function TopSlider(props: Props) {
 
-  const [currentIndex, setCurrentIndex] = useState(0)
-
   const settings = {
     className: `${styles.slider}`,
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     variableWidth: false,
     adaptiveHeight: false,
     arrows: false,
-    beforeChange: (current: number, next: number) => setCurrentIndex(next),
   }
 
   const items =[
@@ -33,6 +30,7 @@ export default function TopSlider(props: Props) {
     {label: 'Лучшие игры на Richy', image: '/img/TopSlider/banner.svg'},
     {label: 'Лучшие игры на Richy', image: '/img/TopSlider/d.jpg'},
   ]
+
 
   return (
     <div className={styles.root}>
@@ -44,7 +42,7 @@ export default function TopSlider(props: Props) {
         <ConstantSlide/>
         {items.map((item, index) =>
         <div className={styles.rootSlide} key={index}>
-        <div className={styles.item} style={{backgroundImage: `url(${items[currentIndex].image})`}}>
+        <div className={styles.item} style={{backgroundImage: `url(${item.image})`}}>
         <div className={styles.left}>
           <div className={styles.label}>
             {item.label}
