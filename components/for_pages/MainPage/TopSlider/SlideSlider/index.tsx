@@ -45,6 +45,7 @@ export default function SlideSlider(props: Props) {
 
   return (
       <Col className={styles.col}>
+      <div className={styles.bonus}><img src='/img/TopSlider/bonus.svg' alt=''/></div>
       <div className={styles.root} style={{backgroundImage: `url(${props.items[currentIndex].image})`}}>
       <div className={styles.controls}>
         <div className={styles.prev} onClick={() => slider.slickGoTo(currentIndex - 1)}>

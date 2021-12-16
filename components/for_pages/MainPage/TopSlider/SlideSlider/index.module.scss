@@ -20,6 +20,19 @@
 
 .col{
   width: 50% !important;
+  position: relative;
+}
+
+.bonus{
+  position: absolute;
+  position: absolute;
+  right: -40px;
+  bottom: 35%;
+  z-index: 1;
+  cursor: pointer;
+  @media screen and (max-width: 1050px){
+    right: 0;
+  }
 }
 
 .controls{
