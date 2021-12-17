@@ -1,0 +1,133 @@
+@import "scss/index";
+
+.root{
+  padding: 13px 14px 30px 14px;
+  background: #1D1E25;
+  border-radius: 18px;
+  max-height: 1313px;
+  margin-top: 20px;
+}
+
+.col{
+  width: 25% !important;
+  max-width: 25% !important;
+  @media screen and (max-width: 1000px){
+    display: none;
+  }
+}
+
+.gameFilter{
+  padding: 9px 13px;
+  display: flex;
+  align-items: center;
+  border-radius: 9px;
+  background-color: $dark600;
+  margin-top: 8px;
+  justify-content: space-between;
+  cursor: pointer;
+  &:hover{
+    background-color: #1D1E25;
+  }
+}
+
+.categoryFilter{
+  padding-top: 14px;
+  padding-left: 20px;
+  padding-bottom: 14px;
+  padding-right: 14px;
+  display: flex;
+  align-items: center;
+  border-radius: 11px;
+  background-color: #1D1E25;
+  justify-content: space-between;
+  cursor: pointer;
+  .label{
+    font-size: 15px;
+  }
+  .icon{
+    margin-right: 13px;
+  }
+  &:hover{
+    background-color: $dark600;
+    .quantity{
+      color: #fff;
+    }
+  }
+}
+
+.icon{
+  display: flex;
+  margin-right: 8px;
+}
+
+.label{
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.left{
+  display: flex;
+  align-items: center;
+}
+
+.quantity{
+  font-weight: 500;
+  font-size: 14px;
+  color: $dark300;
+}
+
+.categoriesLbl{
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 19px;
+  font-weight: bold;
+  font-size: 14px;
+  color: $dark300;
+}
+
+.providers{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  padding: 0 15px;
+  margin-top: 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 385px;
+}
+
+.categories{
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 624px;
+}
+
+.provider{
+  padding-top: 18px;
+  padding-bottom: 9px;
+  border-radius: 8px;
+  background-color: $dark600;
+  cursor: pointer;
+  &:hover{
+    .icon{
+    svg{
+      fill: #fff;
+    }
+  }
+  .quantity{
+    color: #fff;
+  }
+  }
+  .icon{
+    display: flex;
+    justify-content: center;
+    svg{
+      fill: #6B6C77;
+    }
+  }
+  .quantity{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+}

@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import classNames from 'classnames'
-import Header from '../Header'
+import Header from 'components/for_pages/Common/Header'
 
 interface Props {
   

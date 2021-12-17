@@ -1,0 +1,81 @@
+@import "scss/index";
+
+.root{
+  margin-top: 20px;
+  max-width: 420px !important;
+  @media screen and (max-width: 650px){
+    display: none !important;
+  }
+}
+
+.jackpot{
+  background-image: url('../../../../public/img/TopSlider/bg.svg');
+  background-repeat: no-repeat;
+  min-height: 250px;
+  max-width: 420px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 18px;
+  background-size: cover;
+  padding: 0 33px;
+  @media screen and (max-width: 800px){
+   min-height: 200px;
+  }
+  @media screen and (max-width: 650px){
+    max-width: 100%;
+    margin: 0 5px;
+  }
+}
+
+.title{
+  font-weight: bold;
+  font-size: 41px;
+  background: linear-gradient(#fff 0%, #3EAEDF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #FFF7F7;
+}
+
+.money{
+  font-weight: 800;
+  font-size: 60px;
+  @media screen and (max-width: 1360px){
+    font-size: 40px;
+  }
+}
+
+.col{
+  
+}
+
+.const{
+  @media screen and (min-width: 651px){
+    display: none;
+  }
+}
+
+.const > div {
+  div:first-child{
+    right: 0;
+  }
+  div:last-child{
+   width: auto;
+  }
+}
+
+.slider{
+  margin-top: 20px;
+  @media screen and (min-width: 651px){
+    display: none !important;
+  }
+}
+
+.desktop{
+  margin-top: 20px;
+  @media screen and (max-width: 650px){
+    display: none !important;
+  }
+}

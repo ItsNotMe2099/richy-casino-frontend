@@ -2,7 +2,7 @@ import Slider from 'react-slick'
 import Slide from './Slide'
 import styles from './index.module.scss'
 import { useState } from 'react'
-import Header from '../Header'
+import Header from 'components/for_pages/Common/Header'
 
 interface Props {
   slider?: any

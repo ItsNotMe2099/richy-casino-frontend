@@ -1,7 +1,7 @@
 import { GetStaticProps, GetStaticPropsContext } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import styles from 'pages/index.module.scss'
-import { Col, Container, Row } from 'react-grid-system'
+import { Col, Row } from 'react-grid-system'
 import Layout from 'components/layout/Layout'
 import Contents from 'components/for_pages/MainPage/Contents'
 import Games from 'components/for_pages/MainPage/Games'
@@ -41,7 +41,6 @@ const live = [
 export default function IndexPage() {
   return (
     <div className={styles.root}>
-      <Container style={{height: '100%', minHeight: '100%'}}>
         <Layout>
           <TopSlider/>
           <Contents/>
@@ -66,7 +65,6 @@ export default function IndexPage() {
           <Tournament balance='0,00000001 BTC'/>
           <Statistics/>
         </Layout>
-      </Container>
     </div>
   )
 }

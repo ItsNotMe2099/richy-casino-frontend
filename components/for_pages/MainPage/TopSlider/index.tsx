@@ -4,7 +4,6 @@ import ConstantSlide from 'components/for_pages/Common/ConstantSlide'
 import SlideSlider from './SlideSlider'
 import Button from 'components/ui/Button'
 import Slider from 'react-slick'
-import { useState } from 'react'
 
 interface Props {
   children?: React.ReactNode

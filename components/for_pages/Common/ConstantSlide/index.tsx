@@ -10,7 +10,7 @@ interface Props {
 export default function ConstantSlide(props: Props) {
 
   return (
-      <Col>
+      <Col className={props.className}>
       <div className={styles.root}>
         <div className={styles.hero}><img src='/img/TopSlider/hero.svg' alt=''/></div>
         <div className={styles.money}><img src='/img/TopSlider/money.svg' alt=''/></div>

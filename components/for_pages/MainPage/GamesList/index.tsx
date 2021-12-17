@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import Header from '../Header'
+import Header from 'components/for_pages/Common/Header'
 import { TabSelect } from 'components/ui/TabSelect'
 import { useState } from 'react'
 import classNames from 'classnames'
