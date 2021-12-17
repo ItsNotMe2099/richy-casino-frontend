@@ -6,23 +6,18 @@ interface IGame{
   label: string
   image: string
   top: boolean
-  createdAt: Date
-  lastWin: Date
-  players: number
+  createdAt: string
+  lastWin: string
   category: string
-  type: string
   provider: string
 }
 
 interface Props {
   path?: string
+  items?: IGame[]
 }
 
 export default function Filter(props: Props) {
-
-  const games = [
-    
-  ]
 
   const GameFilter = (prop: {icon: string, label: string, items: IGame[]}) => {
     return(
@@ -65,83 +60,17 @@ export default function Filter(props: Props) {
     </svg>
     )
   }
-
   const providers = [
     {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    {icon: <Netent/>, label: 'Netent'},
-    
+    {icon: <Netent/>, label: 'Gamomat'},
+    {icon: <Netent/>, label: 'Truelab'},
+    {icon: <Netent/>, label: 'Other'},
+    {icon: <Netent/>, label: 'Other1'},
+    {icon: <Netent/>, label: 'Other3'},
+    {icon: <Netent/>, label: 'N4'},
+    {icon: <Netent/>, label: '5'},
+    {icon: <Netent/>, label: '6'},
+    {icon: <Netent/>, label: '8'}
   ]
 
   const gameFilters = [
@@ -171,7 +100,7 @@ export default function Filter(props: Props) {
       <div className={styles.root}>
          <InputSearch placeholder='Поиск'/>
          {gameFilters.map((item, index) => 
-          <GameFilter key={index} icon={item.icon} label={item.label} items={games}/>
+          <GameFilter key={index} icon={item.icon} label={item.label} items={props.items}/>
          )
          }
          <div className={styles.categoriesLbl}>
@@ -179,7 +108,7 @@ export default function Filter(props: Props) {
          </div>
          <div className={styles.categories}>
          {categoryFilters.map((item, index) =>
-          <CategoryFilter key={index} icon={item.icon} label={item.label} items={games}/>
+          <CategoryFilter key={index} icon={item.icon} label={item.label} items={props.items}/>
          )}
          </div>
          <div className={styles.categoriesLbl}>
@@ -188,11 +117,11 @@ export default function Filter(props: Props) {
          <div className={styles.providers}>
          {providers.map((item, index) =>
             <div className={styles.provider} key={index}>
-              <div className={styles.icon}>
+              <div className={styles.iconProvider}>
                 {item.icon}
               </div>
               <div className={styles.quantity}>
-                {games.length}
+                {props.items.length}
               </div>
             </div>
          )}

@@ -1,0 +1,21 @@
+@import "scss/index";
+
+.root {
+  @include componentRoot;
+}
+
+.none{
+  display: none;
+}
+
+.wrapper{
+  display: flex;
+}
+
+.list{
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 20px;
+  padding-left: 23px;
+}

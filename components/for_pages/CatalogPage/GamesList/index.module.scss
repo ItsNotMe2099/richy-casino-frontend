@@ -1,0 +1,54 @@
+@import "scss/index";
+
+.root {
+  @include componentRoot;
+}
+
+.none{
+  display: none;
+}
+
+.wrapper{
+  display: flex;
+  padding-left: 23px;
+}
+
+.item{
+  position: relative;
+    @media screen and (max-width: 400px){
+        display: flex !important;
+        justify-content: center;
+        margin-bottom: 8px;
+      }
+    img{
+    width: 100%;
+    border-radius: 18px;
+    @media screen and (max-width: 400px){
+        width: 78px;
+        
+      }
+}
+}
+
+.list{
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 20px;
+  padding-left: 23px;
+}
+
+.more{
+  display: flex;
+  padding: 21px 0;
+  border-radius: 12px;
+  background-color: $dark600;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.icon{
+  margin-right: 12px;
+}

@@ -1,0 +1,37 @@
+@import "scss/index";
+
+.root {
+  border-radius: 67px;
+  background-color: $dark600;
+  display: flex;
+}
+
+.item{
+  border-radius: 46px;
+  background-color: $dark600;
+  display: flex;
+  padding: 13px 16px;
+  align-items: center;
+  cursor: pointer;
+  svg{
+    fill: #797C86;
+    margin-right: 8px;
+  }
+}
+
+.label{
+  font-weight: 500;
+  font-size: 14px;
+  color: $dark100;
+}
+
+.active{
+  border-radius: 46px;
+  background-color: $dark400;
+  .label{
+    color: $white;
+  }
+  svg{
+    fill: $white;
+  }
+}

@@ -41,7 +41,7 @@ export default function Header(props: Props) {
           </div>}
           <Link href='#'>
           <a className={styles.all}>
-            {props.games ? <>Все <span>игры</span></> : props.top && <><span>Смотреть</span> ТОП-100</>}
+            {props.games ? <>Все <span>игры</span></> : <><span>Смотреть</span> ТОП-100</>}
             {props.allDesktop && <div className={styles.desktop}>{props.allDesktop}</div>}
             {props.allMobile && <div className={styles.mobile}>{props.allMobile}</div>}
           </a>
