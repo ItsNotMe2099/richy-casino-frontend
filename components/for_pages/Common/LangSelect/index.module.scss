@@ -9,10 +9,13 @@
   img{
     margin-right: 10px;
   }
+  &:hover{
+    background-color: $dark500;
+  }
 }
 
 .other{
-  background-color: $dark500;
+  background-color: $dark700;
   padding: 12px 14px;
   @media screen and (max-width: 900px){
     padding: 7px 9px;

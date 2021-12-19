@@ -67,7 +67,7 @@
 .facebook{
   a{
   &:hover{
-    @include blueGradient500;
+    background: linear-gradient(270deg, #2C50FF -6.01%, #4785F6 114.87%);
   }
 }
 }
@@ -204,7 +204,7 @@
   .btnsMobile{
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     margin-top: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid #2D2E38;
@@ -214,6 +214,10 @@
     }
     @media screen and (min-width: 901px){
       display: none;
+    }
+    @media screen and (max-width: 320px){
+      justify-content: flex-end;
+      padding-right: 12px;
     }
 }
 

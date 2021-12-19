@@ -101,7 +101,7 @@ export default function Footer(props: Props) {
             }
           </div>
           <div className={classNames(styles.show, {[styles.notShow]: !showAllItems})}>
-            <Button onClick={() => showAllItems ? setShowAllItems(false) : setShowAllItems(true)} size='extraSmall' background='dark500'><img src='/img/layout/footer/up.svg' alt=''/></Button>
+            <Button onClick={() => showAllItems ? setShowAllItems(false) : setShowAllItems(true)} size='extraSmall' background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button>
           </div>
           <div className={styles.left}>
             <div className={styles.desc}>
@@ -112,10 +112,10 @@ export default function Footer(props: Props) {
             </div>
             <div className={styles.btns}>
               <div className={styles.support}>
-                <Button size='normal' background='dark500'><img src='/img/layout/footer/support.svg' alt=''/>Тех. поддержка</Button>
+                <Button size='normal' background='dark700'><img src='/img/layout/footer/support.svg' alt=''/>Тех. поддержка</Button>
               </div>
-              <div className={styles.btn}><Button size='extraSmall' background='dark500'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>
-              <Button size='extraSmall' background='dark500'><img src='/img/layout/top/android.svg' alt=''/></Button>
+              <div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>
+              <Button size='extraSmall' background='dark700'><img src='/img/layout/top/android.svg' alt=''/></Button>
             </div>
             </div>
             <div className={styles.list}>
@@ -161,10 +161,10 @@ export default function Footer(props: Props) {
           </div>
             <div className={styles.supportMobile}>
               <div className={styles.support}>
-                <Button size='normal' background='dark500'><img src='/img/layout/footer/support.svg' alt=''/>Тех. поддержка</Button>
+                <Button size='normal' background='dark700'><img src='/img/layout/footer/support.svg' alt=''/>Тех. поддержка</Button>
               </div>
-              <div className={styles.btn}><Button size='extraSmall' background='dark500'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>
-              <Button size='extraSmall' background='dark500'><img src='/img/layout/top/android.svg' alt=''/></Button>
+              <div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>
+              <Button size='extraSmall' background='dark700'><img src='/img/layout/top/android.svg' alt=''/></Button>
             </div>
         </div>
         <div className={styles.sliders}>
@@ -206,8 +206,8 @@ export default function Footer(props: Props) {
               </div>
           </div>
           <div className={styles.btnsMobile}>
-                  <div className={styles.btn}><Button href="#top" size='extraSmall' background='dark500'><img src='/img/layout/footer/up.svg' alt=''/></Button></div>
-                  <div className={styles.btn}><Button size='extraSmall' background='dark500'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>
+                  <div className={styles.btn}><Button href="#top" size='extraSmall' background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button></div>
+                  <div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>
                   <div className={styles.lang}><LangSelect other/></div>
                 </div>
           <div className={styles.bottom}>
@@ -221,8 +221,8 @@ export default function Footer(props: Props) {
                   ©2021 CRYPLL ALL RIGHTS RESERVED
                 </div>
                 <div className={styles.btns}>
-                  <div className={styles.btn}><Button href="#top" size='extraSmall' background='dark500'><img src='/img/layout/footer/up.svg' alt=''/></Button></div>
-                  <div className={styles.btn}><Button size='extraSmall' background='dark500'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>
+                  <div className={styles.btn}><Button href="#top" size='extraSmall' background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button></div>
+                  <div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>
                   <div className={styles.lang}><LangSelect other/></div>
                 </div>
           </div>

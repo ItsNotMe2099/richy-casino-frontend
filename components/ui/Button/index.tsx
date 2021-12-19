@@ -13,7 +13,7 @@ interface Props extends IButton {
   target?: string
   className?: string
   image?: string
-  background?: 'dark700' | 'payGradient500' | 'dark500' | 'blueGradient500' | 'blackTransparent' | 'white' | 'yellowTransparent' | 'violetTransparent'
+  background?: 'dark700' | 'payGradient500' | 'dark500' | 'blueGradient500' | 'blackTransparent' | 'white' 
 }
 
 export default function Button(props: Props) {
@@ -34,8 +34,6 @@ export default function Button(props: Props) {
       [styles.payGradient500]: props.background === 'payGradient500',
       [styles.blueGradient500]: props.background === 'blueGradient500',
       [styles.blackTransparent]: props.background === 'blackTransparent',
-      [styles.yellowTransparent]: props.background === 'yellowTransparent',
-      [styles.violetTransparent]: props.background === 'violetTransparent',
       [styles.white]: props.background === 'white'
   })
 

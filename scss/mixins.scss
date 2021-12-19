@@ -47,6 +47,9 @@
 
 @mixin blueGradient500 {
   background: linear-gradient(270deg, #2C50FF -6.01%, #4785F6 114.87%);
+  &:hover{
+    background: linear-gradient(273.01deg, #7000FF -8.03%, #1B6BFF 109.58%);
+  }
 }
 
 @mixin blueGradientColor500 {
@@ -55,6 +58,9 @@
 
 @mixin payGradient500{
   background: linear-gradient(270deg, #6ABD37 -6.01%, #8EDC5D 114.87%);
+  &:hover{
+    background: linear-gradient(270deg, #82D54F -6.01%, #A4FE6B 114.87%);
+  }
 }
 
 @mixin componentRoot{

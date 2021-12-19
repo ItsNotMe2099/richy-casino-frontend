@@ -17,7 +17,7 @@ export default function Header(props: Props) {
 
   const options = [
     { label: 'Главная', link: '/' },
-    { label: 'Казино', link: '#' },
+    { label: 'Казино', link: '/catalog' },
     { label: 'Richy Game', link: '#' },
     { label: 'Free Bitcoin', link: '/freebitcoin' },
     { label: 'Wheel of Fortuna', link: '#' },
