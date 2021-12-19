@@ -2,6 +2,8 @@ import InputSearch from 'components/ui/Inputs/InputSearch'
 import styles from './index.module.scss'
 import { Col } from 'react-grid-system'
 import classNames from 'classnames'
+import { TabSelect } from 'components/ui/TabSelect'
+import { useState } from 'react'
 
 interface IGame{
   label: string
@@ -18,6 +20,7 @@ interface Props {
   items?: IGame[]
   className?: string
   state?: boolean
+  mobile?: boolean
   onClick?: () => void
 }
 
@@ -77,13 +80,13 @@ export default function Filter(props: Props) {
     {icon: <Netent/>, label: '8'}
   ]
 
-  const gameFilters = [
+  const games = [
     {icon: '/img/Filter/icons/24.svg', label: 'Последние игры'},
     {icon: '/img/Filter/icons/top.svg', label: 'ТОП игры'},
     {icon: '/img/Filter/icons/favorite.svg', label: 'Избранные'},
   ]
 
-  const categoryFilters = [
+  const categories = [
     {icon: '/img/Filter/icons/all.svg', label: 'Все игры'},
     {icon: '/img/Filter/icons/richy.svg', label: 'Richy Games'},
     {icon: '/img/Filter/icons/slots.svg', label: 'Слоты'},
@@ -99,14 +102,18 @@ export default function Filter(props: Props) {
     {icon: '/img/Filter/icons/other.svg', label: 'Другие'},
   ]
 
+  const [category, setCategory] = useState('')
+  const [provider, setProvider] = useState('')
+
   return (
-    <Col className={classNames(styles.col, {[styles.none]: !props.state})}>
+    <>
+    <Col className={classNames(styles.col, {[styles.none]: (!props.state || props.mobile)})}>
       <div className={classNames(styles.root, props.className)}>
           <div className={styles.close}>
             <img src='/img/icons/close.svg' alt='' onClick={props.onClick}/>
           </div>
          <InputSearch placeholder='Поиск'/>
-         {gameFilters.map((item, index) => 
+         {games.map((item, index) => 
           <GameFilter key={index} icon={item.icon} label={item.label} items={props.items}/>
          )
          }
@@ -114,7 +121,7 @@ export default function Filter(props: Props) {
           КАТЕГОРИИ
          </div>
          <div className={styles.categories}>
-         {categoryFilters.map((item, index) =>
+         {categories.map((item, index) =>
           <CategoryFilter key={index} icon={item.icon} label={item.label} items={props.items}/>
          )}
          </div>
@@ -135,5 +142,22 @@ export default function Filter(props: Props) {
          </div>
       </div>
     </Col>
+    <div className={classNames(styles.mobile, {[styles.none]: !props.mobile})}>
+        <div className={styles.search}>
+          <InputSearch placeholder='Поиск'/>
+          <div className={styles.filters}>
+          <TabSelect tabs={categories} label='Категория' allOption
+           onAll={() => setCategory('')} onChange={(item) => setCategory(item.label)} activeTab={category} type='category'/>
+          <TabSelect tabs={providers} label='Провайдеры' allOption
+            onAll={() => setProvider('')}
+           onChange={(item) => setProvider(item.label)} activeTab={provider} type='provider'/>
+        </div>
+        </div>
+        {games.map((item, index) => 
+          <GameFilter key={index} icon={item.icon} label={item.label} items={props.items}/>
+         )
+         }
+    </div>
+    </>
   )
 }

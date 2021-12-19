@@ -2,6 +2,8 @@
 
 .root {
   @include componentRoot;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .none{
@@ -10,19 +12,58 @@
 
 .wrapper{
   display: flex;
+  div{
+    flex-shrink: 0;
+  }
+  @media screen and (max-width: 400px){
+    padding-left: 0;
+    margin-top: 10px;
+  }
 }
 
 .list{
   margin-top: 28px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  gap: 20px;
+  display: flex;
   padding-left: 23px;
+  flex-wrap: nowrap;
+  @media screen and (max-width: 400px){
+    padding-left: 0;
+  }
 }
 .item{
+  min-width: 78px;
+  min-height: 78px;
   img {
-    width: 100%;
+    width: 80%;
     object-fit: cover;
     border-radius: 10px;
   }
+}
+
+.label{
+  font-weight: bold;
+  font-size: 14px;
+  color: $white;
+  @media screen and (max-width: 650px){
+    font-size: 12px;
+}
+}
+
+.user{
+  font-weight: 500;
+  font-size: 14px;
+  color: $dark100;
+  @media screen and (max-width: 650px){
+    font-size: 12px;
+}
+}
+
+.win{
+  color: #7bd245;
+  span{
+    color: $white;
+  }
+  @media screen and (max-width: 650px){
+    font-size: 12px;
+}
 }

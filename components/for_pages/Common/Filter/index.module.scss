@@ -24,6 +24,25 @@
   }
 }
 
+.mobile{
+  width: 100%;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 19px;
+  @media screen and (min-width: 1001px){
+    display: none;
+  }
+}
+
+.search{
+  padding-top: 9px;
+  padding-left: 9px;
+  padding-right: 9px;
+  padding-bottom: 11px;
+  background: #1D1E25;
+  border-radius: 18px;
+}
+
 .close{
   margin-bottom: 10px;
   display: flex;
@@ -160,4 +179,20 @@
     justify-content: center;
     margin-top: 15px;
   }
+}
+
+.filters{
+  display: flex;
+  margin-top: 8px;
+  justify-content: space-between;
+  div{
+    margin-bottom: 0;
+  }
+  div:last-child{
+    margin-right: 0;
+  }
+}
+
+.filters > div{
+  margin-right: 8px;
 }

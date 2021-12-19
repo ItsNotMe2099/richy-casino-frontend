@@ -11,10 +11,18 @@
 .wrapper{
   display: flex;
   padding-left: 23px;
+  @media screen and (max-width: 400px){
+    padding-left: 0;
+    justify-content: center;
+    margin-top: 10px;
+  }
 }
 
 .item{
   position: relative;
+  max-width: 78px;
+  min-height: 78px;
+  justify-self: center;
     @media screen and (max-width: 400px){
         display: flex !important;
         justify-content: center;
@@ -36,6 +44,12 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 20px;
   padding-left: 23px;
+  @media screen and (max-width: 500px){
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @media screen and (max-width: 400px){
+    padding-left: 0;
+  }
 }
 
 .more{

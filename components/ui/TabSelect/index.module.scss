@@ -130,6 +130,11 @@ max-width: 280px;
     font-size: 14px;
     color: #FFFFFF;
   }
+  @media screen and (max-width: 400px){
+    span{
+      font-size: 10px;
+    }
+  }
 }
 
 .active{

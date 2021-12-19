@@ -383,8 +383,9 @@ export default function CatalogPage() {
 
   return (
     <Layout>
+      <TopSlider money={money} slider/>
       <Row className={styles.desktop}>
-      <Filter items={games}/>
+      <Filter items={games} mobile/>
       <Col className={styles.content}>
       <Row>
       <TopSlider money={money}/>
@@ -395,7 +396,6 @@ export default function CatalogPage() {
       <GamesList richy items={richyGames}/>
       </Col>
       </Row>
-      <TopSlider money={money} slider/>
     </Layout>
   )
 }
