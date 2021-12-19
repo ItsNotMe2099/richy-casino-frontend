@@ -37,6 +37,9 @@
   color: $white;
   font-weight: 600;
   font-size: 12px;
+  &:hover{
+    background-color: $dark400;
+  }
   @media screen and (max-width: 500px){
     padding: 8px 12px;
     span{
@@ -68,6 +71,9 @@
   background-color: $dark600;
   border-radius: 8px;
   cursor: pointer;
+  &:hover{
+    background-color: $dark400;
+  }
 }
 
 .prev{
