@@ -6,11 +6,37 @@
   border-radius: 18px;
   max-height: 1313px;
   margin-top: 20px;
+  @media screen and (max-width: 1000px){
+  max-height: 800px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  }
 }
 
 .col{
   width: 25% !important;
   max-width: 25% !important;
+  @media screen and (max-width: 1000px){
+    position: absolute !important;
+    z-index: 1;
+    width: 100% !important;
+    max-width: 300px !important;
+  }
+}
+
+.close{
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
+  img{
+  cursor: pointer;
+  }
+  @media screen and (min-width: 1001px){
+    display: none;
+  }
+}
+
+.none{
   @media screen and (max-width: 1000px){
     display: none;
   }

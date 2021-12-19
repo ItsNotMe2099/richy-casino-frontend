@@ -1,0 +1,137 @@
+@import "scss/index";
+
+.root{
+  padding: 24px 23px;
+  border-radius: 18px;
+  background-color: $dark700;
+  overflow-y: auto;
+  overflow-x: hidden;
+  @media screen and (max-width: 700px){
+    padding: 0;
+    padding-top: 13px;
+}
+@media screen and (max-width: 400px){
+  max-height: 300px;
+}
+}
+
+.col{
+
+    @media screen and (max-width: 550px){
+        flex-basis: auto !important;
+        padding: 0 19px !important;
+    }
+}
+
+.last{
+  @media screen and (max-width: 550px){
+    margin-top: 16px;
+}
+}
+
+.table{
+  display: table;
+  width: 100%;
+  border-collapse: separate;
+  .rowInner:nth-child(odd){
+      .cell{
+      background-color: transparent;
+      }
+  }
+}
+
+.row{
+  display: table-row;
+  .cell{
+      padding-bottom: 26px;
+      @media screen and (max-width: 550px){
+          padding-bottom: 11px;
+      }
+      @media screen and (max-width: 400px){
+          font-size: 12px;
+      }
+  }
+  .cell:first-child{
+      padding-left: 20px;
+      .text{
+        text-align: unset;
+      }
+  }
+}
+
+.rowInner{
+  .cell{
+      background-color: $dark600;
+      padding-top: 20px;
+      padding-bottom: 20px;
+  }
+  .cell:first-child{
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+      padding-left: 20px;
+      @media screen and (max-width: 700px){
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+      }
+  }
+  .cell:last-child{
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+      @media screen and (max-width: 700px){
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+      }
+  }
+  @media screen and (max-width: 400px){
+      margin-left: -10px;
+      margin-right: -16px;
+  }
+}
+
+.cell{
+  display: table-cell;
+  font-weight: 600;
+  font-size: 16px;
+  color: $dark200;
+  @media screen and (max-width: 1360px){
+    font-size: 12px;
+}
+}
+
+.text{
+  font-weight: 500;
+  font-size: 16px;  
+  color: #FFFFFF;
+  span{
+    color: #eeaf4d;
+  }
+  @media screen and (max-width: 1360px){
+    font-size: 12px;
+}
+@media screen and (max-width: 900px){
+  font-size: 10px;
+}
+@media screen and (max-width: 700px){
+  text-align: right;
+  padding-right: 11px;
+}
+}
+
+.date{
+  font-size: 16px;
+  font-weight: 500;
+  color: $dark200;
+  @media screen and (max-width: 1360px){
+    font-size: 12px;
+}
+@media screen and (max-width: 900px){
+  font-size: 10px;
+}
+}
+
+.payout{
+  color: $dark200;
+  @media screen and (max-width: 1360px){
+    font-size: 12px;
+}
+}

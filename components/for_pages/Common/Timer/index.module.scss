@@ -50,9 +50,6 @@
   justify-content: center;
   max-height: 40px;
   margin: 0 6px;
-  @media screen and (max-width: 950px){
-    justify-content: flex-end;
-  }
   @media screen and (max-width: 550px){
     justify-content: center;
   }
@@ -68,11 +65,35 @@
   text-align: center;
   @media screen and (max-width: 950px){
     display: none;
+    font-size: 10px;
   }
 }
 
 .minutes + .separator{
   @media screen and (max-width: 950px){
     display: none;
+  }
+}
+
+.visible{
+  @media screen and (max-width: 950px){
+    display: block !important;
+  }
+}
+
+.visibleSep{
+  @media screen and (max-width: 950px){
+    display: flex !important;
+  }
+  @media screen and (max-width: 550px){
+    justify-content: flex-start;
+    margin-top: 5px;
+  }
+}
+
+.large{
+  @media screen and (max-width: 550px){
+    width: 30px;
+    height: 28px;
   }
 }

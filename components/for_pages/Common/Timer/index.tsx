@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import styles from './index.module.scss'
+import classNames from 'classnames'
 
 interface Props {
   expiredAt: Date
   days?: boolean
+  mainPage?: boolean
 }
 
 export default function Timer(props: Props) {
@@ -79,46 +81,46 @@ const getOutput = (index: number) => {
   return (
     <div className={styles.root}>
       <div className={styles.hours}>
-        <div className={styles.input}>
+        <div className={classNames(styles.input, {[styles.large]: !props.mainPage})}>
           {props.days ?
             getOutput(0)
             :
             getOutput(1)
           }
         </div>
-        <div className={styles.label}>
+        <div className={classNames(styles.label, {[styles.visible]: !props.mainPage})}>
           {props.days? <>дней</> : <>часов</>}
         </div>
       </div>
-      <div className={styles.separator}>
+      <div className={classNames(styles.separator, {[styles.visibleSep]: !props.mainPage})}>
         <div className={styles.circle}></div>
         <div className={styles.circle}></div>
       </div>
       <div className={styles.minutes}>
-        <div className={styles.input}>
+        <div className={classNames(styles.input, {[styles.large]: !props.mainPage})}>
         {props.days ?
             getOutput(1)
             :
             getOutput(2)
           }
         </div>
-        <div className={styles.label}>
+        <div className={classNames(styles.label, {[styles.visible]: !props.mainPage})}>
         {props.days? <>часов</> : <>минут</>}
         </div>
       </div>
-      <div className={styles.separator}>
+      <div className={classNames(styles.separator, {[styles.visibleSep]: !props.mainPage})}>
         <div className={styles.circle}></div>
         <div className={styles.circle}></div>
       </div>
-      <div className={styles.seconds}>
-        <div className={styles.input}>
+      <div className={classNames(styles.seconds, {[styles.visible]: !props.mainPage})}>
+        <div className={classNames(styles.input, {[styles.large]: !props.mainPage})}>
         {props.days ?
             getOutput(2)
             :
             getOutput(3)
           }
         </div>
-        <div className={styles.label}>
+        <div className={classNames(styles.label, {[styles.visible]: !props.mainPage})}>
         {props.days? <>минут</> : <>секунд</>}
         </div>
       </div>

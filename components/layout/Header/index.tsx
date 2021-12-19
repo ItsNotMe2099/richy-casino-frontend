@@ -19,7 +19,7 @@ export default function Header(props: Props) {
     { label: 'Главная', link: '/' },
     { label: 'Казино', link: '#' },
     { label: 'Richy Game', link: '#' },
-    { label: 'Free Bitcoin', link: '#' },
+    { label: 'Free Bitcoin', link: '/freebitcoin' },
     { label: 'Wheel of Fortuna', link: '#' },
     { label: 'Лотерея', link: '#' },
     { label: 'Live Casino', link: '#' },

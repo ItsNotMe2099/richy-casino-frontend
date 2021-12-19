@@ -38,7 +38,7 @@ export default function Tournament(props: Props) {
             <div className={styles.end}>
               До окончания
             </div>
-            <Timer expiredAt={expiredAt} days/>
+            <Timer expiredAt={expiredAt} days mainPage/>
           </div>
           <div className={styles.btnContainer}><Button className={styles.btn} size='normal' background='payGradient500'>Участвовать</Button></div>
         </div>

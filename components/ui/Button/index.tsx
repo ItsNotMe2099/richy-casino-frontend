@@ -7,13 +7,13 @@ interface Props extends IButton {
   children?: React.ReactNode
   variant?: 'outlined' 
   color?: 'fill'
-  size?: 'extraSmall' | 'small' | 'normal' | 'large' | 'play' | 'superExtraSmall'
+  size?: 'extraSmall' | 'small' | 'normal' | 'large' | 'play' | 'superExtraSmall' | 'huge'
   fluid?: boolean
   href?: string
   target?: string
   className?: string
   image?: string
-  background?: 'dark700' | 'payGradient500' | 'dark500' | 'blueGradient500' | 'blackTransparent' | 'white'
+  background?: 'dark700' | 'payGradient500' | 'dark500' | 'blueGradient500' | 'blackTransparent' | 'white' | 'yellowTransparent' | 'violetTransparent'
 }
 
 export default function Button(props: Props) {
@@ -25,6 +25,7 @@ export default function Button(props: Props) {
       [styles.sizeNormal]: props.size === 'normal',
       [styles.sizeLarge]: props.size === 'large',
       [styles.sizePlay]: props.size === 'play',
+      [styles.sizeHuge]: props.size === 'huge',
       [styles.variantOutlined]: props.variant === 'outlined',
       [styles.fill]: props.color === 'fill',
       [styles.fluid]: props.fluid,
@@ -33,6 +34,8 @@ export default function Button(props: Props) {
       [styles.payGradient500]: props.background === 'payGradient500',
       [styles.blueGradient500]: props.background === 'blueGradient500',
       [styles.blackTransparent]: props.background === 'blackTransparent',
+      [styles.yellowTransparent]: props.background === 'yellowTransparent',
+      [styles.violetTransparent]: props.background === 'violetTransparent',
       [styles.white]: props.background === 'white'
   })
 

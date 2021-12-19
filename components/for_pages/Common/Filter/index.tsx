@@ -1,6 +1,7 @@
 import InputSearch from 'components/ui/Inputs/InputSearch'
 import styles from './index.module.scss'
 import { Col } from 'react-grid-system'
+import classNames from 'classnames'
 
 interface IGame{
   label: string
@@ -15,6 +16,9 @@ interface IGame{
 interface Props {
   path?: string
   items?: IGame[]
+  className?: string
+  state?: boolean
+  onClick?: () => void
 }
 
 export default function Filter(props: Props) {
@@ -96,8 +100,11 @@ export default function Filter(props: Props) {
   ]
 
   return (
-    <Col className={styles.col}>
-      <div className={styles.root}>
+    <Col className={classNames(styles.col, {[styles.none]: !props.state})}>
+      <div className={classNames(styles.root, props.className)}>
+          <div className={styles.close}>
+            <img src='/img/icons/close.svg' alt='' onClick={props.onClick}/>
+          </div>
          <InputSearch placeholder='Поиск'/>
          {gameFilters.map((item, index) => 
           <GameFilter key={index} icon={item.icon} label={item.label} items={props.items}/>

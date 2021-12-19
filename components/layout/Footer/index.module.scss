@@ -2,11 +2,15 @@
 
 .root{
   margin-top: auto;
+  margin-top: 95px;
   @media screen and (max-width: 920px){
     padding: 0 18px;
     margin-left: -10px;
     margin-right: -10px;
   }
+  @media screen and (max-width: 400px){
+    margin-top: 49px;
+}
 }
 
 .top{

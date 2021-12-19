@@ -1,0 +1,35 @@
+@import "scss/index";
+
+.root{
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-left: 17px;
+  background: #1D1E25;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  @media screen and (max-width: 1000px){
+    background-color: transparent;
+  }
+}
+
+.icon{
+  margin-right: 5px;
+  img{
+    width: 56px;
+  }
+}
+
+.title{
+  color: #fff;
+  font-weight: bold;
+  font-size: 21px;
+}
+
+.btn{
+  cursor: pointer;
+  @media screen and (min-width: 1001px){
+    display: none;
+  }
+}
