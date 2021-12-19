@@ -20,7 +20,7 @@
 
 .item{
   position: relative;
-  max-width: 78px;
+  min-width: 78px;
   min-height: 78px;
   justify-self: center;
     @media screen and (max-width: 400px){
