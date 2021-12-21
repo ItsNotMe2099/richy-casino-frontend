@@ -1,0 +1,66 @@
+@import "scss/index";
+
+.root {
+  display: flex;
+  background: linear-gradient(91.02deg, rgba(89, 96, 255, 0.18) 0.69%, rgba(89, 96, 255, 0) 103.39%);
+  border: 1px solid #5960FF;
+  border-radius: 18px;
+  padding: 23px 37px 23px 49px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  @media screen and (max-width: 1360px){
+    flex-direction: column;
+  }
+  @media screen and (max-width: 400px){
+    padding: 11px 0 9px 0;
+    margin-top: 0;
+  }
+}
+
+.digit{
+  font-weight: bold;
+  font-size: 40px;
+  color: $lottery500;
+  @media screen and (max-width: 400px){
+    font-size: 20px;
+  }
+}
+
+.label{
+  font-size: 15px;
+  color: $lottery500;
+  @media screen and (max-width: 400px){
+    font-size: 10px;
+  }
+}
+
+.days{
+  text-align: center;
+  margin-right: 43px;
+  @media screen and (max-width: 400px){
+    margin-right: 20px;
+  }
+  &:last-of-type{
+    margin-right: 0;
+  }
+}
+
+.left{
+  font-weight: 600;
+  font-size: 25px;
+  span{
+    color: $lottery500;
+  }
+  @media screen and (max-width: 400px){
+    font-size: 15px;
+  }
+}
+
+.timer{
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 400px){
+    margin-top: 8px;
+  }
+}

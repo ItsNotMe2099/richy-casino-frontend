@@ -1,0 +1,11 @@
+@import "scss/index";
+
+.root{
+
+}
+
+.content{
+    @media screen and (max-width: 700px){
+        padding: 0 19px !important;
+      }
+}

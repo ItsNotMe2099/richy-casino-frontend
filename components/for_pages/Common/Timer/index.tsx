@@ -52,7 +52,7 @@ Object.keys(timeLeft).forEach((interval) => {
 
   timerComponents.push(
     <span>
-      {+timeLeft[interval] >= 10 ? timeLeft[interval]  : `0${timeLeft[interval]}`}
+      {timeLeft[interval] ? (+timeLeft[interval] >= 10 ? timeLeft[interval]  : `0${timeLeft[interval]}`) : '00'}
     </span>
   )
 })
@@ -68,13 +68,13 @@ const getOutput = (index: number) => {
   }
   switch(index){
     case 0:
-    return days ? days : '00'
+    return days
     case 1: 
-    return hours ? hours : '00'
+    return hours
     case 2:
-    return minutes ? minutes : '00'
+    return minutes
     case 3: 
-    return seconds ? seconds : '00'
+    return seconds
   }
 }
 

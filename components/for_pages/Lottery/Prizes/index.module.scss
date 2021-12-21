@@ -1,0 +1,103 @@
+@import "scss/index";
+
+.root{
+ 
+}
+
+.top{
+  display: grid;
+  grid-template-areas: 'a a a a' 
+   'b b c c';
+  gap: 9px 6px;
+}
+
+.middle{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0 6px;
+  margin-top: 9px;
+}
+
+.bottom{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0 6px;
+  margin-top: 9px;
+}
+
+.place{
+  border-radius: 18px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 55px 0;
+}
+
+.first{
+  @include placeGradient1st200;
+  grid-area: a;
+}
+
+.secondPlace{
+  grid-area: b;
+}
+
+.thirdPlace{
+  grid-area: c;
+}
+
+.second{
+  @include placeGradient2nd200;
+}
+
+.third{
+  @include placeGradient4th200;
+}
+
+.fourth{
+  @include placeGradient7th200;
+}
+
+.free{
+  background: #F30058;
+  border-top-left-radius: 21px;
+  border-bottom-right-radius: 21px;
+  padding: 9px 21px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #FFFFFF;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.green{
+  @include placeGradient1st500;
+}
+
+.orange{
+  @include placeGradient2nd500;
+}
+
+.blue{
+  @include blueGradient500NoHover;
+}
+
+.purple{
+  @include placeGradient7th500;
+}
+
+.bitcoin{
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.column{
+  flex-direction: column;
+  img{
+    margin-bottom: 14px;
+  }
+}

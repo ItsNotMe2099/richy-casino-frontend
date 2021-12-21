@@ -17,6 +17,9 @@
     margin-left: 9px;
     margin-right: 9px;
   }
+  @media screen and (max-width: 400px){
+    margin-top: 0;
+  }
   @media screen and (max-width: 320px){
     background-image: url('../../../../public/img/FreeBitcoin/bgm.svg');
   }
