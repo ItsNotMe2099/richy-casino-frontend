@@ -1,6 +1,5 @@
 import styles from './index.module.scss'
 import classNames from 'classnames'
-import Bitcoin from 'components/svg/Bitcoin'
 import { Col } from 'react-grid-system'
 
 interface Props {

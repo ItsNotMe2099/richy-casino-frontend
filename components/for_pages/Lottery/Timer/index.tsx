@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import styles from './index.module.scss'
-import classNames from 'classnames'
 
 interface Props {
   expiredAt: Date
