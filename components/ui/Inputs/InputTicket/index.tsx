@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import { FieldConfig, useField } from 'formik'
@@ -14,7 +13,7 @@ export default function InputTicket(props: Props & FieldConfig) {
 
   const [field, meta] = useField(props)
   const {value} = field
-  const {placeholder} = props;
+  const {placeholder} = props
 
   return (
     <div className={classNames(styles.root, props.className)}>
