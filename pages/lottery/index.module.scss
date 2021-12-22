@@ -25,6 +25,6 @@
 .statistics{
   margin-top: 17px;
   @media screen and (min-width: 451px){
-    display: none;
+    display: none !important;
   }
 }
