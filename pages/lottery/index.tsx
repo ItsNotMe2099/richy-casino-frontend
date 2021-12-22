@@ -7,6 +7,8 @@ import styles from 'pages/lottery/index.module.scss'
 import Timer from 'components/for_pages/Lottery/Timer'
 import Table from 'components/for_pages/Lottery/Table'
 import Prizes from 'components/for_pages/Lottery/Prizes'
+import BuyTickets from 'components/for_pages/Lottery/BuyTickets'
+import Statistics from 'components/for_pages/Lottery/Statistics'
 
 export default function Lottery() {
 
@@ -40,7 +42,9 @@ export default function Lottery() {
       <Col className={styles.content}>
         <PageTitle icon='/img/Lottery/lottery.svg' title='Lottery' onClick={() => isShow ? setIsShow(false) : setIsShow(true)} lottery/>
         <Timer expiredAt={expiredAt}/>
-        <Row>
+        <Statistics className={styles.statistics}/>
+        <Row className={styles.row}>
+          <BuyTickets/>
           <Prizes/>
         </Row>
         <Table items={topWinners}/>

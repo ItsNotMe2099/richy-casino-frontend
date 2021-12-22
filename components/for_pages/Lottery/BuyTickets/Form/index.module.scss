@@ -1,0 +1,98 @@
+@import "scss/index";
+
+.root{
+  margin-top: 16px;
+  border-radius: 16px;
+  @media screen and (max-width: 450px){
+    font-size: 14px;
+    background-color: $dark600;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 18px;
+  }
+}
+
+.block{
+  background-color: $dark600;
+  border-radius: 16px;
+  padding: 0 0 28px 0;
+  @media screen and (max-width: 450px){
+    padding: 0 0 20px 0;
+  }
+}
+
+.top{
+  @include darkGradient500;
+  padding: 21px 15px 17px 17px;
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 450px){
+    margin: 0 -16px;
+  }
+}
+
+.number{
+  font-weight: 500;
+  font-size: 16px;
+  flex: 1;
+}
+
+.input{
+  flex: 1;
+}
+
+.bottom{
+  padding: 28px 15px 0 15px;
+  @media screen and (max-width: 450px){
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.price{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 19px;
+  border-bottom: 1px solid #41424F;
+}
+
+.total{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 34px;
+}
+
+.text{
+  font-weight: 500;
+  font-size: 16px;
+  color: $dark200;
+  @media screen and (max-width: 450px){
+    font-size: 14px;
+  }
+}
+
+.digits{
+  font-weight: 600;
+  font-size: 18px;
+  color: $white;
+  @media screen and (max-width: 450px){
+    font-size: 14px;
+  }
+}
+
+.btn{
+  margin-top: 12px;
+  font-weight: bold;
+  font-size: 18px;
+  color: $white;
+  width: 100%;
+  @media screen and (max-width: 870px){
+    font-size: 14px;
+  }
+  @media screen and (max-width: 405px){
+    padding: 25px 70px;
+  }
+}

@@ -44,7 +44,7 @@ export default function Prizes(props: Props) {
         else if(place > 1 && place < 4){
           return '/img/Lottery/bitcoin-orange.svg'
         }
-        else if(place > 4 && place < 7){
+        else if(place > 3 && place < 7){
           return '/img/Lottery/bitcoin-blue.svg'
         }
         else if(place > 6){
@@ -52,10 +52,16 @@ export default function Prizes(props: Props) {
         }
     }
 
+  const bitcoinClass = classNames({
+    [styles.column]: prop.place > 1,
+    [styles.mediumFont]: prop.place > 1 && prop.place < 7,
+    [styles.smallFont]: prop.place > 6 
+  })
+
     return (
       <div className={classNames(styles.place, rootClass, prop.className)}>
         <div className={classNames(styles.free, colorClass)}>{prop.place}{getEnding()}</div>
-        <div className={classNames(styles.bitcoin, {[styles.column]: prop.place > 1})}>
+        <div className={classNames(styles.bitcoin, bitcoinClass)}>
           <img src={getBtcColor(prop.place)} alt=''/>{prop.bitcoin}
         </div>
       </div>

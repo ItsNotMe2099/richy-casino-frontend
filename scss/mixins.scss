@@ -96,6 +96,10 @@
   background: linear-gradient(280.99deg, #5C00F3 18.02%, #905BFF 126.63%);
 }
 
+@mixin  darkGradient500 {
+  background: linear-gradient(100.47deg, #323340 -32.54%, #272832 102.28%);
+}
+
 @mixin componentRoot{
     margin-top: 20px;
     padding: 5px 28px 28px 10px;
