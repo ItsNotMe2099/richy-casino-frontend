@@ -13,7 +13,7 @@
     @media screen and (max-width: 1360px){
         flex-direction: column;
       }
-      @media screen and (max-width: 400px){
+      @media screen and (max-width: $xs-max){
         display: none;
       }
 }
@@ -144,7 +144,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     position: relative;
     gap: 15px;
-    @media screen and (max-width: 400px){
+    @media screen and (max-width: $xs-max){
         display: none;
       }
 }
@@ -153,7 +153,7 @@
     margin-top: 15px;
     overflow-x: auto;
     overflow-y: hidden;
-    @media screen and (min-width: 401px){
+    @media screen and (min-width: 769px){
         display: none;
       } 
 }

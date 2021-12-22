@@ -68,23 +68,13 @@
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(9.04865px);
   border-radius: 4px;
-  width: 45%;
   position: relative;
   z-index: 3;
-  @media screen and (max-width: 1360px){
-    width: 63%;
-  }
-  @media screen and (max-width: 950px){
-    width: 100%;
-  }
-  @media screen and (max-width: 650px){
-    width: 35%;
-  }
-  @media screen and (max-width: 550px){
-    width: 45%;
-  }
-  @media screen and (max-width: 500px){
-    width: 100%;
+  float: left;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
   }
 }
 
@@ -109,7 +99,7 @@
   @media screen and (max-width: 1360px){
     right: -10%;
   }
-  @media screen and (max-width: 650px){
+  @media screen and (max-width: $xs-max){
     right: -5%;
   }
 }
@@ -127,7 +117,7 @@
   @media screen and (max-width: 1360px){
     right: -35%;
   }
-  @media screen and (max-width: 650px){
+  @media screen and (max-width: $xs-max){
     right: -19%;
   }
   @media screen and (max-width: 550px){

@@ -99,22 +99,5 @@
       }
     }
   }
-  @media screen and (max-width: 400px){
-    display: none;
-  }
+ 
 }
-
-.overflowSlider{
-  @media screen and (min-width: 401px){
-    display: none;
-  }
-  flex-wrap: nowrap;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; 
-  overflow-x: scroll;
-  clip: auto;
-  position: relative;
-  margin-top: 15px;
-}
-

@@ -68,11 +68,6 @@ export default function Games(props: Props) {
             <Slide item={item} key={index}/>
           )}
         </Slider>
-        <div className={styles.overflowSlider}>
-          {items.map((item, index) => 
-            <Slide item={item} key={index}/>
-          )}
-        </div>
       </div>
   )
 }

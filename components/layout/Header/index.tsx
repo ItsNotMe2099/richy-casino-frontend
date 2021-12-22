@@ -70,7 +70,7 @@ export default function Header(props: Props) {
         <div className={styles.login}><Button size='small' background='dark700'>Войти</Button></div>
         <div className={styles.reg}><Button size='normal' background='payGradient500'><img src='/img/layout/top/person.svg' alt=''/>Регистрация</Button></div>
         <div className={styles.lang}><LangSelect/></div>
-        <Button className={styles.chat} size='normal' background='dark700'><img src='/img/layout/top/chat.svg' alt=''/></Button>
+        {/*<Button className={styles.chat} size='normal' background='dark700'><img src='/img/layout/top/chat.svg' alt=''/></Button>*/}
       </div>
     </div>
         <div className={styles.menu}>

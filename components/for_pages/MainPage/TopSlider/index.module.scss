@@ -2,16 +2,19 @@
 
 .root{
   margin-top: 28px;
+  @media screen and (max-width: $xs-max){
+    margin-top: 24px;
+  }
 }
 
 .desktop{
-  @media screen and (max-width: 650px){
+  @media screen and (max-width: $xs-max){
     display: none !important;
   }
 }
 
 .slider{
-  @media screen and (min-width: 651px){
+  @media screen and (min-width: 769px){
     display: none !important;
   }
 }
@@ -52,6 +55,8 @@
   min-height: 250px;
   background-position: center center;
   margin: 0 5px;
+  background-repeat: no-repeat;
+  background-size: cover;
   @media screen and (max-width: 1360px){
     padding-left: 18px;
   }

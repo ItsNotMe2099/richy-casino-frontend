@@ -24,6 +24,32 @@ export default function GamesList(props: Props) {
 
     const [inFavorite, setInFavorite] = useState(false)
 
+    const settings = {
+      className: `${styles.slider}`,
+      dots: false,
+      infinite: false,
+      speed: 500,
+      slidesToShow: items.length < 6 ? items.length : 6,
+      slidesToScroll: 1,
+      variableWidth: false,
+      adaptiveHeight: false,
+      arrows: false,
+      responsive: [
+        {
+          breakpoint: 570,
+          settings: {
+            slidesToShow: items.length < 4 ? items.length : 4,
+          }
+        },
+        {
+          breakpoint: 400,
+          settings: {
+            slidesToShow: items.length < 3 ? items.length : 3,
+          },
+        }
+      ]
+    }
+
     return(
     <div className={styles.item}>
               <div className={styles.shade}></div>
