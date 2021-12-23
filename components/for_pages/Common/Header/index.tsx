@@ -68,6 +68,32 @@ export default function Header(props: Props) {
             </div>
           </div>}
       </div>}
+      {props.catalogTop &&
+        <VisibleXs>
+        <div className={styles.block}>
+          {props.length &&
+          <div className={styles.length}>
+            {props.length}
+          </div>}
+          <Link href='#'>
+          <a className={styles.all}>
+            {props.games ? <>Все <span>игры</span></> : props.top ? <><span>Смотреть</span> ТОП-100</>: null}
+            {props.allDesktop && <div className={styles.desktop}>{props.allDesktop}</div>}
+            {props.allMobile && <div className={styles.mobile}>{props.allMobile}</div>}
+          </a>
+          </Link>
+          {props.slider &&
+          <div className={styles.controls}>
+            <div className={styles.prev} onClick={props.onPrev}>
+              <SliderArrow/>
+            </div>
+            <div className={styles.next} onClick={props.onNext}>
+              <SliderArrow/>
+            </div>
+          </div>}
+      </div>
+      </VisibleXs> 
+      }
       </div>
   )
 }

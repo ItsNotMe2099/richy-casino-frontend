@@ -1,6 +1,7 @@
 import styles from './index.module.scss'
 import Header from 'components/for_pages/Common/Header'
 import SwitchFilter from '../SwitchFilter'
+import Slider from 'react-slick'
 
 interface IGame{
   label: string
@@ -36,15 +37,38 @@ export default function GamesListTop(props: Props) {
     )
   }
 
+  const settings = {
+    className: `${styles.list}`,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    variableWidth: false,
+    adaptiveHeight: false,
+    arrows: false,
+    dotsClass: `${styles.dots}`,
+
+    responsive: [
+      {
+        breakpoint: 550,
+        settings: {
+          slidesToShow: 3,
+        }
+      },
+    ]
+  }
+
   return (
       <div className={styles.root}>
-        <Header icon='/img/Contents/money.svg' label='ТОП игры' games length={1} catalogTop/>
+        <div className={styles.header}>
+          <Header icon='/img/Contents/money.svg' label='ТОП игры' games length={1} catalogTop/>
+        </div>
         <div className={styles.wrapper}><SwitchFilter top/></div>
-        <div className={styles.list}>
+        <Slider {...settings}>
           {props.items && props.items.slice(0, 6).map((item, index) =>
             <Item item={item} key={index}/>
           )}
-        </div>
+        </Slider>
       </div>
   )
 }

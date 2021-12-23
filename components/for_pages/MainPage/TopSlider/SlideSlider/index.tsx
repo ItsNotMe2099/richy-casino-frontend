@@ -32,7 +32,7 @@ export default function SlideSlider(props: Props) {
   const settings = {
     className: `${styles.slider}`,
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -41,6 +41,8 @@ export default function SlideSlider(props: Props) {
     arrows: false,
     dotsClass: `${styles.dots}`,
     beforeChange: (current: number, next: number) => setCurrentIndex(next),
+    autoplay: true,
+    autoplaySpeed: 5000,
   }
 
   return (
