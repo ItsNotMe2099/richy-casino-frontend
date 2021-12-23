@@ -14,6 +14,7 @@ interface Props {
   onNext?: () => void
   slider?: boolean
   richy?: boolean
+  catalogTop?: boolean
 }
 
 export default function Header(props: Props) {
@@ -36,6 +37,7 @@ export default function Header(props: Props) {
             {props.label}
           </div>
         </div>
+        {!props.catalogTop &&
         <div className={styles.block}>
           {(props.length && !props.richy) ?
           <div className={styles.length}>
@@ -65,7 +67,7 @@ export default function Header(props: Props) {
               <SliderArrow/>
             </div>
           </div>}
-      </div>
+      </div>}
       </div>
   )
 }

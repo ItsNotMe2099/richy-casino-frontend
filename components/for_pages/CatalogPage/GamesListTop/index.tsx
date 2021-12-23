@@ -38,7 +38,7 @@ export default function GamesListTop(props: Props) {
 
   return (
       <div className={styles.root}>
-        <Header icon='/img/Contents/money.svg' label='ТОП игры' games length={1}/>
+        <Header icon='/img/Contents/money.svg' label='ТОП игры' games length={1} catalogTop/>
         <div className={styles.wrapper}><SwitchFilter top/></div>
         <div className={styles.list}>
           {props.items && props.items.slice(0, 6).map((item, index) =>

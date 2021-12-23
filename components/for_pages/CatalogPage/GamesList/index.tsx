@@ -2,6 +2,7 @@ import styles from './index.module.scss'
 import Header from 'components/for_pages/Common/Header'
 import SwitchFilter from '../SwitchFilter'
 import { useState } from 'react'
+import HiddenXs from 'components/ui/HiddenXS'
 
 interface IGame{
   label: string
@@ -61,8 +62,10 @@ export default function GamesList(props: Props) {
   return (
       <div className={styles.root}>
         <Header icon={getIcon()} label={getLabel()} games length={props.items.length}/>
-        {!props.richy &&
-        <div className={styles.wrapper}><SwitchFilter all={props.all}/></div>}
+        <HiddenXs>
+          {!props.richy &&
+          <div className={styles.wrapper}><SwitchFilter all={props.all}/></div>}
+        </HiddenXs>
         <div className={styles.list}>
           {props.items && (isShow ? props.items : props.items.slice(0, 10)).map((item, index) =>
             <Item item={item} key={index}/>

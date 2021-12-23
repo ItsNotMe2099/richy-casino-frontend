@@ -11,10 +11,8 @@
 .wrapper{
   display: flex;
   padding-left: 23px;
-  @media screen and (max-width: 400px){
-    padding-left: 0;
-    justify-content: center;
-    margin-top: 10px;
+  @media screen and (max-width: $xs-max){
+    display: none;
   }
 }
 
