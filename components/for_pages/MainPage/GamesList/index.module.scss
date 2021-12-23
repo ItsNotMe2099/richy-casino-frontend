@@ -153,9 +153,7 @@
     margin-top: 15px;
     overflow-x: auto;
     overflow-y: hidden;
-    @media screen and (min-width: 769px){
-        display: none;
-      } 
+  
 }
 
 .row{
@@ -164,4 +162,19 @@
 
 .row > div{
   margin-right: 8px;
+}
+
+.slider{
+  :global .slick-list{
+    .slick-track{
+      .slick-slide{
+        div{
+          display: flex;
+          justify-content: center;
+          margin: 2px;
+        }
+      }
+    }
+  }
+ 
 }

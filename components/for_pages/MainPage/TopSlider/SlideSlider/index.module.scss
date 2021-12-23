@@ -8,6 +8,7 @@
   overflow: hidden;
   min-height: 250px;
   background-position: center center;
+  background-repeat: no-repeat;
   @media screen and (max-width: 1360px){
     padding-left: 18px;
   }
@@ -24,14 +25,15 @@
 }
 
 .bonus{
-  position: absolute;
-  position: absolute;
-  right: -40px;
-  bottom: 35%;
-  z-index: 1;
+  position: fixed;
+  transform: translate(640%, 70%);
+  z-index: 10;
   cursor: pointer;
-  @media screen and (max-width: 1050px){
-    right: 0;
+  @media screen and (max-width: $sm-max){
+    transform: translate(440%, 70%);
+  }
+  @media screen and (max-width: 1000px){
+    display: none;
   }
 }
 

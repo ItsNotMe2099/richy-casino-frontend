@@ -1,5 +1,6 @@
 import Timer from 'components/for_pages/Common/Timer'
 import Button from 'components/ui/Button'
+import HiddenXs from 'components/ui/HiddenXS'
 import styles from './index.module.scss'
 
 interface Props {
@@ -14,8 +15,7 @@ export default function Tournament(props: Props) {
 
   return (
     <div className={styles.root}>
-        <div className={styles.hero}><img src='/img/Tournament/hero.svg' alt=''/></div>
-        <div className={styles.hero2}><img src='/img/Tournament/hero2.svg' alt=''/></div>
+        <div className={styles.hero}><img src='/img/Tournament/hero.png' alt=''/></div>
         <div className={styles.coinsBlur}><img src='/img/Tournament/coins-blur.png' alt=''/></div>
         <div className={styles.money}><img src='/img/Tournament/money.svg' alt=''/></div>
         <div className={styles.money2}><img src='/img/Tournament/money2.svg' alt=''/></div>
@@ -35,9 +35,11 @@ export default function Tournament(props: Props) {
         </div>
         <div className={styles.right}>
           <div className={styles.timer}>
+            <HiddenXs>
             <div className={styles.end}>
               До окончания
             </div>
+            </HiddenXs>
             <Timer expiredAt={expiredAt} days mainPage/>
           </div>
           <div className={styles.btnContainer}><Button className={styles.btn} size='normal' background='payGradient500'>Участвовать</Button></div>

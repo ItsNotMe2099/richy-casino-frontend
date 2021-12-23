@@ -4,6 +4,9 @@ import { TabSelect } from 'components/ui/TabSelect'
 import { useState } from 'react'
 import classNames from 'classnames'
 import Button from 'components/ui/Button'
+import Slider from 'react-slick'
+import VisibleXs from 'components/ui/VisibleXS'
+import HiddenXs from 'components/ui/HiddenXS'
 
 interface IItem {
   image: string
@@ -23,32 +26,6 @@ export default function GamesList(props: Props) {
   const Item = (prop:{item: IItem}) => {
 
     const [inFavorite, setInFavorite] = useState(false)
-
-    const settings = {
-      className: `${styles.slider}`,
-      dots: false,
-      infinite: false,
-      speed: 500,
-      slidesToShow: items.length < 6 ? items.length : 6,
-      slidesToScroll: 1,
-      variableWidth: false,
-      adaptiveHeight: false,
-      arrows: false,
-      responsive: [
-        {
-          breakpoint: 570,
-          settings: {
-            slidesToShow: items.length < 4 ? items.length : 4,
-          }
-        },
-        {
-          breakpoint: 400,
-          settings: {
-            slidesToShow: items.length < 3 ? items.length : 3,
-          },
-        }
-      ]
-    }
 
     return(
     <div className={styles.item}>
@@ -93,9 +70,24 @@ export default function GamesList(props: Props) {
   (provider === '' && category === '')
   ))
 
+  const settings = {
+    className: `${styles.slider}`,
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 3,
+    rows: 2,
+    slidesToScroll: 3,
+    variableWidth: false,
+    adaptiveHeight: false,
+    arrows: false,
+  }
+
   return (
       <div className={classNames(styles.root, {[styles.none]: props.items.length === 0})}>
         <Header icon={props.icon} label={props.label} games length={props.items.length}/>
+        <HiddenXs>
+        <>
         <div className={styles.filters}>
           <TabSelect tabs={categories} label='Категория' allOption
            onAll={() => setCategory('')} onChange={(item) => setCategory(item.label)} activeTab={category} type='category'/>
@@ -108,18 +100,17 @@ export default function GamesList(props: Props) {
             <Item item={item} key={index}/>
           )}
         </div>
+        </>
+        </HiddenXs>
+        <VisibleXs>
         <div className={styles.mobile}>
-          <div className={styles.row}>
-          {items.slice(0, (props.items.length/2)).map((item, index) =>
-            <Item item={item} key={index}/>
-          )}
-          </div>
-          <div className={styles.row}>
-          {items.slice((props.items.length/2), props.items.length).map((item, index) =>
-            <Item item={item} key={index}/>
-          )}
-          </div>
+          <Slider {...settings}>
+            {items.map((item, index) =>
+              <Item item={item} key={index}/>
+            )}
+          </Slider>
         </div>
+        </VisibleXs>
       </div>
   )
 }

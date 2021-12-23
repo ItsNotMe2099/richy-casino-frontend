@@ -24,8 +24,8 @@ export const colors = {
 export const breakpoints = {
   xsMax: 768,
   smMin: 769,
-  smMax: 1200,
-  mdMin: 1201,
+  smMax: 1360,
+  mdMin: 1361,
   mdMax: 1850,
   lgMin: 1851,
 }

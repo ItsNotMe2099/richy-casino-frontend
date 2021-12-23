@@ -1,5 +1,6 @@
 import styles from './index.module.scss'
 import Link from 'next/link'
+import VisibleXs from 'components/ui/VisibleXS'
 
 interface Props {
   length?: number
@@ -12,6 +13,7 @@ interface Props {
   onPrev?: () => void
   onNext?: () => void
   slider?: boolean
+  richy?: boolean
 }
 
 export default function Header(props: Props) {
@@ -35,10 +37,18 @@ export default function Header(props: Props) {
           </div>
         </div>
         <div className={styles.block}>
-          {props.length &&
+          {(props.length && !props.richy) ?
           <div className={styles.length}>
             {props.length}
-          </div>}
+          </div>
+          :
+          props.length &&
+          <VisibleXs>
+            <div className={styles.length}>
+              {props.length}
+            </div>
+          </VisibleXs> 
+        }
           <Link href='#'>
           <a className={styles.all}>
             {props.games ? <>Все <span>игры</span></> : props.top ? <><span>Смотреть</span> ТОП-100</>: null}

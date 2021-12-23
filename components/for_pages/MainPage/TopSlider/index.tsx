@@ -4,6 +4,8 @@ import ConstantSlide from 'components/for_pages/Common/ConstantSlide'
 import SlideSlider from './SlideSlider'
 import Button from 'components/ui/Button'
 import Slider from 'react-slick'
+import HiddenXs from 'components/ui/HiddenXS'
+import VisibleXs from 'components/ui/VisibleXS'
 
 interface Props {
   children?: React.ReactNode
@@ -33,10 +35,13 @@ export default function TopSlider(props: Props) {
 
   return (
     <div className={styles.root}>
+      <HiddenXs>
       <Row className={styles.desktop}>
         <ConstantSlide/>
         <SlideSlider items={items}/>
       </Row>
+      </HiddenXs>
+      <VisibleXs>
       <Slider {...settings}>
         <ConstantSlide/>
         {items.map((item, index) =>
@@ -54,6 +59,7 @@ export default function TopSlider(props: Props) {
         </div> 
         )}
       </Slider>
+      </VisibleXs>
     </div>
   )
 }

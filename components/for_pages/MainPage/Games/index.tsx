@@ -61,6 +61,7 @@ export default function Games(props: Props) {
         onPrev={() => slider.slickGoTo(currentIndex - 1)}
         onNext={() => slider.slickGoTo(currentIndex + 1)}
         games 
+        richy
         slider />
         </div>
         <Slider {...settings} ref={slider1 => (slider = slider1)}>

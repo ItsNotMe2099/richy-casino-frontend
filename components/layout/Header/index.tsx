@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 import Overflow from './components/Overflow'
 import Link from 'next/link'
 import LangSelect from 'components/for_pages/Common/LangSelect'
+import classNames from 'classnames'
+import { useEffect, useState } from 'react'
 
 interface Props {
   children?: React.ReactNode
@@ -28,12 +30,27 @@ export default function Header(props: Props) {
     { label: 'Some Option', link: '#' },
   ]
 
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  const handleScroll = () => {
+    if (window.pageYOffset > 0) {
+      setIsScrolled(true)
+    }
+    else{
+      setIsScrolled(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  })
+
   return (
     <div className={styles.root} id='top'>
       <div className={styles.top}>
       <div className={styles.left}>
         <div className={styles.apps}>
-          <div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>
+          {/*<div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>*/}
           <div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/android.svg' alt=''/></Button></div>
           <Button size='extraSmall' background='dark700'><img src='/img/layout/top/apple.svg' alt=''/></Button>
         </div>
@@ -73,7 +90,7 @@ export default function Header(props: Props) {
         {/*<Button className={styles.chat} size='normal' background='dark700'><img src='/img/layout/top/chat.svg' alt=''/></Button>*/}
       </div>
     </div>
-        <div className={styles.menu}>
+        <div className={classNames(styles.menu, {[styles.scrolled]: isScrolled})}>
         {currentRoute === '/' || currentPath === '/' ?
           <div className={styles.logo}><Logo/></div>
             :
