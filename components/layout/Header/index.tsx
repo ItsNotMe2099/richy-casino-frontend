@@ -42,7 +42,7 @@ export default function Header(props: Props) {
   }
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll)
   })
 
   return (
