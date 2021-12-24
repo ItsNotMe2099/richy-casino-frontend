@@ -27,8 +27,8 @@ export default function TopSlider(props: Props) {
   }
 
   const items =[
-    {label: 'Лучшие игры на Richy', image: '/img/TopSlider/banner.svg'},
-    {label: 'Лучшие игры на Richy', image: '/img/TopSlider/banner.svg'},
+    {label: 'Лучшие игры на Richy', image: '/img/TopSlider/banner.png'},
+    {label: 'Лучшие игры на Richy', image: '/img/TopSlider/banner.png'},
     {label: 'Лучшие игры на Richy', image: '/img/TopSlider/d.jpg'},
   ]
 
