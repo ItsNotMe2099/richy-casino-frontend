@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import { Col } from 'react-grid-system'
 import BuyTicketsForm from './Form'
 import Statistics from '../Statistics'
+import HiddenXs from 'components/ui/HiddenXS'
 
 interface Props {
   
@@ -28,7 +29,9 @@ export default function BuyTickets(props: Props) {
   return (
     <Col className={styles.root}>
     <Panel className={styles.panel}>
-      <Statistics className={styles.statistics}/>
+      <HiddenXs>
+        <Statistics className={styles.statistics}/>
+      </HiddenXs>
       <div className={styles.buy}>
         BUY LOTTERY TICKETS
       </div>

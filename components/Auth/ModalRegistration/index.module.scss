@@ -1,0 +1,119 @@
+@import "scss/index";
+
+  .form{
+      margin-top: 16px;
+  }
+
+  .variants{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+    .variant:last-child{
+      margin-right: 0;
+    }
+    @media screen and (max-width: 430px){
+      justify-content: space-evenly;
+    }
+  }
+
+  .variant{
+    padding: 16px;
+    cursor: pointer;
+    max-width: 118px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $dark600;
+    border-radius: 6px;
+    margin-right: 9px;
+    img{
+      margin-right: 8px;
+    }
+  }
+
+  .active{
+    @include blueGradient500NoHover;
+    @media screen and (max-width: 430px){
+      img{
+        margin-right: 0;
+      }
+    }
+  }
+
+  .label{
+    font-size: 14px;
+    color: $white;
+    @media screen and (max-width: 430px){
+      font-size: 12px;
+    }
+  }
+
+  .inputs{
+    margin-top: 24px;
+  }
+
+.phone{
+  margin-bottom: 12px;
+}
+
+.promo{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  span{
+    font-size: 14px;
+    color: #FFD12F;
+  }
+}
+
+.plus{
+  width: 13px;
+  height: 13px;
+  border-radius: 100%;
+  background: #FFD12F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 15px;
+  margin-right: 8px;
+}
+
+.mobile{
+  @media screen and (max-width: 430px){
+    display: none;
+  }
+}
+
+.button{
+  width: 100%;
+  font-weight: 600;
+  font-size: 16px;
+  color: $white;
+}
+
+.login{
+  font-weight: 500;
+  font-size: 14px;
+  color: $dark200;
+  margin-top: 25px;
+  span{
+    color: #FFD12F;
+    cursor: pointer;
+  }
+}
+
+.socials{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  @media screen and (max-width: 430px){
+    justify-content: center;
+    margin-bottom: 10px;
+    a{
+      margin-right: 10px;
+    }
+  }
+}

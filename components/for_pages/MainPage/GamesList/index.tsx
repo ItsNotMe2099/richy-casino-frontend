@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import Header from 'components/for_pages/Common/Header'
-import { TabSelect } from 'components/ui/TabSelect'
+import DropdownMenu from 'components/ui/DropdownMenu'
 import { useState } from 'react'
 import classNames from 'classnames'
 import Button from 'components/ui/Button'
@@ -89,9 +89,9 @@ export default function GamesList(props: Props) {
         <HiddenXs>
         <>
         <div className={styles.filters}>
-          <TabSelect tabs={categories} label='Категория' allOption
+          <DropdownMenu tabs={categories} label='Категория' allOption
            onAll={() => setCategory('')} onChange={(item) => setCategory(item.label)} activeTab={category} type='category'/>
-          <TabSelect tabs={providers} label='Провайдеры' allOption
+          <DropdownMenu tabs={providers} label='Провайдеры' allOption
             onAll={() => setProvider('')}
            onChange={(item) => setProvider(item.label)} activeTab={provider} type='provider'/>
         </div>

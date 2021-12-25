@@ -1,0 +1,21 @@
+@import "scss/index";
+
+.root{
+  position: relative;
+  margin-bottom: 12px;
+  svg{
+    fill: #6B6C77;
+  }
+}
+
+.show{
+  path{
+    fill: $white;
+  }
+}
+
+.hide{
+  path{
+    fill: #6B6C77;
+  }
+}

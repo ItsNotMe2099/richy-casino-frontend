@@ -1,0 +1,49 @@
+@import "scss/index";
+
+.root{
+  background: linear-gradient(46.89deg, #4A16E4 2.09%, #933288 11.47%, #C1444E 32.44%, #FF5C00 108.03%);
+  border-radius: 18px;
+  padding: 17px 0 11px 0;
+  padding-left: 85px;
+  position: relative;
+  max-height: 79px;
+  overflow: hidden;
+}
+
+.title{
+  font-weight: bold;
+  font-size: 16px;
+  position: relative;
+  z-index: 2;
+  color: #AAFF55;
+  text-align: left;
+}
+
+.bottom{
+  
+}
+
+.satoshi{
+  font-weight: 600;
+  font-size: 12px;
+  text-align: left;
+}
+
+.hero{
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  left: 0;
+}
+
+.money{
+  right: -20px;
+  bottom: -35px;
+  position: absolute;
+}
+
+.money2{
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+}

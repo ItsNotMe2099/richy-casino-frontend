@@ -17,8 +17,9 @@ interface Props {
   allOption?: boolean
 }
 
-export const TabSelect = ({tabs, label, onChange, activeTab, type, allOption, onAll }: Props) => {
+export default function DropdownMenu(props: Props){
   const dropdownRef = useRef(null)
+  const {tabs, label, onChange, activeTab, type, allOption, onAll} = props
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
   const handleClick = (e) => {
     e.preventDefault()
@@ -27,12 +28,12 @@ export const TabSelect = ({tabs, label, onChange, activeTab, type, allOption, on
 
   return (
     <div className={styles.root}>
-      <a href="#" onClick={handleClick} className={classNames(styles.dropDownTrigger)}>
+      <a href="#" onClick={handleClick} className={styles.dropDownTrigger}>
         <div className={styles.label}>
-        {type && <img src={type === 'category' ? '/img/TabSelect/arrows.svg' : '/img/TabSelect/pacman.svg'} alt=''/>}
+        {type && <img src={type === 'category' ? '/img/DropdownMenu/arrows.svg' : '/img/DropdownMenu/pacman.svg'} alt=''/>}
         {activeTab ? <span>{activeTab}</span> : <span>{label}</span>}
         </div>
-        <div className={classNames(styles.arrow, {[styles.active]: isActive})}><img src='/img/TabSelect/arrow.svg' alt=''/></div>
+        <div className={classNames(styles.arrow, {[styles.active]: isActive})}><img src='/img/DropdownMenu/arrow.svg' alt=''/></div>
       </a>
        <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
        {allOption && <div className={styles.option} onClick={() => onAll()}><a onClick={() => setIsActive(false)}>Все</a></div>}

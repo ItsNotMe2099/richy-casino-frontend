@@ -2,7 +2,7 @@ import InputSearch from 'components/ui/Inputs/InputSearch'
 import styles from './index.module.scss'
 import { Col } from 'react-grid-system'
 import classNames from 'classnames'
-import { TabSelect } from 'components/ui/TabSelect'
+import DropdownMenu from 'components/ui/DropdownMenu'
 import { useState } from 'react'
 
 interface IGame{
@@ -146,9 +146,9 @@ export default function Filter(props: Props) {
         <div className={styles.search}>
           <InputSearch placeholder='Поиск'/>
           <div className={styles.filters}>
-          <TabSelect tabs={categories} label='Категория' allOption
+          <DropdownMenu tabs={categories} label='Категория' allOption
            onAll={() => setCategory('')} onChange={(item) => setCategory(item.label)} activeTab={category} type='category'/>
-          <TabSelect tabs={providers} label='Провайдеры' allOption
+          <DropdownMenu tabs={providers} label='Провайдеры' allOption
             onAll={() => setProvider('')}
            onChange={(item) => setProvider(item.label)} activeTab={provider} type='provider'/>
         </div>

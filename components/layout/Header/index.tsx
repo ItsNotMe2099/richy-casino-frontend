@@ -7,6 +7,9 @@ import Link from 'next/link'
 import LangSelect from 'components/for_pages/Common/LangSelect'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
+import { useModal } from 'store/modal-store'
+import { ModalType } from 'types/enums'
+import Modals from '../Modals'
 
 interface Props {
   children?: React.ReactNode
@@ -16,6 +19,7 @@ interface Props {
 export default function Header(props: Props) {
 
   const { route: currentRoute, asPath: currentPath } = useRouter()
+  const {open} = useModal()
 
   const options = [
     { label: 'Главная', link: '/' },
@@ -33,7 +37,7 @@ export default function Header(props: Props) {
   const [isScrolled, setIsScrolled] = useState(false)
 
   const handleScroll = () => {
-    if (window.pageYOffset > 0) {
+    if (window.pageYOffset > 200) {
       setIsScrolled(true)
     }
     else{
@@ -85,7 +89,9 @@ export default function Header(props: Props) {
       }
       <div className={styles.right}>
         <div className={styles.login}><Button size='small' background='dark700'>Войти</Button></div>
-        <div className={styles.reg}><Button size='normal' background='payGradient500'><img src='/img/layout/top/person.svg' alt=''/>Регистрация</Button></div>
+        <div className={styles.reg}>
+          <Button onClick={() => open(ModalType.registration)} size='normal' background='payGradient500'><img src='/img/layout/top/person.svg' alt=''/>Регистрация</Button>
+        </div>
         <div className={styles.lang}><LangSelect/></div>
         {/*<Button className={styles.chat} size='normal' background='dark700'><img src='/img/layout/top/chat.svg' alt=''/></Button>*/}
       </div>
@@ -100,6 +106,7 @@ export default function Header(props: Props) {
         }
           <Overflow currentPath={currentPath} currentRoute={currentRoute} options={options}/>
         </div>
+        <Modals />
     </div>
   )
 }

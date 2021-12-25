@@ -1,0 +1,37 @@
+import styles from './index.module.scss'
+import ReactCheckbox from 'react-custom-checkbox'
+import classNames from 'classnames'
+
+interface Props {
+  label: string
+  checked?: boolean
+  disabled?: boolean
+  onChange: (val) => void
+  color?: string
+  shadow?: boolean
+}
+
+export const CustomCheckbox = (props: Props) => {
+  const {label, checked, disabled, onChange} = props
+
+  return (<div className={classNames(styles.root, {[styles.shadow]: props.shadow})}>
+      <ReactCheckbox
+        checked={checked}
+        disabled={disabled}
+        onChange={onChange}
+        icon={<div className={classNames(styles.icon, {[styles.iconActive]: checked})}><img src={'/img/icons/checkbox.svg'}  alt="" /></div>}
+          borderColor={props.color}
+          borderRadius={4}
+          size={21}
+          label={label}
+          containerClassName={`${styles.checkboxContainer}`}
+          labelClassName={styles.checkboxLabel}
+          labelStyle={{}}
+        />
+  </div>
+  )
+}
+
+CustomCheckbox.defaultProps = {
+  color: ''
+}

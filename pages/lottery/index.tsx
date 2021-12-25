@@ -9,6 +9,7 @@ import Table from 'components/for_pages/Lottery/Table'
 import Prizes from 'components/for_pages/Lottery/Prizes'
 import BuyTickets from 'components/for_pages/Lottery/BuyTickets'
 import Statistics from 'components/for_pages/Lottery/Statistics'
+import VisibleXs from 'components/ui/VisibleXS'
 
 export default function Lottery() {
 
@@ -42,7 +43,9 @@ export default function Lottery() {
       <Col className={styles.content}>
         <PageTitle icon='/img/Lottery/lottery.svg' title='Lottery' onClick={() => isShow ? setIsShow(false) : setIsShow(true)} lottery/>
         <Timer expiredAt={expiredAt}/>
-        <Statistics className={styles.statistics}/>
+        <VisibleXs>
+          <Statistics className={styles.statistics}/>
+        </VisibleXs>
         <Row className={styles.row}>
           <BuyTickets/>
           <Prizes/>

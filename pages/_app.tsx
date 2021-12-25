@@ -8,6 +8,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { getSelectorsByUserAgent } from 'react-device-detect'
 import App from 'next/app'
+import { ModalStateProvider } from 'store/modal-store'
 
 function MyApp({ Component, pageProps }: AppProps) {
   setConfiguration({
@@ -18,7 +19,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <AppWrapper isMobile={pageProps.isMobile}>
+      <ModalStateProvider>
       <Component {...pageProps} />
+      </ModalStateProvider>
     </AppWrapper>
   )
 }
