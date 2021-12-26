@@ -42,7 +42,7 @@ export default function GamesList(props: Props) {
               </Button>
               <div className={styles.btns}>
                 <Button className={styles.btn} size='small' background='blueGradient500'>Играть</Button>
-                <Button className={styles.btn} size='small' background='blackTransparent'>Демо</Button>
+                <Button className={styles.demo} size='small' background='blackTransparent'>Демо</Button>
               </div>
               <img src={prop.item.image} alt=''/>
             </div>

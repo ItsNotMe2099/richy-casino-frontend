@@ -15,6 +15,7 @@ import Link from 'next/link'
 import ShortBanner from 'components/for_pages/Common/ShortBanner'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
+import Input from 'components/ui/Inputs/Input'
 
 interface Props {
   isOpen: boolean
@@ -57,6 +58,7 @@ export default function ModalRegistration(props: Props) {
   const formik = useFormik({
     initialValues: {
       phone: null,
+      email: null,
       password: null,
       currency: 'Российский рубль (RUB)',
       checkBox: false
@@ -132,7 +134,8 @@ export default function ModalRegistration(props: Props) {
             <Select name='currency' options={items}/> 
             {(variant === 'Телефон' || variant === 'Быстрая') &&
               <>
-             <InputPhone className={styles.phone} name={'phone'} placeholder={'Номер телефона'} validate={required} />
+             {variant === 'Телефон' && <InputPhone className={styles.phone} name={'phone'} placeholder={'Номер телефона'} validate={required} />}
+             {variant === 'Быстрая' && <Input className={styles.email} name={'email'} placeholder={'Электронный адрес'} validate={required} />}
              <InputPassword name={'password'} placeholder={'Придумайте пароль'} validate={required}/>
              </>
             }

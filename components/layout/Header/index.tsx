@@ -37,7 +37,7 @@ export default function Header(props: Props) {
   const [isScrolled, setIsScrolled] = useState(false)
 
   const handleScroll = () => {
-    if (window.pageYOffset > 200) {
+    if (window.pageYOffset > 90) {
       setIsScrolled(true)
     }
     else{
@@ -50,6 +50,7 @@ export default function Header(props: Props) {
   })
 
   return (
+    <>
     <div className={styles.root} id='top'>
       <div className={styles.top}>
       <div className={styles.left}>
@@ -96,18 +97,19 @@ export default function Header(props: Props) {
         {/*<Button className={styles.chat} size='normal' background='dark700'><img src='/img/layout/top/chat.svg' alt=''/></Button>*/}
       </div>
     </div>
-        <div className={classNames(styles.menu, {[styles.scrolled]: isScrolled})}>
-        {currentRoute === '/' || currentPath === '/' ?
-          <div className={styles.logo}><Logo/></div>
-            :
-          <Link href='/'>
-            <a className={styles.logo}><Logo/></a>
-          </Link>
-        }
-          <Overflow currentPath={currentPath} currentRoute={currentRoute} options={options}/>
-        </div>
         <Modals />
     </div>
+    <div className={classNames(styles.menu, {[styles.scrolled]: isScrolled})}>
+    {currentRoute === '/' || currentPath === '/' ?
+      <div className={styles.logo}><Logo/></div>
+        :
+      <Link href='/'>
+        <a className={styles.logo}><Logo/></a>
+      </Link>
+    }
+      <Overflow currentPath={currentPath} currentRoute={currentRoute} options={options}/>
+    </div>
+    </>
   )
 }
 
