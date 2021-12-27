@@ -1,0 +1,50 @@
+@import "scss/index";
+
+.form {
+  margin-top: 16px;
+}
+
+.inputs {
+  margin-top: 8px;
+  @media screen and (max-width: $sm-min){
+    margin-top: 12px;
+  }
+}
+.label{
+  font-size: 14px;
+  color: #717384;
+  font-weight: 400;
+  &:first-of-type{
+    margin-bottom: 12px;
+  }
+  text-align: center;
+}
+.forgot{
+  cursor: pointer;
+  font-size: 14px;
+  color: $dark200;
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: 20px;
+  &:hover{
+    text-decoration: underline;
+  }
+}
+.socials{
+  margin-top: 13px;
+  margin-bottom: 13px;
+  @media screen and (max-width: $sm-min){
+    margin-top: 20px;
+  }
+}
+
+.login{
+  font-weight: 500;
+  font-size: 14px;
+  color: $dark200;
+  margin-top: 25px;
+  span{
+    color: #FFD12F;
+    cursor: pointer;
+  }
+}

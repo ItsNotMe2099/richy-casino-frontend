@@ -2,17 +2,9 @@ import { HTMLInputTypeAttribute, MouseEventHandler } from 'react'
 import { FieldConfig } from 'formik'
 
 export interface IField extends FieldConfig {
-  label: string
-  iconName?: 'field_name'
-    | 'field_surname'
-    | 'field_country'
-    | 'field_city'
-    | 'field_phone'
-    | 'field_email'
-    | 'field_telegram'
-    | 'field_password'
-    | 'field_repeat_pass'
-  type: HTMLInputTypeAttribute
+  label?: string
+  placeholder?: string
+  type?: HTMLInputTypeAttribute
 }
 
 export interface IButton {

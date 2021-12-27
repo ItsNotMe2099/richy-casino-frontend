@@ -1,0 +1,63 @@
+@import "scss/index";
+.root{
+  position: relative;
+  margin-bottom: 12px;
+}
+.wrapper{
+  position: relative;
+  flex-direction: column;
+}
+
+
+.input,
+.input:-webkit-autofill,
+.input:-internal-autofill-selected{
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  border-radius: 8px;
+  background: $dark600;
+  border: 0;
+  width: 100%;
+  padding: 18px 20px;
+  color: #717384;
+  flex: 1;
+  @media screen and (max-width: $sm-min) {
+    padding: 15px 15px;
+  }
+
+  &::placeholder{
+    font-size: 14px;
+    color: $dark200 !important;
+  }
+  &.inputFocused{
+    color: $white;
+  }
+
+  &.inputError{
+    color: #FF1066;
+    &::placeholder{
+      color:  #C60D0D;
+    }
+  }
+
+}
+
+
+.obscure{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  path{
+    fill: #6B6C77;
+  }
+  &.show{
+    path{
+      fill: $white;
+    }
+  }
+}

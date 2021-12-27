@@ -89,7 +89,7 @@ export default function Header(props: Props) {
       </Link>
       }
       <div className={styles.right}>
-        <div className={styles.login}><Button size='small' background='dark700'>Войти</Button></div>
+        <div className={styles.login}><Button  onClick={() => open(ModalType.login)}  size='small' background='dark700'>Войти</Button></div>
         <div className={styles.reg}>
           <Button onClick={() => open(ModalType.registration)} size='normal' background='payGradient500'><img src='/img/layout/top/person.svg' alt=''/>Регистрация</Button>
         </div>

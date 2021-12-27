@@ -5,15 +5,15 @@ import { IButton } from 'types/interfaces'
 
 interface Props extends IButton {
   children?: React.ReactNode
-  variant?: 'outlined' 
+  variant?: 'outlined'
   color?: 'fill'
-  size?: 'extraSmall' | 'small' | 'normal' | 'large' | 'play' | 'superExtraSmall' | 'huge'
+  size?: 'extraSmall' | 'small' | 'normal' | 'large' | 'play' | 'superExtraSmall' | 'huge' | 'submit'
   fluid?: boolean
   href?: string
   target?: string
   className?: string
   image?: string
-  background?: 'dark700' | 'payGradient500' | 'dark500' | 'blueGradient500' | 'blackTransparent' | 'white' 
+  background?: 'dark700' | 'payGradient500' | 'dark500' | 'dark600' | 'blueGradient500' | 'blackTransparent' | 'white'
 }
 
 export default function Button(props: Props) {
@@ -25,11 +25,13 @@ export default function Button(props: Props) {
       [styles.sizeNormal]: props.size === 'normal',
       [styles.sizeLarge]: props.size === 'large',
       [styles.sizePlay]: props.size === 'play',
-      [styles.sizeHuge]: props.size === 'huge',
+    [styles.sizeHuge]: props.size === 'huge',
+    [styles.sizeSubmit]: props.size === 'submit',
       [styles.variantOutlined]: props.variant === 'outlined',
       [styles.fill]: props.color === 'fill',
       [styles.fluid]: props.fluid,
       [styles.dark700]: props.background === 'dark700',
+      [styles.dark600]: props.background === 'dark600',
       [styles.dark500]: props.background === 'dark500',
       [styles.payGradient500]: props.background === 'payGradient500',
       [styles.blueGradient500]: props.background === 'blueGradient500',
@@ -58,7 +60,7 @@ export default function Button(props: Props) {
     >
       {props.image ? <img src={props.image} alt=""/> : props.children}
     </button>
-  
+
 )}</>)
 }
 

@@ -13,6 +13,7 @@
         -webkit-tap-highlight-color: transparent;
         border-radius: 8px;
         border: 0;
+      font-weight: 600;
         text-align: center;
     }
 
@@ -39,6 +40,9 @@
 .sizeHuge{
     padding: 26px 170px;
 }
+.sizeSubmit{
+  height: 53px;
+}
 
 .sizePlay{
     padding: 15px 21px;
@@ -49,6 +53,13 @@
     &:hover{
         background-color: $dark500;
     }
+}
+.dark600{
+  color: $white;
+  background-color: $dark600;
+  &:hover{
+    background-color: $dark500;
+  }
 }
 
 .dark500{
@@ -65,6 +76,7 @@
 
 .blueGradient500{
     @include blueGradient500;
+  color: $white;
 }
 
 .blackTransparent{
@@ -73,4 +85,7 @@
 
 .variantOutlined{
     border: 2px solid #fff;
+}
+.fluid{
+  width: 100%;
 }
