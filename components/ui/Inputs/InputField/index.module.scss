@@ -8,10 +8,7 @@
   flex-direction: column;
 }
 
-
-.input,
-.input:-webkit-autofill,
-.input:-internal-autofill-selected{
+.input{
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
   appearance: none !important;
@@ -22,13 +19,16 @@
   padding: 18px 20px;
   color: #717384;
   flex: 1;
+  &:-webkit-autofill{
+    -webkit-text-fill-color: #717384 !important;
+  }
   @media screen and (max-width: $sm-min) {
     padding: 15px 15px;
   }
 
   &::placeholder{
     font-size: 14px;
-    color: $dark200 !important;
+    color: $dark200;
   }
   &.inputFocused{
     color: $white;
