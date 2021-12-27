@@ -1,7 +1,7 @@
 @import "scss/index";
 
 .root{
-  
+
 }
 
 .top{
@@ -27,6 +27,7 @@
 
 .right{
   display: flex;
+  align-items: center;
 }
 
 .apps{
@@ -114,7 +115,7 @@
   margin-right: 6px;
   button{
   font-weight: 600;
-  font-size: 16px;  
+  font-size: 16px;
   color: #FFFFFF;
   }
   @media screen and (max-width: $xs-max){
@@ -129,7 +130,7 @@
   margin-right: 11px;
   button{
     font-weight: 600;
-    font-size: 16px;  
+    font-size: 16px;
     color: #FFFFFF;
     img{
       margin-right: 14px;
