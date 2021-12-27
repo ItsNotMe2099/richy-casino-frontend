@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const props = await App.getInitialProps(appContext)
-  const ua = appContext.ctx.req?.headers['user-agent']
+  const ua =  appContext.ctx.req ? appContext.ctx.req?.headers['user-agent'] : navigator.userAgent
   console.log('UAget', ua)
   if (ua) {
     const { isMobile } = getSelectorsByUserAgent(ua)
