@@ -26,17 +26,17 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-MyApp.getInitialProps = async (appContext: AppContext) => {   
-  const props = await App.getInitialProps(appContext)   
-  const ua = appContext.ctx.req?.headers['user-agent'] 
-  if (ua) {     
-    const { isMobile } = getSelectorsByUserAgent(ua)     
-    props.pageProps.isMobile = isMobile   
-  } 
-  else {     
-    props.pageProps.isMobile = false   
-  }     
-  return props 
+MyApp.getInitialProps = async (appContext: AppContext) => {
+  const props = await App.getInitialProps(appContext)
+  const ua = appContext.ctx.req?.headers['user-agent'] || navigator.userAgent;
+  if (ua) {
+    const { isMobile } = getSelectorsByUserAgent(ua)
+    props.pageProps.isMobile = isMobile
+  }
+  else {
+    props.pageProps.isMobile = false
+  }
+  return props
 }
 
 export default appWithTranslation(MyApp)
