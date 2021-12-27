@@ -3,7 +3,8 @@ import ReactModal from 'react-modal'
 import Close from 'components/svg/Close'
 import HiddenXs from '../HiddenXS'
 import VisibleXs from '../VisibleXS'
-
+import Sheet from 'react-modal-sheet'
+import {useAppContext} from 'context/state'
 interface Props {
   isOpen: boolean
   onRequestClose?: () => void
@@ -19,6 +20,8 @@ interface Props {
 }
 
 export default function Modal(props: Props) {
+  const {isOpen, onRequestClose} = props
+  const appContext = useAppContext()
   const customStyles = {
     overlay: {
       backgroundColor: !props.singlePage  ? 'rgba(0, 0, 0, 0.5)' : 'transparent',
@@ -46,51 +49,77 @@ export default function Modal(props: Props) {
         return styles.rootNormal
     }
   }
-  return (
-    <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
-      <div className={styles.frame}>
-        <div
-          className={`${styles.root} ${getSizeClass(props.size)} ${props.className} ${
-            props.center && styles.rootFlex
-          }`}
-        >
-          <HiddenXs>
-          <div className={styles.top}>
-          <div className={styles.title}>
-            {props.title}
-          </div>
-          {props.onRequestClose && (
-            <div className={styles.close} onClick={props.onRequestClose}>
-              <Close />
-            </div>
-          )}
-          </div>
-          </HiddenXs>
-          <VisibleXs>
-          <div className={styles.top}>
-          <div className={styles.line}></div>
-          {props.onRequestClose && (
-            <div className={styles.close} onClick={props.onRequestClose}>
-              <Close />
-            </div>
-          )}
-          <div className={styles.title}>
-            {props.title}
-          </div>
-          </div>
-          </VisibleXs>
-          <div className={styles.center}>
-            {props.image && !props.loading && (
-              <div className={styles.image}>
-                <img src={props.image} alt=''/>
+
+  if(appContext.isDesktop) {
+    return (
+      <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
+        <div className={styles.frame}>
+          <div
+            className={`${styles.root} ${getSizeClass(props.size)} ${props.className} ${
+              props.center && styles.rootFlex
+            }`}
+          >
+            <HiddenXs>
+              <div className={styles.top}>
+                <div className={styles.title}>
+                  {props.title}
+                </div>
+                {props.onRequestClose && (
+                  <div className={styles.close} onClick={props.onRequestClose}>
+                    <Close/>
+                  </div>
+                )}
               </div>
-            )}
-            {props.children}
+            </HiddenXs>
+            <VisibleXs>
+              <div className={styles.top}>
+                <div className={styles.line}></div>
+                {props.onRequestClose && (
+                  <div className={styles.close} onClick={props.onRequestClose}>
+                    <Close/>
+                  </div>
+                )}
+                <div className={styles.title}>
+                  {props.title}
+                </div>
+              </div>
+            </VisibleXs>
+            <div className={styles.center}>
+              {props.image && !props.loading && (
+                <div className={styles.image}>
+                  <img src={props.image} alt=''/>
+                </div>
+              )}
+              {props.children}
+            </div>
           </div>
         </div>
-      </div>
-    </ReactModal>
-  )
+      </ReactModal>
+    )
+  }else{
+    /* eslint-disable */
+    // @ts-ignore
+    return (
+    <Sheet isOpen={isOpen} onClose={onRequestClose}    snapPoints={[-116]}>
+
+      <Sheet.Container onViewportBoxUpdate>
+        <Sheet.Header onViewportBoxUpdate />
+        {props.onRequestClose && (
+          <div className={styles.close} onClick={props.onRequestClose}>
+            <Close/>
+          </div>
+        )}
+        <Sheet.Content onViewportBoxUpdate>{isOpen && <div className={styles.centerSheet}>
+          <div className={styles.title}>
+            {props.title}
+          </div>
+
+          {props.children}</div>}</Sheet.Content>
+      </Sheet.Container>
+
+      <Sheet.Backdrop onViewportBoxUpdate/>
+    </Sheet>)
+  }
 }
 Modal.defaultProps = {
   size: 'normal',

@@ -11,10 +11,10 @@ const Modals = (props: Props) => {
   const { modalKey, close } = useModal()
   return (
     <>
-      {modalKey === ModalType.registration && <ModalRegistration isOpen={true} onRequestClose={close} />}
-      {modalKey === ModalType.login && <ModalLogin isOpen={true} onRequestClose={close} />}
-      {modalKey === ModalType.passwordRecovery && <ModalPasswordRecovery isOpen={true} onRequestClose={close} />}
-      {modalKey === ModalType.passwordReset && <ModalPasswordReset isOpen={true} onRequestClose={close} />}
+       <ModalRegistration isOpen={modalKey === ModalType.registration} onRequestClose={close} />
+       <ModalLogin isOpen={modalKey === ModalType.login} onRequestClose={close} />
+       <ModalPasswordRecovery isOpen={modalKey === ModalType.passwordRecovery } onRequestClose={close} />
+      <ModalPasswordReset isOpen={modalKey === ModalType.passwordReset} onRequestClose={close} />
     </>
   )
 }
