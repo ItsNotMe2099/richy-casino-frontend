@@ -10,6 +10,8 @@ import Prizes from 'components/for_pages/Lottery/Prizes'
 import BuyTickets from 'components/for_pages/Lottery/BuyTickets'
 import Statistics from 'components/for_pages/Lottery/Statistics'
 import VisibleXs from 'components/ui/VisibleXS'
+import {GetServerSideProps} from 'next'
+import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 
 export default function Lottery() {
 
@@ -55,4 +57,11 @@ export default function Lottery() {
       </Row>
     </Layout>
   )
+}
+export const getServerSideProps: GetServerSideProps = async (context ) => {
+  return {
+    props: {
+      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+    },
+  }
 }

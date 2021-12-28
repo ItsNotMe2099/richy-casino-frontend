@@ -25,10 +25,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-MyApp.getServerSideProps = async (appContext: AppContext) => {
+MyApp.getInitialProps = async (appContext: AppContext) => {
   const props = await App.getInitialProps(appContext)
   const ua =  appContext.ctx.req ? appContext.ctx.req?.headers['user-agent'] : navigator.userAgent
-  console.error('UAget', ua)
+
   if (ua) {
     const { isMobile } = getSelectorsByUserAgent(ua)
     props.pageProps.isMobile = isMobile

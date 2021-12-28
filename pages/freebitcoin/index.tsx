@@ -5,6 +5,8 @@ import Table from 'components/for_pages/FreeBitcoin/Table'
 import Layout from 'components/layout/Layout'
 import { useState } from 'react'
 import { Row, Col } from 'react-grid-system'
+import {GetServerSideProps} from 'next'
+import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 
 export default function FreeBitcoin() {
 
@@ -47,4 +49,11 @@ export default function FreeBitcoin() {
       </Row>
     </Layout>
   )
+}
+export const getServerSideProps: GetServerSideProps = async (context ) => {
+  return {
+    props: {
+      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+    },
+  }
 }

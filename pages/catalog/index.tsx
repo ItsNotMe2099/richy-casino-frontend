@@ -5,6 +5,8 @@ import Layout from 'components/layout/Layout'
 import styles from 'pages/catalog/index.module.scss'
 import { Row, Col } from 'react-grid-system'
 import GamesListTop from 'components/for_pages/CatalogPage/GamesListTop'
+import {GetServerSideProps} from 'next'
+import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 
 export default function CatalogPage() {
 
@@ -398,4 +400,12 @@ export default function CatalogPage() {
       </Row>
     </Layout>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context ) => {
+  return {
+    props: {
+      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+    },
+  }
 }

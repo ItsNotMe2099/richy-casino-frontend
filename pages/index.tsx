@@ -1,4 +1,4 @@
-import { GetStaticProps, GetStaticPropsContext } from 'next'
+import {GetServerSideProps} from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import styles from 'pages/index.module.scss'
 import { Col, Row } from 'react-grid-system'
@@ -71,8 +71,11 @@ export default function IndexPage() {
   )
 }
 
-export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => ({
-  props: {
-    ...await serverSideTranslations(context.locale ?? 'en', ['common']),
-  },
-})
+export const getServerSideProps: GetServerSideProps = async (context ) => {
+  return {
+    props: {
+      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+    },
+  }
+}
+
