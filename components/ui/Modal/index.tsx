@@ -100,7 +100,7 @@ export default function Modal(props: Props) {
     /* eslint-disable */
     // @ts-ignore
     return (
-    <Sheet isOpen={isOpen} onClose={onRequestClose}    snapPoints={[-116]}>
+    <Sheet isOpen={isOpen} onClose={onRequestClose}    >
 
       <Sheet.Container onViewportBoxUpdate>
         <Sheet.Header onViewportBoxUpdate />
