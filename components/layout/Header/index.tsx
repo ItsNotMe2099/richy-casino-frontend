@@ -7,9 +7,8 @@ import Link from 'next/link'
 import LangSelect from 'components/for_pages/Common/LangSelect'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
-import { useModal } from 'store/modal-store'
 import { ModalType } from 'types/enums'
-import Modals from '../Modals'
+import { useAppContext } from 'context/state'
 
 interface Props {
   children?: React.ReactNode
@@ -19,7 +18,7 @@ interface Props {
 export default function Header(props: Props) {
 
   const { route: currentRoute, asPath: currentPath } = useRouter()
-  const {open} = useModal()
+  const context = useAppContext()
 
   const options = [
     { label: 'Главная', link: '/' },
@@ -89,15 +88,14 @@ export default function Header(props: Props) {
       </Link>
       }
       <div className={styles.right}>
-        <div className={styles.login}><Button  onClick={() => open(ModalType.login)}  size='small' background='dark700'>Войти</Button></div>
+        <div className={styles.login}><Button  onClick={() => context.showModal(ModalType.login)}  size='small' background='dark700'>Войти</Button></div>
         <div className={styles.reg}>
-          <Button onClick={() => open(ModalType.registration)} size='normal' background='payGradient500'><img src='/img/layout/top/person.svg' alt=''/>Регистрация</Button>
+          <Button onClick={() => context.showModal(ModalType.registration)} size='normal' background='payGradient500'><img src='/img/layout/top/person.svg' alt=''/>Регистрация</Button>
         </div>
         <div className={styles.lang}><LangSelect/></div>
         {/*<Button className={styles.chat} size='normal' background='dark700'><img src='/img/layout/top/chat.svg' alt=''/></Button>*/}
       </div>
     </div>
-        <Modals />
     </div>
     <div className={classNames(styles.menu, {[styles.scrolled]: isScrolled})}>
     {currentRoute === '/' || currentPath === '/' ?

@@ -11,6 +11,7 @@ import Statistics from 'components/for_pages/MainPage/Statistics'
 import GamesList from 'components/for_pages/MainPage/GamesList'
 import Tournament from 'components/for_pages/MainPage/Tournament'
 import TopSlider from 'components/for_pages/MainPage/TopSlider'
+import BuyCrypto from 'components/for_pages/MainPage/BuyCrypto'
 
 const casinos = [
   {image: '/img/GamesList/hotline.png', label: 'hotline', provider: 'provider1', category: 'category1'},
@@ -53,6 +54,7 @@ export default function IndexPage() {
             <GamesList label='Live Casino' icon='/img/Contents/live.svg' items={live}/>
             </Col>
           </Row>
+          <BuyCrypto/>
           <Row className={styles.gameCards}>
             <Col className={styles.gameCard}>
               <GameCard poker/>

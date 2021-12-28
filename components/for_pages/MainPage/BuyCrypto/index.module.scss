@@ -1,0 +1,45 @@
+@import "scss/index";
+
+.root{
+  border-radius: 18px;
+  background-image: url('../../../../public/img/BuyCrypto/buy-crypto.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 27px;
+  padding-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12px;
+  @media screen and (min-width: 501px){
+    display: none;
+  }
+}
+
+.no{
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+}
+
+.pay{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 19px;
+}
+
+.btn{
+  margin-top: 19px;
+  padding: 8px 12px;
+  font-weight: 600;
+  font-size: 13px;
+  color: $white;
+}
+
+.icon{ 
+  margin-right: 16px;
+  display: flex;
+  align-self: center;
+}

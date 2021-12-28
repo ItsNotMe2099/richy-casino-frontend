@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import Modal from '../../ui/Modal'
 import { useTranslation } from 'react-i18next'
 import {Form, Formik} from 'formik'
 import Button from 'components/ui/Button'
@@ -9,7 +8,7 @@ import {ModalType} from 'types/enums'
 import {useModal} from 'store/modal-store'
 
 interface Props {
-  isOpen: boolean
+  isOpen?: boolean
   onRequestClose?: () => void
   singlePage?: boolean
 }
@@ -33,7 +32,6 @@ export default function ModalPasswordReset(props: Props) {
 
 
   return (
-    <Modal {...props} title='Восстановление пароля'>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {({values}) => (
         <Form className={styles.form}>
@@ -66,6 +64,5 @@ export default function ModalPasswordReset(props: Props) {
 
         </Form>)}
       </Formik>
-    </Modal>
   )
 }

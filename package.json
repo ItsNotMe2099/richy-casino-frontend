@@ -2,7 +2,7 @@
   "name": "richy-casino-frontend",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3010",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

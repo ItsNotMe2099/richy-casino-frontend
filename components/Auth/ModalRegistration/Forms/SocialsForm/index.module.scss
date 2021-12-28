@@ -4,36 +4,6 @@
   margin-top: 24px;
 }
 
-.variants {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 24px;
-
-  .variant:last-child {
-    margin-right: 0;
-  }
-
-  @media screen and (max-width: 430px) {
-    justify-content: space-evenly;
-  }
-}
-
-.variant {
-  padding: 16px;
-  cursor: pointer;
-  max-width: 118px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: $dark600;
-  border-radius: 6px;
-  margin-right: 9px;
-
-  img {
-    margin-right: 8px;
-  }
-}
 
 .active {
   @include blueGradient500NoHover;

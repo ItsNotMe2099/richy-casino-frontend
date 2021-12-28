@@ -1,28 +1,27 @@
 import styles from './index.module.scss'
-import Modal from '../../ui/Modal'
 import { useTranslation } from 'react-i18next'
 import {Form, Formik} from 'formik'
 import Button from 'components/ui/Button'
 import InputField from 'components/ui/Inputs/InputField'
 import Validator from 'utils/validator'
 import {ModalType} from 'types/enums'
-import {useModal} from 'store/modal-store'
+import { useAppContext } from 'context/state'
 
 interface Props {
-  isOpen: boolean
+  isOpen?: boolean
   onRequestClose?: () => void
   singlePage?: boolean
 }
 
 export default function ModalPasswordRecovery(props: Props) {
-  const {open, modalProps} = useModal()
+  const context = useAppContext()
 
   const handleSubmit = async (data) => {
-    open(ModalType.passwordReset, {login: data.login})
+    context.showModal(ModalType.passwordReset)
   }
 
   const initialValues = {
-    login: modalProps.login || ''
+    login: ''
   }
 
 
@@ -31,7 +30,6 @@ export default function ModalPasswordRecovery(props: Props) {
 
 
   return (
-    <Modal {...props} title='Восстановление пароля'>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         <Form className={styles.form}>
           <div className={styles.description}>
@@ -44,13 +42,12 @@ export default function ModalPasswordRecovery(props: Props) {
               placeholder={'Email / Телефон'} validate={Validator.required}/>
                 </div>
           <div className={styles.buttons}>
-            <Button type='button' className={styles.button} size='submit' background='dark600' onClick={() => open(ModalType.login)}>Отменить</Button>
+            <Button type='button' className={styles.button} size='submit' background='dark600' onClick={() => context.showModal(ModalType.login)}>Отменить</Button>
             <div className={styles.spacer}/>
             <Button type='submit' className={styles.button} size='submit' background='blueGradient500' >Продолжить</Button>
           </div>
 
         </Form>
       </Formik>
-    </Modal>
   )
 }
