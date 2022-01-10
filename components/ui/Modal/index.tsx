@@ -5,6 +5,8 @@ import HiddenXs from '../HiddenXS'
 import VisibleXs from '../VisibleXS'
 import Sheet from 'react-modal-sheet'
 import {useAppContext} from 'context/state'
+import classNames from 'classnames'
+
 interface Props {
   isOpen: boolean
   onRequestClose?: () => void
@@ -17,6 +19,7 @@ interface Props {
   closeClassName?: string
   center?: boolean
   singlePage?: boolean
+  noBorder?: boolean
 }
 
 export default function Modal(props: Props) {
@@ -60,7 +63,7 @@ export default function Modal(props: Props) {
             }`}
           >
             <HiddenXs>
-              <div className={styles.top}>
+              <div className={classNames(styles.top, {[styles.noBorder]: props.noBorder})}>
                 <div className={styles.title}>
                   {props.title}
                 </div>

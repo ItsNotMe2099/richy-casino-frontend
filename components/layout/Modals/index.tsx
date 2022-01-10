@@ -6,6 +6,7 @@ import ModalLogin from 'components/Auth/ModalLogin'
 import ModalPasswordRecovery from 'components/Auth/ModalPasswordRecovery'
 import ModalPasswordReset from 'components/Auth/ModalPasswordReset'
 import ModalRegistration from 'components/Auth/ModalRegistration'
+import ModalRegistrationSuccess from 'components/Auth/ModalRegistrationSuccess'
 
 interface Props {}
 
@@ -30,6 +31,9 @@ export default function ModalContainer(props: Props) {
           </Modal>
           <Modal key={3} isOpen={context.modal === ModalType.registration} {...commonSettings} title='Регистрация'>
             <ModalRegistration/>
+          </Modal>
+          <Modal key={4} isOpen={context.modal === ModalType.registrationSuccess} {...commonSettings} noBorder>
+            <ModalRegistrationSuccess/>
           </Modal>
         </>
       )}

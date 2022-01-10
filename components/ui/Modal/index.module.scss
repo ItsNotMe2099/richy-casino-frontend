@@ -61,6 +61,10 @@
   }
 }
 
+.noBorder{
+  border-bottom: 0;
+}
+
 .rootNormal{
   width: 428px;
   @media screen and (max-width: 430px){

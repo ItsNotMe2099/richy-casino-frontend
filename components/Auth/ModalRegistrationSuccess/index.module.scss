@@ -1,0 +1,86 @@
+@import "scss/index";
+
+.root{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media screen and (max-width: $xs-max) {
+    padding-top: 41px;
+  }
+}
+
+.title{
+  margin-top: 29px;
+  font-weight: 600;
+  font-size: 22px;
+  @media screen and (max-width: $xs-max) {
+    font-size: 18px;
+  }
+}
+
+.reminder{
+  color: $dark200;
+  font-weight: 500;
+  font-size: 16px;
+  max-width: 174px;
+  margin-top: 24px;
+  line-height: 19px;
+  margin-bottom: 36px;
+  @media screen and (max-width: $xs-max) {
+    font-size: 15px;
+  }
+}
+
+.content{
+  padding: 26px 61px 25px 29px;
+  border-radius: 12px;
+  background-color: $dark600;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  @media screen and (max-width: $xs-max) {
+    padding: 17px 23px 17px 17px;
+  }
+}
+
+.password{
+  .text{
+    margin-right: 32px;
+  }
+}
+
+.text{
+  color: $dark200;
+  font-weight: 500;
+  font-size: 14px;
+  margin-right: 42px;
+}
+
+.value{
+  input{
+    background-color: $dark600;
+    border: 0;
+    color: $white;
+    width: 100%;
+    font-weight: 600;
+    font-size: 16px;
+  }
+}
+
+.copy{
+  display: flex;
+  cursor: pointer;
+}
+
+.left{
+  display: flex;
+  align-items: center;
+}
+
+.button{
+  width: 100%;
+  font-weight: 500;
+  font-size: 14px;
+}

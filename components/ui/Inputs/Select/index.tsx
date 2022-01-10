@@ -39,8 +39,7 @@ export const Select = (props: Props & FieldConfig) => {
     <div className={classNames(styles.root, {[styles.hasError]: !!meta.error && meta.touched})}>
       <div className={styles.input}>
       <div  onClick={handleClick} className={classNames(styles.dropDownTrigger)}>
-        <div><img src={currentItem.icon} alt=''/></div>
-        <div className={styles.placeholder}>{currentItem ? currentItem?.label : (placeholder || '')}</div>
+        <div className={styles.placeholder}><div className={styles.icon}><img src={currentItem.icon} alt=''/></div>{currentItem ? currentItem?.label : (placeholder || '')}</div>
         <img className={classNames({[styles.reverse]: isActive})} src='/img/DropdownMenu/arrow.svg' alt=''/>
       </div>
       <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>

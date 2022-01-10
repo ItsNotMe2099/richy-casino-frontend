@@ -2,5 +2,6 @@ export enum ModalType {
   login,
   registration,
   passwordReset,
-  passwordRecovery
+  passwordRecovery,
+  registrationSuccess
 }

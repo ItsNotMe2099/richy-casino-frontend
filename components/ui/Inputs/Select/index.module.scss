@@ -112,11 +112,17 @@
 
   .placeholder{
     padding-right: 10px;
+    display: flex;
   }
 
   img{
     margin: auto 0;
   }
+  display: flex;
+}
+
+.icon{
+  margin-right: 19px;
   display: flex;
 }
 
