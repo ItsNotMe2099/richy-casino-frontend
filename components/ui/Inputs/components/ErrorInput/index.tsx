@@ -8,7 +8,7 @@ interface Props {
 export default function ErrorInput(props: Props) {
   const { error, touched } = props
   if(touched && error) {
-    return (<div className={styles.root}>{error}</div>)
+    return (<div className={styles.root}><img src='/img/icons/error.svg' alt=''/>{error}</div>)
   }else{
     return (<></>)
   }

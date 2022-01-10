@@ -35,9 +35,10 @@
   }
 
   &.inputError{
-    color: #FF1066;
+    color: #ED4700;
+    border: 1px solid #ED4700;
     &::placeholder{
-      color:  #FF1066 !important;
+      color:  #ED4700 !important;
     }
   }
 
