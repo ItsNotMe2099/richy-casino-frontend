@@ -75,6 +75,7 @@ export default function InputField(props: Props) {
   return (
     <div className={styles.root}>
       <div className={styles.wrapper}>
+        <div className={styles.inputWrapper}>
         <input
           {...field}
           ref={props.format && ref as any}
@@ -99,6 +100,7 @@ export default function InputField(props: Props) {
             <Eye/>
           </div>
         )}
+        </div>
          <ErrorInput {...meta}/>
       </div>
     </div>
