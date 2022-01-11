@@ -21,7 +21,7 @@ export default function ModalLogin(props: Props) {
   }
 
   const initialValues = {
-    login: '',
+    authInput: '',
     password: ''
   }
 

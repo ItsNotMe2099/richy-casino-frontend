@@ -5,3 +5,7 @@ export enum ModalType {
   passwordRecovery,
   registrationSuccess
 }
+
+export enum CookiesType {
+  accessToken = 'accessToken',
+}
