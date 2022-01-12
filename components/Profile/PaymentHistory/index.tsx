@@ -51,8 +51,8 @@ export default function PaymentHistory(props: Props) {
         <div className={styles.wrapper}>
           <SwitchFilter payment/>
         </div>
-        {items.map(item => 
-          <Item label={item.label} card={item.card} date={item.date} amount={item.amount}/>
+        {items.map((item, index) => 
+          <Item label={item.label} card={item.card} date={item.date} amount={item.amount} key={index}/>
         )}
         <div className={styles.btn}>
         <Button size='normal' background='payGradient500'>Пополнить</Button>
