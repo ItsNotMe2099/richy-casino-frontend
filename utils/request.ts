@@ -1,5 +1,5 @@
 import fetch from 'cross-fetch'
-import { runtimeConfig } from 'config/runtimeConfig'
+//import { runtimeConfig } from 'config/runtimeConfig'
 import Cookies from 'js-cookie'
 import { CookiesType } from 'types/enums'
 
@@ -30,7 +30,8 @@ async function request(options: string | Options): Promise<Res> {
     data = options.data
   }
 
-  const correctUrl = `${runtimeConfig.HOST}${url}${(method === 'GET' && data) ? `?${queryParams(data)}` : ''}`
+  //const correctUrl = `${runtimeConfig.HOST}${url}${(method === 'GET' && data) ? `?${queryParams(data)}` : ''}`
+  const correctUrl = `${url}${(method === 'GET' && data) ? `?${queryParams(data)}` : ''}`
 
   try {
     const res = await fetch(correctUrl, {

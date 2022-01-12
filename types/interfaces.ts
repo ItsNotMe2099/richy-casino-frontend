@@ -14,6 +14,11 @@ export interface IButton {
   onClick?: MouseEventHandler
 }
 
+export interface LoginFormData {
+  authInput: string
+  password: string
+}
+
 export const CONTACTS = {
   email: 'support@richy.com',
   facebook: '#',

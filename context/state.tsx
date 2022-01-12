@@ -8,6 +8,7 @@ interface IState {
   modal: ModalType | null   
   showModal: (type: ModalType) => void   
   hideModal: () => void
+  updateUserFromCookies: () => void
 }
 
 const defaultValue: IState = {
@@ -16,6 +17,7 @@ const defaultValue: IState = {
   modal: null,
   showModal: (type) => null,
   hideModal: () => null,
+  updateUserFromCookies: () => null
 }
 
 const AppContext = createContext<IState>(defaultValue)

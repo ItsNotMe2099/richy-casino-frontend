@@ -9,6 +9,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import { getSelectorsByUserAgent } from 'react-device-detect'
 import App from 'next/app'
 import ModalContainer from 'components/layout/Modals'
+import { AuthWrapper } from 'context/auth_state'
 
 function MyApp({ Component, pageProps }: AppProps) {
   setConfiguration({
@@ -19,8 +20,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <AppWrapper isMobile={pageProps.isMobile}>
-      <Component {...pageProps} />
-      <ModalContainer/>
+      <AuthWrapper>
+        <Component {...pageProps} />
+        <ModalContainer/>
+      </AuthWrapper>
     </AppWrapper>
   )
 }

@@ -7,6 +7,8 @@ import Validator from 'utils/validator'
 import SocialButtons from 'components/Auth/SocialButtons'
 import {ModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
+import { LoginFormData } from 'types/interfaces'
+import { useAuthContext } from 'context/auth_state'
 
 interface Props {
   isOpen?: boolean
@@ -15,12 +17,10 @@ interface Props {
 
 export default function ModalLogin(props: Props) {
   const context = useAppContext()
+  const authContext = useAuthContext()
 
-  const handleSubmit = async (data) => {
 
-  }
-
-  const initialValues = {
+  const initialValues: LoginFormData = {
     authInput: '',
     password: ''
   }
@@ -29,7 +29,7 @@ export default function ModalLogin(props: Props) {
   const {t} = useTranslation('common')
 
   return (
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Formik initialValues={initialValues} onSubmit={authContext.login}>
         <Form className={styles.form}>
           <div className={styles.label}>Через социальные сети</div>
           <div className={styles.socials}>
@@ -40,7 +40,7 @@ export default function ModalLogin(props: Props) {
             <InputField
               format={'phoneAndEmail'}
 
-              name={'login'}
+              name={'authInput'}
               placeholder={'Email / Телефон'} validate={Validator.required}/>
             <InputField name={'password'} placeholder={'Пароль'} type={'password'} obscure
                         validate={Validator.required}/>
