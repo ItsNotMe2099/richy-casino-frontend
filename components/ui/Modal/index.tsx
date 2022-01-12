@@ -20,6 +20,8 @@ interface Props {
   center?: boolean
   singlePage?: boolean
   noBorder?: boolean
+  profile?: boolean
+  userId?: string
 }
 
 export default function Modal(props: Props) {
@@ -53,7 +55,7 @@ export default function Modal(props: Props) {
     }
   }
 
-  if(appContext.isDesktop) {
+  if(appContext.isDesktop || props.profile) {
     return (
       <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
         <div className={styles.frame}>
@@ -65,15 +67,24 @@ export default function Modal(props: Props) {
             <HiddenXs>
               <div className={classNames(styles.top, {[styles.noBorder]: props.noBorder})}>
                 <div className={styles.title}>
+                {props.profile &&
+                  <div className={styles.back}>
+                    <img src='/img/icons/back.svg' alt=''/>
+                  </div>
+                }
                   {props.title}
                 </div>
+                <div className={styles.right}>
+                {props.userId && <div className={styles.id}>ID {props.userId}</div>}
                 {props.onRequestClose && (
                   <div className={styles.close} onClick={props.onRequestClose}>
                     <Close/>
                   </div>
                 )}
+                </div>
               </div>
             </HiddenXs>
+            {!props.profile &&
             <VisibleXs>
               <div className={styles.top}>
                 <div className={styles.line}></div>
@@ -86,7 +97,7 @@ export default function Modal(props: Props) {
                   {props.title}
                 </div>
               </div>
-            </VisibleXs>
+            </VisibleXs>}
             <div className={styles.center}>
               {props.image && !props.loading && (
                 <div className={styles.image}>

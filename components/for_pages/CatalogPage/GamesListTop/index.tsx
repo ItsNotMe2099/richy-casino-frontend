@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import Header from 'components/for_pages/Common/Header'
-import SwitchFilter from '../SwitchFilter'
+import SwitchFilter from 'components/for_pages/Common/SwitchFilter'
 import Slider from 'react-slick'
 
 interface IGame{

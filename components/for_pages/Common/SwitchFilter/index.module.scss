@@ -7,14 +7,19 @@
   overflow-x: auto;
   overflow-y: hidden;
   flex-wrap: nowrap;
+  padding: 2px;
+  .item:last-child{
+    margin-right: 0;
+  }
 }
 
 .item{
   border-radius: 46px;
   background-color: $dark600;
   display: flex;
-  padding: 13px 16px;
+  padding: 11px 16px;
   align-items: center;
+  margin-right: 28px;
   cursor: pointer;
   svg{
     fill: #797C86;

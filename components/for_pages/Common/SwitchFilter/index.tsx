@@ -24,6 +24,7 @@ interface IGame{
 interface Props {
   top?: boolean
   all?: boolean
+  payment?: boolean
   items?: IGame[]
   onClick?: () => void
 }
@@ -45,6 +46,12 @@ export default function SwitchFilter(props: Props) {
     {label: 'Топ игр месяца', icon: <Calendar/>},
   ]
 
+  const payments = [
+    {label: 'Все'},
+    {label: 'Пополнения'},
+    {label: 'Выводы'},
+  ]
+
   const [active, setActive] = useState(props.top ? 'Выигрывают сейчас' : 'Все')
 
   return (
@@ -60,6 +67,12 @@ export default function SwitchFilter(props: Props) {
           props.all ? items.map((item, index) =>
             <div className={classNames(styles.item, {[styles.active]: item.label === active})} key={index} onClick={() => setActive(item.label)}>
               {item.icon}
+              <div className={styles.label}>{item.label}</div>
+            </div>
+          )
+          :
+          props.payment ? payments.map((item, index) =>
+            <div className={classNames(styles.item, {[styles.active]: item.label === active})} key={index} onClick={() => setActive(item.label)}>
               <div className={styles.label}>{item.label}</div>
             </div>
           )

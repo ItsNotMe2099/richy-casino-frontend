@@ -72,13 +72,39 @@
   }
 }
 .rootLarge{
-  width: 946px
+  width: 664px;
+  @media screen and (max-width: $xs-max){
+    width: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+  }
+}
+
+.back{
+  margin-right: 12px;
+  cursor: pointer;
+  display: flex;
+}
+
+.id{
+  color: #3c3d46;
+  font-weight: 500;
+  font-size: 14px;
+  margin-right: 11px;
+}
+
+.right{
+  display: flex;
+  align-items: center;
 }
 
 .title {
   font-weight: 600;
   font-size: 22px;
   color: $white;
+  display: flex;
+  align-items: center;
   @media screen and (max-width: 430px){
     font-size: 19px;
     font-weight: 700;

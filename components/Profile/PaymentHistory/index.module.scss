@@ -1,0 +1,93 @@
+@import "scss/index";
+
+.root {
+  
+}
+
+.wrapper{
+  display: flex;
+  margin-top: 22px;
+  margin-bottom: 23px;
+}
+
+.item{
+  display: flex;
+  border-radius: 14px;
+  background-color: $dark600;
+  padding-top: 16px;
+  padding-bottom: 14px;
+  padding-left: 28px;
+  padding-right: 28px;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  @media screen and (max-width: 500px){
+    padding-top: 14px;
+    padding-bottom: 13px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.label{
+  font-weight: bold;
+  font-size: 22px;
+  @media screen and (max-width: 500px){
+    font-size: 14px;
+  }
+}
+
+.date{
+  font-size: 16px;
+  color: $dark200;
+  @media screen and (max-width: 500px){
+    font-size: 10px;
+  }
+}
+
+.amount{
+  font-weight: 600;
+  font-size: 20px;
+  color: $pay500;
+  margin-top: 20px;
+  text-align: end;
+  @media screen and (max-width: 500px){
+    font-size: 16px;
+    margin-top: 10px;
+  }
+}
+
+.left{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bank{
+  font-weight: bold;
+  font-size: 22px;
+  @media screen and (max-width: 500px){
+    font-size: 14px;
+  }
+}
+
+.card{
+  font-size: 16px;
+  color: $dark200;
+  text-align: left;
+  margin-top: 10px;
+  @media screen and (max-width: 500px){
+    font-size: 12px;
+    margin-top: 3px;
+  }
+}
+
+.btn{
+  display: flex;
+  button{
+    color: #fff;
+    padding: 14px 40px;
+    @media screen and (max-width: 500px){
+      width: 100%;
+    }
+  }
+}

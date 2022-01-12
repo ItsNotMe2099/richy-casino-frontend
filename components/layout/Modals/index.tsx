@@ -7,6 +7,7 @@ import ModalPasswordRecovery from 'components/Auth/ModalPasswordRecovery'
 import ModalPasswordReset from 'components/Auth/ModalPasswordReset'
 import ModalRegistration from 'components/Auth/ModalRegistration'
 import ModalRegistrationSuccess from 'components/Auth/ModalRegistrationSuccess'
+import PaymentHistory from 'components/Profile/PaymentHistory'
 
 interface Props {}
 
@@ -34,6 +35,9 @@ export default function ModalContainer(props: Props) {
           </Modal>
           <Modal key={4} isOpen={context.modal === ModalType.registrationSuccess} {...commonSettings} noBorder>
             <ModalRegistrationSuccess/>
+          </Modal>
+          <Modal key={5} isOpen={true} {...commonSettings} title='История платежей' size='large' profile userId='6171361'>
+            <PaymentHistory/>
           </Modal>
         </>
       )}
