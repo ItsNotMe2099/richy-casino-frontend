@@ -1,11 +1,11 @@
 import { createContext, useContext, useState } from 'react'
-import { ModalType } from 'types/enums'
+import { ModalType, ProfileModalType } from 'types/enums'
 import ReactModal from 'react-modal'
 
 interface IState {
   isMobile: boolean   
   isDesktop: boolean
-  modal: ModalType | null   
+  modal: ModalType | ProfileModalType | null   
   showModal: (type: ModalType) => void   
   hideModal: () => void
   updateUserFromCookies: () => void
@@ -28,7 +28,7 @@ interface Props {
 }
 
 export function AppWrapper(props: Props) {
-  const [modal, setModal] = useState<ModalType | null>(null)
+  const [modal, setModal] = useState<ModalType | ProfileModalType | null>(null)
   const value: IState = {
     ...defaultValue,     
    isMobile: props.isMobile,     

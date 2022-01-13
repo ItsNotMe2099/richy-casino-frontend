@@ -3,9 +3,13 @@ import ReactModal from 'react-modal'
 import Close from 'components/svg/Close'
 import HiddenXs from '../HiddenXS'
 import VisibleXs from '../VisibleXS'
-import Sheet from 'react-modal-sheet'
-import {useAppContext} from 'context/state'
-import classNames from 'classnames'
+import Logo from 'components/svg/Logo'
+import Button from '../Button'
+
+interface IUser{
+  id: string
+  balance: string
+}
 
 interface Props {
   isOpen: boolean
@@ -17,14 +21,12 @@ interface Props {
   loading?: boolean
   className?: string
   closeClassName?: string
-  center?: boolean
   singlePage?: boolean
-  noBorder?: boolean
+  user: IUser
+  payment?: boolean
 }
 
-export default function Modal(props: Props) {
-  const {isOpen, onRequestClose} = props
-  const appContext = useAppContext()
+export default function ProfileModal(props: Props) {
   const customStyles = {
     overlay: {
       backgroundColor: !props.singlePage  ? 'rgba(0, 0, 0, 0.5)' : 'transparent',
@@ -44,30 +46,26 @@ export default function Modal(props: Props) {
     },
   }
 
-  const getSizeClass = (size) => {
-    switch (size) {
-      case 'large':
-        return styles.rootLarge
-      default:
-        return styles.rootNormal
-    }
-  }
-
-  if(appContext.isDesktop) {
     return (
       <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
         <div className={styles.frame}>
           <div
-            className={`${styles.root} ${getSizeClass(props.size)} ${props.className} ${
-              props.center && styles.rootFlex
-            }`}
+            className={`${styles.root} ${props.className}`}
           >
             <HiddenXs>
-              <div className={classNames(styles.top, {[styles.noBorder]: props.noBorder})}>
-                <div className={styles.title}>
-                  {props.title}
+              <div className={styles.top}>
+                <div className={styles.left}>
+                  <div className={styles.back}>
+                    <img src='/img/icons/back.svg' alt=''/>
+                  </div>
+                  <div className={styles.title}>
+                    {props.title}
+                  </div>
                 </div>
                 <div className={styles.right}>
+                <div className={styles.id}>
+                  ID {props.user.id}
+                </div>
                 {props.onRequestClose && (
                   <div className={styles.close} onClick={props.onRequestClose}>
                     <Close/>
@@ -77,17 +75,38 @@ export default function Modal(props: Props) {
               </div>
             </HiddenXs>
             <VisibleXs>
+              <>
               <div className={styles.top}>
-                <div className={styles.line}></div>
+                <Logo className={styles.logo}/>
+                <div className={styles.balance}>
+                  <div className={styles.text}>
+                    BALANCE
+                  </div>
+                  <div className={styles.money}>
+                    {props.user.balance}
+                  </div>
+                </div>
+                <Button size='normal' background='payGradient500' className={styles.wallet}><img src='/img/icons/wallet.svg' alt=''/>Пополнить</Button>
                 {props.onRequestClose && (
                   <div className={styles.close} onClick={props.onRequestClose}>
                     <Close/>
                   </div>
                 )}
-                <div className={styles.title}>
-                  {props.title}
-                </div>
               </div>
+              <div className={styles.mobileBack}>
+                  <div className={styles.wrap}>
+                  <div className={styles.arrow}>
+                    <img src='/img/icons/back-arrow.svg' alt=''/>
+                  </div>
+                  <div className={styles.toProfile}>
+                    Профиль
+                  </div>
+                  </div>
+              </div>
+              <div className={styles.title}>
+                {props.title}
+              </div>
+              </>
             </VisibleXs>
             <div className={styles.center}>
               {props.image && !props.loading && (
@@ -101,31 +120,7 @@ export default function Modal(props: Props) {
         </div>
       </ReactModal>
     )
-  }else{
-    /* eslint-disable */
-    // @ts-ignore
-    return (
-    <Sheet isOpen={isOpen} onClose={onRequestClose}    >
-
-      <Sheet.Container onViewportBoxUpdate>
-        <Sheet.Header onViewportBoxUpdate />
-        {props.onRequestClose && (
-          <div className={styles.close} onClick={props.onRequestClose}>
-            <Close/>
-          </div>
-        )}
-        <Sheet.Content onViewportBoxUpdate>{isOpen && <div className={styles.centerSheet}>
-          <div className={styles.title}>
-            {props.title}
-          </div>
-
-          {props.children}</div>}</Sheet.Content>
-      </Sheet.Container>
-
-      <Sheet.Backdrop onViewportBoxUpdate/>
-    </Sheet>)
-  }
 }
-Modal.defaultProps = {
+ProfileModal.defaultProps = {
   size: 'normal',
 }

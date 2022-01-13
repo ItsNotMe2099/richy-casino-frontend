@@ -1,5 +1,5 @@
 import { useAppContext } from 'context/state'
-import { ModalType } from 'types/enums'
+import { ModalType, ProfileModalType } from 'types/enums'
 import { isServer } from 'utils/media'
 import Modal from 'components/ui/Modal'
 import ModalLogin from 'components/Auth/ModalLogin'
@@ -8,6 +8,7 @@ import ModalPasswordReset from 'components/Auth/ModalPasswordReset'
 import ModalRegistration from 'components/Auth/ModalRegistration'
 import ModalRegistrationSuccess from 'components/Auth/ModalRegistrationSuccess'
 import PaymentHistory from 'components/Profile/PaymentHistory'
+import ProfileModal from 'components/ui/ProfileModal'
 
 interface Props {}
 
@@ -16,6 +17,8 @@ export default function ModalContainer(props: Props) {
   const commonSettings = {
     onRequestClose: context.hideModal,
   }
+
+  const user = {id: '6171361', balance: '$275.16'}
 
   return (
     <div aria-hidden="true">
@@ -36,9 +39,9 @@ export default function ModalContainer(props: Props) {
           <Modal key={4} isOpen={context.modal === ModalType.registrationSuccess} {...commonSettings} noBorder>
             <ModalRegistrationSuccess/>
           </Modal>
-          <Modal key={5} isOpen={true} {...commonSettings} title='История платежей' size='large' profile userId='6171361'>
+          <ProfileModal key={0} isOpen={context.modal === ProfileModalType.paymentHistory} {...commonSettings} title='История платежей' user={user}>
             <PaymentHistory/>
-          </Modal>
+          </ProfileModal>
         </>
       )}
     </div>

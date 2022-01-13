@@ -6,6 +6,10 @@ export enum ModalType {
   registrationSuccess
 }
 
+export enum ProfileModalType {
+  paymentHistory
+}
+
 export enum CookiesType {
   accessToken = 'accessToken',
 }

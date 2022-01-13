@@ -6,9 +6,18 @@
   padding: 28px 28px 23px 28px;
   z-index: 5;
   margin:  auto;
+  width: 664px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  @media screen and (max-width: $xs-max){
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+    background: #14151b;
+  }
   @media screen and (max-width: 430px){
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+    border-radius: 0;
     padding-top: 14px;
     padding-right: 18px;
     padding-left: 18px;
@@ -16,11 +25,33 @@
   }
 }
 
-.rootFlex{
-  @media screen and (max-width: 600px){
-    display: flex;
+
+
+.balance{
+  background: rgba(255, 209, 47, 0.05);
+  border-radius: 6px;
+  padding: 4px 7px;
+  .text{
+    color: #FFD12F;
+    text-transform: uppercase;
+    font-size: 7px;
   }
 }
+
+.money{
+  font-weight: 600;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.wallet{
+  padding: 11px 9px;
+  img{
+    margin-right: 6px;
+  }
+  color: $white;
+}
+
 .close {
   cursor: pointer;
   background: $dark600;
@@ -32,19 +63,24 @@
       fill: #6B6C77;
     }
   }
+  @media screen and (max-width: $xs-max){
+    background: #1D1E25;
+    svg{
+      path{
+        fill: $white;
+      }
+    }
+  }
   &:hover{
     background-color: $dark500;
     @media screen and (max-width: 430px){
       background-color: transparent;
     }
   }
-  @media screen and (max-width: 430px){
-    position: absolute;
-    right: 23px;
-    top: 18px;
-    background-color: transparent;
-    padding: 0;
-  }
+}
+
+.logo{
+  width: 59px;
 }
 
 .top{
@@ -56,27 +92,51 @@
   margin: 0 -28px;
   padding-left: 28px;
   padding-right: 28px;
-  @media screen and (max-width: 430px){
-    flex-direction: column;
-    align-items: center;
-    margin: 0 -14px;
-    padding-left: 14px;
-    padding-right: 14px;
-  }
 }
 
-.noBorder{
-  border-bottom: 0;
+.left{
+  display: flex;
+  align-items: center;
 }
 
-.rootNormal{
-  width: 428px;
-  @media screen and (max-width: 430px){
-    width: 100%;
-  }
+.right{
+  display: flex;
+  align-items: center;
 }
-.rootLarge{
-  width: 664px;
+
+.back{
+  display: flex;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.mobileBack{
+  display: flex;
+  align-items: center;
+  margin-top: 23px;
+}
+
+.id{
+  margin-right: 11px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #3c3d46;
+}
+
+.arrow{
+  display: flex;
+  margin-right: 17px;
+}
+
+.wrap{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.toProfile{
+  font-size: 14px;
+  color: #87888C;
 }
 
 .title {
@@ -85,10 +145,8 @@
   color: $white;
   display: flex;
   align-items: center;
-  @media screen and (max-width: 430px){
-    font-size: 19px;
-    font-weight: 700;
-    text-align: center;
+  @media screen and (max-width: $xs-max){
+    margin-top: 18px;
   }
 }
 
@@ -138,13 +196,6 @@
   z-index: 2;
 }
 .scroll{
-}
-
-.line{
-  width: 125px;
-  height: 4px;
-  background: #292B33;
-  border-radius: 28px;
 }
 
 .centerSheet{
