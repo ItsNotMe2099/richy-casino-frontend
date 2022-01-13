@@ -7,7 +7,7 @@ import Link from 'next/link'
 import LangSelect from 'components/for_pages/Common/LangSelect'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
-import { ModalType } from 'types/enums'
+import { ModalType, ProfileModalType } from 'types/enums'
 import { useAppContext } from 'context/state'
 
 interface Props {
@@ -51,6 +51,7 @@ export default function Header(props: Props) {
   return (
     <>
     <div className={styles.root} id='top'>
+      <div onClick={() => context.showModal(ProfileModalType.profile)}>PROFILE</div>
       <div className={styles.top}>
       <div className={styles.left}>
         <div className={styles.apps}>

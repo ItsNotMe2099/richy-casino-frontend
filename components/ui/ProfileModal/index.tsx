@@ -5,6 +5,8 @@ import HiddenXs from '../HiddenXS'
 import VisibleXs from '../VisibleXS'
 import Logo from 'components/svg/Logo'
 import Button from '../Button'
+import { ProfileModalType } from 'types/enums'
+import { useAppContext } from 'context/state'
 
 interface IUser{
   id: string
@@ -24,6 +26,7 @@ interface Props {
   singlePage?: boolean
   user: IUser
   payment?: boolean
+  profile?: boolean
 }
 
 export default function ProfileModal(props: Props) {
@@ -46,26 +49,39 @@ export default function ProfileModal(props: Props) {
     },
   }
 
+  const context = useAppContext()
+
+  const getSizeClass = (size) => {
+    switch (size) {
+      case 'large':
+        return styles.rootLarge
+      default:
+        return styles.rootNormal
+    }
+  }
+
     return (
       <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
         <div className={styles.frame}>
           <div
-            className={`${styles.root} ${props.className}`}
+            className={`${styles.root} ${getSizeClass(props.size)} ${props.className}`}
           >
             <HiddenXs>
               <div className={styles.top}>
                 <div className={styles.left}>
-                  <div className={styles.back}>
+                  {!props.profile &&
+                  <div className={styles.back} onClick={() => context.showModal(ProfileModalType.profile)}>
                     <img src='/img/icons/back.svg' alt=''/>
-                  </div>
+                  </div>}
                   <div className={styles.title}>
                     {props.title}
                   </div>
                 </div>
                 <div className={styles.right}>
+                {props.payment &&
                 <div className={styles.id}>
                   ID {props.user.id}
-                </div>
+                </div>}
                 {props.onRequestClose && (
                   <div className={styles.close} onClick={props.onRequestClose}>
                     <Close/>
@@ -94,7 +110,7 @@ export default function ProfileModal(props: Props) {
                 )}
               </div>
               <div className={styles.mobileBack}>
-                  <div className={styles.wrap}>
+                  <div className={styles.wrap} onClick={() => context.showModal(ProfileModalType.profile)}>
                   <div className={styles.arrow}>
                     <img src='/img/icons/back-arrow.svg' alt=''/>
                   </div>

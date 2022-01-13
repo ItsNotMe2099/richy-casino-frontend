@@ -6,11 +6,10 @@
   padding: 28px 28px 23px 28px;
   z-index: 5;
   margin:  auto;
-  width: 664px;
   overflow-y: auto;
   overflow-x: hidden;
   @media screen and (max-width: $xs-max){
-    width: 100%;
+    width: 100% !important;
     top: 0;
     bottom: 0;
     position: fixed;
@@ -25,7 +24,13 @@
   }
 }
 
+.rootNormal{
+  width: 610px;
+}
 
+.rootLarge{
+  width: 664px;
+}
 
 .balance{
   background: rgba(255, 209, 47, 0.05);

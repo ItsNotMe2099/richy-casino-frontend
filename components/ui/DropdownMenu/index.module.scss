@@ -88,6 +88,25 @@ max-width: 280px;
   font-size: 14px;
 }
 
+.dots{
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: 0;
+  height: auto;
+  position: static;
+  .active{
+    transform: none;
+  }
+  .dropDown{
+    max-width: 150px;
+    right: 0;
+    margin-top: 20px;
+    a{
+      padding: 9px 12px;
+    }
+  }
+}
+
 .isSelected{
   position: relative;
   padding-left: 6px;

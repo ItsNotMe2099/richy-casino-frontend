@@ -1,0 +1,11 @@
+@import "scss/index";
+
+.root{
+  border-radius: 19px;
+  width: 80px;
+  height: 80px;
+  @media screen and (max-width: $xs-max){
+    width: 60px;
+    height: 60px;
+  }
+}

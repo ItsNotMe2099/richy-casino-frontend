@@ -9,6 +9,7 @@ import ModalRegistration from 'components/Auth/ModalRegistration'
 import ModalRegistrationSuccess from 'components/Auth/ModalRegistrationSuccess'
 import PaymentHistory from 'components/Profile/PaymentHistory'
 import ProfileModal from 'components/ui/ProfileModal'
+import Profile from 'components/Profile/Profile'
 
 interface Props {}
 
@@ -39,8 +40,11 @@ export default function ModalContainer(props: Props) {
           <Modal key={4} isOpen={context.modal === ModalType.registrationSuccess} {...commonSettings} noBorder>
             <ModalRegistrationSuccess/>
           </Modal>
-          <ProfileModal key={0} isOpen={context.modal === ProfileModalType.paymentHistory} {...commonSettings} title='История платежей' user={user}>
+          <ProfileModal size='large' key={5} isOpen={context.modal === ProfileModalType.paymentHistory} {...commonSettings} title='История платежей' user={user} payment>
             <PaymentHistory/>
+          </ProfileModal>
+          <ProfileModal key={6} isOpen={context.modal === ProfileModalType.profile} {...commonSettings} title='Профиль' user={user} profile>
+            <Profile/>
           </ProfileModal>
         </>
       )}

@@ -6,7 +6,7 @@ interface IState {
   isMobile: boolean   
   isDesktop: boolean
   modal: ModalType | ProfileModalType | null   
-  showModal: (type: ModalType) => void   
+  showModal: (type: ModalType | ProfileModalType) => void   
   hideModal: () => void
   updateUserFromCookies: () => void
 }

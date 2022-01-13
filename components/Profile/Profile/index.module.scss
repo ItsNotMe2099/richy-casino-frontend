@@ -1,0 +1,220 @@
+@import "scss/index";
+
+.root {
+  
+}
+
+.top{
+  margin-top: 35px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.accounts{
+  margin-top: 42px;
+  display: flex;
+}
+
+.account{
+  padding: 9px 21px;
+  border-radius: 8px;
+  background-color: $dark600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.mainAccount{
+  background-color: #322c29;
+  margin-top: 12px;
+}
+
+.btc{
+  font-weight: 500;
+  font-size: 12px;
+  color: $dark200;
+  text-align: end;
+}
+
+.numbers{
+  margin-right: 19px;
+}
+
+.left{
+  display: flex;
+  align-items: center;
+}
+
+.right{
+  display: flex;
+  align-items: center;
+  .currency{
+    color: $dark100;
+  }
+}
+
+.usdt{
+  display: flex;
+}
+
+.amount{
+  margin-right: 4px;
+}
+
+.icon{
+  display: flex;
+  margin-right: 6px;
+}
+
+.currency{
+
+}
+
+.avatar{
+  display: flex;
+}
+
+.info{
+  margin-left: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nickname{
+  font-weight: 600;
+  font-size: 22px;
+  text-align: start;
+}
+
+.id{
+  font-weight: 500;
+  font-size: 14px;
+  color: #3c3d46;
+  margin-top: 5px;
+}
+
+.logout{
+  display: flex;
+  align-items: center;
+  button{
+    padding-top: 9px;
+    padding-bottom: 9px;
+    padding-right: 13px;
+    padding-left: 15px;
+    border: 1px solid #272832;
+    color: $white;
+    img{
+      margin-right: 9px;
+    }
+  }
+}
+
+.main{
+  margin-right: 14px;
+  .title{
+    color: #FFC700;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: start;
+  }
+}
+
+.bonus{
+  width: 100%;
+}
+
+.title{
+  font-weight: 500;
+  font-size: 14px;
+  text-align: start;
+  margin-bottom: 12px;
+}
+
+.actions{
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.btn{
+  padding: 18px;
+  background: #24252E;
+  color: $white;
+  margin-right: 7px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.wallet{
+  padding: 18px 19px;
+  img{
+    width: 16px;
+    margin-right: 6px;
+  }
+  color: $white;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.bonusItem{
+  padding: 11px 12px;
+  background: $dark600;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.bonusLeft{
+  display: flex;
+  align-items: center;
+}
+
+.bonusIcon{
+  display: flex;
+  margin-right: 8px;
+}
+
+.number{
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.menuItem{
+  padding: 27px 12px 27px 21px;
+  border: 1px solid #2C2D38;
+  background: #1D1E25;
+  border-radius: 25px;
+  min-height: 150px;
+  cursor: pointer;
+}
+
+.active{
+  background-color: $dark600;
+}
+
+.menuIcon{
+  display: flex;
+}
+
+.menuLabel{
+  margin-top: 22px;
+  font-weight: 500;
+  font-size: 16px;
+  color: $white;
+  text-align: start;
+}
+
+.menu{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 64px;
+  gap: 14px;
+}
+
+.drop{
+  display: flex;
+}
