@@ -86,6 +86,18 @@ max-width: 280px;
   width: 100%;
   margin: 0px;
   font-size: 14px;
+  justify-content: center;
+}
+
+.symbol{
+  font-weight: 600;
+  font-size: 14px;
+  color: $dark200;
+  width: 15%;
+}
+
+.currency{
+  display: flex;
 }
 
 .dots{
@@ -109,6 +121,7 @@ max-width: 280px;
 
 .newAccount{
   justify-content: center;
+  display: flex;
   .active{
     transform: none;
   }
@@ -175,7 +188,7 @@ max-width: 280px;
 }
 
 .active{
-  transform: rotate(180deg);
+  justify-content: space-between;
   align-self: center;
 }
 

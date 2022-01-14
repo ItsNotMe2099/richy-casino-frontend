@@ -5,6 +5,10 @@ import classNames from 'classnames'
 import { useAppContext } from 'context/state'
 import { ProfileModalType } from 'types/enums'
 import DropdownMenu from 'components/ui/DropdownMenu'
+import { useState } from 'react'
+import request from 'utils/request'
+import SelectAccountCurrency from 'components/ui/SelectAccountCurrency'
+import { Currency } from 'types/interfaces'
 
 interface Props {
   
@@ -40,12 +44,30 @@ export default function Profile(props: Props) {
   tickets: '256', freebtc: '0.00000001', bonus: '1500 RUB', spins: '23'
 }
 
-const tabs = [
+const options = [
   {label: 'Cделать основным'},
   {label: 'Пополнить'},
   {label: 'Вывести'},
   {label: 'Закрыть счет'},
 ]
+
+const [accounts, setAccount] = useState([])
+const [currencies, setCurrencies] = useState([])
+
+const getCurrencies = async () => {
+  const res = await request({
+    method: 'get',
+    url: 'https://admin.grtestdemo.com/api/currencies',
+  })
+  setCurrencies(res.data.data)
+}
+
+const handleAddNewAccount = (itemNew: Currency) => {
+  const filter = accounts.find(item => item.id === itemNew.id)
+  if(!filter){
+    setAccount(accounts => [...accounts, itemNew])
+  }
+}
 
 const context = useAppContext()
 
@@ -73,7 +95,7 @@ const context = useAppContext()
           {currency === 'BTC' && <div className={styles.btc}>{amount}</div>}
           </div>
           <div className={styles.drop}>
-            <DropdownMenu tabs={main ? tabs.slice(1) : tabs} dots/>
+            <DropdownMenu options={main ? options.slice(1) : options} dots/>
           </div>
         </div>
       </div>
@@ -140,6 +162,13 @@ const context = useAppContext()
             {user.accounts.filter(item => item.main).map((item, index) =>
               <Account icon={item.icon} currency={item.currency} amount={item.amount} usdt={item.usdt} main={item.main} key={index}/>
             )}
+            <SelectAccountCurrency options={currencies} 
+            className={styles.new} 
+            textRight 
+            label='Новый счет' 
+            onChange={(item) => handleAddNewAccount(item)}
+            onTriggerClick={getCurrencies}
+            />
             <div className={styles.actions}>
               <Button className={styles.btn}>
                 Вывод

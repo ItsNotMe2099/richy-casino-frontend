@@ -19,6 +19,14 @@ export interface LoginFormData {
   password: string
 }
 
+export interface Currency {
+  id: number
+  iso: string
+  name: string
+  symbol: string
+  type: number
+}
+
 export const CONTACTS = {
   email: 'support@richy.com',
   facebook: '#',

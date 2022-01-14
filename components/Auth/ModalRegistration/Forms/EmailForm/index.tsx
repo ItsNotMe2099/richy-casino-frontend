@@ -11,9 +11,10 @@ import InputField from 'components/ui/Inputs/InputField'
 import Validator from 'utils/validator'
 import {ModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
+import { Currency } from 'types/interfaces'
 
 interface Props {
-  
+  currencies: Currency[]
 }
 
 export default function EmailForm(props: Props) {
@@ -23,17 +24,10 @@ export default function EmailForm(props: Props) {
     
   }
 
-
-  const items = [
-    {label: 'Российский рубль (RUB)', value: 'Российский рубль (RUB)', icon: '/img/icons/rub.svg'},
-    {label: 'Российский рубль (RUB)', value: 'Российский рубль (RUB)', icon: '/img/icons/rub.svg'},
-    {label: 'Российский рубль (RU)', value: 'Российский рубль (RU)', icon: '/img/icons/rub.svg'},
-  ]
-
   const initialValues = {
       email: null,
       password: null,
-      currency: 'Российский рубль (RUB)',
+      currency: 121,
       checkBox: false
     }
 
@@ -47,7 +41,7 @@ export default function EmailForm(props: Props) {
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         <Form className={styles.form}>
           <div className={styles.inputs}>
-            <Select name='currency' options={items}/>
+            <Select name='currency' options={props.currencies}/>
             <InputField name={'email'} placeholder={'Электронный адрес'} validate={Validator.combine([Validator.required, Validator.email])} />
             <InputField name={'password'} type={'password'} obscure={true} placeholder={'Придумайте пароль'} validate={Validator.required}/>
 

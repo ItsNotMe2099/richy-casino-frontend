@@ -89,9 +89,9 @@ export default function GamesList(props: Props) {
         <HiddenXs>
         <>
         <div className={styles.filters}>
-          <DropdownMenu tabs={categories} label='Категория' allOption
+          <DropdownMenu options={categories} label='Категория' allOption
            onAll={() => setCategory('')} onChange={(item) => setCategory(item.label)} activeTab={category} type='category'/>
-          <DropdownMenu tabs={providers} label='Провайдеры' allOption
+          <DropdownMenu options={providers} label='Провайдеры' allOption
             onAll={() => setProvider('')}
            onChange={(item) => setProvider(item.label)} activeTab={provider} type='provider'/>
         </div>

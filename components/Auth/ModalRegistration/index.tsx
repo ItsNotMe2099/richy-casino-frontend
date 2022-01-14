@@ -1,11 +1,12 @@
 import styles from './index.module.scss'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import ShortBanner from 'components/for_pages/Common/ShortBanner'
 import PhoneForm from './Forms/PhoneForm'
 import EmailForm from './Forms/EmailForm'
 import SocialsForm from './Forms/SocialsForm'
+import request from 'utils/request'
 
 enum TabType{
   Email,
@@ -50,6 +51,19 @@ export default function ModalRegistration(props: Props) {
 
   const { t } = useTranslation('common')
 
+  const [currencies, setCurrencies] = useState([])
+
+  useEffect(() => {
+    const getCurrencies = async () => {
+      const res = await request({
+        method: 'get',
+        url: 'https://admin.grtestdemo.com/api/currencies',
+      })
+      setCurrencies(res.data.data)
+    }
+    getCurrencies()
+  }, [])
+
   return (
     <>
     <div className={styles.banner}>
@@ -60,9 +74,9 @@ export default function ModalRegistration(props: Props) {
           <Tab label={item.label} logo={item.logo} key={index} tab={item.tab} isActive={variant === item.tab} onSelect={() => setVariant(item.tab)}/>
         )}
       </div>
-      {variant === TabType.Phone && <PhoneForm/>}
-      {variant === TabType.Email && <EmailForm/>}
-      {variant === TabType.Socials && <SocialsForm/>}
+      {variant === TabType.Phone && <PhoneForm currencies={currencies}/>}
+      {variant === TabType.Email && <EmailForm currencies={currencies}/>}
+      {variant === TabType.Socials && <SocialsForm currencies={currencies}/>}
     </>
   )
 }

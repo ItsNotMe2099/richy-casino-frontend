@@ -109,10 +109,15 @@
   position: relative;
   justify-content: space-between;
   cursor: pointer;
+  max-height: 53px;
+  .icon{
+    margin-right: 19px;
+  }
 
   .placeholder{
     padding-right: 10px;
     display: flex;
+    align-items: center;
   }
 
   img{
@@ -122,13 +127,21 @@
 }
 
 .icon{
-  margin-right: 19px;
   display: flex;
+  font-weight: bold;
+  font-size: 20px;
+  color: $dark200;
+  width: 15%;
+}
+
+.name{
+  font-size: 14px;
+  flex-shrink: 0;
 }
 
 .option{
   display: flex;
-  flex-direction: column;
+  align-items: center;
   cursor: pointer;
   text-align: left;
   padding: 12px 18px;

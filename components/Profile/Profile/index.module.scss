@@ -218,3 +218,16 @@
 .drop{
   display: flex;
 }
+
+.new{
+  max-width: 100% !important;
+  margin-top: 16px;
+}
+
+.new > a {
+  height: 38px !important;
+  border-radius: 8px !important;
+  span{
+    color: #737683;
+  }
+}

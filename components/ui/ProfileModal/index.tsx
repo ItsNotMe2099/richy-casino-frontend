@@ -109,6 +109,7 @@ export default function ProfileModal(props: Props) {
                   </div>
                 )}
               </div>
+              {!props.profile &&
               <div className={styles.mobileBack}>
                   <div className={styles.wrap} onClick={() => context.showModal(ProfileModalType.profile)}>
                   <div className={styles.arrow}>
@@ -118,7 +119,7 @@ export default function ProfileModal(props: Props) {
                     Профиль
                   </div>
                   </div>
-              </div>
+              </div>}
               <div className={styles.title}>
                 {props.title}
               </div>

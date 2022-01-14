@@ -43,7 +43,7 @@ export function AuthWrapper(props: Props) {
       return
     }
 
-    const accessToken = res.data.accessToken
+    const accessToken = res.data.token
 
     if (!accessToken) {
       return

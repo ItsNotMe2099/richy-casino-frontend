@@ -10,9 +10,10 @@ import Button from 'components/ui/Button'
 import {ModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
 import SocialButtons from 'components/Auth/SocialButtons'
+import { Currency } from 'types/interfaces'
 
 interface Props {
-  
+  currencies: Currency[]
 }
 
 export default function SocialsForm(props: Props) {
@@ -22,15 +23,8 @@ export default function SocialsForm(props: Props) {
     
   }
 
-
-  const items = [
-    {label: 'Российский рубль (RUB)', value: 'Российский рубль (RUB)', icon: '/img/icons/rub.svg'},
-    {label: 'Российский рубль (RUB)', value: 'Российский рубль (RUB)', icon: '/img/icons/rub.svg'},
-    {label: 'Российский рубль (RU)', value: 'Российский рубль (RU)', icon: '/img/icons/rub.svg'},
-  ]
-
   const initialValues = {
-      currency: 'Российский рубль (RUB)',
+      currency: 121,
       checkBox: false
     }
 
@@ -46,7 +40,7 @@ export default function SocialsForm(props: Props) {
           <SocialButtons/>
 
           <div className={styles.inputs}>
-             <Select name='currency' options={items}/>
+             <Select name='currency' options={props.currencies}/>
             <div className={styles.promo} onClick={() => promoCode ? setPromoCode(false) : setPromoCode(true)}>
               <div className={classNames(styles.plus, {[styles.expanded]: promoCode})}>{promoCode ? '-' : '+'}</div>
                <span>У меня есть промокод</span>
