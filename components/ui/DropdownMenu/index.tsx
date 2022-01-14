@@ -2,7 +2,6 @@ import { useRef } from 'react'
 import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
 import styles from './index.module.scss'
 import classNames from 'classnames'
-import { Currency } from 'types/interfaces'
 
 interface Option {
   label: string,
