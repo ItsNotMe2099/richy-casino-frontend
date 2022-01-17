@@ -9,8 +9,6 @@ import { useState } from 'react'
 import request from 'utils/request'
 import SelectAccountCurrency from 'components/ui/SelectAccountCurrency'
 import { Currency } from 'types/interfaces'
-import HiddenXs from 'components/ui/HiddenXS'
-import VisibleXs from 'components/ui/VisibleXS'
 
 interface Props {
   
