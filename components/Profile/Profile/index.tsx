@@ -9,6 +9,8 @@ import { useState } from 'react'
 import request from 'utils/request'
 import SelectAccountCurrency from 'components/ui/SelectAccountCurrency'
 import { Currency } from 'types/interfaces'
+import HiddenXs from 'components/ui/HiddenXS'
+import VisibleXs from 'components/ui/VisibleXS'
 
 interface Props {
   
@@ -51,6 +53,12 @@ const options = [
   {label: 'Закрыть счет'},
 ]
 
+const newAccounts = [
+  {main: false, currency: 'BTC', icon: '/img/currencies/BTC.svg', amount: '0.00000000', usdt: '0.00000001'},
+  {main: false, currency: 'RUB', icon: '/img/currencies/RUB.svg', amount: '1000', usdt: null},
+  {main: false, currency: 'RUB', icon: '/img/currencies/RUB.svg', amount: '1000', usdt: null}
+]
+
 const [accounts, setAccount] = useState([])
 const [currencies, setCurrencies] = useState([])
 
@@ -63,10 +71,7 @@ const getCurrencies = async () => {
 }
 
 const handleAddNewAccount = (itemNew: Currency) => {
-  const filter = accounts.find(item => item.id === itemNew.id)
-  if(!filter){
     setAccount(accounts => [...accounts, itemNew])
-  }
 }
 
 const context = useAppContext()
@@ -89,13 +94,13 @@ const context = useAppContext()
               {currency === 'BTC' ? usdt : amount}
             </div>
             <div className={styles.currency}>
-              {currency === 'BTC' && <>USDT</>}
+              {currency === 'BTC' ? <>USDT</> : currency}
             </div>
           </div>
           {currency === 'BTC' && <div className={styles.btc}>{amount}</div>}
           </div>
           <div className={styles.drop}>
-            <DropdownMenu options={main ? options.slice(1) : options} dots/>
+            <DropdownMenu options={main ? options.slice(1) : options} dots textLeft/>
           </div>
         </div>
       </div>
@@ -162,6 +167,19 @@ const context = useAppContext()
             {user.accounts.filter(item => item.main).map((item, index) =>
               <Account icon={item.icon} currency={item.currency} amount={item.amount} usdt={item.usdt} main={item.main} key={index}/>
             )}
+            <HiddenXs>
+            <>
+            {accounts.length > 0 &&
+            <div className={styles.newAcc}>
+              <div className={styles.title}>
+                Дополнительные
+              </div>
+                {newAccounts.map((acc, index) =>
+                  accounts.find(item => acc.currency === item.iso) &&
+                    <Account icon={acc.icon} currency={acc.currency} amount={acc.amount} usdt={acc.usdt} main={acc.main} key={index}/>
+                  
+              )}
+            </div>}
             <SelectAccountCurrency options={currencies} 
             className={styles.new} 
             textRight 
@@ -169,15 +187,41 @@ const context = useAppContext()
             onChange={(item) => handleAddNewAccount(item)}
             onTriggerClick={getCurrencies}
             />
+            </>
+            </HiddenXs>
             <div className={styles.actions}>
+              <div className={styles.notGreen}>
               <Button className={styles.btn}>
                 Вывод
               </Button>
               <Button className={styles.btn}>
                 Обмен
               </Button>
+              </div>
               <Button size='normal' background='payGradient500' className={styles.wallet}><img src='/img/icons/wallet.svg' alt=''/>Пополнить</Button>
             </div>
+            <VisibleXs>
+            <>
+            {accounts.length > 0 &&
+            <div className={styles.newAcc}>
+              <div className={styles.title}>
+                Дополнительные
+              </div>
+                {newAccounts.map((acc, index) =>
+                  accounts.find(item => acc.currency === item.iso) &&
+                    <Account icon={acc.icon} currency={acc.currency} amount={acc.amount} usdt={acc.usdt} main={acc.main} key={index}/>
+                  
+              )}
+            </div>}
+            <SelectAccountCurrency options={currencies} 
+            className={styles.new} 
+            textRight 
+            label='Новый счет' 
+            onChange={(item) => handleAddNewAccount(item)}
+            onTriggerClick={getCurrencies}
+            />
+            </>
+            </VisibleXs>
           </div>
           <div className={styles.bonus}>
             <div className={styles.title}>

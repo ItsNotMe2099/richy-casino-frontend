@@ -19,11 +19,12 @@ interface Props {
   dots?: boolean
   className?: string
   textRight?: boolean
+  textLeft?: boolean
 }
 
 export default function DropdownMenu(props: Props){
   const dropdownRef = useRef(null)
-  const {options, label, onChange, activeTab, type, allOption, onAll, dots, textRight, onTriggerClick} = props
+  const {options, label, onChange, activeTab, type, allOption, onAll, dots, textRight, textLeft, onTriggerClick} = props
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
   const handleClick = (e) => {
     if(options.length === 0){
@@ -45,7 +46,7 @@ export default function DropdownMenu(props: Props){
       </a>
        <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
        {allOption && <div className={styles.option} onClick={() => onAll()}><a onClick={() => setIsActive(false)}>Все</a></div>}
-       {options.map((item, index) => <div key={index} className={classNames(styles.option, {[styles.textRight]: textRight})} onClick={() => onChange(item)}>
+       {options.map((item, index) => <div key={index} className={classNames(styles.option, {[styles.textRight]: textRight}, {[styles.textLeft]: textLeft})} onClick={() => onChange(item)}>
          <a  onClick={() => setIsActive(false)}>{item.label}</a></div>)}
        </nav>
     </div>

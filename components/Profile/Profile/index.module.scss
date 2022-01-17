@@ -13,6 +13,9 @@
 .accounts{
   margin-top: 42px;
   display: flex;
+  @media screen and (max-width: 600px){
+    flex-direction: column;
+  }
 }
 
 .account{
@@ -23,6 +26,8 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
+  height: 50px;
+
 }
 
 .mainAccount{
@@ -136,6 +141,9 @@
   display: flex;
   align-items: center;
   margin-top: 16px;
+  @media screen and (max-width: 600px){
+    flex-direction: column-reverse;
+  }
 }
 
 .btn{
@@ -156,6 +164,7 @@
   color: $white;
   font-weight: 600;
   font-size: 16px;
+  width: 100%;
 }
 
 .bonusItem{
@@ -229,5 +238,31 @@
   border-radius: 8px !important;
   span{
     color: #737683;
+  }
+}
+
+.newAcc{
+  margin-top: 16px;
+  .title{
+    color: $white;
+  }
+  .account{
+    margin-top: 16px;
+  }
+}
+
+.notGreen{
+  display: flex;
+  width: 100%;
+  @media screen and (max-width: 600px){
+    margin-top: 16px;
+    .btn:first-child{
+      margin-right: 14px;
+      width: 100%;
+    }
+    .btn:last-child{
+      margin-right: 0;
+      width: 100%;
+    }
   }
 }
