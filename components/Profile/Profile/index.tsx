@@ -155,7 +155,7 @@ const context = useAppContext()
           <div className={styles.logout}>
             <Button>
               <img src='/img/icons/logout.svg' alt=''/>
-              Выйти
+              <span>Выйти</span>
             </Button>
           </div>
         </div>
@@ -167,7 +167,7 @@ const context = useAppContext()
             {user.accounts.filter(item => item.main).map((item, index) =>
               <Account icon={item.icon} currency={item.currency} amount={item.amount} usdt={item.usdt} main={item.main} key={index}/>
             )}
-            <HiddenXs>
+            {context.isDesktop &&
             <>
             {accounts.length > 0 &&
             <div className={styles.newAcc}>
@@ -188,7 +188,7 @@ const context = useAppContext()
             onTriggerClick={getCurrencies}
             />
             </>
-            </HiddenXs>
+            }
             <div className={styles.actions}>
               <div className={styles.notGreen}>
               <Button className={styles.btn}>
@@ -200,7 +200,7 @@ const context = useAppContext()
               </div>
               <Button size='normal' background='payGradient500' className={styles.wallet}><img src='/img/icons/wallet.svg' alt=''/>Пополнить</Button>
             </div>
-            <VisibleXs>
+            {context.isMobile &&
             <>
             {accounts.length > 0 &&
             <div className={styles.newAcc}>
@@ -221,7 +221,7 @@ const context = useAppContext()
             onTriggerClick={getCurrencies}
             />
             </>
-            </VisibleXs>
+            }
           </div>
           <div className={styles.bonus}>
             <div className={styles.title}>
