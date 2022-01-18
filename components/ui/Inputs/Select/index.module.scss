@@ -126,6 +126,39 @@
   display: flex;
 }
 
+.altStyle{
+  background: #272832;
+  border: 0;
+}
+
+.withLabel{
+  display: flex;
+  align-items: center;
+  background: #272832;
+  border-radius: 8px;
+  height: 70px;
+  .label{
+    margin-bottom: 0;
+    margin-left: 29px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #484B5C;
+  }
+  .icon{
+    display: none;
+  }
+  .dropDownTrigger{
+    flex: 1;
+  }
+  .name{
+    font-weight: 600;
+    font-size: 18px;
+  }
+  .dropDown, .dropDownActive{
+    top: 70px;
+  }
+}
+
 .icon{
   display: flex;
   font-weight: bold;

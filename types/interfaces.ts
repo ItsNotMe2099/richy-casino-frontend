@@ -27,6 +27,16 @@ export interface Currency {
   type: number
 }
 
+export interface Country {
+  id: number
+  iso: string
+  iso3: string
+  phone: string
+  name: string
+  currency_iso: string
+  symbol: string
+}
+
 export const CONTACTS = {
   email: 'support@richy.com',
   facebook: '#',

@@ -16,6 +16,9 @@ interface Props extends IField {
   obscure?: boolean
   format?: FormatType
   blurValidate?: FieldValidator
+  disabled?: boolean
+  className?: string
+  label?: string
 }
 
 export default function InputField(props: Props) {
@@ -73,11 +76,17 @@ export default function InputField(props: Props) {
   }
 
   return (
-    <div className={styles.root}>
+    <div className={classNames(styles.root, props.className)}>
       <div className={styles.wrapper}>
-        <div className={styles.inputWrapper}>
+        <div className={classNames(styles.inputWrapper, {[styles.withLabel]: props.label})}>
+        {props.label &&
+          <div className={styles.label}>
+            {props.label}
+          </div>
+        }
         <input
           {...field}
+          disabled={props.disabled}
           ref={props.format && ref as any}
           type={props.obscure ? (obscureShow ? 'text' : 'password') : props.type}
           className={classNames({

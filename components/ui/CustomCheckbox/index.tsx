@@ -9,6 +9,7 @@ interface Props {
   onChange: (val) => void
   color?: string
   shadow?: boolean
+  biggerFont?: boolean
 }
 
 export const CustomCheckbox = (props: Props) => {
@@ -25,7 +26,7 @@ export const CustomCheckbox = (props: Props) => {
           size={21}
           label={label}
           containerClassName={`${styles.checkboxContainer}`}
-          labelClassName={styles.checkboxLabel}
+          labelClassName={classNames(styles.checkboxLabel, {[styles.biggerFont]: props.biggerFont})}
           labelStyle={{}}
         />
   </div>

@@ -10,6 +10,7 @@ import ModalRegistrationSuccess from 'components/Auth/ModalRegistrationSuccess'
 import PaymentHistory from 'components/Profile/PaymentHistory'
 import ProfileModal from 'components/ui/ProfileModal'
 import Profile from 'components/Profile/Profile'
+import Settings from 'components/Profile/Settings'
 
 interface Props {}
 
@@ -19,7 +20,9 @@ export default function ModalContainer(props: Props) {
     onRequestClose: context.hideModal,
   }
 
-  const user = {id: '6171361', balance: '$275.16'}
+  const user = {id: '6171361', balance: '$275.16', userName: 'Alex', name: 'Ерохин Иван Иванович', dateOfBirth: '15.12.1998',
+  country: 185, currency: 121, phone: '8 (800) 800 88 88', email: 'pochta@mail.ru', password: 'qwerty123'
+}
 
   return (
     <div aria-hidden="true">
@@ -45,6 +48,9 @@ export default function ModalContainer(props: Props) {
           </ProfileModal>
           <ProfileModal key={6} isOpen={context.modal === ProfileModalType.profile} {...commonSettings} title='Профиль' user={user} profile>
             <Profile/>
+          </ProfileModal>
+          <ProfileModal size='large' key={7} isOpen={context.modal === ProfileModalType.settings} {...commonSettings} title='Настройки' user={user}>
+            <Settings user={user}/>
           </ProfileModal>
         </>
       )}

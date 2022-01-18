@@ -237,7 +237,7 @@ const context = useAppContext()
             <MenuItem icon='/img/Profile/icons/favorite.svg' label='Избранное'/>
             <MenuItem icon='/img/Profile/icons/support.svg' label='Поддержка'/>
             <MenuItem icon='/img/Profile/icons/wallet2.svg' label='История платежей' onClick={() => context.showModal(ProfileModalType.paymentHistory)}/>
-            <MenuItem icon='/img/Profile/icons/settings.svg' label='Настройки'/>
+            <MenuItem icon='/img/Profile/icons/settings.svg' label='Настройки' onClick={() => context.showModal(ProfileModalType.settings)}/>
         </div>
       </div>
   )

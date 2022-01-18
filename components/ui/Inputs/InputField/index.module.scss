@@ -42,11 +42,25 @@
       color:  #ED4700 !important;
     }
   }
-
 }
 
 .inputWrapper{
   position: relative;
+}
+
+.withLabel{
+  display: flex;
+  align-items: center;
+  background: #272832;
+  border-radius: 8px;
+  height: 70px;
+}
+
+.label{
+  margin-left: 29px;
+  font-weight: 500;
+  font-size: 16px;
+  color: $dark200;
 }
 
 

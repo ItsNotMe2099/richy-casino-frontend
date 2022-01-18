@@ -5,6 +5,7 @@ import {CustomCheckbox} from 'components/ui/CustomCheckbox'
 interface Props {
   label?: string
   disabled?: boolean
+  biggerFont?: boolean
 }
 
 export const CheckBox = (props: Props & FieldConfig) => {
@@ -20,6 +21,7 @@ export const CheckBox = (props: Props & FieldConfig) => {
         label={props.label}
         onChange={(val) => setFieldValue(props.name, val)}
         color='#272832'
+        biggerFont={props.biggerFont}
         />
       <ErrorInput {...meta}/>
     </div>
