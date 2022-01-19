@@ -156,7 +156,9 @@
   }
   .dropDownTrigger{
     flex: 1;
-    padding: 15px 9px;
+    @media screen and (max-width: $xs-max) {
+      padding: 15px 9px;
+    }
   }
   .name{
     font-weight: 600;
