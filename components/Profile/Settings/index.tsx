@@ -8,6 +8,8 @@ import request from 'utils/request'
 import Validator from 'utils/validator'
 import styles from './index.module.scss'
 import classNames from 'classnames'
+import HiddenXs from 'components/ui/HiddenXS'
+import VisibleXs from 'components/ui/VisibleXS'
 
 interface IUser {
   id: string
@@ -102,7 +104,7 @@ export default function Settings(props: Props) {
           <>
             <InputField name={'password'} disabled={true} className={styles.input} label='Пароль' type={'password'}/>
             <Button className={styles.btn} size='large' background='blueGradient500' type='submit' onClick={() => setIsChange(true)}>
-              Сменить пароль
+              <span>Сменить пароль</span><img src='/img/icons/edit.svg' alt=''/>
             </Button>
           </>}
         </div>
@@ -128,6 +130,7 @@ export default function Settings(props: Props) {
           />
         </>
         }
+        <HiddenXs>
         <div className={styles.boxes}>
           <div className={styles.row}>
           <CheckBox biggerFont name='checkBox1' label='Скрыть юзернейм'/>
@@ -138,6 +141,15 @@ export default function Settings(props: Props) {
           <CheckBox biggerFont name='checkBox4' label='Скрыть баланс из шапки сайта'/>
           </div>
         </div>
+        </HiddenXs>
+        <VisibleXs>
+          <>
+            <CheckBox biggerFont name='checkBox1' label='Скрыть юзернейм'/>
+            <CheckBox biggerFont name='checkBox2' label='Скрыть из лидерборда'/>
+            <CheckBox biggerFont name='checkBox3' label='Скрыть из общей статистики'/>
+            <CheckBox biggerFont name='checkBox4' label='Скрыть баланс из шапки сайта'/>
+          </>
+        </VisibleXs>
         <Button className={styles.save} size='large' background='blueGradient500' type='submit' onClick={handleSubmit}>
           Сохранить
         </Button>
