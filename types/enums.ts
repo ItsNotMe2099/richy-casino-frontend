@@ -9,7 +9,8 @@ export enum ModalType {
 export enum ProfileModalType {
   paymentHistory = 5,
   profile = 6,
-  settings = 7
+  settings = 7,
+  wallet = 8
 }
 
 export enum CookiesType {

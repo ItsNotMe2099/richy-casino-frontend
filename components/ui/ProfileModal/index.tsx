@@ -7,6 +7,7 @@ import Logo from 'components/svg/Logo'
 import Button from '../Button'
 import { ProfileModalType } from 'types/enums'
 import { useAppContext } from 'context/state'
+import classNames from 'classnames'
 
 interface IUser{
   id: string
@@ -16,7 +17,7 @@ interface IUser{
 interface Props {
   isOpen: boolean
   onRequestClose?: () => void
-  size?: 'normal' | 'large'
+  size?: 'normal' | 'large' | 'small'
   title?: string
   image?: string
   children?: any
@@ -26,7 +27,9 @@ interface Props {
   singlePage?: boolean
   user: IUser
   payment?: boolean
+  wallet?: boolean
   profile?: boolean
+  noBorder?: boolean
 }
 
 export default function ProfileModal(props: Props) {
@@ -55,6 +58,8 @@ export default function ProfileModal(props: Props) {
     switch (size) {
       case 'large':
         return styles.rootLarge
+      case 'small':
+        return styles.rootSmall
       default:
         return styles.rootNormal
     }
@@ -67,9 +72,9 @@ export default function ProfileModal(props: Props) {
             className={`${styles.root} ${getSizeClass(props.size)} ${props.className}`}
           >
             <HiddenXs>
-              <div className={styles.top}>
+              <div className={classNames(styles.top, {[styles.noBorder]: props.noBorder})}>
                 <div className={styles.left}>
-                  {!props.profile &&
+                  {(!props.profile && !props.wallet) &&
                   <div className={styles.back} onClick={() => context.showModal(ProfileModalType.profile)}>
                     <img src='/img/icons/back.svg' alt=''/>
                   </div>}
@@ -78,7 +83,7 @@ export default function ProfileModal(props: Props) {
                   </div>
                 </div>
                 <div className={styles.right}>
-                {props.payment &&
+                {(props.payment || props.wallet) &&
                 <div className={styles.id}>
                   ID {props.user.id}
                 </div>}

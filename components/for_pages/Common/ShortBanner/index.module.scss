@@ -20,7 +20,18 @@
 }
 
 .bottom{
-  
+  display: flex;
+  flex-direction: column;
+}
+
+.reverse{
+  flex-direction: column-reverse;
+}
+
+.content{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .satoshi{
@@ -46,4 +57,12 @@
   position: absolute;
   bottom: -20px;
   left: -20px;
+}
+
+.timer{
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(16.5295px);
+  padding: 4px;
+  border-radius: 6px;
+  position: relative;
 }

@@ -1,0 +1,78 @@
+@import "scss/index";
+
+.root{
+  
+}
+
+.choose{
+  font-weight: 500;
+  font-size: 14px;
+  color: $dark200;
+  text-align: left;
+}
+
+.banner{
+  margin-top: 20px;
+}
+
+.method{
+  background: #272832;
+  border-radius: 14px;
+  padding: 8px 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  height: 66px;
+  justify-content: space-between;
+  position: relative;
+  cursor: pointer;
+  &:hover{
+    @include blueGradient500NoHover;
+    .label{
+      color: #A7BFFF;
+    }
+  }
+}
+
+.icon{
+
+}
+
+.blue{
+  @include blueGradient500NoHover;
+  .label{
+    color: #A7BFFF;
+  }
+}
+
+.choice{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 9px;
+  margin-top: 16px;
+}
+
+.bonus{
+  background: $white;
+  border-radius: 0px 14px 0px 9px;
+  padding: 4px 6px;
+  font-weight: 600;
+  font-size: 9px;
+  color: #437CF8;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.label{
+  font-weight: 600;
+  font-size: 12px;
+  color: $dark200;
+}
+
+.methods{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}

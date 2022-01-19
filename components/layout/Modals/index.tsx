@@ -11,6 +11,7 @@ import PaymentHistory from 'components/Profile/PaymentHistory'
 import ProfileModal from 'components/ui/ProfileModal'
 import Profile from 'components/Profile/Profile'
 import Settings from 'components/Profile/Settings'
+import Wallet from 'components/Profile/Wallet'
 
 interface Props {}
 
@@ -51,6 +52,11 @@ export default function ModalContainer(props: Props) {
           </ProfileModal>
           <ProfileModal size='large' key={7} isOpen={context.modal === ProfileModalType.settings} {...commonSettings} title='Настройки' user={user}>
             <Settings user={user}/>
+          </ProfileModal>
+          <ProfileModal size='small' 
+          key={8} 
+          isOpen={context.modal === ProfileModalType.wallet} {...commonSettings} title='Пополнение' user={user} wallet noBorder>
+            <Wallet/>
           </ProfileModal>
         </>
       )}
