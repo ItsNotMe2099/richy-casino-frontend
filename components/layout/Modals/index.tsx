@@ -11,7 +11,8 @@ import PaymentHistory from 'components/Profile/PaymentHistory'
 import ProfileModal from 'components/ui/ProfileModal'
 import Profile from 'components/Profile/Profile'
 import Settings from 'components/Profile/Settings'
-import Wallet from 'components/Profile/Wallet'
+import Wallet from 'components/Wallet'
+import { useState } from 'react'
 
 interface Props {}
 
@@ -24,6 +25,11 @@ export default function ModalContainer(props: Props) {
   const user = {id: '6171361', balance: '$275.16', userName: 'Alex', name: 'Ерохин Иван Иванович', dateOfBirth: '15.12.1998',
   country: 185, currency: 121, phone: '8 (800) 800 88 88', email: 'pochta@mail.ru', password: 'qwerty123'
 }
+
+const [isBack, setIsBack] = useState(false)
+
+console.log('MODALS', isBack)
+
 
   return (
     <div aria-hidden="true">

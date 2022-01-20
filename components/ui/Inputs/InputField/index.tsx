@@ -19,6 +19,7 @@ interface Props extends IField {
   disabled?: boolean
   className?: string
   label?: string
+  alt?: boolean
 }
 
 export default function InputField(props: Props) {
@@ -93,6 +94,7 @@ export default function InputField(props: Props) {
             [styles.input]: true,
             [styles.inputError]: showError,
             [styles.inputFocused]: focused,
+            [styles.inputAlt]: props.alt
           })}
           placeholder={props.placeholder}
           onFocus={(e) => {
