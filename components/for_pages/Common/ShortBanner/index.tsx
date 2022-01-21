@@ -16,14 +16,14 @@ export default function ShortBanner(props: Props) {
   const expiredAt = new Date(someDate)
 
   return (
-      <div className={styles.root}>
-        <div className={styles.hero}><img src='/img/ShortBanner/hero.svg' alt=''/></div>
+      <div className={classNames(styles.root, {[styles.noPaddingLeft]: props.timer})}>
+        <div className={classNames(styles.hero, {[styles.withTimer]: props.timer})}><img src='/img/ShortBanner/hero.svg' alt=''/></div>
         <div className={styles.money}><img src='/img/ShortBanner/money.svg' alt=''/></div>
-        <div className={styles.money2}><img src='/img/ShortBanner/money2.svg' alt=''/></div>
+        <div className={classNames(styles.money2, {[styles.money2Timer]: props.timer})}><img src='/img/ShortBanner/money2.svg' alt=''/></div>
         <div className={styles.content}>
         <div className={styles.left}>
         <div className={styles.title}>
-          Бонус 30 000 ₽ + 300 FS 
+          <span className={classNames({[styles.bonusTimer]: props.timer})}>Бонус</span><br className={classNames(styles.break, {[styles.showBreak]: props.timer})}/> 30 000 ₽ + 300 FS 
         </div>
         <div className={classNames(styles.bottom, {[styles.reverse]: props.reverse})}>
           <div className={styles.satoshi}>

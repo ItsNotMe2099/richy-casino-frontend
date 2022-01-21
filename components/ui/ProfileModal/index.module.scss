@@ -158,9 +158,26 @@
   color: $white;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   @media screen and (max-width: $xs-max){
     margin-top: 18px;
   }
+}
+
+.walletBackTitle{
+  background-color: $dark700;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  padding: 0 15px;
+  padding-top: 11px;
+}
+
+.walletBackCenter{
+  background-color: $dark700;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  padding: 0 15px;
+  padding-bottom: 16px;
 }
 
 .loader {

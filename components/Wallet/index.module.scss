@@ -34,6 +34,23 @@
   }
 }
 
+.mobileMethod{
+  display: flex;
+  @include blueGradient500NoHover;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  height: 43px;
+}
+
+.fill{
+  font-size: 8px;
+  color: #A7BFFF;
+  text-align: left;
+}
+
 .icon{
 
 }
@@ -45,6 +62,16 @@
   }
 }
 
+.change{
+  font-size: 12px;
+  color: #9BB1FF;
+  cursor: pointer;
+}
+
+.iconMobile{
+  display: flex;
+}
+
 .choice{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -54,6 +81,12 @@
   padding: 0 28px;
   padding-bottom: 16px;
   margin-top: 16px;
+  @media screen and (max-width: $xs-max){
+   border: 0;
+  }
+  @media screen and (max-width: 375px){
+    display: flex;
+  }
 }
 
 .bonus{
@@ -74,11 +107,18 @@
   color: $dark200;
 }
 
+.labelMobile{
+  color: $white;
+}
+
 .methods{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
   margin-top: 16px;
+  @media screen and (max-width: 375px){
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .top{
@@ -86,6 +126,10 @@
   margin-bottom: 10px;
   .btn:first-child{
     margin-right: 10px;
+  }
+  @media screen and (max-width: $xs-max){
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 
@@ -97,9 +141,67 @@
   }
 }
 
+.btnWrap{
+  @media screen and (max-width: $xs-max){
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
 .options{
   margin-top: 16px;
   .methods{
     margin-top: 10px;
+    @media screen and (max-width: $xs-max){
+      margin-top: 16px;
+    }
+  }
+  @media screen and (max-width: $xs-max){
+    margin-top: 0;
+  }
+}
+
+.actions{
+  @media screen and (max-width: $xs-max){
+    border-bottom: 1px solid #24272F;
+    padding-bottom: 17px;
+    margin: 0 -15px;
+  }
+  @media screen and (max-width: 375px){
+    font-size: 12px;
+    img{
+      margin-right: 6px; 
+    }
+    .top{
+      .btn:last-child{
+        flex: 1;
+        padding-left: 8px;
+        padding-right: 10px;
+      }
+    }
+  }
+}
+
+.iso{
+  @media screen and (max-width: 375px){
+    flex-direction: row;
+    align-items: center;
+    height: 43px;
+    min-width: 76px;
+    justify-content: center;
+    border-radius: 8px;
+  }
+}
+
+.isoIcon{
+  margin-right: 8px;
+}
+
+.isoLabel{
+  @media screen and (max-width: 375px){
+  font-weight: 600;
+  font-size: 16px;
+  color: $white !important;
+  text-transform: uppercase;
   }
 }

@@ -97,7 +97,7 @@ export default function ProfileModal(props: Props) {
             </HiddenXs>
             <VisibleXs>
               <>
-              <div className={styles.top}>
+              {!props.wallet && <div className={styles.top}>
                 <Logo className={styles.logo}/>
                 <div className={styles.balance}>
                   <div className={styles.text}>
@@ -113,24 +113,25 @@ export default function ProfileModal(props: Props) {
                     <Close/>
                   </div>
                 )}
-              </div>
+              </div>}
               {!props.profile &&
               <div className={styles.mobileBack}>
-                  <div className={styles.wrap} onClick={() => context.showModal(ProfileModalType.profile)}>
+                  <div className={styles.wrap} onClick={props.wallet ? props.onRequestClose : () => context.showModal(ProfileModalType.profile)}>
                   <div className={styles.arrow}>
                     <img src='/img/icons/back-arrow.svg' alt=''/>
                   </div>
                   <div className={styles.toProfile}>
-                    Профиль
+                    {props.wallet ? <>Назад</> : <>Профиль</>}
                   </div>
                   </div>
               </div>}
-              <div className={styles.title}>
-                {props.title}
+              <div className={classNames(styles.title, {[styles.walletBackTitle]: props.wallet})}>
+                <div>{props.title}</div>
+                {props.wallet && <div className={styles.id}>ID {props.user.id}</div>}
               </div>
               </>
             </VisibleXs>
-            <div className={styles.center}>
+            <div className={classNames(styles.center, {[styles.walletBackCenter]: props.wallet})}>
               {props.image && !props.loading && (
                 <div className={styles.image}>
                   <img src={props.image} alt=''/>

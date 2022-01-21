@@ -13,6 +13,7 @@ import Profile from 'components/Profile/Profile'
 import Settings from 'components/Profile/Settings'
 import Wallet from 'components/Wallet'
 import { useState } from 'react'
+import styles from './index.module.scss'
 
 interface Props {}
 
@@ -27,8 +28,6 @@ export default function ModalContainer(props: Props) {
 }
 
 const [isBack, setIsBack] = useState(false)
-
-console.log('MODALS', isBack)
 
 
   return (
@@ -59,7 +58,8 @@ console.log('MODALS', isBack)
           <ProfileModal size='large' key={7} isOpen={context.modal === ProfileModalType.settings} {...commonSettings} title='Настройки' user={user}>
             <Settings user={user}/>
           </ProfileModal>
-          <ProfileModal size='small' 
+          <ProfileModal size='small'
+          className={styles.wallet} 
           key={8} 
           isOpen={context.modal === ProfileModalType.wallet} {...commonSettings} title='Пополнение' user={user} wallet noBorder>
             <Wallet/>
