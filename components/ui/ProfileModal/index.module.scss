@@ -173,11 +173,13 @@
 }
 
 .walletBackCenter{
+  @media screen and (max-width: $xs-max){
   background-color: $dark700;
   border-bottom-left-radius: 18px;
   border-bottom-right-radius: 18px;
   padding: 0 15px;
   padding-bottom: 16px;
+  }
 }
 
 .loader {

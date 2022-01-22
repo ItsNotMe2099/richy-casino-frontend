@@ -27,6 +27,10 @@ interface OptionsProps {
   array: MethodProps[]
 }
 
+interface QrCodeProps {
+  iso: string
+}
+
 export default function Wallet(props: Props) {
 
   const methods = [
@@ -61,8 +65,19 @@ export default function Wallet(props: Props) {
 
   const [method, setMethod] = useState('')
   const [currency, setCurrency] = useState('')
+  const [iso, setIso] = useState('')
 
-  const Method = ({icon, label, iso, bonus, onClick, blue, currency, mobile}: MethodProps) => {
+  const handleCurrencyAndIso = (item: MethodProps) => {
+    setCurrency(item.label)
+    if(item.iso){
+      setIso(item.iso)
+    }
+  }
+
+  // temporary for submit imitation from WalletForm
+  const [isSubmit, setIsSubmit] = useState(false)
+
+  const Method = ({icon, label, iso, bonus, onClick, blue, mobile}: MethodProps) => {
     return (
       <div className={classNames(styles.method, {[styles.blue]: blue}, {[styles.iso]: (iso || mobile)})} onClick={onClick}>
         {bonus && 
@@ -101,8 +116,8 @@ export default function Wallet(props: Props) {
             </div></>}
             {(array.length && !currency) &&
               <div className={styles.methods}>
-                {array.map((item, index) => 
-                  <Method icon={item.icon} label={item.label} key={index} onClick={() => setCurrency(item.label)}/>
+                {array && array.map((item, index) => 
+                  <Method icon={item.icon} label={item.label} key={index} onClick={() => handleCurrencyAndIso(item)}/>
                 )}
               </div>
           }
@@ -145,6 +160,27 @@ export default function Wallet(props: Props) {
       </div>
     )
   }
+
+  const QrCode = ({iso}: QrCodeProps) => {
+    return (
+      <div className={styles.qr}>
+        <div className={styles.choose}>Сумма пополнения</div>
+        <div className={styles.input}>
+          0.0557123 <span>{iso}</span>
+        </div>
+        <div className={styles.choose2}>BTC кошелек пополнения</div>
+        <div className={styles.input}>
+          18e6Ktb8GuyhfEq7r9mRfvk9xyJLzUN7XD
+        </div>
+        <div className={styles.code}>
+          <img src='/img/Wallet/qr.png' alt=''/>
+        </div>
+        <div className={styles.important}>
+          <span>ВАЖНО:</span> Отправляйте только BTC на этот депозитный адрес. Отправка любой другой валюты на этот адрес может привести к потере вашего депозита.
+        </div>
+      </div>
+    )
+  }
   
   return (
     <div className={styles.root}>
@@ -152,25 +188,29 @@ export default function Wallet(props: Props) {
       <div className={styles.choose}>
         Выберите платежный метод
       </div>}
+      {!isSubmit &&
       <div className={styles.banner}>
         <ShortBanner reverse timer/>
-      </div>
+      </div>}
       {method && 
         <Choice array={method === 'Криптовалюта' ? crypto : bank}/>
       }
-      {!method &&
+      {!method && !isSubmit &&
       <div className={styles.methods}>
         {methods.map((item, index) =>
           <Method icon={item.icon} label={item.label} key={index} bonus={item.bonus} onClick={() => setMethod(item.label)}/>
         )}
       </div>}
-      {method &&
+      {method && !isSubmit &&
         <>
-        <Options array={method === 'Криптовалюта' ? crypto : bank} method={method}/>
+        <Options array={method === 'Криптовалюта' ? crypto : method === 'Карты банка' && bank} method={method}/>
         {currency &&
-              <WalletForm/>
-            }
+          <WalletForm onSubmit={() => method === 'Криптовалюта' ? setIsSubmit(true) : null}/>
+        }
         </>
+      }
+      {isSubmit &&
+        <QrCode iso={iso}/>
       }
     </div>
   )

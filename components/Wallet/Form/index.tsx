@@ -9,7 +9,7 @@ import PromoCode from 'components/for_pages/Common/Promocode'
 
 
 interface Props {
-  
+  onSubmit?: () => void
 }
 
 export default function WalletForm(props: Props) {
@@ -18,8 +18,9 @@ export default function WalletForm(props: Props) {
     amount: '', 
   }
 
-  const handleSubmit = async () => {
-
+  const handleSubmit = /*async*/ () => {
+    //temp
+    props.onSubmit()
   }
 
   const [promoCode, setPromoCode] = useState(false)
@@ -62,7 +63,7 @@ export default function WalletForm(props: Props) {
          {promoCode &&
           <PromoCode/>
          }
-         <Button size='normal' background='payGradient500' className={styles.wallet}><img src='/img/icons/wallet.svg' alt=''/>Пополнить</Button>
+         <Button type='submit' size='normal' background='payGradient500' className={styles.wallet}><img src='/img/icons/wallet.svg' alt=''/>Пополнить</Button>
       </Form>
       )}
     </Formik>
