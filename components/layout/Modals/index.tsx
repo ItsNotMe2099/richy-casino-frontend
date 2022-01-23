@@ -12,8 +12,6 @@ import ProfileModal from 'components/ui/ProfileModal'
 import Profile from 'components/Profile/Profile'
 import Settings from 'components/Profile/Settings'
 import Wallet from 'components/Wallet'
-import { useState } from 'react'
-import styles from './index.module.scss'
 
 interface Props {}
 
@@ -26,8 +24,6 @@ export default function ModalContainer(props: Props) {
   const user = {id: '6171361', balance: '$275.16', userName: 'Alex', name: 'Ерохин Иван Иванович', dateOfBirth: '15.12.1998',
   country: 185, currency: 121, phone: '8 (800) 800 88 88', email: 'pochta@mail.ru', password: 'qwerty123'
 }
-
-const [isBack, setIsBack] = useState(false)
 
 
   return (
@@ -49,21 +45,16 @@ const [isBack, setIsBack] = useState(false)
           <Modal key={4} isOpen={context.modal === ModalType.registrationSuccess} {...commonSettings} noBorder>
             <ModalRegistrationSuccess/>
           </Modal>
-          <ProfileModal size='large' key={5} isOpen={context.modal === ProfileModalType.paymentHistory} {...commonSettings} title='История платежей' user={user} payment>
+          <ProfileModal isBack={true} size='large' key={5} isOpen={context.modal === ProfileModalType.paymentHistory} {...commonSettings} title='История платежей' user={user} payment>
             <PaymentHistory/>
           </ProfileModal>
           <ProfileModal key={6} isOpen={context.modal === ProfileModalType.profile} {...commonSettings} title='Профиль' user={user} profile>
             <Profile/>
           </ProfileModal>
-          <ProfileModal size='large' key={7} isOpen={context.modal === ProfileModalType.settings} {...commonSettings} title='Настройки' user={user}>
+          <ProfileModal isBack={true} size='large' key={7} isOpen={context.modal === ProfileModalType.settings} {...commonSettings} title='Настройки' user={user}>
             <Settings user={user}/>
           </ProfileModal>
-          <ProfileModal size='small'
-          className={styles.wallet} 
-          key={8} 
-          isOpen={context.modal === ProfileModalType.wallet} {...commonSettings} title='Пополнение' user={user} wallet noBorder>
-            <Wallet/>
-          </ProfileModal>
+          <Wallet/>
         </>
       )}
     </div>

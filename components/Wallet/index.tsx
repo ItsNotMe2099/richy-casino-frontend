@@ -1,14 +1,17 @@
 import ShortBanner from 'components/for_pages/Common/ShortBanner'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import Button from 'components/ui/Button'
 import WalletForm from './Form'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
+import ProfileModal from 'components/ui/ProfileModal'
+import { useAppContext } from 'context/state'
+import { ProfileModalType } from 'types/enums'
 
 interface Props {
-  
+  isOpen?: boolean
 }
 
 interface MethodProps {
@@ -114,7 +117,8 @@ export default function Wallet(props: Props) {
                 </Button>
               </div>
             </div></>}
-            {(array.length && !currency) &&
+            {step === 2 &&
+            (array.length && !currency) &&
               <div className={styles.methods}>
                 {array && array.map((item, index) => 
                   <Method icon={item.icon} label={item.label} key={index} onClick={() => handleCurrencyAndIso(item)}/>
@@ -181,8 +185,55 @@ export default function Wallet(props: Props) {
       </div>
     )
   }
+
+  const [step, setStep] = useState(1)
+
+  const context = useAppContext()
+  const handleClose = () => {
+    setStep(1)
+    setCurrency('')
+    setMethod('')
+    context.hideModal()
+  }
+  const commonSettings = {
+    onRequestClose: handleClose,
+  }
+
+  useEffect(() => {
+    if(method){
+      setStep(2)
+    }
+    if(currency){
+      setStep(3)
+    }
+  }, [currency, method])
+
+  const user = {id: '6171361', balance: '$275.16', userName: 'Alex', name: 'Ерохин Иван Иванович', dateOfBirth: '15.12.1998',
+  country: 185, currency: 121, phone: '8 (800) 800 88 88', email: 'pochta@mail.ru', password: 'qwerty123'
+}
+
+const handleBack = () => {
+  if(step === 2){
+    setStep(1)
+    setMethod('')
+  }
+  if(step === 3){
+    setStep(2)
+    setCurrency('')
+    if(isSubmit){
+      setIsSubmit(false)
+    }
+  }
+}
   
   return (
+    <ProfileModal size='small'
+          key={8} 
+          isOpen={context.modal === ProfileModalType.wallet} {...commonSettings} title='Пополнение' user={user} wallet noBorder
+          isBack={step > 1 ? true : false}
+          step={step}
+          setStep={() => step === 2  ? handleBack() : step === 3 ? handleBack() : null}
+          >
     <div className={styles.root}>
       {!method &&
       <div className={styles.choose}>
@@ -195,7 +246,7 @@ export default function Wallet(props: Props) {
       {method && 
         <Choice array={method === 'Криптовалюта' ? crypto : bank}/>
       }
-      {!method && !isSubmit &&
+      {!method && !isSubmit && step === 1 &&
       <div className={styles.methods}>
         {methods.map((item, index) =>
           <Method icon={item.icon} label={item.label} key={index} bonus={item.bonus} onClick={() => setMethod(item.label)}/>
@@ -209,9 +260,10 @@ export default function Wallet(props: Props) {
         }
         </>
       }
-      {isSubmit &&
+      {isSubmit && step === 3 &&
         <QrCode iso={iso}/>
       }
     </div>
+    </ProfileModal>
   )
 }

@@ -30,6 +30,9 @@ interface Props {
   wallet?: boolean
   profile?: boolean
   noBorder?: boolean
+  isBack?: boolean
+  step?: number
+  setStep?: () => void
 }
 
 export default function ProfileModal(props: Props) {
@@ -65,6 +68,7 @@ export default function ProfileModal(props: Props) {
     }
   }
 
+
     return (
       <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
         <div className={styles.frame}>
@@ -74,8 +78,9 @@ export default function ProfileModal(props: Props) {
             <HiddenXs>
               <div className={classNames(styles.top, {[styles.noBorder]: props.noBorder})}>
                 <div className={styles.left}>
-                  {(!props.profile && !props.wallet) &&
-                  <div className={styles.back} onClick={() => context.showModal(ProfileModalType.profile)}>
+                  {(!props.profile && props.isBack) &&
+                  <div className={styles.back} 
+                  onClick={() => props.wallet ? props.setStep() : context.showModal(ProfileModalType.profile)}>
                     <img src='/img/icons/back.svg' alt=''/>
                   </div>}
                   <div className={styles.title}>
