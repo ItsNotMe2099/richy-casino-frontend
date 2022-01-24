@@ -32,6 +32,7 @@ interface OptionsProps {
 
 interface QrCodeProps {
   iso: string
+  walletNumber: string
 }
 
 export default function Wallet(props: Props) {
@@ -165,16 +166,19 @@ export default function Wallet(props: Props) {
     )
   }
 
-  const QrCode = ({iso}: QrCodeProps) => {
+  const QrCode = ({iso, walletNumber}: QrCodeProps) => {
     return (
       <div className={styles.qr}>
         <div className={styles.choose}>Сумма пополнения</div>
         <div className={styles.input}>
           0.0557123 <span>{iso}</span>
         </div>
-        <div className={styles.choose2}>BTC кошелек пополнения</div>
-        <div className={styles.input}>
-          18e6Ktb8GuyhfEq7r9mRfvk9xyJLzUN7XD
+        <div className={styles.choose2}><span>{iso}</span> кошелек пополнения</div>
+        <div className={styles.input2}>
+          <div className={styles.forFill}>{walletNumber}</div>
+          <div className={styles.copy} onClick={() => {navigator.clipboard.writeText(walletNumber)}}>
+            <img src='/img/icons/copy.svg' alt=''/>
+          </div>
         </div>
         <div className={styles.code}>
           <img src='/img/Wallet/qr.png' alt=''/>
@@ -261,7 +265,7 @@ const handleBack = () => {
         </>
       }
       {isSubmit && step === 3 &&
-        <QrCode iso={iso}/>
+        <QrCode iso={iso} walletNumber='18e6Ktb8GuyhfEq7r9mRfvk9xyJLzUN7XD'/>
       }
     </div>
     </ProfileModal>

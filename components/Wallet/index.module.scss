@@ -230,11 +230,25 @@
   font-size: 16px;
   display: flex;
   margin-top: 14px;
+  padding-right: 15px;
   span{
     color: #2f56fd;
     text-transform: uppercase;
     margin-left: 5px;
   }
+}
+
+.input2{
+  padding: 14px 0;
+  padding-left: 20px;
+  background: $dark600;
+  border-radius: 9px;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  margin-top: 14px;
+  padding-right: 15px;
+  justify-content: space-between;
 }
 
 .code{
@@ -252,4 +266,19 @@
     color: #2f56fd;
     text-transform: uppercase;
   }
+}
+
+.choose2{
+  span{
+    text-transform: uppercase;
+  }
+}
+
+.forFill{
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copy{
+  cursor: pointer;
 }

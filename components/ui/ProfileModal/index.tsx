@@ -121,7 +121,10 @@ export default function ProfileModal(props: Props) {
               </div>}
               {!props.profile &&
               <div className={styles.mobileBack}>
-                  <div className={styles.wrap} onClick={props.wallet ? props.onRequestClose : () => context.showModal(ProfileModalType.profile)}>
+                  <div className={styles.wrap} 
+                  onClick={(props.wallet && props.step === 1) ? props.onRequestClose :
+                  (props.wallet && props.step > 1) ? () => props.setStep() :
+                  () => context.showModal(ProfileModalType.profile)}>
                   <div className={styles.arrow}>
                     <img src='/img/icons/back-arrow.svg' alt=''/>
                   </div>
