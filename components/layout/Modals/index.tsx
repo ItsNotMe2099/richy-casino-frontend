@@ -12,6 +12,8 @@ import ProfileModal from 'components/ui/ProfileModal'
 import Profile from 'components/Profile/Profile'
 import Settings from 'components/Profile/Settings'
 import Wallet from 'components/Wallet'
+import Fortune from 'components/Fortune'
+import styles from './index.module.scss'
 
 interface Props {}
 
@@ -55,6 +57,9 @@ export default function ModalContainer(props: Props) {
             <Settings user={user}/>
           </ProfileModal>
           <Wallet/>
+          <Modal fortune key={9} isOpen={context.modal === ModalType.fortune} {...commonSettings} noBorder size='fortune'>
+            <Fortune/>
+          </Modal>
         </>
       )}
     </div>

@@ -21,6 +21,26 @@
     display: flex;
   }
 }
+
+.fortune{
+  background: url('../../../public/img/Fortune/fortune.svg') no-repeat;
+  background-position: center center;
+  background-size: cover;
+  position: relative;
+  border-radius: 30px;
+  padding: 14px 14px 43px 14px;
+  z-index: 5;
+  margin:  auto;
+  @media screen and (max-width: 430px){
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    padding-top: 14px;
+    padding-right: 18px;
+    padding-left: 18px;
+    padding-bottom: 43px;
+  }
+}
+
 .close {
   cursor: pointer;
   background: $dark600;
@@ -71,10 +91,20 @@
 
 .rootNormal{
   width: 428px;
+  overflow: hidden;
   @media screen and (max-width: 430px){
     width: 100%;
   }
 }
+
+.rootFortune{
+  width: 452px;
+  @media screen and (max-width: 500px){
+    width: 100%;
+  }
+}
+
+
 .rootLarge{
   width: 664px;
 }

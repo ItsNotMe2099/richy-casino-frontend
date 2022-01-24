@@ -1,0 +1,76 @@
+@import "scss/index";
+
+.root{
+  
+}
+
+.wheel{
+  position: relative;
+}
+
+.everyday{
+  width: 100%;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 36px 92px;
+  background: rgba(37, 37, 37, 0.46);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(32px);
+  border-radius: 12px;
+  display: flex;
+  div{
+    flex-shrink: 0;
+  }
+}
+
+.right{
+  position: absolute;
+  bottom: 20px;
+  right: 0;
+}
+
+.left{
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+}
+
+.spin{
+  padding: 27px 121px;
+  margin-top: 34px;
+  font-weight: bold;
+  font-size: 20px;
+  color: $white;
+  text-transform: uppercase;
+}
+
+.wrapper{
+  padding: 0 16px;
+  position: absolute;
+  bottom: 0;
+}
+
+.next{
+  background: rgba(246, 15, 98, 0.05);
+  border: 1px solid #F60F62;
+  box-shadow: 0px 4px 27px rgba(243, 0, 88, 0.1);
+  border-radius: 12px;
+  padding: 12px 108px;
+  margin-top: 34px;
+}
+
+.free{
+  font-size: 14px;
+  color: $white;
+}
+
+.timer{
+  display: flex;
+  justify-content: center;
+  margin-top: 9px;
+  letter-spacing: 0.335em;
+  color: #F5075D;
+  font-weight: bold;
+  font-size: 30px;
+}

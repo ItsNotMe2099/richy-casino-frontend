@@ -10,7 +10,7 @@ import classNames from 'classnames'
 interface Props {
   isOpen: boolean
   onRequestClose?: () => void
-  size?: 'normal' | 'large'
+  size?: 'normal' | 'large' | 'fortune'
   title?: string
   image?: string
   children?: any
@@ -20,6 +20,7 @@ interface Props {
   center?: boolean
   singlePage?: boolean
   noBorder?: boolean
+  fortune?: boolean
 }
 
 export default function Modal(props: Props) {
@@ -48,6 +49,8 @@ export default function Modal(props: Props) {
     switch (size) {
       case 'large':
         return styles.rootLarge
+      case 'fortune':
+        return styles.rootFortune
       default:
         return styles.rootNormal
     }
@@ -58,8 +61,8 @@ export default function Modal(props: Props) {
       <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
         <div className={styles.frame}>
           <div
-            className={`${styles.root} ${getSizeClass(props.size)} ${props.className} ${
-              props.center && styles.rootFlex
+            className={`${!props.fortune && styles.root} ${getSizeClass(props.size)} ${props.className} ${
+              props.center && styles.rootFlex} ${props.fortune && styles.fortune}
             }`}
           >
             <HiddenXs>

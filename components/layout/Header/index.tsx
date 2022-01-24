@@ -74,7 +74,7 @@ export default function Header(props: Props) {
             </div>
             <div className={styles.textBitcoin}>Free Bitcoin</div>
           </div>
-          <div className={styles.bonus}>
+          <div className={styles.bonus} onClick={() => context.showModal(ModalType.fortune)}>
             <div className={styles.wheel}>
               <img src='/img/layout/top/wheel.svg' alt=''/>
             </div>

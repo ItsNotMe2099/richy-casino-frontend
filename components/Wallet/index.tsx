@@ -197,6 +197,7 @@ export default function Wallet(props: Props) {
     setStep(1)
     setCurrency('')
     setMethod('')
+    setIsSubmit(false)
     context.hideModal()
   }
   const commonSettings = {

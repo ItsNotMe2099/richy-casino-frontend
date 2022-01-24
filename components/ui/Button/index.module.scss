@@ -70,6 +70,10 @@
     background-color: $white;
 }
 
+.pink{
+    @include fortuneGradient500;
+}
+
 .payGradient500{
    @include payGradient500;
 }

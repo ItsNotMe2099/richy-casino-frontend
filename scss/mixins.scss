@@ -100,6 +100,15 @@
   background: linear-gradient(100.47deg, #323340 -32.54%, #272832 102.28%);
 }
 
+@mixin fortuneGradient500 {
+  background: linear-gradient(280.99deg, #F30058 18.02%, #FF5B96 126.63%);
+  box-shadow: 0px 4px 27px rgba(243, 0, 88, 0.1);
+  &:hover{
+    background: linear-gradient(280.99deg, #FF055F 18.02%, #FF055F 18.02%, #FF055F 18.02%, #FF055F 18.03%, #FF2171 126.63%);
+    box-shadow: 0px 4px 27px rgba(243, 0, 88, 0.1);
+  }
+}
+
 @mixin componentRoot{
     margin-top: 20px;
     padding: 5px 28px 28px 10px;
