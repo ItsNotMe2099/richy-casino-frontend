@@ -53,6 +53,7 @@ export default function Header(props: Props) {
     <div className={styles.root} id='top'>
       <div onClick={() => context.showModal(ProfileModalType.profile)}>PROFILE</div>
       <div onClick={() => context.showModal(ProfileModalType.wallet)}>WALLET</div>
+      <div onClick={() => context.showModal(ModalType.bonus)}>BONUS</div>
       <div className={styles.top}>
       <div className={styles.left}>
         <div className={styles.apps}>

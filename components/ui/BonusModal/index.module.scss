@@ -143,22 +143,6 @@
   flex-direction: column;
   text-align: center;
 }
-
-.frame{
-  overflow-y: scroll;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  z-index: 3;
-  @media screen and (max-width: 430px){
-    padding-bottom: 0;
-  }
-}
 .overlay{
   position: absolute;
   left: 0;
@@ -183,21 +167,20 @@
   align-items: stretch;
   flex-direction: column;
   text-align: center;
-  padding: 0px 18px 18px 18px;
-}
-
-.centerSheetFortune{
   padding: 0;
 }
 
 .sheet{
   :global .react-modal-sheet-container {
-    height: calc(65% - env(safe-area-inset-top) - 34px) !important;
-    background: url('../../../public/img/Fortune/fortune.svg') no-repeat;
-    background-position: center center;
-    background-size: cover;
-  }
-  :global .react-modal-sheet-content {
-    overflow-x: hidden !important;
+    height: calc(29% - env(safe-area-inset-top) - 34px) !important;
+    background: linear-gradient(46.89deg, #4A16E4 2.09%, #933288 11.47%, #C1444E 32.44%, #FF5C00 108.03%);
+    :global .react-modal-sheet-content {
+      margin-top: -34px;
+    }
+    :global .react-modal-sheet-drag-indicator {
+      background-color: $white !important;
+      opacity: 0.2;
+      width: 17px !important;
+    }
   }
 }

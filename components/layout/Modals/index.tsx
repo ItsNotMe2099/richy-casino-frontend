@@ -13,7 +13,7 @@ import Profile from 'components/Profile/Profile'
 import Settings from 'components/Profile/Settings'
 import Wallet from 'components/Wallet'
 import Fortune from 'components/Fortune'
-import styles from './index.module.scss'
+import BonusModal from 'components/ui/BonusModal'
 
 interface Props {}
 
@@ -60,6 +60,7 @@ export default function ModalContainer(props: Props) {
           <Modal fortune key={9} isOpen={context.modal === ModalType.fortune} {...commonSettings} noBorder size='fortune'>
             <Fortune/>
           </Modal>
+          <BonusModal isOpen={context.modal === ModalType.bonus} {...commonSettings}/>
         </>
       )}
     </div>

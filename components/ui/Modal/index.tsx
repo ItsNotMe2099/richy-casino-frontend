@@ -109,7 +109,7 @@ export default function Modal(props: Props) {
     // @ts-ignore
     return (
     <Sheet isOpen={isOpen} onClose={onRequestClose}    >
-      <div className={styles.sheet}>
+      <div className={classNames({[styles.sheet]: props.fortune})}>
       <Sheet.Container onViewportBoxUpdate>
         <Sheet.Header onViewportBoxUpdate />
         {props.onRequestClose && (

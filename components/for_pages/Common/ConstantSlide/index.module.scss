@@ -17,6 +17,11 @@
   }
 }
 
+.noBack{
+  background: transparent;
+  border-radius: 0;
+}
+
 .title{
   font-weight: bold;
   font-size: 26px;
@@ -51,6 +56,7 @@
   margin-top: 13px;
   position: relative;
   z-index: 3;
+  display: flex;
   button{
     @include textStyle14Bold;
     color: $white;
@@ -87,11 +93,12 @@
 
 .hero{
   position: absolute;
-  top: 0;
+  top: -10%;
   right: 10%;
   z-index: 1;
   img{
     width: 100%;
+    max-width: 200px;
     @media screen and (max-width: 800px){
       width: 80%;
     }
@@ -102,6 +109,14 @@
   @media screen and (max-width: $xs-max){
     right: -5%;
   }
+}
+
+.sheet{
+  top: 0;
+}
+
+.textLeft{
+  text-align: left;
 }
 
 .money{
@@ -129,4 +144,16 @@
   @media screen and (max-width: 375px){
     right: -40%;
   }
+}
+
+.close{
+  position: absolute;
+  cursor: pointer;
+  right: 15px;
+  display: flex;
+  z-index: 11;
+}
+
+.closeSheet{
+  top: 15px;
 }

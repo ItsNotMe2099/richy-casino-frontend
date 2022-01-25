@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import classNames from 'classnames'
 import Button from 'components/ui/Button'
 import { useEffect, useState } from 'react'
 import HiddenXs from 'components/ui/HiddenXS'

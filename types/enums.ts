@@ -4,7 +4,8 @@ export enum ModalType {
   passwordReset,
   passwordRecovery,
   registrationSuccess,
-  fortune = 9
+  fortune = 9,
+  bonus = 10
 }
 
 export enum ProfileModalType {
