@@ -2,6 +2,8 @@ import styles from './index.module.scss'
 import classNames from 'classnames'
 import Button from 'components/ui/Button'
 import { useEffect, useState } from 'react'
+import HiddenXs from 'components/ui/HiddenXS'
+import VisibleXs from 'components/ui/VisibleXS'
 
 interface Props {
   
@@ -82,11 +84,13 @@ const getOutput = (index: number) => {
     <div className={styles.root}>
       <div className={styles.wheel}>
         <img src='/img/Fortune/wheel.svg' alt=''/>
+        <HiddenXs>
         <div className={styles.wrapper}>
           <div className={styles.everyday}>
             <div>lucky spin everyday</div>
           </div>
         </div>
+        </HiddenXs>
         <div className={styles.right}>
           <img src='/img/Fortune/coins1.svg' alt=''/>
         </div>
@@ -94,7 +98,15 @@ const getOutput = (index: number) => {
           <img src='/img/Fortune/coins2.svg' alt=''/>
         </div>
       </div>
-      {!currentDate && <Button onClick={handleClick} className={styles.spin} background='pink'>Spin the wheel</Button>}
+      <div className={styles.mobile}>
+      <VisibleXs>
+        <div className={styles.wrapperMobile}>
+          <div className={styles.everydayMobile}>
+            <div>lucky spin everyday</div>
+          </div>
+        </div>
+      </VisibleXs>
+      {!currentDate && <div className={styles.btn}><Button onClick={handleClick} className={styles.spin} background='pink'>Spin the wheel</Button></div>}
       {currentDate &&
       <div className={styles.next}>
         <div className={styles.free}>
@@ -114,6 +126,7 @@ const getOutput = (index: number) => {
           </div>
         </div>
       </div>}
+      </div>
     </div>
   )
 }

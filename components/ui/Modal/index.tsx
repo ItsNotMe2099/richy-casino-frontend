@@ -109,7 +109,7 @@ export default function Modal(props: Props) {
     // @ts-ignore
     return (
     <Sheet isOpen={isOpen} onClose={onRequestClose}    >
-
+      <div className={styles.sheet}>
       <Sheet.Container onViewportBoxUpdate>
         <Sheet.Header onViewportBoxUpdate />
         {props.onRequestClose && (
@@ -117,16 +117,18 @@ export default function Modal(props: Props) {
             <Close/>
           </div>
         )}
-        <Sheet.Content onViewportBoxUpdate>{isOpen && <div className={styles.centerSheet}>
+        <Sheet.Content onViewportBoxUpdate>{isOpen && <div className={classNames(styles.centerSheet, {[styles.centerSheetFortune]: props.fortune})}>
           <div className={styles.title}>
             {props.title}
           </div>
 
           {props.children}</div>}</Sheet.Content>
       </Sheet.Container>
+      </div>
 
       <Sheet.Backdrop onViewportBoxUpdate/>
-    </Sheet>)
+    </Sheet>
+    )
   }
 }
 Modal.defaultProps = {

@@ -185,3 +185,18 @@
   text-align: center;
   padding: 0px 18px 18px 18px;
 }
+
+.centerSheetFortune{
+  padding: 0;
+}
+
+.sheet{
+  :global .react-modal-sheet-container {
+    background: url('../../../public/img/Fortune/fortune.svg') no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+  :global .react-modal-sheet-content {
+    overflow-x: hidden !important;
+  }
+}
