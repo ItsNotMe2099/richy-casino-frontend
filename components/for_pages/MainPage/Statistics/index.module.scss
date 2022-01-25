@@ -98,10 +98,10 @@
         padding-bottom: 29px;
         @media screen and (max-width: $xs-max){
             padding-bottom: 11px;
-            font-size: 10px;
+            font-size: 11px;
         }
         @media screen and (max-width: 400px){
-            font-size: 9px;
+            font-size: 10px;
         }
     }
     .cell:first-child{
@@ -176,11 +176,11 @@
     white-space: nowrap;
     text-overflow: unset;
     @media screen and (max-width: $xs-max){
-        font-size: 10px;
+        font-size: 11px;
         margin-left: 21px;
     }
     @media screen and (max-width: 400px){
-        font-size: 9px;
+        font-size: 10px;;
         max-width: 35px;
     }
 }
@@ -190,10 +190,10 @@
     font-size: 14px;
     color: #FFFFFF;
     @media screen and (max-width: $xs-max){
-        font-size: 10px;
+        font-size: 11px;
     }
     @media screen and (max-width: 400px){
-        font-size: 9px;
+        font-size: 10px;
     }
 }
 
@@ -208,11 +208,11 @@
         max-width: 100px;
     }
     @media screen and (max-width: $xs-max){
-        font-size: 10px;
+        font-size: 11px;
         max-width: 50px;
     }
     @media screen and (max-width: 400px){
-        font-size: 9px;
+        font-size: 10px;
     }
 }
 
@@ -227,10 +227,10 @@
     justify-content: center;
     width: 30%;
     @media screen and (max-width: $xs-max){
-        font-size: 10px;
+        font-size: 11px;
     }
     @media screen and (max-width: 400px){
-        font-size: 9px;
+        font-size: 10px;
     }
 }
 
@@ -251,10 +251,10 @@
     font-size: 14px;
     color: $pay500;
     @media screen and (max-width: $xs-max){
-        font-size: 10px;
+        font-size: 11px;
     }
     @media screen and (max-width: 400px){
-        font-size: 9px;
+        font-size: 10px;
     }
 }
 

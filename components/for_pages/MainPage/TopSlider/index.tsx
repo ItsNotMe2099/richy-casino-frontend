@@ -24,6 +24,15 @@ export default function TopSlider(props: Props) {
     variableWidth: false,
     adaptiveHeight: false,
     arrows: false,
+    dotsClass: `${styles.dots}`,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          dots: true
+        }
+      },
+    ]
   }
 
   const items =[

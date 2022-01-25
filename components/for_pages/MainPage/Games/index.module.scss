@@ -89,9 +89,16 @@
 
 .slider{
   margin-top: 28px;
+  @media screen and (max-width: $xs-max){
+    margin-top: 15px;
+  }
   :global .slick-list{
     .slick-track{
       .slick-slide{
+        @media screen and (max-width: $xs-max){
+          width: 78px !important;
+          margin-right: 8px;
+        }
         div{
           display: flex;
           justify-content: center;
