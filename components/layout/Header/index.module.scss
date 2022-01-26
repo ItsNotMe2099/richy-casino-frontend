@@ -205,3 +205,70 @@
 .scrolled{
   z-index: 100;
 }
+
+.userBtns{
+  display: flex;
+  height: 41px;
+  margin-right: 8px;
+  @media screen and (max-width: $xs-max){
+    height: 30px;
+    margin-right: 0;
+  }
+}
+
+.userBonuses{
+  border-radius: 8px;
+  background-color: $dark700;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px 15px;
+  padding: 5px 12px;
+  margin-right: 8px;
+}
+
+.userBonus{
+  display: flex;
+  align-items: center;
+}
+
+.icon{
+  display: flex;
+  margin-right: 7px;
+}
+
+.amount{
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.wallet{
+  padding: 12px 15px;
+  @media screen and (max-width: $xs-max){
+    padding: 9px 4px;
+    font-weight: 600;
+    font-size: 11px;
+    margin-right: 6px;
+  }
+  img{
+    width: 16px;
+    margin-right: 12px;
+  }
+  color: $white;
+  font-weight: 600;
+  font-size: 14px;
+  width: 100%;
+}
+
+.accMenu{
+  margin-right: 8px;
+  @media screen and (max-width: $xs-max){
+    margin-right: 6px;
+  }
+}
+
+.proMenu{
+  margin-right: 8px;
+  @media screen and (max-width: $xs-max){
+    margin-right: 0;
+  }
+}

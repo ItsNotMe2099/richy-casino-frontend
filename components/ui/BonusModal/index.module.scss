@@ -172,7 +172,7 @@
 
 .sheet{
   :global .react-modal-sheet-container {
-    height: calc(29% - env(safe-area-inset-top) - 34px) !important;
+    height: calc(40% - env(safe-area-inset-top) - 34px) !important;
     background: linear-gradient(46.89deg, #4A16E4 2.09%, #933288 11.47%, #C1444E 32.44%, #FF5C00 108.03%);
     :global .react-modal-sheet-content {
       margin-top: -34px;

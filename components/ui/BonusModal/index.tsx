@@ -43,17 +43,6 @@ export default function BonusModal(props: Props) {
     },
   }
 
-  const getSizeClass = (size) => {
-    switch (size) {
-      case 'large':
-        return styles.rootLarge
-      case 'fortune':
-        return styles.rootFortune
-      default:
-        return styles.rootNormal
-    }
-  }
-
   if(appContext.isDesktop) {
     return (
       <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>

@@ -12,6 +12,7 @@ import GamesList from 'components/for_pages/MainPage/GamesList'
 import Tournament from 'components/for_pages/MainPage/Tournament'
 import TopSlider from 'components/for_pages/MainPage/TopSlider'
 import BuyCrypto from 'components/for_pages/MainPage/BuyCrypto'
+import ConstantSlide from 'components/for_pages/Common/ConstantSlide'
 
 const casinos = [
   {image: '/img/GamesList/hotline.png', label: 'hotline', provider: 'provider1', category: 'category1'},
@@ -43,6 +44,9 @@ export default function IndexPage() {
   return (
     <div className={styles.root}>
         <Layout>
+          <div className={styles.longDown}>
+            <ConstantSlide longDown/>
+          </div>
           <TopSlider/>
           <Contents/>
           <Games/>

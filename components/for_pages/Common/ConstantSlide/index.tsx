@@ -10,6 +10,7 @@ interface Props {
   onRequestClose?: () => void
   noBack?: boolean
   sheet?: boolean
+  longDown?: boolean
 }
 
 export default function ConstantSlide(props: Props) {

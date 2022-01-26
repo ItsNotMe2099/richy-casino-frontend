@@ -11,6 +11,7 @@ import Logo from 'components/svg/Logo'
 import LangSelect from 'components/for_pages/Common/LangSelect'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import SupportButton from 'components/for_pages/Common/SupportButton'
 
 
 interface Props {
@@ -111,9 +112,7 @@ export default function Footer(props: Props) {
               <a href={`mailto:${CONTACTS.email}`}>{CONTACTS.email}</a>
             </div>
             <div className={styles.btns}>
-              <div className={styles.support}>
-                <Button size='normal' background='dark700'><img src='/img/layout/footer/support.svg' alt=''/>Тех. поддержка</Button>
-              </div>
+              <SupportButton className={styles.support}/>
               <div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/apple.svg' alt=''/></Button></div>
               <Button size='extraSmall' background='dark700'><img src='/img/layout/top/android.svg' alt=''/></Button>
             </div>
@@ -160,9 +159,7 @@ export default function Footer(props: Props) {
             </div>
           </div>
             <div className={styles.supportMobile}>
-              <div className={styles.support}>
-                <Button size='normal' background='dark700'><img src='/img/layout/footer/support.svg' alt=''/>Тех. поддержка</Button>
-              </div>
+              <SupportButton className={styles.support}/>
               <div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/apple.svg' alt=''/></Button></div>
               <Button size='extraSmall' background='dark700'><img src='/img/layout/top/android.svg' alt=''/></Button>
             </div>
