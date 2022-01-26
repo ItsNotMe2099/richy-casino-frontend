@@ -6,6 +6,9 @@ import InputField from 'components/ui/Inputs/InputField'
 import Validator from 'utils/validator'
 import {ModalType} from 'types/enums'
 import {useAppContext} from 'context/state'
+import {useState} from 'react'
+import AuthRepository from 'data/repositories/AuthRepository'
+import {formatPhone} from 'utils/formatters'
 
 interface Props {
   isOpen?: boolean
@@ -15,10 +18,28 @@ interface Props {
 
 export default function ModalPasswordReset(props: Props) {
   const context = useAppContext()
+  const modalProps = context.modalProps
+  const login = modalProps.login
+  const [error, setError] = useState<string | null>(null)
   const handleSubmit = async (data) => {
+    try {
+      setError(null)
+      const res = await AuthRepository.resetPassword({login: data.login, code: data.code, password: data.password})
+      console.log('PassRes', res)
+      const accessToken = res.token
 
+      if (!accessToken) {
+        return
+      }
+
+      context.setToken(accessToken)
+      context.updateUserFromCookies()
+      context.hideModal()
+
+    } catch (e) {
+      setError(e.message)
+    }
   }
-
   const initialValues = {
     code: '',
     password: '',
@@ -26,7 +47,7 @@ export default function ModalPasswordReset(props: Props) {
   }
 
 
-
+  const isEmail =  login?.includes('@')
   const { t } = useTranslation('common')
 
 
@@ -35,13 +56,13 @@ export default function ModalPasswordReset(props: Props) {
         {({values}) => (
         <Form className={styles.form}>
           <div className={styles.description}>
-            Введите ниже код, отправленный на указанный
-            Вами Email ({context.modalProps?.login})
+            Введите ниже код, отправленный на указанный<br/>
+            Вами {isEmail ? 'Email' : 'Тел.'} <span className={styles.login}>{isEmail ? login : formatPhone(login)}</span>
           </div>
           <div className={styles.inputs}>
             <InputField
               name={'code'}
-              placeholder={'Код из Email'} validate={Validator.required}/>
+              placeholder={`Код из ${isEmail ? 'Email' : 'СМС'}`} validate={Validator.required}/>
             <InputField
               name={'password'}
               type={'password'}
@@ -51,7 +72,7 @@ export default function ModalPasswordReset(props: Props) {
               name={'passwordConfirm'}
               type={'password'}
               obscure={true}
-              placeholder={'Пароль'}
+              placeholder={'Повторите пароль'}
               validate={Validator.combine([Validator.required, Validator.passwordsMustMatch(values)])}
             />
           </div>

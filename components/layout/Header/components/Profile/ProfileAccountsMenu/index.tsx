@@ -55,7 +55,7 @@ export default function ProfileAccountsMenu(props: Props){
            <div className={styles.iso2}>{item.iso}</div>
            </div>
            <div className={styles.rightSide}>
-             {item.type === 1 ? 
+             {item.type === 1 ?
              <>
              <div className={styles.amount2}>{item.usdt} <span>USDT</span></div>
              <div className={styles.dg}>{item.dg} <span>DG</span></div>

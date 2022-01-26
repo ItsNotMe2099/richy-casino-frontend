@@ -7,7 +7,7 @@ import Link from 'next/link'
 import LangSelect from 'components/for_pages/Common/LangSelect'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
-import { ModalType, ProfileModalType } from 'types/enums'
+import { ModalType } from 'types/enums'
 import { useAppContext } from 'context/state'
 //import cookie from 'js-cookie'
 import ProfileAccountsMenu from './components/Profile/ProfileAccountsMenu'
@@ -73,16 +73,6 @@ export default function Header(props: Props) {
     { label: 'Some Option', link: '#' },
   ]
 
-  const profileOptions = [
-    {label: 'Профиль'},
-    {label: 'Пополнить счет'},
-    {label: 'Вывод средств'},
-    {label: 'История ставок'},
-    {label: 'Реферальная программа'},
-    {label: 'Настройки'},
-    {label: 'Кошелек'},
-    {label: 'Выйти'},
-  ]
 
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -114,9 +104,6 @@ export default function Header(props: Props) {
   return (
     <>
     <div className={styles.root} id='top'>
-      <div onClick={() => context.showModal(ProfileModalType.profile)}>PROFILE</div>
-      <div onClick={() => context.showModal(ProfileModalType.wallet)}>WALLET</div>
-      <div onClick={() => context.showModal(ModalType.bonus)}>BONUS</div>
       <div className={styles.top}>
       <div className={styles.left}>
         <div className={styles.apps}>
@@ -180,12 +167,12 @@ export default function Header(props: Props) {
           className={styles.accMenu}
           />
           <HiddenXs>
-            <ProfileMenu options={profileOptions} className={styles.accMenu}/>
+            <ProfileMenu className={styles.accMenu}/>
           </HiddenXs>
           <Button size='normal' background='payGradient500' className={styles.wallet}>
             <HiddenXs><img src='/img/icons/wallet.svg' alt=''/></HiddenXs>Пополнить</Button>
           <VisibleXs>
-            <ProfileMenu options={profileOptions} className={styles.proMenu}/>
+            <ProfileMenu className={styles.proMenu}/>
           </VisibleXs>
         </div>
         }

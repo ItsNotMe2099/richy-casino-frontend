@@ -1,7 +1,5 @@
 import { createContext, useContext, useState } from 'react'
 import { useAppContext } from 'context/state'
-import { CookiesType} from 'types/enums'
-import Cookies from 'js-cookie'
 import { LoginFormData } from 'types/interfaces'
 import AuthRepository from 'data/repositories/AuthRepository'
 
@@ -47,7 +45,7 @@ export function AuthWrapper(props: Props) {
         return
       }
 
-      Cookies.set(CookiesType.accessToken, accessToken, {expires: 365})
+      appContext.setToken(accessToken)
       appContext.updateUserFromCookies()
     }catch (e){
       setError(e.message)

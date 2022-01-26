@@ -65,4 +65,37 @@ export default class AuthRepository {
     return res.data?.data
   }
 
+  static async forgotPassword(login): Promise<any> {
+    const res = await request({
+      method: 'post',
+      url: '/api/auth/forgotPassword',
+      data: {
+        authInput: login,
+      },
+    })
+    console.log('ress', res)
+    if (res?.err) {
+      throw res.err
+    }
+    return res.data?.data
+  }
+
+  static async resetPassword({login, password, code}): Promise<any> {
+    const res = await request({
+      method: 'post',
+      url: '/api/auth/resetPassword',
+      data: {
+        authInput: login,
+        password,
+        password_confirmation: password,
+        code
+      },
+    })
+    console.log('ress', res)
+    if (res?.err) {
+      throw res.err
+    }
+    return res.data?.data
+  }
+
 }

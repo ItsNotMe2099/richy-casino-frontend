@@ -6,6 +6,9 @@ import InputField from 'components/ui/Inputs/InputField'
 import Validator from 'utils/validator'
 import {ModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
+import {useState} from 'react'
+import AuthRepository from 'data/repositories/AuthRepository'
+import FormError from 'components/ui/Form/FormError'
 
 interface Props {
   isOpen?: boolean
@@ -15,9 +18,16 @@ interface Props {
 
 export default function ModalPasswordRecovery(props: Props) {
   const context = useAppContext()
-
+  const [error, setError] = useState<string | null>(null)
   const handleSubmit = async (data) => {
-    context.showModal(ModalType.passwordReset)
+    try {
+      setError(null)
+      const res = await AuthRepository.forgotPassword(data.login)
+      console.log('PassRes', res)
+      context.showModal(ModalType.passwordReset, {login: data.login})
+    } catch (e) {
+      setError(e.message)
+    }
   }
 
   const initialValues = {
@@ -41,6 +51,7 @@ export default function ModalPasswordRecovery(props: Props) {
               name={'login'}
               placeholder={'Email / Телефон'} validate={Validator.required}/>
                 </div>
+          <FormError error={error}/>
           <div className={styles.buttons}>
             <Button type='button' className={styles.button} size='submit' background='dark600' onClick={() => context.showModal(ModalType.login)}>Отменить</Button>
             <div className={styles.spacer}/>

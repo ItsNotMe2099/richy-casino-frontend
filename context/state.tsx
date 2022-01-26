@@ -13,6 +13,7 @@ interface IState {
   showModal: (type: ModalType | ProfileModalType, data?: any) => void
   hideModal: () => void
   setToken: (token) => void
+  logout: () => void
   updateUserFromCookies: () => void
 }
 
@@ -25,6 +26,7 @@ const defaultValue: IState = {
   showModal: (type, data) => null,
   hideModal: () => null,
   setToken: (token) => null,
+  logout: () => null,
   updateUserFromCookies: () => null
 }
 
@@ -60,6 +62,11 @@ export function AppWrapper(props: Props) {
     setToken: (token: string) => {
       Cookies.set(CookiesType.accessToken, token, {expires: 365})
       setAuth(true)
+    },
+    logout: () => {
+      Cookies.remove(CookiesType.accessToken)
+      setAuth(false)
+      setUserDetails(null)
     },
     updateUserFromCookies() {
       updateUserDetails()
