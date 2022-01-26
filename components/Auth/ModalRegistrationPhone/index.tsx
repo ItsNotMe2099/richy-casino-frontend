@@ -1,25 +1,44 @@
 import styles from './index.module.scss'
-import Modal from '../../ui/Modal'
 import { useTranslation } from 'react-i18next'
 import {Form, Formik} from 'formik'
 import Button from 'components/ui/Button'
 import InputField from 'components/ui/Inputs/InputField'
 import Validator from 'utils/validator'
-import {ModalType} from 'types/enums'
 import {useAppContext} from 'context/state'
+import {formatPhone} from 'utils/formatters'
+import {useState} from 'react'
+import AuthRepository from 'data/repositories/AuthRepository'
+import {ModalType} from 'types/enums'
+import FormError from 'components/ui/Form/FormError'
 
 interface Props {
-  isOpen: boolean
-  onRequestClose?: () => void
-  singlePage?: boolean
+
 }
 
-export default function ModalRegistrationCompleted(props: Props) {
+export default function ModalRegistrationPhone(props: Props) {
   const context = useAppContext()
+  const [error, setError] = useState<string | null>(null)
   const handleSubmit = async (data) => {
+    try {
+      setError(null)
+      const res = await AuthRepository.registerPhone({
+        code: data.code,
+        password: data.password,
+        authToken: null,
+      })
+      const accessToken = res.token
 
+      if (!accessToken) {
+        setError('Ошибка Регистрации')
+      }
+
+      context.setToken(accessToken)
+      context.updateUserFromCookies()
+      context.showModal(ModalType.registrationSuccess, {login: data.email, password: data.password})
+    } catch (e) {
+      setError(e.message)
+    }
   }
-
   const initialValues = {
     code: '',
     password: '',
@@ -27,18 +46,16 @@ export default function ModalRegistrationCompleted(props: Props) {
   }
 
 
-
   const { t } = useTranslation('common')
 
 
   return (
-    <Modal {...props} title='Восстановление пароля'>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {({values}) => (
         <Form className={styles.form}>
           <div className={styles.description}>
-            Введите ниже код, отправленный на указанный
-            Вами Email ({context.modalProps.login})
+            Введите ниже <span className={styles.code}>код</span>, отправленный на указанный
+            Вами номер тел. <span className={styles.phone}>{formatPhone(context.modalProps.login)}</span>
           </div>
           <div className={styles.inputs}>
             <InputField
@@ -57,14 +74,10 @@ export default function ModalRegistrationCompleted(props: Props) {
               validate={Validator.combine([Validator.required, Validator.passwordsMustMatch(values)])}
             />
           </div>
-          <div className={styles.buttons}>
-            <Button type='button' className={styles.button} size='submit' background='dark600' onClick={() => context.showModal(ModalType.passwordRecovery, {login: context.modalProps.login})}>Отменить</Button>
-            <div className={styles.spacer}/>
-            <Button type='submit' className={styles.button} size='submit' background='blueGradient500' >Сменить</Button>
-          </div>
+          <FormError error={error}/>
+            <Button type='submit' fluid className={styles.button} size='submit' background='blueGradient500' >Продолжить</Button>
 
         </Form>)}
       </Formik>
-    </Modal>
   )
 }

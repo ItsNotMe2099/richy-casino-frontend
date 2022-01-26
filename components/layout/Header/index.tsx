@@ -40,7 +40,7 @@ export default function Header(props: Props) {
   const { route: currentRoute, asPath: currentPath } = useRouter()
   const context = useAppContext()
 
-  const user = true//cookie.get('accessToken')
+  const user = context.auth
 
   const UserBonus = ({icon, amount, color}: UserBonusProps) => {
     return (
@@ -170,10 +170,10 @@ export default function Header(props: Props) {
             <UserBonus icon='/img/icons/dollar.svg' amount='256' color='#7BD245'/>
           </div>
           </HiddenXs>
-          <ProfileAccountsMenu 
-          options={userAccounts} 
-          activeIcon={activeIcon} 
-          activeAmount={activeAmount} 
+          <ProfileAccountsMenu
+          options={userAccounts}
+          activeIcon={activeIcon}
+          activeAmount={activeAmount}
           activeIso={activeIso}
           activeType={activeType}
           onChange={(item) => handleChange(item)}

@@ -6,12 +6,12 @@ import { useAppContext } from 'context/state'
 import { ProfileModalType } from 'types/enums'
 import DropdownMenu from 'components/ui/DropdownMenu'
 import { useState } from 'react'
-import request from 'utils/request'
 import SelectAccountCurrency from 'components/ui/SelectAccountCurrency'
 import { Currency } from 'types/interfaces'
+import InfoRepository from 'data/repositories/InfoRepository'
 
 interface Props {
-  
+
 }
 
 interface AccountProps {
@@ -37,9 +37,9 @@ interface MenuProps {
 
 export default function Profile(props: Props) {
 
-  const user = {avatar: '/img/Avatar/avatar.png', 
-  nickname: 'Alex', 
-  id: '6171361', 
+  const user = {avatar: '/img/Avatar/avatar.png',
+  nickname: 'Alex',
+  id: '6171361',
   accounts: [{main: true, currency: 'BTC', icon: '/img/currencies/BTC.svg', amount: '0.00000000', usdt: '0.00000001'}],
   tickets: '256', freebtc: '0.00000001', bonus: '1500 RUB', spins: '23'
 }
@@ -61,11 +61,8 @@ const [accounts, setAccount] = useState([])
 const [currencies, setCurrencies] = useState([])
 
 const getCurrencies = async () => {
-  const res = await request({
-    method: 'get',
-    url: 'https://admin.grtestdemo.com/api/currencies',
-  })
-  setCurrencies(res.data.data)
+  const res = await InfoRepository.getCurrencies()
+  setCurrencies(res)
 }
 
 const handleAddNewAccount = (itemNew: Currency) => {
@@ -175,13 +172,13 @@ const context = useAppContext()
                 {newAccounts.map((acc, index) =>
                   accounts.find(item => acc.currency === item.iso) &&
                     <Account icon={acc.icon} currency={acc.currency} amount={acc.amount} usdt={acc.usdt} main={acc.main} key={index}/>
-                  
+
               )}
             </div>}
-            <SelectAccountCurrency options={currencies} 
-            className={styles.new} 
-            textRight 
-            label='Новый счет' 
+            <SelectAccountCurrency options={currencies}
+            className={styles.new}
+            textRight
+            label='Новый счет'
             onChange={(item) => handleAddNewAccount(item)}
             onTriggerClick={getCurrencies}
             />
@@ -208,13 +205,13 @@ const context = useAppContext()
                 {newAccounts.map((acc, index) =>
                   accounts.find(item => acc.currency === item.iso) &&
                     <Account icon={acc.icon} currency={acc.currency} amount={acc.amount} usdt={acc.usdt} main={acc.main} key={index}/>
-                  
+
               )}
             </div>}
-            <SelectAccountCurrency options={currencies} 
-            className={styles.new} 
-            textRight 
-            label='Новый счет' 
+            <SelectAccountCurrency options={currencies}
+            className={styles.new}
+            textRight
+            label='Новый счет'
             onChange={(item) => handleAddNewAccount(item)}
             onTriggerClick={getCurrencies}
             />
@@ -223,7 +220,7 @@ const context = useAppContext()
           </div>
           <div className={styles.bonus}>
             <div className={styles.title}>
-              Бонусные 
+              Бонусные
             </div>
             <Bonus color='#587DFF' label='Lottery tickets' amount={user.tickets} icon='/img/Profile/icons/ticket.svg'/>
             <Bonus color='#FFD12F' label='FreeBitcoin' amount={user.freebtc} icon='/img/Profile/icons/btc.svg'/>

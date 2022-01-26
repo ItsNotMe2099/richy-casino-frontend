@@ -12,6 +12,8 @@ import Validator from 'utils/validator'
 import {ModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
 import { Currency } from 'types/interfaces'
+import AuthRepository from 'data/repositories/AuthRepository'
+import FormError from 'components/ui/Form/FormError'
 
 interface Props {
   currencies: Currency[]
@@ -20,10 +22,26 @@ interface Props {
 export default function PhoneForm(props: Props) {
 
   const context = useAppContext()
+  const [error, setError] = useState<string | null>(null)
   const handleSubmit = async (data) => {
-    
-  }
+    try {
+      setError(null)
+      const res = await AuthRepository.registerPhoneSendOtp({
+        phone: data.phone,
+      })
+      const accessToken = res.token
 
+      if (!accessToken) {
+        setError('Ошибка Регистрации')
+      }
+
+      context.setToken(accessToken)
+      context.updateUserFromCookies()
+      context.showModal(ModalType.registrationPhone, {login: data.phone, ...res})
+    } catch (e) {
+      setError(e.message)
+    }
+  }
   const initialValues = {
       phone: null,
       password: null,
@@ -52,8 +70,9 @@ export default function PhoneForm(props: Props) {
          {promoCode &&
           <PromoCode/>
          }
-         <CheckBox name='checkBox' label='Я согласен с пользовательским соглашением и подтверждаю, что мне исполнилось 18 лет'/>
+         <CheckBox name='checkBox' label='Я согласен с пользовательским соглашением и подтверждаю, что мне исполнилось 18 лет' validate={Validator.required}/>
       </div>
+      <FormError error={error}/>
       <Button type='submit' className={styles.button} size='submit' background='blueGradient500'>Регистрация</Button>
       <div className={styles.login}>
         Уже есть аккаунт? <span onClick={() => context.showModal(ModalType.login)}>Войдите</span>

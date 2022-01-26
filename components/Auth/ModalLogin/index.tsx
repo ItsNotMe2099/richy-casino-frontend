@@ -9,6 +9,7 @@ import {ModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
 import { LoginFormData } from 'types/interfaces'
 import { useAuthContext } from 'context/auth_state'
+import FormError from 'components/ui/Form/FormError'
 
 interface Props {
   isOpen?: boolean
@@ -28,6 +29,7 @@ export default function ModalLogin(props: Props) {
 
   const {t} = useTranslation('common')
 
+  console.log('Error', authContext.error)
   return (
       <Formik initialValues={initialValues} onSubmit={authContext.login}>
         <Form className={styles.form}>
@@ -46,6 +48,7 @@ export default function ModalLogin(props: Props) {
                         validate={Validator.required}/>
           </div>
           <div className={styles.forgot} onClick={() => { context.showModal(ModalType.passwordRecovery) }}>Забыли пароль?</div>
+          <FormError error={authContext.error}/>
           <Button type='submit' size='play' fluid background='blueGradient500'>Авторизация</Button>
           <div className={styles.login}>
             Еще нет аккаунта? <span onClick={() => context.showModal(ModalType.registration)}>Зарегистрируйтесь</span>

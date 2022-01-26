@@ -1,11 +1,12 @@
 import styles from './index.module.scss'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
-import { useModal } from 'store/modal-store'
 import Button from 'components/ui/Button'
+import {saveDownloadedData} from 'utils/txt'
+import {useAppContext} from 'context/state'
 
 interface Props {
-  
+
 }
 
 interface FieldProps {
@@ -18,8 +19,10 @@ export default function ModalRegistrationSuccess(props: Props) {
 
   const { t } = useTranslation('common')
 
-  const {open, modalProps} = useModal()
-
+  const {modalProps} = useAppContext()
+  const handleDownload = () => {
+    saveDownloadedData('richy_casino-credentials.txt', `Login: ${modalProps.login}\r\n Password: ${modalProps.password}`)
+  }
   const Field = ({text, value, className}: FieldProps) => {
 
     return(
@@ -51,9 +54,9 @@ export default function ModalRegistrationSuccess(props: Props) {
         Не забудьте сохранить
           логин и пароль:
       </div>
-      <Field text='Логин' value={/*modalProps.login*/'Alex'}/>
-      <Field text='Пароль' value={/*modalProps.password*/'Password1234'} className={styles.password}/>
-      <Button className={styles.button} size='submit' background='blueGradient500'>Скачать в TXT</Button>
+      <Field text='Логин' value={modalProps.login}/>
+      <Field text='Пароль' value={modalProps.password} className={styles.password}/>
+      <Button className={styles.button} size='submit' background='blueGradient500' onClick={handleDownload}>Скачать в TXT</Button>
     </div>
   )
 }

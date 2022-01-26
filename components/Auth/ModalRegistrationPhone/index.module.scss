@@ -1,0 +1,41 @@
+@import "scss/index";
+
+.form {
+  margin-top: 28px;
+  @media screen and (max-width: $sm-min){
+    margin-top: 20px;
+  }
+}
+
+.inputs {
+  margin-top: 28px;
+  @media screen and (max-width: $sm-min){
+    margin-top: 20px;
+  }
+}
+.description{
+
+  font-size: 14px;
+  color: #717384;
+  font-weight: 400;
+  text-align: left;
+  .code{
+    font-weight: 700;
+  }
+  .phone{
+    color: #FFFFFF;
+    font-weight: 700;
+  }
+}
+
+.buttons{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  .spacer{
+    width: 24px;
+  }
+}
+.button{
+  flex: 1;
+}

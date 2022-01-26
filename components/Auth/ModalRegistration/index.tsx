@@ -6,7 +6,7 @@ import ShortBanner from 'components/for_pages/Common/ShortBanner'
 import PhoneForm from './Forms/PhoneForm'
 import EmailForm from './Forms/EmailForm'
 import SocialsForm from './Forms/SocialsForm'
-import request from 'utils/request'
+import InfoRepository from 'data/repositories/InfoRepository'
 
 enum TabType{
   Email,
@@ -55,11 +55,8 @@ export default function ModalRegistration(props: Props) {
 
   useEffect(() => {
     const getCurrencies = async () => {
-      const res = await request({
-        method: 'get',
-        url: 'https://admin.grtestdemo.com/api/currencies',
-      })
-      setCurrencies(res.data.data)
+      const res = await InfoRepository.getCurrencies()
+      setCurrencies(res)
     }
     getCurrencies()
   }, [])

@@ -5,7 +5,7 @@ import Button from 'components/ui/Button'
 import InputField from 'components/ui/Inputs/InputField'
 import Validator from 'utils/validator'
 import {ModalType} from 'types/enums'
-import {useModal} from 'store/modal-store'
+import {useAppContext} from 'context/state'
 
 interface Props {
   isOpen?: boolean
@@ -14,8 +14,7 @@ interface Props {
 }
 
 export default function ModalPasswordReset(props: Props) {
-  const {open, modalProps} = useModal()
-
+  const context = useAppContext()
   const handleSubmit = async (data) => {
 
   }
@@ -37,7 +36,7 @@ export default function ModalPasswordReset(props: Props) {
         <Form className={styles.form}>
           <div className={styles.description}>
             Введите ниже код, отправленный на указанный
-            Вами Email ({modalProps.login})
+            Вами Email ({context.modalProps?.login})
           </div>
           <div className={styles.inputs}>
             <InputField
@@ -57,7 +56,7 @@ export default function ModalPasswordReset(props: Props) {
             />
           </div>
           <div className={styles.buttons}>
-            <Button type='button' className={styles.button} size='submit' background='dark600' onClick={() => open(ModalType.passwordRecovery, {login: modalProps.login})}>Отменить</Button>
+            <Button type='button' className={styles.button} size='submit' background='dark600' onClick={() => context.showModal(ModalType.passwordRecovery, {login: context.modalProps.login})}>Отменить</Button>
             <div className={styles.spacer}/>
             <Button type='submit' className={styles.button} size='submit' background='blueGradient500' >Сменить</Button>
           </div>

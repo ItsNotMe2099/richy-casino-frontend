@@ -4,12 +4,12 @@ import InputField from 'components/ui/Inputs/InputField'
 import { Select } from 'components/ui/Inputs/Select'
 import { Form, Formik } from 'formik'
 import { useEffect, useState } from 'react'
-import request from 'utils/request'
 import Validator from 'utils/validator'
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
+import InfoRepository from 'data/repositories/InfoRepository'
 
 interface IUser {
   id: string
@@ -36,7 +36,7 @@ export default function Settings(props: Props) {
     userName: props.user.userName,
     name: props.user.name,
     dateOfBirth: props.user.dateOfBirth,
-    country: props.user.country,   
+    country: props.user.country,
     currency: props.user.currency,
     phone: props.user.phone,
     email: props.user.email,
@@ -56,18 +56,12 @@ export default function Settings(props: Props) {
 
   useEffect(() => {
     const getCountries = async () => {
-      const res = await request({
-        method: 'get',
-        url: 'https://admin.grtestdemo.com/api/countries',
-      })
-      setCountries(res.data.data)
+      const res = await InfoRepository.getCountries()
+      setCountries(res)
     }
     const getCurrencies = async () => {
-      const res = await request({
-      method: 'get',
-      url: 'https://admin.grtestdemo.com/api/currencies',
-    })
-    setCurrencies(res.data.data)
+      const res = await InfoRepository.getCurrencies()
+    setCurrencies(res)
   }
     getCurrencies()
     getCountries()

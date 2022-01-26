@@ -1,17 +1,20 @@
 import { createContext, useContext, useState } from 'react'
 import { useAppContext } from 'context/state'
 import { CookiesType} from 'types/enums'
-import request from 'utils/request'
 import Cookies from 'js-cookie'
 import { LoginFormData } from 'types/interfaces'
+import AuthRepository from 'data/repositories/AuthRepository'
 
 interface IState {
+  error: string,
   loginFormData: LoginFormData | null
   setLoginFormData: (values: LoginFormData) => void
-  login: (values: LoginFormData) => void
+  login: (values: LoginFormData) => void,
+
 }
 
 const defaultValue: IState = {
+  error: null,
   loginFormData: null,
   setLoginFormData: (values) => null,
   login: (values) => null
@@ -26,35 +29,34 @@ interface Props {
 export function AuthWrapper(props: Props) {
   const appContext = useAppContext()
   const [loginFormData, setLoginFormData] = useState<LoginFormData | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   const login = async (values: LoginFormData) => {
+    console.log('values', values)
     setLoginFormData(values)
-    const res = await request({
-      method: 'post',
-      url: 'https://admin.grtestdemo.com/api/auth/login',
-      data: {
-        authInput: loginFormData?.authInput,
-        password: loginFormData?.password,
-      },
-    })
-    console.log(res)
-    if (res.err) {
-      
-      return
+    try {
+      setError(null)
+      const res = await AuthRepository.login(values?.authInput, values.password)
+
+      if (!res) {
+        return
+      }
+      const accessToken = res.token
+
+      if (!accessToken) {
+        return
+      }
+
+      Cookies.set(CookiesType.accessToken, accessToken, {expires: 365})
+      appContext.updateUserFromCookies()
+    }catch (e){
+      setError(e.message)
     }
-
-    const accessToken = res.data.token
-
-    if (!accessToken) {
-      return
-    }
-
-    Cookies.set(CookiesType.accessToken, accessToken, { expires: 365 })
-    appContext.updateUserFromCookies()
   }
 
   const value: IState = {
     ...defaultValue,
+    error,
     login,
   }
 

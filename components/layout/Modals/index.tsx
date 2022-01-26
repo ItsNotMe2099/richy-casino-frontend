@@ -14,6 +14,7 @@ import Settings from 'components/Profile/Settings'
 import Wallet from 'components/Wallet'
 import Fortune from 'components/Fortune'
 import BonusModal from 'components/ui/BonusModal'
+import ModalRegistrationPhone from 'components/Auth/ModalRegistrationPhone'
 
 interface Props {}
 
@@ -47,6 +48,7 @@ export default function ModalContainer(props: Props) {
           <Modal key={4} isOpen={context.modal === ModalType.registrationSuccess} {...commonSettings} noBorder>
             <ModalRegistrationSuccess/>
           </Modal>
+
           <ProfileModal isBack={true} size='large' key={5} isOpen={context.modal === ProfileModalType.paymentHistory} {...commonSettings} title='История платежей' user={user} payment>
             <PaymentHistory/>
           </ProfileModal>
@@ -59,6 +61,9 @@ export default function ModalContainer(props: Props) {
           <Wallet/>
           <Modal fortune key={9} isOpen={context.modal === ModalType.fortune} {...commonSettings} noBorder size='fortune'>
             <Fortune/>
+          </Modal>
+          <Modal key={10} isOpen={context.modal === ModalType.registrationPhone} {...commonSettings} noBorder>
+            <ModalRegistrationPhone/>
           </Modal>
           <BonusModal isOpen={context.modal === ModalType.bonus} {...commonSettings}/>
         </>
