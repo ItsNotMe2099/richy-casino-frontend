@@ -10,6 +10,7 @@ import { getSelectorsByUserAgent } from 'react-device-detect'
 import App from 'next/app'
 import ModalContainer from 'components/layout/Modals'
 import { AuthWrapper } from 'context/auth_state'
+import {CookiesType} from 'types/enums'
 
 function MyApp({ Component, pageProps }: AppProps) {
   setConfiguration({
@@ -19,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   })
 
   return (
-    <AppWrapper isMobile={pageProps.isMobile}>
+    <AppWrapper isMobile={pageProps.isMobile} token={pageProps.token}>
       <AuthWrapper>
         <Component {...pageProps} />
         <ModalContainer/>
@@ -38,6 +39,9 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   }
   else {
     props.pageProps.isMobile = false
+  }
+  if ((appContext.ctx.req as any).cookies) {
+    props.pageProps.token = (appContext.ctx as any).req.cookies[CookiesType.accessToken]
   }
   return props
 }
