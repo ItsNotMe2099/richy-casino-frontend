@@ -40,7 +40,7 @@ export default function Header(props: Props) {
   const { route: currentRoute, asPath: currentPath } = useRouter()
   const context = useAppContext()
 
-  const user = context.auth
+  const user = true//context.auth
 
   const UserBonus = ({icon, amount, color}: UserBonusProps) => {
     return (

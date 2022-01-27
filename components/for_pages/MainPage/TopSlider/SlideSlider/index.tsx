@@ -3,6 +3,7 @@ import { Col } from 'react-grid-system'
 import Button from 'components/ui/Button'
 import { useState } from 'react'
 import Slider from 'react-slick'
+import { useAppContext } from 'context/state'
 
 interface IItem {
   label: string
@@ -27,6 +28,10 @@ export default function SlideSlider(props: Props) {
 
   const [currentIndex, setCurrentIndex] = useState(0)
 
+  const context = useAppContext()
+
+  const user = true//context.auth
+
   let { slider } = props
 
   const settings = {
@@ -47,7 +52,7 @@ export default function SlideSlider(props: Props) {
 
   return (
       <Col className={styles.col}>
-      <div className={styles.bonus}><img src='/img/TopSlider/bonus.png' alt=''/></div>
+      {!user && <div className={styles.bonus}><img src='/img/TopSlider/bonus.png' alt=''/></div>}
       <div className={styles.root} style={{backgroundImage: `url(${props.items[currentIndex].image})`}}>
       <div className={styles.controls}>
         <div className={styles.prev} onClick={() => slider.slickGoTo(currentIndex - 1)}>
