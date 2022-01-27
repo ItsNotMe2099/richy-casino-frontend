@@ -4,6 +4,8 @@ import Button from 'components/ui/Button'
 import { useState } from 'react'
 import Slider from 'react-slick'
 import { useAppContext } from 'context/state'
+import Gift from 'components/for_pages/Common/Gift'
+import classNames from 'classnames'
 
 interface IItem {
   label: string
@@ -52,7 +54,8 @@ export default function SlideSlider(props: Props) {
 
   return (
       <Col className={styles.col}>
-      {!user && <div className={styles.bonus}><img src='/img/TopSlider/bonus.png' alt=''/></div>}
+      {!user && <div className={styles.bonus}><Gift/></div>}
+      {(user && !context.banner) && <div className={classNames(styles.bonus, styles.timer)}><Gift timer/></div>}
       <div className={styles.root} style={{backgroundImage: `url(${props.items[currentIndex].image})`}}>
       <div className={styles.controls}>
         <div className={styles.prev} onClick={() => slider.slickGoTo(currentIndex - 1)}>

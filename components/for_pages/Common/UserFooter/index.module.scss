@@ -12,6 +12,8 @@
   left: 0;
   width: 100%;
   z-index: 200;
+  height: auto !important;
+  min-height: auto !important;
   .item:nth-child(4){
     .icon{
       align-self: flex-end;

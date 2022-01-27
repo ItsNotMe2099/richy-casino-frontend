@@ -26,14 +26,24 @@
 
 .bonus{
   position: fixed;
-  transform: translate(640%, 70%);
+  transform: translate(860%, 110%);
   z-index: 10;
   cursor: pointer;
   @media screen and (max-width: $sm-max){
-    transform: translate(440%, 70%);
+    transform: translate(610%, 110%);
   }
   @media screen and (max-width: 1000px){
     display: none;
+  }
+}
+
+.timer{
+  transform: translate(860%, 80%);
+  @media screen and (max-width: $sm-max){
+    transform: translate(610%, 80%);
+  }
+  @media screen and (max-width: 1000px){
+    display: block;
   }
 }
 

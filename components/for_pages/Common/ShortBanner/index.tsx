@@ -7,6 +7,8 @@ interface Props {
   className?: string
   reverse?: boolean
   timer?: boolean
+  longDown?: boolean
+  onRequestClose?: () => void
 }
 
 export default function ShortBanner(props: Props) {
@@ -17,6 +19,10 @@ export default function ShortBanner(props: Props) {
 
   return (
       <div className={classNames(styles.root, {[styles.noPaddingLeft]: props.timer})}>
+        {props.longDown &&
+        <div className={styles.close} onClick={props.onRequestClose}>
+          <img src='/img/icons/close-bonus.svg' alt=''/>
+        </div>}
         <div className={classNames(styles.hero, {[styles.withTimer]: props.timer})}><img src='/img/ShortBanner/hero.svg' alt=''/></div>
         <div className={styles.money}><img src='/img/ShortBanner/money.svg' alt=''/></div>
         <div className={classNames(styles.money2, {[styles.money2Timer]: props.timer})}><img src='/img/ShortBanner/money2.svg' alt=''/></div>
@@ -34,7 +40,7 @@ export default function ShortBanner(props: Props) {
           </div>
         </div>
         </div>
-        {props.timer && <div className={styles.timer}><Timer expiredAt={expiredAt}/></div>}
+        {props.timer && <Timer expiredAt={expiredAt}/>}
         </div>
         </div>
   )

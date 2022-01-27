@@ -11,6 +11,7 @@ import App from 'next/app'
 import ModalContainer from 'components/layout/Modals'
 import { AuthWrapper } from 'context/auth_state'
 import {CookiesType} from 'types/enums'
+import AuthUserFeatures from 'components/layout/AuthUserFeatures'
 
 function MyApp({ Component, pageProps }: AppProps) {
   setConfiguration({
@@ -24,6 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <AuthWrapper>
         <Component {...pageProps} />
         <ModalContainer/>
+        <AuthUserFeatures/>
       </AuthWrapper>
     </AppWrapper>
   )

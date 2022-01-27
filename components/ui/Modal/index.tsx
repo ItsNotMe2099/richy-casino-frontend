@@ -63,7 +63,7 @@ export default function Modal(props: Props) {
           <div
             className={`${!props.fortune && styles.root} ${getSizeClass(props.size)} ${props.className} ${
               props.center && styles.rootFlex} ${props.fortune && styles.fortune}
-            }`}
+            `}
           >
             <HiddenXs>
               <div className={classNames(styles.top, {[styles.noBorder]: props.noBorder})}>

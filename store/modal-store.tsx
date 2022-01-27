@@ -8,14 +8,14 @@ const ModalStateContext = React.createContext({
 });
 
 export function ModalStateProvider(props) {
-  const [modalKey, setModalKey] = useState(null);
-  const [modalProps, setModalProps] = useState({});
+  const [modalKey, setModalKey] = useState(null)
+  const [modalProps, setModalProps] = useState({})
   const open = (modalKey, modalProps = {}) => {
     setModalKey(modalKey);
     setModalProps(modalProps);
   }
   const close = () => {
-    setModalKey(null);
+    setModalKey(null)
   }
   const value = React.useMemo(() => ({ open, close, modalKey, modalProps }), [
     open,
@@ -31,10 +31,10 @@ export function ModalStateProvider(props) {
 // So, We don't need React.useContext everywhere we need data from GlobalStateContext.
 
 export function useModal() {
-  const context = React.useContext(ModalStateContext);
+  const context = React.useContext(ModalStateContext)
 
   if (!context) {
-    throw new Error("You need to wrap GlobalStateProvider.");
+    throw new Error("You need to wrap GlobalStateProvider.")
   }
 
   return context;

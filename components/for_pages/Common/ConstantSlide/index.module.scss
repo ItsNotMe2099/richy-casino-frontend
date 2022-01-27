@@ -17,6 +17,14 @@
   }
 }
 
+.rootDownBanner{
+  padding: 6px 0;
+  @media screen and (max-width: 800px){
+    max-height: 100%;
+    min-height: 100%;
+  }
+}
+
 .noBack{
   background: transparent;
   border-radius: 0;
@@ -156,4 +164,63 @@
 
 .closeSheet{
   top: 15px;
+}
+
+.downBanner{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .title, .bonus, .fs, .bottom{
+    margin-right: 12px;
+  }
+  @media screen and (max-width: 950px){
+    .title{
+      font-size: 18px;
+    }
+    .bonus{
+      font-size: 35px;
+    }
+    .fs{
+      font-size: 14px;
+    }
+  }
+  .bottom{
+    margin-top: 0;
+  }
+}
+
+.none{
+  display: none;
+}
+
+.moneyLeft{
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.moneyRight{
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+}
+
+.coinUp{
+  position: absolute;
+  top: 0;
+  right: 40%;
+}
+
+.coinDown{
+  position: absolute;
+  bottom: -6px;
+  right: 17%;
+}
+
+.timer{
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(16.5295px);
+  padding: 10px;
+  border-radius: 6px;
+  position: relative;
 }

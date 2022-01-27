@@ -7,7 +7,7 @@ import Link from 'next/link'
 import LangSelect from 'components/for_pages/Common/LangSelect'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
-import { ModalType } from 'types/enums'
+import { ModalType, ProfileModalType } from 'types/enums'
 import { useAppContext } from 'context/state'
 //import cookie from 'js-cookie'
 import ProfileAccountsMenu from './components/Profile/ProfileAccountsMenu'
@@ -169,7 +169,7 @@ export default function Header(props: Props) {
           <HiddenXs>
             <ProfileMenu className={styles.accMenu}/>
           </HiddenXs>
-          <Button size='normal' background='payGradient500' className={styles.wallet}>
+          <Button onClick={() => context.showModal(ProfileModalType.wallet)}  size='normal' background='payGradient500' className={styles.wallet}>
             <HiddenXs><img src='/img/icons/wallet.svg' alt=''/></HiddenXs>Пополнить</Button>
           <VisibleXs>
             <ProfileMenu className={styles.proMenu}/>

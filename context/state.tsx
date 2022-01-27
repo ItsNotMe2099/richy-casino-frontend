@@ -8,10 +8,12 @@ interface IState {
   isMobile: boolean
   isDesktop: boolean
   auth: boolean
+  banner: boolean
   modalProps?: any
   modal: ModalType | ProfileModalType | null
   showModal: (type: ModalType | ProfileModalType, data?: any) => void
   hideModal: () => void
+  hideBanner: () => void
   setToken: (token) => void
   logout: () => void
   updateUserFromCookies: () => void
@@ -22,9 +24,11 @@ const defaultValue: IState = {
   isMobile: false,
   isDesktop: true,
   modal: null,
+  banner: true,
   auth: false,
   showModal: (type, data) => null,
   hideModal: () => null,
+  hideBanner: () => null,
   setToken: (token) => null,
   logout: () => null,
   updateUserFromCookies: () => null
@@ -43,12 +47,14 @@ export function AppWrapper(props: Props) {
   const [modalProps, setModalProps] = useState<ModalType | ProfileModalType | null>(null)
   const [userDetails, setUserDetails] = useState<any>()
   const [auth, setAuth] = useState<boolean>(false)
+  const [banner, setBanner] = useState<boolean>(true)
   const value: IState = {
     ...defaultValue,
     isMobile: props.isMobile,
     isDesktop: !props.isMobile,
     auth,
     modal,
+    banner,
     modalProps,
     showModal: (type, props: any) => {
       ReactModal.setAppElement('body')
@@ -58,6 +64,9 @@ export function AppWrapper(props: Props) {
     },
     hideModal: () => {
       setModal(null)
+    },
+    hideBanner: () => {
+      setBanner(false)
     },
     setToken: (token: string) => {
       Cookies.set(CookiesType.accessToken, token, {expires: 365})

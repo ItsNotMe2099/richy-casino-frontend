@@ -10,6 +10,14 @@
   overflow: hidden;
 }
 
+.close{
+  position: absolute;
+  cursor: pointer;
+  right: 15px;
+  display: flex;
+  z-index: 11;
+}
+
 .noPaddingLeft{
   @media screen and (max-width: 375px){
     padding: 0 5px;

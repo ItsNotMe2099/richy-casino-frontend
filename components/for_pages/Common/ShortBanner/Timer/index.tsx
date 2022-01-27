@@ -6,6 +6,7 @@ interface Props {
   expiredAt: Date
   days?: boolean
   mainPage?: boolean
+  size?: 'large' | 'normal' | 'small'
 }
 
 export default function Timer(props: Props) {
@@ -70,8 +71,22 @@ const getOutput = (index: number) => {
   }
 }
 
+const getSizeClass = (size) => {
+  switch (size) {
+    case 'normal':
+      return styles.rootNormal
+    case 'large':
+      return styles.rootLarge
+    case 'small':
+      return styles.rootSmall
+    default:
+      return styles.root
+  }
+}
+
   return (
-    <div className={styles.root}>
+    <div className={`${styles.root} ${getSizeClass(props.size)}`}>
+    <div className={styles.wrapper}>
       <div className={styles.hours}>
         <div className={styles.input}>
           {getOutput(0)}
@@ -86,6 +101,7 @@ const getOutput = (index: number) => {
           {getOutput(1)}
         </div>
       </div>
+    </div>
     </div>
   )
 }

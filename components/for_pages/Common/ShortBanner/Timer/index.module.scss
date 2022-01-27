@@ -1,9 +1,42 @@
 @import "scss/index";
 
-.root {
+.wrapper {
   display: flex;
   justify-content: center;
   }
+
+  .root{
+    background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(16.5295px);
+  padding: 4px;
+  border-radius: 6px;
+  position: relative;
+  }
+
+.rootNormal{
+  .input{
+    width: 30px;
+    height: 28px;
+    font-size: 20px;
+  }
+  .visibleSep{
+    margin-top: 10px;
+  }
+  padding: 10px;
+}
+
+.rootSmall{
+  .input{
+    width: 28px;
+    height: 26px;
+    font-size: 20px;
+  }
+  padding: 3px;
+}
+
+.rootLarge{
+
+}
 
 .input{
   background: #FFFFFF;
