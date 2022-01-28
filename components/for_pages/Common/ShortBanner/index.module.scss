@@ -24,6 +24,11 @@
   }
 }
 
+.authBannerPadding{
+  padding: 5px 0 30px 70px;
+  max-height: 125px;
+}
+
 .title{
   font-weight: bold;
   font-size: 16px;
@@ -68,6 +73,17 @@
   left: 0;
 }
 
+.hero2{
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  right: 0;
+}
+
+.none{
+  display: none;
+}
+
 .money{
   right: -20px;
   bottom: -35px;
@@ -84,6 +100,10 @@
   @media screen and (max-width: 375px){
     left: -65px;
   }
+}
+
+.money2AuthBanner{
+  bottom: 10px;
 }
 
 .timer{

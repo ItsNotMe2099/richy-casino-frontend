@@ -9,6 +9,7 @@ interface Props {
   timer?: boolean
   longDown?: boolean
   onRequestClose?: () => void
+  authBanner?: boolean
 }
 
 export default function ShortBanner(props: Props) {
@@ -18,14 +19,17 @@ export default function ShortBanner(props: Props) {
   const expiredAt = new Date(someDate)
 
   return (
-      <div className={classNames(styles.root, {[styles.noPaddingLeft]: props.timer})}>
+      <div className={classNames(styles.root, 
+      {[styles.noPaddingLeft]: (props.timer && !props.authBanner)}, {[styles.authBannerPadding]: props.authBanner})}>
         {props.longDown &&
         <div className={styles.close} onClick={props.onRequestClose}>
           <img src='/img/icons/close-bonus.svg' alt=''/>
         </div>}
-        <div className={classNames(styles.hero, {[styles.withTimer]: props.timer})}><img src='/img/ShortBanner/hero.svg' alt=''/></div>
+        <div className={classNames(styles.hero, {[styles.withTimer]: (props.timer && !props.authBanner)})}><img src='/img/ShortBanner/hero.svg' alt=''/></div>
         <div className={styles.money}><img src='/img/ShortBanner/money.svg' alt=''/></div>
-        <div className={classNames(styles.money2, {[styles.money2Timer]: props.timer})}><img src='/img/ShortBanner/money2.svg' alt=''/></div>
+        <div className={classNames(styles.money2, {[styles.money2Timer]: props.timer}, {[styles.money2AuthBanner]: props.authBanner})}>
+          <img src='/img/ShortBanner/money2.svg' alt=''/>
+        </div>
         <div className={styles.content}>
         <div className={styles.left}>
         <div className={styles.title}>

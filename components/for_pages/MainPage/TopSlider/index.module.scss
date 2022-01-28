@@ -18,6 +18,16 @@
   @media screen and (min-width: $sm-min){
     display: none !important;
   }
+  position: relative;
+}
+
+.bonus{
+  position: fixed;
+  top: 170px;
+  right: 10px;
+  z-index: 10;
+  cursor: pointer;
+
 }
 
 .label{

@@ -95,7 +95,7 @@
   :global .slick-list{
     .slick-track{
       .slick-slide{
-        @media screen and (max-width: $xs-max){
+        @media screen and (max-width: 570px){
           width: 78px !important;
           margin-right: 8px;
         }

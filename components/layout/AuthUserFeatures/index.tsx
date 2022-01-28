@@ -23,7 +23,7 @@ export default function AuthUserFeatures(props: Props) {
             <ConstantSlide longDown onRequestClose={context.hideBanner}/>
           </HiddenXs>
           <VisibleXs>
-            <ShortBanner reverse timer longDown onRequestClose={context.hideBanner}/>
+            <ShortBanner authBanner reverse timer longDown onRequestClose={context.hideBanner}/>
           </VisibleXs>
         </div>
       </>

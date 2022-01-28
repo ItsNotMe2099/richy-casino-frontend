@@ -6,6 +6,8 @@ import Button from 'components/ui/Button'
 import Slider from 'react-slick'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
+import { useAppContext } from 'context/state'
+import Gift from 'components/for_pages/Common/Gift'
 
 interface Props {
   children?: React.ReactNode
@@ -13,6 +15,10 @@ interface Props {
 }
 
 export default function TopSlider(props: Props) {
+
+  const context = useAppContext()
+
+  const user = true//context.auth
 
   const settings = {
     className: `${styles.slider}`,
@@ -51,6 +57,8 @@ export default function TopSlider(props: Props) {
       </Row>
       </HiddenXs>
       <VisibleXs>
+      <>
+      {(user && !context.banner) && <div className={styles.bonus}><Gift timer/></div>}
       <Slider {...settings}>
         <ConstantSlide/>
         {items.map((item, index) =>
@@ -68,6 +76,7 @@ export default function TopSlider(props: Props) {
         </div> 
         )}
       </Slider>
+      </>
       </VisibleXs>
     </div>
   )
