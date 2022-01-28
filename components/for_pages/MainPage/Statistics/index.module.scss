@@ -70,6 +70,7 @@
     padding: 0 26px;
     width: 100%;
     border-collapse: separate;
+    margin-top: 21px;
     .rowInner:nth-child(odd){
         .cell{
         background-color: transparent;
@@ -112,6 +113,10 @@
             display: none;
          }
     }
+    .cell:last-child{
+        display: flex;
+        justify-content: center;
+    }
 }
 
 .rowInner{
@@ -133,6 +138,7 @@
     .cell:last-child{
         border-top-right-radius: 8px;
         border-bottom-right-radius: 8px;
+        display: table-cell;
         @media screen and (max-width: $xs-max){
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
@@ -221,7 +227,7 @@
     background: rgba(123, 210, 69, 0.05);
     font-weight: 600;
     font-size: 14px;
-    color: #5b913e;
+    color: $pay500;
     border-radius: 7px;
     display: flex;
     justify-content: center;
@@ -243,13 +249,14 @@
 .zero{
     background: rgba(237, 71, 0, 0.05);
     color: #ED4700;
-    opacity: 0.6;
 }
 
 .amount{
     font-weight: 600;
     font-size: 14px;
     color: $pay500;
+    display: flex;
+    justify-content: center;
     @media screen and (max-width: $xs-max){
         font-size: 11px;
     }

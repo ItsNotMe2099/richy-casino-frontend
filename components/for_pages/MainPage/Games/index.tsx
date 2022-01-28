@@ -3,6 +3,8 @@ import Slide from './Slide'
 import styles from './index.module.scss'
 import { useState } from 'react'
 import Header from 'components/for_pages/Common/Header'
+import HiddenXs from 'components/ui/HiddenXS'
+import VisibleXs from 'components/ui/VisibleXS'
 
 interface Props {
   slider?: any
@@ -57,6 +59,7 @@ export default function Games(props: Props) {
         <Header 
         icon='/img/Contents/gamepad.svg' 
         label='Richy Games' 
+        shadowColor='blue'
         length={items.length} 
         onPrev={() => slider.slickGoTo(currentIndex - 1)}
         onNext={() => slider.slickGoTo(currentIndex + 1)}
@@ -64,11 +67,20 @@ export default function Games(props: Props) {
         richy
         slider />
         </div>
-        <Slider {...settings} ref={slider1 => (slider = slider1)}>
-          {items.map((item, index) => 
-            <Slide item={item} key={index}/>
-          )}
-        </Slider>
+        <HiddenXs>
+          <Slider {...settings} ref={slider1 => (slider = slider1)}>
+            {items.map((item, index) => 
+              <Slide item={item} key={index}/>
+            )}
+          </Slider>
+        </HiddenXs>
+        <VisibleXs>
+          <div className={styles.overflow}>
+            {items.map((item, index) => 
+              <Slide item={item} key={index}/>
+            )}
+          </div>
+        </VisibleXs>
       </div>
   )
 }

@@ -15,6 +15,7 @@ interface Props {
   slider?: boolean
   richy?: boolean
   catalogTop?: boolean
+  shadowColor?: 'red' | 'blue' | 'yellow' | 'violet'
 }
 
 export default function Header(props: Props) {
@@ -27,11 +28,25 @@ export default function Header(props: Props) {
     )
   }
 
+  const getShadow = (shadowColor) => {
+    switch (shadowColor){
+      case 'blue':
+        return '/img/shadows/light-blue.png'
+      case 'red':
+        return '/img/shadows/light-red.png'
+      case 'yellow':
+        return '/img/shadows/light-yellow.png'
+      case 'violet':
+        return '/img/shadows/light-violet.png'
+    }
+  }
+
   return (
         <div className={styles.root}>
           <div className={styles.block}>
           <div className={styles.icon}>
-            <img src={props.icon} alt=''/>
+            {props.shadowColor && <div className={styles.shadow}><img src={getShadow(props.shadowColor)} alt=''/></div>}
+            <div className={styles.image}><img src={props.icon} alt=''/></div>
           </div>
           <div className={styles.label}>
             {props.label}

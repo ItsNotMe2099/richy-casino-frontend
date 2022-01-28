@@ -9,6 +9,7 @@
     display: flex;
     align-items: flex-end;
     background-size: contain;
+    background-repeat: no-repeat;
     @media screen and (max-width: 1360px){
         width: 120px;
         height: 120px;
@@ -17,6 +18,7 @@
         width: 100px;
         height: 100px;
         margin-right: 8px;
+        border-radius: 14px;
     }
     @media screen and (max-width: 700px){
         width: 78px;

@@ -2,13 +2,11 @@
 
 .root {
   @include componentRoot;
-  padding-left: 28px;
-  padding-bottom: 38px;
 }
 
 .filters{
     display: flex;
-    margin-top: 5px;
+    margin-top: 23px;
     justify-content: space-between;
     @media screen and (max-width: 1360px){
         flex-direction: column;
@@ -16,6 +14,10 @@
       @media screen and (max-width: $xs-max){
         display: none;
       }
+}
+
+.drop{
+  margin-bottom: 28px;
 }
 
 .item{
@@ -172,7 +174,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     position: relative;
-    gap: 15px;
+    gap: 22px;
     @media screen and (max-width: $xs-max){
         display: none;
       }
@@ -182,8 +184,9 @@
     margin-top: 15px;
     overflow-x: auto;
     overflow-y: hidden;
-  
+    padding-bottom: 14px;
 }
+
 
 .row{
   display: flex;

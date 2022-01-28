@@ -38,6 +38,7 @@
 
 .content{
     display: flex;
+    margin-top: 25px;
     @media screen and (max-width: 950px){
         flex-direction: column;
       }

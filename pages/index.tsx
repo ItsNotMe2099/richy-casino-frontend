@@ -49,10 +49,10 @@ export default function IndexPage() {
           <Games/>
           <Row className={styles.gamesLists}>
             <Col>
-            <GamesList label='Казино' icon='/img/Contents/casino.svg' items={casinos}/>
+            <GamesList label='Казино' icon='/img/Contents/casino.svg' items={casinos} shadowColor='red'/>
             </Col>
             <Col>
-            <GamesList label='Live Casino' icon='/img/Contents/live.svg' items={live}/>
+            <GamesList label='Live Casino' icon='/img/Contents/live.svg' items={live} shadowColor='blue'/>
             </Col>
           </Row>
           <BuyCrypto/>

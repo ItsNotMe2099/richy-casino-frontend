@@ -21,6 +21,12 @@
   overflow-y: hidden;
 }
 
+.col{
+  @media screen and (max-width: 375px){
+    padding: 0 5px !important;
+  }
+}
+
 .wrapper{
   position: relative;
 }
@@ -28,7 +34,8 @@
 .item{
   display: flex;
   flex-direction: column;
-  padding-bottom: 24px;
+  padding-bottom: 23px;
+  padding-top: 20px;
   align-items: center;
   border-radius: 18px;
   background-color: $dark700;
@@ -39,12 +46,19 @@
   }
   @media screen and (max-width: 375px){
     min-width: 108px;
+    padding: 14px 0;
   }
 }
 
+.icon{
+  position: relative;
+}
+
 .image{
+  position: relative;
   img{
-    height: 84px;
+    height: 56px;
+    width: 56px;
     @media screen and (max-width: 375px){
       width: 42px;
       height: 42px;
@@ -52,10 +66,26 @@
   }
 }
 
+.shadow{
+  position: absolute;
+  width: 92px;
+  height: 92px;
+  left: -15px;
+  bottom: -20px;
+  img{
+    width: 100%;
+    height: 100%;
+  }
+  @media screen and (max-width: 375px){
+    left: -25px;
+  }
+}
+
 .label{
   @include textStyle22Bold;
   color: $white;
   text-align: center;
+  margin-top: 10px;
   @media screen and (max-width: 1360px){
     font-size: 16px;
   }
@@ -65,7 +95,6 @@
 }
 
 .desc{
-  margin-top: 6px;
   font-weight: 500;
   font-size: 14px;
   color: $dark100;
@@ -90,6 +119,6 @@
     display: none;
   }
   @media screen and (max-width: 375px){
-    height: 87px;
+    height: 116px;
   }
 }

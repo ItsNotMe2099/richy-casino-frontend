@@ -9,18 +9,18 @@ interface Props {
 export default function Statistics(props: Props) {
 
   const users = [
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '2.567', id: 12345678987654321245},
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '0.00', amount: '2.567', id: 12345678987654321245},
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '2.567', id: 12345678987654321245},
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '2.567', id: 12345678987654321245},
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '0.00', amount: '2.567', id: 12345678987654321245},
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '2.567', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '2.567 BTC', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '0.00', amount: '2.567 BTC', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '2.567 BTC', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '2.567 BTC', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '0.00', amount: '2.567 BTC', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '2.567 BTC', id: 12345678987654321245},
   ]
 
   return (
       <div className={styles.root}>
           <div className={styles.header}>
-            <Header icon='/img/Statistics/stats.svg' label='Общая статистика' allDesktop='Полная статистика' allMobile='Все'/>
+            <Header icon='/img/Statistics/stats.svg' label='Общая статистика' allDesktop='Полная статистика' allMobile='Все' shadowColor='violet'/>
           </div>
           <div className={styles.table}>
             <div className={styles.row}>

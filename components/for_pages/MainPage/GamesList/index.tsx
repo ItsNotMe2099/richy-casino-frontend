@@ -4,7 +4,6 @@ import DropdownMenu from 'components/ui/DropdownMenu'
 import { useState } from 'react'
 import classNames from 'classnames'
 import Button from 'components/ui/Button'
-import Slider from 'react-slick'
 import VisibleXs from 'components/ui/VisibleXS'
 import HiddenXs from 'components/ui/HiddenXS'
 
@@ -19,6 +18,7 @@ interface Props {
   icon: string
   label: string
   items: IItem[]
+  shadowColor?: 'red' | 'blue' | 'yellow'
 }
 
 export default function GamesList(props: Props) {
@@ -85,13 +85,13 @@ export default function GamesList(props: Props) {
 
   return (
       <div className={classNames(styles.root, {[styles.none]: props.items.length === 0})}>
-        <Header icon={props.icon} label={props.label} games length={props.items.length}/>
+        <Header icon={props.icon} label={props.label} games length={props.items.length} shadowColor={props.shadowColor}/>
         <HiddenXs>
         <>
         <div className={styles.filters}>
-          <DropdownMenu options={categories} label='Категория' allOption
+          <DropdownMenu className={styles.drop} options={categories} label='Категория' allOption
            onAll={() => setCategory('')} onChange={(item) => setCategory(item.label)} activeTab={category} type='category'/>
-          <DropdownMenu options={providers} label='Провайдеры' allOption
+          <DropdownMenu className={styles.drop} options={providers} label='Провайдеры' allOption
             onAll={() => setProvider('')}
            onChange={(item) => setProvider(item.label)} activeTab={provider} type='provider'/>
         </div>
@@ -104,11 +104,16 @@ export default function GamesList(props: Props) {
         </HiddenXs>
         <VisibleXs>
         <div className={styles.mobile}>
-          <Slider {...settings}>
-            {items.map((item, index) =>
+          <div className={styles.row}>
+            {items.slice(0, (items.length / 2)).map((item, index) =>
               <Item item={item} key={index}/>
             )}
-          </Slider>
+          </div>
+          <div className={styles.row}>
+            {items.slice((items.length / 2), items.length).map((item, index) =>
+              <Item item={item} key={index}/>
+            )}
+          </div>
         </div>
         </VisibleXs>
       </div>
