@@ -11,7 +11,7 @@
 
 .top{
   display: grid;
-  grid-template-areas: 'a a a a' 
+  grid-template-areas: 'a a a a'
    'b b c c';
   gap: 9px 6px;
 }
@@ -96,7 +96,7 @@
   top: 0;
   left: 0;
   @media screen and (max-width: 450px){
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 
@@ -138,7 +138,7 @@
   font-weight: bold;
   font-size: 22px;
   @media screen and (max-width: 450px){
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 
@@ -162,7 +162,7 @@
 }
 
 .smallFont{
-  font-size: 14px;
+  font-size: 13px;
   @media screen and (max-width: 450px){
     font-size: 8px;
   }

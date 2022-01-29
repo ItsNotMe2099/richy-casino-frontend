@@ -122,12 +122,11 @@
 
 .item{
   font-weight: 600;
-  font-size: 15px;
+  font-size: 15px;  
   color: #FFFFFF;
   position: relative;
   @media screen and (max-width: 920px){
     font-size: 12px;
-    font-weight: 400;
     flex-shrink: 0;
     margin-right: 18px;
   }

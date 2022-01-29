@@ -29,9 +29,12 @@ export default function ProfileAccountsMenu(props: Props){
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
   const handleClick = (e) => {
     e.preventDefault()
-    setIsActive(!isActive)
+
+    console.log('SetActive')
+    setIsActive(i => !i)
   }
 
+  console.log('isActive', isActive)
   return (
     <div className={classNames(styles.root, props.className)}>
       <a href="#" onClick={handleClick} className={styles.dropDownTrigger}>

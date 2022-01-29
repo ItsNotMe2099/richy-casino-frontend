@@ -11,7 +11,7 @@
     font-size: 18px;
     height: 70px;
     @media screen and (max-width: $xs-max) {
-      font-size: 14px;
+      font-size: 13px;
       height: 50px;
       padding: 15px 9px;
     }
@@ -68,7 +68,7 @@
   width: 100%;
   @media screen and (max-width: $xs-max) {
     height: 45px;
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 
@@ -97,5 +97,5 @@
 }
 
 .row{
- 
+
 }

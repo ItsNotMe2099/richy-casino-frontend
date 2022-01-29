@@ -73,19 +73,19 @@ export default function ProfileMenu(props: Props){
     const handleClick = (e) => {
       e.preventDefault()
 
-    setIsActive(!isActive)
+    setIsActive(i => !i)
   }
 
   return (
     <div className={classNames(styles.root, props.className)}>
-      <a href="#" onClick={handleClick} className={styles.dropDownTrigger}>
+      <div onClick={handleClick} className={styles.dropDownTrigger}>
         <div className={styles.avatar}><Avatar avatar='/img/Avatar/avatar.png'/></div>
         <HiddenXs>
         <div className={styles.arrow}>
           <img src='/img/DropdownMenu/arrow3.svg' alt=''/>
         </div>
         </HiddenXs>
-      </a>
+      </div>
        <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
         <div className={styles.triangle}></div>
        {options.map((item, index) =>   <a key={item.key} className={styles.option} onClick={ e => handleClickItem(e, item)}>

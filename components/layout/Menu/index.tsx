@@ -44,7 +44,7 @@ export default function Menu(props: Props) {
   ]
   return (
     <Sticky>
-      {({style}) => <div className={classNames(styles.menu)} style={style}>
+      {({style, isSticky}) => <div className={classNames(styles.menu, {[styles.isSticky]: isSticky})} style={style}>
         <Link href='/'>
           <a className={styles.logo}><Logo/></a>
         </Link>

@@ -118,7 +118,7 @@ export default function Modal(props: Props) {
           </div>
         )}
         <Sheet.Content onViewportBoxUpdate>{isOpen && <div className={classNames(styles.centerSheet, {[styles.centerSheetFortune]: props.fortune})}>
-          <div className={styles.title}>
+          <div className={classNames(styles.title, {[styles.mobile]: true})}>
             {props.title}
           </div>
 
@@ -126,7 +126,7 @@ export default function Modal(props: Props) {
       </Sheet.Container>
       </div>
 
-      <Sheet.Backdrop onViewportBoxUpdate/>
+      <Sheet.Backdrop onViewportBoxUpdate onTap={props.onRequestClose}/>
     </Sheet>
     )
   }

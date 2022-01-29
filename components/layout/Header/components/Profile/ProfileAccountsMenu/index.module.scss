@@ -3,19 +3,22 @@
 .root{
   position: relative;
   width: 100%;
+  @media screen and (max-width: $xs-max) {
+    position: inherit;
+  }
 }
 
 .amount{
   color: $white;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 13px;
   margin-right: 4px;
 }
 
 .iso{
   color: #8f8e8d;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .iso2{
@@ -38,16 +41,14 @@
   position: absolute;
   background: #ffffff;
   opacity: 0;
-  visibility: hidden;
+  display: none;
   //transform: translateY(-20px);
   //transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-  z-index: 5;
-  width: 100%;
-  display: flex;
+  z-index: 20;
   flex-direction: column;
-  margin-top: 10px;
-  right: -50px;
+  margin-top: 21px;
+  left: 50%;
   .option:nth-child(2){
     a{
     &:hover{
@@ -66,18 +67,20 @@
   }
   a{
     padding: 10px 21px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     color: $white;
     &:hover{
       background-color: $dark400;
     }
   }
+
 }
 .dropDownActive{
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+  display: flex;
+    transform: translateX(-50%);
     filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.25));
     background: $dark500;
     border-radius: 12px;
@@ -94,6 +97,15 @@
         border-bottom-right-radius: 12px;
       }
     }
+  @media screen and (max-width: $xs-max) {
+    position: absolute;
+    margin-top: 0px;
+
+    top: 54px;
+    right: 10px;
+    left: 0px;
+    transform: none;
+  }
 }
 
 .dropDownTrigger {
@@ -110,7 +122,7 @@
   position: relative;
   width: 100%;
   margin: 0px;
-  font-size: 14px;
+  font-size: 13px;
   align-items: center;
   @media screen and (max-width: $xs-max){
     height: 30px;
@@ -149,7 +161,7 @@
 
 .dropdownTriggerActive{
   position: relative;
-  font-size: 14px;
+  font-size: 13px;
   color: #000000;
   padding-bottom: 6px;
 }
@@ -178,7 +190,7 @@
   align-items: center;
   margin-right: 7px;
   span{
-    font-size: 14px;
+    font-size: 13px;
     color: #FFFFFF;
   }
   @media screen and (max-width: 400px){
@@ -200,12 +212,17 @@
 
 .triangle{
   position: absolute;
-  transform: rotate(-45deg);
+  transform: rotate(-45deg) translateX(-50%);
   width: 22px;
   height: 22px;
   background: #2D2E38;
   top: -12px;
-  right: 140px;
+  right: 50%;
+  @media screen and (max-width: $xs-max) {
+    width: 14px;
+    height: 14px;
+
+  }
 }
 
 .leftSide{
@@ -215,16 +232,16 @@
 
 .amount, .iso{
   font-weight: bold;
-  font-size: 14px;
+  font-size: 13px;
   @media screen and (max-width: $xs-max){
-    font-weight: bold;
-    font-size: 11px;
+    font-weight: 500;
+    font-size: 10px;
   }
 }
 
 .amount2{
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
   color: $white;
   span{
     color: #96969b;

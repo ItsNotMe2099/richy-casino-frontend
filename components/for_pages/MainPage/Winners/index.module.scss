@@ -29,10 +29,10 @@
 
 .label{
     font-weight: bold;
-    font-size: 26px;    
+    font-size: 26px;
     color: #FFFFFF;
     @media screen and (max-width: 450px){
-        font-size: 14px;
+        font-size: 13px;
     }
 }
 
@@ -94,7 +94,7 @@
 
 .nick{
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     color: #FFFFFF;
     @media screen and (max-width: 450px){
         font-size: 11px;
@@ -109,7 +109,7 @@
 
 .amount{
     font-weight: 500;
-    font-size: 14px;
+    font-size: 13px;
     color: $pay500;
     flex: 1;
     display: flex;
@@ -134,7 +134,7 @@
 
 .game{
     font-weight: 500;
-    font-size: 14px;
+    font-size: 13px;
     color: $dark200;
     flex: 1;
     display: flex;

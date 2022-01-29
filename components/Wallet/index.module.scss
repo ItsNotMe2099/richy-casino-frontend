@@ -1,12 +1,12 @@
 @import "scss/index";
 
 .root{
-  
+
 }
 
 .choose{
   font-weight: 500;
-  font-size: 14px;
+  font-size: 13px;
   color: $dark200;
   text-align: left;
 }
@@ -170,7 +170,7 @@
   @media screen and (max-width: 375px){
     font-size: 12px;
     img{
-      margin-right: 6px; 
+      margin-right: 6px;
     }
     .top{
       .btn:last-child{
@@ -216,7 +216,7 @@
 .choose2{
   margin-top: 20px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 13px;
   color: $dark200;
   text-align: left;
 }

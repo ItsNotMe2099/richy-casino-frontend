@@ -42,7 +42,7 @@
 
 .label{
     font-weight: bold;
-    font-size: 26px;    
+    font-size: 26px;
     color: #FFFFFF;
     @media screen and (max-width: 450px){
         font-size: 19px;
@@ -62,7 +62,7 @@
 .mobile{
     @media screen and (min-width: 551px){
         display: none;
-    } 
+    }
 }
 
 .table{
@@ -153,7 +153,7 @@
 .cell{
     display: table-cell;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 13px;
     color: $dark200;
 }
 
@@ -175,7 +175,7 @@
 
 .gameLbl{
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     color: $dark200;
     margin-left: 41px;
     overflow: hidden;
@@ -193,7 +193,7 @@
 
 .gambler{
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     color: #FFFFFF;
     @media screen and (max-width: $xs-max){
         font-size: 11px;
@@ -205,7 +205,7 @@
 
 .id{
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     color: $dark200;
     overflow: hidden;
     white-space: nowrap;
@@ -226,7 +226,7 @@
     padding: 8px 16px;
     background: rgba(123, 210, 69, 0.05);
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     color: $pay500;
     border-radius: 7px;
     display: flex;
@@ -243,7 +243,7 @@
 .desktop{
     @media screen and (max-width: $xs-max){
         display: none;
-    } 
+    }
 }
 
 .zero{
@@ -253,7 +253,7 @@
 
 .amount{
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     color: $pay500;
     display: flex;
     justify-content: center;
