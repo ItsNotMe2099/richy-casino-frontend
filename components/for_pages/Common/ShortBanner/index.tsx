@@ -25,7 +25,10 @@ export default function ShortBanner(props: Props) {
       {[styles.noPaddingLeft]: (props.timer && !props.authBanner)}, {[styles.authBannerPadding]: props.authBanner})}
          onClick={() => appContext.showModal(ModalType.bonus)}>
       {props.longDown &&
-      <div className={styles.close} onClick={props.onRequestClose}>
+      <div className={styles.close} onClick={(e) => {
+        e.stopPropagation()
+        props.onRequestClose()
+      }}>
         <img src='/img/icons/close-bonus.svg' alt=''/>
       </div>}
       <div className={classNames(styles.hero, {[styles.withTimer]: (props.timer && !props.authBanner)})}><img

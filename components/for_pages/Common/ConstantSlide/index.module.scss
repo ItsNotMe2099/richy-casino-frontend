@@ -18,6 +18,17 @@
   @media screen and (max-width: $xs-max){
     width: 282px;
   }
+  &.sheet{
+    @media screen and (max-width: $xs-max){
+      width: auto;
+    }
+
+  }
+  &.longDown{
+    @media screen and (max-width: $xs-max){
+      width: auto;
+    }
+  }
 }
 
 .rootDownBanner{
@@ -109,6 +120,9 @@
   top: -10%;
   right: 10%;
   z-index: 1;
+
+
+
   img{
     width: 100%;
     max-width: 200px;
@@ -122,10 +136,10 @@
   @media screen and (max-width: $xs-max){
     right: -5%;
   }
-}
-
-.sheet{
-  top: 0;
+  &.sheet{
+    top: 0;
+    right: -50px;
+  }
 }
 
 .textLeft{
