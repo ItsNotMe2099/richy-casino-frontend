@@ -1,6 +1,8 @@
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import Timer from './Timer'
+import {ModalType} from 'types/enums'
+import {useAppContext} from 'context/state'
 
 interface Props {
   children?: React.ReactNode
@@ -13,14 +15,15 @@ interface Props {
 }
 
 export default function ShortBanner(props: Props) {
-
+  const appContext = useAppContext()
   const someDate = '2022-03-27T12:46:24.007Z'
 
   const expiredAt = new Date(someDate)
 
   return (
     <div className={classNames(styles.root,
-      {[styles.noPaddingLeft]: (props.timer && !props.authBanner)}, {[styles.authBannerPadding]: props.authBanner})}>
+      {[styles.noPaddingLeft]: (props.timer && !props.authBanner)}, {[styles.authBannerPadding]: props.authBanner})}
+         onClick={() => appContext.showModal(ModalType.bonus)}>
       {props.longDown &&
       <div className={styles.close} onClick={props.onRequestClose}>
         <img src='/img/icons/close-bonus.svg' alt=''/>

@@ -54,8 +54,8 @@
 }
 
 .label{
-  font-weight: bold;
-  font-size: 26px;    
+  font-weight: 500;
+  font-size: 24px;
   color: #FFFFFF;
   @media screen and (max-width: 920px){
       font-size: 16px;
@@ -67,7 +67,7 @@
   border-radius: 8px;
   background-color: $dark600;
   color: $white;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 12px;
   &:hover{
     background-color: $dark400;
@@ -82,7 +82,7 @@
 
 .length{
   font-weight: 500;
-  font-size: 16px;
+  font-size: 13px;
   color: #45454D;
   margin-right: 10px;
 }
@@ -118,11 +118,11 @@
 .mobile{
   @media screen and (min-width: $sm-min){
       display: none;
-  } 
+  }
 }
 
 .desktop{
   @media screen and (max-width: $xs-max){
       display: none;
-  } 
+  }
 }

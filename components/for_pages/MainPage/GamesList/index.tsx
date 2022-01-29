@@ -30,14 +30,14 @@ export default function GamesList(props: Props) {
     return(
     <div className={styles.item}>
               <div className={styles.shade}></div>
-              <Button 
-              onClick={() => inFavorite ? setInFavorite(false) : setInFavorite(true)} 
-              className={classNames(styles.favorite, {[styles.active]: inFavorite})} 
-              size='superExtraSmall' 
+              <Button
+              onClick={() => inFavorite ? setInFavorite(false) : setInFavorite(true)}
+              className={classNames(styles.favorite, {[styles.active]: inFavorite})}
+              size='superExtraSmall'
               background='blackTransparent'>
-                {inFavorite ? 
-                <img src='/img/GamesList/star-fill.svg' alt=''/> 
-                : 
+                {inFavorite ?
+                <img src='/img/GamesList/star-fill.svg' alt=''/>
+                :
                 <img src='/img/GamesList/star-stroke.svg' alt=''/>}
               </Button>
               <div className={styles.btns}>
@@ -63,8 +63,8 @@ export default function GamesList(props: Props) {
   const [category, setCategory] = useState('')
   const [provider, setProvider] = useState('')
 
-  const items = 
-  props.items.filter(item => ((category === item.category && provider === '') || 
+  const items =
+  props.items.filter(item => ((category === item.category && provider === '') ||
   (category === '' && provider === item.provider) ||
   (category === item.category && provider === item.provider) ||
   (provider === '' && category === '')

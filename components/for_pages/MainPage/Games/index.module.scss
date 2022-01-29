@@ -5,7 +5,7 @@
 }
 
 .header{
-  
+
 }
 
 .block{
@@ -42,7 +42,7 @@
   border-radius: 8px;
   background-color: $dark600;
   color: $white;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 12px;
   margin-right: 13px;
   @media screen and (max-width: 500px){
@@ -89,8 +89,10 @@
 
 .slider{
   margin-top: 28px;
+  margin-right: -22px;
   @media screen and (max-width: $xs-max){
     margin-top: 15px;
+    margin-right: 0px;
   }
   :global .slick-list{
     .slick-track{
@@ -105,7 +107,7 @@
       }
     }
   }
- 
+
 }
 
 .overflow{

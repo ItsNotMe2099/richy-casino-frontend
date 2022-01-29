@@ -18,8 +18,9 @@
             font-size: 19px;
         }
      }
-    @media screen and (max-width: 400px){
-        margin-bottom: 26px;
+    @media screen and (max-width: $xs-max){
+        margin-bottom: 0px;
+      padding-bottom: 0px;
     }
 }
 
@@ -28,7 +29,7 @@
     border-radius: 8px;
     background-color: $dark600;
     color: $white;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 12px;
     @media screen and (max-width: 700px){
         padding: 8px 12px;
@@ -90,6 +91,7 @@
 }
     @media screen and (max-width: $xs-max){
         padding: 0;
+      margin-top: 21px;
     }
 }
 
@@ -100,6 +102,7 @@
         @media screen and (max-width: $xs-max){
             padding-bottom: 11px;
             font-size: 11px;
+            font-weight: 400;
         }
         @media screen and (max-width: 400px){
             font-size: 10px;
@@ -174,7 +177,7 @@
 }
 
 .gameLbl{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 13px;
     color: $dark200;
     margin-left: 41px;
@@ -192,11 +195,12 @@
 }
 
 .gambler{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 13px;
     color: #FFFFFF;
     @media screen and (max-width: $xs-max){
         font-size: 11px;
+      font-weight: 400;
     }
     @media screen and (max-width: 400px){
         font-size: 10px;
@@ -204,7 +208,7 @@
 }
 
 .id{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 13px;
     color: $dark200;
     overflow: hidden;
@@ -225,7 +229,7 @@
 .mult{
     padding: 8px 16px;
     background: rgba(123, 210, 69, 0.05);
-    font-weight: 600;
+    font-weight: 500;
     font-size: 13px;
     color: $pay500;
     border-radius: 7px;
@@ -252,7 +256,7 @@
 }
 
 .amount{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 13px;
     color: $pay500;
     display: flex;

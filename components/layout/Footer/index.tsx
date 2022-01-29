@@ -12,7 +12,7 @@ import LangSelect from 'components/for_pages/Common/LangSelect'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import SupportButton from 'components/for_pages/Common/SupportButton'
-
+import {useAppContext} from 'context/state'
 
 interface Props {
   children?: React.ReactNode
@@ -20,7 +20,7 @@ interface Props {
 }
 
 export default function Footer(props: Props) {
-
+  const appContext = useAppContext()
   const options = [
     { label: 'Правила', link: '#' },
     { label: 'Призы и бонусы', link: '#' },
@@ -72,7 +72,9 @@ export default function Footer(props: Props) {
   const { route: currentRoute, asPath: currentPath } = useRouter()
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} style={{
+      paddingBottom: `${(appContext.auth  ? 81 : 0) + (appContext.showBonusExpanded ? 20 : 0)}px`
+    }}>
         <div className={styles.wrapper}>
         {currentRoute === '/' || currentPath === '/' ?
           <div className={styles.logo}><Logo/></div>
@@ -83,14 +85,14 @@ export default function Footer(props: Props) {
         }
         <div className={styles.top}>
           <div className={styles.mobile}>
-            {(showAllItems ? allItems : allItems.slice(0, 3)).map((item, index) => 
+            {(showAllItems ? allItems : allItems.slice(0, 3)).map((item, index) =>
               <Link href={item.link} key={index}>
               <a className={styles.item}>
                 {item.label}
               </a>
             </Link>
             )}
-            {showAllItems && 
+            {showAllItems &&
             <>
               <div className={styles.desc}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -102,7 +104,7 @@ export default function Footer(props: Props) {
             }
           </div>
           <div className={classNames(styles.show, {[styles.notShow]: !showAllItems})}>
-            <Button onClick={() => showAllItems ? setShowAllItems(false) : setShowAllItems(true)} size='extraSmall' background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button>
+            <Button className={styles.menuMobileToggle} onClick={() => showAllItems ? setShowAllItems(false) : setShowAllItems(true)} size='extraSmall' background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button>
           </div>
           <div className={styles.left}>
             <div className={styles.desc}>
@@ -159,21 +161,23 @@ export default function Footer(props: Props) {
             </div>
           </div>
             <div className={styles.supportMobile}>
+              <div style={{flex: 1}}>
               <SupportButton className={styles.support}/>
+              </div>
               <div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/apple.svg' alt=''/></Button></div>
               <Button size='extraSmall' background='dark700'><img src='/img/layout/top/android.svg' alt=''/></Button>
             </div>
         </div>
         <div className={styles.sliders}>
             <div className={styles.sliderTop}>
-              {slidesTop.map((slide, index) => 
+              {slidesTop.map((slide, index) =>
                 <div className={styles.slide} key={index}>
                   <img src={slide.image} alt=''/>
                 </div>
               )}
             </div>
             <div className={styles.sliderBottom}>
-              {slidesBottom.map((slide, index) => 
+              {slidesBottom.map((slide, index) =>
                 <div className={styles.slide} key={index}>
                   <img src={slide.image} alt=''/>
                 </div>

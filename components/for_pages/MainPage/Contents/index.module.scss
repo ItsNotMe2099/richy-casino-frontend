@@ -82,20 +82,19 @@
 }
 
 .label{
-  @include textStyle22Bold;
+  @include textStyle25Bold;
   color: $white;
   text-align: center;
   margin-top: 10px;
-  @media screen and (max-width: 1360px){
-    font-size: 16px;
-  }
+
   @media screen and (max-width: 375px){
     font-size: 13px;
+    font-weight: 500;
   }
 }
 
 .desc{
-  font-weight: 500;
+  font-weight: 400;
   font-size: 13px;
   color: $dark100;
   text-align: center;

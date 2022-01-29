@@ -19,7 +19,7 @@
 }
 
 .title{
-  font-weight: 600;
+  font-weight: 500;
   font-size: 18px;
   @media screen and (max-width: 700px){
     padding-left: 28px;
@@ -140,7 +140,7 @@
 
 .cell{
   display: table-cell;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
   color: $dark200;
   @media screen and (max-width: 1360px){
@@ -150,7 +150,7 @@
 
 .text{
   font-weight: 500;
-  font-size: 16px;  
+  font-size: 16px;
   color: #FFFFFF;
   @media screen and (max-width: 1360px){
     font-size: 12px;

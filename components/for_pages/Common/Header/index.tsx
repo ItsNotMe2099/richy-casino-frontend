@@ -64,15 +64,15 @@ export default function Header(props: Props) {
             <div className={styles.length}>
               {props.length}
             </div>
-          </VisibleXs> 
+          </VisibleXs>
         }
-          <Link href='#'>
+          {/*<Link href='#'>
           <a className={styles.all}>
             {props.games ? <>Все <span>игры</span></> : props.top ? <><span>Смотреть</span> ТОП-100</>: null}
             {props.allDesktop && <div className={styles.desktop}>{props.allDesktop}</div>}
             {props.allMobile && <div className={styles.mobile}>{props.allMobile}</div>}
           </a>
-          </Link>
+          </Link>*/}
           {props.slider &&
           <div className={styles.controls}>
             <div className={styles.prev} onClick={props.onPrev}>
@@ -107,7 +107,7 @@ export default function Header(props: Props) {
             </div>
           </div>}
       </div>
-      </VisibleXs> 
+      </VisibleXs>
       }
       </div>
   )

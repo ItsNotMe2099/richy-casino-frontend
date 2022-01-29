@@ -18,7 +18,7 @@
 }
 
 .no{
-  font-weight: bold;
+  font-weight: 500;
   font-size: 16px;
   text-align: center;
 }
@@ -33,12 +33,12 @@
 .btn{
   margin-top: 19px;
   padding: 8px 12px;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 13px;
   color: $white;
 }
 
-.icon{ 
+.icon{
   margin-right: 16px;
   display: flex;
   align-self: center;

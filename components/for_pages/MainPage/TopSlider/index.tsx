@@ -35,7 +35,9 @@ export default function TopSlider(props: Props) {
       {
         breakpoint: 768,
         settings: {
-          dots: true
+          variableWidth: true,
+          dots: true,
+          centerMode: true
         }
       },
     ]
@@ -58,7 +60,7 @@ export default function TopSlider(props: Props) {
       </HiddenXs>
       <VisibleXs>
       <>
-      {(user && !context.banner) && <div className={styles.bonus}><Gift timer/></div>}
+      {(context.showBonus && !context.showBonusExpanded) && <div className={styles.bonus}><Gift timer/></div>}
       <Slider {...settings}>
         <ConstantSlide/>
         {items.map((item, index) =>
@@ -72,8 +74,8 @@ export default function TopSlider(props: Props) {
             <Button size='normal' background='white'>Начать играть</Button>
           </div>
         </div>
-        </div>  
-        </div> 
+        </div>
+        </div>
         )}
       </Slider>
       </>

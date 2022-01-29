@@ -107,7 +107,7 @@ select:-webkit-autofill:focus {
   font-family: Gilroy;
   src: url(/fonts/Gilroy/Gilroy-Semibold.ttf) format('truetype');
   src: url(/fonts/Gilroy/Gilroy-Semibold.woff2) format('woff2');
-  font-weight: 600;
+  font-weight: 500;
 }
 
 @font-face {
@@ -126,9 +126,7 @@ select:-webkit-autofill:focus {
   padding: 0px;
 
 }
-.react-modal-sheet-header{
-  height: 34px !important;
-}
+
 .react-modal-sheet-drag-indicator {
   /* custom styles */
   background-color: #292B33 !important;

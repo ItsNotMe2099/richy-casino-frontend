@@ -8,7 +8,7 @@
   margin-top: 18px;
   position: relative;
   overflow: hidden;
-  padding: 30px 0;
+  padding: 43px 0;
   min-height: 230px;
   @media screen and (max-width: 950px){
     flex-direction: column;
@@ -19,6 +19,7 @@
     padding-left: 10px;
     min-height: auto;
     margin-top: 12px;
+    border-radius: 11px;
   }
 }
 
@@ -31,12 +32,16 @@
     width: 100%;
     min-height: 235px;
     @media screen and (max-width: $xs-max){
-      max-height: 108px;
-      min-height: 108px;
+      width: auto;
+      min-height: auto;
+      max-height: 100%;
+
     }
   }
-  @media screen and (max-width: 870px){
-    left: 60%;
+  @media screen and (max-width: $xs-max){
+    right: 0px;
+    left: auto;
+    bottom: 0px;
   }
 }
 
@@ -51,14 +56,19 @@
 }
 
 .left{
+  flex: 1;
   display: flex;
-  flex-direction: column;   
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  margin-left: 25%;
   position: relative;
   z-index: 2;
   justify-content: center;
-  @media screen and (max-width: 870px){
+  @media screen and (max-width: $xs-max){
     align-items: flex-start;
+    margin-left: 0px;
+    margin-top: 8px;
   }
 }
 
@@ -66,8 +76,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: absolute;
-  right: 10%;
+
+  margin-right: 10%;
   @media screen and (max-width: $sm-max){
     right: 5%;
 }
@@ -82,7 +92,7 @@
 }
 
 .title{
-  font-weight: 600;
+  font-weight: 500;
   font-size: 90px;
   letter-spacing: 0.275em;
   color: #FFFFFF;
@@ -100,30 +110,30 @@
 
 .prize{
   background-color: rgba(255, 199, 0, 0.4);
-  padding: 13px 12px;
+  padding: 11px 12px;
   padding-right: 24px;
   border-radius: 9px;
   display: flex;
   align-items: center;
-  font-weight: 500;
-  font-size: 20px;
+  font-weight: 400;
+  font-size: 19px;
   @media screen and (max-width: 1360px){
     padding: 4px 5px;
     padding-right: 20px;
   }
   @media screen and (max-width: $xs-max){
-    font-size: 11px;
+    font-size: 9px;
     border-radius: 4px;
   }
 }
 
 .balance{
   background-color: $balance600;
-  padding: 13px 16px;
+  padding: 11px 16px;
   border-radius: 9px;
   margin-left: -12px;
-  font-weight: 600;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 19px;
   color: #000;
   display: flex;
   align-items: center;
@@ -131,7 +141,7 @@
     padding: 4px 5px;
   }
   @media screen and (max-width: $xs-max){
-    font-size: 11px;
+    font-size: 9px;
     border-radius: 4px;
   }
 }
@@ -142,13 +152,13 @@
   background: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(16.5295px);
   @media screen and (max-width: $xs-max){
-    padding: 8px;
+    padding: 4px;
     border-radius: 6px;
   }
 }
 
 .end{
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
   color: $white;
   text-align: center;
@@ -159,24 +169,24 @@
 }
 
 .btn{
-  padding-right: 55px;
-  padding-left: 55px;
-  @include textStyle14Bold;
-  margin-top: 21px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 0px 15px;
+  margin-top: 15px;
+  height: 46px;
+  width: 100%;
   color: $white;
   @media screen and (max-width: 950px){
     margin-top: 0;
   }
   @media screen and (max-width: $xs-max){
-    font-size: 11px;
-    padding: 12px 15px;
+    font-size: 9px;
+    padding: 10px 14px;
     border-radius: 4px;
+    font-weight: 600;
   }
 }
 
 .btnContainer{
+
   @media screen and (max-width: 950px){
     align-self: center;
     margin-right: 5px;

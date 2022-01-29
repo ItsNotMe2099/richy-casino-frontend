@@ -9,7 +9,7 @@ interface Props {
 
 export default function Tournament(props: Props) {
 
-  const someDate = '2021-12-27T12:46:24.007Z'
+  const someDate = '2022-05-01T12:46:24.007Z'
 
   const expiredAt = new Date(someDate)
 

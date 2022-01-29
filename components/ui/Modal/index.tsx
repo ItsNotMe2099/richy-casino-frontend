@@ -109,18 +109,18 @@ export default function Modal(props: Props) {
     // @ts-ignore
     return (
     <Sheet isOpen={isOpen} onClose={onRequestClose}    >
-      <div className={classNames({[styles.sheet]: props.fortune})}>
+      <div className={classNames(styles.rootSheet, {[styles.sheet]: props.fortune})}>
       <Sheet.Container onViewportBoxUpdate>
         <Sheet.Header onViewportBoxUpdate />
+        <div className={classNames(styles.title, {[styles.mobile]: true})}>
+          {props.title}
+        </div>
         {props.onRequestClose && (
           <div className={styles.close} onClick={props.onRequestClose}>
             <Close/>
           </div>
         )}
         <Sheet.Content onViewportBoxUpdate>{isOpen && <div className={classNames(styles.centerSheet, {[styles.centerSheetFortune]: props.fortune})}>
-          <div className={classNames(styles.title, {[styles.mobile]: true})}>
-            {props.title}
-          </div>
 
           {props.children}</div>}</Sheet.Content>
       </Sheet.Container>

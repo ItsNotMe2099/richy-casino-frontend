@@ -8,6 +8,13 @@
   box-shadow: 0px 0px 11px rgba(0, 0, 0, 0.5);
   border-radius: 12px 12px 6px 6px;
   img{
-    padding: 11px;
+  padding: 11px 11px;
   }
+  @media screen and (max-width: $xs-max){
+    width: 64px;
+    img{
+      padding: 6px 8px;
+    }
+  }
+
 }

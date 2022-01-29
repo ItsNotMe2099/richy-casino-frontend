@@ -1,8 +1,10 @@
 import styles from './index.module.scss'
-import { Col } from 'react-grid-system'
+import {Col} from 'react-grid-system'
 import Button from 'components/ui/Button'
 import classNames from 'classnames'
 import Timer from '../ShortBanner/Timer'
+import {useAppContext} from 'context/state'
+import {ModalType} from 'types/enums'
 
 interface Props {
   children?: React.ReactNode
@@ -15,13 +17,13 @@ interface Props {
 }
 
 export default function ConstantSlide(props: Props) {
-
+  const appContext = useAppContext()
   const someDate = '2022-03-27T12:46:24.007Z'
 
   const expiredAt = new Date(someDate)
 
   return (
-      <Col className={props.className}>
+      <Col className={props.className} onClick={() => appContext.showModal(ModalType.bonus)}>
       <div className={classNames(styles.root, {[styles.noBack]: props.noBack}, {[styles.rootDownBanner]: props.longDown})}>
         {(props.modal || props.longDown) &&
         <div className={classNames(styles.close, {[styles.closeSheet]: props.sheet})} onClick={props.onRequestClose}>

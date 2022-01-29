@@ -15,6 +15,9 @@
     min-height: 200px;
     padding: 20px 0 9px 15px;
   }
+  @media screen and (max-width: $xs-max){
+    width: 282px;
+  }
 }
 
 .rootDownBanner{
@@ -31,7 +34,7 @@
 }
 
 .title{
-  font-weight: bold;
+  font-weight: 500;
   font-size: 26px;
   position: relative;
   z-index: 2;
@@ -41,7 +44,7 @@
 }
 
 .bonus{
-  font-weight: 800;
+  font-weight: 600;
   font-size: 49px;
   color: #AAFF55;
   position: relative;
@@ -94,6 +97,8 @@
 
 .satoshi{
   padding: 3px 12px;
+  font-size: 14px;
+  font-weight: 500;
   @media screen and (max-width: 800px){
     font-size: 11px;
   }

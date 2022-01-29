@@ -16,20 +16,21 @@ export default function AuthUserFeatures(props: Props) {
 
   return (
     <>
-    {(user && context.banner) &&
+    {(user && context.showBonus && context.showBonusExpanded) &&
       <>
         <div className={styles.longDown}>
           <HiddenXs>
-            <ConstantSlide longDown onRequestClose={context.hideBanner}/>
+            <ConstantSlide longDown onRequestClose={() => context.setBonusExpanded(false)}/>
           </HiddenXs>
           <VisibleXs>
-            <ShortBanner authBanner reverse timer longDown onRequestClose={context.hideBanner}/>
+            <ShortBanner authBanner reverse timer longDown onRequestClose={() => context.setBonusExpanded(false)}/>
           </VisibleXs>
         </div>
       </>
     }
-    {user &&
+    {context.auth && <VisibleXs>
       <UserFooter/>
+    </VisibleXs>
     }
     </>
   )

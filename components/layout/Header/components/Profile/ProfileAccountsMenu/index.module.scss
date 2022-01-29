@@ -22,7 +22,7 @@
 }
 
 .iso2{
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
 }
 
@@ -233,6 +233,7 @@
 .amount, .iso{
   font-weight: bold;
   font-size: 13px;
+  padding-top: 4px;
   @media screen and (max-width: $xs-max){
     font-weight: 500;
     font-size: 10px;
@@ -240,7 +241,7 @@
 }
 
 .amount2{
-  font-weight: 600;
+  font-weight: 500;
   font-size: 13px;
   color: $white;
   span{
@@ -249,7 +250,7 @@
 }
 
 .dg{
-  font-weight: 600;
+  font-weight: 500;
   font-size: 12px;
   text-align: right;
   span{

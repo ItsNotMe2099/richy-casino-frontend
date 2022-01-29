@@ -3,6 +3,7 @@
 .root {
   display: flex;
   justify-content: center;
+
   }
 
 .input{
@@ -12,15 +13,16 @@
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  font-size: 28px;
+  font-size: 27px;
   color: $dark800;
   width: 42px;
+  padding-top: 4px;
   height: 40px;
   @media screen and (max-width: 950px){
     padding: 0 5px;
   }
   @media screen and (max-width: $xs-max){
-    font-size: 16px;
+    font-size: 15px;
     width: 24px;
     height: 22px;
   }
@@ -37,9 +39,12 @@
   }
 }
 
-.separator{ 
+.separator{
   .circle:first-child{
   margin-bottom: 8px;
+    @media screen and (max-width: $xs-max){
+      margin-bottom: 4px;
+    }
 }
 }
 
@@ -63,6 +68,9 @@
 
 .label{
   text-align: center;
+  font-weight: 400;
+  font-size: 12px;
+  margin-top: 5px;
   @media screen and (max-width: 950px){
     display: none;
   }

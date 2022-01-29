@@ -9,6 +9,11 @@
   font-size: 22px;
 }
 
+@mixin textStyle25Bold {
+  font-weight: 500;
+  font-size: 22px;
+}
+
 @mixin textStyle26Bold {
   font-weight: bold;
   font-size: 26px;
@@ -33,7 +38,7 @@
 }
 
 @mixin textStyle14600 {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 13px;
 }
 

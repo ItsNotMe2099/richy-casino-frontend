@@ -43,3 +43,13 @@ export const formatPhone = (phone) => {
     return phone
   }
 }
+
+export const pad = (pad, str, padLeft = true) => {
+  if (typeof str === 'undefined')
+    return pad
+  if (padLeft) {
+    return (pad + str).slice(-pad.length)
+  } else {
+    return (str + pad).substring(0, pad.length)
+  }
+}

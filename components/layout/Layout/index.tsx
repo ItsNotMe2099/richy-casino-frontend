@@ -12,7 +12,7 @@ interface Props{
 export default function Layout({children}: Props){
 
    return (
-    <Container style={{height: '100%', minHeight: '100%'}}>
+    <Container fluid style={{height: '100%', minHeight: '100%', maxWidth: '1320px'}}>
     <div className={styles.root}>
 
         <Header/>
