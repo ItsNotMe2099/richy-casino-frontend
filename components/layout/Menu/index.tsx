@@ -5,7 +5,7 @@ import Overflow from './Overflow'
 import Link from 'next/link'
 import classNames from 'classnames'
 
-import {Sticky} from 'react-sticky'
+import {Sticky, StickyContainer} from 'react-sticky'
 import {useAppContext} from 'context/state'
 
 interface Props {
@@ -60,9 +60,9 @@ export default function Menu(props: Props) {
     </div>
   }
   return ( appContext.isDesktop ?
-    <Sticky>
+   <StickyContainer><Sticky>
       {({style, isSticky}) => renderMenu(classNames(styles.menu, {[styles.isSticky]: isSticky}), style)}
-    </Sticky> : renderMenu(classNames(styles.menu, {[styles.isMobile]: true}), {})
+    </Sticky></StickyContainer>  : renderMenu(classNames(styles.menu, {[styles.isMobile]: true}), {})
   )
 }
 
