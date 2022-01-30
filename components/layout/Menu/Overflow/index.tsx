@@ -19,7 +19,7 @@ interface Props {
 export default function Overflow(props: Props) {
 
   const MenuItem = (prop: {item: IOption}) => {
-    
+
     return(
       <Link href={prop.item.link}>
           <a
@@ -34,7 +34,7 @@ export default function Overflow(props: Props) {
     )
   }
 
-  const length = props.options.length 
+  const length = props.options.length
 
   return (
     <>

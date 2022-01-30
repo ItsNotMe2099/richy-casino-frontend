@@ -28,9 +28,9 @@ export default function Modal(props: Props) {
   const appContext = useAppContext()
   const customStyles = {
     overlay: {
-      backgroundColor: !props.singlePage  ? 'rgba(0, 0, 0, 0.5)' : 'transparent',
+      backgroundColor: !props.singlePage ? 'rgba(0, 0, 0, 0.5)' : 'transparent',
       display: 'flex',
-      zIndex: '11',
+      zIndex: '30',
     },
     content: {
       width: '100%',
@@ -56,7 +56,7 @@ export default function Modal(props: Props) {
     }
   }
 
-  if(appContext.isDesktop) {
+  if (appContext.isDesktop) {
     return (
       <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
         <div className={styles.frame}>
@@ -71,11 +71,11 @@ export default function Modal(props: Props) {
                   {props.title}
                 </div>
                 <div className={styles.right}>
-                {props.onRequestClose && (
-                  <div className={styles.close} onClick={props.onRequestClose}>
-                    <Close/>
-                  </div>
-                )}
+                  {props.onRequestClose && (
+                    <div className={styles.close} onClick={props.onRequestClose}>
+                      <Close/>
+                    </div>
+                  )}
                 </div>
               </div>
             </HiddenXs>
@@ -104,30 +104,37 @@ export default function Modal(props: Props) {
         </div>
       </ReactModal>
     )
-  }else{
+  } else {
+    const openModal = () => {
+      document.body.classList.add('modal-open')
+    }
+    const hideModal = () => {
+      document.body.classList.remove('modal-open')
+    }
     /* eslint-disable */
     // @ts-ignore
     return (
-    <Sheet isOpen={isOpen} onClose={onRequestClose}    >
-      <div className={classNames(styles.rootSheet, {[styles.sheet]: props.fortune})}>
-      <Sheet.Container onViewportBoxUpdate>
-        <Sheet.Header onViewportBoxUpdate />
-        <div className={classNames(styles.title, {[styles.mobile]: true})}>
-          {props.title}
+      <Sheet isOpen={isOpen} onClose={onRequestClose} onOpenStart={openModal} onCloseEnd={hideModal}>
+        <div className={classNames(styles.rootSheet, {[styles.sheet]: props.fortune})}>
+          <Sheet.Container onViewportBoxUpdate>
+            <Sheet.Header onViewportBoxUpdate/>
+            <div className={classNames(styles.title, {[styles.mobile]: true})}>
+              {props.title}
+            </div>
+            {props.onRequestClose && (
+              <div className={styles.close} onClick={props.onRequestClose}>
+                <Close/>
+              </div>
+            )}
+            <Sheet.Content onViewportBoxUpdate>{isOpen &&
+            <div className={classNames(styles.centerSheet, {[styles.centerSheetFortune]: props.fortune})}>
+
+              {props.children}</div>}</Sheet.Content>
+          </Sheet.Container>
         </div>
-        {props.onRequestClose && (
-          <div className={styles.close} onClick={props.onRequestClose}>
-            <Close/>
-          </div>
-        )}
-        <Sheet.Content onViewportBoxUpdate>{isOpen && <div className={classNames(styles.centerSheet, {[styles.centerSheetFortune]: props.fortune})}>
 
-          {props.children}</div>}</Sheet.Content>
-      </Sheet.Container>
-      </div>
-
-      <Sheet.Backdrop onViewportBoxUpdate onTap={props.onRequestClose}/>
-    </Sheet>
+        <Sheet.Backdrop onViewportBoxUpdate onTap={props.onRequestClose}/>
+      </Sheet>
     )
   }
 }

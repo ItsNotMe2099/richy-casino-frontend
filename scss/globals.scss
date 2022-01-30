@@ -22,7 +22,12 @@ body{
   width: 100%;
   max-width: 100%;
   &.modal-open{
+
     overflow-y: hidden;
+
+    #__next{
+      overflow-y: hidden;
+    }
   }
 }
 

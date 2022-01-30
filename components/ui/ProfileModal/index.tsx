@@ -40,7 +40,7 @@ export default function ProfileModal(props: Props) {
     overlay: {
       backgroundColor: !props.singlePage  ? 'rgba(0, 0, 0, 0.5)' : 'transparent',
       display: 'flex',
-      zIndex: '11',
+      zIndex: '30',
     },
     content: {
       width: '100%',
@@ -79,7 +79,7 @@ export default function ProfileModal(props: Props) {
               <div className={classNames(styles.top, {[styles.noBorder]: props.noBorder})}>
                 <div className={styles.left}>
                   {(!props.profile && props.isBack) &&
-                  <div className={styles.back} 
+                  <div className={styles.back}
                   onClick={() => props.wallet ? props.setStep() : context.showModal(ProfileModalType.profile)}>
                     <img src='/img/icons/back.svg' alt=''/>
                   </div>}
@@ -121,7 +121,7 @@ export default function ProfileModal(props: Props) {
               </div>}
               {!props.profile &&
               <div className={styles.mobileBack}>
-                  <div className={styles.wrap} 
+                  <div className={styles.wrap}
                   onClick={(props.wallet && props.step === 1) ? props.onRequestClose :
                   (props.wallet && props.step > 1) ? () => props.setStep() :
                   () => context.showModal(ProfileModalType.profile)}>

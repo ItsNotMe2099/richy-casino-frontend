@@ -23,6 +23,11 @@
       width: 100% !important;
     }
   }
+  &.isMobile{
+    position: sticky;
+    top: 0px;
+  padding: 0px;
+  }
 
 
 

@@ -6,6 +6,7 @@ import Link from 'next/link'
 import classNames from 'classnames'
 
 import {Sticky} from 'react-sticky'
+import {useAppContext} from 'context/state'
 
 interface Props {
   children?: React.ReactNode
@@ -28,7 +29,7 @@ interface Option {
 }
 
 export default function Menu(props: Props) {
-
+  const appContext = useAppContext()
   const {route: currentRoute, asPath: currentPath} = useRouter()
   const options = [
     {label: 'Главная', link: '/'},
@@ -42,15 +43,26 @@ export default function Menu(props: Props) {
     {label: 'Poker', link: '#'},
     {label: 'Some Option', link: '#'},
   ]
-  return (
+  const renderMobile = () => {
+    return  <div className={classNames(styles.menu, )} >
+      <Link href='/'>
+        <a className={styles.logo}><Logo/></a>
+      </Link>
+      <Overflow currentPath={currentPath} currentRoute={currentRoute} options={options}/>
+    </div>
+  }
+  const renderMenu = (className, style) => {
+    return  <div className={className} style={style}>
+      <Link href='/'>
+        <a className={styles.logo}><Logo/></a>
+      </Link>
+      <Overflow currentPath={currentPath} currentRoute={currentRoute} options={options}/>
+    </div>
+  }
+  return ( appContext.isDesktop ?
     <Sticky>
-      {({style, isSticky}) => <div className={classNames(styles.menu, {[styles.isSticky]: isSticky})} style={style}>
-        <Link href='/'>
-          <a className={styles.logo}><Logo/></a>
-        </Link>
-        <Overflow currentPath={currentPath} currentRoute={currentRoute} options={options}/>
-      </div>}
-    </Sticky>
+      {({style, isSticky}) => renderMenu(classNames(styles.menu, {[styles.isSticky]: isSticky}), style)}
+    </Sticky> : renderMenu(classNames(styles.menu, {[styles.isMobile]: true}), {})
   )
 }
 

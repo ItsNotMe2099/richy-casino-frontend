@@ -28,7 +28,7 @@ export default function BonusModal(props: Props) {
     overlay: {
       backgroundColor: !props.singlePage  ? 'rgba(0, 0, 0, 0.5)' : 'transparent',
       display: 'flex',
-      zIndex: '11',
+      zIndex: '20',
     },
     content: {
       width: '34%',
@@ -50,10 +50,16 @@ export default function BonusModal(props: Props) {
       </ReactModal>
     )
   }else{
+    const openModal = () => {
+      document.body.classList.add('modal-open')
+    }
+    const hideModal = () => {
+      document.body.classList.remove('modal-open')
+    }
     /* eslint-disable */
     // @ts-ignore
     return (
-    <Sheet isOpen={isOpen} onClose={onRequestClose}>
+    <Sheet isOpen={isOpen} onClose={onRequestClose}  onOpenStart={openModal} onCloseEnd={hideModal}>
       <div className={styles.sheet}>
       <Sheet.Container onViewportBoxUpdate>
         <Sheet.Header onViewportBoxUpdate />

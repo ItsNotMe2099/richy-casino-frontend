@@ -9,7 +9,7 @@ export const useDetectOutsideClick = (el, initialState) => {
       // If the active element exists and is clicked outside of
       if (el.current !== null && !el.current.contains(e.target)) {
         setIsActive(!isActive)
-        window.removeEventListener('click', pageClickEvent)
+        document.removeEventListener('click', pageClickEvent)
       }
 
     }
@@ -18,7 +18,7 @@ export const useDetectOutsideClick = (el, initialState) => {
     if (isActive) {
       console.log('AddListenerClick')
       setTimeout(() => {
-        window.addEventListener('click', pageClickEvent)
+        document.addEventListener('click', pageClickEvent)
       }, 300)
 
     }

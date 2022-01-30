@@ -17,6 +17,9 @@
     overflow-X: scroll;
     overflow-Y: hidden;
   }
+  @media screen and (max-width: $sm-max){
+    padding: 0px 18px 0px 18px;
+  }
 }
 
 .listMobile{
@@ -131,6 +134,12 @@
     flex-shrink: 0;
     margin-right: 18px;
   }
+  @media screen and (max-width: $sm-max){
+    &:last-of-type{
+      padding-right: 18px;
+    }
+  }
+
   &:hover{
     color: #427BF8;
   }
