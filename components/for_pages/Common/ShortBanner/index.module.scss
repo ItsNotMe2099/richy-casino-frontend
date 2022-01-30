@@ -19,7 +19,7 @@
 }
 
 .noPaddingLeft{
-  @media screen and (max-width: 375px){
+  @media screen and (max-width: $xs-max){
     padding: 5px 15px 8px 20px;
   }
 }
@@ -27,8 +27,14 @@
 .authBannerPadding{
   border-radius: 18px 18px 0px 0px;
   padding: 5px 32px 30px 70px;
-  max-height: 125px;
-
+  max-height: 140px;
+  @media screen and (max-width: $xs-max){
+    max-height: initial;
+    padding-bottom: 50px;
+    .content{
+      margin-bottom: -5px;
+    }
+  }
 }
 
 .title{
@@ -122,8 +128,8 @@
 
 .money2AuthBanner{
   bottom: 10px;
-  @media screen and (max-width: 375px){
-    left: -35px;
+  @media screen and (max-width: $xs-max){
+    left: -38px;
     bottom: 7px !important;
   }
 }
