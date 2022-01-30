@@ -73,7 +73,7 @@ export default function ProfileMenu(props: Props){
     const handleClick = (e) => {
       e.preventDefault()
 
-    setIsActive(i => !i)
+    setIsActive(!isActive)
   }
 
   return (

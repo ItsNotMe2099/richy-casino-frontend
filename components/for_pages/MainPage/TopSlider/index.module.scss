@@ -29,6 +29,10 @@
   right: 10px;
   z-index: 10;
   cursor: pointer;
+  @media screen and (max-width: $sm-min){
+    position: absolute;
+    right: -5px;
+  }
 
 }
 

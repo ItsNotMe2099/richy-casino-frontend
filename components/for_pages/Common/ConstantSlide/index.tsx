@@ -26,7 +26,12 @@ export default function ConstantSlide(props: Props) {
       <Col className={props.className} onClick={() => appContext.showModal(ModalType.bonus)}>
       <div className={classNames(styles.root, {[styles.noBack]: props.noBack, [styles.sheet]: props.sheet, [styles.longDown]: props.longDown}, {[styles.rootDownBanner]: props.longDown})}>
         {(props.modal || props.longDown) &&
-        <div className={classNames(styles.close, {[styles.closeSheet]: props.sheet})} onClick={props.onRequestClose}>
+        <div className={classNames(styles.close, {[styles.closeSheet]: props.sheet})} onClick={(e) => {
+          e.stopPropagation()
+          e.preventDefault()
+          console.log('ClockBtn')
+          props.onRequestClose()
+        }}>
           <img src='/img/icons/close-bonus.svg' alt=''/>
         </div>}
         <div className={classNames(styles.hero, {[styles.sheet]: props.sheet}, {[styles.none]: props.longDown})}><img src='/img/TopSlider/hero2.svg' alt=''/></div>

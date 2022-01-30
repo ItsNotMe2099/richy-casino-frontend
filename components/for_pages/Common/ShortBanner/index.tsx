@@ -27,6 +27,8 @@ export default function ShortBanner(props: Props) {
       {props.longDown &&
       <div className={styles.close} onClick={(e) => {
         e.stopPropagation()
+        e.preventDefault()
+        console.log('ClockBtn')
         props.onRequestClose()
       }}>
         <img src='/img/icons/close-bonus.svg' alt=''/>

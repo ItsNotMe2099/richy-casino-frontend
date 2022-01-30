@@ -52,7 +52,9 @@ export default function TopSlider(props: Props) {
 
   return (
     <div className={styles.root}>
+      {(context.showBonus && !context.showBonusExpanded) && <div className={styles.bonus}><Gift timer/></div>}
       <HiddenXs>
+
       <Row className={styles.desktop}>
         <ConstantSlide/>
         <SlideSlider items={items}/>
@@ -60,7 +62,6 @@ export default function TopSlider(props: Props) {
       </HiddenXs>
       <VisibleXs>
       <>
-      {(context.showBonus && !context.showBonusExpanded) && <div className={styles.bonus}><Gift timer/></div>}
       <Slider {...settings}>
         <ConstantSlide/>
         {items.map((item, index) =>
