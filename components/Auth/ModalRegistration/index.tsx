@@ -2,7 +2,7 @@ import styles from './index.module.scss'
 import {useEffect, useState} from 'react'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
-import ShortBanner from 'components/for_pages/Common/ShortBanner'
+import BonusSmallBanner from 'components/for_pages/Common/BonusSmallBanner'
 import PhoneForm from './Forms/PhoneForm'
 import EmailForm from './Forms/EmailForm'
 import SocialsForm from './Forms/SocialsForm'
@@ -64,7 +64,7 @@ export default function ModalRegistration(props: Props) {
   return (
     <>
     <div className={styles.banner}>
-      <ShortBanner/>
+      <BonusSmallBanner/>
     </div>
       <div className={styles.variants}>
         {variants.map((item, index) =>

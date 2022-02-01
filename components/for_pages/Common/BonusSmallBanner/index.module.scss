@@ -2,12 +2,15 @@
 
 .root{
   background: linear-gradient(46.89deg, #4A16E4 2.09%, #933288 11.47%, #C1444E 32.44%, #FF5C00 108.03%);
-  padding: 17px 0 11px 0;
-  padding-left: 85px;
+  padding: 4px 0 11px 0;
+  padding-left: 75px;
   position: relative;
   max-height: 79px;
   overflow: hidden;
   border-radius: 18px;
+  .moneyWallet, .moneyWallet2, .moneyBlurWallet{
+    display: none;
+  }
 }
 
 .close{
@@ -18,16 +21,62 @@
   z-index: 11;
 }
 
-.noPaddingLeft{
+.wallet{
+  padding-left: 85px;
   @media screen and (max-width: $xs-max){
-    padding: 5px 15px 8px 20px;
+    padding-left: 25px;
+  }
+  @media screen and (max-width: 375px){
+    padding-left: 35px;
+  }
+  .money, .money2, .hero{
+    @media screen and (max-width: $xs-max){
+      display: none;
+    }
+  }
+  .moneyWallet{
+    display: block;
+    position: absolute;
+    top: 30%;
+    right: -2%;
+    @media screen and (max-width: 375px){
+      right: -7%;
+    }
+  }
+  .moneyWallet2{
+    display: block;
+    position: absolute;
+    left: -6%;
+    top: 15%;
+    @media screen and (max-width: 375px){
+      left: -12%;
+    }
+  }
+  .moneyBlurWallet{
+    display: block;
+    position: absolute;
+    right: 8%;
+    top: 0;
   }
 }
 
-.authBannerPadding{
+.footer{
   border-radius: 18px 18px 0px 0px;
   padding: 5px 32px 30px 70px;
   max-height: 140px;
+  .hero {
+    left: 0px;
+  }
+  .bottom{
+    flex-direction: column-reverse;
+  }
+  .money2{
+    bottom: 10px;
+    @media screen and (max-width: $xs-max){
+      left: -38px;
+      bottom: 7px !important;
+    }
+  }
   @media screen and (max-width: $xs-max){
     max-height: initial;
     padding-bottom: 50px;
@@ -46,20 +95,9 @@
   text-align: left;
 }
 
-.bonusTimer{
-  @media screen and (max-width: 375px){
-    font-size: 12px;
-
-  }
-}
-
 .bottom{
   display: flex;
   flex-direction: column;
-}
-
-.reverse{
-  flex-direction: column-reverse;
 }
 
 .content{
@@ -83,72 +121,27 @@
   position: absolute;
   top: 0;
   z-index: 1;
-  left: 10px;
-}
-.authBannerPadding{
-  .hero {
-    left: 0px;
-
-  }
-}
-.hero2{
-  position: absolute;
-  top: 0;
-  z-index: 1;
-  right: 0;
-}
-
-.none{
-  display: none;
+  left: 0;
 }
 
 .money{
   right: -20px;
   bottom: -35px;
   position: absolute;
-}
-.authBannerPadding{
-  .money{
-    right: -35px;
-    bottom: -10px;
+  @media screen and (max-width: $xs-max){
+    left: 0;
+    right: auto;
+    bottom: 0;
   }
 }
+
 .money2{
   position: absolute;
   bottom: -24px;
   left: -22px;
-}
-
-.money2Timer{
-  @media screen and (max-width: 375px){
-    left: -85px;
-    bottom: -20px !important;
-  }
-}
-
-.money2AuthBanner{
-  bottom: 10px;
   @media screen and (max-width: $xs-max){
-    left: -38px;
-    bottom: 7px !important;
-  }
-}
-
-
-
-
-.withTimer{
-  @media screen and (max-width: 430px){
-    display: none;
-  }
-}
-
-.break{
-  display: none;
-}
-
-.showBreak{
-  @media screen and (max-width: 375px){
-    display: block;
+    left: auto;
+    right: -10px;
+    bottom: -40px;
   }
 }

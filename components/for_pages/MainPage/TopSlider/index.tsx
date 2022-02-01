@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import { Row } from 'react-grid-system'
-import ConstantSlide from 'components/for_pages/Common/ConstantSlide'
+import BonusSlide from 'components/for_pages/Common/BonusSlide'
 import SlideSlider from './SlideSlider'
 import Button from 'components/ui/Button'
 import Slider from 'react-slick'
@@ -56,14 +56,14 @@ export default function TopSlider(props: Props) {
       <HiddenXs>
 
       <Row className={styles.desktop}>
-        <ConstantSlide/>
+        <BonusSlide/>
         <SlideSlider items={items}/>
       </Row>
       </HiddenXs>
       <VisibleXs>
       <>
       <Slider {...settings}>
-        <ConstantSlide/>
+        <BonusSlide/>
         {items.map((item, index) =>
         <div className={styles.rootSlide} key={index}>
         <div className={styles.item} style={{backgroundImage: `url(${item.image})`}}>

@@ -1,4 +1,4 @@
-import ShortBanner from 'components/for_pages/Common/ShortBanner'
+import BonusSmallBanner from 'components/for_pages/Common/BonusSmallBanner'
 import { useEffect, useState } from 'react'
 import styles from './index.module.scss'
 import classNames from 'classnames'
@@ -246,7 +246,7 @@ const handleBack = () => {
       </div>}
       {!isSubmit &&
       <div className={styles.banner}>
-        <ShortBanner reverse timer/>
+        <BonusSmallBanner style='wallet' timer/>
       </div>}
       {method && 
         <Choice array={method === 'Криптовалюта' ? crypto : bank}/>

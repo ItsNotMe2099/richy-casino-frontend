@@ -18,7 +18,7 @@
     display: none !important;
   }
   @media screen and (max-width: $sm-min){
-   height: 200px;
+   height: 175px;
   }
   position: relative;
 }
@@ -42,7 +42,7 @@
   color: $white;
   line-height: 100%;
   width: 70%;
-  @media screen and (max-width: 400px){
+  @media screen and (max-width: $xs-max){
     font-size: 26px;
   }
 }
@@ -78,8 +78,8 @@
     padding-left: 18px;
   }
   @media screen and (max-width: 800px){
-    max-height: 200px;
-    min-height: 200px;
+    max-height: 175px;
+    min-height: 175px;
     padding: 20px 0 9px 15px;
   }
   @media screen and (max-width: $xs-max){

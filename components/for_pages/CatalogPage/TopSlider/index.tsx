@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import ConstantSlide from 'components/for_pages/Common/ConstantSlide'
+import BonusSlide from 'components/for_pages/Common/BonusSlide'
 import Slider from 'react-slick'
 import { Col } from 'react-grid-system'
 
@@ -37,14 +37,14 @@ export default function TopSlider(props: Props) {
           </div>
         </div>
       </Col>
-      <ConstantSlide className={styles.desktop}/>
+      <BonusSlide className={styles.desktop}/>
       </>
       :
       null
       }
       {props.slider &&
       <Slider {...settings}>
-        <ConstantSlide className={styles.const}/>
+        <BonusSlide className={styles.const}/>
         <div className={styles.jackpot}>
           <div className={styles.title}>JACKPOT</div>
           <div className={styles.money}>

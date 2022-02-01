@@ -15,6 +15,7 @@ import Wallet from 'components/Wallet'
 import Fortune from 'components/Fortune'
 import BonusModal from 'components/ui/BonusModal'
 import ModalRegistrationPhone from 'components/Auth/ModalRegistrationPhone'
+//import ProfileBurger from 'components/ui/ProfileBurger'
 
 interface Props {}
 
@@ -66,6 +67,7 @@ export default function ModalContainer(props: Props) {
             <ModalRegistrationPhone/>
           </Modal>
           <BonusModal isOpen={context.modal === ModalType.bonus} {...commonSettings}/>
+          {/*<ProfileBurger isOpen={context.modal === ModalType.profileBurger} {...commonSettings}/>*/}
         </>
       )}
     </div>

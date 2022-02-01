@@ -2,31 +2,36 @@ import styles from './index.module.scss'
 import {Col} from 'react-grid-system'
 import Button from 'components/ui/Button'
 import classNames from 'classnames'
-import Timer from '../ShortBanner/Timer'
+import Timer from '../BonusSmallBanner/Timer'
 import {useAppContext} from 'context/state'
 import {ModalType} from 'types/enums'
+import HiddenXs from 'components/ui/HiddenXS'
+import VisibleXs from 'components/ui/VisibleXS'
 
 interface Props {
   children?: React.ReactNode
   className?: string
-  modal?: boolean
   onRequestClose?: () => void
-  noBack?: boolean
-  sheet?: boolean
-  longDown?: boolean
+  style?: 'sheet' | 'modal' | 'footer'
 }
 
-export default function ConstantSlide(props: Props) {
+export default function BonusSlide(props: Props) {
   const appContext = useAppContext()
   const someDate = '2022-03-27T12:46:24.007Z'
 
   const expiredAt = new Date(someDate)
 
+  const slideClass = classNames({
+    [styles.sheet]: props.style === 'sheet',
+    [styles.modal]: props.style === 'modal',
+    [styles.footer]: props.style === 'footer',
+  })
+
   return (
       <Col className={props.className} onClick={() => appContext.showModal(ModalType.bonus)}>
-      <div className={classNames(styles.root, {[styles.noBack]: props.noBack, [styles.sheet]: props.sheet, [styles.longDown]: props.longDown}, {[styles.rootDownBanner]: props.longDown})}>
-        {(props.modal || props.longDown) &&
-        <div className={classNames(styles.close, {[styles.closeSheet]: props.sheet})} onClick={(e) => {
+      <div className={classNames(styles.root, slideClass)}>
+        {(props.style === 'modal' || props.style === 'sheet' || props.style === 'footer') &&
+        <div className={styles.close} onClick={(e) => {
           e.stopPropagation()
           e.preventDefault()
           console.log('ClockBtn')
@@ -34,10 +39,18 @@ export default function ConstantSlide(props: Props) {
         }}>
           <img src='/img/icons/close-bonus.svg' alt=''/>
         </div>}
-        <div className={classNames(styles.hero, {[styles.sheet]: props.sheet}, {[styles.none]: props.longDown})}><img src='/img/TopSlider/hero2.svg' alt=''/></div>
-        <div className={classNames(styles.money, {[styles.none]: props.longDown})}><img src='/img/TopSlider/money.svg' alt=''/></div>
-        {props.longDown &&
+        <div className={styles.hero}><img src='/img/TopSlider/hero2.svg' alt=''/></div>
+        <HiddenXs>
+          <div className={styles.money}><img src='/img/TopSlider/money.svg' alt=''/></div>
+        </HiddenXs>
+        <VisibleXs>
+          <div className={styles.money}><img src='/img/TopSlider/money-mobile.svg' alt=''/></div>
+        </VisibleXs>
+        {props.style === 'footer' &&
           <>
+          <div className={styles.moneyBlur}>
+            <img src='/img/TopSlider/footer-banner.svg' alt=''/>
+          </div>
           <div className={styles.moneyLeft}>
             <img src='/img/UserFooter/money-left-down-banner.svg' alt=''/>
           </div>
@@ -53,17 +66,17 @@ export default function ConstantSlide(props: Props) {
 
           </>
         }
-        <div className={classNames({[styles.downBanner]: props.longDown})}>
-        <div className={classNames(styles.title, {[styles.textLeft]: props.sheet})}>
+        <div className={styles.downBanner}>
+        <div className={styles.title}>
           Бонус на депозит
         </div>
-        <div className={classNames(styles.bonus, {[styles.textLeft]: props.sheet})}>
+        <div className={styles.bonus}>
           30 000 ₽
         </div>
-        <div className={classNames(styles.fs, {[styles.textLeft]: props.sheet})}>
+        <div className={styles.fs}>
           300 FS
         </div>
-        <div className={classNames(styles.btn, {[styles.none]: props.longDown})}>
+        <div className={styles.btn}>
           <Button size='normal' background='payGradient500'>Получить</Button>
         </div>
         <div className={styles.bottom}>
@@ -74,7 +87,7 @@ export default function ConstantSlide(props: Props) {
             10 Лотерейных билетов
           </div>
         </div>
-        {props.longDown && <Timer expiredAt={expiredAt} size='normal'/>}
+        {props.style === 'footer' && <Timer expiredAt={expiredAt} size='normal'/>}
         </div>
       </div>
       </Col>

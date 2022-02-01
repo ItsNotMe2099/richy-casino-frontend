@@ -1,8 +1,8 @@
 import { useAppContext } from 'context/state'
-import ConstantSlide from 'components/for_pages/Common/ConstantSlide'
+import BonusSlide from 'components/for_pages/Common/BonusSlide'
 import UserFooter from 'components/for_pages/Common/UserFooter'
 import styles from './index.module.scss'
-import ShortBanner from 'components/for_pages/Common/ShortBanner'
+import BonusSmallBanner from 'components/for_pages/Common/BonusSmallBanner'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 
@@ -12,7 +12,7 @@ export default function AuthUserFeatures(props: Props) {
 
   const context = useAppContext()
 
-  const user = true//context.auth
+  const user = context.auth
 
   return (
     <>
@@ -20,10 +20,10 @@ export default function AuthUserFeatures(props: Props) {
       <>
         <div className={styles.longDown}>
           <HiddenXs>
-            <ConstantSlide longDown onRequestClose={() => context.setBonusExpanded(false)}/>
+            <BonusSlide style='footer' onRequestClose={() => context.setBonusExpanded(false)}/>
           </HiddenXs>
           <VisibleXs>
-            <ShortBanner authBanner reverse timer longDown onRequestClose={() => context.setBonusExpanded(false)}/>
+            <BonusSmallBanner style='footer' timer onRequestClose={() => context.setBonusExpanded(false)}/>
           </VisibleXs>
         </div>
       </>

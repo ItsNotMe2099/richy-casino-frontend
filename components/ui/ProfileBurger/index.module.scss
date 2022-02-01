@@ -1,0 +1,186 @@
+@import "scss/index";
+.root {
+  position: relative;
+  background: linear-gradient(0deg, #1D1E25, #1D1E25);
+  border-radius: 30px;
+  padding: 28px 28px 23px 28px;
+  z-index: 5;
+  margin:  auto;
+  @media screen and (max-width: 430px){
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    padding-top: 14px;
+    padding-right: 18px;
+    padding-left: 18px;
+    padding-bottom: 23px;
+  }
+}
+
+.rootFlex{
+  @media screen and (max-width: 600px){
+    display: flex;
+  }
+}
+
+.fortune{
+  background: url('../../../public/img/Fortune/fortune.svg') no-repeat;
+  background-position: center center;
+  background-size: cover;
+  position: relative;
+  border-radius: 30px;
+  padding: 14px 14px 43px 14px;
+  z-index: 5;
+  margin:  auto;
+  @media screen and (max-width: 430px){
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    padding-top: 14px;
+    padding-right: 18px;
+    padding-left: 18px;
+    padding-bottom: 43px;
+  }
+}
+
+.close {
+  cursor: pointer;
+  background: $dark600;
+  border-radius: 6px;
+  padding: 8px;
+  display: flex;
+  svg{
+    path{
+      fill: #6B6C77;
+    }
+  }
+  &:hover{
+    background-color: $dark500;
+    @media screen and (max-width: 430px){
+      background-color: transparent;
+    }
+  }
+  @media screen and (max-width: 430px){
+    position: absolute;
+    right: 23px;
+    top: 18px;
+    background-color: transparent;
+    padding: 0;
+  }
+}
+
+.top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #272832;
+  margin: 0 -28px;
+  padding-left: 28px;
+  padding-right: 28px;
+  @media screen and (max-width: 430px){
+    flex-direction: column;
+    align-items: center;
+    margin: 0 -14px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+
+.noBorder{
+  border-bottom: 0;
+}
+
+.rootNormal{
+  width: 428px;
+  overflow: hidden;
+  @media screen and (max-width: 430px){
+    width: 100%;
+  }
+}
+
+.rootFortune{
+  width: 452px;
+  @media screen and (max-width: 500px){
+    width: 100%;
+  }
+}
+
+
+.rootLarge{
+  width: 664px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 22px;
+  color: $white;
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 430px){
+    font-size: 19px;
+    font-weight: 700;
+    text-align: center;
+  }
+}
+
+.loader {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 3;
+}
+
+.center, .body {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: column;
+  text-align: center;
+}
+.overlay{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+}
+.scroll{
+}
+
+.line{
+  width: 125px;
+  height: 4px;
+  background: #292B33;
+  border-radius: 28px;
+}
+
+.centerSheet{
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: column;
+  text-align: center;
+  padding: 0;
+}
+
+.sheet{
+  :global .react-modal-sheet-container {
+    height: calc(40% - env(safe-area-inset-top) - 34px) !important;
+    background: linear-gradient(46.89deg, #4A16E4 2.09%, #933288 11.47%, #C1444E 32.44%, #FF5C00 108.03%);
+    :global .react-modal-sheet-content {
+      margin-top: -34px;
+    }
+    :global .react-modal-sheet-drag-indicator {
+      background-color: $white !important;
+      opacity: 0.2;
+      width: 17px !important;
+    }
+  }
+}

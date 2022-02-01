@@ -1,4 +1,4 @@
-import Timer from '../ShortBanner/Timer'
+import Timer from '../BonusSmallBanner/Timer'
 import styles from './index.module.scss'
 import {useAppContext} from 'context/state'
 

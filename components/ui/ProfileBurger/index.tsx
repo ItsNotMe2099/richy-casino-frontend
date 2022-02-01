@@ -1,9 +1,6 @@
 import styles from './index.module.scss'
-import ReactModal from 'react-modal'
 import Sheet from 'react-modal-sheet'
 import {useAppContext} from 'context/state'
-import classNames from 'classnames'
-import BonusSlide from 'components/for_pages/Common/BonusSlide'
 
 interface Props {
   isOpen: boolean
@@ -21,14 +18,14 @@ interface Props {
   fortune?: boolean
 }
 
-export default function BonusModal(props: Props) {
+export default function ProfileBurger(props: Props) {
   const {isOpen, onRequestClose} = props
   const appContext = useAppContext()
   const customStyles = {
     overlay: {
       backgroundColor: !props.singlePage  ? 'rgba(0, 0, 0, 0.5)' : 'transparent',
       display: 'flex',
-      zIndex: '20',
+      zIndex: '11',
     },
     content: {
       width: '34%',
@@ -43,29 +40,18 @@ export default function BonusModal(props: Props) {
     },
   }
 
-  if(appContext.isDesktop) {
-    return (
-      <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
-        <BonusSlide style='modal' onRequestClose={props.onRequestClose}/>
-      </ReactModal>
-    )
-  }else{
-    const openModal = () => {
-      document.body.classList.add('modal-open')
-    }
-    const hideModal = () => {
-      document.body.classList.remove('modal-open')
-    }
+  if(appContext.isMobile) {
     /* eslint-disable */
     // @ts-ignore
     return (
-    <Sheet isOpen={isOpen} onClose={onRequestClose}  onOpenStart={openModal} onCloseEnd={hideModal}>
+    <Sheet isOpen={isOpen} onClose={onRequestClose}>
       <div className={styles.sheet}>
       <Sheet.Container onViewportBoxUpdate>
         <Sheet.Header onViewportBoxUpdate />
-        <Sheet.Content onViewportBoxUpdate>{isOpen && <div className={classNames(styles.centerSheet, {[styles.centerSheetFortune]: props.fortune})}>
-
-          <BonusSlide style='sheet' onRequestClose={props.onRequestClose}/></div>}
+        <Sheet.Content onViewportBoxUpdate>{isOpen && 
+        <div>
+          BLANK
+        </div>}
         </Sheet.Content>
       </Sheet.Container>
       </div>
@@ -74,7 +60,4 @@ export default function BonusModal(props: Props) {
     </Sheet>
     )
   }
-}
-BonusModal.defaultProps = {
-  size: 'normal',
 }
