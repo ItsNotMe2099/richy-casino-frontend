@@ -1,6 +1,6 @@
-import Timer from '../BonusSmallBanner/Timer'
 import styles from './index.module.scss'
 import {useAppContext} from 'context/state'
+import Timer from 'components/for_pages/Common/Timer'
 
 interface Props {
   timer?: boolean
@@ -15,7 +15,7 @@ export default function Gift(props: Props) {
   return (
       <div className={styles.root} onClick={() => appContext.setBonusExpanded(true)}>
         <img src='/img/TopSlider/bonus.svg' alt=''/>
-        {props.timer && <Timer expiredAt={expiredAt} size='small'/>}
+        {props.timer && <Timer style='gift' expiredAt={expiredAt}/>}
       </div>
   )
 }

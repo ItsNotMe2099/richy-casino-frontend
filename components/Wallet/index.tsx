@@ -246,7 +246,7 @@ const handleBack = () => {
       </div>}
       {!isSubmit &&
       <div className={styles.banner}>
-        <BonusSmallBanner style='wallet' timer/>
+        <BonusSmallBanner style='wallet'/>
       </div>}
       {method && 
         <Choice array={method === 'Криптовалюта' ? crypto : bank}/>

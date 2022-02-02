@@ -8,8 +8,18 @@
   max-height: 79px;
   overflow: hidden;
   border-radius: 18px;
-  .moneyWallet, .moneyWallet2, .moneyBlurWallet{
+  .moneyWallet, .moneyWallet2, .moneyBlurWallet, .moneyFooter, .moneyFooter2{
     display: none;
+  }
+  @media screen and (max-width: $xs-max){
+    padding: 5px 0;
+    padding-left: 25px;
+    .title{
+      font-size: 16px;
+      span{
+        font-size: 12px;
+      }
+    }
   }
 }
 
@@ -25,9 +35,7 @@
   padding-left: 85px;
   @media screen and (max-width: $xs-max){
     padding-left: 25px;
-  }
-  @media screen and (max-width: 375px){
-    padding-left: 35px;
+    padding-right: 10px;
   }
   .money, .money2, .hero{
     @media screen and (max-width: $xs-max){
@@ -68,21 +76,46 @@
     left: 0px;
   }
   .bottom{
-    flex-direction: column-reverse;
+    line-height: 130%;
+  }
+  .title{
+    line-height: 130%;
+    span{
+      font-size: 12px;
+    }
   }
   .money2{
     bottom: 10px;
+  }
+  .money, .money2 {
     @media screen and (max-width: $xs-max){
-      left: -38px;
-      bottom: 7px !important;
+      display: none;
     }
   }
+
+  .close{
+    right: 12px;
+    top: 10px;
+  }
+
   @media screen and (max-width: $xs-max){
     max-height: initial;
-    padding-bottom: 50px;
+    padding-bottom: 55px;
     .content{
       margin-bottom: -5px;
     }
+  }
+  .moneyFooter{
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .moneyFooter2{
+    display: block;
+    position: absolute;
+    left: 0%;
+    top: 23%;
   }
 }
 

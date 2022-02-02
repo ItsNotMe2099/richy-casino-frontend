@@ -2,11 +2,12 @@ import styles from './index.module.scss'
 import {Col} from 'react-grid-system'
 import Button from 'components/ui/Button'
 import classNames from 'classnames'
-import Timer from '../BonusSmallBanner/Timer'
+import Timer from 'components/for_pages/Common/Timer'
 import {useAppContext} from 'context/state'
 import {ModalType} from 'types/enums'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
+import { useEffect, useState } from 'react'
 
 interface Props {
   children?: React.ReactNode
@@ -26,6 +27,21 @@ export default function BonusSlide(props: Props) {
     [styles.modal]: props.style === 'modal',
     [styles.footer]: props.style === 'footer',
   })
+
+
+
+  const [isTimerVisible, setIsTimerVisible] = useState(false)
+
+  const user = appContext.auth
+
+  useEffect(() => {
+    if(user){
+      setIsTimerVisible(true)
+    }
+    else{
+      setIsTimerVisible(false)
+    }
+  }, [user])
 
   return (
       <Col className={props.className} onClick={() => appContext.showModal(ModalType.bonus)}>
@@ -76,9 +92,16 @@ export default function BonusSlide(props: Props) {
         <div className={styles.fs}>
           300 FS
         </div>
+        <div className={styles.footerGroup}>
         <div className={styles.btn}>
           <Button size='normal' background='payGradient500'>Получить</Button>
+          {isTimerVisible && 
+            <div className={styles.timer}>
+              <Timer style={props.style ==='footer' ? 'footer' : props.style ==='sheet' ? 'sheet' : 'bonus'} expiredAt={expiredAt}/>
+            </div>
+          }
         </div>
+        <div>
         <div className={styles.bottom}>
           <div className={styles.satoshi}>
             50 Satoshi
@@ -87,7 +110,8 @@ export default function BonusSlide(props: Props) {
             10 Лотерейных билетов
           </div>
         </div>
-        {props.style === 'footer' && <Timer expiredAt={expiredAt} size='normal'/>}
+        </div>
+        </div>
         </div>
       </div>
       </Col>

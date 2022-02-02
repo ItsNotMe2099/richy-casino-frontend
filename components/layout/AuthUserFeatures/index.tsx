@@ -23,7 +23,7 @@ export default function AuthUserFeatures(props: Props) {
             <BonusSlide style='footer' onRequestClose={() => context.setBonusExpanded(false)}/>
           </HiddenXs>
           <VisibleXs>
-            <BonusSmallBanner style='footer' timer onRequestClose={() => context.setBonusExpanded(false)}/>
+            <BonusSmallBanner style='footer' onRequestClose={() => context.setBonusExpanded(false)}/>
           </VisibleXs>
         </div>
       </>

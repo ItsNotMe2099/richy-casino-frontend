@@ -39,8 +39,8 @@ export default function FreeBitcoin() {
       <Row>
       <Filter items={games} state={isShow} onClick={() => setIsShow(false)}/>
       <Col>
-        <PageTitle icon='/img/Contents/bitcoin.svg' title='Free Bitcoin' onClick={() => isShow ? setIsShow(false) : setIsShow(true)}/>
-        <Banner coins='0.0000010001' state='play'/>
+        <PageTitle icon='/img/Contents/bitcoin.svg' title='Free Bitcoin' onClick={() => isShow ? setIsShow(false) : setIsShow(true)} shadowColor='yellow'/>
+        <Banner coins='0.0000010001' state='timer'/>
         <Row>
           <Table items={luckyNumber}/>
           <Table items={last} last/>

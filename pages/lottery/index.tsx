@@ -21,7 +21,7 @@ export default function Lottery() {
 
   const [isShow, setIsShow] = useState(false)
 
-  const someDate = '2021-12-27T12:46:24.007Z'
+  const someDate = '2023-12-27T12:46:24.007Z'
 
   const expiredAt = new Date(someDate)
 

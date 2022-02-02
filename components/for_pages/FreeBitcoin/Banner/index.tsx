@@ -56,7 +56,7 @@ export default function Banner(props: Props) {
       }
       {props.state === 'timer' &&
         <div className={styles.timer}>
-          <Timer expiredAt={expiredAt}/>
+          <Timer expiredAt={expiredAt} style='freebitcoin'/>
           <div className={styles.again}>
             Before you can play free again
           </div>

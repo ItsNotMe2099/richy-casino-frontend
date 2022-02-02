@@ -1,17 +1,17 @@
 import styles from './index.module.scss'
 import classNames from 'classnames'
-import Timer from './Timer'
+import Timer from 'components/for_pages/Common/Timer'
 import {ModalType} from 'types/enums'
 import {useAppContext} from 'context/state'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
+import { useEffect, useState } from 'react'
 
 interface Props {
   children?: React.ReactNode
   className?: string
   onRequestClose?: () => void
   style?: 'footer' | 'wallet'
-  timer?: boolean
 }
 
 export default function BonusSmallBanner(props: Props) {
@@ -24,6 +24,19 @@ export default function BonusSmallBanner(props: Props) {
     [styles.footer]: props.style === 'footer',
     [styles.wallet]: props.style === 'wallet'
   })
+
+  const [isTimerVisible, setIsTimerVisible] = useState(false)
+
+  const user = appContext.auth
+
+  useEffect(() => {
+    if(user){
+      setIsTimerVisible(true)
+    }
+    else{
+      setIsTimerVisible(false)
+    }
+  }, [user])
 
   return (
     <div className={classNames(styles.root, bannerClass)}
@@ -38,35 +51,41 @@ export default function BonusSmallBanner(props: Props) {
         <img src='/img/icons/close-bonus.svg' alt=''/>
       </div>}
       <div className={styles.hero}><img
-        src='/img/ShortBanner/hero.svg' alt=''/>
+        src='/img/BonusSmallBanner/hero.svg' alt=''/>
       </div>
       <HiddenXs>
       <>
       <div className={styles.money}>
-        <img src='/img/ShortBanner/money.svg' alt=''/>
+        <img src='/img/BonusSmallBanner/money.svg' alt=''/>
       </div>
       <div
         className={styles.money2}>
-        <img src='/img/ShortBanner/money2.svg' alt=''/>
+        <img src='/img/BonusSmallBanner/money2.svg' alt=''/>
       </div>
       </>
       </HiddenXs>
       <VisibleXs>
         <>
         <div className={styles.money}>
-          <img src='/img/ShortBanner/money-mobile-reg.svg' alt=''/>
+          <img src='/img/BonusSmallBanner/money-mobile-reg.svg' alt=''/>
         </div>
         <div className={styles.money2}>
-          <img src='/img/ShortBanner/money-mobile-reg-r.svg' alt=''/>
+          <img src='/img/BonusSmallBanner/money-mobile-reg-r.svg' alt=''/>
         </div>
         <div className={styles.moneyWallet}>
-          <img src='/img/ShortBanner/money-mobile-wallet-r.svg' alt=''/>
+          <img src='/img/BonusSmallBanner/money-mobile-wallet-r.svg' alt=''/>
         </div>
         <div className={styles.moneyWallet2}>
-          <img src='/img/ShortBanner/money-mobile-wallet-l.svg' alt=''/>
+          <img src='/img/BonusSmallBanner/money-mobile-wallet-l.svg' alt=''/>
         </div>
         <div className={styles.moneyBlurWallet}>
-          <img src='/img/ShortBanner/money-blur-mobile-wallet.svg' alt=''/>
+          <img src='/img/BonusSmallBanner/money-blur-mobile-wallet.svg' alt=''/>
+        </div>
+        <div className={styles.moneyFooter}>
+          <img src='/img/BonusSmallBanner/money-mobile-footer-r.svg' alt=''/>
+        </div>
+        <div className={styles.moneyFooter2}>
+          <img src='/img/BonusSmallBanner/money-mobile-footer-l.svg' alt=''/>
         </div>
         </>
       </VisibleXs>
@@ -85,7 +104,7 @@ export default function BonusSmallBanner(props: Props) {
             </div>
           </div>
         </div>
-        {props.timer && <div className={styles.timer}><Timer expiredAt={expiredAt}/></div>}
+        {isTimerVisible && <div className={styles.timer}><Timer style={props.style === 'wallet'? 'wallet' : 'footerSmall'} expiredAt={expiredAt}/></div>}
       </div>
     </div>
   )
