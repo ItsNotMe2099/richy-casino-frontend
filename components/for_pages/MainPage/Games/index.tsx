@@ -61,10 +61,9 @@ export default function Games(props: Props) {
         label='Richy Games'
         shadowColor='blue'
         length={items.length}
+        style='withoutLength'
         onPrev={() => slider.slickGoTo(currentIndex - 1)}
         onNext={() => slider.slickGoTo(currentIndex + 1)}
-        games
-        richy
         slider />
         </div>
         <HiddenXs>

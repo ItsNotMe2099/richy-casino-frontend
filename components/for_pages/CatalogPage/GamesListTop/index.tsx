@@ -2,6 +2,8 @@ import styles from './index.module.scss'
 import Header from 'components/for_pages/Common/Header'
 import SwitchFilter from 'components/for_pages/Common/SwitchFilter'
 import Slider from 'react-slick'
+import HiddenXs from 'components/ui/HiddenXS'
+import VisibleXs from 'components/ui/VisibleXS'
 
 interface IGame{
   label: string
@@ -60,15 +62,22 @@ export default function GamesListTop(props: Props) {
 
   return (
       <div className={styles.root}>
-        <div className={styles.header}>
-          <Header icon='/img/Contents/money.svg' label='ТОП игры' games length={1} catalogTop/>
-        </div>
+        <Header icon='/img/Contents/money.svg' label='ТОП игры' length={1} shadowColor='red' style='fullOnlyOnMobile'/>
         <div className={styles.wrapper}><SwitchFilter top/></div>
+        <HiddenXs>
         <Slider {...settings}>
           {props.items && props.items.slice(0, 6).map((item, index) =>
             <Item item={item} key={index}/>
           )}
         </Slider>
+        </HiddenXs>
+        <VisibleXs>
+          <div className={styles.overflow}>
+            {props.items && props.items.map((item, index) =>
+              <Item item={item} key={index}/>
+            )}
+          </div>
+        </VisibleXs>
       </div>
   )
 }

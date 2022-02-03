@@ -16,7 +16,7 @@ export default function Winners(props: Props) {
   return (
       <div className={styles.root}>
           <div className={styles.header}>
-            <Header icon='/img/Winners/icon.svg' label='ТОП-3 победителей за сегодня' top shadowColor='violet'/>
+            <Header icon='/img/Winners/icon.svg' label='ТОП-3 победителей за сегодня' style='labelOnly' shadowColor='violet'/>
           </div>
           <div className={styles.content}>
             <div className={styles.illustration}>

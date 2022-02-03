@@ -7,6 +7,8 @@ import { Row, Col } from 'react-grid-system'
 import GamesListTop from 'components/for_pages/CatalogPage/GamesListTop'
 import {GetServerSideProps} from 'next'
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
+import VisibleXs from 'components/ui/VisibleXS'
+import HiddenXs from 'components/ui/HiddenXS'
 
 export default function CatalogPage() {
 
@@ -385,12 +387,12 @@ export default function CatalogPage() {
 
   return (
     <Layout>
-      <TopSlider money={money} slider/>
+      <VisibleXs><TopSlider money={money}/></VisibleXs>
       <Row className={styles.desktop}>
       <Filter items={games} mobile/>
       <Col className={styles.content}>
       <Row>
-      <TopSlider money={money}/>
+      <HiddenXs><TopSlider money={money}/></HiddenXs>
       </Row>
       <GamesListTop items={topGames}/>
       <GamesList all items={games}/>

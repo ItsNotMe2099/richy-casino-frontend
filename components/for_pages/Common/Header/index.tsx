@@ -1,20 +1,15 @@
 import styles from './index.module.scss'
-import Link from 'next/link'
-import VisibleXs from 'components/ui/VisibleXS'
+import classNames from 'classnames'
+import HiddenXs from 'components/ui/HiddenXS'
 
 interface Props {
   length?: number
   icon: string
   label: string
-  games?: boolean
-  top?: boolean
-  allDesktop?: string
-  allMobile?: string
   onPrev?: () => void
   onNext?: () => void
   slider?: boolean
-  richy?: boolean
-  catalogTop?: boolean
+  style?: 'labelOnly' | 'withoutLength' | 'fullOnlyOnMobile'
   shadowColor?: 'red' | 'blue' | 'yellow' | 'violet'
 }
 
@@ -41,8 +36,14 @@ export default function Header(props: Props) {
     }
   }
 
+  const rootClasses = {
+    [styles.labelOnly]: props.style === 'labelOnly',
+    [styles.withoutLength]: props.style === 'withoutLength',
+    [styles.fullOnlyOnMobile]: props.style === 'fullOnlyOnMobile',
+  }
+
   return (
-        <div className={styles.root}>
+        <div className={classNames(styles.root, rootClasses)}>
           <div className={styles.block}>
           <div className={styles.icon}>
             {props.shadowColor && <div className={styles.shadow}><img src={getShadow(props.shadowColor)} alt=''/></div>}
@@ -52,27 +53,13 @@ export default function Header(props: Props) {
             {props.label}
           </div>
         </div>
-        {!props.catalogTop &&
-        <div className={styles.block}>
-          {(props.length && !props.richy) ?
+        <div className={styles.right}>
           <div className={styles.length}>
             {props.length}
           </div>
-          :
-          props.length &&
-          <VisibleXs>
-            <div className={styles.length}>
-              {props.length}
-            </div>
-          </VisibleXs>
-        }
-          {/*<Link href='#'>
-          <a className={styles.all}>
-            {props.games ? <>Все <span>игры</span></> : props.top ? <><span>Смотреть</span> ТОП-100</>: null}
-            {props.allDesktop && <div className={styles.desktop}>{props.allDesktop}</div>}
-            {props.allMobile && <div className={styles.mobile}>{props.allMobile}</div>}
-          </a>
-          </Link>*/}
+          <div className={styles.all}>
+            Все <HiddenXs><>игры</></HiddenXs>
+          </div>
           {props.slider &&
           <div className={styles.controls}>
             <div className={styles.prev} onClick={props.onPrev}>
@@ -82,33 +69,7 @@ export default function Header(props: Props) {
               <SliderArrow/>
             </div>
           </div>}
-      </div>}
-      {props.catalogTop &&
-        <VisibleXs>
-        <div className={styles.block}>
-          {props.length &&
-          <div className={styles.length}>
-            {props.length}
-          </div>}
-          <Link href='#'>
-          <a className={styles.all}>
-            {props.games ? <>Все <span>игры</span></> : props.top ? <><span>Смотреть</span> ТОП-100</>: null}
-            {props.allDesktop && <div className={styles.desktop}>{props.allDesktop}</div>}
-            {props.allMobile && <div className={styles.mobile}>{props.allMobile}</div>}
-          </a>
-          </Link>
-          {props.slider &&
-          <div className={styles.controls}>
-            <div className={styles.prev} onClick={props.onPrev}>
-              <SliderArrow/>
-            </div>
-            <div className={styles.next} onClick={props.onNext}>
-              <SliderArrow/>
-            </div>
-          </div>}
-      </div>
-      </VisibleXs>
-      }
+          </div>
       </div>
   )
 }

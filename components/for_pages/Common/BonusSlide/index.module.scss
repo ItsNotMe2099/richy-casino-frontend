@@ -12,6 +12,11 @@
     padding-left: 18px;
   }
   @media screen and (max-width: 800px){
+    max-height: 200px;
+    min-height: 200px;
+    padding: 15px 0 9px 15px;
+  }
+  @media screen and (max-width: $xs-max){
     max-height: 175px;
     min-height: 175px;
     padding: 15px 0 9px 15px;
@@ -62,6 +67,8 @@
         padding-right: 35px;
         padding-left: 35px;
         border-radius: 4px;
+        height: 32px;
+        font-size: 11px;
       }
     }
     @media screen and (max-width: 800px){

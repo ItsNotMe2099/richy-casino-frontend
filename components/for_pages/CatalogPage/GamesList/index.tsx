@@ -57,12 +57,23 @@ export default function GamesList(props: Props) {
     }
   }
 
+  const getShadow = (icon) => {
+    switch (icon){
+      case '/img/Contents/live.svg':
+        return 'blue'
+      case '/img/Contents/all-games.svg':
+        return 'red'
+      case '/img/Contents/gamepad.svg':
+        return 'blue'
+    }
+  }
+
   const [isShow, setIsShow] = useState(false)
 
 
   return (
       <div className={styles.root}>
-        <Header icon={getIcon()} label={getLabel()} games length={props.items.length}/>
+        <Header icon={getIcon()} label={getLabel()} length={props.items.length} shadowColor={getShadow(getIcon())}/>
         <HiddenXs>
           {!props.richy &&
           <div className={styles.wrapper}><SwitchFilter all={props.all}/></div>}

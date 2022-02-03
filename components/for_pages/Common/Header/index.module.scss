@@ -6,6 +6,63 @@
   justify-content: space-between;
 }
 
+.labelOnly{
+  .length{
+    display: none;
+    @media screen and (max-width: $xs-max){
+      display: block;
+    }
+  }
+  .all{
+    display: none;
+  }
+}
+
+.fullOnlyOnMobile{
+  .length{
+    display: none;
+    @media screen and (max-width: $xs-max){
+      display: block;
+    }
+  }
+  .all{
+    display: none;
+    @media screen and (max-width: $xs-max){
+      display: block;
+    }
+  }
+}
+
+.withoutLength{
+  .length{
+    display: none;
+    @media screen and (max-width: $xs-max){
+      display: block;
+    }
+  }
+}
+
+.all{
+  padding: 13px 20px;
+  background: #272832;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  @media screen and (max-width: $xs-max){
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  &:hover{
+    background-color: $dark400;
+  }
+}
+
+.right{
+  display: flex;
+  align-items: center;
+}
+
 .block{
   display: flex;
   align-items: center;
@@ -62,29 +119,15 @@
   }
 }
 
-.all{
-  padding: 13px 17px;
-  border-radius: 8px;
-  background-color: $dark600;
-  color: $white;
-  font-weight: 400;
-  font-size: 12px;
-  &:hover{
-    background-color: $dark400;
-  }
-  @media screen and (max-width: $xs-max){
-    padding: 8px 12px;
-    span{
-      display: none;
-    }
-  }
-}
-
 .length{
   font-weight: 500;
-  font-size: 13px;
+  font-size: 16px;
   color: #45454D;
-  margin-right: 10px;
+  margin-right: 15px;
+  @media screen and (max-width: $xs-max){
+    margin-right: 10px;
+    font-size: 13px;
+  }
 }
 
 .controls{
@@ -112,17 +155,5 @@
   margin-right: 5px;
   svg{
     transform: rotate(180deg);
-  }
-}
-
-.mobile{
-  @media screen and (min-width: $sm-min){
-      display: none;
-  }
-}
-
-.desktop{
-  @media screen and (max-width: $xs-max){
-      display: none;
   }
 }

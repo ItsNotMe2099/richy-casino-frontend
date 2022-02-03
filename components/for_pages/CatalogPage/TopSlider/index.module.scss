@@ -21,9 +21,13 @@
   background-size: cover;
   padding: 0 33px;
   @media screen and (max-width: 800px){
-   min-height: 200px;
+    max-height: 200px;
+    min-height: 200px;
   }
-  @media screen and (max-width: 650px){
+  @media screen and (max-width: $xs-max){
+    width: 282px !important;
+    max-height: 175px;
+    min-height: 175px;
     max-width: 100%;
     margin: 0 5px;
   }
@@ -45,46 +49,22 @@
   @media screen and (max-width: 1360px){
     font-size: 40px;
   }
-}
-
-.col{
-  
-}
-
-.const{
-  @media screen and (min-width: 651px){
-    display: none;
+  @media screen and (max-width: $xs-max){
+    font-size: 30px;
   }
 }
 
-.const > div {
-  div:first-child{
-    right: 0;
-  }
-  div:last-child{
-   width: auto;
-  }
-}
-
-.desktop > div {
-  div:first-child{
-    right: 0;
-  }
-  div:last-child{
-   width: auto;
-  }
-}
 
 .slider{
   margin-top: 20px;
-  @media screen and (min-width: 651px){
-    display: none !important;
+  @media screen and (max-width: $sm-min){
+    height: 175px;
+    :global .slick-list{
+      height: 175px;
+    }
   }
 }
 
 .desktop{
   margin-top: 20px;
-  @media screen and (max-width: 650px){
-    display: none !important;
-  }
 }

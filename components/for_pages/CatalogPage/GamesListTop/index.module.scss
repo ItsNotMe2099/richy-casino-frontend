@@ -2,9 +2,10 @@
 
 .root {
   @include componentRoot;
-  @media screen and (max-width: 580px){
-    padding-right: 0;
-    padding-left: 0;
+  padding-top: 22px;
+  padding-bottom: 14px;
+  @media screen and (max-width: $xs-max){
+    @include componentRoot;
   }
 }
 
@@ -12,50 +13,39 @@
   display: none;
 }
 
-.header{
-  @media screen and (max-width: 580px){
-    padding-right: 16px;
-    padding-left: 10px;
-  }
-}
-
 .wrapper{
   display: flex;
   overflow-x: auto;
   scrollbar-width: none;
+  margin-top: 16px;
   &::-webkit-scrollbar {
     width: 0;
     height: 0;
-}
-  padding-left: 23px;
+  }
   div{
     flex-shrink: 0;
   }
   @media screen and (max-width: $xs-max){
-    margin-top: 17px;
-    padding-left: 16px;
+    margin-right: -16px;
   }
 }
 
 .list{
   margin-top: 28px;
-  padding-left: 23px;
   overflow-x: auto;
-  @media screen and (max-width: $xs-max){
-    padding-left: 16px;
-  }
 }
 .item{
   @media screen and (max-width: $xs-max){
     margin-right: 8px;
   }
   img {
-    width: 80%;
+    width: 134px;
+    height: 134px;
     object-fit: cover;
     border-radius: 10px;
     @media screen and (max-width: $xs-max){
-      min-width: 78px;
-      min-height: 78px;
+      width: 78px;
+      height: 78px;
     }
   }
 }
@@ -87,4 +77,18 @@
   @media screen and (max-width: 650px){
     font-size: 12px;
 }
+}
+
+.overflow{
+  margin-top: 16px;
+  flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: clip;
+  clip: auto;
+  flex:1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 18px;
 }

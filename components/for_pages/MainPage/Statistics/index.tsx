@@ -20,7 +20,7 @@ export default function Statistics(props: Props) {
   return (
       <div className={styles.root}>
           <div className={styles.header}>
-            <Header icon='/img/Statistics/stats.svg' label='Статистика' allDesktop='Полная статистика' allMobile='Все' shadowColor='violet'/>
+            <Header icon='/img/Statistics/stats.svg' label='Статистика' style='labelOnly' shadowColor='violet'/>
           </div>
           <div className={styles.table}>
             <div className={styles.row}>

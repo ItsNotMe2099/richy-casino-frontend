@@ -44,7 +44,7 @@ export default function Table(props: Props) {
                 {props.last ? handleDate(item) : item.number}
               </div>
             </div>
-            <div className={styles.cell}>
+            <div className={classNames(styles.cell, {[styles.cellPayout]: !props.last})}>
               <div className={styles.text}>
                 {item.payout} <span>BTC</span>
               </div>

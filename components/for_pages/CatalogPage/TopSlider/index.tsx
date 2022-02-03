@@ -2,12 +2,13 @@ import styles from './index.module.scss'
 import BonusSlide from 'components/for_pages/Common/BonusSlide'
 import Slider from 'react-slick'
 import { Col } from 'react-grid-system'
+import HiddenXs from 'components/ui/HiddenXS'
+import VisibleXs from 'components/ui/VisibleXS'
 
 interface Props {
   children?: React.ReactNode
   className?: string
   money: string
-  slider?: boolean
 }
 
 export default function TopSlider(props: Props) {
@@ -22,12 +23,21 @@ export default function TopSlider(props: Props) {
     variableWidth: false,
     adaptiveHeight: false,
     arrows: false,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          variableWidth: true,
+          centerMode: true
+        }
+      },
+    ]
   }
 
 
   return (
     <>
-    {!props.slider ?
+    <HiddenXs>
     <>
     <Col className={styles.root}>
         <div className={styles.jackpot}>
@@ -39,19 +49,18 @@ export default function TopSlider(props: Props) {
       </Col>
       <BonusSlide className={styles.desktop}/>
       </>
-      :
-      null
-      }
-      {props.slider &&
+      </HiddenXs>
+      <VisibleXs>
       <Slider {...settings}>
-        <BonusSlide className={styles.const}/>
+        <BonusSlide/>
         <div className={styles.jackpot}>
           <div className={styles.title}>JACKPOT</div>
           <div className={styles.money}>
             {props.money}
           </div>
         </div>
-      </Slider>}
+      </Slider>
+      </VisibleXs>
       </>
   )
 }

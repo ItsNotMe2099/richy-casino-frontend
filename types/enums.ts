@@ -4,7 +4,7 @@ export enum ModalType {
   passwordReset,
   passwordRecovery,
   registrationSuccess,
-  registrationPhone,
+  registrationPhone = 12,
   fortune = 9,
   bonus = 10,
   profileBurger = 11

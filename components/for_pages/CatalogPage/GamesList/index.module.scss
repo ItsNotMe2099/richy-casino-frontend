@@ -2,6 +2,7 @@
 
 .root {
   @include componentRoot;
+  padding-top: 23px;
 }
 
 .none{
@@ -10,7 +11,7 @@
 
 .wrapper{
   display: flex;
-  padding-left: 23px;
+  margin-top: 18px;
   @media screen and (max-width: $xs-max){
     display: none;
   }
@@ -21,16 +22,14 @@
   min-width: 78px;
   min-height: 78px;
   justify-self: center;
-    @media screen and (max-width: 400px){
-        display: flex !important;
-        justify-content: center;
-        margin-bottom: 8px;
-      }
     img{
     width: 100%;
     border-radius: 18px;
+    @media screen and (max-width: $xs-max){
+      border-radius: 10px;
+    }
     @media screen and (max-width: 400px){
-        width: 78px;
+      width: 85px;
         
       }
 }
@@ -41,13 +40,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 20px;
-  padding-left: 23px;
   @media screen and (max-width: $xs-max){
     grid-template-columns: 1fr 1fr 1fr;
-  }
-  @media screen and (max-width: 400px){
-    padding-left: 0;
-    gap: 0;
+    margin-top: 20px;
+    gap: 7px;
   }
 }
 
