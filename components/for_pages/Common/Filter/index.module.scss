@@ -6,6 +6,7 @@
   border-radius: 18px;
   max-height: 1313px;
   margin-top: 20px;
+  overflow-y: hidden;
   @media screen and (max-width: 1000px){
   max-height: 800px;
   overflow-y: auto;
@@ -76,9 +77,9 @@
 }
 
 .categoryFilter{
-  padding-top: 14px;
+  padding-top: 11px;
   padding-left: 20px;
-  padding-bottom: 14px;
+  padding-bottom: 11px;
   padding-right: 14px;
   display: flex;
   align-items: center;
@@ -88,13 +89,15 @@
   cursor: pointer;
   .label{
     font-size: 15px;
+    color: $dark100;
+    font-weight: 500;
   }
   .icon{
     margin-right: 13px;
   }
   &:hover{
     background-color: $dark600;
-    .quantity{
+    .quantity, .label{
       color: #fff;
     }
   }
@@ -107,7 +110,7 @@
 }
 
 .label{
-  font-weight: 500;
+  font-weight: normal;
   font-size: 12px;
 }
 
@@ -123,6 +126,7 @@
 }
 
 .categoriesLbl{
+  margin-top: 8px;
   padding-top: 15px;
   padding-bottom: 15px;
   padding-left: 19px;
@@ -145,7 +149,7 @@
 .categories{
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 624px;
+  max-height: 724px;
 }
 
 .provider{

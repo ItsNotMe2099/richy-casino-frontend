@@ -104,7 +104,9 @@
 }
 
 .support{
-
+  @media screen and (min-width: 671px){
+    margin-right: 27px;
+  }
 }
 
 .item{

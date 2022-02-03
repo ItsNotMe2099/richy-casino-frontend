@@ -37,13 +37,13 @@ export default function ModalContainer(props: Props) {
           <Modal key={0} isOpen={context.modal === ModalType.login} {...commonSettings} title='Авторизация'>
             <ModalLogin/>
           </Modal>
-          <Modal key={1} isOpen={context.modal === ModalType.passwordRecovery} {...commonSettings} title='Восстановление пароля'>
+          <Modal key={3} isOpen={context.modal === ModalType.passwordRecovery} {...commonSettings} title='Восстановление пароля'>
             <ModalPasswordRecovery/>
           </Modal>
           <Modal key={2} isOpen={context.modal === ModalType.passwordReset} {...commonSettings} title='Восстановление пароля'>
             <ModalPasswordReset/>
           </Modal>
-          <Modal key={3} isOpen={context.modal === ModalType.registration} {...commonSettings} title='Регистрация'>
+          <Modal key={1} isOpen={context.modal === ModalType.registration} {...commonSettings} title='Регистрация'>
             <ModalRegistration/>
           </Modal>
           <Modal key={4} isOpen={context.modal === ModalType.registrationSuccess} {...commonSettings} noBorder>
@@ -63,7 +63,7 @@ export default function ModalContainer(props: Props) {
           <Modal fortune key={9} isOpen={context.modal === ModalType.fortune} {...commonSettings} noBorder size='fortune'>
             <Fortune/>
           </Modal>
-          <Modal key={10} isOpen={context.modal === ModalType.registrationPhone} {...commonSettings} noBorder>
+          <Modal key={12} isOpen={context.modal === ModalType.registrationPhone} {...commonSettings} noBorder>
             <ModalRegistrationPhone/>
           </Modal>
           <BonusModal isOpen={context.modal === ModalType.bonus} {...commonSettings}/>
