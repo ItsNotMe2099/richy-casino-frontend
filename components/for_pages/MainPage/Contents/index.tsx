@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import Link from 'next/link'
-import { Row, Col } from 'react-grid-system'
+import { Row } from 'react-grid-system'
 
 
 
@@ -43,8 +43,7 @@ export default function Contents(props: Props) {
     <div className={styles.root}>
     <div className={styles.transparent}></div>
       {items.map((item, index) =>
-          <Col key={index} className={styles.col}>
-          <Link href={item.link}>
+         <Link href={item.link}>
           <a className={styles.item}>
             <div className={styles.image}>
               <div className={styles.shadow}><img src={getShadow(item)} alt=''/></div>
@@ -58,7 +57,6 @@ export default function Contents(props: Props) {
             </div>
           </a>
           </Link>
-          </Col>
       )}
     </div>
     </Row>

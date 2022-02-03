@@ -15,6 +15,21 @@
   @media screen and (max-width: 400px){
     padding: 5px 21px 58px 1px;
     }
+  @media screen and (max-width: $xs-max){
+
+    .bg{
+      bottom: -8px;
+    }
+  }
+  &.chess{
+    @media screen and (max-width: $xs-max){
+      margin-top: 12px;
+      .bg{
+        bottom: -24px;
+      }
+    }
+  }
+
 }
 
 .bg{
@@ -56,7 +71,7 @@
         font-size: 26px;
     }
     @media screen and (max-width: $xs-max){
-      margin-bottom: 5px;
+      margin-bottom: 2px;
         font-size: 18px;
     }
 }
@@ -110,8 +125,3 @@
     }
 }
 
-.chess{
-    @media screen and (max-width: 850px){
-        margin-top: 12px;
-    }
-}
