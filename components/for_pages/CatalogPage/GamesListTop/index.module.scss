@@ -5,7 +5,8 @@
   padding-top: 22px;
   padding-bottom: 14px;
   @media screen and (max-width: $xs-max){
-    @include componentRoot;
+    padding: 16px 16px 12px 16px;
+    margin-top: 12px;
   }
 }
 
@@ -36,7 +37,8 @@
 }
 .item{
   @media screen and (max-width: $xs-max){
-    margin-right: 8px;
+    margin-right: 0px;
+
   }
   img {
     width: 134px;
@@ -44,8 +46,9 @@
     object-fit: cover;
     border-radius: 10px;
     @media screen and (max-width: $xs-max){
-      width: 78px;
-      height: 78px;
+      width: auto;
+      height: auto;
+      max-width: 100%;
     }
   }
 }
@@ -57,16 +60,21 @@
   margin-top: 10px;
   @media screen and (max-width: 650px){
     font-size: 12px;
-}
+    margin-top: 2px;
+  }
 }
 
 .user{
-  font-weight: 500;
+  font-weight: 400;
   font-size: 13px;
   color: $dark100;
+  margin-top: 4px;
   @media screen and (max-width: 650px){
+
     font-size: 12px;
-}
+
+    margin-top: 2px;
+  }
 }
 
 .win{
@@ -74,21 +82,21 @@
   span{
     color: $white;
   }
+  font-weight: 400;
+  margin-top: 1px;
   @media screen and (max-width: 650px){
     font-size: 12px;
-}
+  }
 }
 
 .overflow{
-  margin-top: 16px;
-  flex-wrap: nowrap;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  overflow-x: clip;
-  clip: auto;
-  flex:1;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-bottom: 18px;
+  display:grid;
+  grid-auto-flow: column;
+  grid-auto-columns:calc((100% - (3 - 1)*8px)/3);
+  grid-gap: 8px;
+  padding-top: 14px;
+  overflow:auto;
+  padding-bottom: 21px;
+
+
 }

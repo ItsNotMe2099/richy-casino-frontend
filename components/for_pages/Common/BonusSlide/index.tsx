@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import {Col} from 'react-grid-system'
 import Button from 'components/ui/Button'
 import classNames from 'classnames'
 import Timer from 'components/for_pages/Common/Timer'
@@ -44,8 +43,7 @@ export default function BonusSlide(props: Props) {
   }, [user])
 
   return (
-      <Col className={props.className} onClick={() => appContext.showModal(ModalType.bonus)}>
-      <div className={classNames(styles.root, slideClass)}>
+      <div className={classNames(styles.root, props.className, slideClass)} onClick={() => appContext.showModal(ModalType.bonus)}>
         {(props.style === 'modal' || props.style === 'sheet' || props.style === 'footer') &&
         <div className={styles.close} onClick={(e) => {
           e.stopPropagation()
@@ -95,7 +93,7 @@ export default function BonusSlide(props: Props) {
         <div className={styles.footerGroup}>
         <div className={styles.btn}>
           <Button size='normal' background='payGradient500'>Получить</Button>
-          {isTimerVisible && 
+          {isTimerVisible &&
             <div className={styles.timer}>
               <Timer style={props.style ==='footer' ? 'footer' : props.style ==='sheet' ? 'sheet' : 'bonus'} expiredAt={expiredAt}/>
             </div>
@@ -114,7 +112,6 @@ export default function BonusSlide(props: Props) {
         </div>
         </div>
       </div>
-      </Col>
   )
 }
 

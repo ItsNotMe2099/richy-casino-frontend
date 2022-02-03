@@ -80,12 +80,15 @@ max-width: 280px;
   justify-content: space-between;
   display: flex;
   color: #000;
-  margin-right: 20px;
   flex-shrink: 0;
   position: relative;
   width: 100%;
   margin: 0px;
   font-size: 13px;
+  @media screen and (max-width: $xs-max){
+    height: 35px;
+    font-size: 10px;
+  }
 }
 
 .dots{
@@ -167,6 +170,11 @@ max-width: 280px;
   img{
     margin-right: 12px;
   }
+  @media screen and (max-width: $xs-max){
+    img{
+      height: 16px;
+    }
+  }
   span{
     font-size: 13px;
     color: #FFFFFF;
@@ -185,4 +193,9 @@ max-width: 280px;
 
 .arrow{
   align-self: center;
+  @media screen and (max-width: $xs-max){
+    img{
+
+    }
+  }
 }

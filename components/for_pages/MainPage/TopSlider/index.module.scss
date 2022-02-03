@@ -18,7 +18,7 @@
     display: none !important;
   }
   @media screen and (max-width: $sm-min){
-   height: 175px;
+    height: 167px;
   }
   position: relative;
 }
@@ -78,12 +78,12 @@
     padding-left: 18px;
   }
   @media screen and (max-width: 800px){
-    max-height: 175px;
-    min-height: 175px;
+    max-height: 167px;
+    min-height: 167px;
     padding: 20px 0 9px 15px;
   }
   @media screen and (max-width: $xs-max){
-    width: 282px;
+    width: auto;
   }
 }
 
@@ -149,4 +149,7 @@
       }
     }
   }
+}
+.bonusSlideMobile{
+  margin: 0px 4px;
 }

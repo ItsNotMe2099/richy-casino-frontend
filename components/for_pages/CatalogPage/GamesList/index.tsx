@@ -27,9 +27,9 @@ export default function GamesList(props: Props) {
   const Item = (prop:{item: IGame}) => {
 
     return(
-    <div className={styles.item}>
-      <img src={prop.item.image} alt=''/>
-    </div>
+      <div className={styles.item}>
+        <img src={prop.item.image} alt=''/>
+      </div>
     )
   }
 
@@ -72,36 +72,36 @@ export default function GamesList(props: Props) {
 
 
   return (
-      <div className={styles.root}>
-        <Header icon={getIcon()} label={getLabel()} length={props.items.length} shadowColor={getShadow(getIcon())}/>
+    <div className={styles.root}>
+      <Header icon={getIcon()} label={getLabel()} length={props.items.length} shadowColor={getShadow(getIcon())}/>
+      <HiddenXs>
+        {!props.richy &&
+        <div className={styles.wrapper}><SwitchFilter all={props.all}/></div>}
+      </HiddenXs>
+      <div className={styles.list}>
         <HiddenXs>
-          {!props.richy &&
-          <div className={styles.wrapper}><SwitchFilter all={props.all}/></div>}
-        </HiddenXs>
-        <div className={styles.list}>
-          <HiddenXs>
-            <>
+          <>
             {props.items && (isShow ? props.items : props.items.slice(0, 10)).map((item, index) =>
               <Item item={item} key={index}/>
             )}
           </>
-          </HiddenXs>
-          <VisibleXs>
-            <>
+        </HiddenXs>
+        <VisibleXs>
+          <>
             {props.items && (isShow ? props.items : props.items.slice(0, 9)).map((item, index) =>
               <Item item={item} key={index}/>
             )}
-            </>
-          </VisibleXs>
-        </div>
-        <div className={styles.more} onClick={() => isShow ? setIsShow(false) : setIsShow(true)}>
-            <div className={styles.icon}>
-              <img src='/img/CatalogPage/more.svg' alt=''/>
-            </div>
-            <div className={styles.text}>
-              {isShow ? <>Меньше игр</> : <>Больше игр</>}
-            </div>
-          </div>
+          </>
+        </VisibleXs>
       </div>
+      <div className={styles.more} onClick={() => isShow ? setIsShow(false) : setIsShow(true)}>
+        <div className={styles.icon}>
+          <img src='/img/CatalogPage/more.svg' alt=''/>
+        </div>
+        <div className={styles.text}>
+          {isShow ? <>Меньше игр</> : <>Больше игр</>}
+        </div>
+      </div>
+    </div>
   )
 }

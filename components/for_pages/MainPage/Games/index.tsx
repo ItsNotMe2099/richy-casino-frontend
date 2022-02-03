@@ -5,6 +5,7 @@ import { useState } from 'react'
 import Header from 'components/for_pages/Common/Header'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
+import Link from 'next/link'
 
 interface Props {
   slider?: any
@@ -54,32 +55,36 @@ export default function Games(props: Props) {
   }
 
   return (
-      <div className={styles.root}>
-        <div className={styles.header}>
+    <div className={styles.root}>
+      <div className={styles.header}>
         <Header
-        icon='/img/Contents/gamepad.svg'
-        label='Richy Games'
-        shadowColor='blue'
-        length={items.length}
-        style='withoutLength'
-        onPrev={() => slider.slickGoTo(currentIndex - 1)}
-        onNext={() => slider.slickGoTo(currentIndex + 1)}
-        slider />
-        </div>
-        <HiddenXs>
-          <Slider {...settings} ref={slider1 => (slider = slider1)}>
-            {items.map((item, index) =>
-              <Slide item={item} key={index}/>
-            )}
-          </Slider>
-        </HiddenXs>
-        <VisibleXs>
-          <div className={styles.overflow}>
-            {items.map((item, index) =>
-              <Slide item={item} key={index}/>
-            )}
-          </div>
-        </VisibleXs>
+          icon='/img/Contents/gamepad.svg'
+          label='Richy Games'
+          shadowColor='blue'
+          length={items.length}
+          style='withoutLength'
+          onPrev={() => slider.slickGoTo(currentIndex - 1)}
+          onNext={() => slider.slickGoTo(currentIndex + 1)}
+          slider />
       </div>
+      <HiddenXs>
+        <Slider {...settings} ref={slider1 => (slider = slider1)}>
+          {items.map((item, index) =>
+            <Slide item={item} key={index}/>
+          )}
+        </Slider>
+      </HiddenXs>
+      <VisibleXs>
+        <div className={styles.overflow}>
+          {items.map((item, index) =>
+            <Link key={item.link} href={item.link}>
+              <a className={styles.slide}><img src={item.image}/>
+                <div className={styles.label}>{item.label}</div>
+              </a>
+            </Link>
+          )}
+        </div>
+      </VisibleXs>
+    </div>
   )
 }

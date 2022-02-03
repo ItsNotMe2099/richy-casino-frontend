@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import { Row } from 'react-grid-system'
+import {Col, Row} from 'react-grid-system'
 import BonusSlide from 'components/for_pages/Common/BonusSlide'
 import SlideSlider from './SlideSlider'
 import Button from 'components/ui/Button'
@@ -35,9 +35,10 @@ export default function TopSlider(props: Props) {
       {
         breakpoint: 768,
         settings: {
-          variableWidth: true,
+          variableWidth: false,
           dots: true,
-          centerMode: true
+          centerMode: true,
+          centerPadding: '15px',
         }
       },
     ]
@@ -55,31 +56,33 @@ export default function TopSlider(props: Props) {
       {(context.showBonus && !context.showBonusExpanded) && <div className={styles.bonus}><Gift timer/></div>}
       <HiddenXs>
 
-      <Row className={styles.desktop}>
-        <BonusSlide/>
-        <SlideSlider items={items}/>
-      </Row>
+        <Row className={styles.desktop}>
+          <Col>
+          <BonusSlide/>
+          </Col>
+          <SlideSlider items={items}/>
+        </Row>
       </HiddenXs>
       <VisibleXs>
-      <>
-      <Slider {...settings}>
-        <BonusSlide/>
-        {items.map((item, index) =>
-        <div className={styles.rootSlide} key={index}>
-        <div className={styles.item} style={{backgroundImage: `url(${item.image})`}}>
-        <div className={styles.left}>
-          <div className={styles.label}>
-            {item.label}
-          </div>
-          <div className={styles.btn}>
-            <Button size='normal' background='white'>Начать играть</Button>
-          </div>
-        </div>
-        </div>
-        </div>
-        )}
-      </Slider>
-      </>
+        <>
+          <Slider {...settings}>
+            <BonusSlide className={styles.bonusSlideMobile}/>
+            {items.map((item, index) =>
+              <div className={styles.rootSlide} key={index}>
+                <div className={styles.item} style={{backgroundImage: `url(${item.image})`}}>
+                  <div className={styles.left}>
+                    <div className={styles.label}>
+                      {item.label}
+                    </div>
+                    <div className={styles.btn}>
+                      <Button size='normal' background='white'>Начать играть</Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </Slider>
+        </>
       </VisibleXs>
     </div>
   )

@@ -24,18 +24,18 @@ export default function GamesListTop(props: Props) {
   const Item = (prop:{item: IGame}) => {
 
     return(
-    <div className={styles.item}>
-      <img src={prop.item.image} alt=''/>
-      <div className={styles.label}>
-        {prop.item.label}
+      <div className={styles.item}>
+        <img src={prop.item.image} alt=''/>
+        <div className={styles.label}>
+          {prop.item.label}
+        </div>
+        <div className={styles.user}>
+          Username
+        </div>
+        <div className={styles.win}>
+          <span>Win:</span> 8410 Р
+        </div>
       </div>
-      <div className={styles.user}>
-        Username
-      </div>
-      <div className={styles.win}>
-        <span>Win:</span> 8410 Р
-      </div>
-    </div>
     )
   }
 
@@ -61,23 +61,23 @@ export default function GamesListTop(props: Props) {
   }
 
   return (
-      <div className={styles.root}>
-        <Header icon='/img/Contents/money.svg' label='ТОП игры' length={1} shadowColor='red' style='fullOnlyOnMobile'/>
-        <div className={styles.wrapper}><SwitchFilter top/></div>
-        <HiddenXs>
+    <div className={styles.root}>
+      <Header icon='/img/Contents/money.svg' label='ТОП игры' length={1} shadowColor='red' style='fullOnlyOnMobile'/>
+      <div className={styles.wrapper}><SwitchFilter top/></div>
+      <HiddenXs>
         <Slider {...settings}>
           {props.items && props.items.slice(0, 6).map((item, index) =>
             <Item item={item} key={index}/>
           )}
         </Slider>
-        </HiddenXs>
-        <VisibleXs>
-          <div className={styles.overflow}>
-            {props.items && props.items.map((item, index) =>
-              <Item item={item} key={index}/>
-            )}
-          </div>
-        </VisibleXs>
-      </div>
+      </HiddenXs>
+      <VisibleXs>
+        <div className={styles.overflow}>
+          {props.items && props.items.map((item, index) =>
+            <Item item={item} key={index}/>
+          )}
+        </div>
+      </VisibleXs>
+    </div>
   )
 }

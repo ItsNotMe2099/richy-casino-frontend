@@ -17,15 +17,16 @@
     padding: 15px 0 9px 15px;
   }
   @media screen and (max-width: $xs-max){
-    max-height: 175px;
-    min-height: 175px;
+    max-height: 167px;
+    min-height: 167px;
     padding: 15px 0 9px 15px;
+    margin: 0px 4px;
   }
   @media screen and (max-width: $xs-max){
     .timer{
       display: none;
     }
-    width: 282px;
+    width: auto;
   }
 
   .hero{
@@ -44,7 +45,7 @@
       }
     }
     @media screen and (max-width: 1360px){
-      right: -10%;
+      right: -0.5%;
     }
     @media screen and (max-width: $xs-max){
       right: -32%;
@@ -214,6 +215,7 @@
   @media screen and (max-width: 800px){
     font-size: 28px;
     margin-top: 8px;
+    font-weight: 600;
   }
 }
 
@@ -240,6 +242,9 @@
     content: "";
     display: table;
     clear: both;
+  }
+  @media screen and (max-width: $xs-max){
+    margin-top: 8px;
   }
 }
 

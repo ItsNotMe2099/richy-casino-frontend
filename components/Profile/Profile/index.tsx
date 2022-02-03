@@ -167,7 +167,7 @@ const context = useAppContext()
             {accounts.length > 0 &&
             <div className={styles.newAcc}>
               <div className={styles.title}>
-                Дополнительные
+                Бонусные
               </div>
                 {newAccounts.map((acc, index) =>
                   accounts.find(item => acc.currency === item.iso) &&

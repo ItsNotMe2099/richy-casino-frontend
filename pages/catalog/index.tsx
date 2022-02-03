@@ -9,6 +9,7 @@ import {GetServerSideProps} from 'next'
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import VisibleXs from 'components/ui/VisibleXS'
 import HiddenXs from 'components/ui/HiddenXS'
+import BuyCrypto from 'components/for_pages/MainPage/BuyCrypto'
 
 export default function CatalogPage() {
 
@@ -395,6 +396,7 @@ export default function CatalogPage() {
       <HiddenXs><TopSlider money={money}/></HiddenXs>
       </Row>
       <GamesListTop items={topGames}/>
+      <BuyCrypto/>
       <GamesList all items={games}/>
       <GamesList live items={liveCasino}/>
       <GamesList richy items={richyGames}/>

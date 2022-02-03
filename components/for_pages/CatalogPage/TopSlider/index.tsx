@@ -27,8 +27,10 @@ export default function TopSlider(props: Props) {
       {
         breakpoint: 768,
         settings: {
-          variableWidth: true,
-          centerMode: true
+          variableWidth: false,
+          dots: false,
+          centerMode: true,
+          centerPadding: '15px',
         }
       },
     ]
@@ -37,31 +39,33 @@ export default function TopSlider(props: Props) {
 
   return (
     <>
-    <HiddenXs>
-    <>
-    <Col className={styles.root}>
-        <div className={styles.jackpot}>
-          <div className={styles.title}>JACKPOT</div>
-          <div className={styles.money}>
-            {props.money}
-          </div>
-        </div>
-      </Col>
-      <BonusSlide className={styles.desktop}/>
-      </>
+      <HiddenXs>
+        <>
+          <Col className={styles.root}>
+            <div className={styles.jackpot}>
+              <div className={styles.title}>JACKPOT</div>
+              <div className={styles.money}>
+                {props.money}
+              </div>
+            </div>
+          </Col>
+          <Col className={styles.desktop}>
+          <BonusSlide />
+          </Col>
+        </>
       </HiddenXs>
       <VisibleXs>
-      <Slider {...settings}>
-        <BonusSlide/>
-        <div className={styles.jackpot}>
-          <div className={styles.title}>JACKPOT</div>
-          <div className={styles.money}>
-            {props.money}
+        <Slider {...settings}>
+          <BonusSlide className={styles.bonusSlideMobile}/>
+          <div className={styles.jackpot}>
+            <div className={styles.title}>JACKPOT</div>
+            <div className={styles.money}>
+              {props.money}
+            </div>
           </div>
-        </div>
-      </Slider>
+        </Slider>
       </VisibleXs>
-      </>
+    </>
   )
 }
 

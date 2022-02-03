@@ -71,6 +71,9 @@
   margin-top: 8px;
   justify-content: space-between;
   cursor: pointer;
+  @media screen and (max-width: $xs-max){
+
+  }
   &:hover{
     background-color: $dark500;
   }
@@ -112,6 +115,9 @@
 .label{
   font-weight: normal;
   font-size: 12px;
+  @media screen and (max-width: $xs-max){
+    font-weight: 400;
+  }
 }
 
 .left{

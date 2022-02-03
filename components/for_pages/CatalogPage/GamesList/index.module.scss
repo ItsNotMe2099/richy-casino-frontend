@@ -22,17 +22,16 @@
   min-width: 78px;
   min-height: 78px;
   justify-self: center;
-    img{
+  img{
     width: 100%;
     border-radius: 18px;
     @media screen and (max-width: $xs-max){
       border-radius: 10px;
     }
     @media screen and (max-width: 400px){
-      width: 85px;
-        
-      }
-}
+      width: 100%;
+    }
+  }
 }
 
 .list{
@@ -41,9 +40,19 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 20px;
   @media screen and (max-width: $xs-max){
+    margin-top: 14px;
+    padding-left: 0px;
     grid-template-columns: 1fr 1fr 1fr;
-    margin-top: 20px;
-    gap: 7px;
+    grid-gap: 8px;
+    > div {
+      display: flex;
+      margin-bottom: 0px;
+      img {
+        width: auto;
+        max-width: 100%;
+      }
+    }
+
   }
 }
 
@@ -56,6 +65,11 @@
   align-items: center;
   margin-top: 20px;
   cursor: pointer;
+  @media screen and (max-width: $xs-max){
+    padding: 11px 0;
+    font-weight: 500;
+    margin-top: 14px;
+  }
 }
 
 .icon{

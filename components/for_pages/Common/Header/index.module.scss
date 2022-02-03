@@ -76,12 +76,12 @@
     margin-right: 10px;
   }
   img{
-      width: 48px;
-      height: 48px;
-      @media screen and (max-width: $xs-max){
-        width: 17px;
-        height: 17px;
-      }
+    width: 48px;
+    height: 48px;
+    @media screen and (max-width: $xs-max){
+      width: 17px;
+      height: 17px;
+    }
   }
 }
 
@@ -115,7 +115,7 @@
   font-size: 24px;
   color: #FFFFFF;
   @media screen and (max-width: 920px){
-      font-size: 16px;
+    font-size: 16px;
   }
 }
 

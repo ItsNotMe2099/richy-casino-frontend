@@ -2,6 +2,7 @@
 
 .root {
   @include componentRoot;
+
 }
 
 .header{
@@ -111,16 +112,34 @@
 }
 
 .overflow{
-  margin-top: 20px;
-  flex-wrap: nowrap;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  overflow-x: clip;
-  clip: auto;
-  flex:1;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-bottom: 18px;
+  display:grid;
+  grid-auto-flow: column;
+  grid-auto-columns:calc((100% - (3 - 1)*8px)/3);
+  grid-gap: 8px;
+  padding-top: 14px;
+  overflow:auto;
+  padding-bottom: 21px;
+  .slide{
+    position: relative;
+    display: flex;
+    img{
+      border-radius: 13px;
+
+      max-width: 100%;
+    }
+    .label{
+      position: absolute;
+      left: 5px;
+      bottom: 5px;
+      right: 0px;
+      text-overflow: ellipsis;
+      font-style: italic;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: $white;
+    }
+  }
 }
 

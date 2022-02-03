@@ -25,11 +25,11 @@
     min-height: 200px;
   }
   @media screen and (max-width: $xs-max){
-    width: 282px !important;
-    max-height: 175px;
-    min-height: 175px;
+    width: auto !important;
+    max-height: 167px;
+    min-height: 167px;
     max-width: 100%;
-    margin: 0 5px;
+    margin: 0 4px;
   }
 }
 
@@ -58,13 +58,14 @@
 .slider{
   margin-top: 20px;
   @media screen and (max-width: $sm-min){
-    height: 175px;
-    :global .slick-list{
-      height: 175px;
-    }
+    margin: 24px -10px 0px -10px;
+
   }
 }
 
 .desktop{
   margin-top: 20px;
+}
+.bonusSlideMobile{
+  margin: 0px 4px;
 }
