@@ -28,6 +28,14 @@
       border-radius: 3px;
       font-size: 16px;
     }
+    .label, .seconds{
+      display: none;
+    }
+    .timer{
+      .separator:nth-child(4){
+        display: none;
+      }
+    }
   }
 }
 
