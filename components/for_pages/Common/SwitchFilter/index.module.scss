@@ -4,8 +4,7 @@
   border-radius: 67px;
   background-color: $dark600;
   display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
+
   flex-wrap: nowrap;
   padding: 2px;
   .item:last-child{
