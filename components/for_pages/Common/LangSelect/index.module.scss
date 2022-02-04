@@ -6,6 +6,7 @@
   padding: 15px 14px;
   border-radius: 8px;
   cursor: pointer;
+  align-items: center;
   img{
     margin-right: 10px;
   }
@@ -17,9 +18,14 @@
 .other{
   background-color: $dark700;
   padding: 12px 14px;
-  @media screen and (max-width: 900px){
-    padding: 7px 9px;
+  @media screen and (max-width: $xs-max){
+    padding: 0px 9px;
+    height: 29px;
+    img{
+      width: 14px;
+    }
   }
+
 }
 
 

@@ -169,6 +169,7 @@ export default function Footer(props: Props) {
             </div>
         </div>
         <div className={styles.sliders}>
+
             <div className={styles.sliderTop}>
               {slidesTop.map((slide, index) =>
                 <div className={styles.slide} key={index}>

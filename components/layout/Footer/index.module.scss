@@ -67,8 +67,12 @@
     }
     svg{
       fill: #484B5C;
+      @media screen and (max-width: $xs-max){
+        fill: $white;
+      }
     }
   }
+
 }
 
 .facebook{
@@ -77,6 +81,11 @@
     background: linear-gradient(270deg, #2C50FF -6.01%, #4785F6 114.87%);
   }
 }
+  @media screen and (max-width: $xs-max){
+    a{
+      background: linear-gradient(270deg, #2C50FF -6.01%, #4785F6 114.87%);
+    }
+  }
 }
 
 .youtube{
@@ -85,6 +94,11 @@
     background: #EC4444;
   }
 }
+  @media screen and (max-width: $xs-max){
+    a{
+      background: #EC4444;
+    }
+  }
 }
 
 .twitter{
@@ -93,11 +107,21 @@
       background: #00A1E6;
     }
   }
+  @media screen and (max-width: $xs-max){
+    a{
+      background: #00A1E6;
+    }
+  }
 }
 
 .linkedIn{
   a{
     &:hover{
+      background: #3F6EA6;
+    }
+  }
+  @media screen and (max-width: $xs-max){
+    a{
       background: #3F6EA6;
     }
   }
@@ -153,6 +177,10 @@
     overflow-X: scroll;
     overflow-Y: hidden;
   }
+  @media screen and (max-width: $xs-max){
+    padding-top: 14px;
+    padding-bottom: 16px;
+  }
 }
 
 .sliderBottom{
@@ -170,6 +198,10 @@
   @media screen and (max-width: 920px){
     overflow-X: scroll;
     overflow-Y: hidden;
+  }
+  @media screen and (max-width: $xs-max){
+    padding-top: 14px;
+    padding-bottom: 16px;
   }
 }
 
@@ -191,8 +223,9 @@
     @media screen and (max-width: 1360px){
       max-width: 300px;
     }
-    @media screen and (max-width: 620px){
-      max-width: 260px;
+    @media screen and (max-width: $xs-max){
+      max-width: 100%;
+      flex: 1;
       font-weight: 400;
     }
   }
@@ -203,7 +236,7 @@
     }
   }
   @media screen and (max-width: $xs-max){
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
       padding-top: 16px;
   }
@@ -211,7 +244,7 @@
   .btnsMobile{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     margin-top: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid #2D2E38;
@@ -283,6 +316,18 @@
     @media screen and (min-width: 901px){
       display: none;
     }
+  @media screen and (max-width: $xs-max){
+  .btn{
+    margin-right: 14px;
+    flex: 1;
+    &:last-of-type{
+      margin-right: 0px;
+    }
+  }
+a{
+  width: 100%;
+}
+  }
 }
 
 .wrapper{
