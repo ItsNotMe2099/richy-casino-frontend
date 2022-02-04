@@ -2,7 +2,8 @@
 
 .root {
   border-radius: 16px;
-  background: linear-gradient(231.45deg, #2CA4FB 27.83%, #C5048F 94.57%);
+  background: linear-gradient(200.45deg, #2CA4FB 7.83%, #C5048F 94.57%);
+
   display: flex;
   justify-content: center;
   margin-top: 18px;
@@ -40,10 +41,10 @@
     }
   }
   @media screen and (max-width: $xs-max){
-    right: 0px;
+    right: 7px;
     left: auto;
     bottom: 0px;
-    width: 153px;
+    max-height: 100%;
   }
 }
 
@@ -249,8 +250,8 @@
 
 .money2{
   position: absolute;
-  right: -4%;
-  top: 0;
+  right: -22px;
+  bottom: -63px;
   img{
     width: 100%;
   }

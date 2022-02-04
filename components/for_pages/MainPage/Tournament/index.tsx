@@ -1,20 +1,21 @@
 import Timer from 'components/for_pages/Common/Timer'
 import Button from 'components/ui/Button'
 import styles from './index.module.scss'
+import {useAppContext} from 'context/state'
 
 interface Props {
   balance: string
 }
 
 export default function Tournament(props: Props) {
-
+    const appContext = useAppContext()
   const someDate = '2022-05-01T12:46:24.007Z'
 
   const expiredAt = new Date(someDate)
 
   return (
     <div className={styles.root}>
-        <div className={styles.hero}><img src='/img/Tournament/hero.png' alt=''/></div>
+        <div className={styles.hero}><img src={`/img/Tournament/${appContext.isMobile ? 'hero_mobile' : 'hero'}.png`} alt=''/></div>
         <div className={styles.coinsBlur}><img src='/img/Tournament/coins-blur.png' alt=''/></div>
         <div className={styles.money}><img src='/img/Tournament/money.svg' alt=''/></div>
         <div className={styles.money2}><img src='/img/Tournament/money2.svg' alt=''/></div>
