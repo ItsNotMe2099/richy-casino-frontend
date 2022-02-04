@@ -8,7 +8,7 @@
   max-height: 79px;
   overflow: hidden;
   border-radius: 18px;
-  .moneyWallet, .moneyWallet2, .moneyBlurWallet, .moneyFooter, .moneyFooter2{
+  .moneyWallet, .moneyWallet2, .moneyBlurWallet, .moneyFooter, .moneyFooter2, .moneyBurger{
     display: none;
   }
   @media screen and (max-width: $xs-max){
@@ -29,6 +29,29 @@
   right: 15px;
   display: flex;
   z-index: 11;
+}
+
+.profileBurger{
+  padding-left: 70px;
+  .timer{
+    margin-right: 8px;
+  }
+  .money2{
+    display: none;
+  }
+  .moneyBurger{
+    display: block;
+    position: absolute;
+    right: -30px;
+    top: 0;
+  }
+}
+
+.reg{
+  padding-left: 70px;
+  .timer{
+    margin-right: 8px;
+  }
 }
 
 .wallet{

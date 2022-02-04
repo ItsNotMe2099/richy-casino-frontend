@@ -1,15 +1,26 @@
 @import "scss/index";
 
 .root{
-  border-radius: 19px;
   img{
     width: 80px;
     height: 80px;
+    border-radius: 19px;
   }
   @media screen and (max-width: $xs-max){
     img{
       width: 60px;
       height: 60px;
+      border-radius: 19px;
+    }
+  }
+}
+
+.circle{
+  @media screen and (max-width: $xs-max){
+    img{
+      width: 55px;
+      height: 55px;
+      border-radius: 100%;
     }
   }
 }

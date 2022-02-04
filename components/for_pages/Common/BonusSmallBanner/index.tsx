@@ -11,7 +11,7 @@ interface Props {
   children?: React.ReactNode
   className?: string
   onRequestClose?: () => void
-  style?: 'footer' | 'wallet'
+  style?: 'footer' | 'wallet' | 'registration' | 'profileBurger'
 }
 
 export default function BonusSmallBanner(props: Props) {
@@ -22,7 +22,9 @@ export default function BonusSmallBanner(props: Props) {
 
   const bannerClass = classNames({
     [styles.footer]: props.style === 'footer',
-    [styles.wallet]: props.style === 'wallet'
+    [styles.wallet]: props.style === 'wallet',
+    [styles.reg]: props.style === 'registration',
+    [styles.profileBurger]: props.style === 'profileBurger'
   })
 
   const [isTimerVisible, setIsTimerVisible] = useState(false)
@@ -86,6 +88,9 @@ export default function BonusSmallBanner(props: Props) {
         </div>
         <div className={styles.moneyFooter2}>
           <img src='/img/BonusSmallBanner/money-mobile-footer-l.svg' alt=''/>
+        </div>
+        <div className={styles.moneyBurger}>
+          <img src='/img/BonusSmallBanner/money-burger-r.svg' alt=''/>
         </div>
         </>
       </VisibleXs>

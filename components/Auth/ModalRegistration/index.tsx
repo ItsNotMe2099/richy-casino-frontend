@@ -64,7 +64,7 @@ export default function ModalRegistration(props: Props) {
   return (
     <>
     <div className={styles.banner}>
-      <BonusSmallBanner/>
+      <BonusSmallBanner style='registration'/>
     </div>
       <div className={styles.variants}>
         {variants.map((item, index) =>
