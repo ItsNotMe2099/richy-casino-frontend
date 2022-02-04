@@ -14,7 +14,9 @@ export default function Gift(props: Props) {
 
   return (
       <div className={styles.root} onClick={() => appContext.setBonusExpanded(true)}>
-        <img src='/img/TopSlider/bonus.svg' alt=''/>
+        <div className={styles.imgWrapper}>
+          <img src='/img/TopSlider/bonus.svg' alt=''/>
+        </div>
         {props.timer && <Timer style='gift' expiredAt={expiredAt}/>}
       </div>
   )
