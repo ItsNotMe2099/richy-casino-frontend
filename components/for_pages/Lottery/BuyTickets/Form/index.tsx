@@ -2,15 +2,15 @@ import styles from './index.module.scss'
 import { Form, Formik } from 'formik'
 import InputTicket from 'components/ui/Inputs/InputTicket'
 import Button from 'components/ui/Button'
-
+import cx from 'classnames'
 interface Props {
-  
+
 }
 
 export default function BuyTicketsForm(props: Props) {
 
   const handleBuy = async (data) => {
-    
+
   }
 
   return (
@@ -30,7 +30,7 @@ export default function BuyTicketsForm(props: Props) {
                 <InputTicket className={styles.input} name='ticket' placeholder='Enter no. of ticket'/>
               </div>
               <div className={styles.bottom}>
-                <div className={styles.price}>
+                <div className={cx(styles.total, styles.price)}>
                   <div className={styles.text}>
                     Price per ticket
                   </div>
