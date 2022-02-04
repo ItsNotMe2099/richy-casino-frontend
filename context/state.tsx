@@ -98,7 +98,7 @@ export function AppWrapper(props: Props) {
 
   useEffect(() => {
     setTimeout(() => {
-      setModal(ModalType.fortune)
+     // setModal(ModalType.fortune)
     })
   }, [])
   const updateUserDetails = async () => {
