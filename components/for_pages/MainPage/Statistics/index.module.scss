@@ -54,7 +54,7 @@
     display: flex;
     img{
         width: 100%;
-        @media screen and (max-width: 400px){
+        @media screen and (max-width: $xs-max){
             height: 30px;
         }
     }
@@ -104,7 +104,7 @@
             font-size: 11px;
             font-weight: 400;
         }
-        @media screen and (max-width: 400px){
+        @media screen and (max-width: $xs-max){
             font-size: 10px;
         }
     }
@@ -147,7 +147,7 @@
             border-bottom-right-radius: 0;
         }
     }
-    @media screen and (max-width: 400px){
+    @media screen and (max-width: $xs-max){
         margin-left: -10px;
         margin-right: -16px;
     }
@@ -188,7 +188,7 @@
         font-size: 11px;
         margin-left: 21px;
     }
-    @media screen and (max-width: 400px){
+    @media screen and (max-width: $xs-max){
         font-size: 10px;;
         max-width: 35px;
     }
@@ -202,7 +202,7 @@
         font-size: 11px;
       font-weight: 400;
     }
-    @media screen and (max-width: 400px){
+    @media screen and (max-width: $xs-max){
         font-size: 10px;
     }
 }
@@ -221,7 +221,7 @@
         font-size: 11px;
         max-width: 50px;
     }
-    @media screen and (max-width: 400px){
+    @media screen and (max-width: $xs-max){
         font-size: 10px;
     }
 }
@@ -239,7 +239,7 @@
     @media screen and (max-width: $xs-max){
         font-size: 11px;
     }
-    @media screen and (max-width: 400px){
+    @media screen and (max-width: $xs-max){
         font-size: 10px;
     }
 }
@@ -264,7 +264,7 @@
     @media screen and (max-width: $xs-max){
         font-size: 11px;
     }
-    @media screen and (max-width: 400px){
+    @media screen and (max-width: $xs-max){
         font-size: 10px;
     }
 }

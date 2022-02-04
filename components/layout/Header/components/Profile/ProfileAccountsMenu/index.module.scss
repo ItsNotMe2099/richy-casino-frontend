@@ -193,7 +193,7 @@
     font-size: 13px;
     color: #FFFFFF;
   }
-  @media screen and (max-width: 400px){
+  @media screen and (max-width: $xs-max){
     span{
       font-size: 11px;
     }

@@ -26,7 +26,7 @@
         padding-left: 10px;
         padding-bottom: 5px;
     }
-    @media screen and (max-width: 400px){
+    @media screen and (max-width: $xs-max){
         flex-shrink: 0;
         margin-right: 8px;
     }

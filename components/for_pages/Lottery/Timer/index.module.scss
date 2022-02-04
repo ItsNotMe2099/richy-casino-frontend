@@ -12,7 +12,7 @@
   @media screen and (max-width: 1360px){
     flex-direction: column;
   }
-  @media screen and (max-width: 400px){
+  @media screen and (max-width: $xs-max){
     padding: 11px 0 9px 0;
     margin-top: 17px;
   }
@@ -22,7 +22,7 @@
   font-weight: bold;
   font-size: 40px;
   color: $lottery500;
-  @media screen and (max-width: 400px){
+  @media screen and (max-width: $xs-max){
     font-size: 20px;
   }
 }
@@ -30,7 +30,7 @@
 .label{
   font-size: 15px;
   color: $lottery500;
-  @media screen and (max-width: 400px){
+  @media screen and (max-width: $xs-max){
     font-size: 11px;
   }
 }
@@ -38,7 +38,7 @@
 .days{
   text-align: center;
   margin-right: 43px;
-  @media screen and (max-width: 400px){
+  @media screen and (max-width: $xs-max){
     margin-right: 17px;
   }
   &:last-of-type{
@@ -52,7 +52,7 @@
   span{
     color: $lottery500;
   }
-  @media screen and (max-width: 400px){
+  @media screen and (max-width: $xs-max){
     font-size: 15px;
   }
 }
@@ -60,7 +60,7 @@
 .timer{
   display: flex;
   align-items: center;
-  @media screen and (max-width: 400px){
+  @media screen and (max-width:$xs-max){
     margin-top: 8px;
   }
 }

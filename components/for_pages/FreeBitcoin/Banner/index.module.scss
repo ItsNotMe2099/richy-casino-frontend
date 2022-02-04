@@ -19,7 +19,7 @@
     justify-content: flex-start;
     padding-top: 22px;
   }
-  @media screen and (max-width: 400px){
+  @media screen and (max-width: $xs-max){
     margin-top: 18px;
   }
   @media screen and (max-width: 320px){

@@ -66,7 +66,7 @@
 
 .controls{
   display: flex;
-  @media screen and (max-width: 400px){
+  @media screen and (max-width: $xs-max){
     display: none;
   }
 }
