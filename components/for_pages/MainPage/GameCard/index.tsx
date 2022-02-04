@@ -5,7 +5,6 @@ import { useAppContext } from 'context/state'
 
 interface Props {
   poker?: boolean
-  shadowColor?: 'red' | 'blue'
 }
 
 export default function GameCard(props: Props) {
@@ -38,7 +37,7 @@ export default function GameCard(props: Props) {
         </div>
         <div className={styles.image}>
           <div className={styles.shadow}><img src={getShadow(props.poker ? 'red' : 'blue')} alt=''/></div>
-          <img src={props.poker ? '/img/GameCard/poker-small.svg' : '/img/GameCard/chess-small.svg'} alt=''/>
+          <img src={props.poker ? '/img/GameCard/poker-small.png' : '/img/GameCard/chess-small.svg'} alt=''/>
         </div>
         <div className={styles.text}>
           <div className={styles.label}>
