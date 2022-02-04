@@ -25,7 +25,6 @@ export default function ModalPasswordReset(props: Props) {
     try {
       setError(null)
       const res = await AuthRepository.resetPassword({login: data.login, code: data.code, password: data.password})
-      console.log('PassRes', res)
       const accessToken = res.token
 
       if (!accessToken) {

@@ -39,7 +39,6 @@ export default function EmailForm(props: Props) {
       context.setToken(accessToken)
       context.updateUserFromCookies()
       context.showModal(ModalType.registrationSuccess, {login: data.email, password: data.password})
-      console.log('RegRes', res)
     } catch (e) {
       setError(e.message)
     }

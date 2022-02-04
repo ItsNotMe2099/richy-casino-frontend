@@ -25,7 +25,7 @@ export default function Fortune(props: Props) {
     pause,
     resume,
     restart,
-  } = useTimer({ expiryTimestamp: addHours(new Date(), 1), onExpire: () => console.warn('onExpire called') })
+  } = useTimer({ expiryTimestamp: addHours(new Date(), 1), onExpire: () => null })
 
 
   const handleClick = () => {

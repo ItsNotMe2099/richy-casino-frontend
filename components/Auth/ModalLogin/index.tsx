@@ -29,7 +29,6 @@ export default function ModalLogin(props: Props) {
 
   const {t} = useTranslation('common')
 
-  console.log('Error', authContext.error)
   return (
       <Formik initialValues={initialValues} onSubmit={authContext.login}>
         <Form className={styles.form}>
