@@ -34,9 +34,9 @@
     width: 100%;
     min-height: 235px;
     @media screen and (max-width: $xs-max){
-      width: auto;
-      min-height: auto;
-      max-height: 100%;
+      width: unset;
+      min-height: unset;
+      max-height: unset;
 
     }
   }
