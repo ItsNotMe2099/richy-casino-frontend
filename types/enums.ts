@@ -20,3 +20,11 @@ export enum ProfileModalType {
 export enum CookiesType {
   accessToken = 'accessToken',
 }
+
+export enum GameType{
+  Mines = 'mines',
+  Dice = 'dice',
+  Keno = 'keno',
+  Limbo = 'limbo',
+  WheelOfFortune = 'wheelOfFortune',
+}
