@@ -5,6 +5,7 @@ export interface IField extends FieldConfig {
   label?: string
   placeholder?: string
   type?: HTMLInputTypeAttribute
+  disable?: boolean
 }
 
 export interface IButton {
@@ -47,4 +48,8 @@ export const CONTACTS = {
 
 export const LINKS = {
 
+}
+export interface IOption<T> {
+  label: string
+  value: T
 }

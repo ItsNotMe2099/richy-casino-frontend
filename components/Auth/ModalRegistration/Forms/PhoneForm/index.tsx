@@ -70,7 +70,7 @@ export default function PhoneForm(props: Props) {
          {promoCode &&
           <PromoCode/>
          }
-         <CheckBox name='checkBox' label='Я согласен с пользовательским соглашением и подтверждаю, что мне исполнилось 18 лет' validate={Validator.required}/>
+         <CheckBox size={'small'} name='checkBox' label='Я согласен с пользовательским соглашением и подтверждаю, что мне исполнилось 18 лет' validate={Validator.required}/>
       </div>
       <FormError error={error}/>
       <Button type='submit' className={styles.button} size='submit' background='blueGradient500'>Регистрация</Button>

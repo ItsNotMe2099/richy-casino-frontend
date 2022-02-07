@@ -1,0 +1,25 @@
+@import "scss/index";
+
+
+.root{
+
+}
+
+.columns{
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  .board{
+    flex: 1;
+    margin-left: 20px;
+    @media screen and (max-width: $xs-max){
+      margin-left: 0px;
+    }
+  }
+  .sideBar{
+    width: 310px;
+  }
+  @media screen and (max-width: $xs-max){
+    flex-direction: column-reverse;
+  }
+}

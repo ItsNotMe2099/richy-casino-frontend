@@ -10,12 +10,18 @@ interface Props {
   color?: string
   shadow?: boolean
   biggerFont?: boolean
+  size?: 'small' | 'normal' | 'large'
 }
 
 export const CustomCheckbox = (props: Props) => {
   const {label, checked, disabled, onChange} = props
 
-  return (<div className={classNames(styles.root, {[styles.shadow]: props.shadow})}>
+  return (<div className={classNames(styles.root, {
+    [styles.shadow]: props.shadow,
+      [styles.small]: props.size === 'small',
+      [styles.normal]: props.size === 'normal',
+      [styles.large]: props.size === 'large',
+    })}>
       <ReactCheckbox
         checked={checked}
         disabled={disabled}
@@ -26,7 +32,11 @@ export const CustomCheckbox = (props: Props) => {
           size={21}
           label={label}
           containerClassName={`${styles.checkboxContainer}`}
-          labelClassName={classNames(styles.checkboxLabel, {[styles.biggerFont]: props.biggerFont})}
+          labelClassName={classNames(styles.checkboxLabel, {
+            [styles.small]: props.size === 'small',
+            [styles.normal]: props.size === 'normal',
+            [styles.large]: props.size === 'large',
+          })}
           labelStyle={{}}
         />
   </div>
@@ -34,5 +44,6 @@ export const CustomCheckbox = (props: Props) => {
 }
 
 CustomCheckbox.defaultProps = {
-  color: ''
+  color: '',
+  size: 'normal'
 }

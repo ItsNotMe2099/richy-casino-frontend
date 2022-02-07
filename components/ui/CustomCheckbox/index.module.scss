@@ -20,20 +20,30 @@
   align-items: center;
   justify-content: center;
   background: $dark600;
+  cursor: pointer;
   img{
     width: 10px;
     height: 9px;
   }
 }
 .checkboxLabel{
+  cursor: pointer;
   margin-left: 10px;
-  font-size: 12px;
   letter-spacing: -0.01em;
   box-shadow: none !important;
   text-align: left;
   color: #a5a5a8;
+  &.large{
+    font-size: 16px;
+  }
+  &.normal{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+  &.small{
+    font-size: 12px;
+  }
+
 }
 
-.biggerFont{
-  font-size: 16px;
-}

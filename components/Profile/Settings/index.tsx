@@ -127,21 +127,21 @@ export default function Settings(props: Props) {
         <HiddenXs>
         <div className={styles.boxes}>
           <div className={styles.row}>
-          <CheckBox biggerFont name='checkBox1' label='Скрыть юзернейм'/>
-          <CheckBox biggerFont name='checkBox3' label='Скрыть из общей статистики'/>
+          <CheckBox size='large' name='checkBox1' label='Скрыть юзернейм'/>
+          <CheckBox size='large' name='checkBox3' label='Скрыть из общей статистики'/>
           </div>
           <div className={styles.row}>
-          <CheckBox biggerFont name='checkBox2' label='Скрыть из лидерборда'/>
-          <CheckBox biggerFont name='checkBox4' label='Скрыть баланс из шапки сайта'/>
+          <CheckBox size='large' name='checkBox2' label='Скрыть из лидерборда'/>
+          <CheckBox size='large' name='checkBox4' label='Скрыть баланс из шапки сайта'/>
           </div>
         </div>
         </HiddenXs>
         <VisibleXs>
           <>
-            <CheckBox biggerFont name='checkBox1' label='Скрыть юзернейм'/>
-            <CheckBox biggerFont name='checkBox2' label='Скрыть из лидерборда'/>
-            <CheckBox biggerFont name='checkBox3' label='Скрыть из общей статистики'/>
-            <CheckBox biggerFont name='checkBox4' label='Скрыть баланс из шапки сайта'/>
+            <CheckBox size='large' name='checkBox1' label='Скрыть юзернейм'/>
+            <CheckBox size='large' name='checkBox2' label='Скрыть из лидерборда'/>
+            <CheckBox size='large' name='checkBox3' label='Скрыть из общей статистики'/>
+            <CheckBox size='large' name='checkBox4' label='Скрыть баланс из шапки сайта'/>
           </>
         </VisibleXs>
         <Button className={styles.save} size='large' background='blueGradient500' type='submit' onClick={handleSubmit}>

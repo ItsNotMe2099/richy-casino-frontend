@@ -2,10 +2,12 @@ import {FieldConfig, useField, useFormikContext} from 'formik'
 import styles from './index.module.scss'
 import ErrorInput from 'components/ui/Inputs/components/ErrorInput'
 import {CustomCheckbox} from 'components/ui/CustomCheckbox'
+import cx from 'classnames'
 interface Props {
   label?: string
   disabled?: boolean
   biggerFont?: boolean
+  size?: 'small' | 'normal' | 'large'
 }
 
 export const CheckBox = (props: Props & FieldConfig) => {
@@ -14,7 +16,9 @@ export const CheckBox = (props: Props & FieldConfig) => {
   const hasError = !!meta.error && meta.touched
 
   return (
-    <div className={styles.root}>
+    <div className={cx(styles.root, {
+      [styles.large]: props.size === 'large'
+    })}>
       <CustomCheckbox
         checked={field.value}
         disabled={props.disabled}
