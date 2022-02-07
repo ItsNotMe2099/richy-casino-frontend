@@ -20,7 +20,7 @@ export default function SocialsForm(props: Props) {
 
   const context = useAppContext()
   const handleSubmit = async (data) => {
-    
+
   }
 
   const initialValues = {
@@ -48,7 +48,7 @@ export default function SocialsForm(props: Props) {
              {promoCode &&
               <PromoCode/>
              }
-             <CheckBox name='checkBox' label='Я согласен с пользовательским соглашением и подтверждаю, что мне исполнилось 18 лет'/>
+             <CheckBox size={'small'} name='checkBox' label='Я согласен с пользовательским соглашением и подтверждаю, что мне исполнилось 18 лет'/>
           </div>
           <Button type='submit' className={styles.button} size='submit' background='blueGradient500'>Регистрация</Button>
           <div className={styles.login}>

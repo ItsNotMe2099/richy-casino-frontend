@@ -73,7 +73,7 @@ export default function EmailForm(props: Props) {
           {promoCode &&
           <PromoCode/>
           }
-          <CheckBox name='checkBox'
+          <CheckBox size={'small'} name='checkBox'
                     label='Я согласен с пользовательским соглашением и подтверждаю, что мне исполнилось 18 лет' validate={Validator.required}/>
         </div>
         <FormError error={error}/>

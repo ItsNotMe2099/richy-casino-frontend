@@ -1,0 +1,33 @@
+@import "scss/index";
+
+.root{
+  @include componentRoot();
+  display: flex;
+  align-items: center;
+  padding: 15px 24px;
+  font-weight: 700;
+  font-size: 21px;
+  @media screen and (max-width: $xs-max){
+    padding: 8px 0px;
+    background-color: transparent;
+  }
+}
+.back{
+  display: none;
+  @media screen and (max-width: $xs-max){
+    display: block;
+    margin-right: 12px;
+  }
+}
+
+.title{
+  font-weight: 700;
+  font-size: 21px;
+  @media screen and (max-width: $xs-max){
+    font-size: 18px;
+
+  }
+}
+.icon{
+  margin-right: 12px;
+}

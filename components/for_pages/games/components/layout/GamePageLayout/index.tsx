@@ -1,4 +1,4 @@
-import styles from 'pages/catalog/index.module.scss'
+import styles from './index.module.scss'
 import {Col, Row} from 'react-grid-system'
 import {ReactElement} from 'react'
 interface Props{
@@ -14,10 +14,10 @@ export default function GamePageLayout(props: Props) {
       <Row >
         <Col>{header}</Col>
       </Row>
-      <Row className={styles.columns}>
-        <Col>{sideBar}</Col>
-        <Col>{board}</Col>
-      </Row>
+      <div className={styles.columns}>
+        <div className={styles.sideBar}>{sideBar}</div>
+        <div className={styles.board}>{board}</div>
+      </div>
       <Row >
         <Col>{history}</Col>
       </Row>

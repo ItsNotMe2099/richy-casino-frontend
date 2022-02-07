@@ -99,8 +99,8 @@ select:-webkit-autofill:focus {
 }
 @font-face {
   font-family: Gilroy;
-  src: url(/fonts/Gilroy/Gilroy-Light.ttf) format('truetype');
-  src: url(/fonts/Gilroy/Gilroy-Light.woff2) format('woff2');
+  src: url(/fonts/Gilroy/Gilroy-Regular.ttf) format('truetype');
+  src: url(/fonts/Gilroy/Gilroy-Regular.woff2) format('woff2');
   font-weight: 400;
 }
 
@@ -115,7 +115,7 @@ select:-webkit-autofill:focus {
   font-family: Gilroy;
   src: url(/fonts/Gilroy/Gilroy-Semibold.ttf) format('truetype');
   src: url(/fonts/Gilroy/Gilroy-Semibold.woff2) format('woff2');
-  font-weight: 500;
+  font-weight: 600;
 }
 
 @font-face {
