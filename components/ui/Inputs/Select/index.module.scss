@@ -4,6 +4,7 @@
   margin-bottom: 12px;
   color: $white;
   font-size: 13px;
+  position: relative;
 
   &.hasError{
     .label {
@@ -16,6 +17,13 @@
       border-color: #F15151;
   }
   }
+}
+
+.separator{
+  background-color: $dark400;
+  width: 1px;
+  height: 24px !important;
+  margin-right: 13px;
 }
 
 .label{
@@ -91,6 +99,9 @@
         border-bottom-left-radius: 12px;
         border-bottom-right-radius: 12px;
       }
+    }
+    .symbolAndName{
+      padding: 0 14px;
     }
 }
 
@@ -196,5 +207,16 @@
   }
   &:hover{
     background: rgba(206, 187, 170, 0.2);
+  }
+}
+
+.symbolAndName{
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 130%;
+  img{
+    margin-right: 6px;
   }
 }
