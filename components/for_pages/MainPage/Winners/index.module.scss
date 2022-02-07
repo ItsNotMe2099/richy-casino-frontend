@@ -45,7 +45,7 @@
       }
 }
 
-.user{
+/*.user{
     padding: 20px 55px 20px 20px;
     background-color: $dark600;
     border-radius: 8px;
@@ -58,7 +58,7 @@
         margin-left: -10px;
         border-radius: 0;
     }
-}
+}*/
 
 .userLeft{
     display: flex;
@@ -87,15 +87,19 @@
 }
 
 .avatar{
-    margin-right: 20px;
+    img{
+        width: 32px;
+        height: 32px;
+        border-radius: 100%;
+    }
     @media screen and (max-width: 450px){
         margin-right: 10px;
     }
 }
 
 .nick{
-    font-weight: 500;
-    font-size: 13px;
+    font-weight: 600;
+    font-size: 14px;
     color: #FFFFFF;
     @media screen and (max-width: 450px){
         font-size: 11px;
@@ -121,7 +125,7 @@
 }
 
 .illustration{
-    margin-right: 30px;
+    margin-right: 70px;
     img{
         width: 100%;
     }
@@ -149,4 +153,91 @@
       @media screen and (max-width: 700px){
         display: none;
       }
+}
+
+.table{
+    display: table;
+    width: 100%;
+}
+
+.row{
+    display: table-row;
+    .cell{
+        font-weight: 500;
+        font-size: 14px;
+        color: $dark200;
+    }
+    .cell:first-child{
+        text-align: center;
+        padding-right: 47px;
+    }
+    .cell:last-child{
+        text-align: right;
+    }
+}
+
+.cell{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.user{
+    display: table-row;
+    .cell{
+        padding: 20px 0 21px 0;
+        border-bottom: 1px solid #272832;
+    }
+    .cell:first-child{
+        text-align: center;
+        padding-right: 47px;
+    }
+    .cell:nth-child(2){
+        width: 40%;
+    }
+    .cell:last-child{
+        .group{
+            justify-content: flex-end;
+            color: $pay500;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 18px;
+            span{
+                color: #4c7836;
+            }
+        }
+    }
+}
+
+.group{
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 14px;
+    img{
+        margin-right: 8px;
+    }
+
+}
+
+.wrapper{
+    width: 100%;
+    max-height: 308px;
+    overflow-y: auto;
+    .table{
+        padding-bottom: 77px;
+    }
+}
+
+.outerWrapper{
+    position: relative;
+    width: 100%;
+}
+
+.transparent{
+    position: absolute;
+    width: 100%;
+    min-width: 811px;
+    height: 77px;
+    background: linear-gradient(180deg, rgba(29, 30, 37, 0) 0%, rgba(29, 30, 37, 0.87) 21.88%, #1D1E25 100%);
+    bottom: 0;
 }
