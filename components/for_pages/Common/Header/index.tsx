@@ -1,6 +1,7 @@
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import HiddenXs from 'components/ui/HiddenXS'
+import QuestionPopover from 'components/ui/QuestionPopover'
 
 interface Props {
   length?: number
@@ -9,8 +10,9 @@ interface Props {
   onPrev?: () => void
   onNext?: () => void
   slider?: boolean
-  style?: 'labelOnly' | 'withoutLength' | 'fullOnlyOnMobile'
+  style?: 'labelOnly' | 'withoutLength' | 'fullOnlyOnMobile' | 'popover'
   shadowColor?: 'red' | 'blue' | 'yellow' | 'violet'
+  className?: string
 }
 
 export default function Header(props: Props) {
@@ -40,10 +42,11 @@ export default function Header(props: Props) {
     [styles.labelOnly]: props.style === 'labelOnly',
     [styles.withoutLength]: props.style === 'withoutLength',
     [styles.fullOnlyOnMobile]: props.style === 'fullOnlyOnMobile',
+    [styles.popover]: props.style === 'popover',
   }
 
   return (
-        <div className={classNames(styles.root, rootClasses)}>
+        <div className={classNames(styles.root, rootClasses, props.className)}>
           <div className={styles.block}>
           <div className={styles.icon}>
             {props.shadowColor && <div className={styles.shadow}><img src={getShadow(props.shadowColor)} alt=''/></div>}
@@ -54,6 +57,7 @@ export default function Header(props: Props) {
           </div>
         </div>
         <div className={styles.right}>
+          <QuestionPopover info='info' className={styles.question}/>
           <div className={styles.length}>
             {props.length}
           </div>

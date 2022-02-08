@@ -2,9 +2,11 @@
 
 .root {
     @include componentRoot;
+    padding-right: 0;
 }
 
 .header{
+    padding-right: 28px;
 }
 
 .all{
@@ -45,46 +47,6 @@
       }
 }
 
-/*.user{
-    padding: 20px 55px 20px 20px;
-    background-color: $dark600;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    @media screen and (max-width: 450px){
-        padding: 8px 16px 8px 15px;
-        margin-right: -16px;
-        margin-left: -10px;
-        border-radius: 0;
-    }
-}*/
-
-.userLeft{
-    display: flex;
-    align-items: center;
-    flex: 1;
-}
-
-.first{
-    svg{
-
-    }
-}
-
-.list{
-    flex: 1;
-    div:nth-child(even){
-        background-color: transparent;
-    }
-}
-
-.award{
-    margin-right: 20px;
-    @media screen and (max-width: 450px){
-        margin-right: 10px;
-    }
-}
 
 .avatar{
     img{
@@ -106,26 +68,9 @@
     }
 }
 
-.image{
-    img{
-        width: 100%;
-    }
-}
-
-.amount{
-    font-weight: 500;
-    font-size: 13px;
-    color: $pay500;
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    @media screen and (max-width: 450px){
-        font-size: 8px;
-    }
-}
-
 .illustration{
     margin-right: 70px;
+    width: 50%;
     img{
         width: 100%;
     }
@@ -137,27 +82,10 @@
     }
 }
 
-.game{
-    font-weight: 500;
-    font-size: 13px;
-    color: $dark200;
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    @media screen and (max-width: 1360px){
-        display: none;
-      }
-      @media screen and (max-width: 950px){
-        display: flex;
-      }
-      @media screen and (max-width: 700px){
-        display: none;
-      }
-}
-
 .table{
     display: table;
     width: 100%;
+    padding-right: 23px;
 }
 
 .row{
@@ -175,7 +103,6 @@
         text-align: right;
     }
 }
-
 .cell{
     display: table-cell;
     vertical-align: middle;
@@ -240,4 +167,43 @@
     height: 77px;
     background: linear-gradient(180deg, rgba(29, 30, 37, 0) 0%, rgba(29, 30, 37, 0.87) 21.88%, #1D1E25 100%);
     bottom: 0;
+    right: 28px;
+}
+
+.bottom{
+    margin-right: 28px;
+    padding: 28px 21px 28px 20px;
+    background: #272832;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    .element:last-child{
+        .title{
+            text-align: right;
+        }
+        .group{
+            color: $pay500;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 18px;
+            span{
+                color: #4c7836;
+            }
+        }
+    }
+}
+
+.title{
+    font-weight: 500;
+    font-size: 14px;
+    color: $dark200;
+    span{
+        font-weight: 600;
+    }
+}
+
+.value{
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 600;
 }

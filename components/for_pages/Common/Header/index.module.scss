@@ -4,6 +4,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  .question{
+    display: none;
+  }
 }
 
 .labelOnly{
@@ -15,6 +18,21 @@
   }
   .all{
     display: none;
+  }
+}
+
+.popover{
+  .length{
+    display: none;
+    @media screen and (max-width: $xs-max){
+      display: block;
+    }
+  }
+  .all{
+    display: none;
+  }
+  .question{
+    display: block;
   }
 }
 
