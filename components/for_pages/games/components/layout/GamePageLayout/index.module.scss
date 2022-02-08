@@ -18,6 +18,9 @@
   }
   .sideBar{
     width: 310px;
+    @media screen and (max-width: $xs-max){
+      width: 100%;
+    }
   }
   @media screen and (max-width: $xs-max){
     flex-direction: column-reverse;

@@ -2,6 +2,9 @@
 
 .form {
   margin-top: 16px;
+  @media screen and (max-width: $sm-min){
+    margin-top: 0px;
+  }
 }
 
 .inputs {

@@ -4,15 +4,15 @@ import type { AppContext, AppProps } from 'next/app'
 import { appWithTranslation } from 'next-i18next'
 import { setConfiguration } from 'react-grid-system'
 import { AppWrapper } from 'context/state'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
 import { getSelectorsByUserAgent } from 'react-device-detect'
 import App from 'next/app'
 import ModalContainer from 'components/layout/Modals'
 import { AuthWrapper } from 'context/auth_state'
 import {CookiesType} from 'types/enums'
 import AuthUserFeatures from 'components/layout/AuthUserFeatures'
-
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import 'react-input-range/lib/css/index.css'
 function MyApp({ Component, pageProps }: AppProps) {
   setConfiguration({
     gutterWidth: 20,

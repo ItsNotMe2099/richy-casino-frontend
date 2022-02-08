@@ -124,6 +124,12 @@ select:-webkit-autofill:focus {
   src: url(/fonts/Gilroy/Gilroy-Bold.woff2) format('woff2');
   font-weight: 700;
 }
+@font-face {
+  font-family: Gilroy;
+  src: url(/fonts/Gilroy/Gilroy-Extrabold.ttf) format('truetype');
+  src: url(/fonts/Gilroy/Gilroy-Extrabold.woff2) format('woff2');
+  font-weight: 700;
+}
 .react-modal-sheet-backdrop {
   background-color: rgba(17, 19, 25, 0.78) !important;
 }

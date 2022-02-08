@@ -12,11 +12,13 @@ interface Props {
   label?: string
   disabled?: boolean
   className?: string
+  fluid?: boolean
+  style?: 'normal' | 'small'
 }
 
 export const GFieldSelectTabs = (props: Props & FieldConfig) => {
-  const {label, options, className} = props
-  const [field, meta] = useField(props)
+  const {label, options, className, style, fluid} = props
+  const [field, meta] = useField(props as any)
   const {value} = field
   const { setFieldValue, setFieldTouched } = useFormikContext()
   const hasError = !!meta.error && meta.touched
@@ -28,7 +30,11 @@ export const GFieldSelectTabs = (props: Props & FieldConfig) => {
   }
 
   return (
-    <div className={cx(styles.root, className, {[styles.hasError]: !!meta.error && meta.touched})}>
+    <div className={cx(styles.root, className, {
+      [styles.normal]: style === 'normal',
+      [styles.small]: style === 'small',
+      [styles.fluid]: fluid,
+      [styles.hasError]: !!meta.error && meta.touched})}>
       <GFieldLabel label={label} hasError={hasError}/>
       <div className={styles.options}>
         {options.map((item, index) => <div className={classNames(styles.item, {

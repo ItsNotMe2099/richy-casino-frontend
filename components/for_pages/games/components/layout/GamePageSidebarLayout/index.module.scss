@@ -2,6 +2,12 @@
 
 
 .root{
-  @include componentRoot()
+  @include componentRoot();
+  @media screen and (max-width: $xs-max){
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    margin-top: 0px;
+
+  }
 }
 

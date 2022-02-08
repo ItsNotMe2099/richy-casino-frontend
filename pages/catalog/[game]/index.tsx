@@ -7,12 +7,22 @@ import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import {useRouter} from 'next/router'
 import {GameType} from 'types/enums'
 import GameMines from 'components/for_pages/games/Mines'
+import GameDice from 'components/for_pages/games/Dice'
+import GameKeno from 'components/for_pages/games/Keno'
+import GameWheelOfFortune from 'components/for_pages/games/WheelOfFortune'
 
 export default function CatalogPage() {
   const {query} = useRouter()
   const renderGame = () => {
     switch (query.game as string){
       case GameType.Mines:
+        return <GameMines/>
+      case GameType.Dice:
+        return <GameDice/>
+      case GameType.Keno:
+        return <GameKeno/>
+      case GameType.WheelOfFortune:
+        return <GameWheelOfFortune/>
       default:
         return <GameMines/>
     }

@@ -1,0 +1,8 @@
+@import "scss/index";
+
+.field{
+  margin-bottom: 32px;
+  @media only screen and (max-width: $xs-max) {
+    margin-bottom: 0px;
+  }
+}

@@ -6,6 +6,7 @@ export interface IField extends FieldConfig {
   placeholder?: string
   type?: HTMLInputTypeAttribute
   disable?: boolean
+  onChange?: (val) => void
 }
 
 export interface IButton {
