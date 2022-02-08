@@ -5,7 +5,7 @@
     height: 189px;
     border-radius: 18px;
     padding-left: 13px;
-    padding-bottom: 4px;
+    padding-bottom: 8px;
     display: flex;
     align-items: flex-end;
     background-size: contain;
@@ -38,8 +38,6 @@
     letter-spacing: 0.02em;
     text-transform: uppercase;
     color: $white;
-  margin-left: -3px;
-  margin-bottom: -3px;
     @media screen and (max-width: 1360px){
         font-size: 10px;
       font-weight: 500;

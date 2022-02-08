@@ -30,7 +30,7 @@ export default function SlideSlider(props: Props) {
 
   const context = useAppContext()
 
-  const user = true//context.auth
+  const user = context.auth
 
   let { slider } = props
 

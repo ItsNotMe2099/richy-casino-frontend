@@ -68,7 +68,6 @@
 
 .table{
     display: table;
-    padding: 0 26px;
     width: 100%;
     border-collapse: separate;
     margin-top: 21px;
@@ -111,10 +110,10 @@
     .cell:first-child{
         padding-left: 20px;
     }
-    .cell:nth-last-child(2){
-        @media screen and (max-width: 650px){
+    .cell:nth-child(3){
+        @media screen and (max-width: $xs-max){
             display: none;
-         }
+        }
     }
     .cell:last-child{
         display: flex;
@@ -145,6 +144,7 @@
         @media screen and (max-width: $xs-max){
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
+            padding-right: 16px;
         }
     }
     @media screen and (max-width: $xs-max){
@@ -185,12 +185,10 @@
     white-space: nowrap;
     text-overflow: unset;
     @media screen and (max-width: $xs-max){
-        font-size: 11px;
+        font-size: 10px;
         margin-left: 21px;
-    }
-    @media screen and (max-width: $xs-max){
-        font-size: 8px;
-
+        text-overflow: ellipsis;
+        max-width: 38px;
     }
 }
 
@@ -199,11 +197,12 @@
     font-size: 13px;
     color: #FFFFFF;
     @media screen and (max-width: $xs-max){
-        font-size: 11px;
-      font-weight: 400;
-    }
-    @media screen and (max-width: $xs-max){
-        font-size: 8px;
+        font-size: 10px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+        max-width: 44px;
     }
 }
 
@@ -240,7 +239,7 @@
         font-size: 11px;
     }
     @media screen and (max-width: $xs-max){
-        font-size: 8px;
+        font-size: 10px;
     }
 }
 
@@ -265,7 +264,7 @@
         font-size: 11px;
     }
     @media screen and (max-width: $xs-max){
-        font-size: 8px;
+        font-size: 10px;
     }
 }
 

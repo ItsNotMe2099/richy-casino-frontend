@@ -18,7 +18,7 @@ export default function TopSlider(props: Props) {
 
   const context = useAppContext()
 
-  const user = true//context.auth
+  const user = context.auth
 
   const settings = {
     className: `${styles.slider}`,

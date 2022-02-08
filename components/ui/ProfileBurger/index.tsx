@@ -84,7 +84,8 @@ export default function ProfileBurger(props: Props) {
           <>{label.split(' ').map((word, index) => 
             index === 0 && <span>{word}</span>
           )}</>
-          <br/>
+          <span className={styles.space}>&nbsp;</span>
+          <br className={styles.break}/>
           {label.split(' ').slice(1).map((word, index) => 
             <>{word}&nbsp;</>
           )}

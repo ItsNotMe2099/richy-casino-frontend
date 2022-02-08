@@ -17,6 +17,7 @@
   @media screen and (max-width: $xs-max){
     overflow-x: auto;
     clip: unset;
+    scrollbar-width: none;
     &::-webkit-scrollbar {
       -webkit-appearance: none;
       display: none;
@@ -28,6 +29,11 @@
 .row{
   overflow-x: auto;
   overflow-y: hidden;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 }
 
 
