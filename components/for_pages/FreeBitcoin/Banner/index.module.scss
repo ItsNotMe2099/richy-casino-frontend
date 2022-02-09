@@ -11,7 +11,10 @@
   min-height: 413px;
   margin-top: 20px;
   margin-bottom: 20px;
-  @media screen and (max-width: 500px){
+  overflow: hidden;
+  position: relative;
+  background-size: cover;
+  @media screen and (max-width: $xs-max){
     min-height: 216px;
     max-height: 216px;
     margin-left: 9px;
@@ -21,9 +24,34 @@
   }
   @media screen and (max-width: $xs-max){
     margin-top: 18px;
+    border-radius: 18px;
+  }
+}
+
+.coinsLeft{
+  position: absolute;
+  left: 0;
+  @media screen and (max-width: 1060px){
+    left: -10%;
+  }
+  @media screen and (max-width: $xs-max){
+    left: 0;
+    top: 0;
   }
   @media screen and (max-width: 320px){
-    background-image: url('../../../../public/img/FreeBitcoin/bgm.svg');
+    left: -2%;
+  }
+}
+
+.coinsRight{
+  position: absolute;
+  right: 0;
+  @media screen and (max-width: 1060px){
+    right: -10%;
+  }
+  @media screen and (max-width: $xs-max){
+    right: 0;
+    top: 0;
   }
 }
 
@@ -39,7 +67,7 @@
   margin-right: 7px;
   min-width: 79px;
   padding: 10px 0;
-  @media screen and (max-width: 500px){
+  @media screen and (max-width: $xs-max){
     min-width: 40px;
     max-width: 40px;
     font-size: 20px;
@@ -50,6 +78,7 @@
 
 .amount{
   display: flex;
+  position: relative;
 }
 
 .btn{
@@ -57,7 +86,8 @@
   font-weight: bold;
   font-size: 16px;
   margin-top: 72px;
-  @media screen and (max-width: 500px){
+  position: relative;
+  @media screen and (max-width: $xs-max){
       padding: 14px 63px;
       font-size: 18px;
       margin-top: 50px;
@@ -72,7 +102,8 @@
   border-radius: 26px;
   background-color: rgba(20, 21, 27, 0.5);
   margin-top: 43px;
-  @media screen and (max-width: 500px){
+  position: relative;
+  @media screen and (max-width: $xs-max){
     padding: 11px 44px 15px 44px;
     margin-top: 15px;
     border-radius: 13px;
@@ -85,7 +116,7 @@
   text-align: center;
   letter-spacing: 0.205em;
   color: #FFFFFF;
-  @media screen and (max-width: 500px){
+  @media screen and (max-width: $xs-max){
     font-size: 11px;
   }
 }
@@ -93,7 +124,7 @@
 .btns{
   margin-top: 19px;
   display: flex;
-  @media screen and (max-width: 500px){
+  @media screen and (max-width: $xs-max){
     flex-direction: column;
     margin-top: 9px;
   }
@@ -107,7 +138,7 @@
   display: flex;
   border-radius: 8px;
   align-items: center;
-  @media screen and (max-width: 500px){
+  @media screen and (max-width: $xs-max){
     margin-right: 0;
     margin-bottom: 5px;
     font-size: 11px;
@@ -115,7 +146,7 @@
   }
   img{
     margin-right: 11px;
-    @media screen and (max-width: 500px){
+    @media screen and (max-width: $xs-max){
       margin-right: 4px;
       width: 18px;
     }
@@ -129,13 +160,13 @@
   border-radius: 8px;
   display: flex;
   align-items: center;
-  @media screen and (max-width: 500px){
+  @media screen and (max-width: $xs-max){
     font-size: 11px;
     padding: 6px 11px;
   }
   img{
     margin-right: 11px;
-    @media screen and (max-width: 500px){
+    @media screen and (max-width: $xs-max){
       margin-right: 4px;
       width: 16px;
     }
@@ -154,7 +185,7 @@
   text-align: center;
   color: #FFFFFF;
   margin-top: 32px;
-  @media screen and (max-width: 500px){
+  @media screen and (max-width: $xs-max){
     font-size: 12px;
     margin-top: 24px;
   }

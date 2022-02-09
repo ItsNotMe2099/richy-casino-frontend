@@ -1,5 +1,7 @@
 import Timer from 'components/for_pages/Common/Timer'
 import Button from 'components/ui/Button'
+import HiddenXs from 'components/ui/HiddenXS'
+import VisibleXs from 'components/ui/VisibleXS'
 import styles from './index.module.scss'
 
 interface Props {
@@ -31,6 +33,18 @@ export default function Banner(props: Props) {
   
   return (
     <div className={styles.root}>
+      <HiddenXs>
+        <>
+          <div className={styles.coinsLeft}><img src='/img/FreeBitcoin/coins-l.svg' alt=''/></div>
+          <div className={styles.coinsRight}><img src='/img/FreeBitcoin/coins-r.svg' alt=''/></div>
+        </>
+      </HiddenXs>
+      <VisibleXs>
+        <>
+          <div className={styles.coinsLeft}><img src='/img/FreeBitcoin/coins-mobile-l.svg' alt=''/></div>
+          <div className={styles.coinsRight}><img src='/img/FreeBitcoin/coins-mobile-r.svg' alt=''/></div>
+        </>
+      </VisibleXs>
       <div className={styles.amount}>
         {chars.slice((chars.length - 5), chars.length).map((item, index) =>
           <Digit digit={item} key={index}/>
