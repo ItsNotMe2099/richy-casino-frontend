@@ -139,6 +139,7 @@
     width: 28px;
     height: 26px;
     font-size: 20px;
+    border-radius: 3px;
     @media screen and (max-width: $xs-max){
       width: 24px;
       height: 22px;
@@ -176,6 +177,7 @@
     width: 24px;
     height: 22px;
     font-size: 16px;
+    border-radius: 3px;
   }
   .separator{
     margin: 0 2px;

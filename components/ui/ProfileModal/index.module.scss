@@ -3,7 +3,7 @@
   position: relative;
   background: linear-gradient(0deg, #1D1E25, #1D1E25);
   border-radius: 30px;
-  padding: 28px 28px 23px 28px;
+  padding: 28px;
   z-index: 5;
   margin:  auto;
   overflow-y: auto;
@@ -103,6 +103,10 @@
   padding-right: 28px;
 }
 
+.wallet{
+  padding-bottom: 6px;
+}
+
 .noBorder{
   border-bottom: 0;
 }
@@ -153,7 +157,7 @@
 }
 
 .title {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 22px;
   color: $white;
   display: flex;
@@ -168,8 +172,8 @@
   background-color: $dark700;
   border-top-left-radius: 18px;
   border-top-right-radius: 18px;
-  padding: 0 15px;
-  padding-top: 11px;
+  padding: 0 16px;
+  padding-top: 16px;
 }
 
 .walletBackCenter{
@@ -177,8 +181,8 @@
   background-color: $dark700;
   border-bottom-left-radius: 18px;
   border-bottom-right-radius: 18px;
-  padding: 0 15px;
-  padding-bottom: 16px;
+  padding: 16px;
+  padding-top: 6px;
   }
 }
 

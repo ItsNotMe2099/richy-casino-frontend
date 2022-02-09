@@ -9,6 +9,11 @@ import VisibleXs from 'components/ui/VisibleXS'
 import ProfileModal from 'components/ui/ProfileModal'
 import { useAppContext } from 'context/state'
 import { ProfileModalType } from 'types/enums'
+import WalletCryptoEth from 'components/svg/WalletCryptoEth'
+import WalletCryptoBtc from 'components/svg/WalletCryptoBtc'
+import WalletCryptoTeth from 'components/svg/WalletCryptoTeth'
+import WalletCrypto13 from 'components/svg/WalletCrypto13'
+import WalletVisa from 'components/svg/WalletVisa'
 
 interface Props {
   isOpen?: boolean
@@ -16,6 +21,7 @@ interface Props {
 
 interface MethodProps {
   icon: string
+  iconLabel?: string
   label: string
   bonus?: boolean
   iso?: string
@@ -35,11 +41,35 @@ interface QrCodeProps {
   walletNumber: string
 }
 
+interface CryptoIconsProps {
+  mainColor: string
+  iconColor: string
+  lastMainColor: string
+  lastIconMainColor: string
+  style?: 'three' | 'two'
+}
+
 export default function Wallet(props: Props) {
 
+  const CryptoIcons = ({mainColor, iconColor, lastIconMainColor, lastMainColor, style}: CryptoIconsProps) => {
+
+    const classes = {
+      [styles.three]: style === 'three',
+      [styles.two]: style === 'two',
+    }
+    return (
+      <div className={classNames(styles.iconsGroup, classes)}>
+        <WalletCryptoEth mainColor={mainColor} iconColor={iconColor}/>
+        <WalletCryptoBtc mainColor={mainColor} iconColor={iconColor}/>
+        <WalletCryptoTeth mainColor={mainColor} iconColor={iconColor}/>
+        <WalletCrypto13 mainColor={lastMainColor} iconColor={lastIconMainColor}/>
+      </div>
+    )
+  }
+
   const methods = [
-    {icon: '/img/Wallet/crypto.svg', label: 'Криптовалюта', bonus: true},
-    {icon: '/img/Wallet/visa.svg', label: 'Карты банка'},
+    {iconLabel: 'crypto', label: 'Криптовалюта', bonus: true},
+    {iconLabel: 'visa', label: 'Карты банка'},
     {icon: '/img/Wallet/paypal.svg', label: 'PayPal'},
     {icon: '/img/Wallet/yoo.svg', label: 'YooMoney'},
     {icon: '/img/Wallet/web.svg', label: 'WebMoney'},
@@ -78,10 +108,15 @@ export default function Wallet(props: Props) {
     }
   }
 
+  const handleChange = () => {
+    setStep(1)
+    setMethod('')
+  }
+
   // temporary for submit imitation from WalletForm
   const [isSubmit, setIsSubmit] = useState(false)
 
-  const Method = ({icon, label, iso, bonus, onClick, blue, mobile}: MethodProps) => {
+  const Method = ({icon, iconLabel, label, iso, bonus, onClick, blue, mobile}: MethodProps) => {
     return (
       <div className={classNames(styles.method, {[styles.blue]: blue}, {[styles.iso]: (iso || mobile)})} onClick={onClick}>
         {bonus && 
@@ -90,7 +125,20 @@ export default function Wallet(props: Props) {
           </div>
         }
         <div className={classNames(styles.icon, {[styles.isoIcon]: iso})}>
-          <img src={icon} alt=''/>
+          {iconLabel === 'crypto' && <CryptoIcons 
+          mainColor={blue ? '#628CFF' : '#373945'} 
+          iconColor={blue ? '#fff' : '#cacaca'}
+          lastIconMainColor={blue ? '#A7D5FF': '#959595'}
+          lastMainColor={blue ? '#628CFF' : '#373845'}
+          />}
+          {iconLabel === 'visa' && 
+          <WalletVisa 
+           className={styles.visaHover}
+           color1={blue ? '#fff' : '#FAA61A'} 
+           color2={blue ? '#fff' :'#FF5F00'} 
+           color3={blue ? '#fff' :'#EB001B'} 
+           color4={blue ? '#EDEDED' :'#F79E1B'}/>}
+          {!iconLabel && <img src={icon} alt=''/>}
         </div>
         <div className={classNames(styles.label, {[styles.isoLabel]: iso})}>
           <VisibleXs><>{iso ? iso : !mobile && label}</></VisibleXs>
@@ -122,7 +170,7 @@ export default function Wallet(props: Props) {
             (array.length && !currency) &&
               <div className={styles.methods}>
                 {array && array.map((item, index) => 
-                  <Method icon={item.icon} label={item.label} key={index} onClick={() => handleCurrencyAndIso(item)}/>
+                  <Method icon={item.icon} iconLabel={item.iconLabel} label={item.label} key={index} onClick={() => handleCurrencyAndIso(item)}/>
                 )}
               </div>
           }
@@ -130,17 +178,25 @@ export default function Wallet(props: Props) {
     )
   }
 
-  const MobileMethod = ({icon, label}: MethodProps) => {
+  const MobileMethod = ({icon, label, iconLabel}: MethodProps) => {
     return (
       <div className={classNames(styles.mobileMethod, {[styles.withCurrency]: currency})}>
         <div className={styles.iconMobile}>
-          <img src={icon} alt=''/>
+          {iconLabel === 'crypto' && <CryptoIcons 
+          mainColor={'#628CFF'} 
+          iconColor={'#fff'}
+          lastIconMainColor={'#A7D5FF'}
+          lastMainColor={'#628CFF'}
+          style={currency ? 'two' : 'three'}
+          />}
+          {iconLabel === 'visa' && <WalletVisa className={styles.visa} color1={'#fff'} color2={'#fff'} color3={'#fff'} color4={'#EDEDED'}/>}
+          {!iconLabel && <img src={icon} alt=''/>}
         </div>
         <div className={styles.middle}>
           <div className={styles.fill}>Способ пополнения</div>
           <div className={classNames(styles.label, styles.labelMobile)}>{label}</div>
         </div>
-        {!currency && <div className={styles.change} onClick={() => setMethod('')}>Изменить</div>}
+        {!currency && <div className={styles.change} onClick={handleChange}>Изменить</div>}
       </div>
     )
   }
@@ -152,15 +208,15 @@ export default function Wallet(props: Props) {
           method === item.label &&
           <>
           <HiddenXs>
-            <Method blue icon={item.icon} label={item.label} key={index} bonus={item.bonus}/>
+            <Method blue icon={item.icon} label={item.label} key={index} bonus={item.bonus} iconLabel={item.iconLabel}/>
           </HiddenXs>
           <VisibleXs>
-            <MobileMethod icon={item.icon} label={item.label} key={index}/>
+            <MobileMethod icon={item.icon} label={item.label} key={index} iconLabel={item.iconLabel}/>
           </VisibleXs>
           </>
         )}
         {array.map((item, index) =>
-          currency === item.label && <Method blue icon={item.icon} label={item.label} key={index} iso={item.iso} mobile/>
+          currency === item.label && <Method blue icon={item.icon} label={item.label} key={index} iso={item.iso} mobile iconLabel={item.iconLabel}/>
         )}
       </div>
     )
@@ -238,6 +294,7 @@ const handleBack = () => {
           isBack={step > 1 ? true : false}
           step={step}
           setStep={() => step === 2  ? handleBack() : step === 3 ? handleBack() : null}
+          style='wallet'
           >
     <div className={styles.root}>
       {!method &&
@@ -251,10 +308,10 @@ const handleBack = () => {
       {method && 
         <Choice array={method === 'Криптовалюта' ? crypto : bank}/>
       }
-      {!method && !isSubmit && step === 1 &&
+      {!method && !isSubmit &&
       <div className={styles.methods}>
         {methods.map((item, index) =>
-          <Method icon={item.icon} label={item.label} key={index} bonus={item.bonus} onClick={() => setMethod(item.label)}/>
+          <Method iconLabel={item.iconLabel} icon={item.icon} label={item.label} key={index} bonus={item.bonus} onClick={() => setMethod(item.label)}/>
         )}
       </div>}
       {method && !isSubmit &&

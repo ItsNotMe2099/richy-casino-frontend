@@ -6,9 +6,12 @@
 
 .choose{
   font-weight: 500;
-  font-size: 13px;
+  font-size: 14px;
   color: $dark200;
   text-align: left;
+  @media screen and (max-width: $xs-max){
+    font-size: 12px;
+  }
 }
 
 .banner{
@@ -18,7 +21,7 @@
 .method{
   background: #272832;
   border-radius: 14px;
-  padding: 8px 9px;
+  padding: 11px;
   display: flex;
   flex-direction: column;
   align-items: baseline;
@@ -31,6 +34,29 @@
     .label{
       color: #A7BFFF;
     }
+    .iconsGroup{
+      svg{
+        rect{
+          fill: #628CFF !important;
+        }
+        path{
+          fill: $white !important;
+        }
+      }
+      svg:last-child{
+        path{
+          fill: #A7D5FF !important;
+        }
+      }
+    }
+    .visaHover{
+      path{
+        fill: '#fff' !important;
+      }
+      path:last-child{
+        fill: '#ededed' !important;
+      }
+    }
   }
 }
 
@@ -38,7 +64,6 @@
   display: flex;
   @include blueGradient500NoHover;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   padding: 10px;
   border-radius: 8px;
@@ -64,12 +89,14 @@
 
 .change{
   font-size: 12px;
+  margin-left: 22px;
   color: #9BB1FF;
   cursor: pointer;
 }
 
 .iconMobile{
   display: flex;
+  margin-right: 9px;
 }
 
 .choice{
@@ -186,15 +213,18 @@
   @media screen and (max-width: 375px){
     flex-direction: row;
     align-items: center;
+    padding: 9px 0;
     height: 43px;
-    min-width: 76px;
     justify-content: center;
     border-radius: 8px;
+    width: 100%;
   }
 }
 
 .isoIcon{
   margin-right: 8px;
+  width: 25px;
+  height: 25px;
 }
 
 .isoLabel{
@@ -281,4 +311,33 @@
 
 .copy{
   cursor: pointer;
+}
+
+.iconsGroup{
+  display: flex;
+  svg{
+    margin-right: 3px;
+  }
+  svg:last-child{
+    margin-right: 0;
+  }
+}
+
+.three{
+  svg:last-child{
+    display: none;
+  }
+}
+
+.two{
+  svg:nth-child(3){
+    display: none;
+  }
+  svg:last-child{
+    display: none;
+  }
+}
+
+.visa{
+  width: 54px;
 }

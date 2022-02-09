@@ -39,7 +39,7 @@ export default function WalletForm(props: Props) {
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
       {({setFieldValue, values}) => (
       <Form className={styles.form}>
-        <InputField name={'amount'} className={styles.input} validate={Validator.required} alt/>
+        <InputField name={'amount'} className={styles.input} validate={Validator.required} alt placeholder='$0'/>
         <div className={styles.options}>
           {options.map((item, index) =>
             <div className={classNames(styles.option, {[styles.active]: item.value === values.amount})} 

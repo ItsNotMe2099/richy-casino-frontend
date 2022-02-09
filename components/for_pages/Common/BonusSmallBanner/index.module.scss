@@ -66,9 +66,11 @@
 
 .wallet{
   padding-left: 85px;
+  padding-top: 17px;
   @media screen and (max-width: $xs-max){
     padding-left: 25px;
     padding-right: 10px;
+    padding-top: 4px;
   }
   .money, .money2, .hero{
     @media screen and (max-width: $xs-max){
@@ -98,6 +100,12 @@
     position: absolute;
     right: 8%;
     top: 0;
+  }
+  .break{
+    display: none;
+    @media screen and (max-width: $xs-max){
+      display: block;
+    }
   }
 }
 

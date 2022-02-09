@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 import { useField } from 'formik'
 import classNames from 'classnames'
-import { useEffect, useState } from 'react'
+import { ChangeEventHandler, useEffect, useState } from 'react'
 import { FieldValidator } from 'formik/dist/types'
 import { useIMask } from 'react-imask'
 import { AsYouType, isValidPhoneNumber } from 'libphonenumber-js'
@@ -9,6 +9,7 @@ import { convertLibphonenumberToMask } from 'utils/converter'
 import {IField} from 'types/interfaces'
 import Eye from 'components/svg/Eye'
 import ErrorInput from 'components/ui/Inputs/components/ErrorInput'
+import { InputType } from 'zlib'
 
 type FormatType = 'phone' | 'phoneAndEmail'
 
@@ -20,7 +21,6 @@ interface Props extends IField {
   className?: string
   label?: string
   alt?: boolean
-  onChange?: (e) => void
 }
 
 export default function InputField(props: Props) {
@@ -106,7 +106,6 @@ export default function InputField(props: Props) {
             field.onBlur(e)
             blurValidator()
           }}
-          onChange = {(e) => props.onChange(e)}
         />
         {props.obscure && (
           <div className={classNames(styles.obscure, {[styles.show]: obscureShow})} onClick={() => { setObscureShow(!obscureShow) }}>

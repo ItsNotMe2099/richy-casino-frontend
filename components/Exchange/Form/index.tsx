@@ -1,9 +1,10 @@
 import Button from 'components/ui/Button'
 import InputField from 'components/ui/Inputs/InputField'
-import { Form, Formik } from 'formik'
+import { Form, FormikProvider, useFormik } from 'formik'
 import styles from './index.module.scss'
 import Validator from 'utils/validator'
 import { Select } from 'components/ui/Inputs/Select'
+import { useEffect } from 'react'
 
 interface IUser{
   id: string
@@ -35,12 +36,19 @@ export default function ExchangeForm(props: Props) {
     {id: 2, iso: 'eht', name: 'EHT', symbol: '/img/Exchange/eth.png', type: 0 }
   ]
 
-  console.log
+  const formik = useFormik({
+    initialValues,
+    onSubmit: handleSubmit,
+  })
 
+  const {values, setFieldValue, handleChange} = formik
+
+  useEffect(() => {
+    setFieldValue('amountGet', (values.amountSent*2))
+  }, [values.amountSent])
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit} enableReinitialize>
-      {({setFieldValue, values, handleChange}) => (
+    <FormikProvider value={formik}>
       <Form className={styles.form}>
         <div className={styles.send}>
           <div className={styles.texts}>
@@ -52,11 +60,7 @@ export default function ExchangeForm(props: Props) {
             </div>
           </div>
           <div className={styles.inputs}>
-            <InputField name={'amountSent'} className={styles.input} validate={Validator.required} onChange={e => {
-
-              handleChange(e)
-              setFieldValue('amountGet', (e.target.value*2))
-            }}/>
+            <InputField name={'amountSent'} className={styles.input} validate={Validator.required}/>
             <Select name='currencySent' options={array} exchange className={styles.select} rootClass={styles.selectRoot}/>
           </div>
         </div>
@@ -77,7 +81,6 @@ export default function ExchangeForm(props: Props) {
         </div>
         <Button type='submit' size='play' fluid background='blueGradient500' className={styles.btn}>Обменять</Button>
       </Form>
-      )}
-    </Formik>
+    </FormikProvider>
   )
 }

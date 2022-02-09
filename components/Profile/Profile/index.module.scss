@@ -130,7 +130,7 @@
   .title{
     color: #FFC700;
     font-weight: 500;
-    font-size: 13px;
+    font-size: 14px;
     text-align: start;
   }
   @media screen and (max-width: 600px){
@@ -150,7 +150,7 @@
 
 .title{
   font-weight: 500;
-  font-size: 13px;
+  font-size: 14px;
   text-align: start;
   margin-bottom: 12px;
 }
@@ -212,7 +212,6 @@
 
 .menuItem{
   padding: 27px 12px 27px 21px;
-  border: 1px solid #2C2D38;
   background: #1D1E25;
   border-radius: 25px;
   min-height: 150px;
@@ -257,7 +256,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   margin-top: 64px;
-  gap: 14px;
+  gap: 8px;
   @media screen and (max-width: 600px){
     grid-template-columns: 1fr;
     margin-top: 32px;

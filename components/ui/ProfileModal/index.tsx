@@ -33,6 +33,7 @@ interface Props {
   isBack?: boolean
   step?: number
   setStep?: () => void
+  style?: 'wallet'
 }
 
 export default function ProfileModal(props: Props) {
@@ -68,6 +69,9 @@ export default function ProfileModal(props: Props) {
     }
   }
 
+  const styleClass = {
+    [styles.wallet]: props.style === 'wallet'
+  }
 
     return (
       <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
@@ -76,7 +80,7 @@ export default function ProfileModal(props: Props) {
             className={`${styles.root} ${getSizeClass(props.size)} ${props.className}`}
           >
             <HiddenXs>
-              <div className={classNames(styles.top, {[styles.noBorder]: props.noBorder})}>
+              <div className={classNames(styles.top, styleClass, {[styles.noBorder]: props.noBorder})}>
                 <div className={styles.left}>
                   {(!props.profile && props.isBack) &&
                   <div className={styles.back}

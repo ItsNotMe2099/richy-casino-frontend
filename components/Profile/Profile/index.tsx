@@ -167,7 +167,7 @@ const context = useAppContext()
             {accounts.length > 0 &&
             <div className={styles.newAcc}>
               <div className={styles.title}>
-                Бонусные
+                Бонусные счета
               </div>
                 {newAccounts.map((acc, index) =>
                   accounts.find(item => acc.currency === item.iso) &&
@@ -220,7 +220,7 @@ const context = useAppContext()
           </div>
           <div className={styles.bonus}>
             <div className={styles.title}>
-              Бонусные
+              Бонусные счета
             </div>
             <Bonus color='#587DFF' label='Lottery tickets' amount={user.tickets} icon='/img/Profile/icons/ticket.svg'/>
             <Bonus color='#FFD12F' label='FreeBitcoin' amount={user.freebtc} icon='/img/Profile/icons/btc.svg'/>
