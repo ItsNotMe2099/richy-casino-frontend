@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 import { useField } from 'formik'
 import classNames from 'classnames'
-import { ChangeEventHandler, useEffect, useState } from 'react'
+import {  useEffect, useState } from 'react'
 import { FieldValidator } from 'formik/dist/types'
 import { useIMask } from 'react-imask'
 import { AsYouType, isValidPhoneNumber } from 'libphonenumber-js'
@@ -9,7 +9,6 @@ import { convertLibphonenumberToMask } from 'utils/converter'
 import {IField} from 'types/interfaces'
 import Eye from 'components/svg/Eye'
 import ErrorInput from 'components/ui/Inputs/components/ErrorInput'
-import { InputType } from 'zlib'
 
 type FormatType = 'phone' | 'phoneAndEmail'
 
