@@ -1,6 +1,7 @@
 import styles from './index.module.scss'
 import Header from 'components/for_pages/Common/Header'
 import { useAppContext } from 'context/state'
+import { Scrollbars } from 'react-custom-scrollbars-2'
 
 interface Props {
   
@@ -10,7 +11,7 @@ export default function Winners(props: Props) {
 
   const context = useAppContext()
 
-  const user = context.auth
+  const user = true//context.auth
 
   const users = [
     {nickname: 'Erohin', sort: 1, usdt: '45.1056915',  amount: '+ 00.2120625 BTC · ', avatar: '/img/Winners/folder.jpg'},
@@ -36,7 +37,8 @@ export default function Winners(props: Props) {
               <img src='/img/Winners/illustration.svg' alt=''/>
             </div>
             <div className={styles.outerWrapper}>
-            <div className={styles.wrapper}>
+            <div className={styles.transparent}></div>
+            <Scrollbars className={styles.scroll}>
               <div className={styles.table}>
               <div className={styles.row}>
                 <div className={styles.cell}>
@@ -81,9 +83,8 @@ export default function Winners(props: Props) {
                     </div>
                   </div>
                 )}
-                <div className={styles.transparent}></div>
             </div>
-            </div>
+            </Scrollbars>
             </div>
           </div>
           {user &&

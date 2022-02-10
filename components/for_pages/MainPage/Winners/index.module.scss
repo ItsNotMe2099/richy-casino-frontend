@@ -7,6 +7,9 @@
 
 .header{
     padding-right: 28px;
+    @media screen and (max-width: $xs-max){
+        padding-right: 0;
+      }
 }
 
 .all{
@@ -53,6 +56,10 @@
         width: 32px;
         height: 32px;
         border-radius: 100%;
+        @media screen and (max-width: $xs-max){
+          width: 16px;
+          height: 16px;
+        }
     }
     @media screen and (max-width: 450px){
         margin-right: 10px;
@@ -63,8 +70,8 @@
     font-weight: 600;
     font-size: 14px;
     color: #FFFFFF;
-    @media screen and (max-width: 450px){
-        font-size: 11px;
+    @media screen and (max-width: $xs-max){
+      font-size: 10px;
     }
 }
 
@@ -80,6 +87,10 @@
         justify-content: center;
         margin-bottom: 13px;
     }
+    @media screen and (max-width: $xs-max){
+       width: 100%;
+       margin-bottom: 43px;
+    }
 }
 
 .table{
@@ -94,13 +105,31 @@
         font-weight: 500;
         font-size: 14px;
         color: $dark200;
+        @media screen and (max-width: $xs-max){
+            font-size: 10px;
+        }
     }
     .cell:first-child{
         text-align: center;
         padding-right: 47px;
+        @media screen and (max-width: $xs-max){
+            padding-right: 0;
+            text-align: left;
+            padding-left: 5px;
+        }
+    }
+    .cell:nth-child(2){
+        @media screen and (max-width: $xs-max){
+          padding-left: 10px;
+        }
     }
     .cell:last-child{
         text-align: right;
+    }
+    .cell:nth-child(3){
+        @media screen and (max-width: $xs-max){
+            display: none;
+        }
     }
 }
 .cell{
@@ -113,13 +142,35 @@
     .cell{
         padding: 20px 0 21px 0;
         border-bottom: 1px solid #272832;
+        @media screen and (max-width: $xs-max){
+          padding: 10px 0;
+          .avatar{
+              margin-right: 4px;
+          }
+        }
     }
     .cell:first-child{
         text-align: center;
         padding-right: 47px;
+        @media screen and (max-width: $xs-max){
+            padding-right: 0;
+            text-align: left;
+            width: 1%;
+            img{
+                width: 16px;
+            }
+        }
     }
     .cell:nth-child(2){
         width: 40%;
+        @media screen and (max-width: $xs-max){
+          padding-left: 10px;
+        }
+    }
+    .cell:nth-child(3){
+        @media screen and (max-width: $xs-max){
+            display: none;
+        }
     }
     .cell:last-child{
         .group{
@@ -130,6 +181,9 @@
             line-height: 18px;
             span{
                 color: #4c7836;
+            }
+            @media screen and (max-width: $xs-max){
+                font-size: 10px;
             }
         }
     }
@@ -143,15 +197,55 @@
     img{
         margin-right: 8px;
     }
-
+    @media screen and (max-width: $xs-max){
+        img{
+            margin-right: 4px;
+            width: 8px;
+            height: 8px;
+        }
+        .avatar{
+            img{
+                width: 32px;
+                height: 32px;
+                border-radius: 100%;
+                @media screen and (max-width: $xs-max){
+                  width: 16px;
+                  height: 16px;
+                }
+            }
+            @media screen and (max-width: 450px){
+                margin-right: 10px;
+            }
+        }
+    }
 }
 
 .wrapper{
     width: 100%;
     max-height: 308px;
     overflow-y: auto;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      display: none;
+      width: 0px;
+    }
     .table{
         padding-bottom: 77px;
+    }
+}
+
+.scroll{
+    height: 308px !important;
+    @media screen and (max-width: $xs-max){
+      height: 200px !important;
+    }
+}
+
+.scroll > div:first-child{
+    padding-bottom: 28px;
+    @media screen and (max-width: $xs-max){
+      padding-bottom: 81px;
     }
 }
 
@@ -167,7 +261,12 @@
     height: 77px;
     background: linear-gradient(180deg, rgba(29, 30, 37, 0) 0%, rgba(29, 30, 37, 0.87) 21.88%, #1D1E25 100%);
     bottom: 0;
-    right: 28px;
+    right: 24px;
+    z-index: 1;
+    @media screen and (max-width: $xs-max){
+        height: 81px;
+        right: -24px;
+    }
 }
 
 .bottom{
@@ -180,6 +279,9 @@
     .element:last-child{
         .title{
             text-align: right;
+            @media screen and (max-width: $xs-max){
+                text-align: left;
+             }
         }
         .group{
             color: $pay500;
@@ -190,6 +292,35 @@
                 color: #4c7836;
             }
         }
+    }
+    @media screen and (max-width: $xs-max){
+       margin-right: 0;
+       padding: 16px;
+       padding-bottom: 23px;
+       flex-direction: column;
+       .avatar{
+           margin-right: 8px;
+           img{
+               width: 32px;
+               height: 32px;
+           }
+       }
+       .nick{
+           font-size: 14px;
+       }
+       .element{
+           margin-top: 20px;
+       }
+       .value{
+           margin-top: 4px;
+           .group{
+               img{
+                   width: 16px;
+                   height: 16px;
+                   margin-right: 8px;
+               }
+           }
+       }
     }
 }
 
