@@ -52,8 +52,7 @@ export default function ModalPasswordRecovery(props: Props) {
                 </div>
           <FormError error={error}/>
           <div className={styles.buttons}>
-            <Button type='button' className={styles.button} size='submit' background='dark600' onClick={() => context.showModal(ModalType.login)}>Отменить</Button>
-            <div className={styles.spacer}/>
+            <Button type='button' className={styles.cancel} size='submit' background='dark600' onClick={() => context.showModal(ModalType.login)}>Отменить</Button>
             <Button type='submit' className={styles.button} size='submit' background='blueGradient500' >Продолжить</Button>
           </div>
 

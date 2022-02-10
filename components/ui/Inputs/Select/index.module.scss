@@ -140,16 +140,20 @@
 .altStyle{
   background: #272832;
   border: 0;
+  @media screen and (max-width: $xs-max) {
+    background-color: $dark700;
+  }
 }
 
 .withLabel{
   display: flex;
   align-items: center;
   background: #272832;
-  border-radius: 8px;
+  border-radius: 12px;
   height: 70px;
   @media screen and (max-width: $xs-max) {
     height: 50px;
+    background-color: $dark700;
   }
   .label{
     margin-bottom: 0;

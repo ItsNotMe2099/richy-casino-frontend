@@ -15,13 +15,14 @@
   text-transform: uppercase;
   font-weight: bold;
   font-size: 20px;
-  padding: 36px 0;
+  padding: 32px 0;
   background: rgba(37, 37, 37, 0.46);
   border: 1px solid rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(32px);
   border-radius: 12px;
   display: flex;
   justify-content: center;
+  min-width: 391px;
   div{
     flex-shrink: 0;
   }
@@ -77,6 +78,7 @@
 
 .btn{
   width: 100%;
+  padding: 0 16px;
 }
 
 .wrapper{

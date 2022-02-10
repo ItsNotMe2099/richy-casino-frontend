@@ -20,6 +20,9 @@
   color: #717384;
   flex: 1;
   font-weight: 500;
+  @media screen and (max-width: $xs-max) {
+    background-color: $dark700;
+  }
   &:-webkit-autofill{
     -webkit-text-fill-color: #717384 !important;
   }
@@ -59,10 +62,11 @@
   display: flex;
   align-items: center;
   background: #272832;
-  border-radius: 8px;
+  border-radius: 12px;
   height: 70px;
   @media screen and (max-width: $xs-max) {
     height: 50px;
+    background-color: $dark700;
   }
 }
 

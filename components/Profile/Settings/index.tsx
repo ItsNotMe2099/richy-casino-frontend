@@ -41,6 +41,7 @@ export default function Settings(props: Props) {
     phone: props.user.phone,
     email: props.user.email,
     password: isChange ? '' : props.user.password,
+    fa: false,
     checkBox1: true,
     checkBox2: true,
     checkBox3: false,
@@ -73,7 +74,7 @@ export default function Settings(props: Props) {
 
   return (
     <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
-      {({values}) => (
+      {({values, setFieldValue}) => (
       <Form className={styles.form}>
         <InputField name={'id'} disabled={true} className={styles.input} label='ID'/>
         <InputField name={'userName'} disabled={true} className={styles.input} label='Username'/>
@@ -124,6 +125,16 @@ export default function Settings(props: Props) {
           />
         </>
         }
+        <div className={styles.fa}>
+          <div className={styles.faInput}>
+            {values.fa ? <>Двухфакторная аутентификация <span className={styles.blue}>включена</span></> : 
+            <>Двухфакторная аутентификация <span className={styles.red}>отключена</span></>}
+          </div>
+          <Button className={classNames(styles.btn, {[styles.faBtn]: values.fa})} background={values.fa ? 'dark600' : 'payGradient500'} type='submit' 
+          onClick={() => values.fa ? setFieldValue('fa', false) : setFieldValue('fa', true)}>
+            {values.fa ? <>Отключить 2FA</> : <>Включить 2FA</>}
+          </Button>
+        </div>
         <HiddenXs>
         <div className={styles.boxes}>
           <div className={styles.row}>

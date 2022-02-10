@@ -7,7 +7,7 @@
 }
 
 .title{
-    font-weight: 500;
+    font-weight: 600;
     font-size: 24px;
 }
 
@@ -15,6 +15,9 @@
     background-color: $dark700;
     border-radius: 16px;
     padding: 34px 33px;
+    @media screen and (max-width: $xs-max){
+        padding: 16px;
+    }
 }
 
 .row{
@@ -54,12 +57,12 @@
 
 .label{
     font-weight: bold;
-    font-size: 25px;
+    font-size: 21px;
 }
 
 .text{
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 160%;
     margin-top: 16px;
 }
@@ -76,8 +79,15 @@
 .drop{
     a{
         background-color: $dark700;
+        height: 50px;
+        div{
+            span{
+                font-size: 13px;
+            }
+        }
     }
 }
+
 
 .container{
     @media screen and (max-width: $xs-max){

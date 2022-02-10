@@ -7,7 +7,6 @@
 .variants {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   margin-top: 24px;
 
   .variant:last-child {
@@ -21,6 +20,7 @@
 
 .variant {
   padding: 16px;
+  flex: 1;
   cursor: pointer;
   max-width: 118px;
   display: flex;
@@ -28,8 +28,10 @@
   justify-content: center;
   background-color: $dark600;
   border-radius: 6px;
-  margin-right: 9px;
-
+  margin-right: 6px;
+  @media screen and (max-width: $xs-max){
+    padding: 13px 0;
+  }
   img {
     margin-right: 8px;
   }
@@ -37,7 +39,8 @@
 
 .active {
   @include blueGradient500NoHover;
-  @media screen and (max-width: 430px) {
+  @media screen and (max-width: 320px) {
+    max-width: 47px;
     img {
       margin-right: 0;
     }
@@ -102,7 +105,7 @@
 }
 
 .mobile {
-  @media screen and (max-width: 430px) {
+  @media screen and (max-width: 320px) {
     display: none;
   }
 }

@@ -14,9 +14,10 @@
   }
 }
 .label{
-  font-size: 13px;
+  font-size: 15px;
   color: #717384;
   font-weight: 400;
+  margin-bottom: 7px;
   &:first-of-type{
     margin-bottom: 12px;
   }
@@ -35,7 +36,13 @@
 }
 .socials{
   margin-top: 13px;
-  margin-bottom: 13px;
+  margin-bottom: 7px;
+  div{
+    margin-bottom: 0;
+    @media screen and (max-width: 430px){
+      margin-bottom: 10px;
+    }
+  }
   @media screen and (max-width: $sm-min){
     margin-top: 20px;
   }

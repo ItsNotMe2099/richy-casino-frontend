@@ -25,10 +25,14 @@
   display: flex;
   align-items: center;
   flex-direction: row;
-  .spacer{
-    width: 24px;
-  }
 }
 .button{
   flex: 1;
+}
+.cancel{
+  margin-right: 8px;
+  width: 45%;
+  @media screen and (max-width: $xs-max){
+    width: 39%;
+  }
 }
