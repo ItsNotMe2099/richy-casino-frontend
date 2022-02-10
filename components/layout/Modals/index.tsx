@@ -17,6 +17,8 @@ import BonusModal from 'components/ui/BonusModal'
 import ModalRegistrationPhone from 'components/Auth/ModalRegistrationPhone'
 import ProfileBurger from 'components/ui/ProfileBurger'
 import Exchange from 'components/Exchange'
+import Favorite from 'components/Profile/Favorite'
+import styles from './index.module.scss'
 
 interface Props {}
 
@@ -73,6 +75,17 @@ export default function ModalContainer(props: Props) {
           size='small'
           key={13} isOpen={context.modal === ProfileModalType.exchange} {...commonSettings} title='Обмен' user={user} wallet noBorder>
             <Exchange user={user}/>
+          </ProfileModal>
+          <ProfileModal 
+          className={styles.favorite}
+           key={14} 
+           isOpen={context.modal === ProfileModalType.favorite} 
+           size='large' {...commonSettings} 
+           title='Избранное' user={user} 
+           isBack={true}
+           style='favorite'
+           >
+            <Favorite/>
           </ProfileModal>
         </>
       )}

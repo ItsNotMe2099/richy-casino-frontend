@@ -53,12 +53,22 @@
   margin-top: 3px;
 }
 
-.wallet{
+.btnFill{
   padding: 11px 9px;
   img{
     margin-right: 6px;
   }
   color: $white;
+  font-size: 10px;
+}
+
+.favorite{
+  margin: 0;
+  .left{
+    .title{
+      font-size: 16px;
+    }
+  }
 }
 
 .close {
@@ -152,7 +162,7 @@
 }
 
 .toProfile{
-  font-size: 13px;
+  font-size: 14px;
   color: #87888C;
 }
 

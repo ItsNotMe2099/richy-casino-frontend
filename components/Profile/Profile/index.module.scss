@@ -216,7 +216,9 @@
   border-radius: 25px;
   min-height: 150px;
   cursor: pointer;
+  border: 1px solid #2C2D38;
   @media screen and (max-width: 600px){
+    border: 0;
     display: flex;
     min-height: auto;
     padding: 15px 18px;

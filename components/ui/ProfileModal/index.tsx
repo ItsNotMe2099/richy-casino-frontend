@@ -33,7 +33,7 @@ interface Props {
   isBack?: boolean
   step?: number
   setStep?: () => void
-  style?: 'wallet'
+  style?: 'wallet' | 'favorite'
 }
 
 export default function ProfileModal(props: Props) {
@@ -70,7 +70,8 @@ export default function ProfileModal(props: Props) {
   }
 
   const styleClass = {
-    [styles.wallet]: props.style === 'wallet'
+    [styles.wallet]: props.style === 'wallet',
+    [styles.favorite]: props.style === 'favorite'
   }
 
     return (
@@ -116,7 +117,7 @@ export default function ProfileModal(props: Props) {
                     {props.user.balance}
                   </div>
                 </div>
-                <Button size='normal' background='payGradient500' className={styles.wallet}><img src='/img/icons/wallet.svg' alt=''/>Пополнить</Button>
+                <Button background='payGradient500' className={styles.btnFill}><img src='/img/icons/wallet.svg' alt=''/>Пополнить</Button>
                 {props.onRequestClose && (
                   <div className={styles.close} onClick={props.onRequestClose}>
                     <Close/>
