@@ -230,7 +230,7 @@ const context = useAppContext()
         </div>
         <div className={styles.menu}>
             <MenuItem icon='/img/Profile/icons/wallet.svg' label='Управлять кошельком'/>
-            <MenuItem icon='/img/Profile/icons/clock.svg' label='История ставок'/>
+            <MenuItem icon='/img/Profile/icons/clock.svg' label='История ставок' onClick={() => context.showModal(ProfileModalType.betsHistory)}/>
             <MenuItem icon='/img/Profile/icons/favorite.svg' label='Избранное' onClick={() => context.showModal(ProfileModalType.favorite)}/>
             <MenuItem icon='/img/Profile/icons/support.svg' label='Поддержка'/>
             <MenuItem icon='/img/Profile/icons/wallet2.svg' label='История платежей' onClick={() => context.showModal(ProfileModalType.paymentHistory)}/>

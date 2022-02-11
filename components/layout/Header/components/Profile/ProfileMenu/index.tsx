@@ -53,7 +53,7 @@ export default function ProfileMenu(props: Props){
         showModal(ProfileModalType.wallet)
         break
       case ActionType.Transactions:
-        showModal(ProfileModalType.paymentHistory)
+        showModal(ProfileModalType.betsHistory)
         break
       case ActionType.Referral:
         // TODO add link

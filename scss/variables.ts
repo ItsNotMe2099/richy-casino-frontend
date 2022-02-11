@@ -10,7 +10,7 @@ export const colors = {
   dark100: '#797C86',
   grey500: '#C4C4C4',
   blue500: '#427BF8',
-  lose500: '#427BF8',
+  lose500: '#ED4700',
   pay500: '#7BD245',
   tickets500: '#6BFFA6',
   balance700: '#EEAF4D',

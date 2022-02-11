@@ -19,6 +19,7 @@ import ProfileBurger from 'components/ui/ProfileBurger'
 import Exchange from 'components/Exchange'
 import Favorite from 'components/Profile/Favorite'
 import styles from './index.module.scss'
+import BetsHistory from 'components/Profile/BetsHistory'
 
 interface Props {}
 
@@ -86,6 +87,9 @@ export default function ModalContainer(props: Props) {
            style='favorite'
            >
             <Favorite/>
+          </ProfileModal>
+          <ProfileModal isBack={true} size='large' key={15} isOpen={context.modal === ProfileModalType.betsHistory} {...commonSettings} title='История ставок' user={user} payment>
+            <BetsHistory/>
           </ProfileModal>
         </>
       )}
