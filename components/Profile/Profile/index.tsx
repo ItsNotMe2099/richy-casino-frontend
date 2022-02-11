@@ -189,7 +189,7 @@ const context = useAppContext()
               <Button className={styles.btn}>
                 Вывод
               </Button>
-              <Button className={styles.btn}>
+              <Button className={styles.btn} onClick={() => context.showModal(ProfileModalType.exchange)}>
                 Обмен
               </Button>
               </div>

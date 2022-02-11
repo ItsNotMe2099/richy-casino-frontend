@@ -8,6 +8,7 @@ import Button from '../Button'
 import { ProfileModalType } from 'types/enums'
 import { useAppContext } from 'context/state'
 import classNames from 'classnames'
+import ProfileMenu from 'components/layout/Header/components/Profile/ProfileMenu'
 
 interface IUser{
   id: string
@@ -33,7 +34,7 @@ interface Props {
   isBack?: boolean
   step?: number
   setStep?: () => void
-  style?: 'wallet' | 'favorite'
+  style?: 'wallet' | 'favorite' | 'buyCrypto'
 }
 
 export default function ProfileModal(props: Props) {
@@ -71,7 +72,11 @@ export default function ProfileModal(props: Props) {
 
   const styleClass = {
     [styles.wallet]: props.style === 'wallet',
-    [styles.favorite]: props.style === 'favorite'
+    [styles.favorite]: props.style === 'favorite',
+  }
+
+  const styleClassMobile = {
+    [styles.buyCrypto]: props.style === 'buyCrypto'
   }
 
     return (
@@ -85,7 +90,7 @@ export default function ProfileModal(props: Props) {
                 <div className={styles.left}>
                   {(!props.profile && props.isBack) &&
                   <div className={styles.back}
-                  onClick={() => props.wallet ? props.setStep() : context.showModal(ProfileModalType.profile)}>
+                  onClick={() => props.wallet ? props?.setStep() : context.showModal(ProfileModalType.profile)}>
                     <img src='/img/icons/back.svg' alt=''/>
                   </div>}
                   <div className={styles.title}>
@@ -106,7 +111,7 @@ export default function ProfileModal(props: Props) {
               </div>
             </HiddenXs>
             <VisibleXs>
-              <>
+              <div className={classNames(styles.mobile,  styleClassMobile)}>
               {!props.wallet && <div className={styles.top}>
                 <Logo className={styles.logo}/>
                 <div className={styles.balance}>
@@ -123,18 +128,19 @@ export default function ProfileModal(props: Props) {
                     <Close/>
                   </div>
                 )}
+                <ProfileMenu className={styles.profileMenu}/>
               </div>}
               {!props.profile &&
               <div className={styles.mobileBack}>
                   <div className={styles.wrap}
                   onClick={(props.wallet && props.step === 1) ? props.onRequestClose :
                   (props.wallet && props.step > 1) ? () => props.setStep() :
-                  () => context.showModal(ProfileModalType.profile)}>
+                  props.style !== 'buyCrypto' ? () => context.showModal(ProfileModalType.profile) : props.onRequestClose}>
                   <div className={styles.arrow}>
                     <img src='/img/icons/back-arrow.svg' alt=''/>
                   </div>
                   <div className={styles.toProfile}>
-                    {props.wallet ? <>Назад</> : <>Профиль</>}
+                    {(props.wallet || props.style === 'buyCrypto') ? <>Назад</> : <>Профиль</>}
                   </div>
                   </div>
               </div>}
@@ -142,7 +148,7 @@ export default function ProfileModal(props: Props) {
                 <div>{props.title}</div>
                 {props.wallet && <div className={styles.id}>ID {props.user.id}</div>}
               </div>
-              </>
+              </div>
             </VisibleXs>
             <div className={classNames(styles.center, {[styles.walletBackCenter]: props.wallet})}>
               {props.image && !props.loading && (

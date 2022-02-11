@@ -117,6 +117,35 @@
   padding-bottom: 6px;
 }
 
+.mobile{
+  .profileMenu{
+    visibility: hidden;
+  }
+}
+
+.buyCrypto{
+  .title{
+    @media screen and (max-width: $xs-max){
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-bottom: 16px;
+      padding-top: 11px;
+      background: #1D1E25;
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
+      margin-top: 32px;
+    }
+  }
+    .top{
+      .close{
+        display: none;
+      }
+    }
+    .profileMenu{
+      visibility: visible;
+    }
+}
+
 .noBorder{
   border-bottom: 0;
 }

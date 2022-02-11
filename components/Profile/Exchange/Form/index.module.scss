@@ -27,10 +27,13 @@
 }
 
 .select{
-  padding: 14px 16px 14px 13px !important;
+  padding: 14px 16px 14px 0 !important;
   background-color: $dark600 !important;
   border-top-left-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
+  @media screen and (max-width: $xs-max){
+    background-color: $dark700 !important;
+  }
 }
 
 .selectRoot{
@@ -43,7 +46,7 @@
     width: 50%;
   }
   nav{
-    top: 0;
+    top: 50px;
   }
 }
 

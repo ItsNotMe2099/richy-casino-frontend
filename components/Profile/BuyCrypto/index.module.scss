@@ -1,0 +1,8 @@
+@import "scss/index";
+
+.root{
+    margin-top: 9px;
+    @media screen and (max-width: $xs-max){
+        margin-top: 0;
+    }
+}

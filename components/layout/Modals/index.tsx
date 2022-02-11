@@ -11,15 +11,16 @@ import PaymentHistory from 'components/Profile/PaymentHistory'
 import ProfileModal from 'components/ui/ProfileModal'
 import Profile from 'components/Profile/Profile'
 import Settings from 'components/Profile/Settings'
-import Wallet from 'components/Wallet'
 import Fortune from 'components/Fortune'
 import BonusModal from 'components/ui/BonusModal'
 import ModalRegistrationPhone from 'components/Auth/ModalRegistrationPhone'
 import ProfileBurger from 'components/ui/ProfileBurger'
-import Exchange from 'components/Exchange'
 import Favorite from 'components/Profile/Favorite'
 import styles from './index.module.scss'
 import BetsHistory from 'components/Profile/BetsHistory'
+import Wallet from 'components/Profile/Wallet'
+import Exchange from 'components/Profile/Exchange'
+import BuyCrypto from 'components/Profile/BuyCrypto'
 
 interface Props {}
 
@@ -74,7 +75,7 @@ export default function ModalContainer(props: Props) {
           <ProfileBurger key={11} isOpen={context.modal === ModalType.profileBurger} {...commonSettings} user={user}/>
           <ProfileModal 
           size='small'
-          key={13} isOpen={context.modal === ProfileModalType.exchange} {...commonSettings} title='Обмен' user={user} wallet noBorder>
+          key={13} isBack={true} isOpen={context.modal === ProfileModalType.exchange} {...commonSettings} title='Обмен' user={user} payment noBorder>
             <Exchange user={user}/>
           </ProfileModal>
           <ProfileModal 
@@ -90,6 +91,12 @@ export default function ModalContainer(props: Props) {
           </ProfileModal>
           <ProfileModal isBack={true} size='large' key={15} isOpen={context.modal === ProfileModalType.betsHistory} {...commonSettings} title='История ставок' user={user} payment>
             <BetsHistory/>
+          </ProfileModal>
+          <ProfileModal 
+          size='small'
+          style='buyCrypto'
+          key={16} isBack={true} isOpen={true/*context.modal === ProfileModalType.buyCrypto*/} {...commonSettings} title='Купить криптовалюту' user={user} payment noBorder>
+            <BuyCrypto user={user}/>
           </ProfileModal>
         </>
       )}

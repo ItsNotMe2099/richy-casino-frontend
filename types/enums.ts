@@ -17,7 +17,8 @@ export enum ProfileModalType {
   wallet = 8,
   exchange = 13,
   favorite = 14,
-  betsHistory = 15
+  betsHistory = 15,
+  buyCrypto = 16
 }
 
 export enum CookiesType {

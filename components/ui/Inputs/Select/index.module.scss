@@ -102,6 +102,9 @@
     }
     .symbolAndName{
       padding: 0 14px;
+      &:hover{
+        background-color: $dark400;
+      }
     }
 }
 
@@ -115,7 +118,6 @@
   flex-direction: row;
   align-items: center;
   padding: 15px 20px;
-  border: 1px solid #272832;
   border-radius: 8px;
   position: relative;
   justify-content: space-between;
