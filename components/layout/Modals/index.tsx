@@ -95,7 +95,7 @@ export default function ModalContainer(props: Props) {
           <ProfileModal 
           size='small'
           style='buyCrypto'
-          key={16} isBack={true} isOpen={true/*context.modal === ProfileModalType.buyCrypto*/} {...commonSettings} title='Купить криптовалюту' user={user} payment noBorder>
+          key={16} isBack={true} isOpen={context.modal === ProfileModalType.buyCrypto} {...commonSettings} title='Купить криптовалюту' user={user} payment noBorder>
             <BuyCrypto user={user}/>
           </ProfileModal>
         </>
