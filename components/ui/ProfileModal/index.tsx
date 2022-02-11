@@ -34,7 +34,7 @@ interface Props {
   isBack?: boolean
   step?: number
   setStep?: () => void
-  style?: 'wallet' | 'favorite' | 'buyCrypto'
+  style?: 'wallet' | 'favorite' | 'buyCrypto' | '2fa'
 }
 
 export default function ProfileModal(props: Props) {
@@ -73,6 +73,7 @@ export default function ProfileModal(props: Props) {
   const styleClass = {
     [styles.wallet]: props.style === 'wallet',
     [styles.favorite]: props.style === 'favorite',
+    [styles.fa]: props.style === '2fa'
   }
 
   const styleClassMobile = {
@@ -86,7 +87,8 @@ export default function ProfileModal(props: Props) {
             className={`${styles.root} ${getSizeClass(props.size)} ${props.className}`}
           >
             <HiddenXs>
-              <div className={classNames(styles.top, styleClass, {[styles.noBorder]: props.noBorder})}>
+              <div className={classNames(styleClass, {[styles.noBorder]: props.noBorder})}>
+                <div className={styles.mainTop}>
                 <div className={styles.left}>
                   {(!props.profile && props.isBack) &&
                   <div className={styles.back}
@@ -108,6 +110,12 @@ export default function ProfileModal(props: Props) {
                   </div>
                 )}
                 </div>
+                </div>
+                {props.style === '2fa' && 
+                <div className={styles.faText}>
+                  Загрузите и установите <span>Google Authenticator.</span> Включите двухфакторную аутентификацию, чтобы защитить свою учетную запись от несанкционированного доступа.
+                </div>
+                }
               </div>
             </HiddenXs>
             <VisibleXs>
@@ -140,7 +148,7 @@ export default function ProfileModal(props: Props) {
                     <img src='/img/icons/back-arrow.svg' alt=''/>
                   </div>
                   <div className={styles.toProfile}>
-                    {(props.wallet || props.style === 'buyCrypto') ? <>Назад</> : <>Профиль</>}
+                    {(props.wallet || props.style === 'buyCrypto' || props.style === '2fa') ? <>Назад</> : <>Профиль</>}
                   </div>
                   </div>
               </div>}

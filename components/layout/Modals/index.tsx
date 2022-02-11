@@ -21,6 +21,7 @@ import BetsHistory from 'components/Profile/BetsHistory'
 import Wallet from 'components/Profile/Wallet'
 import Exchange from 'components/Profile/Exchange'
 import BuyCrypto from 'components/Profile/BuyCrypto'
+import FA from 'components/Profile/FA'
 
 interface Props {}
 
@@ -97,6 +98,12 @@ export default function ModalContainer(props: Props) {
           style='buyCrypto'
           key={16} isBack={true} isOpen={context.modal === ProfileModalType.buyCrypto} {...commonSettings} title='Купить криптовалюту' user={user} payment noBorder>
             <BuyCrypto user={user}/>
+          </ProfileModal>
+          <ProfileModal 
+          size='small'
+          style='2fa'
+          key={17} isBack={true} isOpen={context.modal === ProfileModalType.FA} {...commonSettings} title='Безопасность 2FA' user={user}>
+            <FA/>
           </ProfileModal>
         </>
       )}

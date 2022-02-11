@@ -1,4 +1,5 @@
 @import "scss/index";
+
 .root {
   position: relative;
   background: linear-gradient(0deg, #1D1E25, #1D1E25);
@@ -21,6 +22,50 @@
     padding-right: 18px;
     padding-left: 18px;
     padding-bottom: 23px;
+  }
+}
+
+.mainTop{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #272832;
+  margin: 0 -28px;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #272832;
+  margin: 0 -28px;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.fa{
+  .mainTop{
+    border: 0;
+  }
+  border-bottom: 1px solid #272832;
+  margin: 0 -28px;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.faText{
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 130%;
+  color: $dark200;
+  text-align: left;
+  padding-bottom: 16px;
+  span{
+    text-decoration: underline;
   }
 }
 
@@ -102,24 +147,13 @@
   width: 59px;
 }
 
-.top{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #272832;
-  margin: 0 -28px;
-  padding-left: 28px;
-  padding-right: 28px;
-}
-
 .wallet{
   padding-bottom: 6px;
 }
 
 .mobile{
   .profileMenu{
-    visibility: hidden;
+    display: none;
   }
 }
 
@@ -142,7 +176,7 @@
       }
     }
     .profileMenu{
-      visibility: visible;
+      display: block;
     }
 }
 
