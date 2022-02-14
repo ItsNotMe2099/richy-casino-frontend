@@ -22,6 +22,7 @@ import Wallet from 'components/Profile/Wallet'
 import Exchange from 'components/Profile/Exchange'
 import BuyCrypto from 'components/Profile/BuyCrypto'
 import FA from 'components/Profile/FA'
+import Withdraw from 'components/Profile/Withdraw'
 
 interface Props {}
 
@@ -105,6 +106,7 @@ export default function ModalContainer(props: Props) {
           key={17} isBack={true} isOpen={context.modal === ProfileModalType.FA} {...commonSettings} title='Безопасность 2FA' user={user}>
             <FA/>
           </ProfileModal>
+          <Withdraw/>
         </>
       )}
     </div>

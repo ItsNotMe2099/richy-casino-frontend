@@ -9,6 +9,7 @@ import { ProfileModalType } from 'types/enums'
 import { useAppContext } from 'context/state'
 import classNames from 'classnames'
 import ProfileMenu from 'components/layout/Header/components/Profile/ProfileMenu'
+import FAFooter from './FAFooter'
 
 interface IUser{
   id: string
@@ -35,6 +36,7 @@ interface Props {
   step?: number
   setStep?: () => void
   style?: 'wallet' | 'favorite' | 'buyCrypto' | '2fa'
+  faFooter?: boolean
 }
 
 export default function ProfileModal(props: Props) {
@@ -86,9 +88,10 @@ export default function ProfileModal(props: Props) {
           <div
             className={`${styles.root} ${getSizeClass(props.size)} ${props.className}`}
           >
+            {props.faFooter && <FAFooter className={styles.footer}/>}
             <HiddenXs>
               <div className={classNames(styleClass, {[styles.noBorder]: props.noBorder})}>
-                <div className={styles.mainTop}>
+                <div className={classNames(styles.mainTop, {[styles.noBorder]: props.noBorder})}>
                 <div className={styles.left}>
                   {(!props.profile && props.isBack) &&
                   <div className={styles.back}

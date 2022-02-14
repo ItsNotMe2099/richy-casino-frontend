@@ -19,7 +19,8 @@ export enum ProfileModalType {
   favorite = 14,
   betsHistory = 15,
   buyCrypto = 16,
-  FA = 17
+  FA = 17,
+  withdraw = 18
 }
 
 export enum CookiesType {

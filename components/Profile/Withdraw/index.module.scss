@@ -1,0 +1,344 @@
+@import "scss/index";
+
+.root{
+
+}
+
+.choose{
+  font-weight: 500;
+  font-size: 14px;
+  color: $dark200;
+  text-align: left;
+  @media screen and (max-width: $xs-max){
+    font-size: 12px;
+  }
+}
+
+.banner{
+  margin-top: 20px;
+}
+
+.method{
+  background: #272832;
+  border-radius: 14px;
+  padding: 11px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  height: 66px;
+  justify-content: space-between;
+  position: relative;
+  cursor: pointer;
+  &:hover{
+    @include blueGradient500NoHover;
+    .label{
+      color: #A7BFFF;
+    }
+    .iconsGroup{
+      svg{
+        rect{
+          fill: #628CFF !important;
+        }
+        path{
+          fill: $white !important;
+        }
+      }
+      svg:last-child{
+        path{
+          fill: #A7D5FF !important;
+        }
+      }
+    }
+    .visaHover{
+      path{
+        fill: '#fff' !important;
+      }
+      path:last-child{
+        fill: '#ededed' !important;
+      }
+    }
+  }
+}
+
+.mobileMethod{
+  display: flex;
+  @include blueGradient500NoHover;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  height: 43px;
+}
+
+.fill{
+  font-size: 8px;
+  color: #A7BFFF;
+  text-align: left;
+}
+
+.icon{
+
+}
+
+.blue{
+  @include blueGradient500NoHover;
+  .label{
+    color: #A7BFFF;
+  }
+}
+
+.change{
+  font-size: 12px;
+  margin-left: 22px;
+  color: #9BB1FF;
+  cursor: pointer;
+}
+
+.iconMobile{
+  display: flex;
+  margin-right: 9px;
+}
+
+.choice{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 9px;
+  border-bottom: 1px solid #272832;
+  margin: 0 -28px;
+  padding: 0 28px;
+  padding-bottom: 16px;
+  margin-top: 16px;
+  @media screen and (max-width: $xs-max){
+   border: 0;
+  }
+  @media screen and (max-width: 375px){
+    display: flex;
+  }
+}
+
+.bonus{
+  background: $white;
+  border-radius: 0px 14px 0px 9px;
+  padding: 4px 6px;
+  font-weight: 500;
+  font-size: 10px;
+  color: #437CF8;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.label{
+  font-weight: 500;
+  font-size: 12px;
+  color: $dark200;
+}
+
+.labelMobile{
+  color: $white;
+}
+
+.methods{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+  margin-bottom: 120px;
+  @media screen and (max-width: 375px){
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.top{
+  display: flex;
+  margin-bottom: 10px;
+  .btn:first-child{
+    margin-right: 10px;
+  }
+  @media screen and (max-width: $xs-max){
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.btn{
+  padding: 11px 0;
+  width: 100%;
+  img{
+    margin-right: 10px;
+  }
+}
+
+.btnWrap{
+  @media screen and (max-width: $xs-max){
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.options{
+  margin-top: 16px;
+  .methods{
+    margin-top: 10px;
+    @media screen and (max-width: $xs-max){
+      margin-top: 16px;
+    }
+  }
+  @media screen and (max-width: $xs-max){
+    margin-top: 0;
+  }
+}
+
+.actions{
+  @media screen and (max-width: $xs-max){
+    border-bottom: 1px solid #24272F;
+    padding-bottom: 17px;
+    margin: 0 -15px;
+  }
+  @media screen and (max-width: 375px){
+    font-size: 12px;
+    img{
+      margin-right: 6px;
+    }
+    .top{
+      .btn:last-child{
+        flex: 1;
+        padding-left: 8px;
+        padding-right: 10px;
+      }
+    }
+  }
+}
+
+.iso{
+  @media screen and (max-width: 375px){
+    flex-direction: row;
+    align-items: center;
+    padding: 9px 0;
+    height: 43px;
+    justify-content: center;
+    border-radius: 8px;
+    width: 100%;
+  }
+}
+
+.isoIcon{
+  margin-right: 8px;
+  width: 25px;
+  height: 25px;
+}
+
+.isoLabel{
+  @media screen and (max-width: 375px){
+  font-weight: 500;
+  font-size: 16px;
+  color: $white !important;
+  text-transform: uppercase;
+  }
+}
+
+.qr{
+  margin-top: 16px;
+  .choose:nth-child(2){
+    margin-top: 20px;
+  }
+}
+
+.choose2{
+  margin-top: 20px;
+  font-weight: 500;
+  font-size: 13px;
+  color: $dark200;
+  text-align: left;
+}
+
+.input{
+  padding: 14px 0;
+  padding-left: 20px;
+  background: $dark600;
+  border-radius: 9px;
+  font-weight: 500;
+  font-size: 16px;
+  display: flex;
+  margin-top: 14px;
+  padding-right: 15px;
+  span{
+    color: #2f56fd;
+    text-transform: uppercase;
+    margin-left: 5px;
+  }
+}
+
+.input2{
+  padding: 14px 0;
+  padding-left: 20px;
+  background: $dark600;
+  border-radius: 9px;
+  font-weight: 500;
+  font-size: 16px;
+  display: flex;
+  margin-top: 14px;
+  padding-right: 15px;
+  justify-content: space-between;
+}
+
+.code{
+  margin-top: 32px;
+}
+
+.important{
+  margin-top: 25px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: -0.01em;
+  color: #a5a5a8;
+  span{
+    color: #2f56fd;
+    text-transform: uppercase;
+  }
+}
+
+.choose2{
+  span{
+    text-transform: uppercase;
+  }
+}
+
+.forFill{
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copy{
+  cursor: pointer;
+}
+
+.iconsGroup{
+  display: flex;
+  svg{
+    margin-right: 3px;
+  }
+  svg:last-child{
+    margin-right: 0;
+  }
+}
+
+.three{
+  svg:last-child{
+    display: none;
+  }
+}
+
+.two{
+  svg:nth-child(3){
+    display: none;
+  }
+  svg:last-child{
+    display: none;
+  }
+}
+
+.visa{
+  width: 54px;
+}

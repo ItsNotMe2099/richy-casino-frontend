@@ -25,6 +25,13 @@
   }
 }
 
+.footer{
+  position: absolute;
+  bottom: 0;
+  z-index: 10;
+  background: #1D1E25;
+}
+
 .mainTop{
   display: flex;
   align-items: center;

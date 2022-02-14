@@ -1,0 +1,124 @@
+@import "scss/index";
+
+.form {
+  margin-top: 12px;
+}
+
+.options{
+  display: flex;
+  justify-content: space-between;
+  overflow: auto;
+  scrollbar-width: none;
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      display: none;
+      width: 0px;
+    }
+}
+
+.option{
+  background: $dark600;
+  border-radius: 8px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 12px;
+  color: $dark200;
+  @media screen and (max-width: 375px){
+    margin-right: 5px;
+  }
+}
+
+.active{
+  @include blueGradient500NoHover;
+  color: $white;
+}
+
+.promo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover{
+    span{
+      text-decoration: underline;
+    }
+  }
+  span {
+    font-size: 13px;
+    color: $white;
+  }
+}
+
+.plus {
+  width: 12.83px;
+  height: 12.83px;
+  border-radius: 100%;
+  background: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 15px;
+  margin-right: 8px;
+}
+
+.bottom{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.code{
+  justify-content: flex-end;
+}
+
+.rate{
+  font-weight: 500;
+  font-size: 12px;
+  color: $dark300;
+}
+
+.btn{
+  width: 100%;
+  margin-top: 10px;
+  color: $white;
+  padding: 17px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  img{
+    width: 16px;
+    height: 16px;
+    margin-right: 12px;
+  }
+}
+
+.texts{
+  display: flex;
+  justify-content: space-between;
+}
+
+.amount{
+  font-weight: 500;
+  font-size: 14px;
+  color: $dark200;
+}
+
+.limit{
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: $dark400;
+}
+
+.input{
+  margin-top: 14px;
+  input{
+    padding: 14px 21px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: -0.01em;
+  }
+}

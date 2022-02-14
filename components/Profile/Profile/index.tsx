@@ -186,7 +186,7 @@ const context = useAppContext()
             }
             <div className={styles.actions}>
               <div className={styles.notGreen}>
-              <Button className={styles.btn}>
+              <Button className={styles.btn} onClick={() => context.showModal(ProfileModalType.withdraw)}>
                 Вывод
               </Button>
               <Button className={styles.btn} onClick={() => context.showModal(ProfileModalType.exchange)}>
