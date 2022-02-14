@@ -1,8 +1,6 @@
-import BonusSmallBanner from 'components/for_pages/Common/BonusSmallBanner'
 import { useEffect, useState } from 'react'
 import styles from './index.module.scss'
 import classNames from 'classnames'
-import Button from 'components/ui/Button'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import ProfileModal from 'components/ui/ProfileModal'

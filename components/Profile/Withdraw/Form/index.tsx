@@ -2,10 +2,7 @@ import Button from 'components/ui/Button'
 import InputField from 'components/ui/Inputs/InputField'
 import { Form, Formik } from 'formik'
 import styles from './index.module.scss'
-import classNames from 'classnames'
 import Validator from 'utils/validator'
-import { useState } from 'react'
-import PromoCode from 'components/for_pages/Common/Promocode'
 
 
 interface Props {
