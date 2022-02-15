@@ -1,12 +1,13 @@
 import request from 'utils/request'
+import IAuthResponse from 'data/interfaces/IAuthResponse'
 
 export default class AuthRepository {
-  static async login(login: string, password: string): Promise<any> {
+  static async login(login: string, password: string): Promise<IAuthResponse> {
     const res = await request({
       method: 'post',
-      url: '/api/auth/login',
+      url: '/api/user/auth/login',
       data: {
-        authInput: login,
+        identity: login,
         password: password,
       },
     })
@@ -16,14 +17,14 @@ export default class AuthRepository {
     }
     return res.data?.data
   }
-  static async registerEmail({email, password, currency}): Promise<any> {
+  static async registerEmail({email, password, currency}): Promise<IAuthResponse | null> {
     const res = await request({
       method: 'post',
-      url: '/api/auth/register',
+      url: '/api/user/auth/registration',
       data: {
         email,
         password,
-        currencyIso: currency
+        currency_iso: currency
       },
     })
     console.log('ress', res)
@@ -33,12 +34,13 @@ export default class AuthRepository {
     return res.data?.data
   }
 
-  static async registerPhoneSendOtp({phone}): Promise<any> {
+  static async registerPhoneSendOtp({phone, currency}): Promise<IAuthResponse | null> {
     const res = await request({
       method: 'post',
-      url: '/api/auth/register/phone',
+      url: '/api/user/auth/register/phone',
       data: {
-        phoneNumber: phone
+         phone,
+        currency_iso: currency
       },
     })
     console.log('ress', res)
@@ -48,10 +50,10 @@ export default class AuthRepository {
     return res.data?.data
   }
 
-  static async registerPhone({code, password, authToken}): Promise<any> {
+  static async registerPhone({code, phone, authToken}): Promise<any> {
     const res = await request({
       method: 'post',
-      url: '/api/auth/register/checkotp',
+      url: '/api/user/auth/sms',
       data: {
         code,
         password,
