@@ -13,6 +13,7 @@ import AuthUserFeatures from 'components/layout/AuthUserFeatures'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import 'react-input-range/lib/css/index.css'
+import NotificationBanner from 'components/for_pages/Common/NotificationBanner'
 function MyApp({ Component, pageProps }: AppProps) {
   setConfiguration({
     gutterWidth: 20,
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
         <ModalContainer/>
         <AuthUserFeatures/>
+        <NotificationBanner/>
       </AuthWrapper>
     </AppWrapper>
   )
