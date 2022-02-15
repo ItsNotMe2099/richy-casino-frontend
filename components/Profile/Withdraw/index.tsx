@@ -153,7 +153,7 @@ export default function Withdraw(props: Props) {
     <div className={styles.options}>
             {step === 2 &&
             (array.length && !currency) &&
-              <div className={styles.methods}>
+              <div className={classNames(styles.methods, {[styles.nextStep]: step > 1})}>
                 {array && array.map((item, index) => 
                   <Method icon={item.icon} iconLabel={item.iconLabel} label={item.label} key={index} onClick={() => handleCurrencyAndIso(item)}/>
                 )}
@@ -255,14 +255,18 @@ const handleBack = () => {
           isBack={step > 1 ? true : false}
           step={step}
           setStep={() => step === 2  ? handleBack() : step === 3 ? handleBack() : null}
-          style='wallet'
+          style='withdraw'
           faFooter
           >
     <div className={styles.root}>
       {!method &&
+      <>
+      <WithdrawForm onSubmit={() => null} step={1}/>
       <div className={styles.choose}>
         Выберите метод вывода
-      </div>}
+      </div>
+      </>
+      }
       {method && 
         <Choice array={method === 'Криптовалюта' ? crypto : bank}/>
       }
@@ -276,7 +280,7 @@ const handleBack = () => {
         <>
         <Options array={method === 'Криптовалюта' ? crypto : method === 'Карты банка' && bank} method={method}/>
         {currency &&
-          <WithdrawForm onSubmit={() => method === 'Криптовалюта' ? setIsSubmit(true) : null}/>
+          <WithdrawForm onSubmit={() => null} step={3}/>
         }
         </>
       }

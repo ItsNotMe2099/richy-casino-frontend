@@ -30,6 +30,14 @@
   bottom: 0;
   z-index: 10;
   background: #1D1E25;
+  @media screen and (max-width: $xs-max){
+    right: 0;
+    left: 0;
+  }
+}
+
+.withdraw{
+  padding-bottom: 0;
 }
 
 .mainTop{
@@ -286,6 +294,7 @@
   align-items: stretch;
   flex-direction: column;
   text-align: center;
+  position: relative;
 }
 
 .frame{

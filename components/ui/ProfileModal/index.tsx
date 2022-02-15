@@ -35,8 +35,9 @@ interface Props {
   isBack?: boolean
   step?: number
   setStep?: () => void
-  style?: 'wallet' | 'favorite' | 'buyCrypto' | '2fa'
+  style?: 'wallet' | 'favorite' | 'buyCrypto' | '2fa' | 'withdraw'
   faFooter?: boolean
+  withdraw?: boolean
 }
 
 export default function ProfileModal(props: Props) {
@@ -74,6 +75,7 @@ export default function ProfileModal(props: Props) {
 
   const styleClass = {
     [styles.wallet]: props.style === 'wallet',
+    [styles.withdraw]: props.style === 'withdraw',
     [styles.favorite]: props.style === 'favorite',
     [styles.fa]: props.style === '2fa'
   }
@@ -88,7 +90,7 @@ export default function ProfileModal(props: Props) {
           <div
             className={`${styles.root} ${getSizeClass(props.size)} ${props.className}`}
           >
-            {props.faFooter && <FAFooter className={styles.footer}/>}
+            <HiddenXs><>{(props.faFooter && props.step === 1) && <FAFooter className={styles.footer}/>}</></HiddenXs>
             <HiddenXs>
               <div className={classNames(styleClass, {[styles.noBorder]: props.noBorder})}>
                 <div className={classNames(styles.mainTop, {[styles.noBorder]: props.noBorder})}>
@@ -162,6 +164,7 @@ export default function ProfileModal(props: Props) {
               </div>
             </VisibleXs>
             <div className={classNames(styles.center, {[styles.walletBackCenter]: props.wallet})}>
+            <VisibleXs><>{(props.faFooter && props.step === 1) && <FAFooter className={styles.footer}/>}</></VisibleXs>
               {props.image && !props.loading && (
                 <div className={styles.image}>
                   <img src={props.image} alt=''/>

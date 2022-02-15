@@ -144,9 +144,17 @@
   gap: 10px;
   margin-top: 16px;
   margin-bottom: 120px;
+  @media screen and (max-width: $xs-max){
+    margin-bottom: 160px;
+   }
   @media screen and (max-width: 375px){
     grid-template-columns: 1fr 1fr;
+
   }
+}
+
+.nextStep{
+  margin-bottom: 0;
 }
 
 .top{

@@ -7,6 +7,7 @@ import { Country, Currency } from 'types/interfaces'
 
 interface Props {
   options: (Currency | Country)[]
+  currency?: Currency
   label?: string
   placeholder?: string
   disabled?: boolean
@@ -15,10 +16,11 @@ interface Props {
   exchange?: boolean
   className?: string
   rootClass?: string
+  withdraw?: boolean
 }
 
 export const Select = (props: Props & FieldConfig) => {
-  const {label, placeholder, options, disabled, altStyle, country, exchange, className, rootClass} = props
+  const {label, placeholder, options, disabled, altStyle, country, exchange, className, rootClass, withdraw, currency} = props
   const [field, meta] = useField(props)
   const {value} = field
   const { setFieldValue, setFieldTouched } = useFormikContext()
@@ -49,7 +51,7 @@ export const Select = (props: Props & FieldConfig) => {
       <div  onClick={handleClick} className={classNames(styles.dropDownTrigger, {[styles.altStyle]: altStyle}, className)}>
         {exchange ?
         <div className={styles.symbolAndName}>
-        <div className={styles.separator}></div>
+        {!withdraw && <div className={styles.separator}></div>}
         <img src={currentItem.symbol} alt=''/>
         {currentItem?.name}
         </div>
@@ -59,14 +61,36 @@ export const Select = (props: Props & FieldConfig) => {
         : (currentItem && !country && altStyle) ? <div className={styles.name}>{currentItem?.symbol} ({currentItem?.name})</div> 
         : currentItem ? <div className={styles.name}>{currentItem?.name}</div> 
         : (placeholder || '')}</div>}
+        <div className={styles.leftSide}>
+        {withdraw &&
+          <div className={styles.rate}>
+            <div className={styles.usdt}>
+              3136.00000 <span>USDT</span>
+            </div>
+            <div className={styles.dg}>
+              0.0000004 DG
+            </div>
+          </div>
+        }
         <img className={classNames({[styles.reverse]: (isActive && !exchange)})} src={exchange ? '/img/Exchange/arrow.svg' : '/img/DropdownMenu/arrow.svg'} alt=''/>
+        </div>
       </div>
-      <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
+      <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive }, {[styles.withdraw]: withdraw})}>
        {options.map((item, index) =>
         exchange ?
         <div className={styles.symbolAndName} key={index} onClick={() => handleChange(item.id)}>
         <img src={item.symbol} alt=''/>
         {item.name}
+        {withdraw &&
+          <div className={styles.rate}>
+            <div className={styles.usdt}>
+              3136.00000 <span>USDT</span>
+            </div>
+            <div className={styles.dg}>
+              0.0000004 DG
+            </div>
+          </div>
+        }
         </div>
         :
        <div key={index} 
