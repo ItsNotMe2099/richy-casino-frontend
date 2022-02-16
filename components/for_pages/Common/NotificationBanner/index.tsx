@@ -13,9 +13,8 @@ export default function NotificationBanner(props: Props) {
   const context = useAppContext()
 
   const user = context.auth
-
-  const [isShow, setIsShow] = useState(user ? true : false)
   const showCookie = cookie.get('show_notification')
+  const [isShow, setIsShow] = useState(user ? true : false)
 
   useEffect(() => {
     setIsShow(showCookie === 'no' ? false : true)
@@ -39,7 +38,7 @@ export default function NotificationBanner(props: Props) {
               <img src='/img/NotificationBanner/close.svg' alt=''/>
             </div>
           <div className={styles.subscribe}>
-            <img src='/img/NotificationBanner/gift.png' alt=''/>
+            <img src='/img/NotificationBanner/gift.svg' alt=''/>
             <div className={styles.title}>
               Подпишись на уведомления
             </div>
