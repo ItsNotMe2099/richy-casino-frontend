@@ -257,14 +257,12 @@
 .transparent{
     position: absolute;
     width: 100%;
-    min-width: 811px;
     height: 77px;
     background: linear-gradient(180deg, rgba(29, 30, 37, 0) 0%, rgba(29, 30, 37, 0.87) 21.88%, #1D1E25 100%);
     bottom: 0;
     z-index: 1;
     @media screen and (max-width: $xs-max){
         height: 81px;
-        min-width: auto;
     }
 }
 
