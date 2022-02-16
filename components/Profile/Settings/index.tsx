@@ -77,9 +77,9 @@ export default function Settings(props: Props) {
       {({values, setFieldValue}) => (
       <Form className={styles.form}>
         <InputField name={'id'} disabled={true} className={styles.input} label='ID'/>
-        <InputField name={'userName'} disabled={true} className={styles.input} label='Username'/>
-        <InputField name={'name'} disabled={true} className={styles.input} label='ФИО'/>
-        <InputField name={'dateOfBirth'} disabled={true} className={styles.input} label='Дата рождения'/>
+        <InputField name={'userName'} className={styles.input} label='Username'/>
+        <InputField name={'name'} className={styles.input} label='ФИО'/>
+        <InputField name={'dateOfBirth'} className={styles.input} label='Дата рождения'/>
         <Select name='country' options={countries} altStyle country label='Страна'/>
         <Select name='currency' options={currencies} altStyle label='Основная валюта'/>
         <InputField name={'phone'} disabled={true} className={styles.input} label='Номер телефона'/>
