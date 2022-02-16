@@ -193,7 +193,7 @@ const context = useAppContext()
                 Обмен
               </Button>
               </div>
-              <Button size='normal' background='payGradient500' className={styles.wallet}><img src='/img/icons/wallet.svg' alt=''/>Пополнить</Button>
+              <Button  onClick={() => context.showModal(ProfileModalType.wallet)} size='normal' background='payGradient500' className={styles.wallet}><img src='/img/icons/wallet.svg' alt=''/>Пополнить</Button>
             </div>
             {context.isMobile &&
             <>

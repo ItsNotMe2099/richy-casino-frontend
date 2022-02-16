@@ -11,7 +11,7 @@ export default function Winners(props: Props) {
 
   const context = useAppContext()
 
-  const user = true//context.auth
+  const user = context.auth
 
   const users = [
     {nickname: 'Erohin', sort: 1, usdt: '45.1056915',  amount: '+ 00.2120625 BTC · ', avatar: '/img/Winners/folder.jpg'},

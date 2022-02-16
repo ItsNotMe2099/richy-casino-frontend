@@ -9,6 +9,7 @@ interface Props {
   onClick?: () => void
   lottery?: boolean
   shadowColor?: 'red' | 'blue' | 'yellow' | 'violet'
+  style?: 'chess'
 }
 
 export default function PageTitle(props: Props) {
@@ -26,8 +27,12 @@ export default function PageTitle(props: Props) {
     }
   }
 
+  const rootClass = {
+    [styles.chess]: props.style === 'chess'
+  }
+
   return (
-      <div className={styles.root}>
+      <div className={classNames(styles.root, rootClass)}>
         <div className={styles.btn} onClick={props.onClick}>
           <img src='/img/FreeBitcoin/eva_arrow.svg' alt=''/>
         </div>

@@ -12,7 +12,7 @@ export default function NotificationBanner(props: Props) {
 
   const context = useAppContext()
 
-  const user = true//context.auth
+  const user = context.auth
 
   const [isShow, setIsShow] = useState(user ? true : false)
   const showCookie = cookie.get('show_notification')

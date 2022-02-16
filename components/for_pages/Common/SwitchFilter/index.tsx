@@ -25,6 +25,7 @@ interface Props {
   top?: boolean
   all?: boolean
   payment?: boolean
+  chessBets?: boolean
   items?: IGame[]
   onClick?: () => void
 }
@@ -52,7 +53,12 @@ export default function SwitchFilter(props: Props) {
     {label: 'Выводы'},
   ]
 
-  const [active, setActive] = useState(props.top ? 'Выигрывают сейчас' : 'Все')
+  const chessBets = [
+    {label: 'Все ставки'},
+    {label: 'Мои ставки'}
+  ]
+
+  const [active, setActive] = useState(props.top ? 'Выигрывают сейчас' : props.chessBets ? 'Все ставки' : 'Все')
 
   return (
       <div className={styles.root}>
@@ -72,6 +78,12 @@ export default function SwitchFilter(props: Props) {
           )
           :
           props.payment ? payments.map((item, index) =>
+            <div className={classNames(styles.item, {[styles.active]: item.label === active})} key={index} onClick={() => setActive(item.label)}>
+              <div className={styles.label}>{item.label}</div>
+            </div>
+          )
+          :
+          props.chessBets ? chessBets.map((item, index) =>
             <div className={classNames(styles.item, {[styles.active]: item.label === active})} key={index} onClick={() => setActive(item.label)}>
               <div className={styles.label}>{item.label}</div>
             </div>

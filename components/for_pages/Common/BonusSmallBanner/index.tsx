@@ -29,7 +29,7 @@ export default function BonusSmallBanner(props: Props) {
 
   const [isTimerVisible, setIsTimerVisible] = useState(false)
 
-  const user = true//appContext.auth
+  const user = appContext.auth
 
   useEffect(() => {
     if(user){

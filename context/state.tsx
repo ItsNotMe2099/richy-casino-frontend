@@ -49,7 +49,7 @@ export function AppWrapper(props: Props) {
   const [modal, setModal] = useState<ModalType | ProfileModalType | null>(null)
   const [modalProps, setModalProps] = useState<ModalType | ProfileModalType | null>(null)
   const [userDetails, setUserDetails] = useState<any>()
-  const [auth, setAuth] = useState<boolean>(false)
+  const [auth, setAuth] = useState<boolean>(true)
   const [showBonus, setShowBonus] = useState<boolean>(true)
   const [showBonusExpanded, setShowBonusExpanded] = useState<boolean>(true)
   const value: IState = {

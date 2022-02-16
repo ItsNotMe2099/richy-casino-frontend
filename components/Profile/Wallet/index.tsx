@@ -157,11 +157,19 @@ export default function Wallet(props: Props) {
           <>
           <div className={styles.actions}>
               <div className={styles.top}>
-                <Button className={styles.btn} background='dark600'><img src='/img/Wallet/wallet+.svg' alt=''/> Завести кошелек</Button>
-                <Button className={styles.btn} background='dark600'><img src='/img/Wallet/exchange.svg' alt=''/>Обменять</Button>
+                <Button className={styles.btn} background='dark600'><img src='/img/Wallet/wallet+.svg' alt=''/>Завести кошелек</Button>
+                <Button 
+                  className={styles.btn} 
+                  background='dark600'
+                  onClick={() => context.showModal(ProfileModalType.exchange)}
+                >
+                  <img src='/img/Wallet/exchange.svg' alt=''/>
+                  Обменять
+                </Button>
               </div>
               <div className={styles.btnWrap}>
                 <Button 
+                  onClick={() => context.showModal(ProfileModalType.buyCrypto)}
                   className={styles.btn} background='dark600'><img src='/img/Wallet/buy.svg' alt=''/>Купить криптовалюту
                 </Button>
               </div>
