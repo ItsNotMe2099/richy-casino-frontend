@@ -214,6 +214,11 @@
 .arrow {
   align-self: center;
   display: flex;
+  transform: rotate(270deg);
+}
+
+.rotate{
+  transform: rotate(360deg);
 }
 
 .triangle {

@@ -136,7 +136,7 @@ export default function Header(props: Props) {
               :
               <div className={styles.userBtns}>
                 <HiddenXs>
-                  <div className={styles.userBonuses}>
+                  <div className={styles.userBonuses} onClick={() => context.showModal(ProfileModalType.profile)}>
                     <UserBonus icon='/img/icons/ticket.svg' amount='256' color='#427BF8'/>
                     <UserBonus icon='/img/icons/bitcoin.svg' amount='256' color='#FFD12F'/>
                     <UserBonus icon='/img/icons/spin.svg' amount='256' color='#F81AAC'/>

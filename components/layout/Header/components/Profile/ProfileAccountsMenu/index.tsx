@@ -44,7 +44,7 @@ export default function ProfileAccountsMenu(props: Props){
           <div className={styles.iso}>{activeType === 1 ? activeIso : <>USDT</>}</div>
         </div>
         <HiddenXs>
-        <div className={styles.arrow}>
+        <div className={classNames(styles.arrow, {[styles.rotate]: isActive})}>
           <img src='/img/DropdownMenu/arrow2.svg' alt=''/>
         </div>
         </HiddenXs>

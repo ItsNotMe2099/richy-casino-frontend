@@ -81,7 +81,7 @@ export default function ProfileMenu(props: Props){
       <div onClick={handleClick} className={styles.dropDownTrigger}>
         <div className={styles.avatar}><Avatar avatar='/img/Avatar/avatar.png'/></div>
         <HiddenXs>
-        <div className={styles.arrow}>
+        <div className={classNames(styles.arrow, {[styles.rotate]: isActive})}>
           <img src='/img/DropdownMenu/arrow3.svg' alt=''/>
         </div>
         </HiddenXs>
