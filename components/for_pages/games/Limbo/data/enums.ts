@@ -1,11 +1,11 @@
-export enum KenoItemStatus{
+export enum LimboItemStatus{
   UnActive,
   Disabled,
   Active,
   Win,
   Lose,
 }
-export enum KenoGameLevel{
+export enum LimboGameLevel{
   Low = 'low',
   Medium = 'medium',
   High = 'high'

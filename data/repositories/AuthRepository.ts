@@ -34,13 +34,13 @@ export default class AuthRepository {
     return res.data?.data
   }
 
-  static async registerPhoneSendOtp({phone, currency}): Promise<IAuthResponse | null> {
+  static async registerPhoneSendOtp({phone}): Promise<IAuthResponse | null> {
     const res = await request({
       method: 'post',
       url: '/api/user/auth/register/phone',
       data: {
          phone,
-        currency_iso: currency
+       // currency_iso: currency
       },
     })
     console.log('ress', res)
@@ -50,7 +50,7 @@ export default class AuthRepository {
     return res.data?.data
   }
 
-  static async registerPhone({code, phone, authToken}): Promise<any> {
+  static async registerPhone({code, phone, password, authToken}): Promise<any> {
     const res = await request({
       method: 'post',
       url: '/api/user/auth/sms',

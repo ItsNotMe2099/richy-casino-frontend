@@ -10,6 +10,7 @@ import GameMines from 'components/for_pages/games/Mines'
 import GameDice from 'components/for_pages/games/Dice'
 import GameKeno from 'components/for_pages/games/Keno'
 import GameWheelOfFortune from 'components/for_pages/games/WheelOfFortune'
+import GameLimbo from 'components/for_pages/games/Limbo'
 
 export default function CatalogPage() {
   const {query} = useRouter()
@@ -23,6 +24,8 @@ export default function CatalogPage() {
         return <GameKeno/>
       case GameType.WheelOfFortune:
         return <GameWheelOfFortune/>
+      case GameType.Limbo:
+        return <GameLimbo/>
       default:
         return <GameMines/>
     }

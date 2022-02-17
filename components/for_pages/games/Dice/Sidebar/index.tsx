@@ -58,10 +58,13 @@ export default function Sidebar(props: Props) {
           </HiddenXs>
 
           <VisibleXs>
-            <GamePageBetMobileLayout>
-              <GFieldBet balance={'0.0s0ds0d0sd BTC'}/>
-              <GamePageBetButton/>
-            </GamePageBetMobileLayout>
+            <>
+              <GFieldMode/>
+              <GamePageBetMobileLayout>
+                <GFieldBet balance={'0.0s0ds0d0sd BTC'}/>
+                <GamePageBetButton/>
+              </GamePageBetMobileLayout>
+            </>
           </VisibleXs>
         </Form>
       </FormikProvider>

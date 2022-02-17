@@ -1,7 +1,6 @@
 import {Form, FormikProvider, useFormik} from 'formik'
 import GField from 'components/for_pages/games/components/inputs/GField'
 import GFieldBet from 'components/for_pages/games/components/inputs/GFieldBet'
-import GFieldBetAmount from 'components/for_pages/games/components/inputs/GFieldBetAmount'
 import GFieldAutoAction from 'components/for_pages/games/components/inputs/GFieldAutoAction'
 import {CheckBox} from 'components/ui/Inputs/CheckBox'
 import HiddenXs from 'components/ui/HiddenXS'
@@ -11,8 +10,8 @@ import GamePageBetButton from 'components/for_pages/games/components/GamePageBet
 import GFieldMode from 'components/for_pages/games/components/inputs/GFieldMode'
 import GamePageSidebarLayout from 'components/for_pages/games/components/layout/GamePageSidebarLayout'
 import {IGameModeType} from 'components/ui/Tabs'
-import {GFieldSelectTabs} from 'components/for_pages/games/components/inputs/GFieldSelectTabs'
-import {KenoGameLevel} from 'components/for_pages/games/Keno/data/enums'
+import {LimboGameLevel} from 'components/for_pages/games/Limbo/data/enums'
+import GFieldInfinite from 'components/for_pages/games/components/inputs/GFieldInfinite'
 
 interface Props {
 
@@ -40,9 +39,9 @@ export default function Sidebar(props: Props) {
   const {values} = formik
   const {mode} = values
   const options = [
-    {label: 'Low', value: KenoGameLevel.Low},
-    {label: 'Medium', value: KenoGameLevel.Medium},
-    {label: 'High', value: KenoGameLevel.High},
+    {label: 'Low', value: LimboGameLevel.Low},
+    {label: 'Medium', value: LimboGameLevel.Medium},
+    {label: 'High', value: LimboGameLevel.High},
   ]
   return (
     <GamePageSidebarLayout>
@@ -54,14 +53,13 @@ export default function Sidebar(props: Props) {
               <GFieldBet balance={'0.0s0ds0d0sd BTC'}/>
             </>
           </HiddenXs>
-          <GField name={'mines'} label={'Mines'} suffix={'arrow'}/>
+          <GField name={'cof'} label={'Коэффициент'} suffix={'clear'}/>
           {mode === IGameModeType.Auto && <>
-            <GFieldBetAmount name={'betAmount'}/>
+            <GFieldInfinite name={'countGames'} label={'Кол-во игр'}/>
             <GFieldAutoAction typeName={'onWinType'} valueName={'onWinValue'}/>
             <GFieldAutoAction typeName={'onLooseType'} valueName={'onLooseValue'}/>
             <CheckBox size={'normal'} name={'stopOnWin'} label={'Stop on win'}/>
           </>}
-          <GFieldSelectTabs fluid  name={'level'} label={'Сложность'} options={options} />
 
           <HiddenXs>
             <GamePageBetButton/>

@@ -1,0 +1,25 @@
+@import "scss/index";
+
+
+.root{
+  margin-top: 27px;
+}
+.block{
+  background: $dark600;
+  color: $dark200;
+  text-align: center;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  padding-top: 3px;
+  border-radius: 2px;
+  @media screen and (max-width: $xs-max){
+    font-size: 11px;
+  }
+}
+.block2{
+  margin-top: 2px;
+}
