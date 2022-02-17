@@ -111,6 +111,7 @@ export default function Wallet(props: Props) {
   const handleChange = () => {
     setStep(1)
     setMethod('')
+    setCurrency('')
   }
 
   // temporary for submit imitation from WalletForm
@@ -216,7 +217,7 @@ export default function Wallet(props: Props) {
           method === item.label &&
           <>
           <HiddenXs>
-            <Method blue icon={item.icon} label={item.label} key={index} bonus={item.bonus} iconLabel={item.iconLabel}/>
+            <Method blue icon={item.icon} label={item.label} key={index} bonus={item.bonus} iconLabel={item.iconLabel} onClick={handleChange}/>
           </HiddenXs>
           <VisibleXs>
             <MobileMethod icon={item.icon} label={item.label} key={index} iconLabel={item.iconLabel}/>
