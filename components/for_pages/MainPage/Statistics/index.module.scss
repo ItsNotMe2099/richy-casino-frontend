@@ -155,8 +155,8 @@
 
 .cell{
     display: table-cell;
-    font-weight: 500;
-    font-size: 13px;
+    font-weight: 600;
+    font-size: 15px;
     color: $dark200;
 }
 
@@ -177,9 +177,9 @@
 }
 
 .gameLbl{
-    font-weight: 500;
-    font-size: 13px;
-    color: $dark200;
+    font-weight: 600;
+    font-size: 14px;
+    color: #97a2ad;
     margin-left: 41px;
     overflow: hidden;
     white-space: nowrap;
@@ -193,8 +193,8 @@
 }
 
 .gambler{
-    font-weight: 500;
-    font-size: 13px;
+    font-weight: 600;
+    font-size: 14px;
     color: #FFFFFF;
     @media screen and (max-width: $xs-max){
         font-size: 10px;
@@ -207,9 +207,9 @@
 }
 
 .id{
-    font-weight: 500;
-    font-size: 13px;
-    color: $dark200;
+    font-weight: 600;
+    font-size: 14px;
+    color: #97a2ad;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -228,9 +228,9 @@
 .mult{
     padding: 8px 16px;
     background: rgba(123, 210, 69, 0.05);
-    font-weight: 500;
-    font-size: 13px;
-    color: $pay500;
+    font-weight: 600;
+    font-size: 14px;
+    color: #7bd245;
     border-radius: 7px;
     display: flex;
     justify-content: center;
@@ -255,8 +255,8 @@
 }
 
 .amount{
-    font-weight: 500;
-    font-size: 13px;
+    font-weight: 600;
+    font-size: 14px;
     color: $pay500;
     display: flex;
     justify-content: center;
