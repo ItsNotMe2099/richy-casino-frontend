@@ -15,7 +15,7 @@ interface Props {
 export default function WalletForm(props: Props) {
 
   const initialValues = {
-    amount: '', 
+    amount: '$20', 
   }
 
   const handleSubmit = /*async*/ () => {
