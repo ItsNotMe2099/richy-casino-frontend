@@ -35,7 +35,7 @@ export default function Tournament(props: Props) {
         </div>
         <div className={styles.right}>
             <Timer expiredAt={expiredAt} days style='tournament'/>
-          <div className={styles.btnContainer}><Button className={styles.btn} size='normal' background='payGradient500'>Участвовать</Button></div>
+          {appContext.auth && <div className={styles.btnContainer}><Button className={styles.btn} size='normal' background='payGradient500'>Участвовать</Button></div>}
         </div>
     </div>
   )
