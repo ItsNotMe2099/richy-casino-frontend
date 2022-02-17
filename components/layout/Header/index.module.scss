@@ -223,8 +223,12 @@
   gap: 3px 15px;
   padding: 5px 12px;
   margin-right: 8px;
+  cursor: pointer;
   @media screen and (max-width: 1360px){
     display: none;
+  }
+  &:hover{
+    background-color: $dark500;
   }
 }
 

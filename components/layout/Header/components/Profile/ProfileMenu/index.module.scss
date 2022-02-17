@@ -123,6 +123,10 @@
   margin: 0px;
   font-size: 13px;
   align-items: center;
+  cursor: pointer;
+  &:hover{
+    background-color: $dark500;
+  }
   @media screen and (max-width: $xs-max) {
     padding: 0;
     background-color: transparent;
