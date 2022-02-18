@@ -102,8 +102,8 @@
 .row{
     display: table-row;
     .cell{
-        font-weight: 500;
-        font-size: 14px;
+        font-weight: 600;
+        font-size: 15px;
         color: $dark200;
         @media screen and (max-width: $xs-max){
             font-size: 10px;
@@ -322,8 +322,8 @@
 }
 
 .title{
-    font-weight: 500;
-    font-size: 14px;
+    font-weight: 600;
+    font-size: 15px;
     color: $dark200;
     span{
         font-weight: 600;
