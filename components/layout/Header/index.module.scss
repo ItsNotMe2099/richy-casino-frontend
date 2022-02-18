@@ -49,6 +49,9 @@
   margin-right: 8px;
   position: relative;
   cursor: pointer;
+  &:hover {
+    background-color: $dark500;
+  }
 }
 
 .gift{
