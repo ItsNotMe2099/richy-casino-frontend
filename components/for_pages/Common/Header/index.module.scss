@@ -71,6 +71,9 @@
     padding: 8px 12px;
     font-size: 13px;
   }
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.9rem;
+  }
   &:hover{
     background-color: $dark400;
   }
@@ -99,6 +102,10 @@
     @media screen and (max-width: $xs-max){
       width: 17px;
       height: 17px;
+    }
+    @media screen and (max-width: $mobile-max){
+      width: 1.3rem;
+      height: 1.3rem;
     }
   }
 }
@@ -135,6 +142,9 @@
   @media screen and (max-width: 920px){
     font-size: 16px;
   }
+  @media screen and (max-width: $mobile-max){
+    font-size: 1.3rem;
+  }
 }
 
 .length{
@@ -145,6 +155,9 @@
   @media screen and (max-width: $xs-max){
     margin-right: 10px;
     font-size: 13px;
+  }
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.9rem;
   }
 }
 

@@ -23,6 +23,11 @@
     margin-top: 12px;
     border-radius: 11px;
   }
+  @media screen and (max-width: $mobile-max){
+    max-height: 8rem;
+    padding: 13px 0;
+    padding-left: 18px;
+  }
 }
 
 .hero{
@@ -39,12 +44,18 @@
       max-height: unset;
 
     }
+    @media screen and (max-width: $mobile-max){
+      height: 100%;
+    }
   }
   @media screen and (max-width: $xs-max){
     right: 7px;
     left: auto;
     bottom: 0px;
     max-height: 100%;
+  }
+  @media screen and (max-width: $mobile-max){
+    right: -14px;
   }
 }
 
@@ -72,6 +83,9 @@
     align-items: flex-start;
     margin-left: 0px;
     margin-top: 8px;
+  }
+  @media screen and (max-width: $mobile-max){
+    margin-top: 0;
   }
 }
 
@@ -101,6 +115,9 @@
   margin-left: 0;
   justify-content: flex-end;
 }
+@media screen and (max-width: $mobile-max){
+  align-items: center;
+}
 }
 
 .title{
@@ -114,10 +131,17 @@
   @media screen and (max-width: $xs-max){
     font-size: 19px;
   }
+  @media screen and (max-width: $mobile-max){
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
 }
 
 .fund{
   display: flex;
+  @media screen and (max-width: $mobile-max){
+    margin-top: 8px;
+  }
 }
 
 .prize{
@@ -137,6 +161,9 @@
     font-size: 9px;
     border-radius: 4px;
   }
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.7rem;
+  }
 }
 
 .balance{
@@ -155,6 +182,9 @@
   @media screen and (max-width: $xs-max){
     font-size: 9px;
     border-radius: 4px;
+  }
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.7rem;
   }
 }
 
@@ -195,6 +225,10 @@
     border-radius: 4px;
     font-weight: 600;
     height: 30px;
+  }
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.9rem;
+    height: 2.2rem;
   }
 }
 
@@ -257,5 +291,9 @@
   }
   @media screen and (min-width: $sm-min){
     display: none;
+  }
+  @media screen and (max-width: $mobile-max){
+    right: -32px;
+    bottom: -83px;
   }
 }

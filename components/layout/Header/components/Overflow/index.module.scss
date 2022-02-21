@@ -122,13 +122,15 @@
 
 .item{
   font-weight: 500;
-  font-size: 15px;
+  font-size: 1.1rem;
   color: #FFFFFF;
   position: relative;
   @media screen and (max-width: 920px){
-    font-size: 12px;
     flex-shrink: 0;
     margin-right: 18px;
+  }
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.8rem;
   }
   &:hover{
     color: #427BF8;

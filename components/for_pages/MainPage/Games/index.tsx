@@ -6,9 +6,21 @@ import Header from 'components/for_pages/Common/Header'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import Link from 'next/link'
+import Button from 'components/ui/Button'
+import classNames from 'classnames'
 
 interface Props {
   slider?: any
+}
+
+interface IItem {
+  image: string
+  label: string
+  link: string
+}
+
+interface OverflowSlideProps {
+  item: IItem
 }
 
 export default function Games(props: Props) {
@@ -52,6 +64,35 @@ export default function Games(props: Props) {
         },
       }
     ]
+  }
+
+  const OverflowSlide = ({item}: OverflowSlideProps) => {
+
+    const [inFavorite, setInFavorite] = useState(false)
+
+    return (
+      <Link key={item.link} href={item.link}>
+        <a className={styles.slide}><img src={item.image}/>
+        <div className={styles.shade}></div>
+        <Button
+          onClick={() => inFavorite ? setInFavorite(false) : setInFavorite(true)}
+          className={classNames(styles.favorite, {[styles.active]: inFavorite})}
+          size='superExtraSmall'
+          background='blackTransparent'>
+          {inFavorite ?
+            <img src='/img/GamesList/star-fill.svg' alt=''/>
+            :
+            <img src='/img/GamesList/star-stroke.svg' alt=''/>}
+        </Button>
+        <div className={styles.btns}>
+          <Button className={styles.btn} size='small' background='blueGradient500'>Играть</Button>
+          <Button className={styles.demo} size='small' background='blackTransparent'>Демо</Button>
+        </div>
+          <img src={item.image}/>
+          <div className={styles.label}>{item.label}</div>
+        </a>
+      </Link>
+    )
   }
 
   return (

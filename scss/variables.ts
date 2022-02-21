@@ -22,6 +22,7 @@ export const colors = {
 }
 
 export const breakpoints = {
+  mobileMax: 428,
   xsMax: 768,
   smMin: 769,
   smMax: 1360,

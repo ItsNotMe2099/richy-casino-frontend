@@ -73,6 +73,9 @@
     @media screen and (max-width: $xs-max){
       font-size: 10px;
     }
+    @media screen and (max-width: $mobile-max){
+        font-size: 0.6rem;
+    }
 }
 
 .illustration{
@@ -103,10 +106,13 @@
     display: table-row;
     .cell{
         font-weight: 600;
-        font-size: 15px;
+        font-size: 1.1rem;
         color: $dark200;
         @media screen and (max-width: $xs-max){
             font-size: 10px;
+        }
+        @media screen and (max-width: $mobile-max){
+            font-size: 0.6rem;
         }
     }
     .cell:first-child{
@@ -184,6 +190,9 @@
             }
             @media screen and (max-width: $xs-max){
                 font-size: 10px;
+            }
+            @media screen and (max-width: $mobile-max){
+                font-size: 0.6rem;
             }
         }
     }
@@ -285,6 +294,9 @@
             font-weight: 600;
             font-size: 14px;
             line-height: 18px;
+            @media screen and (max-width: $mobile-max){
+                font-size: 0.8rem;
+              }
             span{
                 color: #4c7836;
             }
@@ -304,6 +316,9 @@
        }
        .nick{
            font-size: 14px;
+           @media screen and (max-width: $mobile-max){
+            font-size: 1rem;
+        }
        }
        .element{
            margin-top: 20px;
@@ -323,8 +338,11 @@
 
 .title{
     font-weight: 600;
-    font-size: 15px;
+    font-size: 1.1rem;
     color: $dark200;
+    @media screen and (max-width: $mobile-max){
+        font-size: 0.8rem;
+      }
     span{
         font-weight: 600;
     }
@@ -334,4 +352,7 @@
     margin-top: 8px;
     font-size: 14px;
     font-weight: 600;
+    @media screen and (max-width: $mobile-max){
+        font-size: 0.8rem;
+      }
 }

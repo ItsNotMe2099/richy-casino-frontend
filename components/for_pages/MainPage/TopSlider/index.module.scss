@@ -67,9 +67,9 @@
   border-radius: 18px;
   padding: 20px 0 13px 0;
   position: relative;
-  max-height: 250px;
+  max-height: 18rem;
   overflow: hidden;
-  min-height: 250px;
+  min-height: 18rem;
   background-position: center center;
   margin: 0 5px;
   background-repeat: no-repeat;
@@ -78,9 +78,13 @@
     padding-left: 18px;
   }
   @media screen and (max-width: 800px){
-    max-height: 167px;
-    min-height: 167px;
+    max-height: 14.5rem;
+    min-height: 14.5rem;
     padding: 20px 0 9px 15px;
+  }
+  @media screen and (max-width: $mobile-max){
+    max-height: 10rem;
+    min-height: 10rem;
   }
   @media screen and (max-width: $xs-max){
     width: auto;
@@ -96,9 +100,10 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  bottom: -23px;
+  bottom: -25%;
   width: 100%;
   list-style: none;
+  z-index: 1;
   :global .slick-active{
 
     button{

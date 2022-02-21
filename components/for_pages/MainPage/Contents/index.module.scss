@@ -24,6 +24,9 @@
       width: 0px;
     }
   }
+  @media screen and (max-width: $mobile-max){
+    margin-top: 40px;
+  }
 }
 
 .row{
@@ -122,6 +125,9 @@
     font-size: 13px;
     font-weight: 500;
     margin-top: 6px;
+  }
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.7rem;
   }
 }
 

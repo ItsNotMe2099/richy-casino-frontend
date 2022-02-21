@@ -19,6 +19,9 @@
       bottom: -16px;
     }
   }
+  @media screen and (max-width: $mobile-max){
+    padding: 27px 21px 100px 16px;
+  }
   &.chess{
     @media screen and (max-width: $xs-max){
       margin-top: 12px;
@@ -52,6 +55,10 @@
           height: 40px;
           width: 40px;
         }
+        @media screen and (max-width: $mobile-max){
+          height: 3rem;
+          width: 3rem;
+        }
     }
 }
 
@@ -76,6 +83,9 @@
       margin-bottom: 2px;
         font-size: 19px;
     }
+    @media screen and (max-width: $mobile-max){
+      font-size: 1.4rem;
+    }
 }
 
 .desc{
@@ -92,6 +102,9 @@
     @media screen and (max-width: $xs-max){
         font-size: 11px;
       font-weight: 400;
+    }
+    @media screen and (max-width: $mobile-max){
+      font-size: 0.7rem;
     }
 
 }
@@ -124,6 +137,9 @@
   @media screen and (max-width: $xs-max){
     display: flex;
     flex: unset;
+    }
+    @media screen and (max-width: $mobile-max){
+      height: 1rem;
     }
 }
 

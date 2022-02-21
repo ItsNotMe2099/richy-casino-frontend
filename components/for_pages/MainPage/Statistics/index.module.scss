@@ -18,6 +18,11 @@
             font-size: 19px;
         }
      }
+     @media screen and (max-width: $mobile-max){
+        div{
+            font-size: 1.3rem;
+        }
+    }
     @media screen and (max-width: $xs-max){
         margin-bottom: 0px;
       padding-bottom: 0px;
@@ -106,6 +111,9 @@
         @media screen and (max-width: $xs-max){
             font-size: 10px;
         }
+        @media screen and (max-width: $mobile-max){
+            font-size: 0.7rem;
+        }
     }
     .cell:first-child{
         padding-left: 20px;
@@ -156,8 +164,11 @@
 .cell{
     display: table-cell;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 1.1rem;
     color: $dark200;
+    @media screen and (max-width: $mobile-max){
+        font-size: 0.8rem;
+      }
 }
 
 .game{
@@ -190,6 +201,9 @@
         text-overflow: ellipsis;
         max-width: 38px;
     }
+    @media screen and (max-width: $mobile-max){
+        font-size: 0.7rem;
+    }
 }
 
 .gambler{
@@ -203,6 +217,9 @@
       overflow: hidden;
       text-overflow: ellipsis;
         max-width: 44px;
+    }
+    @media screen and (max-width: $mobile-max){
+        font-size: 0.7rem;
     }
 }
 
@@ -241,6 +258,9 @@
     @media screen and (max-width: $xs-max){
         font-size: 10px;
     }
+    @media screen and (max-width: $mobile-max){
+        font-size: 0.7rem;
+    }
 }
 
 .desktop{
@@ -265,6 +285,9 @@
     }
     @media screen and (max-width: $xs-max){
         font-size: 10px;
+    }
+    @media screen and (max-width: $mobile-max){
+        font-size: 0.7rem;
     }
 }
 

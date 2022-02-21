@@ -34,10 +34,13 @@
   position: absolute;
   padding: 0 5px;
   background-color: #fff;
-  font-size: 15px;
+  font-size: 1.1rem;
   color: #828282;
   top: -8px;
   left: 15px;
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.8rem;
+  }
 }
 
 .country{

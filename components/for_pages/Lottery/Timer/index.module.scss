@@ -28,7 +28,7 @@
 }
 
 .label{
-  font-size: 15px;
+  font-size: 1.1rem;
   color: $lottery500;
   @media screen and (max-width: $xs-max){
     font-size: 11px;
@@ -53,7 +53,10 @@
     color: $lottery500;
   }
   @media screen and (max-width: $xs-max){
-    font-size: 15px;
+    font-size: 1.1rem;
+  }
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.8rem;
   }
 }
 
