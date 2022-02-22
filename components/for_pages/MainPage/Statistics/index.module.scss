@@ -2,6 +2,7 @@
 
 .root {
     @include componentRoot;
+    border-radius: 24px;
     @media screen and (max-width: $xs-max){
        padding: 0;
        margin-top: 12px;
@@ -19,6 +20,7 @@
         }
      }
      @media screen and (max-width: $mobile-max){
+        padding-left: 22px;
         div{
             font-size: 1.3rem;
         }
@@ -114,6 +116,12 @@
         @media screen and (max-width: $mobile-max){
             font-size: 0.7rem;
         }
+        @media screen and (max-width: $mobile-md){
+            font-size: 0.6rem;
+        }
+        @media screen and (max-width: $mobile-min){
+            font-size: 0.5rem;
+        }
     }
     .cell:first-child{
         padding-left: 20px;
@@ -134,6 +142,7 @@
         background-color: $dark600;
         padding-top: 20px;
         padding-bottom: 20px;
+        padding-right: 10px;
     }
     .cell:first-child{
         border-top-left-radius: 8px;
@@ -203,6 +212,13 @@
     }
     @media screen and (max-width: $mobile-max){
         font-size: 0.7rem;
+        max-width: 2.8rem;
+    }
+    @media screen and (max-width: $mobile-md){
+        font-size: 0.6rem;
+    }
+    @media screen and (max-width: $mobile-min){
+        font-size: 0.5rem;
     }
 }
 
@@ -220,6 +236,12 @@
     }
     @media screen and (max-width: $mobile-max){
         font-size: 0.7rem;
+    }
+    @media screen and (max-width: $mobile-md){
+        font-size: 0.6rem;
+    }
+    @media screen and (max-width: $mobile-min){
+        font-size: 0.5rem;
     }
 }
 
@@ -242,6 +264,11 @@
     }
 }
 
+.multWrapper{
+    display: flex;
+    justify-content: center;
+}
+
 .mult{
     padding: 8px 16px;
     background: rgba(123, 210, 69, 0.05);
@@ -251,7 +278,7 @@
     border-radius: 7px;
     display: flex;
     justify-content: center;
-    width: 30%;
+    width: 3rem;
     @media screen and (max-width: $xs-max){
         font-size: 11px;
     }
@@ -260,6 +287,13 @@
     }
     @media screen and (max-width: $mobile-max){
         font-size: 0.7rem;
+    }
+    @media screen and (max-width: $mobile-md){
+        font-size: 0.6rem;
+    }
+    @media screen and (max-width: $mobile-min){
+        font-size: 0.5rem;
+        width: 2rem;
     }
 }
 
@@ -288,6 +322,12 @@
     }
     @media screen and (max-width: $mobile-max){
         font-size: 0.7rem;
+    }
+    @media screen and (max-width: $mobile-md){
+        font-size: 0.6rem;
+    }
+    @media screen and (max-width: $mobile-min){
+        font-size: 0.5rem;
     }
 }
 

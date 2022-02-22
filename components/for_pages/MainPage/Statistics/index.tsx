@@ -9,12 +9,12 @@ interface Props {
 export default function Statistics(props: Props) {
 
   const users = [
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '2.567 BTC', id: 12345678987654321245},
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '0.00', amount: '2.567 BTC', id: 12345678987654321245},
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '2.567 BTC', id: 12345678987654321245},
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '2.567 BTC', id: 12345678987654321245},
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '0.00', amount: '2.567 BTC', id: 12345678987654321245},
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '2.567 BTC', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 200.829378 BTC', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '0.00', amount: '+ 200.829378 BTC', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 200.829378 BTC', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 200.829378 BTC', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '0.00', amount: '+ 200.829378 BTC', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 200.829378 BTC', id: 12345678987654321245},
   ]
 
   return (
@@ -63,13 +63,15 @@ export default function Statistics(props: Props) {
                   </div>
                 </div>
                 <div className={styles.cell}>
-                  <div className={classNames(styles.mult, {[styles.zero]: +item.mult <= 0})}>
-                    x{item.mult}
+                  <div className={styles.multWrapper}>
+                    <div className={classNames(styles.mult, {[styles.zero]: +item.mult <= 0})}>
+                      x{item.mult}
+                    </div>
                   </div>
                 </div>
                 <div className={styles.cell}>
                   <div className={classNames(styles.amount, {[styles.red]: +item.mult <= 0})}>
-                    <span>+</span>{item.amount}
+                    {item.amount}
                   </div>
                 </div>
               </div>
