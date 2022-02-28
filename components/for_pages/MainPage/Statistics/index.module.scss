@@ -74,10 +74,16 @@
 }
 
 .table{
-    display: table;
-    width: 100%;
     border-collapse: separate;
     margin-top: 21px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    tbody{
+        display: block;
+        width: 100%;
+        overflow: auto;
+        height: px;
+    }
     .rowInner:nth-child(odd){
         .cell{
         background-color: transparent;
@@ -115,12 +121,6 @@
         }
         @media screen and (max-width: $mobile-max){
             font-size: 0.7rem;
-        }
-        @media screen and (max-width: $mobile-md){
-            font-size: 0.6rem;
-        }
-        @media screen and (max-width: $mobile-min){
-            font-size: 0.5rem;
         }
     }
     .cell:first-child{
@@ -212,13 +212,10 @@
     }
     @media screen and (max-width: $mobile-max){
         font-size: 0.7rem;
-        max-width: 2.8rem;
-    }
-    @media screen and (max-width: $mobile-md){
-        font-size: 0.6rem;
+
     }
     @media screen and (max-width: $mobile-min){
-        font-size: 0.5rem;
+        max-width: 20px;
     }
 }
 
@@ -231,17 +228,13 @@
       font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
-      text-overflow: ellipsis;
         max-width: 44px;
     }
     @media screen and (max-width: $mobile-max){
         font-size: 0.7rem;
     }
-    @media screen and (max-width: $mobile-md){
-        font-size: 0.6rem;
-    }
     @media screen and (max-width: $mobile-min){
-        font-size: 0.5rem;
+        max-width: 34px;
     }
 }
 
@@ -288,13 +281,6 @@
     @media screen and (max-width: $mobile-max){
         font-size: 0.7rem;
     }
-    @media screen and (max-width: $mobile-md){
-        font-size: 0.6rem;
-    }
-    @media screen and (max-width: $mobile-min){
-        font-size: 0.5rem;
-        width: 2rem;
-    }
 }
 
 .desktop{
@@ -314,6 +300,9 @@
     color: $pay500;
     display: flex;
     justify-content: center;
+    img{
+        margin-right: 10px;
+    }
     @media screen and (max-width: $xs-max){
         font-size: 11px;
     }
@@ -322,12 +311,7 @@
     }
     @media screen and (max-width: $mobile-max){
         font-size: 0.7rem;
-    }
-    @media screen and (max-width: $mobile-md){
-        font-size: 0.6rem;
-    }
-    @media screen and (max-width: $mobile-min){
-        font-size: 0.5rem;
+        width: 6rem;
     }
 }
 
@@ -336,4 +320,11 @@
         display: none;
     }
     color: #ED4700;
+}
+
+.container{
+    overflow: auto;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    max-height: 413px;
 }

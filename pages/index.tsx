@@ -64,8 +64,8 @@ export default function IndexPage() {
               <GameCard/>
             </Col>
           </Row>
-          <Winners/>
           <Tournament balance='0,00000001 BTC'/>
+          <Winners/>
           <Statistics/>
         </Layout>
     </div>

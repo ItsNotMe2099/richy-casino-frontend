@@ -9,12 +9,12 @@ interface Props {
 export default function Statistics(props: Props) {
 
   const users = [
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 200.829378 BTC', id: 12345678987654321245},
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '0.00', amount: '+ 200.829378 BTC', id: 12345678987654321245},
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 200.829378 BTC', id: 12345678987654321245},
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 200.829378 BTC', id: 12345678987654321245},
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '0.00', amount: '+ 200.829378 BTC', id: 12345678987654321245},
-    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 200.829378 BTC', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 2.00829378', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '0.00', amount: '+ 2.00829378', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 2.00829378', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 2.00829378', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '0.00', amount: '+ 2.00829378', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 2.00829378', id: 12345678987654321245},
   ]
 
   return (
@@ -22,6 +22,7 @@ export default function Statistics(props: Props) {
           <div className={styles.header}>
             <Header icon='/img/Statistics/stats.svg' label='Статистика' style='labelOnly' shadowColor='violet'/>
           </div>
+          <div className={styles.container}>
           <div className={styles.table}>
             <div className={styles.row}>
               <div className={styles.cell}>
@@ -40,7 +41,7 @@ export default function Statistics(props: Props) {
                 Выигрыш
               </div>
             </div>
-            {users.slice(0, 5).map((item, index) =>
+            {users.map((item, index) =>
               <div className={classNames(styles.row, styles.rowInner)} key={index}>
                 <div className={styles.cell}>
                   <div className={styles.game}>
@@ -71,11 +72,12 @@ export default function Statistics(props: Props) {
                 </div>
                 <div className={styles.cell}>
                   <div className={classNames(styles.amount, {[styles.red]: +item.mult <= 0})}>
-                    {item.amount}
+                  <img src='/img/Winners/BTC.png' alt=''/>{item.amount} 
                   </div>
                 </div>
               </div>
             )}
+          </div>
           </div>
       </div>
   )

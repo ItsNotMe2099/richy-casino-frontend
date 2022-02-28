@@ -14,12 +14,12 @@ export default function Winners(props: Props) {
   const user = context.auth
 
   const users = [
-    {nickname: 'Erohin', sort: 1, usdt: '45.1056915',  amount: '+ 00.2120625 BTC · ', avatar: '/img/Winners/folder.jpg'},
-    {nickname: 'Enotova', sort: 2, usdt: '45.1056915',  amount: '+ 00.2120625 BTC · ', avatar: '/img/Winners/avatarF.svg'},
-    {nickname: 'Sychev', sort: 3, usdt: '45.1056915',  amount: '+ 00.2120625 BTC · ', avatar: '/img/Winners/avatarM.svg'},
-    {nickname: 'Sychev', sort: 3, usdt: '45.1056915',  amount: '+ 00.2120625 BTC · ', avatar: '/img/Winners/avatarM.svg'},
-    {nickname: 'Sychev', sort: 3, usdt: '45.1056915',  amount: '+ 00.2120625 BTC · ', avatar: '/img/Winners/avatarM.svg'},
-    {nickname: 'Sychev', sort: 3, usdt: '45.1056915',  amount: '+ 00.2120625 BTC · ', avatar: '/img/Winners/avatarM.svg'},
+    {nickname: 'Erohin', sort: 1, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/folder.jpg'},
+    {nickname: 'Enotova', sort: 2, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarF.svg'},
+    {nickname: 'Sychev', sort: 3, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarM.svg'},
+    {nickname: 'Sychev', sort: 3, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarM.svg'},
+    {nickname: 'Sychev', sort: 3, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarM.svg'},
+    {nickname: 'Sychev', sort: 3, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarM.svg'},
   ]
 
   //temporary
@@ -78,7 +78,7 @@ export default function Winners(props: Props) {
                     </div>
                     <div className={styles.cell}>
                     <div className={styles.group}>
-                        <img src='/img/Winners/BTC.png' alt=''/>{item.amount} <span> &nbsp;50%</span>
+                        <img src='/img/Winners/BTC.png' alt=''/>{item.amount}
                       </div>
                     </div>
                   </div>

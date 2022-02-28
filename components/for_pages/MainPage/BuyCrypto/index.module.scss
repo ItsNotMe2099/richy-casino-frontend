@@ -18,7 +18,7 @@
 }
 
 .no{
-  font-weight: 500;
+  font-weight: bold;
   font-size: 1.2rem;
   text-align: center;
 }
@@ -40,7 +40,14 @@
 }
 
 .icon{
-  margin-right: 16px;
+  margin-right: 1.4rem;
   display: flex;
   align-self: center;
+  @media screen and (max-width: $mobile-md){
+    margin-right: 1rem;
+  }
+  img{
+    width: 2.4rem;
+    height: 1rem;
+  }
 }
