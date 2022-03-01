@@ -45,6 +45,10 @@ body{
   min-height: 100%;
 }
 
+#__next > div > div{
+  max-width: 100% !important;
+}
+
 *{
   box-sizing: border-box;
 }

@@ -33,6 +33,8 @@
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
   &::-webkit-scrollbar {
     width: 0;
     height: 0;
@@ -46,7 +48,6 @@
 }
 
 .item{
-  float: left;
   display: flex;
   flex-direction: column;
   padding-bottom: 23px;
@@ -54,21 +55,13 @@
   align-items: center;
   border-radius: 18px;
   background-color: $dark700;
-  min-width: 200px;
+  width: 15vw;
   flex-shrink: 0;
-  @media screen and (max-width: 1360px){
-    min-width: 150px;
-  }
   @media screen and (max-width: $xs-max){
     min-width: 108px;
     height: 90px;
     padding: 14px 0;
     margin: 0 5px;
-  }
-  &:after {
-    content: '';
-    display: block;
-    clear: both;
   }
 }
 
@@ -133,12 +126,9 @@
 
 .desc{
   font-weight: 400;
-  font-size: 13px;
+  font-size: calc(10px + 0.1vw);
   color: $dark100;
   text-align: center;
-  @media screen and (max-width: 1360px){
-    font-size: 11px;
-  }
   @media screen and (max-width: $xs-max){
     display: none;
   }

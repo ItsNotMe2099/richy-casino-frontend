@@ -16,9 +16,9 @@ import 'react-input-range/lib/css/index.css'
 import NotificationBanner from 'components/for_pages/Common/NotificationBanner'
 function MyApp({ Component, pageProps }: AppProps) {
   setConfiguration({
-    gutterWidth: 20,
-    breakpoints: [700, 950, 1360],
-    containerWidths: [950, 960, 1320],
+    gutterWidth: 40,
+    //breakpoints: [700, 950, 1360],
+    //containerWidths: [950, 960, 1320],
   })
 
   return (
