@@ -1,4 +1,5 @@
 import request from 'utils/request'
+import {ICurrency} from 'data/interfaces/ICurrency'
 
 export default class InfoRepository {
   static async getCountries(): Promise<any | null> {
@@ -11,16 +12,15 @@ export default class InfoRepository {
     }
     return res.data.data
   }
-  static async getCurrencies(): Promise<any | null> {
-
+  static async getCurrencies(): Promise<ICurrency[]> {
     const res = await request({
       method: 'get',
-      url: '/api/currencies',
+      url: '/api/finance/currency/index',
     })
     if (res.err) {
-      return []
+      return null
     }
-    return res.data.data
+    return res.data?.data ?? []
   }
 
 }

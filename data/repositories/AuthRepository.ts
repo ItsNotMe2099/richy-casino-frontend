@@ -1,8 +1,8 @@
 import request from 'utils/request'
-import IAuthResponse from 'data/interfaces/IAuthResponse'
+import {IAuthEmailResponse, IAuthLoginResponse, IAuthPhoneResponse} from 'data/interfaces/IAuthResponse'
 
 export default class AuthRepository {
-  static async login(login: string, password: string): Promise<IAuthResponse> {
+  static async login(login: string, password: string): Promise<IAuthLoginResponse> {
     const res = await request({
       method: 'post',
       url: '/api/user/auth/login',
@@ -17,83 +17,90 @@ export default class AuthRepository {
     }
     return res.data?.data
   }
-  static async registerEmail({email, password, currency}): Promise<IAuthResponse | null> {
+  static async logout(): Promise<any> {
     const res = await request({
       method: 'post',
-      url: '/api/user/auth/registration',
+      url: '/api/user/auth/logout',
+    })
+    console.log('ress', res)
+    if (res?.err) {
+      throw res.err
+    }
+    return res.data?.data
+  }
+  static async registerEmail({email, password, currency}): Promise<IAuthEmailResponse> {
+    const res = await request({
+      method: 'post',
+      url: '/api/user/auth/registration/email',
       data: {
         email,
         password,
+        password2: password,
         currency_iso: currency
       },
     })
-    console.log('ress', res)
     if (res?.err) {
       throw res.err
     }
     return res.data?.data
   }
 
-  static async registerPhoneSendOtp({phone}): Promise<IAuthResponse | null> {
+  static async registerPhoneSendOtp({phone, currency}): Promise<{ id: string, phone: string, currency_iso: string }> {
     const res = await request({
       method: 'post',
-      url: '/api/user/auth/register/phone',
+      url: '/api/user/registration/phone',
       data: {
          phone,
-       // currency_iso: currency
+        currency_iso: currency
       },
     })
-    console.log('ress', res)
     if (res?.err) {
       throw res.err
     }
     return res.data?.data
   }
 
-  static async registerPhone({code, phone, password, authToken}): Promise<any> {
+  static async registerPhone({code, phone, password}): Promise<IAuthPhoneResponse> {
     const res = await request({
       method: 'post',
-      url: '/api/user/auth/sms',
+      url: '/api/user/sms/activate',
       data: {
+        phone,
         code,
         password,
-        authToken
+        password2: password
       },
     })
-    console.log('ress', res)
     if (res?.err) {
       throw res.err
     }
     return res.data?.data
   }
 
-  static async forgotPassword(login): Promise<any> {
+  static async forgotPassword(login): Promise<{identity: string}> {
     const res = await request({
       method: 'post',
-      url: '/api/auth/forgotPassword',
+      url: '/api/user/password/request',
       data: {
-        authInput: login,
+        identity: login,
       },
     })
-    console.log('ress', res)
     if (res?.err) {
       throw res.err
     }
     return res.data?.data
   }
 
-  static async resetPassword({login, password, code}): Promise<any> {
+  static async resetPassword({token, password}): Promise<{ id: string }> {
     const res = await request({
       method: 'post',
-      url: '/api/auth/resetPassword',
+      url: '/api/user/password/restore',
       data: {
-        authInput: login,
+        token,
         password,
-        password_confirmation: password,
-        code
+        password2: password,
       },
     })
-    console.log('ress', res)
     if (res?.err) {
       throw res.err
     }

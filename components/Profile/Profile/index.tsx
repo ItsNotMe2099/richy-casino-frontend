@@ -7,8 +7,8 @@ import { ProfileModalType } from 'types/enums'
 import DropdownMenu from 'components/ui/DropdownMenu'
 import { useState } from 'react'
 import SelectAccountCurrency from 'components/ui/SelectAccountCurrency'
-import { Currency } from 'types/interfaces'
 import InfoRepository from 'data/repositories/InfoRepository'
+import {ICurrency} from 'data/interfaces/ICurrency'
 
 interface Props {
 
@@ -65,7 +65,7 @@ const getCurrencies = async () => {
   setCurrencies(res)
 }
 
-const handleAddNewAccount = (itemNew: Currency) => {
+const handleAddNewAccount = (itemNew: ICurrency) => {
     setAccount(accounts => [...accounts, itemNew])
 }
 

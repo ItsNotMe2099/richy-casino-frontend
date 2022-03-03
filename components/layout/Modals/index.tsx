@@ -23,7 +23,7 @@ import Exchange from 'components/Profile/Exchange'
 import BuyCrypto from 'components/Profile/BuyCrypto'
 import FA from 'components/Profile/FA'
 import Withdraw from 'components/Profile/Withdraw'
-
+import { RemoveScroll } from 'react-remove-scroll'
 interface Props {}
 
 export default function ModalContainer(props: Props) {
@@ -38,9 +38,10 @@ export default function ModalContainer(props: Props) {
 
 
   return (
-    <div aria-hidden="true">
+    <RemoveScroll enabled={!!context.modal}>
       {!isServer && (
-        <>
+
+          <div aria-hidden="true">
           <Modal key={0} isOpen={context.modal === ModalType.login} {...commonSettings} title='Авторизация'>
             <ModalLogin/>
           </Modal>
@@ -75,17 +76,17 @@ export default function ModalContainer(props: Props) {
           </Modal>
           <BonusModal isOpen={context.modal === ModalType.bonus} {...commonSettings}/>
           <ProfileBurger key={11} isOpen={context.modal === ModalType.profileBurger} {...commonSettings} user={user}/>
-          <ProfileModal 
+          <ProfileModal
           size='small'
           key={13} isBack={true} isOpen={context.modal === ProfileModalType.exchange} {...commonSettings} title='Обмен' user={user} payment noBorder>
             <Exchange user={user}/>
           </ProfileModal>
-          <ProfileModal 
+          <ProfileModal
           className={styles.favorite}
-           key={14} 
-           isOpen={context.modal === ProfileModalType.favorite} 
-           size='large' {...commonSettings} 
-           title='Избранное' user={user} 
+           key={14}
+           isOpen={context.modal === ProfileModalType.favorite}
+           size='large' {...commonSettings}
+           title='Избранное' user={user}
            isBack={true}
            style='favorite'
            >
@@ -94,22 +95,22 @@ export default function ModalContainer(props: Props) {
           <ProfileModal isBack={true} size='large' key={15} isOpen={context.modal === ProfileModalType.betsHistory} {...commonSettings} title='История ставок' user={user} payment>
             <BetsHistory/>
           </ProfileModal>
-          <ProfileModal 
+          <ProfileModal
           size='small'
           style='buyCrypto'
           key={16} isBack={true} isOpen={context.modal === ProfileModalType.buyCrypto} {...commonSettings} title='Купить криптовалюту' user={user} payment noBorder>
             <BuyCrypto user={user}/>
           </ProfileModal>
-          <ProfileModal 
+          <ProfileModal
           size='small'
           style='2fa'
           key={17} isBack={true} isOpen={context.modal === ProfileModalType.FA} {...commonSettings} title='Безопасность 2FA' user={user}>
             <FA/>
           </ProfileModal>
           <Withdraw/>
-        </>
+          </div>
       )}
-    </div>
+    </RemoveScroll>
   )
 }
 

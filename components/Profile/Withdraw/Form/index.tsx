@@ -4,6 +4,8 @@ import { Form, Formik } from 'formik'
 import styles from './index.module.scss'
 import Validator from 'utils/validator'
 import { Select } from 'components/ui/Inputs/Select'
+import {convertCurrencyToOptions} from 'utils/converter'
+import {ICurrency} from 'data/interfaces/ICurrency'
 
 
 interface Props {
@@ -14,7 +16,7 @@ interface Props {
 export default function WithdrawForm(props: Props) {
 
   const initialValues = {
-    amount: '', 
+    amount: '',
     address: '',
     accountCurrency: 1
   }
@@ -25,8 +27,8 @@ export default function WithdrawForm(props: Props) {
   }
 
   const array = [
-    {id: 1, iso: 'btc', name: 'BTC', symbol: '/img/Exchange/bitcoin.png', type: 0},
-    {id: 2, iso: 'eht', name: 'EHT', symbol: '/img/Exchange/eth.png', type: 0}
+    { iso: 'btc', name: 'BTC', rate: 0, /*symbol: '/img/Exchange/bitcoin.png'*/},
+    { iso: 'eht', name: 'EHT', rate: 0, /*symbol: '/img/Exchange/eth.png'*/ }
   ]
 
   return (
@@ -40,7 +42,7 @@ export default function WithdrawForm(props: Props) {
               Основной счёт
             </div>
           </div>
-          <Select name='accountCurrency' options={array} exchange className={styles.select} rootClass={styles.selectRoot} withdraw/>
+          <Select name='accountCurrency' options={convertCurrencyToOptions(array as ICurrency[])} exchange className={styles.select} rootClass={styles.selectRoot} withdraw/>
         </div>}
         {props.step === 3 &&
         <>
@@ -64,7 +66,7 @@ export default function WithdrawForm(props: Props) {
           <InputField name={'address'} className={styles.input} validate={Validator.required}/>
         </div>
         <Button type='submit' size='normal' background='blueGradient500' className={styles.btn}>Продолжить</Button>
-        </>       
+        </>
         }
       </Form>
       )}

@@ -38,7 +38,7 @@ export default function ModalRegistrationCompleted(props: Props) {
         <Form className={styles.form}>
           <div className={styles.description}>
             Введите ниже код, отправленный на указанный
-            Вами Email ({context.modalProps.login})
+            Вами Email ({context.modalArguments.login})
           </div>
           <div className={styles.inputs}>
             <InputField
@@ -58,7 +58,7 @@ export default function ModalRegistrationCompleted(props: Props) {
             />
           </div>
           <div className={styles.buttons}>
-            <Button type='button' className={styles.button} size='submit' background='dark600' onClick={() => context.showModal(ModalType.passwordRecovery, {login: context.modalProps.login})}>Отменить</Button>
+            <Button type='button' className={styles.button} size='submit' background='dark600' onClick={() => context.showModal(ModalType.passwordRecovery, {login: context.modalArguments.login})}>Отменить</Button>
             <div className={styles.spacer}/>
             <Button type='submit' className={styles.button} size='submit' background='blueGradient500' >Сменить</Button>
           </div>

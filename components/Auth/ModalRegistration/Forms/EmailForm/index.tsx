@@ -11,12 +11,12 @@ import InputField from 'components/ui/Inputs/InputField'
 import Validator from 'utils/validator'
 import {ModalType} from 'types/enums'
 import {useAppContext} from 'context/state'
-import {Currency} from 'types/interfaces'
 import AuthRepository from 'data/repositories/AuthRepository'
 import FormError from 'components/ui/Form/FormError'
+import {convertCurrencyToOptions} from 'utils/converter'
+import {RegistrationSuccessModalArguments} from 'types/interfaces'
 
 interface Props {
-  currencies: Currency[]
 }
 
 export default function EmailForm(props: Props) {
@@ -38,7 +38,7 @@ export default function EmailForm(props: Props) {
 
       context.setToken(accessToken)
       context.updateUserFromCookies()
-      context.showModal(ModalType.registrationSuccess, {login: data.email, password: data.password})
+      context.showModal(ModalType.registrationSuccess, {login: data.email, password: data.password} as RegistrationSuccessModalArguments)
     } catch (e) {
       setError(e.message)
     }
@@ -60,7 +60,7 @@ export default function EmailForm(props: Props) {
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
       <Form className={styles.form}>
         <div className={styles.inputs}>
-          <Select name='currency' options={props.currencies}/>
+          <Select name='currency' options={convertCurrencyToOptions(context.currencies)}/>
           <InputField name={'email'} placeholder={'Электронный адрес'}
                       validate={Validator.combine([Validator.required, Validator.email])}/>
           <InputField name={'password'} type={'password'} obscure={true} placeholder={'Придумайте пароль'}

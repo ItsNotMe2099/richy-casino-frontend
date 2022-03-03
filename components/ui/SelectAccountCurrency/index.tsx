@@ -2,14 +2,14 @@ import { useRef } from 'react'
 import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
 import styles from './index.module.scss'
 import classNames from 'classnames'
-import { Currency } from 'types/interfaces'
+import {ICurrency} from 'data/interfaces/ICurrency'
 
 
 interface Props {
-  options: Currency[],
+  options: ICurrency[],
   label?: string
-  type?: 'category' | 'provider' 
-  onChange?: (item: Currency) => void
+  type?: 'category' | 'provider'
+  onChange?: (item: ICurrency) => void
   onAll?: () => void
   onTriggerClick?: () => void
   activeTab?: string
@@ -49,7 +49,7 @@ export default function SelectAccountCurrency(props: Props){
         {type && <img src={type === 'category' ? '/img/DropdownMenu/arrows.svg' : '/img/DropdownMenu/pacman.svg'} alt=''/>}
         {activeTab ? <span>{activeTab}</span> : <span>{label}</span>}
         </div>
-        <div className={classNames(styles.arrow, {[styles.active]: isActive})}><img 
+        <div className={classNames(styles.arrow, {[styles.active]: isActive})}><img
         src={dots ? '/img/DropdownMenu/dots.svg' : '/img/DropdownMenu/arrow.svg'} alt=''/></div>
         </>
       }
@@ -57,7 +57,7 @@ export default function SelectAccountCurrency(props: Props){
        <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
        {allOption && <div className={styles.option} onClick={() => onAll()}><a onClick={() => setIsActive(false)}>Все</a></div>}
        {options.map((item, index) => <div key={index} className={classNames(styles.option, {[styles.textRight]: textRight})} onClick={() => onChange(item)}>
-         <a className={styles.currency}  onClick={() => setIsActive(false)}><span className={styles.symbol}>{item.symbol}</span> <div>{item.name} ({item.iso})</div></a></div>)}
+         <a className={styles.currency}  onClick={() => setIsActive(false)}><span className={styles.symbol}>Р</span> <div>{item.name} ({item.iso})</div></a></div>)}
        </nav>
     </div>
   )
