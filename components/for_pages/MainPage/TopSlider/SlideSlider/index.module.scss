@@ -4,9 +4,9 @@
   border-radius: 18px;
   padding: 43px 0 13px 0;
   position: relative;
-  max-height: 250px;
+  max-height: 18rem;
   overflow: hidden;
-  min-height: 250px;
+  min-height: 18rem;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -14,9 +14,17 @@
     padding-left: 18px;
   }
   @media screen and (max-width: 800px){
-    max-height: 200px;
-    min-height: 200px;
+    max-height: 14.5rem;
+    min-height: 14.5rem;
     padding: 20px 0 9px 15px;
+  }
+  @media screen and (max-width: $xs-max){
+    max-height: 12rem;
+    min-height: 12rem;
+  }
+  @media screen and (max-width: $mobile-max){
+    max-height: 10rem;
+    min-height: 10rem;
   }
 }
 
@@ -30,6 +38,9 @@
 .btn{
   button{
     height: 47px;
+    @media screen and (max-width: $xs-max){
+      height: 32px;
+    }
   }
 }
 
@@ -98,8 +109,8 @@
   color: $white;
   line-height: 100%;
   width: 70%;
-  @media screen and (max-width: 770px){
-    font-size: 26px;
+  @media screen and (max-width: $xs-max){
+    font-size: 20px;
   }
 }
 
@@ -110,12 +121,18 @@
     @include textStyle14Bold;
     padding-right: 38px;
     padding-left: 38px;
+    @media screen and (max-width: $xs-max){
+      padding: 12px 15px;
+    }
   }
 }
 
 .left{
   align-self: center;
   margin-left: 28px;
+  @media screen and (max-width: $xs-max){
+    margin-left: 0;
+  }
 }
 
 .dots{

@@ -25,11 +25,11 @@
   @media screen and (max-width: $mobile-max){
     max-height: 10rem;
     min-height: 10rem;
-  }
-  @media screen and (max-width: $xs-max){
     .timer{
       display: none;
     }
+  }
+  @media screen and (max-width: $xs-max){
     width: auto;
   }
 
@@ -258,6 +258,9 @@
     content: "";
     display: table;
     clear: both;
+  }
+  @media screen and (max-width: 520px){
+    margin-top: 5px;
   }
   @media screen and (max-width: $mobile-max){
     margin-top: 3%;

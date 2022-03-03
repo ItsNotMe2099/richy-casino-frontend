@@ -33,10 +33,9 @@ export default function TopSlider(props: Props) {
     dotsClass: `${styles.dots}`,
     responsive: [
       {
-        breakpoint: 768,
+        breakpoint: 428,
         settings: {
           variableWidth: false,
-          dots: true,
           centerMode: true,
           centerPadding: '15px',
         }
@@ -57,7 +56,7 @@ export default function TopSlider(props: Props) {
       <HiddenXs>
 
         <Row className={styles.desktop}>
-          <Col>
+          <Col className={styles.col}>
           <BonusSlide/>
           </Col>
           <SlideSlider items={items}/>

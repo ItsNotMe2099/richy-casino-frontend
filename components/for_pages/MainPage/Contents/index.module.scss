@@ -109,13 +109,13 @@
 }
 
 .label{
-  @include textStyle25Bold;
+  font-weight: 700;
+  font-size: calc(11px + 0.5vw);
   color: $white;
   text-align: center;
   margin-top: 10px;
 
   @media screen and (max-width: $xs-max){
-    font-size: 13px;
     font-weight: 500;
     margin-top: 6px;
   }

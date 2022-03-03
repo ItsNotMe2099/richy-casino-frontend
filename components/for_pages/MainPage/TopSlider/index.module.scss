@@ -3,18 +3,18 @@
 .root{
   margin-top: 28px;
   @media screen and (max-width: $xs-max){
-    margin: 24px -10px 23px;
+    margin: 24px -10px 0;
   }
 }
 
 .desktop{
-  @media screen and (max-width: $xs-max){
+  @media screen and (max-width: 520px){
     display: none !important;
   }
 }
 
 .slider{
-  @media screen and (min-width: $sm-min){
+  @media screen and (min-width: 521px){
     display: none !important;
   }
   @media screen and (max-width: $sm-min){
@@ -34,6 +34,12 @@
     right: -5px;
   }
 
+}
+
+.col{
+  @media screen and (max-width: $xs-max){
+    padding-right: 0 !important;
+  }
 }
 
 .label{
@@ -82,12 +88,14 @@
     min-height: 14.5rem;
     padding: 20px 0 9px 15px;
   }
+  @media screen and (max-width: $xs-max){
+    width: auto;
+    max-height: 12rem;
+    min-height: 12rem;
+  }
   @media screen and (max-width: $mobile-max){
     max-height: 10rem;
     min-height: 10rem;
-  }
-  @media screen and (max-width: $xs-max){
-    width: auto;
   }
 }
 
