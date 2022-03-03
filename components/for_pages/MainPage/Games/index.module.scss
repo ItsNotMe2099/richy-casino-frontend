@@ -90,7 +90,6 @@
 
 .slider{
   margin-top: 28px;
-  margin-right: -22px;
   @media screen and (max-width: $xs-max){
     margin-top: 15px;
     margin-right: 0px;
@@ -98,10 +97,6 @@
   :global .slick-list{
     .slick-track{
       .slick-slide{
-        @media screen and (max-width: 570px){
-          width: 78px !important;
-          margin-right: 8px;
-        }
         div{
           display: flex;
         }
@@ -109,6 +104,114 @@
     }
   }
 
+}
+
+.btns{
+  position: absolute;
+  visibility: hidden;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btn{
+  font-weight: 500;
+  font-size: 12px;
+  color: $white;
+  min-width: 80px;
+  margin-bottom: 21px;
+  padding: 13px 20px;
+  @media screen and (max-width: 1360px){
+    min-width: auto;
+    margin-bottom: 11px;
+    max-width: 50px;
+  }
+  @media screen and (max-width: 800px){
+    padding: 10px 15px;
+  }
+  @media screen and (max-width: 550px){
+    max-width: 50px;
+  }
+  @media screen and (max-width: $xs-max){
+    padding: 8px 10px;
+  }
+  @media screen and (max-width: $mobile-max){
+    padding: 0;
+    height: 7vw;
+    width: 12vw;
+  }
+}
+
+.demo{
+  font-weight: 500;
+  font-size: 12px;
+  color: $white;
+  min-width: 80px;
+  margin-bottom: 21px;
+  padding: 13px 25px;
+  @media screen and (max-width: 1360px){
+    min-width: auto;
+    margin-bottom: 11px;
+    max-width: 50px;
+  }
+  @media screen and (max-width: 800px){
+    padding: 10px 15px;
+  }
+  @media screen and (max-width: 450px){
+    padding: 8px 20px;
+  }
+  @media screen and (max-width: $xs-max){
+    padding: 8px 10px;
+  }
+  @media screen and (max-width: $mobile-max){
+    padding: 0;
+    height: 7vw;
+    width: 12vw;
+  }
+}
+
+.favorite{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  visibility: hidden;
+  z-index: 1;
+  @media screen and (max-width: 1360px){
+    right: 5px;
+    top: 5px;
+  }
+  @media screen and (max-width: 920px){
+    width: 18px;
+    height: 18px;
+  }
+  @media screen and (max-width: $xs-max){
+    right: 6px;
+    top: 6px;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+  }
+}
+
+.active{
+  visibility: visible;
+}
+
+.shade{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  visibility: hidden;
+  background: rgba(0, 0, 0, 0.9);
+  opacity: 0.4;
+  border-radius: 12px;
+  left: 0;
+  bottom: 0;
 }
 
 .overflow{
@@ -139,6 +242,17 @@
       letter-spacing: 0.02em;
       text-transform: uppercase;
       color: $white;
+    }
+    &:hover{
+      .shade{
+        visibility: visible;
+      }
+      .btns{
+        visibility: visible;
+      }
+      .favorite{
+        visibility: visible;
+      }
     }
   }
 }

@@ -164,7 +164,7 @@
 .controls{
   display: flex;
   margin-left: 13px;
-  @media screen and (max-width: $xs-max){
+  @media screen and (max-width: $mobile-max){
     display: none;
   }
 }

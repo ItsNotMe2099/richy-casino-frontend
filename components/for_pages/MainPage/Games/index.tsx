@@ -29,6 +29,8 @@ export default function Games(props: Props) {
 
   const [currentIndex, setCurrentIndex] = useState(0)
 
+  const [inFavorite, setInFavorite] = useState(false)
+
   const items = [
     {image: '/img/Games/blackjack.svg', label: 'Blackjack', link: '#'},
     {image: '/img/Games/blackjack.svg', label: 'Blackjack', link: '#'},
@@ -46,8 +48,8 @@ export default function Games(props: Props) {
     speed: 500,
     slidesToShow: items.length < 6 ? items.length : 6,
     slidesToScroll: 1,
-    variableWidth: false,
-    adaptiveHeight: false,
+    variableWidth: true,
+    adaptiveHeight: true,
     arrows: false,
     beforeChange: (current: number, next: number) => setCurrentIndex(next),
     responsive: [
@@ -72,7 +74,7 @@ export default function Games(props: Props) {
 
     return (
       <Link key={item.link} href={item.link}>
-        <a className={styles.slide}><img src={item.image}/>
+        <a className={styles.slide} ><div><img src={item.image}/></div>
         <div className={styles.shade}></div>
         <Button
           onClick={() => inFavorite ? setInFavorite(false) : setInFavorite(true)}
@@ -118,11 +120,7 @@ export default function Games(props: Props) {
       <VisibleXs>
         <div className={styles.overflow}>
           {items.map((item, index) =>
-            <Link key={item.link} href={item.link}>
-              <a className={styles.slide}><img src={item.image}/>
-                <div className={styles.label}>{item.label}</div>
-              </a>
-            </Link>
+            <OverflowSlide item={item} key={index}/>
           )}
         </div>
       </VisibleXs>
