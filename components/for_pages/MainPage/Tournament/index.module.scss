@@ -10,21 +10,23 @@
   position: relative;
   overflow: hidden;
   padding: 43px 0;
-  min-height: 230px;
   max-height: 247px;
+  height: 25vw;
+  @media screen and (min-width: 1476px){
+    height: 13vw;
+  }
+  @media screen and (min-width: 1281px){
+    height: 15vw;
+  }
   @media screen and (max-width: 950px){
     flex-direction: column;
     padding-left: 30px;
   }
-  @media screen and (max-width: $xs-max){
-    max-height: 108px;
-    padding-left: 10px;
-    min-height: auto;
-    margin-top: 12px;
-    border-radius: 11px;
+  @media screen and (max-width: 685px){
+    height: 30vw;
   }
   @media screen and (max-width: $mobile-max){
-    max-height: 8rem;
+    height: 8rem;
     padding: 13px 0;
     padding-left: 18px;
   }
@@ -37,25 +39,24 @@
   left: 0;
   img{
     width: 100%;
-    min-height: 235px;
-    @media screen and (max-width: $xs-max){
-      width: unset;
-      min-height: unset;
-      max-height: unset;
-
-    }
-    @media screen and (max-width: $mobile-max){
-      height: 100%;
-    }
+    height: 25vw;
+  @media screen and (min-width: 1476px){
+    height: 13vw;
   }
-  @media screen and (max-width: $xs-max){
-    right: 7px;
-    left: auto;
-    bottom: 0px;
-    max-height: 100%;
+  @media screen and (min-width: 1281px){
+    height: 15vw;
+  }
+  @media screen and (max-width: 685px){
+    height: 30vw;
+  }
+    @media screen and (max-width: $mobile-max){
+      height: 8rem;
+      width: auto;
+    }
   }
   @media screen and (max-width: $mobile-max){
-    right: -14px;
+    right: 0;
+    left: auto;
   }
 }
 
@@ -79,13 +80,10 @@
   position: relative;
   z-index: 2;
   justify-content: center;
-  @media screen and (max-width: $xs-max){
-    align-items: flex-start;
-    margin-left: 0px;
-    margin-top: 8px;
-  }
   @media screen and (max-width: $mobile-max){
     margin-top: 0;
+    margin-left: 0;
+    align-items: baseline;
   }
 }
 
@@ -95,6 +93,7 @@
   justify-content: center;
   position: relative;
   z-index: 3;
+  align-items: center;
 
   margin-right: 10%;
   @media screen and (max-width: $sm-max){
@@ -110,27 +109,18 @@
   justify-content: center;
   margin-left: 30%;
 }
-@media screen and (max-width: $xs-max){
-  margin-top: 11px;
-  margin-left: 0;
-  justify-content: flex-end;
-}
 @media screen and (max-width: $mobile-max){
   align-items: center;
+  justify-content: flex-end;
+  margin-left: 0;
 }
 }
 
 .title{
   font-weight: 500;
-  font-size: 90px;
+  font-size: 4.7vw;
   letter-spacing: 0.275em;
   color: #FFFFFF;
-  @media screen and (max-width: 1360px){
-    font-size: 45px;
-  }
-  @media screen and (max-width: $xs-max){
-    font-size: 19px;
-  }
   @media screen and (max-width: $mobile-max){
     font-weight: bold;
     font-size: 1.3rem;
@@ -152,17 +142,10 @@
   display: flex;
   align-items: center;
   font-weight: 400;
-  font-size: 19px;
-  @media screen and (max-width: 1360px){
-    padding: 4px 5px;
-    padding-right: 20px;
-  }
-  @media screen and (max-width: $xs-max){
-    font-size: 9px;
-    border-radius: 4px;
-  }
+  font-size: calc(11px + 0.5vw);
   @media screen and (max-width: $mobile-max){
     font-size: 0.7rem;
+    padding: 5px 19px 5px 7px;
   }
 }
 
@@ -172,16 +155,12 @@
   border-radius: 9px;
   margin-left: -12px;
   font-weight: 500;
-  font-size: 19px;
+  font-size: calc(11px + 0.5vw);
   color: #000;
   display: flex;
   align-items: center;
   @media screen and (max-width: $sm-max){
     padding: 4px 5px;
-  }
-  @media screen and (max-width: $xs-max){
-    font-size: 9px;
-    border-radius: 4px;
   }
   @media screen and (max-width: $mobile-max){
     font-size: 0.7rem;
@@ -193,10 +172,6 @@
   border-radius: 12px;
   background: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(16.5295px);
-  @media screen and (max-width: $xs-max){
-    padding: 4px;
-    border-radius: 6px;
-  }
 }
 
 .end{
@@ -216,15 +191,12 @@
   height: 46px;
   width: 100%;
   color: $white;
+  font-weight: bold;
   @media screen and (max-width: 950px){
     margin-top: 0;
   }
-  @media screen and (max-width: $xs-max){
-    font-size: 9px;
-    padding: 10px 14px;
-    border-radius: 4px;
-    font-weight: 600;
-    height: 30px;
+  @media screen and (max-width: 685px){
+    height: 5vw;
   }
   @media screen and (max-width: $mobile-max){
     font-size: 0.9rem;
@@ -270,12 +242,6 @@
   top: 0;
   img{
     width: 100%;
-    @media screen and (max-width: $xs-max){
-      width: 81%;
-    }
-  }
-  @media screen and (max-width: $xs-max){
-    right: -6%;
   }
   @media screen and (max-width: 550px){
     display: none;
