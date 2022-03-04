@@ -56,7 +56,7 @@
         width: 32px;
         height: 32px;
         border-radius: 100%;
-        @media screen and (max-width: $xs-max){
+        @media screen and (max-width: $mobile-max){
           width: 16px;
           height: 16px;
         }
@@ -71,7 +71,7 @@
     font-size: 14px;
     color: #FFFFFF;
     @media screen and (max-width: $xs-max){
-      font-size: 10px;
+        font-size: calc(10px + 0.5vw);
     }
     @media screen and (max-width: $mobile-max){
         font-size: 0.7rem;
@@ -89,8 +89,9 @@
         margin-right: 0;
         justify-content: center;
         margin-bottom: 13px;
+        width: 100%;
     }
-    @media screen and (max-width: $xs-max){
+    @media screen and (max-width: $mobile-max){
        width: 100%;
        margin-bottom: 43px;
     }
@@ -109,7 +110,7 @@
         font-size: 1.1rem;
         color: $dark200;
         @media screen and (max-width: $xs-max){
-            font-size: 10px;
+            font-size: calc(10px + 0.5vw);
         }
         @media screen and (max-width: $mobile-max){
             font-size: 0.7rem;
@@ -118,14 +119,14 @@
     .cell:first-child{
         text-align: center;
         padding-right: 47px;
-        @media screen and (max-width: $xs-max){
+        @media screen and (max-width: $mobile-max){
             padding-right: 0;
             text-align: left;
             padding-left: 5px;
         }
     }
     .cell:nth-child(2){
-        @media screen and (max-width: $xs-max){
+        @media screen and (max-width: $mobile-max){
           padding-left: 10px;
         }
     }
@@ -133,7 +134,7 @@
         text-align: right;
     }
     .cell:nth-child(3){
-        @media screen and (max-width: $xs-max){
+        @media screen and (max-width: 600px){
             display: none;
         }
     }
@@ -148,7 +149,7 @@
     .cell{
         padding: 20px 0 21px 0;
         border-bottom: 1px solid #272832;
-        @media screen and (max-width: $xs-max){
+        @media screen and (max-width: $mobile-max){
           padding: 10px 0;
           .avatar{
               margin-right: 4px;
@@ -158,7 +159,7 @@
     .cell:first-child{
         text-align: center;
         padding-right: 47px;
-        @media screen and (max-width: $xs-max){
+        @media screen and (max-width: $mobile-max){
             padding-right: 0;
             text-align: left;
             width: 1%;
@@ -169,12 +170,12 @@
     }
     .cell:nth-child(2){
         width: 40%;
-        @media screen and (max-width: $xs-max){
+        @media screen and (max-width: $mobile-max){
           padding-left: 10px;
         }
     }
     .cell:nth-child(3){
-        @media screen and (max-width: $xs-max){
+        @media screen and (max-width: 600px){
             display: none;
         }
     }
@@ -189,7 +190,7 @@
                 color: #4c7836;
             }
             @media screen and (max-width: $xs-max){
-                font-size: 10px;
+                font-size: calc(10px + 0.5vw);
             }
             @media screen and (max-width: $mobile-max){
                 font-size: 0.7rem;
@@ -207,6 +208,9 @@
         margin-right: 8px;
     }
     @media screen and (max-width: $xs-max){
+        font-size: calc(10px + 0.6vw);
+    }
+    @media screen and (max-width: $mobile-max){
         img{
             margin-right: 4px;
             width: 8px;
@@ -217,7 +221,7 @@
                 width: 32px;
                 height: 32px;
                 border-radius: 100%;
-                @media screen and (max-width: $xs-max){
+                @media screen and (max-width: $mobile-max){
                   width: 16px;
                   height: 16px;
                 }
@@ -246,14 +250,14 @@
 
 .scroll{
     height: 308px !important;
-    @media screen and (max-width: $xs-max){
+    @media screen and (max-width: $mobile-max){
       height: 200px !important;
     }
 }
 
 .scroll > div:first-child{
     padding-bottom: 56px;
-    @media screen and (max-width: $xs-max){
+    @media screen and (max-width: $mobile-max){
       padding-bottom: 81px;
     }
 }
@@ -270,7 +274,7 @@
     background: linear-gradient(180deg, rgba(29, 30, 37, 0) 0%, rgba(29, 30, 37, 0.87) 21.88%, #1D1E25 100%);
     bottom: 0;
     z-index: 1;
-    @media screen and (max-width: $xs-max){
+    @media screen and (max-width: $mobile-max){
         height: 81px;
     }
 }
@@ -285,7 +289,7 @@
     .element:last-child{
         .title{
             text-align: right;
-            @media screen and (max-width: $xs-max){
+            @media screen and (max-width: 900px){
                 text-align: left;
              }
         }
@@ -302,7 +306,7 @@
             }
         }
     }
-    @media screen and (max-width: $xs-max){
+    @media screen and (max-width: 900px){
        margin-right: 0;
        padding: 16px;
        padding-bottom: 23px;
@@ -316,9 +320,12 @@
        }
        .nick{
            font-size: 14px;
+           @media screen and (max-width: $xs-max){
+            font-size: 1rem;
+            }
            @media screen and (max-width: $mobile-max){
             font-size: 1rem;
-        }
+            }
        }
        .element{
            margin-top: 20px;

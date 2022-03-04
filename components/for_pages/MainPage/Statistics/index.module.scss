@@ -78,6 +78,8 @@
     margin-top: 21px;
     border-collapse: collapse;
     table-layout: fixed;
+    display: table;
+    width: 100%;
     tbody{
         display: block;
         width: 100%;
@@ -113,11 +115,8 @@
         padding-bottom: 29px;
         @media screen and (max-width: $xs-max){
             padding-bottom: 11px;
-            font-size: 11px;
+            font-size: calc(10px + 0.5vw);
             font-weight: 400;
-        }
-        @media screen and (max-width: $xs-max){
-            font-size: 10px;
         }
         @media screen and (max-width: $mobile-max){
             font-size: 0.7rem;
@@ -204,8 +203,11 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: unset;
+    @media screen and (max-width: 1100px){
+        text-overflow: ellipsis;
+    }
     @media screen and (max-width: $xs-max){
-        font-size: 10px;
+        font-size: calc(10px + 0.5vw);
         margin-left: 21px;
         text-overflow: ellipsis;
         max-width: 38px;
@@ -224,14 +226,14 @@
     font-size: 14px;
     color: #FFFFFF;
     @media screen and (max-width: $xs-max){
-        font-size: 10px;
+        font-size: calc(10px + 0.5vw);
       font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
-        max-width: 44px;
     }
     @media screen and (max-width: $mobile-max){
         font-size: 0.7rem;
+        max-width: 44px;
     }
     @media screen and (max-width: $mobile-min){
         max-width: 34px;
@@ -273,10 +275,7 @@
     justify-content: center;
     width: 3rem;
     @media screen and (max-width: $xs-max){
-        font-size: 11px;
-    }
-    @media screen and (max-width: $xs-max){
-        font-size: 10px;
+        font-size: calc(10px + 0.5vw);
     }
     @media screen and (max-width: $mobile-max){
         font-size: 0.7rem;
@@ -304,10 +303,7 @@
         margin-right: 10px;
     }
     @media screen and (max-width: $xs-max){
-        font-size: 11px;
-    }
-    @media screen and (max-width: $xs-max){
-        font-size: 10px;
+        font-size: calc(10px + 0.5vw);
     }
     @media screen and (max-width: $mobile-max){
         font-size: 0.7rem;
@@ -327,4 +323,8 @@
     border-bottom-left-radius: 18px;
     border-bottom-right-radius: 18px;
     max-height: 413px;
+}
+
+.amountText{
+    flex-shrink: 0;
 }
