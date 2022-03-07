@@ -72,7 +72,7 @@ export default function Statistics(props: Props) {
                 </div>
                 <div className={styles.cell}>
                   <div className={classNames(styles.amount, {[styles.red]: +item.mult <= 0})}>
-                  <img src='/img/Winners/BTC.png' alt=''/>
+                  <div><img src='/img/Winners/BTC.png' alt=''/></div>
                   <div className={styles.amountText}>{item.amount}</div>
                   </div>
                 </div>

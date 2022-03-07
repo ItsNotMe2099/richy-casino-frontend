@@ -88,7 +88,7 @@ export default function ProfileMenu(props: Props){
       </div>
        <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
         <div className={styles.triangle}></div>
-       {options.map((item, index) =>   <a key={item.key} className={styles.option} onClick={ e => handleClickItem(e, item)}>
+        {options.map((item, index) =>   <a key={item.key} className={styles.option} onClick={ e => handleClickItem(e, item)}>
           {item.label}
         </a>)}
        </nav>

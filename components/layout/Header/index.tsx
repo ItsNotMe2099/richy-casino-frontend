@@ -33,6 +33,11 @@ interface Option {
   type: number
 }
 
+interface Lang {
+  icon: string
+  lang: string
+}
+
 export default function Header(props: Props) {
 
   const {route: currentRoute, asPath: currentPath} = useRouter()
@@ -76,11 +81,27 @@ export default function Header(props: Props) {
   const [activeAmount, setActiveAmount] = useState(userAccounts[0].amount)
   const [activeType, setActiveType] = useState(userAccounts[0].type)
 
+  const langs = [
+    {icon: '/img/layout/top/russia.svg', lang: 'Ru'},
+    {icon: '/img/layout/top/russia.svg', lang: 'En'},
+    {icon: '/img/layout/top/russia.svg', lang: 'Ru'},
+    {icon: '/img/layout/top/russia.svg', lang: 'Ru'},
+    {icon: '/img/layout/top/russia.svg', lang: 'Ru'},
+  ]
+
+  const [activeLangIcon, setActiveLangIcon] = useState(langs[0].icon)
+  const [activeLang, setActiveLang] = useState(langs[0].lang)
+
   const handleChange = (item: Option) => {
     setActiveAmount(item.amount)
     setActiveIcon(item.icon)
     setActiveIso(item.iso)
     setActiveType(item.type)
+  }
+
+  const handleChangeLang = (item: Lang) => {
+    setActiveLangIcon(item.icon)
+    setActiveLang(item.lang)
   }
 
   return (
@@ -163,7 +184,7 @@ export default function Header(props: Props) {
                 </VisibleXs>
               </div>
             }
-            <div className={styles.lang}><LangSelect/></div>
+            <div className={styles.lang}><LangSelect options={langs} activeIcon={activeLangIcon} lang={activeLang} onChange={(item) => handleChangeLang(item)}/></div>
             {/*<Button className={styles.chat} size='normal' background='dark700'><img src='/img/layout/top/chat.svg' alt=''/></Button>*/}
           </div>
         </div>

@@ -308,6 +308,7 @@
     @media screen and (max-width: $mobile-max){
         font-size: 0.7rem;
         width: 6rem;
+        flex-direction: column;
     }
 }
 
@@ -319,7 +320,8 @@
 }
 
 .container{
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     border-bottom-left-radius: 18px;
     border-bottom-right-radius: 18px;
     max-height: 413px;

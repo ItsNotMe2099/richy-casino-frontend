@@ -25,21 +25,27 @@
 }
 
 .dropDown {
-  background: #fff;
+  background: $dark500;
   position: absolute;
   top: 100%;
   margin-top: 4px;
   opacity: 0;
   visibility: hidden;
   border-radius: 3px;
-  z-index: 5;
+  z-index: 10;
   min-width: 150px;
   display: flex;
   flex-direction: column;
   right: 0px;
   a{
-    color: #000 !important;
+    color: #fff !important;
     padding: 5px 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    &:hover{
+      background: #41424F;
+    }
   }
 }
 
@@ -47,10 +53,33 @@
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-  background: #fff;
+  background: $dark500;
   border-radius: 3px;
   min-width: 150px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  border-radius: 16px;
+  .item:nth-child(2){
+    &:hover{
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    }
+  }
+  .item:last-child{
+    &:hover{
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+    }
+  }
+}
+
+.triangle{
+  position: absolute;
+  transform: rotate(-45deg) translateX(-50%);
+  width: 22px;
+  height: 22px;
+  background: #2D2E38;
+  top: -12px;
+  left: 45%;
 }
