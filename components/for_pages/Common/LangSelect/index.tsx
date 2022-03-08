@@ -38,7 +38,7 @@ const handleClick = (e) => {
        <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
         <div className={styles.triangle}></div>
         {options && options.map((item, index) => 
-          <div className={styles.option} onClick={() => onChange(item)}>
+          <div className={styles.option} onClick={() => onChange(item)} key={index}>
             <div className={styles.image}><img key={index} src={item.icon} alt=''/></div> {item.lang}
           </div>
         )}

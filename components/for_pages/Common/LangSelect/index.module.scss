@@ -7,13 +7,6 @@
 .other{
   background-color: $dark700;
   padding: 12px 14px;
-  @media screen and (max-width: $xs-max){
-    padding: 0px 9px;
-    height: 29px;
-    img{
-      width: 14px;
-    }
-  }
 
 }
 
@@ -37,10 +30,6 @@
   border-radius: 8px;
   cursor: pointer;
   color: #fff;
-  @media screen and (max-width: $xs-max){
-    height: 30px;
-    padding: 7px 3px 7px 5px;
-  }
   img{
     margin-right: 10px;
   }
@@ -115,15 +104,6 @@
         border-bottom-right-radius: 12px;
       }
     }
-  @media screen and (max-width: $xs-max) {
-    position: absolute;
-    margin-top: 0px;
-
-    top: 54px;
-    right: 10px;
-    left: 0px;
-    transform: none;
-  }
 }
 
 .triangle{

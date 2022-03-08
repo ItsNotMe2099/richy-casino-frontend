@@ -49,16 +49,16 @@
   position: relative;
   min-width: 78px;
   min-height: 78px;
-  justify-self: center;
   display: flex;
-  max-width: 165px;
-  max-height: 165px;
+  max-width: 10vw;
+  max-height: 10vw;
+  @media screen and (max-width: 1100px){
+    max-width: 165px;
+    max-height: 165px;
+  }
   &:hover{
     .shade{
       visibility: visible;
-      @media screen and (max-width: $xs-max){
-        display: none;
-      }
     }
     .btns{
       visibility: visible;
@@ -79,31 +79,24 @@
   }
 }
 
-.favorite{
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  visibility: hidden;
-  z-index: 1;
-  @media screen and (max-width: 1360px){
-    right: 5px;
-    top: 5px;
+.item{
+  position: relative;
+  display: flex;
+  &:hover{
+    .shade{
+      visibility: visible;
+    }
+    .btns{
+      visibility: visible;
+    }
+    .favorite{
+      visibility: visible;
+    }
   }
-  @media screen and (max-width: 920px){
-    width: 18px;
-    height: 18px;
-  }
-  @media screen and (max-width: $xs-max){
-    right: 6px;
-    top: 6px;
-    width: 20px;
-    height: 20px;
-    padding: 5px;
-  }
-}
-
-.active{
-  visibility: visible;
+    img{
+      width: 100%;
+      border-radius: 18px;
+    }
 }
 
 .shade{
@@ -121,22 +114,40 @@
   visibility: hidden;
   right: 0;
   left: 0;
-  bottom: 10px;
+  bottom: 0;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.btn{
+  font-weight: 500;
+  font-size: 12px;
+  color: $white;
+  min-width: 80px;
+  margin-bottom: 21px;
+  padding: 13px 20px;
   @media screen and (max-width: 1360px){
-    bottom: 0;
+    min-width: auto;
+    margin-bottom: 11px;
+    max-width: 50px;
   }
-  @media screen and (max-width: $xs-max){
-    display: none;
+  @media screen and (max-width: 1000px){
+    padding: 0;
+    height: 4vw;
+    width: 12vw;
   }
-  @media screen and (max-width: 550px){
-    bottom: 15px;
+  @media screen and (max-width: 800px){
+    padding: 13px 25px;
+    height: auto;
+    width: auto;
   }
-  @media screen and (max-width: $xs-max){
-    bottom: 0;
+  @media screen and (max-width: 500px){
+    padding: 0;
+    height: 7vw;
+    width: 12vw;
   }
 }
 
@@ -152,20 +163,53 @@
     margin-bottom: 11px;
     max-width: 50px;
   }
+  @media screen and (max-width: 1000px){
+    padding: 0;
+    height: 4vw;
+    width: 12vw;
+    margin-bottom: 0;
+  }
   @media screen and (max-width: 800px){
-    max-width: 100%;
+    padding: 13px 25px;
+    height: auto;
+    width: auto;
   }
-  @media screen and (max-width: 550px){
-    max-width: 50px;
+  @media screen and (max-width: 500px){
+    padding: 0;
+    height: 7vw;
+    width: 12vw;
   }
-  @media screen and (max-width: 450px){
-    max-width: 30px;
-    padding: 8px 20px;
-    font-size: 8px;
+}
+
+.favorite{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  visibility: hidden;
+  z-index: 1;
+  @media screen and (max-width: 1360px){
+    right: 5px;
+    top: 5px;
   }
-  @media screen and (max-width: $xs-max){
-    padding: 8px 10px;
+  @media screen and (max-width: 920px){
+    width: 18px;
+    height: 18px;
   }
+  @media screen and (max-width: 800px){
+    width: 28px;
+    height: 28px;
+  }
+  @media screen and (max-width: $mobile-max){
+    right: 6px;
+    top: 6px;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+  }
+}
+
+.active{
+  visibility: visible;
 }
 
 

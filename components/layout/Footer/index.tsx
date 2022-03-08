@@ -19,6 +19,11 @@ interface Props {
   className?: string
 }
 
+interface Lang {
+  icon: string
+  lang: string
+}
+
 export default function Footer(props: Props) {
   const appContext = useAppContext()
   const options = [
@@ -64,6 +69,22 @@ export default function Footer(props: Props) {
     {image: '/img/layout/footer/sliders/bottom/jftw.svg'},
     {image: '/img/layout/footer/sliders/bottom/microgaming.svg'},
   ]
+
+  const langs = [
+    {icon: '/img/layout/top/russia.svg', lang: 'Ru'},
+    {icon: '/img/layout/top/russia.svg', lang: 'En'},
+    {icon: '/img/layout/top/russia.svg', lang: 'Ru'},
+    {icon: '/img/layout/top/russia.svg', lang: 'Ru'},
+    {icon: '/img/layout/top/russia.svg', lang: 'Ru'},
+  ]
+
+  const [activeLangIcon, setActiveLangIcon] = useState(langs[0].icon)
+  const [activeLang, setActiveLang] = useState(langs[0].lang)
+
+  const handleChangeLang = (item: Lang) => {
+    setActiveLangIcon(item.icon)
+    setActiveLang(item.lang)
+  }
 
 
 
@@ -210,7 +231,7 @@ export default function Footer(props: Props) {
           <div className={styles.btnsMobile}>
                   <div className={styles.btn}><Button href="#top" size='extraSmall' background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button></div>
                   {/*<div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>*/}
-                  <div className={styles.lang}><LangSelect other/></div>
+                  <div className={styles.lang}><LangSelect options={langs} activeIcon={activeLangIcon} lang={activeLang} onChange={(item) => handleChangeLang(item)}/></div>
                 </div>
           <div className={styles.bottom}>
               <div className={styles.eighteen}>
@@ -225,7 +246,7 @@ export default function Footer(props: Props) {
                 <div className={styles.btns}>
                   <div className={styles.btn}><Button href="#top" size='extraSmall' background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button></div>
                   {/*<div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>*/}
-                  <div className={styles.lang}><LangSelect other/></div>
+                  <div className={styles.lang}><LangSelect options={langs} activeIcon={activeLangIcon} lang={activeLang} onChange={(item) => handleChangeLang(item)}/></div>
                 </div>
           </div>
     </div>
