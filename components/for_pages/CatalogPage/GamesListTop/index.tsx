@@ -52,9 +52,15 @@ export default function GamesListTop(props: Props) {
 
     responsive: [
       {
-        breakpoint: 550,
+        breakpoint: 1495,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 5,
+        }
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 4,
         }
       },
     ]

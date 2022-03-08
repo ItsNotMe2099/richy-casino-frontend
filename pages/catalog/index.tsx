@@ -396,7 +396,7 @@ export default function CatalogPage() {
       <HiddenXs><TopSlider money={money}/></HiddenXs>
       </Row>
       <GamesListTop items={topGames}/>
-      <BuyCrypto/>
+      <VisibleXs><BuyCrypto/></VisibleXs>
       <GamesList all items={games}/>
       <GamesList live items={liveCasino}/>
       <GamesList richy items={richyGames}/>

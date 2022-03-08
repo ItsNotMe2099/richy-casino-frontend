@@ -329,4 +329,7 @@
 
 .amountText{
     flex-shrink: 0;
+    @media screen and (max-width: 350px){
+        font-size: 0.65rem;
+    }
 }

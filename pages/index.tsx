@@ -42,7 +42,6 @@ const live = [
 export default function IndexPage() {
 
   return (
-    <div className={styles.root}>
         <Layout>
           <TopSlider/>
           <Contents/>
@@ -68,7 +67,6 @@ export default function IndexPage() {
           <Winners/>
           <Statistics/>
         </Layout>
-    </div>
   )
 }
 
