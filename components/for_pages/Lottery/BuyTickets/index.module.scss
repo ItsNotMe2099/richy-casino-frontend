@@ -1,6 +1,7 @@
 @import "scss/index";
 
 .root{
+  padding: 0 !important;
   @media screen and (max-width: 870px){
     flex-basis: auto !important;
     margin-top: 23px;

@@ -1,6 +1,7 @@
 @import "scss/index";
 
 .root{
+  padding: 0 !important;
   @media screen and (max-width: 1360px){
     margin-top: 20px;
   }
