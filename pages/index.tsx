@@ -12,6 +12,7 @@ import GamesList from 'components/for_pages/MainPage/GamesList'
 import Tournament from 'components/for_pages/MainPage/Tournament'
 import TopSlider from 'components/for_pages/MainPage/TopSlider'
 import BuyCrypto from 'components/for_pages/MainPage/BuyCrypto'
+import VisibleXs from 'components/ui/VisibleXS'
 
 const casinos = [
   {image: '/img/GamesList/hotline.png', label: 'hotline', provider: 'provider1', category: 'category1'},
@@ -54,7 +55,9 @@ export default function IndexPage() {
             <GamesList label='Live Casino' icon='/img/Contents/live.svg' items={live} shadowColor='blue'/>
             </Col>
           </Row>
-          <BuyCrypto/>
+          <VisibleXs>
+            <BuyCrypto/>
+          </VisibleXs>
           <Row className={styles.gameCards}>
             <Col className={styles.gameCard}>
               <GameCard poker/>
