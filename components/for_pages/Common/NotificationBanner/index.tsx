@@ -14,10 +14,13 @@ export default function NotificationBanner(props: Props) {
 
   const user = context.auth
   const showCookie = cookie.get('show_notification')
-  const [isShow, setIsShow] = useState(user ? true : false)
+  const [isShow, setIsShow] = useState(false)
+  const modal = context.modal
 
   useEffect(() => {
-    setIsShow(showCookie === 'no' ? false : true)
+    setTimeout(()=>{
+      setIsShow(showCookie === 'no' ? false : true)
+     }, 5000)
   }, [])
 
   const handleClose = () => {
@@ -25,10 +28,9 @@ export default function NotificationBanner(props: Props) {
     setIsShow(false)
   }
 
-
   return (
     <>
-    {(user && isShow) &&
+    {(isShow && !modal && user) &&
       <div className={styles.root}>
         <div className={styles.container}>
           <div className={styles.coins}>

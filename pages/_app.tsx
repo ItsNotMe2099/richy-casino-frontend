@@ -14,6 +14,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import 'react-input-range/lib/css/index.css'
 import NotificationBanner from 'components/for_pages/Common/NotificationBanner'
+import HiddenXs from 'components/ui/HiddenXS'
 function MyApp({ Component, pageProps }: AppProps) {
   setConfiguration({
     gutterWidth: 40,
@@ -27,7 +28,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
         <ModalContainer/>
         <AuthUserFeatures/>
-        <NotificationBanner/>
+        <HiddenXs>
+          <NotificationBanner/>
+        </HiddenXs>
       </AuthWrapper>
     </AppWrapper>
   )
