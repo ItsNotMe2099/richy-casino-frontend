@@ -5,26 +5,18 @@
   border-radius: 18px;
   padding: 20px 0 13px 28px;
   position: relative;
-  max-height: 18rem;
   overflow: hidden;
-  min-height: 18rem;
   @media screen and (max-width: 1360px){
     padding-left: 18px;
   }
   @media screen and (max-width: 800px){
-    max-height: 14.5rem;
-    min-height: 14.5rem;
     padding: 15px 0 9px 15px;
   }
   @media screen and (max-width: $xs-max){
-    max-height: 12rem;
-    min-height: 12rem;
     padding: 15px 0 9px 15px;
     margin: 0px 4px;
   }
   @media screen and (max-width: $mobile-max){
-    max-height: 10rem;
-    min-height: 10rem;
     .timer{
       display: none;
     }

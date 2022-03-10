@@ -8,6 +8,7 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import { useAppContext } from 'context/state'
 import Gift from 'components/for_pages/Common/Gift'
+import classNames from 'classnames'
 
 interface Props {
   children?: React.ReactNode
@@ -45,8 +46,8 @@ export default function TopSlider(props: Props) {
 
   const items =[
     {label: 'Лучшие игры на Richy', image: '/img/TopSlider/banner.png'},
-    {label: 'Лучшие игры на Richy', image: '/img/TopSlider/banner.png'},
-    {label: 'Лучшие игры на Richy', image: '/img/TopSlider/d.jpg'},
+    {label: 'Spin the wheel of fortune every day and get a guaranteed prizes', image: '/img/TopSlider/wheel.png'},
+    {label: 'Try your luck in the most profitable cryptocurrency lottery and get bonuses ', image: '/img/TopSlider/lottery.png'},
   ]
 
 
@@ -70,7 +71,7 @@ export default function TopSlider(props: Props) {
               <div className={styles.rootSlide} key={index}>
                 <div className={styles.item} style={{backgroundImage: `url(${item.image})`}}>
                   <div className={styles.left}>
-                    <div className={styles.label}>
+                    <div className={classNames(styles.label, {[styles.otherLabel]: index !== 0})}>
                       {item.label}
                     </div>
                     <div className={styles.btn}>
