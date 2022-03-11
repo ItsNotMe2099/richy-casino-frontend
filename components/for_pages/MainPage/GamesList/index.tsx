@@ -490,7 +490,7 @@ export default function GamesList(props: Props) {
                           onAll={() => setCategory('')} onChange={(item) => setCategory(item.label)} activeTab={category} type='category' items={games}/>
             <DropdownMenu className={styles.drop} provs={providers} label='Провайдеры' allOption items={games}
                           onAll={() => setProvider('')}
-  onChange={(item) => setProvider(item.label)} activeTab={provider} type='provider'/>
+          onChange={(item) => setProvider(item.label)} activeTab={provider} type='provider'/>
           </div>
           <div className={styles.list}>
             {items.slice(0, 9).map((item, index) =>

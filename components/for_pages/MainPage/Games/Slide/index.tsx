@@ -21,8 +21,8 @@ export default function Slide(props: Props) {
   return (
     <Link href={props.item.link}>
     <a className={styles.root} style={{backgroundImage: `url(${props.item.image})`}}>
-    <div className={styles.shade}></div>
-        <Button
+    <div className={styles.shade}>
+    <Button
           onClick={() => inFavorite ? setInFavorite(false) : setInFavorite(true)}
           className={classNames(styles.favorite, {[styles.active]: inFavorite})}
           size='superExtraSmall'
@@ -32,9 +32,12 @@ export default function Slide(props: Props) {
             :
             <img src='/img/GamesList/star-stroke.svg' alt=''/>}
         </Button>
+      <div className={styles.container}>
         <div className={styles.btns}>
           <Button className={styles.btn} size='small' background='blueGradient500'>Играть</Button>
           <Button className={styles.demo} size='small' background='blackTransparent'>Демо</Button>
+        </div>
+        </div>
         </div>
       <div className={styles.label}>
         {props.item.label}

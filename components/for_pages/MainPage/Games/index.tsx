@@ -75,7 +75,7 @@ export default function Games(props: Props) {
     return (
       <Link key={item.link} href={item.link}>
         <a className={styles.slide} ><div><img src={item.image}/></div>
-        <div className={styles.shade}></div>
+        <div className={styles.shade}>
         <Button
           onClick={() => inFavorite ? setInFavorite(false) : setInFavorite(true)}
           className={classNames(styles.favorite, {[styles.active]: inFavorite})}
@@ -86,9 +86,12 @@ export default function Games(props: Props) {
             :
             <img src='/img/GamesList/star-stroke.svg' alt=''/>}
         </Button>
+        <div className={styles.container}>
         <div className={styles.btns}>
           <Button className={styles.btn} size='small' background='blueGradient500'>Играть</Button>
           <Button className={styles.demo} size='small' background='blackTransparent'>Демо</Button>
+        </div>
+        </div>
         </div>
           <img src={item.image}/>
           <div className={styles.label}>{item.label}</div>
