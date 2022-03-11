@@ -57,7 +57,7 @@
   flex-direction: column;
   margin-top: 21px;
   left: 50%;
-  .option:nth-child(2){
+  .option:first-child{
     a{
     &:hover{
       border-top-left-radius: 12px;
@@ -87,12 +87,12 @@
 .dropDownActive{
     opacity: 1;
     visibility: visible;
-  display: flex;
+    display: flex;
     transform: translateX(-50%);
     filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.25));
     background: $dark500;
     border-radius: 12px;
-    .option:nth-child(2){
+    .option:first-child{
       &:hover{
         border-top-left-radius: 12px;
         border-top-right-radius: 12px;
@@ -104,6 +104,18 @@
         border-bottom-right-radius: 12px;
       }
     }
+}
+
+.footer{
+  bottom: 62px;
+  .triangle{
+    top: auto;
+    bottom: 0;
+  }
+  .option{
+    position: relative;
+    z-index: 11;
+  }
 }
 
 .triangle{
@@ -135,4 +147,18 @@
       margin-right: 10px;
     }
   }
+}
+
+.track{
+  display: block !important;
+  width: 6px;
+  right: 2px;
+  bottom: 2px;
+  top: 2px;
+  border-radius: 3px;
+}
+
+.view{
+  margin-right: -17px !important;
+  margin-bottom: -17px !important;
 }

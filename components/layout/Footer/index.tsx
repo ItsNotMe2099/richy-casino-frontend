@@ -246,7 +246,7 @@ export default function Footer(props: Props) {
                 <div className={styles.btns}>
                   <div className={styles.btn}><Button href="#top" size='extraSmall' background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button></div>
                   {/*<div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>*/}
-                  <div className={styles.lang}><LangSelect options={langs} activeIcon={activeLangIcon} lang={activeLang} onChange={(item) => handleChangeLang(item)}/></div>
+                  <div className={styles.lang}><LangSelect style='footer' options={langs} activeIcon={activeLangIcon} lang={activeLang} onChange={(item) => handleChangeLang(item)}/></div>
                 </div>
           </div>
     </div>
