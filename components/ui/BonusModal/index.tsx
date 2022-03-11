@@ -31,7 +31,7 @@ export default function BonusModal(props: Props) {
       zIndex: '20',
     },
     content: {
-      width: '34%',
+      width: '45rem',
       borderRadius: '21px',
       padding: '0',
       border: '0',

@@ -277,15 +277,9 @@
     @media screen and (max-width: 800px){
       width: 70%;
     }
-    @media screen and (max-width: $xs-max){
-      width: 100%;
-    }
   }
-  @media screen and (max-width: 1360px){
-    right: -35%;
-  }
-  @media screen and (max-width: $xs-max){
-    right: 0;
+  @media screen and (max-width: 800px){
+    right: -117px;
   }
 }
 
