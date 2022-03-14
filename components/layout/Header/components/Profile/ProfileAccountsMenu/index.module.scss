@@ -5,6 +5,7 @@
   width: 100%;
   &:hover{
     background: rgba(255, 209, 47, 0.1);
+    border-radius: 8px;
   }
   @media screen and (max-width: $xs-max) {
     position: inherit;
