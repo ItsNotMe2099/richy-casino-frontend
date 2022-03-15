@@ -1,5 +1,5 @@
 import {mapKeys, mapValues, camelCase, isObject} from 'lodash'
-import {IApiPaginationResponse, IOption} from 'types/interfaces'
+import {IApiPaginationResponse, IApiResponse, IOption} from 'types/interfaces'
 import {ICurrency} from 'data/interfaces/ICurrency'
 export const convertLibphonenumberToMask = (value: string): string => value
   .replace('x', '+')
@@ -17,6 +17,13 @@ export const convertApiPaginationResponse = (res: IApiPaginationResponse) => {
     data: res.data?.map(i => objectKeysToCamelCase(i)),
     total: res._meta?.totalCount
   } : null
+}
+export const convertApiResponseError = (res: IApiResponse) => {
+  if(!res.error.details?.length){
+    return 'Unknown error'
+  }
+  const messages =  res.error.details.map(i => i.message)
+  return messages.length === 1 ? messages[0] : messages
 }
 export const convertCurrencyToOptions = (currencies: ICurrency[]): IOption<string>[] => {
   return currencies.map(i => ({

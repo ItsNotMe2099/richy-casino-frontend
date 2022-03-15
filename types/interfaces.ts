@@ -52,9 +52,18 @@ export interface IPagination<T>{
   data: T[]
   total: number
 }
+export interface IApiResponseErrorDetails{
+  field: string,
+  message: string
+}
+export interface IApiResponseError{
+  code: number,
+  details: IApiResponseErrorDetails[]
+}
 export interface IApiResponse{
   success: boolean,
   data: any
+  error?: IApiResponseError
 }
 export interface IApiPaginationResponse{
   success: boolean,

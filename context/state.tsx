@@ -5,6 +5,7 @@ import UserRepository from 'data/repositories/UserRepository'
 import Cookies from 'js-cookie'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import InfoRepository from 'data/repositories/InfoRepository'
+import IUser from 'data/interfaces/IUser'
 
 interface IState {
   isMobile: boolean
@@ -17,7 +18,7 @@ interface IState {
   setToken: (token) => void
   logout: () => void
   updateUserFromCookies: () => void
-
+  user: IUser,
   showBonus: boolean,
   showBonusExpanded: boolean,
   setBonusExpanded: (show) => void,
@@ -30,6 +31,7 @@ const defaultValue: IState = {
   isDesktop: true,
   modal: null,
   auth: false,
+  user: null,
   showModal: (type, data) => null,
   hideModal: () => null,
   setToken: (token) => null,
@@ -52,7 +54,7 @@ interface Props {
 export function AppWrapper(props: Props) {
   const [modal, setModal] = useState<ModalType | ProfileModalType | null>(null)
   const [modalArguments, setModalArguments] = useState<ModalType | ProfileModalType | null>(null)
-  const [userDetails, setUserDetails] = useState<any>()
+  const [user, setUser] = useState<IUser | null>()
   const [auth, setAuth] = useState<boolean>(false)
   const [showBonus, setShowBonus] = useState<boolean>(true)
   const [showBonusExpanded, setShowBonusExpanded] = useState<boolean>(true)
@@ -65,6 +67,7 @@ export function AppWrapper(props: Props) {
     modal,
     modalArguments,
     currencies,
+    user,
     showModal: (type, props: any) => {
       ReactModal.setAppElement('body')
       setModalArguments(props)
@@ -81,7 +84,7 @@ export function AppWrapper(props: Props) {
     logout: () => {
       Cookies.remove(CookiesType.accessToken)
       setAuth(false)
-      setUserDetails(null)
+      setUser(null)
     },
     updateUserFromCookies() {
       updateUserDetails()
@@ -99,6 +102,7 @@ export function AppWrapper(props: Props) {
   useEffect(() => {
     if (props.token) {
       setAuth(true)
+
       updateUserDetails()
     }
 
@@ -112,7 +116,8 @@ export function AppWrapper(props: Props) {
   }, [])
   const updateUserDetails = async () => {
     const res = await UserRepository.getUser()
-    setUserDetails(res)
+
+    setUser(res)
   }
   return (
     <AppContext.Provider value={value}>

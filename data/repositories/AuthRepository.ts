@@ -91,11 +91,12 @@ export default class AuthRepository {
     return res.data?.data
   }
 
-  static async resetPassword({token, password}): Promise<{ id: string }> {
+  static async resetPassword({identity, token, password}): Promise<{ id: string }> {
     const res = await request({
       method: 'post',
       url: '/api/user/password/restore',
       data: {
+        identity,
         token,
         password,
         password2: password,
