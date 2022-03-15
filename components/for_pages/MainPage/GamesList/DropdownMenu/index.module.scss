@@ -294,10 +294,11 @@ flex: 1;
   grid-template-columns: 1fr 1fr;
   gap: 7px;
   padding: 0 15px;
+  padding-bottom: 15px;
   margin-top: 8px;
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 385px;
+  max-height: 250px;
 }
 
 .categories{
@@ -305,5 +306,5 @@ flex: 1;
   margin-top: 8px;
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 385px;
+  max-height: 220px;
 }
