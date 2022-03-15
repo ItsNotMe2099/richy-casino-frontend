@@ -15,14 +15,14 @@
 .amount{
   color: $white;
   font-weight: bold;
-  font-size: 13px;
+  font-size: 0.7rem;
   margin-right: 4px;
 }
 
 .iso{
   color: #8f8e8d;
   font-weight: bold;
-  font-size: 13px;
+  font-size: 0.7rem;
 }
 
 .iso2{
@@ -129,7 +129,7 @@
   font-size: 13px;
   align-items: center;
   @media screen and (max-width: $xs-max){
-    height: 30px;
+    height: 40px;
     padding: 7px 3px 7px 5px;
   }
 }
@@ -240,7 +240,7 @@
   padding-top: 4px;
   @media screen and (max-width: $xs-max){
     font-weight: 500;
-    font-size: 10px;
+    font-size: 0.7rem;
   }
 }
 

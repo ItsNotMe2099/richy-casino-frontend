@@ -40,7 +40,7 @@ export default function NotificationBanner(props: Props) {
               <img src='/img/NotificationBanner/close.svg' alt=''/>
             </div>
           <div className={styles.subscribe}>
-            <img src='/img/NotificationBanner/gift.svg' alt=''/>
+            <img src='/img/NotificationBanner/gift.png' alt=''/>
             <div className={styles.title}>
               Подпишись на уведомления
             </div>

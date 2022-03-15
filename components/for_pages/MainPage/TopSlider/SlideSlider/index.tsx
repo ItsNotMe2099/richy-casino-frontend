@@ -4,9 +4,10 @@ import Button from 'components/ui/Button'
 import { useState } from 'react'
 import Slider from 'react-slick'
 import { useAppContext } from 'context/state'
+import classNames from 'classnames'
 
 interface IItem {
-  label: string
+  label: React.ReactNode
   image: string
 }
 
@@ -65,11 +66,11 @@ export default function SlideSlider(props: Props) {
         {props.items.map((item, index) =>
         <div key={index} className={styles.item}>
         <div className={styles.left}>
-          <div className={styles.label}>
+          <div className={classNames(styles.label, {[styles.second]: index > 0})}>
             {item.label}
           </div>
-          <div className={styles.btn}>
-            <Button size='normal' background='white'>Начать играть</Button>
+          <div className={classNames(styles.btn, {[styles.alt]: index === 1})}>
+            <Button background={index === 1 ? 'blueGradient500' : 'white'}>Начать играть</Button>
           </div>
         </div>
         </div>

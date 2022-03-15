@@ -70,6 +70,7 @@
   background-color: $dark600;
   margin-top: 8px;
   justify-content: space-between;
+  height: 3.3rem;
   cursor: pointer;
   @media screen and (max-width: $mobile-max){
     background: #1D1E25;
@@ -117,9 +118,10 @@
 
 .label{
   font-weight: normal;
-  font-size: 12px;
+  font-size: 1rem;
   @media screen and (max-width: $xs-max){
     font-weight: 400;
+    font-size: 13px;
   }
 }
 

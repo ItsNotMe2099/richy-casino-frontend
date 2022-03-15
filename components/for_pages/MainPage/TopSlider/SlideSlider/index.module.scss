@@ -114,22 +114,34 @@
   }
 }
 
+.second{
+  font-size: 26px;
+}
+
 .btn{
   margin-top: 23px;
   button{
     color: $blue500;
-    @include textStyle14Bold;
-    padding-right: 38px;
-    padding-left: 38px;
+    font-size: 18px;
+    font-weight: 700;
+    padding-right: 24px;
+    padding-left: 24px;
     @media screen and (max-width: $xs-max){
       padding: 12px 15px;
     }
   }
 }
 
+.alt{
+  button{
+    color: $white;
+  }
+}
+
 .left{
   align-self: center;
   margin-left: 28px;
+  width: 100%;
   @media screen and (max-width: $xs-max){
     margin-left: 0;
   }
@@ -147,6 +159,13 @@
   right: 100px;
   width: 100%;
   list-style: none;
+  right: 0;
+  bottom: -35%;
+  left: -25%;
+  @media screen and (max-width: 1300px){
+    bottom: -15%;
+  }
+
   :global .slick-active{
 
     button{

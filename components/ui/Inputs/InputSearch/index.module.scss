@@ -5,7 +5,7 @@
   position: relative;
   display: flex;
   input{
-    height: 43px;
+    height: 3.5rem;
     line-height: 43px;
     padding-left: 51px;
     width: 100%;
@@ -16,7 +16,7 @@
 
     &::placeholder{
       font-weight: 500;
-      font-size: 13px;
+      font-size: 1rem;
       color: $dark300;
       margin-top: 5px;
     }

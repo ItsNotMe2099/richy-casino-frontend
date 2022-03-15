@@ -87,7 +87,6 @@ max-width: 280px;
   font-size: 13px;
   @media screen and (max-width: $xs-max){
     height: 35px;
-    font-size: 10px;
   }
 }
 
@@ -178,11 +177,6 @@ max-width: 280px;
   span{
     font-size: 13px;
     color: #FFFFFF;
-  }
-  @media screen and (max-width: $xs-max){
-    span{
-      font-size: 11px;
-    }
   }
 }
 

@@ -45,9 +45,9 @@ export default function TopSlider(props: Props) {
   }
 
   const items =[
-    {label: 'Лучшие игры на Richy', image: '/img/TopSlider/banner.png'},
-    {label: 'Spin the wheel of fortune every day and get a guaranteed prizes', image: '/img/TopSlider/wheel.png'},
-    {label: 'Try your luck in the most profitable cryptocurrency lottery and get bonuses ', image: '/img/TopSlider/lottery.png'},
+    {label: <div>Лучшие игры<br/> от Richy</div>, image: '/img/TopSlider/banner@3x.png'},
+    {label: <div className={styles.itemLabel}>Spin the <span className={styles.spin}>wheel of fortune</span><br/> every day and get a<br/> guaranteed <span className={styles.spin}>prizes</span></div>, image: '/img/TopSlider/wheel@3x.png'},
+    {label: <div className={styles.itemLabel}>Try your luck in the <span className={styles.lottery}>most profitable</span><br/> cryptocurrency lottery<br/> and get bonuses</div>, image: '/img/TopSlider/lottery@3x.png'},
   ]
 
 
