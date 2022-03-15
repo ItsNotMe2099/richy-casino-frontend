@@ -207,9 +207,11 @@
 .btnContainer{
   font-size: 18px;
   font-weight: 700;
+  width: 100%;
   @media screen and (max-width: 950px){
     align-self: center;
     margin-right: 5px;
+    width: auto;
   }
 }
 
