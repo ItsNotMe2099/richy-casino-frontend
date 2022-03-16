@@ -32,7 +32,7 @@ export default function GamesList(props: Props) {
 
     return(
       <div className={styles.item}>
-        <div className={styles.shade}></div>
+        <div className={styles.shade}>
         <Button
           onClick={() => inFavorite ? setInFavorite(false) : setInFavorite(true)}
           className={classNames(styles.favorite, {[styles.active]: inFavorite})}
@@ -43,10 +43,13 @@ export default function GamesList(props: Props) {
             :
             <img src='/img/GamesList/star-stroke.svg' alt=''/>}
         </Button>
+      <div className={styles.container}>
         <div className={styles.btns}>
           <Button className={styles.btn} size='small' background='blueGradient500'>Играть</Button>
           <Button className={styles.demo} size='small' background='blackTransparent'>Демо</Button>
         </div>
+      </div>
+      </div>
         <img src={prop.item.image} alt=''/>
       </div>
     )

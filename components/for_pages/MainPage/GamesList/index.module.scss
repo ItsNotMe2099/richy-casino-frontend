@@ -30,6 +30,12 @@
 .item{
   position: relative;
   display: flex;
+  min-width: 100px;
+  min-height: 100px;
+  @media screen and (max-width: $mobile-max){
+    min-width: 78px;
+    min-height: 78px;
+  }
   &:hover{
     .shade{
       visibility: visible;
@@ -44,6 +50,9 @@
     img{
       width: 100%;
       border-radius: 18px;
+      @media screen and (max-width: $mobile-max){
+        border-radius: 13px;
+      }
     }
 }
 
@@ -52,22 +61,34 @@
   height: 100%;
   width: 100%;
   visibility: hidden;
-  background: rgba(0, 0, 0, 0.9);
-  opacity: 0.4;
+  background: rgba(0, 0, 0, .4);
   border-radius: 12px;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container{
+  position: relative;
 }
 
 .btns{
-  position: absolute;
   visibility: hidden;
   right: 0;
   left: 0;
-  bottom: 0;
-  top: 0;
+  bottom: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  @media screen and (max-width: 1360px){
+    bottom: 0;
+  }
+  @media screen and (max-width: 550px){
+    bottom: 15px;
+  }
 }
 
 .btn{
@@ -77,25 +98,32 @@
   min-width: 80px;
   margin-bottom: 21px;
   padding: 13px 20px;
-  @media screen and (max-width: 1360px){
+  @media screen and (max-width: 1150px){
     min-width: auto;
     margin-bottom: 11px;
     max-width: 50px;
+    padding: 8px 12px;
   }
-  @media screen and (max-width: 1000px){
-    padding: 0;
-    height: 4vw;
-    width: 12vw;
-  }
-  @media screen and (max-width: 800px){
+  @media screen and (max-width: 840px){
+    min-width: auto;
+    max-width: 80px;
     padding: 13px 25px;
-    height: auto;
-    width: auto;
   }
-  @media screen and (max-width: 500px){
+  @media screen and (max-width: 700px){
+    min-width: auto;
+    margin-bottom: 11px;
+    max-width: 50px;
+    padding: 8px 12px;
+  }
+  @media screen and (max-width: $mobile-max){
     padding: 0;
     height: 7vw;
     width: 12vw;
+    margin-bottom: 11px;
+    font-size: 10px;
+  }
+  @media screen and (max-width: 360px){
+    margin-bottom: 2px;
   }
 }
 
@@ -104,28 +132,30 @@
   font-size: 12px;
   color: $white;
   min-width: 80px;
-  margin-bottom: 21px;
   padding: 13px 25px;
-  @media screen and (max-width: 1360px){
+  @media screen and (max-width: 1150px){
     min-width: auto;
-    margin-bottom: 11px;
     max-width: 50px;
+    padding: 8px 12px;
   }
-  @media screen and (max-width: 1000px){
-    padding: 0;
-    height: 4vw;
-    width: 12vw;
-    margin-bottom: 0;
-  }
-  @media screen and (max-width: 800px){
+  @media screen and (max-width: 840px){
+    min-width: auto;
+    max-width: 80px;
     padding: 13px 25px;
-    height: auto;
-    width: auto;
   }
-  @media screen and (max-width: 500px){
+  @media screen and (max-width: 700px){
+    min-width: auto;
+    max-width: 50px;
+    padding: 8px 12px;
+  }
+  @media screen and (max-width: 450px){
+    padding: 8px 20px;
+  }
+  @media screen and (max-width: $mobile-max){
     padding: 0;
     height: 7vw;
     width: 12vw;
+    font-size: 10px;
   }
 }
 
@@ -143,13 +173,17 @@
     width: 18px;
     height: 18px;
   }
-  @media screen and (max-width: 800px){
+  @media screen and (max-width: 840px){
     width: 28px;
     height: 28px;
   }
+  @media screen and (max-width: 600px){
+    width: 18px;
+    height: 18px;
+  }
   @media screen and (max-width: $mobile-max){
-    right: 6px;
-    top: 6px;
+    right: 3px;
+    top: 3px;
     width: 20px;
     height: 20px;
     padding: 5px;
@@ -166,12 +200,21 @@
 
 .list{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     position: relative;
     gap: 22px;
+    @media screen and (max-width: 1440px){
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    @media screen and (max-width: 840px){
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    @media screen and (max-width: 520px){
+      grid-template-columns: 1fr 1fr 1fr;
+    }
     @media screen and (max-width: $mobile-max){
         display: none;
-      }
+    }
 }
 
 .mobile{

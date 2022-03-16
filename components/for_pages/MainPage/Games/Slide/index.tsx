@@ -37,8 +37,8 @@ export default function Slide(props: Props) {
           <Button className={styles.btn} size='small' background='blueGradient500'>Играть</Button>
           <Button className={styles.demo} size='small' background='blackTransparent'>Демо</Button>
         </div>
-        </div>
-        </div>
+      </div>
+      </div>
       <div className={styles.label}>
         {props.item.label}
       </div>

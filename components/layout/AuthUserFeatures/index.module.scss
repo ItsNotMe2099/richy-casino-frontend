@@ -16,5 +16,8 @@
     z-index: 20;
     @media screen and (max-width: $xs-max){
         bottom: 35px;
-      }
+    }
+    @media screen and (max-width: $mobile-max){
+      width: 100%;
+  }
 }

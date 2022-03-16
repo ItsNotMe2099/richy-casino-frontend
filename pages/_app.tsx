@@ -17,7 +17,7 @@ import NotificationBanner from 'components/for_pages/Common/NotificationBanner'
 import HiddenXs from 'components/ui/HiddenXS'
 function MyApp({ Component, pageProps }: AppProps) {
   setConfiguration({
-    gutterWidth: 40,
+    gutterWidth: 20,
     //breakpoints: [700, 950, 1360],
     //containerWidths: [950, 960, 1320],
   })
