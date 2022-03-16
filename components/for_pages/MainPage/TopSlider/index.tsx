@@ -71,7 +71,7 @@ export default function TopSlider(props: Props) {
               <div className={styles.rootSlide} key={index}>
                 <div className={styles.item} style={{backgroundImage: `url(${item.image})`}}>
                   <div className={styles.left}>
-                    <div className={classNames(styles.label, {[styles.otherLabel]: index !== 0})}>
+                    <div className={classNames({[styles.label]: index == 0})}>
                       {item.label}
                     </div>
                     <div className={styles.btn}>

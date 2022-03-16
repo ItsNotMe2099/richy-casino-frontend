@@ -7,11 +7,25 @@
   position: relative;
   overflow: hidden;
   max-height: 250px;
+  height: 100%;
   @media screen and (max-width: 1360px){
     padding-left: 18px;
   }
   @media screen and (max-width: 800px){
     padding: 15px 0 9px 15px;
+  }
+  @media screen and (max-width: 800px){
+    max-height: 14.5rem;
+    min-height: 14.5rem;
+    padding: 20px 0 9px 15px;
+  }
+  @media screen and (max-width: $xs-max){
+    max-height: 12rem;
+    min-height: 12rem;
+  }
+  @media screen and (max-width: $mobile-max){
+    max-height: 10rem;
+    min-height: 10rem;
   }
   @media screen and (max-width: $xs-max){
     padding: 15px 0 9px 15px;

@@ -13,6 +13,9 @@
   @media screen and (max-width: 1360px){
     padding-left: 18px;
   }
+  @media screen and (max-width: 1000px){
+    padding-top: 23px;
+  }
   @media screen and (max-width: 800px){
     max-height: 14.5rem;
     min-height: 14.5rem;
@@ -115,7 +118,10 @@
 }
 
 .second{
-  font-size: 26px;
+  font-size: calc(18px + 0.5vw);
+  @media screen and (max-width: $xs-max){
+    font-size: calc(14px + 0.5vw);
+  }
 }
 
 .btn{
@@ -128,6 +134,9 @@
     padding-left: 24px;
     @media screen and (max-width: $xs-max){
       padding: 12px 15px;
+    }
+    @media screen and (max-width: 570px){
+      font-size: calc(12px + 0.5vw);
     }
   }
 }
@@ -160,12 +169,14 @@
   width: 100%;
   list-style: none;
   right: 0;
-  bottom: -35%;
+  bottom: -30%;
   left: -25%;
   @media screen and (max-width: 1300px){
     bottom: -15%;
   }
-
+  @media screen and (max-width: 800px){
+    bottom: -10%;
+  }
   :global .slick-active{
 
     button{

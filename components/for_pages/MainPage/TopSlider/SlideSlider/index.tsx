@@ -49,6 +49,14 @@ export default function SlideSlider(props: Props) {
     beforeChange: (current: number, next: number) => setCurrentIndex(next),
     autoplay: true,
     autoplaySpeed: 5000,
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          dots: false
+        }
+      },
+    ]
   }
 
   return (
