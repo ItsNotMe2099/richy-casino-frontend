@@ -15,6 +15,12 @@ export default function Statistics(props: Props) {
     {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 2.00829378', id: 12345678987654321245},
     {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '0.00', amount: '+ 2.00829378', id: 12345678987654321245},
     {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 2.00829378', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 2.00829378', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '0.00', amount: '+ 2.00829378', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 2.00829378', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 2.00829378', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '0.00', amount: '+ 2.00829378', id: 12345678987654321245},
+    {nickname: 'Alex Terner', game: 'Baccart Hash Dice', gameImg: '/img/Statistics/game.svg', mult: '1.51', amount: '+ 2.00829378', id: 12345678987654321245},
   ]
 
   return (
@@ -41,7 +47,7 @@ export default function Statistics(props: Props) {
                 Выигрыш
               </div>
             </div>
-            {users.map((item, index) =>
+            {users.slice(0, 10).map((item, index) =>
               <div className={classNames(styles.row, styles.rowInner)} key={index}>
                 <div className={styles.cell}>
                   <div className={styles.game}>
@@ -72,8 +78,8 @@ export default function Statistics(props: Props) {
                 </div>
                 <div className={styles.cell}>
                   <div className={classNames(styles.amount, {[styles.red]: +item.mult <= 0})}>
-                  <div><img src='/img/Winners/BTC.png' alt=''/></div>
-                  <div className={styles.amountText}>{item.amount}</div>
+                  <img src='/img/Winners/BTC.png' alt=''/>
+                  {item.amount}
                   </div>
                 </div>
               </div>

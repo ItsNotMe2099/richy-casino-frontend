@@ -77,7 +77,6 @@
     border-collapse: separate;
     margin-top: 21px;
     border-collapse: collapse;
-    table-layout: fixed;
     display: table;
     width: 100%;
     tbody{
@@ -308,7 +307,6 @@
     @media screen and (max-width: $mobile-max){
         font-size: 0.7rem;
         width: 6rem;
-        flex-direction: column;
     }
 }
 
@@ -324,7 +322,6 @@
     overflow-x: hidden;
     border-bottom-left-radius: 18px;
     border-bottom-right-radius: 18px;
-    max-height: 413px;
 }
 
 .amountText{
