@@ -83,7 +83,7 @@ export default function GamesList(props: Props) {
     switch (icon){
       case '/img/Contents/live.svg':
         return 'blue'
-      case '/img/Contents/all-games.svg':
+      case '/img/Contents/all-games.png':
         return 'red'
       case '/img/Contents/gamepad.svg':
         return 'blue'

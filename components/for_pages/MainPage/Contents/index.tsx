@@ -15,7 +15,7 @@ export default function Contents(props: Props) {
     {image: '/img/Contents/bitcoin.svg', label: 'Free Bitcoin', desc: 'Win satoshi every hour', link: '#', value: 'bitcoin'},
     {image: '/img/Contents/gamepad.svg', label: 'Richy Games', desc: 'Our best crypto games', link: '#', value: 'richy'},
     {image: '/img/Contents/casino.svg', label: 'Casino', desc: 'Over 5000 games', link: '#', value: 'casino'},
-    {image: '/img/Contents/poker.svg', label: 'Poker', desc: 'Top tournaments', link: '#', value: 'poker'},
+    {image: '/img/Contents/poker.png', label: 'Poker', desc: 'Top tournaments', link: '#', value: 'poker'},
     {image: '/img/Contents/cup.svg', label: 'Tournaments', desc: 'Top tournaments', link: '#', value: 'tournaments'},
     {image: '/img/Contents/live.svg', label: 'Live Casino', desc: 'Our best crypto games', link: '#', value: 'live'},
   ]
