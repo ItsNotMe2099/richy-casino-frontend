@@ -53,7 +53,13 @@ export default function Contents(props: Props) {
               {item.label}
             </div>
             <div className={styles.desc}>
-              {item.desc}
+              {item.desc.split(' ').map((word, index) => 
+                index !== (item.desc.split(' ').length - 1) && <span>{word}&nbsp;</span>
+              )}
+              <br className={styles.break}/>
+              {item.desc.split(' ').slice(item.desc.split(' ').length - 1).map((word, index) => 
+                <>{word}&nbsp;</>
+              )}
             </div>
           </a>
           </Link>
