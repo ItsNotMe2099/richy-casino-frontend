@@ -21,6 +21,7 @@ export default function PaymentHistory(props: Props) {
     {label: null, card: '0000000000000001', date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
     {label: 'Qiwi', card: null, date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
     {label: null, card: '0000000000000001', date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
+    {label: null, card: '0000000000000001', date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
   ]
 
   const Item = ({label, card, date, amount}: ItemProps) => {
@@ -51,9 +52,11 @@ export default function PaymentHistory(props: Props) {
         <div className={styles.wrapper}>
           <SwitchFilter payment/>
         </div>
+        <div className={styles.list}>
         {items.map((item, index) => 
           <Item label={item.label} card={item.card} date={item.date} amount={item.amount} key={index}/>
         )}
+        </div>
         <div className={styles.btn}>
         <Button size='normal' background='payGradient500'>Пополнить</Button>
         </div>

@@ -10,6 +10,11 @@
   margin-bottom: 23px;
 }
 
+.list{
+  overflow-y: auto;
+  max-height: 450px;
+}
+
 .item{
   display: flex;
   border-radius: 14px;

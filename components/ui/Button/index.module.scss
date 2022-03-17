@@ -93,6 +93,9 @@
 
 .blackTransparent {
   background: rgba(39, 40, 50, 0.8);
+  &:hover {
+    background-color: $dark500;
+  }
 }
 
 .variantOutlined {
