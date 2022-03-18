@@ -5,6 +5,6 @@ interface Props{
   balance?: string
 }
 export default function GFieldBet({balance, ...rest}:Props) {
- return   <GField  name={'bet'} label={'Сумма'} labelSuffix={balance} prefix={'DG'} suffix={'arrow'} inputClassName={styles.input} {...rest}/>
+ return   <GField  name={'bet'} label={'Сумма'} type={'number'} labelSuffix={balance} prefix={'DG'} suffix={'arrow'} inputClassName={styles.input} {...rest}/>
 }
 

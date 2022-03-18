@@ -9,7 +9,7 @@ interface Props {
   fluid?: boolean
 }
 
-export enum IGameModeType {
+export enum CasinoGameModeType {
   Manual = 'manual',
   Auto = 'auto'
 }

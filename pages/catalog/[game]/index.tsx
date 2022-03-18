@@ -5,26 +5,26 @@ import { Row, Col } from 'react-grid-system'
 import {GetServerSideProps} from 'next'
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import {useRouter} from 'next/router'
-import {GameType} from 'types/enums'
 import GameMines from 'components/for_pages/games/Mines'
 import GameDice from 'components/for_pages/games/Dice'
 import GameKeno from 'components/for_pages/games/Keno'
-import GameWheelOfFortune from 'components/for_pages/games/WheelOfFortune'
 import GameLimbo from 'components/for_pages/games/Limbo'
+import {GameWrapper} from 'components/for_pages/games/context/state'
+import {CasinoGameType} from 'components/for_pages/games/data/enums'
 
 export default function CatalogPage() {
   const {query} = useRouter()
   const renderGame = () => {
     switch (query.game as string){
-      case GameType.Mines:
+      case CasinoGameType.Mines:
         return <GameMines/>
-      case GameType.Dice:
+      case CasinoGameType.Dice:
         return <GameDice/>
-      case GameType.Keno:
+      case CasinoGameType.Keno:
         return <GameKeno/>
-      case GameType.WheelOfFortune:
-        return <GameWheelOfFortune/>
-      case GameType.Limbo:
+    //  case CasinoGameType.WheelOfFortune:
+    //    return <GameWheelOfFortune/>
+      case CasinoGameType.Limbo:
         return <GameLimbo/>
       default:
         return <GameMines/>
@@ -35,7 +35,7 @@ export default function CatalogPage() {
       <Row className={styles.desktop}>
       <Filter items={[]} mobile/>
       <Col className={styles.content}>
-        {renderGame()}
+        <GameWrapper gameType={query.game as CasinoGameType} token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywicGFydG5lclVzZXJJZCI6IjEyMiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQ3NTYwMTc1LCJleHAiOjIwMDc1NjAxNzV9.AmPBXZtnMEkwItIMB3YTF3z-lP6B4s7zHnrnyQVrGWY'}>{renderGame()}</GameWrapper>
       </Col>
       </Row>
     </Layout>
