@@ -1,6 +1,6 @@
 import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
 import {FieldConfig, useField, useFormikContext} from 'formik'
-import { useRef } from 'react'
+import {ReactElement, useRef} from 'react'
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import { IOption} from 'types/interfaces'
@@ -16,6 +16,7 @@ interface Props<T> {
   className?: string
   rootClass?: string
   withdraw?: boolean
+  itemComponent: (option: IOption<T> , isActive: boolean, onClick: () => void) => ReactElement
 }
 
 export  function Select<T>(props: Props<T> & FieldConfig){
@@ -72,7 +73,7 @@ export  function Select<T>(props: Props<T> & FieldConfig){
         </div>
       </div>
       <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive }, {[styles.withdraw]: withdraw})}>
-       {options.map((item, index) =>
+       {options.map((item, index) => props.itemComponent ? props.itemComponent(item, currentItem?.value === item.value, () => handleChange(item.value)) :
         exchange ?
         <div className={styles.symbolAndName} key={index} onClick={() => handleChange(item.value)}>
         <img src={item.symbol} alt=''/>
