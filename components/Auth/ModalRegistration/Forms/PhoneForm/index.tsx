@@ -11,40 +11,31 @@ import InputField from 'components/ui/Inputs/InputField'
 import Validator from 'utils/validator'
 import {ModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
-import { Currency } from 'types/interfaces'
 import AuthRepository from 'data/repositories/AuthRepository'
 import FormError from 'components/ui/Form/FormError'
+import {convertCurrencyToOptions} from 'utils/converter'
+import {RegistrationPhoneModalArguments} from 'types/interfaces'
 
 interface Props {
-  currencies: Currency[]
 }
 
 export default function PhoneForm(props: Props) {
-
   const context = useAppContext()
   const [error, setError] = useState<string | null>(null)
   const handleSubmit = async (data) => {
     try {
       setError(null)
-      const res = await AuthRepository.registerPhoneSendOtp({
+      await AuthRepository.registerPhoneSendOtp({
         phone: data.phone,
+        currency: data.currency
       })
-      const accessToken = res.token
-
-      if (!accessToken) {
-        setError('Ошибка Регистрации')
-      }
-
-      context.setToken(accessToken)
-      context.updateUserFromCookies()
-      context.showModal(ModalType.registrationPhone, {login: data.phone, ...res})
+      context.showModal(ModalType.registrationPhone, {phone: data.phone} as RegistrationPhoneModalArguments)
     } catch (e) {
       setError(e.message)
     }
   }
   const initialValues = {
       phone: null,
-      password: null,
       currency: 121,
       checkBox: false
     }
@@ -60,9 +51,8 @@ export default function PhoneForm(props: Props) {
     <Form className={styles.form}>
 
       <div className={styles.inputs}>
-        <Select name='currency' options={props.currencies}/>
+        <Select name='currency' options={convertCurrencyToOptions(context.currencies)}/>
         <InputField format={'phone'} name={'phone'} placeholder={'Номер телефона'} validate={Validator.required} />
-        <InputField name={'password'} type={'password'} obscure={true} placeholder={'Придумайте пароль'} validate={Validator.required}/>
         <div className={styles.promo} onClick={() => promoCode ? setPromoCode(false) : setPromoCode(true)}>
           <div className={classNames(styles.plus, {[styles.expanded]: promoCode})}>{promoCode ? '-' : '+'}</div>
            <span>У меня есть промокод</span>

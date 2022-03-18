@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import { useTranslation } from 'react-i18next'
+import {useTranslation} from 'react-i18next'
 import {Form, Formik} from 'formik'
 import Button from 'components/ui/Button'
 import InputField from 'components/ui/Inputs/InputField'
@@ -18,22 +18,15 @@ interface Props {
 
 export default function ModalPasswordReset(props: Props) {
   const context = useAppContext()
-  const modalProps = context.modalProps
-  const login = modalProps.login
+  const modalArguments = context.modalArguments
+  const login = modalArguments.login
   const [error, setError] = useState<string | null>(null)
   const handleSubmit = async (data) => {
     try {
       setError(null)
-      const res = await AuthRepository.resetPassword({login: data.login, code: data.code, password: data.password})
-      const accessToken = res.token
+      const res = await AuthRepository.resetPassword({identity: login, token: data.code, password: data.password})
 
-      if (!accessToken) {
-        return
-      }
-
-      context.setToken(accessToken)
-      context.updateUserFromCookies()
-      context.hideModal()
+      context.showModal(ModalType.login)
 
     } catch (e) {
       setError(e.message)
@@ -76,7 +69,7 @@ export default function ModalPasswordReset(props: Props) {
             />
           </div>
           <div className={styles.buttons}>
-            <Button type='button' className={styles.button} size='submit' background='dark600' onClick={() => context.showModal(ModalType.passwordRecovery, {login: context.modalProps.login})}>Отменить</Button>
+            <Button type='button' className={styles.button} size='submit' background='dark600' onClick={() => context.showModal(ModalType.passwordRecovery, {login: context.modalArguments.login})}>Отменить</Button>
             <div className={styles.spacer}/>
             <Button type='submit' className={styles.button} size='submit' background='blueGradient500' >Сменить</Button>
           </div>

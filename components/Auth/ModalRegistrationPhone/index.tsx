@@ -10,6 +10,7 @@ import {useState} from 'react'
 import AuthRepository from 'data/repositories/AuthRepository'
 import {ModalType} from 'types/enums'
 import FormError from 'components/ui/Form/FormError'
+import {RegistrationPhoneModalArguments, RegistrationSuccessModalArguments} from 'types/interfaces'
 
 interface Props {
 
@@ -17,15 +18,16 @@ interface Props {
 
 export default function ModalRegistrationPhone(props: Props) {
   const context = useAppContext()
+  const args = context.modalArguments as RegistrationPhoneModalArguments
+
   const [error, setError] = useState<string | null>(null)
   const handleSubmit = async (data) => {
     try {
       setError(null)
       const res = await AuthRepository.registerPhone({
         code: data.code,
-        phone: null,
-        password: data.password,
-        authToken: null,
+        phone: args.phone,
+        password: data.password
       })
       const accessToken = res.token
 
@@ -35,7 +37,7 @@ export default function ModalRegistrationPhone(props: Props) {
 
       context.setToken(accessToken)
       context.updateUserFromCookies()
-      context.showModal(ModalType.registrationSuccess, {login: data.email, password: data.password})
+      context.showModal(ModalType.registrationSuccess, {login: args.phone, password: data.password} as RegistrationSuccessModalArguments)
     } catch (e) {
       setError(e.message)
     }
@@ -56,7 +58,7 @@ export default function ModalRegistrationPhone(props: Props) {
         <Form className={styles.form}>
           <div className={styles.description}>
             Введите ниже <span className={styles.code}>код</span>, отправленный на указанный
-            Вами номер тел. <span className={styles.phone}>{formatPhone(context.modalProps.login)}</span>
+            Вами номер тел. <span className={styles.phone}>{formatPhone(args.phone)}</span>
           </div>
           <div className={styles.inputs}>
             <InputField

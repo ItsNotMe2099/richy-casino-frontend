@@ -2,6 +2,8 @@ import fetch from 'cross-fetch'
 import { runtimeConfig } from 'config/runtimeConfig'
 import Cookies from 'js-cookie'
 import { CookiesType } from 'types/enums'
+import {IApiResponse} from 'types/interfaces'
+import {convertApiResponseError} from 'utils/converter'
 
 interface Options {
   url: string
@@ -12,7 +14,7 @@ interface Options {
 
 interface Res {
   data: any | null
-  err: string | null
+  err: string | string[] | null
 }
 
 async function request(options: string | Options): Promise<Res> {
@@ -51,19 +53,20 @@ async function request(options: string | Options): Promise<Res> {
       }
     }
 
-    const jsonData = await res.json()
+    const jsonData: IApiResponse = await res.json()
+    if(!jsonData?.success){
+      return {
+        data: jsonData,
+        err: convertApiResponseError(jsonData),
+      }
+    }
     if (res.status === 200 || res.status === 201) {
+
       return {
         data: jsonData,
         err: null,
       }
-    } else {
-      return {
-        data: null,
-        err: jsonData ?? {message: 'Error'},
-      }
     }
-
   } catch (err) {
     return {
       data: null,

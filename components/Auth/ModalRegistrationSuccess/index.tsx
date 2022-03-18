@@ -19,9 +19,9 @@ export default function ModalRegistrationSuccess(props: Props) {
 
   const { t } = useTranslation('common')
 
-  const {modalProps} = useAppContext()
+  const {modalArguments} = useAppContext()
   const handleDownload = () => {
-    saveDownloadedData('richy_casino-credentials.txt', `Login: ${modalProps.login}\r\n Password: ${modalProps.password}`)
+    saveDownloadedData('richy_casino-credentials.txt', `Login: ${modalArguments.login}\r\n Password: ${modalArguments.password}`)
   }
   const Field = ({text, value, className}: FieldProps) => {
 
@@ -54,8 +54,8 @@ export default function ModalRegistrationSuccess(props: Props) {
         Не забудьте сохранить
           логин и пароль:
       </div>
-      <Field text='Логин' value={modalProps.login}/>
-      <Field text='Пароль' value={modalProps.password} className={styles.password}/>
+      <Field text='Логин' value={modalArguments.login}/>
+      <Field text='Пароль' value={modalArguments.password} className={styles.password}/>
       <Button className={styles.button} size='submit' background='blueGradient500' onClick={handleDownload}>Скачать в TXT</Button>
     </div>
   )

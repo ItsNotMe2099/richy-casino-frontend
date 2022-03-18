@@ -30,7 +30,6 @@ export function AuthWrapper(props: Props) {
   const [error, setError] = useState<string | null>(null)
 
   const login = async (values: LoginFormData) => {
-    console.log('values', values)
     setLoginFormData(values)
     try {
       setError(null)
@@ -47,6 +46,7 @@ export function AuthWrapper(props: Props) {
 
       appContext.setToken(accessToken)
       appContext.updateUserFromCookies()
+      appContext.hideModal()
     }catch (e){
       setError(e.message)
     }

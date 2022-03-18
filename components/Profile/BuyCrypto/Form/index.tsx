@@ -5,6 +5,8 @@ import styles from './index.module.scss'
 import Validator from 'utils/validator'
 import { Select } from 'components/ui/Inputs/Select'
 import { useEffect } from 'react'
+import {ICurrency} from 'data/interfaces/ICurrency'
+import {convertCurrencyToOptions} from 'utils/converter'
 
 interface IUser{
   id: string
@@ -32,8 +34,8 @@ export default function BuyCryptoForm(props: Props) {
   }
 
   const array = [
-    {id: 1, iso: 'btc', name: 'BTC', symbol: '/img/Exchange/bitcoin.png', type: 0 },
-    {id: 2, iso: 'eht', name: 'EHT', symbol: '/img/Exchange/eth.png', type: 0 }
+    { iso: 'btc', name: 'BTC', rate: 0, /*symbol: '/img/Exchange/bitcoin.png'*/},
+    { iso: 'eht', name: 'EHT', rate: 0, /*symbol: '/img/Exchange/eth.png'*/ }
   ]
 
   const formik = useFormik({
@@ -58,18 +60,18 @@ export default function BuyCryptoForm(props: Props) {
           </div>
           <div className={styles.inputs}>
             <InputField name={'amountSent'} className={styles.input} validate={Validator.required}/>
-            <Select name='currencySent' options={array} exchange className={styles.select} rootClass={styles.selectRoot}/>
+            <Select name='currencySent' options={convertCurrencyToOptions(array as ICurrency[])} exchange className={styles.select} rootClass={styles.selectRoot}/>
           </div>
         </div>
         <div className={styles.send}>
           <div className={styles.texts}>
             <div className={styles.youSend}>
-              Оплатить в 
+              Оплатить в
             </div>
           </div>
           <div className={styles.inputs}>
             <InputField name={'amountGet'} className={styles.input} validate={Validator.required} disabled/>
-            <Select name='currencyGet' options={array} exchange className={styles.select} rootClass={styles.selectRoot}/>
+            <Select name='currencyGet' options={convertCurrencyToOptions(array as ICurrency[])} exchange className={styles.select} rootClass={styles.selectRoot}/>
           </div>
         </div>
         <div className={styles.disclaimer}>

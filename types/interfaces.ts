@@ -21,14 +21,6 @@ export interface LoginFormData {
   password: string
 }
 
-export interface Currency {
-  id: number
-  iso: string
-  name: string
-  symbol: string
-  type: number
-}
-
 export interface Country {
   id: number
   iso: string
@@ -53,4 +45,43 @@ export const LINKS = {
 export interface IOption<T> {
   label: string
   value: T
+  symbol?: string,
+  icon?: string
+}
+export interface IPagination<T>{
+  data: T[]
+  total: number
+}
+export interface IApiResponseErrorDetails{
+  field: string,
+  message: string
+}
+export interface IApiResponseError{
+  code: number,
+  details: IApiResponseErrorDetails[]
+}
+export interface IApiResponse{
+  success: boolean,
+  data: any
+  error?: IApiResponseError
+}
+export interface IApiPaginationResponse{
+  success: boolean,
+  data: any[],
+  _meta: {
+    totalCount: number,
+    pageCount: number,
+    currentPage: number,
+    perPage: number
+  }
+}
+export interface RegistrationPhoneModalArguments {
+  phone: string
+}
+export interface RegistrationSuccessModalArguments {
+  login: string
+  password: string
+}
+export interface PasswordResetModalArguments {
+  login: string
 }

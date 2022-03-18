@@ -9,6 +9,7 @@ import { useAppContext } from 'context/state'
 import {useState} from 'react'
 import AuthRepository from 'data/repositories/AuthRepository'
 import FormError from 'components/ui/Form/FormError'
+import {PasswordResetModalArguments} from 'types/interfaces'
 
 interface Props {
   isOpen?: boolean
@@ -23,7 +24,7 @@ export default function ModalPasswordRecovery(props: Props) {
     try {
       setError(null)
       const res = await AuthRepository.forgotPassword(data.login)
-      context.showModal(ModalType.passwordReset, {login: data.login})
+      context.showModal(ModalType.passwordReset, {login: data.login} as PasswordResetModalArguments)
     } catch (e) {
       setError(e.message)
     }

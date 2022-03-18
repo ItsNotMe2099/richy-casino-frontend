@@ -3,11 +3,10 @@ import {FieldConfig, useField, useFormikContext} from 'formik'
 import { useRef } from 'react'
 import styles from './index.module.scss'
 import classNames from 'classnames'
-import { Country, Currency } from 'types/interfaces'
+import { IOption} from 'types/interfaces'
 
-interface Props {
-  options: (Currency | Country)[]
-  currency?: Currency
+interface Props<T> {
+  options: IOption<T>[]
   label?: string
   placeholder?: string
   disabled?: boolean
@@ -19,8 +18,8 @@ interface Props {
   withdraw?: boolean
 }
 
-export const Select = (props: Props & FieldConfig) => {
-  const {label, placeholder, options, disabled, altStyle, country, exchange, className, rootClass, withdraw, currency} = props
+export  function Select<T>(props: Props<T> & FieldConfig){
+  const {label, placeholder, options, disabled, altStyle, country, exchange, className, rootClass, withdraw} = props
   const [field, meta] = useField(props)
   const {value} = field
   const { setFieldValue, setFieldTouched } = useFormikContext()
@@ -38,7 +37,7 @@ export const Select = (props: Props & FieldConfig) => {
     setIsActive(false)
   }
 
-  const currentItem = options.find(i => i.id === value)
+  const currentItem = options.find(i => i.value === value)
   const hasError = !!meta.error && meta.touched
   return (
     <div className={classNames(styles.root, {[styles.hasError]: !!meta.error && meta.touched}, rootClass)}>
@@ -53,14 +52,11 @@ export const Select = (props: Props & FieldConfig) => {
         <div className={styles.symbolAndName}>
         {!withdraw && <div className={styles.separator}></div>}
         <img src={currentItem.symbol} alt=''/>
-        {currentItem?.name}
+        {currentItem?.label}
         </div>
         :
-        <div className={styles.placeholder}><div className={styles.icon}>{!country && currentItem?.symbol}</div>
-        {(currentItem && !country && !altStyle) ? <div className={styles.name}>{currentItem?.name} ({currentItem?.iso})</div> 
-        : (currentItem && !country && altStyle) ? <div className={styles.name}>{currentItem?.symbol} ({currentItem?.name})</div> 
-        : currentItem ? <div className={styles.name}>{currentItem?.name}</div> 
-        : (placeholder || '')}</div>}
+          <div className={styles.name}>{`${currentItem?.symbol ? `${currentItem.symbol} ` : ''}`}{currentItem?.label}</div>
+        }
         <div className={styles.leftSide}>
         {withdraw &&
           <div className={styles.rate}>
@@ -78,9 +74,9 @@ export const Select = (props: Props & FieldConfig) => {
       <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive }, {[styles.withdraw]: withdraw})}>
        {options.map((item, index) =>
         exchange ?
-        <div className={styles.symbolAndName} key={index} onClick={() => handleChange(item.id)}>
+        <div className={styles.symbolAndName} key={index} onClick={() => handleChange(item.value)}>
         <img src={item.symbol} alt=''/>
-        {item.name}
+        {item.label}
         {withdraw &&
           <div className={styles.rate}>
             <div className={styles.usdt}>
@@ -93,14 +89,11 @@ export const Select = (props: Props & FieldConfig) => {
         }
         </div>
         :
-       <div key={index} 
-       className={classNames(styles.option, {[styles.optionActive]: currentItem?.id === item.id })} onClick={() => handleChange(item.id)}>
-         <div className={styles.icon}>{item.symbol}</div>{!country ? 
-         <div className={styles.name}>{item.name} ({item.iso})</div>
-          :
-        <div className={styles.name}>{item.name}</div>
-        }
-         </div>)}
+       <div key={index}
+       className={classNames(styles.option, {[styles.optionActive]: currentItem?.value === item.value })} onClick={() => handleChange(item.value)}>
+         {item.symbol && <div className={styles.icon}>{item.symbol}</div>}
+         <div className={styles.name}>{item.label}</div>
+       </div>)}
        </nav>
       </div>
     </div>
