@@ -10,7 +10,7 @@ import VisibleXs from 'components/ui/VisibleXS'
 import GamePageBetButton from 'components/for_pages/games/components/GamePageBetButton'
 import GFieldMode from 'components/for_pages/games/components/inputs/GFieldMode'
 import GamePageSidebarLayout from 'components/for_pages/games/components/layout/GamePageSidebarLayout'
-import {IGameModeType} from 'components/ui/Tabs'
+import {CasinoGameModeType} from 'components/ui/Tabs'
 
 interface Props {
 
@@ -24,7 +24,7 @@ export default function Sidebar(props: Props) {
 
   const formik = useFormik({
     initialValues: {
-      mode: IGameModeType.Manual,
+      mode: CasinoGameModeType.Manual,
       bet: null,
       betAmount: null,
       onWinType: null,
@@ -48,7 +48,7 @@ export default function Sidebar(props: Props) {
             </>
           </HiddenXs>
           <GField name={'mines'} label={'Mines'} suffix={'arrow'}/>
-          {mode === IGameModeType.Auto && <>
+          {mode === CasinoGameModeType.Auto && <>
             <GFieldBetAmount name={'betAmount'}/>
             <GFieldAutoAction typeName={'onWinType'} valueName={'onWinValue'}/>
             <GFieldAutoAction typeName={'onLooseType'} valueName={'onLooseValue'}/>

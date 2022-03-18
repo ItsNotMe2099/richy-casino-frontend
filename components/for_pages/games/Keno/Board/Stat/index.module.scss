@@ -3,23 +3,31 @@
 
 .root{
   margin-top: 27px;
+  display: grid;
+  grid-gap: 0px 3px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
-.block{
-  background: $dark600;
-  color: $dark200;
+.item{
   text-align: center;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-  padding-top: 3px;
-  border-radius: 2px;
-  @media screen and (max-width: $xs-max){
-    font-size: 11px;
+  .number, .multiplier{
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2px;
+    background: $dark600;
+    border-radius: 2px;
+    color: $dark200;
+    font-weight: bold;
+    font-size: 12px;
   }
-}
-.block2{
-  margin-top: 2px;
+  .multiplier{
+    margin-top: 2px;
+  }
+  &.active{
+    .number, .multiplier{
+      background: #FFD12F;
+      color: $dark700;
+    }
+  }
 }

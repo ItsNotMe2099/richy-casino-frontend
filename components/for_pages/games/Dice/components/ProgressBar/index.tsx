@@ -12,7 +12,7 @@ interface Props extends IField{
   className?: string
   progressBarClassName?: string
   limit: number
-  state: 'up' | 'down',
+  state: 'higher' | 'lower',
 
 }
 
@@ -51,8 +51,8 @@ export const GDiceProgressBar = (props: Props & FieldConfig) => {
 
         <div className={styles.progressContainer}>
         <div className={cx(styles.progressBar, progressBarClassName, {
-          [styles.up]: state === 'up',
-          [styles.down]: state === 'down',
+          [styles.up]: state === 'higher',
+          [styles.down]: state === 'lower',
         })}>
           <div className={styles.progressBorders}>
             <div className={styles.shadow}>

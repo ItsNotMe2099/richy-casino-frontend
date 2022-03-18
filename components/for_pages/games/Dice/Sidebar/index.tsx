@@ -1,4 +1,3 @@
-import {Form, FormikProvider, useFormik} from 'formik'
 import GFieldBet from 'components/for_pages/games/components/inputs/GFieldBet'
 import GFieldBetAmount from 'components/for_pages/games/components/inputs/GFieldBetAmount'
 import GFieldAutoAction from 'components/for_pages/games/components/inputs/GFieldAutoAction'
@@ -9,44 +8,26 @@ import VisibleXs from 'components/ui/VisibleXS'
 import GamePageBetButton from 'components/for_pages/games/components/GamePageBetButton'
 import GFieldMode from 'components/for_pages/games/components/inputs/GFieldMode'
 import GamePageSidebarLayout from 'components/for_pages/games/components/layout/GamePageSidebarLayout'
-import {IGameModeType} from 'components/ui/Tabs'
+import {CasinoGameModeType} from 'components/ui/Tabs'
+import {ICasinoGameDiceDto} from 'components/for_pages/games/data/interfaces/ICasinoGameData'
 
 interface Props {
-
+  values: ICasinoGameDiceDto
 }
 
 export default function Sidebar(props: Props) {
-
-  const onSubmit = (data) => {
-
-  }
-
-  const formik = useFormik({
-    initialValues: {
-      mode: IGameModeType.Manual,
-      bet: null,
-      betAmount: null,
-      onWinType: null,
-      onWinValue: null,
-      onLooseType: null,
-      onLooseValue: null,
-    },
-    onSubmit,
-  })
-
-  const {values} = formik
+  const {values} = props
   const {mode} = values
+
   return (
     <GamePageSidebarLayout>
-      <FormikProvider value={formik}>
-        <Form>
           <HiddenXs>
             <>
               <GFieldMode/>
               <GFieldBet balance={'0.0s0ds0d0sd BTC'}/>
             </>
           </HiddenXs>
-          {mode === IGameModeType.Auto && <>
+          {mode === CasinoGameModeType.Auto && <>
             <GFieldBetAmount name={'betAmount'}/>
             <GFieldAutoAction typeName={'onWinType'} valueName={'onWinValue'}/>
             <GFieldAutoAction typeName={'onLooseType'} valueName={'onLooseValue'}/>
@@ -56,7 +37,6 @@ export default function Sidebar(props: Props) {
           <HiddenXs>
             <GamePageBetButton/>
           </HiddenXs>
-
           <VisibleXs>
             <>
               <GFieldMode/>
@@ -66,10 +46,7 @@ export default function Sidebar(props: Props) {
               </GamePageBetMobileLayout>
             </>
           </VisibleXs>
-        </Form>
-      </FormikProvider>
     </GamePageSidebarLayout>
-
   )
 }
 

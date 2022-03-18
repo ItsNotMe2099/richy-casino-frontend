@@ -1,5 +1,4 @@
 import {Form, FormikProvider, useFormik} from 'formik'
-import GField from 'components/for_pages/games/components/inputs/GField'
 import GFieldBet from 'components/for_pages/games/components/inputs/GFieldBet'
 import GFieldBetAmount from 'components/for_pages/games/components/inputs/GFieldBetAmount'
 import GFieldAutoAction from 'components/for_pages/games/components/inputs/GFieldAutoAction'
@@ -10,23 +9,24 @@ import VisibleXs from 'components/ui/VisibleXS'
 import GamePageBetButton from 'components/for_pages/games/components/GamePageBetButton'
 import GFieldMode from 'components/for_pages/games/components/inputs/GFieldMode'
 import GamePageSidebarLayout from 'components/for_pages/games/components/layout/GamePageSidebarLayout'
-import {IGameModeType} from 'components/ui/Tabs'
+import {CasinoGameModeType} from 'components/ui/Tabs'
 import {GFieldSelectTabs} from 'components/for_pages/games/components/inputs/GFieldSelectTabs'
 import {KenoGameLevel} from 'components/for_pages/games/Keno/data/enums'
+import {ICasinoGameDataDto} from 'components/for_pages/games/data/interfaces/ICasinoGameData'
 
 interface Props {
-
+  onSubmit: (data: ICasinoGameDataDto) => void
 }
 
 export default function Sidebar(props: Props) {
 
   const onSubmit = (data) => {
-
+    props.onSubmit(data)
   }
 
   const formik = useFormik({
     initialValues: {
-      mode: IGameModeType.Manual,
+      mode: CasinoGameModeType.Manual,
       bet: null,
       betAmount: null,
       onWinType: null,
@@ -54,8 +54,7 @@ export default function Sidebar(props: Props) {
               <GFieldBet balance={'0.0s0ds0d0sd BTC'}/>
             </>
           </HiddenXs>
-          <GField name={'mines'} label={'Mines'} suffix={'arrow'}/>
-          {mode === IGameModeType.Auto && <>
+          {mode === CasinoGameModeType.Auto && <>
             <GFieldBetAmount name={'betAmount'}/>
             <GFieldAutoAction typeName={'onWinType'} valueName={'onWinValue'}/>
             <GFieldAutoAction typeName={'onLooseType'} valueName={'onLooseValue'}/>

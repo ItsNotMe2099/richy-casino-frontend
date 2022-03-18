@@ -12,7 +12,6 @@ import {IField} from 'types/interfaces'
 
 type FormatType = 'phone' | 'phoneAndEmail'
 export interface IGFieldProps extends IField{
-
   format?: FormatType
   blurValidate?: FieldValidator
   disabled?: boolean

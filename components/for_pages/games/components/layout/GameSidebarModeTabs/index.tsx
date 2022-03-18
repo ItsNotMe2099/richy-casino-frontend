@@ -1,11 +1,11 @@
 import Tabs from 'components/ui/Tabs'
 
 interface Props {
-  mode: IGameModeType
+  mode: CasinoGameModeType
   onChange: (mode) => void
 }
 
-export enum IGameModeType {
+export enum CasinoGameModeType {
   Manual = 'manual',
   Auto = 'auto'
 }
@@ -13,8 +13,8 @@ export enum IGameModeType {
 export default function GameSidebarModeTabs(props: Props) {
   const {mode, onChange} = props
   const options = [
-    {label: 'Мануальный', value: IGameModeType.Manual},
-    {label: 'Авто', value: IGameModeType.Auto}
+    {label: 'Мануальный', value: CasinoGameModeType.Manual},
+    {label: 'Авто', value: CasinoGameModeType.Auto}
   ]
   return (
     <Tabs fluid options={options} value={mode} onChange={(option) => onChange(option.value)}/>

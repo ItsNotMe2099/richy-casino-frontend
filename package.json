@@ -38,8 +38,10 @@
     "react-sticky": "^6.0.3",
     "react-timer-hook": "^3.0.5",
     "react-tiny-popover": "^7.0.1",
+    "rxjs": "^7.5.5",
     "sass": "1.43.4",
     "slick-carousel": "^1.8.1",
+    "socket.io-client": "^4.4.1",
     "spinners-react": "^1.0.6",
     "uuid": "^8.3.2"
   },
