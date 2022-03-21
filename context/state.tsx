@@ -55,7 +55,7 @@ export function AppWrapper(props: Props) {
   const [modal, setModal] = useState<ModalType | ProfileModalType | null>(null)
   const [modalArguments, setModalArguments] = useState<ModalType | ProfileModalType | null>(null)
   const [user, setUser] = useState<IUser | null>()
-  const [auth, setAuth] = useState<boolean>(false)
+  const [auth, setAuth] = useState<boolean>(true)
   const [showBonus, setShowBonus] = useState<boolean>(true)
   const [showBonusExpanded, setShowBonusExpanded] = useState<boolean>(true)
   const [currencies, setCurrencies] = useState<ICurrency[]>([])

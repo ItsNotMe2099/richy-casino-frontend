@@ -3,9 +3,10 @@ import InputField from 'components/ui/Inputs/InputField'
 import { Form, Formik } from 'formik'
 import styles from './index.module.scss'
 import Validator from 'utils/validator'
-import { Select } from 'components/ui/Inputs/Select'
-import {convertCurrencyToOptions} from 'utils/converter'
-import {ICurrency} from 'data/interfaces/ICurrency'
+import {convertUserBalanceCurrencyToOptions} from 'utils/converter'
+import { useEffect, useState } from 'react'
+import { UserBalanceSelect } from 'components/ui/Inputs/UserBalanceSelect'
+import { IUserBalanceCurrency } from 'data/interfaces/IUser'
 
 
 interface Props {
@@ -15,21 +16,35 @@ interface Props {
 
 export default function WithdrawForm(props: Props) {
 
-  const initialValues = {
-    amount: '',
-    address: '',
-    accountCurrency: 1
-  }
-
   const handleSubmit = /*async*/ () => {
     //temp
     props.onSubmit()
   }
 
-  const array = [
-    { iso: 'btc', name: 'BTC', rate: 0, /*symbol: '/img/Exchange/bitcoin.png'*/},
-    { iso: 'eht', name: 'EHT', rate: 0, /*symbol: '/img/Exchange/eth.png'*/ }
-  ]
+  const currencies = {
+    totals: {
+      USD: 90.47,
+      BTC: 0.00025867
+    }
+  }
+
+  const [balance, setBalance] = useState([])
+
+  const array = []
+
+  useEffect(() => {
+    Object.entries(currencies.totals).forEach(([key, value]) => {
+      array.push({currency: key, value: value})
+    })
+    setBalance(array)
+   }, []
+  )
+
+  const initialValues = {
+    amount: '',
+    address: '',
+    accountCurrency: convertUserBalanceCurrencyToOptions(balance as IUserBalanceCurrency[])[0]?.value
+  }
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
@@ -37,12 +52,14 @@ export default function WithdrawForm(props: Props) {
       <Form className={styles.form}>
         {props.step === 1 &&
         <div className={styles.send}>
-          <div className={styles.texts}>
+          <div className={styles.textTop}>
             <div className={styles.amount}>
               Основной счёт
             </div>
           </div>
-          <Select name='accountCurrency' options={convertCurrencyToOptions(array as ICurrency[])} exchange className={styles.select} rootClass={styles.selectRoot} withdraw/>
+          <UserBalanceSelect name='accountCurrency' options={convertUserBalanceCurrencyToOptions(balance as IUserBalanceCurrency[])}
+            initial={convertUserBalanceCurrencyToOptions(balance as IUserBalanceCurrency[])[0]?.label}
+          />
         </div>}
         {props.step === 3 &&
         <>

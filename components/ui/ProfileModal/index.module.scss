@@ -7,7 +7,7 @@
   padding: 28px;
   z-index: 5;
   margin:  auto;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
   @media screen and (max-width: $xs-max){
     width: 100% !important;

@@ -3,7 +3,6 @@ import {useState} from 'react'
 import { useTranslation } from 'react-i18next'
 import {Form, Formik} from 'formik'
 import classNames from 'classnames'
-import { Select } from 'components/ui/Inputs/Select'
 import PromoCode from 'components/for_pages/Common/Promocode'
 import { CheckBox } from 'components/ui/Inputs/CheckBox'
 import Button from 'components/ui/Button'
@@ -11,6 +10,7 @@ import {ModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
 import SocialButtons from 'components/Auth/SocialButtons'
 import {convertCurrencyToOptions} from 'utils/converter'
+import { RegCurrencySelectView } from 'components/ui/Inputs/RegCurrencySelectView'
 
 interface Props {
 }
@@ -23,7 +23,7 @@ export default function SocialsForm(props: Props) {
   }
 
   const initialValues = {
-      currency: 121,
+      currency: convertCurrencyToOptions(context.currencies)[0].value,
       checkBox: false
     }
 
@@ -39,7 +39,7 @@ export default function SocialsForm(props: Props) {
           <SocialButtons/>
 
           <div className={styles.inputs}>
-             <Select name='currency' options={convertCurrencyToOptions(context.currencies)}/>
+             <RegCurrencySelectView name='currency' options={convertCurrencyToOptions(context.currencies)} initial={convertCurrencyToOptions(context.currencies)[0].label}/>
             <div className={styles.promo} onClick={() => promoCode ? setPromoCode(false) : setPromoCode(true)}>
               <div className={classNames(styles.plus, {[styles.expanded]: promoCode})}>{promoCode ? '-' : '+'}</div>
                <span>У меня есть промокод</span>

@@ -7,20 +7,19 @@ import { IOption} from 'types/interfaces'
 
 interface Props<T> {
   options: IOption<T>[]
-  label?: string
   placeholder?: string
   disabled?: boolean
-  altStyle?: boolean
-  country?: boolean
-  exchange?: boolean
   className?: string
-  rootClass?: string
-  withdraw?: boolean
-  itemComponent: (option: IOption<T> , isActive: boolean, onClick: () => void) => ReactElement
+  initialStyle?: string
+  initial?: string
+  itemComponent?: (option: IOption<T> , isActive: boolean, onClick: () => void) => ReactElement
+  additional?: (option: IOption<T>) => ReactElement
+  balance?: (option: IOption<T>) => ReactElement
+  view?: 'settings' | 'exchange' | 'balance'
 }
 
 export  function Select<T>(props: Props<T> & FieldConfig){
-  const {label, placeholder, options, disabled, altStyle, country, exchange, className, rootClass, withdraw} = props
+  const {options, disabled, className, placeholder, initial, initialStyle} = props
   const [field, meta] = useField(props)
   const {value} = field
   const { setFieldValue, setFieldTouched } = useFormikContext()
@@ -38,68 +37,36 @@ export  function Select<T>(props: Props<T> & FieldConfig){
     setIsActive(false)
   }
 
+  const style = {
+    [styles.settings]: props.view === 'settings',
+    [styles.exchange]: props.view === 'exchange',
+    [styles.balance]: props.view === 'balance'
+  }
+
   const currentItem = options.find(i => i.value === value)
   const hasError = !!meta.error && meta.touched
+
+  console.log(props.initial)
+
   return (
-    <div className={classNames(styles.root, {[styles.hasError]: !!meta.error && meta.touched}, rootClass)}>
-      <div className={classNames(styles.input, {[styles.withLabel]: props.label})}>
-      {props.label &&
-        <div className={styles.label}>
-          {props.label}
-        </div>
-      }
-      <div  onClick={handleClick} className={classNames(styles.dropDownTrigger, {[styles.altStyle]: altStyle}, className)}>
-        {exchange ?
-        <div className={styles.symbolAndName}>
-        {!withdraw && <div className={styles.separator}></div>}
-        <img src={currentItem.symbol} alt=''/>
-        {currentItem?.label}
-        </div>
-        :
-          <div className={styles.name}>{`${currentItem?.symbol ? `${currentItem.symbol} ` : ''}`}{currentItem?.label}</div>
-        }
-        <div className={styles.leftSide}>
-        {withdraw &&
-          <div className={styles.rate}>
-            <div className={styles.usdt}>
-              3136.00000 <span>USDT</span>
-            </div>
-            <div className={styles.dg}>
-              0.0000004 DG
-            </div>
-          </div>
-        }
-        <img className={classNames({[styles.reverse]: (isActive && !exchange)})} src={exchange ? '/img/Exchange/arrow.svg' : '/img/DropdownMenu/arrow.svg'} alt=''/>
-        </div>
-      </div>
-      <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive }, {[styles.withdraw]: withdraw})}>
+    <div className={classNames(styles.root, {[styles.hasError]: !!meta.error && meta.touched}, className, style)}>
+      <div  onClick={handleClick} className={classNames(styles.dropDownTrigger, initialStyle)}>
+        <div className={styles.placeholder}>{(props.additional && currentItem) && props.additional(currentItem)} {currentItem ? currentItem?.label : initial}</div>
+        <div className={styles.arrow}>
+        {props.balance && currentItem &&
+        <div className={styles.value}>
+          {props.balance(currentItem)}
+          </div>}
+          <img className={classNames({[styles.reverse]: isActive})} 
+        src={(props.view === 'exchange' || props.view === 'balance') ? '/img/Select/arrow-exchange.svg' : '/img/Select/arrow.svg'} alt=''/></div>
+      <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
        {options.map((item, index) => props.itemComponent ? props.itemComponent(item, currentItem?.value === item.value, () => handleChange(item.value)) :
-        exchange ?
-        <div className={styles.symbolAndName} key={index} onClick={() => handleChange(item.value)}>
-        <img src={item.symbol} alt=''/>
-        {item.label}
-        {withdraw &&
-          <div className={styles.rate}>
-            <div className={styles.usdt}>
-              3136.00000 <span>USDT</span>
-            </div>
-            <div className={styles.dg}>
-              0.0000004 DG
-            </div>
-          </div>
-        }
-        </div>
-        :
        <div key={index}
-       className={classNames(styles.option, {[styles.optionActive]: currentItem?.value === item.value })} onClick={() => handleChange(item.value)}>
-         {item.symbol && <div className={styles.icon}>{item.symbol}</div>}
-         <div className={styles.name}>{item.label}</div>
+         className={classNames(styles.option, {[styles.optionActive]: currentItem?.value === item.value })} onClick={() => handleChange(item.value)}>
+          <div className={styles.name}>{item.label}</div>
        </div>)}
        </nav>
       </div>
     </div>
   )
-}
-Select.defaultProps = {
-  placeholder: 'Выберите'
 }

@@ -60,7 +60,7 @@ export default function BuyCryptoForm(props: Props) {
           </div>
           <div className={styles.inputs}>
             <InputField name={'amountSent'} className={styles.input} validate={Validator.required}/>
-            <Select name='currencySent' options={convertCurrencyToOptions(array as ICurrency[])} exchange className={styles.select} rootClass={styles.selectRoot}/>
+            <Select name='currencySent' options={convertCurrencyToOptions(array as ICurrency[])} className={styles.select}/>
           </div>
         </div>
         <div className={styles.send}>
@@ -71,7 +71,7 @@ export default function BuyCryptoForm(props: Props) {
           </div>
           <div className={styles.inputs}>
             <InputField name={'amountGet'} className={styles.input} validate={Validator.required} disabled/>
-            <Select name='currencyGet' options={convertCurrencyToOptions(array as ICurrency[])} exchange className={styles.select} rootClass={styles.selectRoot}/>
+            <Select name='currencyGet' options={convertCurrencyToOptions(array as ICurrency[])}className={styles.select}/>
           </div>
         </div>
         <div className={styles.disclaimer}>

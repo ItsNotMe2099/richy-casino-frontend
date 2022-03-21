@@ -3,10 +3,10 @@ import InputField from 'components/ui/Inputs/InputField'
 import { Form, FormikProvider, useFormik } from 'formik'
 import styles from './index.module.scss'
 import Validator from 'utils/validator'
-import { Select } from 'components/ui/Inputs/Select'
 import { useEffect } from 'react'
-import {convertCurrencyToOptions} from 'utils/converter'
-import {ICurrency} from 'data/interfaces/ICurrency'
+import {convertCurrencyToOptionsExchange} from 'utils/converter'
+import { useAppContext } from 'context/state'
+import { ExchangeCurrencySelectView } from 'components/ui/Inputs/ExchangeCurrencySelectView'
 
 interface IUser{
   id: string
@@ -21,10 +21,12 @@ interface Props {
 
 export default function ExchangeForm(props: Props) {
 
+  const context = useAppContext()
+
   const initialValues = {
-    currencySent: 1,
+    currencySent: convertCurrencyToOptionsExchange(context.currencies)[0].label,
     amountSent: 0,
-    currencyGet: 2,
+    currencyGet: convertCurrencyToOptionsExchange(context.currencies)[1].label,
     amountGet: 0
   }
 
@@ -34,9 +36,10 @@ export default function ExchangeForm(props: Props) {
   }
 
   const array = [
-    { iso: 'btc', name: 'BTC', rate: 0, /*symbol: '/img/Exchange/bitcoin.png'*/},
-    { iso: 'eht', name: 'EHT', rate: 0, /*symbol: '/img/Exchange/eth.png'*/ }
+    { iso: 'btc', name: 'BTC', rate: 0, symbol: ''},
+    { iso: 'eht', name: 'EHT', rate: 0, symbol: ''}
   ]
+
   const formik = useFormik({
     initialValues,
     onSubmit: handleSubmit,
@@ -62,7 +65,7 @@ export default function ExchangeForm(props: Props) {
           </div>
           <div className={styles.inputs}>
             <InputField name={'amountSent'} className={styles.input} validate={Validator.required}/>
-            <Select name='currencySent' options={convertCurrencyToOptions(array as ICurrency[])}  exchange className={styles.select} rootClass={styles.selectRoot}/>
+            <ExchangeCurrencySelectView name='currencySent' options={convertCurrencyToOptionsExchange(context.currencies)} initial={initialValues.currencySent}/>
           </div>
         </div>
         <div className={styles.equality}>
@@ -77,7 +80,7 @@ export default function ExchangeForm(props: Props) {
           </div>
           <div className={styles.inputs}>
             <InputField name={'amountGet'} className={styles.input} validate={Validator.required} disabled/>
-            <Select name='currencyGet' options={convertCurrencyToOptions(array as ICurrency[])} exchange className={styles.select} rootClass={styles.selectRoot}/>
+            <ExchangeCurrencySelectView name='currencyGet' options={convertCurrencyToOptionsExchange(context.currencies)} initial={initialValues.currencyGet}/>
           </div>
         </div>
         <Button type='submit' size='play' fluid background='blueGradient500' className={styles.btn}>Обменять</Button>

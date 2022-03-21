@@ -3,7 +3,7 @@
 .root{
   margin-bottom: 12px;
   color: $white;
-  font-size: 13px;
+  font-size: 14px;
   position: relative;
 
   &.hasError{
@@ -16,6 +16,69 @@
     .dropDownTrigger{
       border-color: #F15151;
   }
+  }
+}
+
+.settings{
+  margin-bottom: 0;
+  display: flex;
+  position: static;
+  .dropDownTrigger{
+    padding: 0;
+    flex: 1;
+    position: static;
+  }
+}
+
+.exchange{
+  margin-bottom: 0;
+  .dropDownTrigger{
+    padding: 14px 18px 14px 16px;
+    max-height: 100%;
+    min-height: 100%;
+    background: #272832;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .reverse{
+    transform: rotate(90deg);
+  }
+  .placeholder{
+    font-weight: 700;
+    font-size: 16px;
+  }
+}
+
+.balance{
+  margin-bottom: 0;
+  .reverse{
+    transform: rotate(90deg);
+  }
+  .placeholder{
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .dropDownTrigger{
+    border: 0;
+    padding: 10px 8px 10px 21px;
+    background: #2D2E38;
+  }
+  .value{
+    display: flex;
+    font-weight: 600;
+    font-size: 14px;
+    margin-right: 7px;
+    span{
+      color: #89898e;
+    }
+  }
+  .arrow{
+    display: flex;
+
+  }
+  .dropDownActive{
+    margin-top: 0;
+    top: 60px
   }
 }
 
@@ -55,6 +118,8 @@
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+  top: 45px;
+  right: 0;
   .option:first-child{
     a{
     &:hover{
@@ -114,10 +179,11 @@
 
 .dropDownTrigger {
   background-color: $dark700;
+  border: 1px solid #272832;
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 15px 20px;
+  padding: 14px 19px;
   border-radius: 8px;
   position: relative;
   justify-content: space-between;
@@ -263,4 +329,8 @@
     flex: 1;
     text-align: right;
   }
+}
+
+.placeholder{
+  display: flex;
 }

@@ -1,7 +1,6 @@
 import Button from 'components/ui/Button'
 import { CheckBox } from 'components/ui/Inputs/CheckBox'
 import InputField from 'components/ui/Inputs/InputField'
-import { Select } from 'components/ui/Inputs/Select'
 import { Form, Formik } from 'formik'
 import { useEffect, useState } from 'react'
 import Validator from 'utils/validator'
@@ -10,13 +9,16 @@ import classNames from 'classnames'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import InfoRepository from 'data/repositories/InfoRepository'
+import { ProfileSettingsSelect } from 'components/ui/Inputs/ProfileSettingsSelect'
+import { convertCurrencyToOptions } from 'utils/converter'
+import { useAppContext } from 'context/state'
 
 interface IUser {
   id: string
   userName: string
   name: string
   dateOfBirth: string
-  country: number
+  country: string
   currency: number
   phone: string
   email: string
@@ -30,6 +32,8 @@ interface Props {
 export default function Settings(props: Props) {
 
   const [isChange, setIsChange] = useState(false)
+
+  const context = useAppContext()
 
   const initialValues = {
     id: props.user.id,
@@ -80,8 +84,8 @@ export default function Settings(props: Props) {
         <InputField name={'userName'} className={styles.input} label='Username'/>
         <InputField name={'name'} className={styles.input} label='ФИО'/>
         <InputField name={'dateOfBirth'} className={styles.input} label='Дата рождения'/>
-        <Select name='country' options={countries} altStyle country label='Страна'/>
-        <Select name='currency' options={currencies} altStyle label='Основная валюта'/>
+        <ProfileSettingsSelect name='country' options={countries} initial={initialValues.country} inputLabel='Страна'/>
+        <ProfileSettingsSelect name='currency' options={convertCurrencyToOptions(context.currencies)} initial={convertCurrencyToOptions(context.currencies)[0].label} inputLabel='Основная валюта'/>
         <InputField name={'phone'} disabled={true} className={styles.input} label='Номер телефона'/>
         <InputField name={'email'} disabled={true} className={styles.input} label='Почта'/>
         <div className={classNames(styles.change, {[styles.justify]: isChange})}>

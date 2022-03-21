@@ -31,7 +31,7 @@ export default class AuthRepository {
   static async registerEmail({email, password, currency}): Promise<IAuthEmailResponse> {
     const res = await request({
       method: 'post',
-      url: '/api/user/auth/registration/email',
+      url: '/api/user/registration/email',
       data: {
         email,
         password,

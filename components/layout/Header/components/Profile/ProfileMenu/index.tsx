@@ -50,7 +50,7 @@ export default function ProfileMenu(props: Props){
         showModal(ProfileModalType.wallet)
         break
       case ActionType.Payout:
-        showModal(ProfileModalType.wallet)
+        showModal(ProfileModalType.withdraw)
         break
       case ActionType.Transactions:
         showModal(ProfileModalType.betsHistory)

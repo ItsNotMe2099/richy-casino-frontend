@@ -3,7 +3,6 @@ import {useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {Form, Formik} from 'formik'
 import classNames from 'classnames'
-import {Select} from 'components/ui/Inputs/Select'
 import PromoCode from 'components/for_pages/Common/Promocode'
 import {CheckBox} from 'components/ui/Inputs/CheckBox'
 import Button from 'components/ui/Button'
@@ -15,6 +14,8 @@ import AuthRepository from 'data/repositories/AuthRepository'
 import FormError from 'components/ui/Form/FormError'
 import {convertCurrencyToOptions} from 'utils/converter'
 import {RegistrationSuccessModalArguments} from 'types/interfaces'
+import { RegCurrencySelectView } from 'components/ui/Inputs/RegCurrencySelectView'
+
 
 interface Props {
 }
@@ -47,7 +48,7 @@ export default function EmailForm(props: Props) {
   const initialValues = {
     email: null,
     password: null,
-    currency: 121,
+    currency: convertCurrencyToOptions(context.currencies)[0].value,
     checkBox: false
   }
 
@@ -60,7 +61,7 @@ export default function EmailForm(props: Props) {
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
       <Form className={styles.form}>
         <div className={styles.inputs}>
-          <Select name='currency' options={convertCurrencyToOptions(context.currencies)}/>
+          <RegCurrencySelectView name='currency' options={convertCurrencyToOptions(context.currencies)} initial={convertCurrencyToOptions(context.currencies)[0].label}/>
           <InputField name={'email'} placeholder={'Электронный адрес'}
                       validate={Validator.combine([Validator.required, Validator.email])}/>
           <InputField name={'password'} type={'password'} obscure={true} placeholder={'Придумайте пароль'}
