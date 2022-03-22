@@ -11,7 +11,7 @@ interface Props<T> {
   onTriggerClick?: () => void
   itemComponent?: (option: IOption<T>, onClick: () => void) => ReactElement
   placeholder?: (isActive?) => ReactElement
-  style?: 'balance'
+  style?: 'balance' | 'newAccount'
 }
 
 export default function Select<T>(props: Props<T>){
@@ -33,7 +33,8 @@ export default function Select<T>(props: Props<T>){
   }
 
   const rootClass = {
-    [styles.balance]: style === 'balance'
+    [styles.balance]: style === 'balance',
+    [styles.newAccount]: style === 'newAccount',
   }
 
   return (

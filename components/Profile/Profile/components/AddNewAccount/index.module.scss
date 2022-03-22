@@ -1,0 +1,59 @@
+@import "scss/index";
+
+.root{
+  width: 100%;
+  margin-top: 16px;
+}
+
+.placeholder{
+  padding: 11px 0;
+}
+
+.newAccount{
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  .active{
+    transform: none;
+  }
+}
+
+.subtract{
+  display: flex;
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+}
+
+.label{
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #737683;
+}
+
+.active{
+  justify-content: space-between;
+  align-self: center;
+}
+
+.arrow{
+  align-self: center;
+}
+
+.option{
+  padding: 7px 19px;
+  display: flex;
+  font-weight: 500;
+  font-size: 14px;
+  align-items: center;
+  span{
+    font-weight: 600;
+    font-size: 14px;
+    color: $dark200;
+    margin-right: 14px;
+  }
+  &:hover{
+    background: #41424F;
+  }
+}

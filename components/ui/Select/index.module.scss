@@ -30,6 +30,18 @@ max-width: 280px;
   }
 }
 
+.newAccount{
+  background: $dark600;
+  border-radius: 8px;
+  max-width: 100%;
+  .dropDownTrigger{
+    display: block;
+  }
+  nav{
+    right: 0;
+  }
+}
+
 .dropDown {
   position: absolute;
   background: #ffffff;

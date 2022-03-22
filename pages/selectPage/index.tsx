@@ -1,4 +1,5 @@
 import Layout from 'components/layout/Layout'
+import AddNewAccountSelect from 'components/SelectPageForms/AddNewAccountSelect'
 import ExchangeSelect from 'components/SelectPageForms/ExchangeSelect'
 import RegistrationSelect from 'components/SelectPageForms/RegistrationSelect'
 import SettingsSelect from 'components/SelectPageForms/SettingsSelect'
@@ -19,6 +20,7 @@ export default function SelectPage() {
         <SettingsSelect/>
         <ExchangeSelect/>
         <WithdrawSelect/>
+        <AddNewAccountSelect/>
       </div>
     </Layout>
   )

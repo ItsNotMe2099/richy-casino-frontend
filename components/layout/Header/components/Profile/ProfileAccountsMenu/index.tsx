@@ -2,18 +2,11 @@ import styles from './index.module.scss'
 import { IOption } from 'types/interfaces'
 import Select from 'components/ui/Select'
 import classNames from 'classnames'
-import { useState } from 'react'
 import HiddenXs from 'components/ui/HiddenXS'
 
 export interface ICustomSelectViewOption extends IOption<string>{
   symbol?: string
   crypto?: boolean
-}
-
-interface ICurrentitem {
-  symbol: string
-  label: string
-  value: string
 }
 
 interface Props{
@@ -30,7 +23,7 @@ export default function ProfileAccountsMenu(props: Props){
   const Symbol = (props: Props) => {
     return (
     <div className={styles.symbol}>
-      <div className={styles.image}>{props.currentItem ? <img src={props.currentItem.symbol} alt=''/> : <img src={props.option.symbol} alt=''/>}</div>
+      {props.currentItem ? <img src={props.currentItem.symbol} alt=''/> : <img src={props.option.symbol} alt=''/>}
     </div>
     )
   }

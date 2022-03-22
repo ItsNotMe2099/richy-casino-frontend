@@ -6,9 +6,9 @@ import { useAppContext } from 'context/state'
 import { ProfileModalType } from 'types/enums'
 import DropdownMenu from 'components/ui/DropdownMenu'
 import { useState } from 'react'
-import SelectAccountCurrency from 'components/ui/SelectAccountCurrency'
 import InfoRepository from 'data/repositories/InfoRepository'
-import {ICurrency} from 'data/interfaces/ICurrency'
+import AddNewAccount from './components/AddNewAccount'
+import { convertCurrencyToOptions } from 'utils/converter'
 
 interface Props {
 
@@ -65,7 +65,7 @@ const getCurrencies = async () => {
   setCurrencies(res)
 }
 
-const handleAddNewAccount = (itemNew: ICurrency) => {
+const handleAddNewAccount = (itemNew) => {
     setAccount(accounts => [...accounts, itemNew])
 }
 
@@ -175,10 +175,8 @@ const context = useAppContext()
 
               )}
             </div>}
-            <SelectAccountCurrency options={currencies}
-            className={styles.new}
-            textRight
-            label='Новый счет'
+            <AddNewAccount 
+            options={convertCurrencyToOptions(currencies)}
             onChange={(item) => handleAddNewAccount(item)}
             onTriggerClick={getCurrencies}
             />
@@ -208,10 +206,8 @@ const context = useAppContext()
 
               )}
             </div>}
-            <SelectAccountCurrency options={currencies}
-            className={styles.new}
-            textRight
-            label='Новый счет'
+            <AddNewAccount 
+            options={convertCurrencyToOptions(currencies)}
             onChange={(item) => handleAddNewAccount(item)}
             onTriggerClick={getCurrencies}
             />
