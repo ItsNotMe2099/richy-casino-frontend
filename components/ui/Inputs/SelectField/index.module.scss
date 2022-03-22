@@ -28,6 +28,11 @@
     flex: 1;
     position: static;
   }
+  .placeholder{
+    @media screen and (max-width: $mobile-max){
+      font-size: 14px;
+    }
+  }
 }
 
 .exchange{
@@ -39,6 +44,10 @@
     background: #272832;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    @media screen and (max-width: $mobile-max){
+      background-color: #1D1E25;
+      border: 0;
+    }
   }
   .reverse{
     transform: rotate(90deg);

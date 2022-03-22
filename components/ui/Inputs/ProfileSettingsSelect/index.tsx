@@ -18,6 +18,7 @@ interface PropsOption{
   onClick?: () => void
 }
 
+
 const Option = (props: PropsOption) => {
     return <div className={styles.option} onClick={props.onClick}>{props.option.label}</div>
 }

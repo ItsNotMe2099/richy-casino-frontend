@@ -6,6 +6,7 @@
   padding: 28px 28px 23px 28px;
   z-index: 5;
   margin:  auto;
+  overflow-y: auto;
   @media screen and (max-width: 430px){
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
