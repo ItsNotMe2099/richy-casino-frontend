@@ -3,7 +3,7 @@ import InputField from 'components/ui/Inputs/InputField'
 import { Form, FormikProvider, useFormik } from 'formik'
 import styles from './index.module.scss'
 import Validator from 'utils/validator'
-import { Select } from 'components/ui/Inputs/Select'
+import { SelectField } from 'components/ui/Inputs/SelectField'
 import { useEffect } from 'react'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import {convertCurrencyToOptions} from 'utils/converter'
@@ -60,7 +60,7 @@ export default function BuyCryptoForm(props: Props) {
           </div>
           <div className={styles.inputs}>
             <InputField name={'amountSent'} className={styles.input} validate={Validator.required}/>
-            <Select name='currencySent' options={convertCurrencyToOptions(array as ICurrency[])} className={styles.select}/>
+            <SelectField name='currencySent' options={convertCurrencyToOptions(array as ICurrency[])} className={styles.select}/>
           </div>
         </div>
         <div className={styles.send}>
@@ -71,7 +71,7 @@ export default function BuyCryptoForm(props: Props) {
           </div>
           <div className={styles.inputs}>
             <InputField name={'amountGet'} className={styles.input} validate={Validator.required} disabled/>
-            <Select name='currencyGet' options={convertCurrencyToOptions(array as ICurrency[])}className={styles.select}/>
+            <SelectField name='currencyGet' options={convertCurrencyToOptions(array as ICurrency[])}className={styles.select}/>
           </div>
         </div>
         <div className={styles.disclaimer}>

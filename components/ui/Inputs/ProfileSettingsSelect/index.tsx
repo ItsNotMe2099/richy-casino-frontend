@@ -1,6 +1,6 @@
 import {IField, IOption} from 'types/interfaces'
 import styles from './index.module.scss'
-import { Select } from 'components/ui/Inputs//Select'
+import { SelectField } from 'components/ui/Inputs/SelectField'
 
 export interface ICustomSelectViewOption extends IOption<string>{
   
@@ -27,7 +27,7 @@ export const ProfileSettingsSelect = (props: Props) => {
   return (
   <div className={styles.root}>
     <div className={styles.label}>{props.inputLabel}</div>
-    <Select view='settings' options={props.options}  name={props.name} placeholder={props.placeholder} initial={props.initial} initialStyle={styles.initial} className={styles.select}
+    <SelectField view='settings' options={props.options}  name={props.name} placeholder={props.placeholder} initial={props.initial} initialStyle={styles.initial} className={styles.select}
       itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}/>
   </div>
   )

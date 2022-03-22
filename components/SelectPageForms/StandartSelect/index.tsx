@@ -1,4 +1,4 @@
-import { Select } from 'components/ui/Inputs/Select'
+import { SelectField } from 'components/ui/Inputs/SelectField'
 import { useAppContext } from 'context/state'
 import { Form, Formik } from 'formik'
 import styles from 'pages/selectPage/index.module.scss'
@@ -23,7 +23,7 @@ export default function StandartSelect() {
             <div className={styles.text}>
               Default
             </div>
-            <Select name='currency' options={convertCurrencyToOptions(context.currencies)} initial={initialValues.currency}/>
+            <SelectField name='currency' options={convertCurrencyToOptions(context.currencies)} initial={initialValues.currency}/>
           </div>
         </Form>
       </Formik>

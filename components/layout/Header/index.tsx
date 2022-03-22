@@ -4,7 +4,7 @@ import Logo from 'components/svg/Logo'
 import {useRouter} from 'next/router'
 import Link from 'next/link'
 import LangSelect from 'components/for_pages/Common/LangSelect'
-import { useState} from 'react'
+import { useEffect, useState} from 'react'
 import {ModalType, ProfileModalType} from 'types/enums'
 import {useAppContext} from 'context/state'
 //import cookie from 'js-cookie'
@@ -22,15 +22,6 @@ interface UserBonusProps {
   icon: string
   amount?: string
   color?: string
-}
-
-interface Option {
-  icon: string
-  usdt: string
-  dg: string
-  amount: string
-  iso: string
-  type: number
 }
 
 interface Lang {
@@ -56,31 +47,6 @@ export default function Header(props: Props) {
     )
   }
 
-  const userAccounts = [
-    {icon: '/img/currencies/BTC.svg', usdt: '3136.00000', dg: '0.0000004', amount: '3136.00000', iso: 'USDT', type: 2},
-    {icon: '/img/currencies/BTC.svg', usdt: '3136.00000', dg: '0.0000004', amount: '3136.00000', iso: 'DG', type: 2},
-    {icon: '/img/currencies/BTC.svg', usdt: '3136.00000', dg: '0.0000004', amount: '3136.00000', iso: 'USD', type: 1},
-    {icon: '/img/currencies/BTC.svg', usdt: '3136.00000', dg: '0.0000004', amount: '3136.00000', iso: 'RUB', type: 1},
-  ]
-
-  const options = [
-    {label: 'Главная', link: '/'},
-    {label: 'Казино', link: '/catalog'},
-    {label: 'Richy Game', link: '#'},
-    {label: 'Free Bitcoin', link: '/freebitcoin'},
-    {label: 'Wheel of Fortuna', link: '#'},
-    {label: 'Лотерея', link: '/lottery'},
-    {label: 'Live Casino', link: '#'},
-    {label: 'Aviator', link: '#'},
-    {label: 'Poker', link: '#'},
-    {label: 'Some Option', link: '#'},
-  ]
-
-  const [activeIcon, setActiveIcon] = useState(userAccounts[0].icon)
-  const [activeIso, setActiveIso] = useState(userAccounts[0].iso)
-  const [activeAmount, setActiveAmount] = useState(userAccounts[0].amount)
-  const [activeType, setActiveType] = useState(userAccounts[0].type)
-
   const langs = [
     {icon: '/img/layout/top/russia.svg', lang: 'Ru'},
     {icon: '/img/layout/top/russia.svg', lang: 'En'},
@@ -92,17 +58,22 @@ export default function Header(props: Props) {
   const [activeLangIcon, setActiveLangIcon] = useState(langs[0].icon)
   const [activeLang, setActiveLang] = useState(langs[0].lang)
 
-  const handleChange = (item: Option) => {
-    setActiveAmount(item.amount)
-    setActiveIcon(item.icon)
-    setActiveIso(item.iso)
-    setActiveType(item.type)
+  const currencies = [
+    {label: 'USD', value: '99.99', symbol: '/img/Select/BTC.png'},
+    {label: 'BTC', value: '0.00025867', symbol: '/img/Select/BTC.png', crypto: true},
+  ]
+
+  const [current, setCurrent] = useState(currencies[0])
+
+  const handleChange = (item) => {
+    setCurrent(item)
   }
 
   const handleChangeLang = (item: Lang) => {
     setActiveLangIcon(item.icon)
     setActiveLang(item.lang)
   }
+
 
   return (
     <div>
@@ -165,13 +136,9 @@ export default function Header(props: Props) {
                   </div>
                 </HiddenXs>
                 <ProfileAccountsMenu
-                  options={userAccounts}
-                  activeIcon={activeIcon}
-                  activeAmount={activeAmount}
-                  activeIso={activeIso}
-                  activeType={activeType}
+                  currentItem={current}
+                  options={currencies}
                   onChange={(item) => handleChange(item)}
-                  className={styles.accMenu}
                 />
                 <HiddenXs>
                   <ProfileMenu className={styles.accMenu}/>

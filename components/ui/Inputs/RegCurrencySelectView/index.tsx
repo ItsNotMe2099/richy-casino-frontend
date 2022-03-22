@@ -1,7 +1,7 @@
 
 import {IField, IOption} from 'types/interfaces'
 import styles from './index.module.scss'
-import { Select } from 'components/ui/Inputs//Select'
+import { SelectField } from 'components/ui/Inputs/SelectField'
 
 export interface ICustomSelectViewOption extends IOption<string>{
   symbol?: string
@@ -29,7 +29,7 @@ const Option = (props: PropsOption) => {
 export const RegCurrencySelectView = (props: Props) => {
 
   return (
-  <Select options={props.options}  name={props.name} placeholder={props.placeholder} initial={props.initial} initialStyle={styles.initial}
+  <SelectField options={props.options}  name={props.name} placeholder={props.placeholder} initial={props.initial} initialStyle={styles.initial}
     itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
     additional={(option) => <Symbol option={option}/>}
     />

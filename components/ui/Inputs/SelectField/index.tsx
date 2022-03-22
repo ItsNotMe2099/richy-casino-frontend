@@ -18,7 +18,7 @@ interface Props<T> {
   view?: 'settings' | 'exchange' | 'balance'
 }
 
-export  function Select<T>(props: Props<T> & FieldConfig){
+export  function SelectField<T>(props: Props<T> & FieldConfig){
   const {options, disabled, className, placeholder, initial, initialStyle} = props
   const [field, meta] = useField(props)
   const {value} = field
@@ -46,11 +46,9 @@ export  function Select<T>(props: Props<T> & FieldConfig){
   const currentItem = options.find(i => i.value === value)
   const hasError = !!meta.error && meta.touched
 
-  console.log(props.initial)
-
   return (
     <div className={classNames(styles.root, {[styles.hasError]: !!meta.error && meta.touched}, className, style)}>
-      <div  onClick={handleClick} className={classNames(styles.dropDownTrigger, initialStyle)}>
+      <div onClick={handleClick} className={classNames(styles.dropDownTrigger, initialStyle)}>
         <div className={styles.placeholder}>{(props.additional && currentItem) && props.additional(currentItem)} {currentItem ? currentItem?.label : initial}</div>
         <div className={styles.arrow}>
         {props.balance && currentItem &&

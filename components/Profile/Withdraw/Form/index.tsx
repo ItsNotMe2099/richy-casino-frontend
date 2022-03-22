@@ -47,7 +47,7 @@ export default function WithdrawForm(props: Props) {
   }
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+    <Formik initialValues={initialValues} onSubmit={handleSubmit} enableReinitialize>
       {({setFieldValue, values}) => (
       <Form className={styles.form}>
         {props.step === 1 &&
