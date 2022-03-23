@@ -1,0 +1,98 @@
+@import "scss/index";
+
+.root {
+    @include componentRoot;
+    margin-top: 20px;
+}
+
+.table{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    tbody{
+      display: block;
+      width: 100%;
+      overflow: auto;
+      max-height: 250px;
+      tr{
+        display: flex;
+        background-color: $dark600;
+        padding: 22px 0;
+        padding-left: 16px;
+        padding-right: 21px;
+        border-radius: 8px;
+        align-items: center;
+        &:nth-child(2n){
+            background-color: transparent;
+        }
+        td{
+            width: 20%;
+            display: flex;
+            align-items: center;
+            &:last-child{
+              justify-content: flex-end;
+            }
+        }
+      }
+    }
+    thead tr {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 12px;
+        padding-left: 16px;
+        padding-right: 21px;
+        th{
+          font-weight: 500;
+          font-size: 14px; 
+          color: $dark200;
+          width: 20%;
+          text-align: left;
+          &:nth-child(4){
+              padding-left: 30px;
+          }
+          &:last-child{
+              text-align: right;
+          }
+        }
+      }
+}
+
+.wrapper{
+    display: flex;
+    margin-bottom: 29px;
+ }
+
+ .users{
+     display: flex;
+     span{
+         color: #52535b;
+         align-self: center;
+         margin: 0 8px;
+     }
+ }
+
+ .user{
+     display: flex;
+     align-items: center;
+     img{
+         margin-right: 8px;
+     }
+ }
+
+ .rocket{
+     margin-right: 6px;
+ }
+
+ .track{
+    display: block !important;
+    width: 6px;
+    right: 2px;
+    bottom: 2px;
+    top: 2px;
+    border-radius: 3px;
+  }
+  
+  .view{
+    margin-right: -17px !important;
+    margin-bottom: -17px !important;
+  }
