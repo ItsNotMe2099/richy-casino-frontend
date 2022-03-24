@@ -72,6 +72,9 @@
 
 .dark500 {
   background-color: $dark500;
+  &:hover {
+    background-color: $dark600;
+  }
 }
 
 .white {

@@ -1,0 +1,220 @@
+@import "scss/index";
+
+.table{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    tbody{
+      display: block;
+      width: 100%;
+      overflow: auto;
+      max-height: 250px;
+      tr{
+        display: flex;
+        background-color: $dark600;
+        padding: 22px 0;
+        padding-left: 16px;
+        padding-right: 21px;
+        border-radius: 8px;
+        align-items: center;
+        justify-content: space-between;
+        &:nth-child(2n){
+            background-color: transparent;
+        }
+        td{
+            width: 20%;
+            display: flex;
+            align-items: center;
+            &:last-child{
+              justify-content: flex-end;
+            }
+            @media screen and (max-width: 1400px){
+              &:nth-child(2){
+                justify-content: center;
+              }
+              &:nth-child(3){
+                justify-content: center;
+              }
+            }
+        }
+      }
+    }
+    thead tr {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 12px;
+        padding-left: 16px;
+        padding-right: 21px;
+        th{
+          font-weight: 500;
+          font-size: 14px; 
+          color: $dark200;
+          width: 20%;
+          text-align: left;
+          &:nth-child(4){
+              padding-left: 30px;
+          }
+          &:last-child{
+              text-align: right;
+          }
+          @media screen and (max-width: 1400px){
+            &:nth-child(3){
+              text-align: center;
+            }
+            &:nth-child(4){
+              text-align: center;
+            }
+          }
+        }
+      }
+      @media screen and (max-width: $xs-max){
+        display: none;
+      }
+}
+
+.notATable{
+  @media screen and (min-width: $sm-min){
+    display: none;
+  }
+}
+
+.games{
+  thead tr{
+    padding-bottom: 16px;
+    th{
+      width: 25%;
+      @media screen and (max-width: 1400px){
+        &:nth-child(2){
+          text-align: center;
+        }
+        &:nth-child(3){
+          text-align: center;
+        }
+      }
+    }
+  }
+  tbody{
+    tr{
+      padding: 16px;
+      margin-bottom: 16px;
+      &:nth-child(2n){
+        background-color: $dark600;
+      }
+      td{
+        width: 25%;
+        @media screen and (max-width: 1400px){
+          &:nth-child(2){
+            justify-content: center;
+          }
+          &:nth-child(3){
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+ .users{
+     display: flex;
+     span{
+         color: #52535b;
+         align-self: center;
+         margin: 0 8px;
+     }
+ }
+
+ .user{
+     display: flex;
+     align-items: center;
+     img{
+         margin-right: 8px;
+     }
+ }
+
+ .rocket{
+     margin-right: 6px;
+ }
+
+ .track{
+    display: block !important;
+    width: 6px;
+    right: 2px;
+    bottom: 2px;
+    top: 2px;
+    border-radius: 3px;
+  }
+  
+  .view{
+    margin-right: -17px !important;
+    margin-bottom: -17px !important;
+  }
+
+  .icon{
+    margin-right: 8px;
+  }
+
+  .pay{
+    color: $pay500;
+  }
+
+  .iso{
+    color: $pay500;
+    opacity: 0.5;
+  }
+
+  .item{
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    background-color: $dark600;
+    font-size: 14px;
+    font-weight: 600;
+    @media screen and (max-width: 360px){
+      font-size: 12px;
+    }
+    @media screen and (max-width: 330px){
+      font-size: 11px;
+    }
+  }
+
+  .top{
+    padding: 8px;
+  }
+
+  .bottom{
+    border-radius: 14px;
+    background-color: $dark500;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .left{
+    display: flex;
+    align-items: center;
+  }
+
+  .begin{
+    margin-right: 20px;
+  }
+
+  .time{
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+    @media screen and (max-width: $mobile-md){
+      margin-right: 20px;
+    }
+  }
+
+  .mult{
+    display: flex;
+    align-items: center;
+  }
+
+  .money{
+    display: flex;
+    align-items: center;
+  }
