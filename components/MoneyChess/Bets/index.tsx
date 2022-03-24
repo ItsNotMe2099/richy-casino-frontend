@@ -1,6 +1,5 @@
 import SwitchFilter from 'components/for_pages/Common/SwitchFilter'
 import styles from './index.module.scss'
-import Scrollbars from 'react-custom-scrollbars-2'
 import Table from '../Table'
 
 interface Props {

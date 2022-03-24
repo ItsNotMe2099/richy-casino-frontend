@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import Scrollbars from 'react-custom-scrollbars-2'
 import Button from 'components/ui/Button'
 import Table from '../Table'
 import HiddenXs from 'components/ui/HiddenXS'
