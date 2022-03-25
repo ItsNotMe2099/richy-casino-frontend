@@ -49,7 +49,7 @@ export default function Table(props: Props) {
 
   useEffect(() => {
     for (let i = 0; i < props.items.length; ++i) {
-      array.push(props.items[i].date);
+      array.push(props.items[i].date)
     }
     const filtered = array.filter((el, id) => array.indexOf(el) === id)
     const sorted = filtered.sort((a, b) => b - a)
