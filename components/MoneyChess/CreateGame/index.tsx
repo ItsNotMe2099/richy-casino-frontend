@@ -2,7 +2,7 @@ import Button from 'components/ui/Button'
 import styles from './index.module.scss'
 
 interface Props {
-  
+  onClick?: () => void
 }
 
 export default function CreateGame(props: Props) {
@@ -10,7 +10,7 @@ export default function CreateGame(props: Props) {
   return (
       <div className={styles.root}>
         <div className={styles.statistics}>
-          <Button background='dark500'>Статистика</Button>
+          <Button background='dark500' onClick={props.onClick}>Статистика</Button>
         </div>
         <div className={styles.own}>
           <div className={styles.opponents}>

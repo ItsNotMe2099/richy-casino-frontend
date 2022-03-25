@@ -16,6 +16,11 @@ export default function Games(props: Props) {
   const [isStatsView, setStatsView] = useState(false)
   const [isCreateView, setCreateView] = useState(false)
 
+  const handleStatistics = () => {
+    setStatsView(true)
+    setCreateView(false)
+  }
+
   const items = [
     {begin: '14:30', users: [{name: 'Frida Zevik', avatar: '/img/Chess/avatar1.png'}, {name: 'Frida', avatar: '/img/Chess/avatar2.png'}], 
       gameType: {icon: '/img/Chess/game-type.svg', mult: '2x'}, time: '3 мин + 3 сек', prize: {amount: '+1548.05148', iso: 'RUB'}, 
@@ -50,7 +55,7 @@ export default function Games(props: Props) {
   return (
       <>
       {isCreateView ?
-      <CreateGame/>
+      <CreateGame onClick={handleStatistics}/>
       :
       <div className={styles.root}>
         <HiddenXs>
