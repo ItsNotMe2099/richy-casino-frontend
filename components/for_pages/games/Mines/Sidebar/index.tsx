@@ -11,32 +11,45 @@ import GamePageBetButton from 'components/for_pages/games/components/GamePageBet
 import GFieldMode from 'components/for_pages/games/components/inputs/GFieldMode'
 import GamePageSidebarLayout from 'components/for_pages/games/components/layout/GamePageSidebarLayout'
 import {CasinoGameModeType} from 'components/ui/Tabs'
+import {ICasinoGameDataDto} from 'components/for_pages/games/data/interfaces/ICasinoGameData'
+import Validator from 'utils/validator'
+import {useGameContext} from 'components/for_pages/games/context/state'
+import GamePageTakeActionButton from 'components/for_pages/games/components/GamePageFinishButton'
 
 interface Props {
-
+  onSubmit: (data: ICasinoGameDataDto) => void
+  onChangeMinesCount: (count: number) => void
 }
 
 export default function Sidebar(props: Props) {
-
+  const gameContext = useGameContext()
   const onSubmit = (data) => {
-
+    props.onSubmit(data)
   }
 
   const formik = useFormik({
     initialValues: {
-      mode: CasinoGameModeType.Manual,
+      gameMode: CasinoGameModeType.Manual,
       bet: null,
       betAmount: null,
       onWinType: null,
       onWinValue: null,
       onLooseType: null,
       onLooseValue: null,
+      mines: 1
     },
     onSubmit,
   })
 
   const {values} = formik
-  const {mode} = values
+  const {gameMode} = values
+  const validateMines = (val) => {
+    return val < 0 || val > 24 ? 'Значение от 1 до 24' : undefined
+  }
+
+  const renderBetButton = () => {
+    return !gameContext.started ? <GamePageBetButton/> : <GamePageTakeActionButton/>
+  }
   return (
     <GamePageSidebarLayout>
       <FormikProvider value={formik}>
@@ -44,11 +57,11 @@ export default function Sidebar(props: Props) {
           <HiddenXs>
             <>
               <GFieldMode/>
-              <GFieldBet balance={'0.0s0ds0d0sd BTC'}/>
+              <GFieldBet/>
             </>
           </HiddenXs>
-          <GField name={'mines'} label={'Mines'} suffix={'arrow'}/>
-          {mode === CasinoGameModeType.Auto && <>
+          <GField name={'mines'}  label={'Mines'} suffix={'arrow'} type={'number'} validate={Validator.combine([Validator.required, validateMines])} onChange={(val) => props.onChangeMinesCount(val as number)}/>
+          {gameMode ===CasinoGameModeType.Auto && <>
             <GFieldBetAmount name={'betAmount'}/>
             <GFieldAutoAction typeName={'onWinType'} valueName={'onWinValue'}/>
             <GFieldAutoAction typeName={'onLooseType'} valueName={'onLooseValue'}/>
@@ -56,15 +69,15 @@ export default function Sidebar(props: Props) {
           </>}
 
           <HiddenXs>
-            <GamePageBetButton/>
+            {renderBetButton()}
           </HiddenXs>
 
           <VisibleXs>
             <>
               <GFieldMode/>
               <GamePageBetMobileLayout>
-                <GFieldBet balance={'0.0s0ds0d0sd BTC'}/>
-                <GamePageBetButton/>
+                <GFieldBet/>
+                {renderBetButton()}
               </GamePageBetMobileLayout>
             </>
           </VisibleXs>

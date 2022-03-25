@@ -1,0 +1,68 @@
+@import "scss/index";
+.root{
+  position: relative;
+  cursor: pointer;
+  &.active{
+    .chip{
+      z-index: 3;
+    }
+    .border1, .border2{
+      display: block;
+    }
+  }
+}
+.chip{
+  position: relative;
+  width: 34px;
+  height: 34px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-weight: 700;
+  font-size: 11.5px;
+  color: #000000;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &.blue{
+    background-image: url('/img/Games/roulette/chip_blue.svg')
+  }
+  &.green{
+    background-image: url('/img/Games/roulette/chip_green.svg')
+  }
+  &.orange{
+    background-image: url('/img/Games/roulette/chip_orange.svg')
+  }
+  &.purple{
+    background-image: url('/img/Games/roulette/chip_purple.svg')
+  }
+  &.yellow{
+    background-image: url('/img/Games/roulette/chip_yellow.svg')
+  }
+  &.red{
+    background-image: url('/img/Games/roulette/chip_red.svg')
+  }
+
+
+}
+.border1{
+  display: none;
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  left: -5px;
+  right: -5px;
+  background: $dark400;
+  border-radius: 100%;
+}
+
+.border2{
+  display: none;
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  left: -2px;
+  right: -2px;
+  background: $dark700;
+  border-radius: 100%;
+}

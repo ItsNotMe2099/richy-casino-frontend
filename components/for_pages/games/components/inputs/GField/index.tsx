@@ -21,6 +21,7 @@ export interface IGFieldProps extends IField{
   suffix?: 'clear' | 'arrow' | string | ReactElement
   labelSuffix?: string | ReactElement
   prefix?: string | ReactElement
+  onChange?: (val: string | number) => void
 }
 
 
@@ -55,12 +56,19 @@ export default function GField(props: IGFieldProps) {
     }
     return props.prefix
   }
+  const handleChange = (e) => {
+    field.onChange(e)
+    if(props.onChange){
+      props.onChange(e.target.value)
+    }
+  }
   return (
     <div className={cx(styles.root, props.className)}>
       <GFieldLabel label={label} labelSuffix={labelSuffix} hasError={showError}/>
       <div className={styles.inputWrapper}>
         <input
           {...field}
+          onChange={handleChange}
           disabled={props.disabled}
           ref={props.format && ref as any}
           type={props.type || 'text'}

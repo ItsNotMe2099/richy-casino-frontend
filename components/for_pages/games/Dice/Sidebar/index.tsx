@@ -10,6 +10,7 @@ import GFieldMode from 'components/for_pages/games/components/inputs/GFieldMode'
 import GamePageSidebarLayout from 'components/for_pages/games/components/layout/GamePageSidebarLayout'
 import {CasinoGameModeType} from 'components/ui/Tabs'
 import {ICasinoGameDiceDto} from 'components/for_pages/games/data/interfaces/ICasinoGameData'
+import GFieldProfit from 'components/for_pages/games/Dice/components/GFieldProfit'
 
 interface Props {
   values: ICasinoGameDiceDto
@@ -17,17 +18,17 @@ interface Props {
 
 export default function Sidebar(props: Props) {
   const {values} = props
-  const {mode} = values
-
+  const {gameMode} = values
   return (
     <GamePageSidebarLayout>
           <HiddenXs>
             <>
               <GFieldMode/>
-              <GFieldBet balance={'0.0s0ds0d0sd BTC'}/>
+              <GFieldBet/>
+              <GFieldProfit />
             </>
           </HiddenXs>
-          {mode === CasinoGameModeType.Auto && <>
+          {gameMode ===CasinoGameModeType.Auto && <>
             <GFieldBetAmount name={'betAmount'}/>
             <GFieldAutoAction typeName={'onWinType'} valueName={'onWinValue'}/>
             <GFieldAutoAction typeName={'onLooseType'} valueName={'onLooseValue'}/>
@@ -41,7 +42,7 @@ export default function Sidebar(props: Props) {
             <>
               <GFieldMode/>
               <GamePageBetMobileLayout>
-                <GFieldBet balance={'0.0s0ds0d0sd BTC'}/>
+                <GFieldBet/>
                 <GamePageBetButton/>
               </GamePageBetMobileLayout>
             </>

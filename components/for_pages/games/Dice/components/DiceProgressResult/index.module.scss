@@ -1,8 +1,16 @@
 @import "scss/index";
 .root{
-  position: relative;
+  position: absolute;
   padding: 0px 20px;
-  overflow: hidden;
+  left: 28px;
+  right: 28px;
+  border-radius: 18px;
+  background-color: $dark700;
+  @media screen and (max-width: $xs-max){
+    left: 16px;
+    right: 16px;
+  }
+
 }
 .wrapper{
   transition: transform 0.5s;

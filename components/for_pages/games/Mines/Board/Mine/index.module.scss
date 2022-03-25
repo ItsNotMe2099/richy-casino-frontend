@@ -2,6 +2,7 @@
 
 
 .root{
+  cursor: pointer;
   display: flex;
   justify-content: center;
   width: 64px;
@@ -14,14 +15,15 @@
   border-radius: 8px;
   background-position: center center;
   background-repeat: no-repeat;
+  background-size: cover;
   &.disabled{
-    background: url('/img/Games/mines/mine_disabled.png')
+    background-image: url('/img/Games/mines/mine_disabled.png')
   }
   &.mine{
-    background: url('/img/Games/mines/mine_mine.png')
+    background-image: url('/img/Games/mines/mine_mine.png')
   }
   &.bonus{
-    background: url('/img/Games/mines/mine_bonus.svg')
+    background-image: url('/img/Games/mines/mine_bonus.svg')
   }
 
 }

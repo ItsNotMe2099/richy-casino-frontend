@@ -1,10 +1,12 @@
 import styles from './index.module.scss'
 import GField from 'components/for_pages/games/components/inputs/GField'
+import Validator from 'utils/validator'
+import {useGameContext} from 'components/for_pages/games/context/state'
 
 interface Props{
-  balance?: string
 }
-export default function GFieldBet({balance, ...rest}:Props) {
- return   <GField  name={'bet'} label={'Сумма'} type={'number'} labelSuffix={balance} prefix={'DG'} suffix={'arrow'} inputClassName={styles.input} {...rest}/>
+export default function GFieldBet(props: Props) {
+  const gameContext = useGameContext()
+ return   <GField  name={'bet'} label={'Сумма'} type={'number'} labelSuffix={`${gameContext.user?.balance ? `${gameContext.user?.balance} ${gameContext.user?.currency}` : ''}`} prefix={gameContext.user?.currency || 'DG'} suffix={'arrow'} validate={Validator.required} inputClassName={styles.input} {...props}/>
 }
 

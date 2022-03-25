@@ -26,7 +26,7 @@ export default function Sidebar(props: Props) {
 
   const formik = useFormik({
     initialValues: {
-      mode: CasinoGameModeType.Manual,
+      gameMode: CasinoGameModeType.Manual,
       bet: null,
       betAmount: null,
       onWinType: null,
@@ -38,7 +38,7 @@ export default function Sidebar(props: Props) {
   })
 
   const {values} = formik
-  const {mode} = values
+  const {gameMode} = values
   const options = [
     {label: 'Low', value: LimboGameLevel.Low},
     {label: 'Medium', value: LimboGameLevel.Medium},
@@ -51,11 +51,11 @@ export default function Sidebar(props: Props) {
           <HiddenXs>
             <>
               <GFieldMode/>
-              <GFieldBet balance={'0.0s0ds0d0sd BTC'}/>
+              <GFieldBet/>
             </>
           </HiddenXs>
           <GField name={'target'} type={'number'} label={'Коэффициент'} suffix={'clear'}/>
-          {mode === CasinoGameModeType.Auto && <>
+          {gameMode ===CasinoGameModeType.Auto && <>
             <GFieldInfinite name={'countGames'} label={'Кол-во игр'}/>
             <GFieldAutoAction typeName={'onWinType'} valueName={'onWinValue'}/>
             <GFieldAutoAction typeName={'onLooseType'} valueName={'onLooseValue'}/>
@@ -70,7 +70,7 @@ export default function Sidebar(props: Props) {
             <>
               <GFieldMode/>
               <GamePageBetMobileLayout>
-                <GFieldBet balance={'0.0s0ds0d0sd BTC'}/>
+                <GFieldBet/>
                 <GamePageBetButton/>
               </GamePageBetMobileLayout>
             </>

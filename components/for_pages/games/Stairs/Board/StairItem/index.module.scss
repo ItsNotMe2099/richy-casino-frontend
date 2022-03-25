@@ -1,0 +1,40 @@
+@import "scss/index";
+
+
+.root{
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 22px;
+  height: 20px;
+
+  @media only screen and (max-width: 985px) {
+
+  }
+  border-radius: 2px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  &.disabled{
+    background-image: url('/img/Games/stairs/disabled.png')
+  }
+  &.active, &.mine, &.mineSelected{
+    background-image: url('/img/Games/stairs/active.png')
+  }
+  &.stair{
+    background-image: url('/img/Games/stairs/active.png')
+  }
+
+}
+
+.mineIcon{
+  position: absolute;
+  top: -16px;
+  margin: 0 auto;
+}
+.stairs{
+  position: absolute;
+  top: 0px;
+  margin: 0 auto;
+}

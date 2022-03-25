@@ -40,7 +40,6 @@ export default function GFieldBetAmount(props:Props) {
           break
       }
     }
-    console.log('Value11', value)
     return <div className={styles.buttons}>
       <Button value={'∞'} onClick={handleClick} active={value === '∞'}/>
       <Button value={'10'} onClick={handleClick} active={value === '10'}/>

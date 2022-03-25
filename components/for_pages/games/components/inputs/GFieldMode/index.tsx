@@ -14,7 +14,7 @@ export default function GFieldMode(props: Props) {
     {label: 'Авто', value: CasinoGameModeType.Auto}
   ]
  return(
-   <GFieldSelectTabs style={'small'} fluid className={styles.field}  name={'mode'} options={options} />
+   <GFieldSelectTabs style={'small'} fluid className={styles.field}  name={'gameMode'} options={options} />
    )
  }
 

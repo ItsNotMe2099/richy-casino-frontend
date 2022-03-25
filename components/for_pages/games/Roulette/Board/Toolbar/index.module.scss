@@ -1,0 +1,48 @@
+@import "scss/index";
+
+.root {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  &.hidden{
+
+    visibility: hidden;
+    @media only screen and (max-width: $xs-max) {
+      visibility: visible;
+      display: none;
+    }
+  }
+}
+.button{
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: $dark200;
+  font-size: 14px;
+  font-weight: 600;
+  svg{
+    margin-right: 6px;
+  }
+  &.clear{
+    &:hover{
+      color: #D82E2E;
+      svg{
+        path{
+          fill: #D82E2E;
+        }
+      }
+    }
+  }
+  &.undo{
+    &:hover{
+      color: $blue500;
+      svg{
+        path{
+          fill: $blue500;
+        }
+      }
+    }
+  }
+}

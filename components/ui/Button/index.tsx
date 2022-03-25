@@ -14,6 +14,7 @@ interface Props extends IButton {
   className?: string
   image?: string
   background?: 'dark700' | 'payGradient500' | 'dark500' | 'dark600' | 'blueGradient500' | 'blackTransparent' | 'white' | 'pink'
+  disabled?: boolean
 }
 
 export default function Button(props: Props) {
@@ -55,6 +56,7 @@ export default function Button(props: Props) {
     </Link>
   ) : (
     <button
+      disabled={props.disabled}
       type={props.type}
       onClick={props.onClick}
       className={classNames(styles.btn, btnClass, props.className)}

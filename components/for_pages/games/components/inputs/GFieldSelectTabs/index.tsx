@@ -13,7 +13,8 @@ interface Props {
   disabled?: boolean
   className?: string
   fluid?: boolean
-  style?: 'normal' | 'small'
+  style?: 'normal' | 'small' | 'exSmall'
+  onChange?: (value) => void
 }
 
 export const GFieldSelectTabs = (props: Props & FieldConfig) => {
@@ -27,12 +28,16 @@ export const GFieldSelectTabs = (props: Props & FieldConfig) => {
       return
     }
     setFieldValue(props.name, value)
+    if(props.onChange){
+      props.onChange(value)
+    }
   }
 
   return (
     <div className={cx(styles.root, className, {
       [styles.normal]: style === 'normal',
       [styles.small]: style === 'small',
+      [styles.exSmall]: style === 'exSmall',
       [styles.fluid]: fluid,
       [styles.hasError]: !!meta.error && meta.touched})}>
       <GFieldLabel label={label} hasError={hasError}/>

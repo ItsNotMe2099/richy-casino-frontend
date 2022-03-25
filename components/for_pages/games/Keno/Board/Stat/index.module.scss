@@ -5,7 +5,22 @@
   margin-top: 27px;
   display: grid;
   grid-gap: 0px 3px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  @media screen and (max-width: $mobile-md){
+    display: flex;
+    flex-direction: row;
+    grid-template-columns: unset;
+    padding-bottom: 20px;
+    overflow-y: auto;
+    .item {
+      .number {
+        width: 57px;
+      }
+    }
+  }
+}
+.overflow{
+
 }
 .item{
   text-align: center;

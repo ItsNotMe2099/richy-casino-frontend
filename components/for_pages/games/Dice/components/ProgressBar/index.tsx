@@ -11,13 +11,14 @@ interface Props extends IField{
   disabled?: boolean
   className?: string
   progressBarClassName?: string
-  limit: number
+  maxValue: number
+  minValue: number
   state: 'higher' | 'lower',
 
 }
 
 export const GDiceProgressBar = (props: Props & FieldConfig) => {
-  const { className, limit, progressBarClassName, state} = props
+  const { className, minValue, maxValue, progressBarClassName, state} = props
   const [field, meta] = useField(props)
   const {value} = field
   const { setFieldValue, setFieldTouched } = useFormikContext()
@@ -33,15 +34,15 @@ export const GDiceProgressBar = (props: Props & FieldConfig) => {
   }
   const progressBarStepNums = () => {
     const nums: number[] = [0]
-    const progressBarStep = limit / 4
+    const progressBarStep = 100 / 4
 
-    for(let i = 0; i < limit; i++) {
+    for(let i = 0; i < 100; i++) {
       if(i > nums[nums.length - 1] && i === nums.length * progressBarStep) {
         nums.push(i)
       }
     }
 
-    nums.push(props.limit)
+    nums.push(props.maxValue)
 
     return nums
   }
@@ -62,8 +63,8 @@ export const GDiceProgressBar = (props: Props & FieldConfig) => {
             </div>
           </div>
       <InputRange
-        maxValue={props.limit}
-        minValue={0}
+        maxValue={maxValue}
+        minValue={minValue}
         value={value || 0}
         onChange={value => handleChange(Number(value))}
       />

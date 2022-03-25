@@ -1,3 +1,4 @@
+import styles from './index.module.scss'
 import {Form, FormikProvider, useFormik} from 'formik'
 import GFieldBet from 'components/for_pages/games/components/inputs/GFieldBet'
 import GFieldBetAmount from 'components/for_pages/games/components/inputs/GFieldBetAmount'
@@ -10,12 +11,14 @@ import GamePageBetButton from 'components/for_pages/games/components/GamePageBet
 import GFieldMode from 'components/for_pages/games/components/inputs/GFieldMode'
 import GamePageSidebarLayout from 'components/for_pages/games/components/layout/GamePageSidebarLayout'
 import {CasinoGameModeType} from 'components/ui/Tabs'
-import {GFieldSelectTabs} from 'components/for_pages/games/components/inputs/GFieldSelectTabs'
 import {KenoGameLevel} from 'components/for_pages/games/Keno/data/enums'
 import {ICasinoGameDataDto} from 'components/for_pages/games/data/interfaces/ICasinoGameData'
+import Button from 'components/ui/Button'
 
 interface Props {
   onSubmit: (data: ICasinoGameDataDto) => void
+  onClear: () => void
+  onAutoSelect: () => void
 }
 
 export default function Sidebar(props: Props) {
@@ -26,7 +29,7 @@ export default function Sidebar(props: Props) {
 
   const formik = useFormik({
     initialValues: {
-      mode: CasinoGameModeType.Manual,
+      gameMode: CasinoGameModeType.Manual,
       bet: null,
       betAmount: null,
       onWinType: null,
@@ -38,12 +41,18 @@ export default function Sidebar(props: Props) {
   })
 
   const {values} = formik
-  const {mode} = values
+  const {gameMode} = values
   const options = [
     {label: 'Low', value: KenoGameLevel.Low},
     {label: 'Medium', value: KenoGameLevel.Medium},
     {label: 'High', value: KenoGameLevel.High},
   ]
+  const handleClearClick = () => {
+
+  }
+  const handleAutoClick = () => {
+
+  }
   return (
     <GamePageSidebarLayout>
       <FormikProvider value={formik}>
@@ -51,16 +60,23 @@ export default function Sidebar(props: Props) {
           <HiddenXs>
             <>
               <GFieldMode/>
-              <GFieldBet balance={'0.0s0ds0d0sd BTC'}/>
+              <GFieldBet/>
             </>
           </HiddenXs>
-          {mode === CasinoGameModeType.Auto && <>
+          <div className={styles.buttons}>
+            <Button size='small' fluid background='dark500'  onClick={props.onAutoSelect}>
+              Авто выбор
+            </Button>
+            <Button className={styles.clearButton} size='small' fluid background='dark500'  onClick={props.onClear}>
+              Очистить
+            </Button>
+          </div>
+          {gameMode ===CasinoGameModeType.Auto && <>
             <GFieldBetAmount name={'betAmount'}/>
             <GFieldAutoAction typeName={'onWinType'} valueName={'onWinValue'}/>
             <GFieldAutoAction typeName={'onLooseType'} valueName={'onLooseValue'}/>
             <CheckBox size={'normal'} name={'stopOnWin'} label={'Stop on win'}/>
           </>}
-          <GFieldSelectTabs fluid  name={'level'} label={'Сложность'} options={options} />
 
           <HiddenXs>
             <GamePageBetButton/>
@@ -70,7 +86,7 @@ export default function Sidebar(props: Props) {
             <>
               <GFieldMode/>
               <GamePageBetMobileLayout>
-                <GFieldBet balance={'0.0s0ds0d0sd BTC'}/>
+                <GFieldBet/>
                 <GamePageBetButton/>
               </GamePageBetMobileLayout>
             </>

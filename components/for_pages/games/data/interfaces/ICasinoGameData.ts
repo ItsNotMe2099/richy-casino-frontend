@@ -13,6 +13,7 @@ export interface ICasinoGameDiceDto extends ICasinoGameDataDto {
   // Коэфециент
   target: 'higher' | 'lower';
   value: number;
+  profit?: number
 }
 
 export interface ICasinoGameLimboDto extends ICasinoGameDataDto {
@@ -22,4 +23,12 @@ export interface ICasinoGameLimboDto extends ICasinoGameDataDto {
 
 export interface ICasinoGameKenoDto extends ICasinoGameDataDto {
   tiles: number[];
+}
+
+export interface ICasinoGameMinesDto extends ICasinoGameDataDto {
+  mines: number;
+}
+export interface ICasinoGameRouletteDto extends ICasinoGameDataDto {
+  // Ставки
+ bets: {[key: string]: number}
 }

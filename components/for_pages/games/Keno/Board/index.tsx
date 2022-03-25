@@ -8,6 +8,8 @@ import Stat from 'components/for_pages/games/Keno/Board/Stat'
 import {useGameContext} from 'components/for_pages/games/context/state'
 import {useEffect, useState} from 'react'
 import {ICasinoGameFinishEvent} from 'components/for_pages/games/data/interfaces/ICasinoGame'
+import {chain} from 'components/for_pages/games/utils/chain'
+import {GameSound, useGameSound} from 'components/for_pages/games/context/game_sound'
 
 interface Props{
   selected: number[]
@@ -16,11 +18,32 @@ interface Props{
 export default function Board(props: Props) {
   const {selected} = props
   const gameContext = useGameContext()
+  const gameSound = useGameSound()
   const [result, setResult] = useState<ICasinoGameFinishEvent>(null)
+  const [resultTiles, setResultTiles] = useState([])
   useEffect(() => {
     const subscription = gameContext.gameState$.subscribe((data) => {
-      console.log('GameRes', data)
-      setResult(data)
+      if(!data){
+        setResultTiles([])
+        setResult(null)
+        return
+      }
+      chain(data.data.tiles.length, 100, (i) => {
+         if(selected.includes(data.data.tiles[i])){
+         gameSound.play(GameSound.Open)
+        }else{
+         gameSound.play(GameSound.Empty)
+        }
+        setResultTiles(tiles => [...tiles, data.data.tiles[i]])
+        if(i === data.data.tiles.length - 1){
+          setResult(data)
+          gameContext.setShowResultModal(true)
+
+        }
+      })
+
+
+
     })
     return () => {
       subscription.unsubscribe()
@@ -30,69 +53,16 @@ export default function Board(props: Props) {
     console.log(key)
     props.onSelect(key)
   }
-  const generateBoard = (cols: number, rows: number) => {
-    const board = []
-    for(let i = 0; i < rows; ++i){
-      for(let a = 0; a < cols; ++a){
-        board.push()
-      }
-    }
-  }
-  const board = {
-    0: 0,
-    1: 5,
-    2: 10,
-    3: 15,
-    4: 20,
-    5: 25,
-    6: 30,
-    7: 35,
 
-    8: 1,
-    9: 6,
-    10: 11,
-    11: 16,
-    12: 21,
-    13: 26,
-    14: 31,
-    15: 36,
-
-    16: 2,
-    17: 7,
-    18: 12,
-    19: 17,
-    20: 22,
-    21: 27,
-    22: 32,
-    23: 37,
-
-    24: 3,
-    25: 8,
-    26: 13,
-    27: 18,
-    28: 23,
-    29: 28,
-    30: 33,
-    31: 38,
-
-    32: 4,
-    33: 9,
-    34: 14,
-    35: 19,
-    36: 24,
-    37: 29,
-    38: 34,
-    39: 39,
-  }
   console.log('Game', gameContext.game)
   const getItemStatus = (item) => {
     const isSelected = selected.includes(item)
-    if(!result){
+    if(!result && resultTiles.length === 0){
       return isSelected ? KenoItemStatus.Active : KenoItemStatus.UnActive
     }
-    if(isSelected && result.data?.tiles.includes(item)){
+    if(isSelected && resultTiles.includes(item)){
       return KenoItemStatus.Win
-    }else if(result.data?.tiles.includes(item)){
+    }else if(resultTiles.includes(item)){
       return KenoItemStatus.Lose
     }else if(isSelected){
       return KenoItemStatus.Active

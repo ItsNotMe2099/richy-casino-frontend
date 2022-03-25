@@ -1,0 +1,41 @@
+@import "../../../../../../scss/index";
+.root{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+
+  &.fluid{
+    .options {
+      width: 100%;
+
+      .item {
+        align-items: center;
+        justify-content: center;
+        margin-right: 0px;
+        flex: 1;
+      }
+    }
+  }
+}
+.options {
+
+  display: flex;
+  padding: 2px;
+  grid-gap: 8px;
+
+
+}
+
+.item{
+
+}
+
+.active{
+  border-radius: 46px;
+  .label{
+    color: $white;
+  }
+  svg{
+    fill: $white;
+  }
+}

@@ -1,0 +1,43 @@
+@import "scss/index";
+
+.root {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  top: 0px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &.fixed{
+    position: fixed;
+    .overlay{
+      background-color: rgba(0,0,0,0.5);
+    }
+
+  }
+}
+.overlay{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  top: 0px;
+  background-color: transparent;
+}
+.content{
+  position: relative;
+  background: rgba(29,30,37,0.6);
+  backdrop-filter: blur(3px);
+  padding: 27px 24px 24px 24px;
+  border-radius: 12px;
+  width: 226px;
+
+}
+.close{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
