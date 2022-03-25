@@ -17,6 +17,8 @@
 }
 
 .statistics{
+  display: flex;
+  align-items: center;
   button{
     padding: 13px;
     color: $white;
@@ -32,6 +34,17 @@
       font-size: 12px;
     }
   }
+}
+
+.back{
+  margin-right: 11px;
+  cursor: pointer;
+  display: flex;
+}
+
+.stats{
+  font-weight: 700;
+  font-size: 18px;
 }
 
 .filter{
