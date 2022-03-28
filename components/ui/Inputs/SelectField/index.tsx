@@ -15,7 +15,7 @@ interface Props<T> {
   itemComponent?: (option: IOption<T> , isActive: boolean, onClick: () => void) => ReactElement
   additional?: (option: IOption<T>) => ReactElement
   balance?: (option: IOption<T>) => ReactElement
-  view?: 'settings' | 'exchange' | 'balance'
+  view?: 'settings' | 'exchange' | 'balance' | 'createGame'
 }
 
 export  function SelectField<T>(props: Props<T> & FieldConfig){
@@ -40,7 +40,8 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
   const style = {
     [styles.settings]: props.view === 'settings',
     [styles.exchange]: props.view === 'exchange',
-    [styles.balance]: props.view === 'balance'
+    [styles.balance]: props.view === 'balance',
+    [styles.createGame]: props.view === 'createGame',
   }
 
   const currentItem = options.find(i => i.value === value)
@@ -56,7 +57,7 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
           {props.balance(currentItem)}
           </div>}
           <img className={classNames({[styles.reverse]: isActive})} 
-        src={(props.view === 'exchange' || props.view === 'balance') ? '/img/Select/arrow-exchange.svg' : '/img/Select/arrow.svg'} alt=''/></div>
+        src={(props.view === 'exchange' || props.view === 'balance' || props.view === 'createGame') ? '/img/Select/arrow-exchange.svg' : '/img/Select/arrow.svg'} alt=''/></div>
       <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
        {options.map((item, index) => props.itemComponent ? props.itemComponent(item, currentItem?.value === item.value, () => handleChange(item.value)) :
        <div key={index}

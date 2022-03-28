@@ -44,7 +44,7 @@ export const LINKS = {
 }
 export interface IOption<T> {
   label: string
-  value: T
+  value?: T
   symbol?: string,
   icon?: string
 }

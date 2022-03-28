@@ -3,28 +3,25 @@ import styles from './index.module.scss'
 import { SelectField } from 'components/ui/Inputs/SelectField'
 
 export interface ICustomSelectViewOption extends IOption<string>{
-  symbol?: string
+  icon?: string
 }
 
 interface Props extends IField{
   options: ICustomSelectViewOption[]
   placeholder?: string
   initial?: string
-  className?: string
 }
 interface PropsOption{
   option?: ICustomSelectViewOption
   isActive?: boolean
   onClick?: () => void
-  separator?: boolean
 }
 
 const Symbol = (props: PropsOption) => {
   return (
   <>
-  {props.separator && <div className={styles.separator}></div>}
   <div className={styles.symbol}>
-    <img src={props.option.symbol} alt=''/>
+    <img src={props.option.icon} alt=''/>
   </div>
   </>
   )
@@ -38,12 +35,12 @@ const Option = (props: PropsOption) => {
     )
 }
 
-export const ExchangeCurrencySelectView = (props: Props) => {
+export const CreateGameOptions = (props: Props) => {
 
   return (
-  <SelectField view='exchange' className={props.className} options={props.options}  name={props.name} placeholder={props.placeholder} initial={props.initial} initialStyle={styles.initial}
+  <SelectField view='createGame' options={props.options}  name={props.name} placeholder={props.placeholder} initial={props.initial} initialStyle={styles.initial}
     itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
-    additional={(option) => <Symbol separator option={option}/>}
+    additional={(option) => <Symbol option={option}/>}
   />
   )
   

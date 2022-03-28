@@ -24,6 +24,7 @@ import BuyCrypto from 'components/Profile/BuyCrypto'
 import FA from 'components/Profile/FA'
 import Withdraw from 'components/Profile/Withdraw'
 import { RemoveScroll } from 'react-remove-scroll'
+import CreateGameModal from 'components/for_pages/MoneyChess/CreateGame/Modals/CreateGameModal'
 interface Props {}
 
 export default function ModalContainer(props: Props) {
@@ -57,7 +58,6 @@ export default function ModalContainer(props: Props) {
           <Modal key={4} isOpen={context.modal === ModalType.registrationSuccess} {...commonSettings} noBorder>
             <ModalRegistrationSuccess/>
           </Modal>
-
           <ProfileModal isBack={true} size='large' key={5} isOpen={context.modal === ProfileModalType.paymentHistory} {...commonSettings} title='История платежей' user={user} payment>
             <PaymentHistory/>
           </ProfileModal>
@@ -108,6 +108,7 @@ export default function ModalContainer(props: Props) {
             <FA/>
           </ProfileModal>
           <Withdraw/>
+          <CreateGameModal isOpen={context.modal === ModalType.createGame} {...commonSettings}/>
           </div>
       )}
     </RemoveScroll>

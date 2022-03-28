@@ -58,6 +58,26 @@
   }
 }
 
+.createGame{
+  height: 46px;
+  margin-bottom: 0;
+  .dropDownTrigger{
+    border: 0;
+    background-color: $dark600;
+    padding: 11px 19px 11px 16px;
+  }
+  .placeholder{
+    font-weight: 600;
+    font-size: 16px;
+    @media screen and (max-width: 340px){
+      font-size: 12px;
+    }
+  }
+  .reverse{
+    transform: rotate(90deg);
+  }
+}
+
 .balance{
   margin-bottom: 0;
   .reverse{

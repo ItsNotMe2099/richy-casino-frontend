@@ -7,7 +7,8 @@ export enum ModalType {
   registrationPhone = 12,
   fortune = 9,
   bonus = 10,
-  profileBurger = 11
+  profileBurger = 11,
+  createGame = 19,
 }
 
 export enum ProfileModalType {
