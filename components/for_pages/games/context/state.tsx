@@ -14,6 +14,7 @@ import CasinoGameRepository from 'components/for_pages/games/data/reposittories/
 import {CasinoGameType} from 'components/for_pages/games/data/enums'
 import {IGameUser} from 'components/for_pages/games/data/interfaces/IGameUser'
 import GameUserRepository from 'components/for_pages/games/data/reposittories/GameUserRepository'
+import {runtimeConfig} from 'config/runtimeConfig'
 
 interface IState {
   auth: boolean
@@ -86,7 +87,7 @@ export function GameWrapper(props: Props) {
   const [started, setStarted] = useState<boolean>(false)
   const [turnLoading, setTurnLoading] = useState<boolean>(false)
   useEffect(() => {
-    const s = io('http://localhost:3000', {
+    const s = io(runtimeConfig.GAMES_HOST, {
       path: '/api/casino-game-ws',
       reconnectionDelayMax: 10000,
       reconnection: true,
@@ -112,21 +113,15 @@ export function GameWrapper(props: Props) {
       return
     }
     const onConnect = () => {
-      console.log('onConnect11', socket)
       // setSocket(socket)
 
     }
     const onDisConnect = () => {
-      console.log('[received] disconnect')
-
       socket.once('reconnect', () => {
-        console.log('[reconnected]')
         setSocket(socket)
       })
     }
     const onGameFinish = (data: ICasinoGameFinishEvent) => {
-      console.log('OnGameFinish', data)
-
       socket.off('game:continue')
       setTimeout( () => setStartLoading(false), 300)
       setTimeout( () => setTurnLoading(false), 300)
@@ -143,7 +138,6 @@ export function GameWrapper(props: Props) {
       }
     }
     const onGameError = (data: ICasinoGameErrorEvent) => {
-      console.log('OnGameFinish', data)
       switch (data.errorCode){
         case CasinoGameErrorCode.Balance:
           setError(data.errorName || 'Balance error')

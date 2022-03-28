@@ -24,7 +24,6 @@ export default function GameStairs(props: Props) {
 
   const handleSubmit = async (data: ICasinoGameDiceDto) => {
     await gameContext.startGame({...data, gameType: CasinoGameType.Stairs})
-    console.log('gameStart')
   }
   return (
     <GamePageLayout

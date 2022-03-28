@@ -29,7 +29,6 @@ export default function GFieldInfinite(props:Props) {
     const [field, meta, helpers] = useField(props as any)
     const value = field.value
     const handleClick = (value) => {
-      console.log('handleClick')
       switch (value){
         case '∞':
           helpers.setValue(value)

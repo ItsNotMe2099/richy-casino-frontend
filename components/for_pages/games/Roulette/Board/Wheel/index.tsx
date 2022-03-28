@@ -50,7 +50,6 @@ const WheelCanvas = ({
 
   }, [canvasRef])
   useEffect(() => {
-    console.log('putBallAtSlot', number)
     if(hasResult && typeof number !== 'undefined'){
       (rouletteRef.current as any).putBallAtSlot(number, 3000)
       setTimeout(() => {

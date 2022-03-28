@@ -11,7 +11,6 @@ export default class CasinoGameRepository {
       url: `/api/casino-game/${gameType}`,
       token,
     })
-    console.log('ress', res)
     if (res?.err) {
       throw res.err
     }
@@ -24,7 +23,6 @@ export default class CasinoGameRepository {
       data,
       token,
     })
-    console.log('ress', res)
     if (res?.err) {
       throw res.err
     }

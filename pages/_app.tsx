@@ -21,7 +21,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     //breakpoints: [700, 950, 1360],
     //containerWidths: [950, 960, 1320],
   })
-  console.log('InitialToken', pageProps.token)
   return (
     <AppWrapper isMobile={pageProps.isMobile} token={pageProps.token}>
       <AuthWrapper>

@@ -20,7 +20,6 @@ export default function GameLimbo(props: Props) {
   ]
   const handleSubmit = async (data) => {
     await gameContext.startGame({...data, gameType: CasinoGameType.Limbo})
-    console.log('gameStart')
   }
 
   return (

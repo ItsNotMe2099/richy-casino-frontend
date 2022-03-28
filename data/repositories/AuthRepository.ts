@@ -11,7 +11,6 @@ export default class AuthRepository {
         password: password,
       },
     })
-    console.log('ress', res)
     if (res?.err) {
       throw res.err
     }
@@ -22,7 +21,6 @@ export default class AuthRepository {
       method: 'post',
       url: '/api/user/auth/logout',
     })
-    console.log('ress', res)
     if (res?.err) {
       throw res.err
     }

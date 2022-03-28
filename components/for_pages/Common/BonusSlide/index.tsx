@@ -48,7 +48,6 @@ export default function BonusSlide(props: Props) {
         <div className={styles.close} onClick={(e) => {
           e.stopPropagation()
           e.preventDefault()
-          console.log('ClockBtn')
           props.onRequestClose()
         }}>
           <img src='/img/icons/close-bonus.svg' alt=''/>

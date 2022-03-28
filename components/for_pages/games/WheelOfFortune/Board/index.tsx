@@ -20,7 +20,6 @@ export default function Board(props: Props) {
       setResult(data)
 
       if(data){
-        console.log('Win', data.win)
         gameSound.play(data.win ? GameSound.Win : GameSound.Lose, 100)
 
       }
@@ -29,9 +28,7 @@ export default function Board(props: Props) {
       subscription.unsubscribe()
     }
   }, [])
-  const handleClick = (key) => {
-    console.log(key)
-  }
+
   const redStyle = {style: { backgroundColor: '#FF1F62'}  }
   const data = props.mode === 'double' ? [
     { option: '0', style: { backgroundColor: '#FFC700'}},

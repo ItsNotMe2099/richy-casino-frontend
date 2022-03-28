@@ -7,6 +7,6 @@ interface Props{
 }
 export default function GFieldBet(props: Props) {
   const gameContext = useGameContext()
- return   <GField  name={'bet'} label={'Сумма'} type={'number'} labelSuffix={`${gameContext.user?.balance ? `${gameContext.user?.balance} ${gameContext.user?.currency}` : ''}`} prefix={gameContext.user?.currency || 'DG'} suffix={'arrow'} validate={Validator.required} inputClassName={styles.input} {...props}/>
+ return   <GField  name={'bet'} label={'Сумма'} type={'number'} labelSuffix={`${gameContext.user?.balance ? `${gameContext.user?.balance} ${gameContext.user?.currency?.toUpperCase()}` : ''}`} prefix={gameContext.user?.currency?.toUpperCase() || ''} suffix={'arrow'} validate={Validator.required} inputClassName={styles.input} {...props}/>
 }
 

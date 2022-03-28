@@ -19,9 +19,6 @@ export default function Board(props: Props) {
     }
   }, [])
 
-  const handleClick = (key) => {
-    console.log(key)
-  }
 
   return (
     <GamePageBoardLayout>

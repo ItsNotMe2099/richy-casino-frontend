@@ -4,6 +4,7 @@ import styles from 'pages/catalog/index.module.scss'
 import {Row, Col} from 'react-grid-system'
 import {GetServerSideProps} from 'next'
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
+import nookies from 'nookies'
 import {useRouter} from 'next/router'
 import GameMines from 'components/for_pages/games/Mines'
 import GameDice from 'components/for_pages/games/Dice'
@@ -17,8 +18,15 @@ import {AudioPlayerProvider} from 'react-use-audio-player'
 import {GameSoundWrapper} from 'components/for_pages/games/context/game_sound'
 import GameWheelOfFortune from 'components/for_pages/games/WheelOfFortune'
 import GameRoulette from 'components/for_pages/games/Roulette'
-
-export default function CatalogPage() {
+import GameDiamonds from 'components/for_pages/games/Diamonds'
+import GameHilo from 'components/for_pages/games/Hilo'
+import GamePlinko from 'components/for_pages/games/Plinko'
+import GameAuthRepository from 'components/for_pages/games/data/reposittories/GameAuthRepository'
+import {runtimeConfig} from 'config/runtimeConfig'
+interface Props{
+  gameToken?: string
+}
+export default function CatalogPage(props: Props) {
   const {query} = useRouter()
   const renderGame = () => {
     switch (query.game as string) {
@@ -38,6 +46,12 @@ export default function CatalogPage() {
         return <GameStairs/>
       case CasinoGameType.Roulette:
         return <GameRoulette/>
+      case CasinoGameType.Diamonds:
+        return <GameDiamonds/>
+      case CasinoGameType.HiLo:
+        return <GameHilo/>
+      case CasinoGameType.Plinko:
+        return <GamePlinko/>
       default:
         return <GameMines/>
     }
@@ -48,8 +62,7 @@ export default function CatalogPage() {
           <Filter items={[]} mobile/>
           <Col className={styles.content}>
             <GameSoundWrapper>
-            <GameWrapper gameType={query.game as CasinoGameType}
-                         token={'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywicGFydG5lclVzZXJJZCI6IjEyMiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjQ3ODcxNDg5LCJleHAiOjIwMDc4NzE0ODl9.1yQQsNBsjXvmJ7RP9_Sf74rsjAUVZlUBMLdPggBsn0A'}>{renderGame()}</GameWrapper>
+            <GameWrapper token={props.gameToken} gameType={query.game as CasinoGameType}>{renderGame()}</GameWrapper>
             </GameSoundWrapper>
           </Col>
         </Row>
@@ -59,9 +72,21 @@ export default function CatalogPage() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = nookies.get(context)
+  const cookieTokenName = 'gameToken'
+  let gameToken = cookies[cookieTokenName]
+  if(!gameToken){
+    const authRes = await GameAuthRepository.loginGuest(runtimeConfig.GAMES_API_SECRET, 'btc')
+    nookies.set(context, cookieTokenName, authRes.accessToken, {
+      maxAge: 30 * 24 * 60 * 60,
+      path: '/',
+    })
+    gameToken = authRes.accessToken
+  }
   return {
     props: {
       ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      gameToken
     },
   }
 }

@@ -24,7 +24,6 @@ export default function GameMines(props: Props) {
   const [selected, setSelected] = useState([])
   const handleSubmit = async (data: ICasinoGameDiceDto) => {
     await gameContext.startGame({...data, gameType: CasinoGameType.Mines})
-    console.log('gameStart')
   }
   return (
     <GamePageLayout

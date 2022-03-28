@@ -29,7 +29,6 @@ export default function GameKeno(props: Props) {
   const handleSubmit = async (data: ICasinoGameDiceDto) => {
     gameSound.play(GameSound.Roll)
     await gameContext.startGame({...data, tiles: selected, gameType: CasinoGameType.Keno} as ICasinoGameDiceDto)
-    console.log('gameStart')
   }
   const handleSelect = (item)=>{
     if(isAutoSelect){
@@ -59,7 +58,6 @@ export default function GameKeno(props: Props) {
       if(picked.includes(rand)) continue
       picked.push(rand)
     }
-    console.log('Picked', picked.length, picked)
     chain(picked.length, 100, (i) => {
       gameSound.play(GameSound.Click)
       setSelected((selected) => [...selected, picked[i]])

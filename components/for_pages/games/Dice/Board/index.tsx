@@ -26,7 +26,6 @@ export default function Board(props: Props) {
       setResult(data)
 
       if(data){
-        console.log('Win', data.win)
         gameSound.play(data.win ? GameSound.Win : GameSound.Lose, 100)
         onSetValue('profit', data.profit.toFixed(8))
       }
@@ -36,16 +35,6 @@ export default function Board(props: Props) {
     }
   }, [])
 
-  const handleClick = (key) => {
-    console.log(key)
-  }
-
-  const handleSubmit = (date) => {
-
-  }
-  const initialValues = {
-
-  }
   const handleChangeTarget = () => {
     const newTarget = values.target === 'lower' ? 'higher' : 'lower'
     const newValue = 100 - values.value
@@ -87,7 +76,6 @@ export default function Board(props: Props) {
   }
   const handleChangeChance = (value) => {
     const newValue = values.target === 'higher' ? 100 - value : value
-    console.log('handleChangeChance', newValue)
       onSetValue('value', newValue)
     setDiceProfit(values.target, newValue)
   }

@@ -12,7 +12,6 @@ export function email(value: string) {
 
 
 export const passwordsMustMatch = (value: string, allValues: any) => {
-  console.log("passwordsMatch", value, allValues)
   return value !== allValues.newPassword ? 'Пароли не совпадают' : undefined
 }
 

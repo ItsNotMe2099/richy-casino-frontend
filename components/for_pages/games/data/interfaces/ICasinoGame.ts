@@ -1,3 +1,5 @@
+import {HiloBetType} from 'components/for_pages/games/Hilo/data/enums'
+
 export interface IMultipliers { [key: number]: number[] }
 export interface ICasinoGame {
   name: string
@@ -12,6 +14,7 @@ export interface ICasinoGameErrorEvent {
   errorName: any
 }
 export interface ICasinoGameFinishEvent {
+  id: number
   win: boolean
   data: any
   profit: number
@@ -43,5 +46,13 @@ export interface ICasinoGameMinesTurn extends ICasinoGameTurn{
 
 export interface ICasinoGameTowersTurn extends ICasinoGameTurn{
   grid?: number[][]
+}
+export interface ICasinoGameHiloTurn extends ICasinoGameTurn{
+  grid: number[],
+  multipliers: number[]
+  history: HiloBetType[]
+}
+export interface ICasinoGameBlackjackTurn extends ICasinoGameTurn{
+  action: 'info' | 'split' | 'hit' | 'double' | 'insurance' | 'stand';
 }
 

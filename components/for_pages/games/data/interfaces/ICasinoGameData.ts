@@ -2,7 +2,7 @@ import {CasinoGameType} from 'components/for_pages/games/data/enums'
 import {CasinoGameModeType} from 'components/ui/Tabs'
 
 export interface ICasinoGameDataDto {
-  mode: CasinoGameModeType
+  gameMode: CasinoGameModeType
   gameType: CasinoGameType;
   bet: number;
   currency: string;
@@ -32,3 +32,12 @@ export interface ICasinoGameRouletteDto extends ICasinoGameDataDto {
   // Ставки
  bets: {[key: string]: number}
 }
+export interface ICasinoDiamondsDto extends ICasinoGameDataDto {
+
+}
+export interface ICasinoGameHiloDto extends ICasinoGameDataDto {
+  starting: number
+}
+export interface ICasinoGameBlackjackDto extends ICasinoGameDataDto {
+}
+

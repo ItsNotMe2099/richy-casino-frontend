@@ -50,11 +50,8 @@ export default function Board(props: Props) {
     }
   }, [])
   const handleClick = (key) => {
-    console.log(key)
     props.onSelect(key)
   }
-
-  console.log('Game', gameContext.game)
   const getItemStatus = (item) => {
     const isSelected = selected.includes(item)
     if(!result && resultTiles.length === 0){

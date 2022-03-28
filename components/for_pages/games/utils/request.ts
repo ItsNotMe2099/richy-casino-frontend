@@ -1,6 +1,7 @@
 import fetch from 'cross-fetch'
 import Cookies from 'js-cookie'
 import { CookiesType } from 'types/enums'
+import {runtimeConfig} from 'config/runtimeConfig'
 
 interface Options {
   url: string
@@ -29,8 +30,7 @@ async function request(options: string | Options): Promise<Res> {
     data = options.data
   }
 
-  const correctUrl = `http://localhost:3000${url}${(method === 'GET' && data) ? `?${queryParams(data)}` : ''}`
-
+  const correctUrl = `${runtimeConfig.GAMES_HOST}${url}${(method === 'GET' && data) ? `?${queryParams(data)}` : ''}`
   try {
     const res = await fetch(correctUrl, {
       method,

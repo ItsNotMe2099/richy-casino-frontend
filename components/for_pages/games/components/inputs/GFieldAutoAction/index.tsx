@@ -12,7 +12,6 @@ interface Props{
 }
 export default function GFieldAutoAction({typeName, valueName}:Props) {
   const formik = useFormikContext()
-  console.log('Formik', formik)
   const options = [
     {label: 'Reset', value: IGameAutoActionType.Reset},
     {label: 'Increase by', value: IGameAutoActionType.IncreaseBy},

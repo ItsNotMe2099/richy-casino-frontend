@@ -21,7 +21,6 @@ export const formatDateRelative = (date) => {
   if (!date) {
     return ''
   }
-  console.log('FormatData', date)
   return formatRelative(new Date(date), new Date(), { locale })
 }
 

@@ -20,7 +20,6 @@ export const StatItem = ({index, multiplier, isActive}: PropsStatItem) => {
   </div>
 }
 export default function Stat({selected, multipliers, hasResult, hits}: Props) {
-  console.log('selected.length', selected.length, selected)
   let multipliersSorted = multipliers[selected.length].sort((a, b) =>  a - b)
   useEffect(() => {
     if(hasResult && hits) {

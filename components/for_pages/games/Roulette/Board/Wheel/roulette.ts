@@ -169,7 +169,6 @@ export const Roulette = function (_canvas, _context){
 
   this.putBallAtSlot = function(num: number, time?: number) {
     let slot = findIndexOfSlot(num)
-    console.log('SlotNum', slot, num)
     if (slot === false) {
       _ballSettings.showBall = false
       return
