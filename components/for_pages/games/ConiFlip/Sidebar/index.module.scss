@@ -1,0 +1,11 @@
+@import "scss/index";
+.sideField{
+  margin-bottom: 15px;
+}
+.sides{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0px 8px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}

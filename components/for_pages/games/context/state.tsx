@@ -22,7 +22,7 @@ interface IState {
   game?: ICasinoGame | null
   gameState$: Subject<ICasinoGameFinishEvent>
   turnState$: Subject<ICasinoGameTurn>
-  newTurn: (data: any) => void
+  newTurn: (data: any, shouldClear?: boolean) => void
   startGame: (data: ICasinoGameDataDto, shouldClear?: boolean) => void
   finish: () => void
   roundId: number
@@ -59,7 +59,7 @@ const defaultValue: IState = {
   setShowResultModal: (show: boolean) => null,
   startGame: (data: ICasinoGameDataDto, shouldClear?: boolean) => null,
   clear: () => null,
-  newTurn: (data: any) => null,
+  newTurn: (data: any, shouldClear?: boolean) => null,
   finish: () => null,
   hideError: () => null
 }
@@ -236,8 +236,12 @@ export function GameWrapper(props: Props) {
         setError(e)
       }
     },
-    newTurn: async (data?: any) => {
+    newTurn: async (data?: any, shouldClear: boolean = false) => {
       try {
+        if(shouldClear){
+          setTurn(null)
+          turnState$.next(null)
+        }
         setError(null)
         setTurnLoading(true)
         socket.emit('game:turn', {...data, roundId})

@@ -23,6 +23,7 @@ import GameHilo from 'components/for_pages/games/Hilo'
 import GamePlinko from 'components/for_pages/games/Plinko'
 import GameAuthRepository from 'components/for_pages/games/data/reposittories/GameAuthRepository'
 import {runtimeConfig} from 'config/runtimeConfig'
+import GameCoinFlip from 'components/for_pages/games/ConiFlip'
 interface Props{
   gameToken?: string
 }
@@ -52,6 +53,8 @@ export default function CatalogPage(props: Props) {
         return <GameHilo/>
       case CasinoGameType.Plinko:
         return <GamePlinko/>
+      case CasinoGameType.Coinflip:
+        return <GameCoinFlip/>
       default:
         return <GameMines/>
     }

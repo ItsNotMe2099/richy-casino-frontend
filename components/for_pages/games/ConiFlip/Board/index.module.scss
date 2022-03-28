@@ -1,0 +1,16 @@
+@import "scss/index";
+.root{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 68px;
+  padding-top: 35px;
+  @media only screen and (max-width: $xs-max) {
+    padding-bottom: 24px;
+
+  }
+
+}
+.board{
+  max-width: 300px;
+}

@@ -1,5 +1,6 @@
 import {CasinoGameType} from 'components/for_pages/games/data/enums'
 import {CasinoGameModeType} from 'components/ui/Tabs'
+import {CoinType} from 'components/for_pages/games/ConiFlip/data/enums'
 
 export interface ICasinoGameDataDto {
   gameMode: CasinoGameModeType
@@ -39,5 +40,9 @@ export interface ICasinoGameHiloDto extends ICasinoGameDataDto {
   starting: number
 }
 export interface ICasinoGameBlackjackDto extends ICasinoGameDataDto {
+}
+
+export interface ICasinoGameCoinFlipDto extends ICasinoGameDataDto {
+  side: CoinType
 }
 

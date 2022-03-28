@@ -1,0 +1,31 @@
+@import "../../../../../../scss/index";
+
+
+.root{
+  cursor: pointer;
+  background: $dark500;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 22%;
+  &.disabled{
+    &:hover{
+      opacity: 0.2;
+    }
+  }
+  opacity: 0.2;
+  &:hover, &.active{
+    opacity: 1;
+  }
+  img{
+    max-width: 100%;
+  }
+}
+.label{
+  color: white;
+  margin-top: 8px;
+  text-align: center;
+}

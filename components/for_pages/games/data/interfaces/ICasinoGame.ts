@@ -1,4 +1,5 @@
 import {HiloBetType} from 'components/for_pages/games/Hilo/data/enums'
+import {CoinType} from 'components/for_pages/games/ConiFlip/data/enums'
 
 export interface IMultipliers { [key: number]: number[] }
 export interface ICasinoGame {
@@ -54,5 +55,9 @@ export interface ICasinoGameHiloTurn extends ICasinoGameTurn{
 }
 export interface ICasinoGameBlackjackTurn extends ICasinoGameTurn{
   action: 'info' | 'split' | 'hit' | 'double' | 'insurance' | 'stand';
+}
+
+export interface ICasinoGameCoinFlipTurn extends ICasinoGameTurn{
+  side: CoinType
 }
 
