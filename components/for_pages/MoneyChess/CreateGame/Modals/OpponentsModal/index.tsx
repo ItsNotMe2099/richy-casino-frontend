@@ -1,10 +1,7 @@
 import styles from './index.module.scss'
 import ReactModal from 'react-modal'
-import Sheet from 'react-modal-sheet'
 import {useAppContext} from 'context/state'
-import classNames from 'classnames'
-import BonusSlide from 'components/for_pages/Common/BonusSlide'
-import CreateGameForm from './Form'
+
 
 interface Props {
   isOpen: boolean
@@ -47,10 +44,7 @@ export default function CreateGameModal(props: Props) {
     return (
       <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
         <div className={styles.root}>
-          <div className={styles.title}>
-            Создание игры
-          </div>
-          <CreateGameForm onRequestClose={props.onRequestClose}/>
+          
         </div>
       </ReactModal>
     )
