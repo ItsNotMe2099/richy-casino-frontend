@@ -36,7 +36,7 @@ export default function Sidebar(props: Props) {
       onWinValue: null,
       onLooseType: null,
       onLooseValue: null,
-      mines: 1
+      mines: 3
     },
     onSubmit,
   })
@@ -44,7 +44,7 @@ export default function Sidebar(props: Props) {
   const {values} = formik
   const {gameMode} = values
   const validateMines = (val) => {
-    return val < 0 || val > 24 ? 'Значение от 1 до 24' : undefined
+    return val < 3 || val > 24 ? 'Значение от 3 до 24' : undefined
   }
 
   const renderBetButton = () => {

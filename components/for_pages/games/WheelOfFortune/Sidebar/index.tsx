@@ -56,7 +56,7 @@ export default function Sidebar(props: Props) {
           </HiddenXs>
           <GFieldSelectTabs label={'Game Mode'} style={'small'} fluid className={styles.field}  name={'mode'} options={[
             {value: 'double', label: 'Double'},
-            {value: '50x', label: '50x'},
+            {value: 'x50', label: '50x'},
           ]} onChange={props.onChangeMode}  validate={Validator.required}/>
           <GFieldSelectColorTabs label={'Цвет'} style={'small'} fluid className={styles.field}  name={'target'} options={
             values.mode === 'double' ?

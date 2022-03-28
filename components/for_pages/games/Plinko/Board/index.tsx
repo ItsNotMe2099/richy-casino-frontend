@@ -159,7 +159,7 @@ export default function Board(props: Props) {
         wireframes: !1, background: 'rgb(39, 45, 57)', pixelRatio: 3
       }
     })
-    Render.setPixelRatio(render, 3)
+    Render.setPixelRatio(render, 'auto')
     const g = []
     const a = pinsCount + 2
     const o = 800 / a / 2

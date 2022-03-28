@@ -107,33 +107,21 @@ export default function Board(props: Props) {
   ]
   const handleStart = (duration) => {
     setTimeout(() => {
-      const length = (duration + 1000) / 150
-      const length2 = 20
+      const length = Math.floor((duration) / 200)
+      const length2 = 7
       const length3 = 15
       const length4 = 15
       chain(length, 100, (i) => {
         gameSound.play(GameSound.Tick)
-        if(i-1 === length){
+        if(i === length - 1){
           setTimeout(() =>     gameSound.play(GameSound.Tick), 100)
 
           chain(length2, 200, (i) => {
             gameSound.play(GameSound.Tick)
-            if(length2 - 1 !== i) {
-                return
+
+            if(i === length2 -1){
+              setTimeout(() => gameContext.setShowResultModal(true), 300)
             }
-              setTimeout(() =>     gameSound.play(GameSound.Tick), 100)
-              chain(length3, 500, (i) => {
-                gameSound.play(GameSound.Tick)
-                if(length3 - 1 !== i) {
-                  return
-                }
-                  setTimeout(() =>     gameSound.play(GameSound.Tick), 100)
-                  chain(length4, 700, (i) => {
-                    gameSound.play(GameSound.Tick)
-                  })
-
-              })
-
 
           })
 

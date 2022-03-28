@@ -37,6 +37,7 @@ export default function Sidebar(props: Props) {
       onWinValue: null,
       onLooseType: null,
       onLooseValue: null,
+      mines: 1
     },
     onSubmit,
   })
