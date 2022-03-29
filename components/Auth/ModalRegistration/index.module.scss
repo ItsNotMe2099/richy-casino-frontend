@@ -1,0 +1,147 @@
+@import "scss/index";
+
+.form {
+  margin-top: 24px;
+}
+
+.variants {
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+
+  .variant:last-child {
+    margin-right: 0;
+  }
+
+  @media screen and (max-width: 430px) {
+    justify-content: space-evenly;
+  }
+}
+
+.variant {
+  padding: 16px;
+  flex: 1;
+  cursor: pointer;
+  max-width: 118px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $dark600;
+  border-radius: 6px;
+  margin-right: 6px;
+  @media screen and (max-width: $xs-max){
+    padding: 13px 0;
+  }
+  img {
+    margin-right: 8px;
+  }
+}
+
+.active {
+  @include blueGradient500NoHover;
+  @media screen and (max-width: 320px) {
+    max-width: 47px;
+    img {
+      margin-right: 0;
+    }
+  }
+}
+
+.label {
+  font-size: 13px;
+  color: $white;
+  @media screen and (max-width: 430px) {
+    font-size: 12px;
+  }
+}
+
+.inputs {
+
+}
+
+.phone {
+  margin-bottom: 12px;
+}
+
+.email {
+  margin-bottom: 12px;
+
+  input {
+    margin-bottom: 0;
+  }
+}
+
+.promo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover{
+    span{
+      text-decoration: underline;
+    }
+  }
+  span {
+    font-size: 13px;
+    color: #FFD12F;
+  }
+}
+
+.banner{
+  margin-top: 16px;
+}
+
+.plus {
+  width: 12.83px;
+  height: 12.83px;
+  border-radius: 100%;
+  background: #FFD12F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 1.1rem;
+  margin-right: 8px;
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.8rem;
+  }
+}
+
+.mobile {
+  @media screen and (max-width: 320px) {
+    display: none;
+  }
+}
+
+.button {
+  width: 100%;
+  font-weight: 500;
+  font-size: 16px;
+  color: $white;
+}
+
+.login {
+  font-weight: 500;
+  font-size: 13px;
+  color: $dark200;
+  margin-top: 25px;
+
+  span {
+    color: #FFD12F;
+    cursor: pointer;
+  }
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  @media screen and (max-width: 430px) {
+    justify-content: center;
+    margin-bottom: 10px;
+    a {
+      margin-right: 10px;
+    }
+  }
+}

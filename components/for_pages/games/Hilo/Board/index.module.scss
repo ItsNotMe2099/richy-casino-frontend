@@ -1,0 +1,19 @@
+@import "scss/index";
+.root{
+  padding-bottom: 68px;
+  padding-top: 35px;
+  @media only screen and (max-width: 985px) {
+    padding-bottom: 24px;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+}
+.tip{
+  font-weight: 500;
+  color: $dark200;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 16px;
+  text-transform: uppercase;
+}

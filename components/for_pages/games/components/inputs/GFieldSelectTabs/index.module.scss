@@ -1,0 +1,88 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  &.small{
+    .options{
+      height: 44px;
+      border-radius: 67px;
+    }
+    .item{
+      height: 40px;
+      border-radius: 46px;
+    }
+  }
+  &.exSmall{
+    .options{
+      height: 36px;
+      border-radius: 59px;
+    }
+    .item{
+      height: 32px;
+      border-radius: 38px;
+      padding: 0px 10px;
+    }
+  }
+  &.fluid{
+    .options {
+      width: 100%;
+
+      .item {
+        align-items: center;
+        justify-content: center;
+        margin-right: 0px;
+        flex: 1;
+      }
+    }
+  }
+}
+.options {
+  height: 46px;
+  border-radius: 24px;
+  background-color: $dark600;
+  display: flex;
+  padding: 2px;
+  .item:last-child{
+    margin-right: 0;
+  }
+
+}
+
+.item{
+  height: 42px;
+  border-radius: 46px;
+  background-color: $dark600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 18px;
+  margin-right: 12px;
+  cursor: pointer;
+  font-weight: 400;
+  padding-top: 1px;
+  font-weight: 400;
+  svg{
+    fill: #797C86;
+    margin-right: 8px;
+  }
+}
+
+.label{
+  font-weight: 500;
+  font-size: 13px;
+  color: $dark100;
+  padding-top: 2px;
+}
+
+.active{
+  border-radius: 46px;
+  background-color: $dark400;
+  .label{
+    color: $white;
+  }
+  svg{
+    fill: $white;
+  }
+}

@@ -1,0 +1,365 @@
+@import "scss/index";
+
+.root {
+    @include componentRoot;
+    padding-right: 0;
+}
+
+.header{
+    padding-right: 28px;
+    @media screen and (max-width: $xs-max){
+        padding-right: 0;
+      }
+}
+
+.all{
+    padding: 13px 17px;
+    border-radius: 8px;
+    background-color: $dark600;
+    color: $white;
+    font-weight: 500;
+    font-size: 12px;
+    @media screen and (max-width: 700px){
+        padding: 8px 9px;
+        span{
+            display: none;
+        }
+    }
+  }
+
+  .left{
+      display: flex;
+      align-items: center;
+  }
+
+.label{
+    font-weight: bold;
+    font-size: 26px;
+    color: #FFFFFF;
+    @media screen and (max-width: 450px){
+        font-size: 13px;
+    }
+}
+
+.content{
+    display: flex;
+    margin-top: 25px;
+    @media screen and (max-width: 950px){
+        flex-direction: column;
+      margin-top: 2px;
+      }
+}
+
+
+.avatar{
+    img{
+        width: 32px;
+        height: 32px;
+        border-radius: 100%;
+        @media screen and (max-width: $mobile-max){
+          width: 16px;
+          height: 16px;
+        }
+    }
+    @media screen and (max-width: 450px){
+        margin-right: 10px;
+    }
+}
+
+.nick{
+    font-weight: 600;
+    font-size: 14px;
+    color: #FFFFFF;
+    @media screen and (max-width: $xs-max){
+        font-size: calc(10px + 0.5vw);
+    }
+    @media screen and (max-width: $mobile-max){
+        font-size: 0.7rem;
+    }
+}
+
+.illustration{
+    margin-right: 70px;
+    width: 50%;
+    img{
+        width: 100%;
+    }
+    @media screen and (max-width: 950px){
+        display: flex;
+        margin-right: 0;
+        justify-content: center;
+        margin-bottom: 13px;
+        width: 100%;
+    }
+    @media screen and (max-width: $mobile-max){
+       width: 100%;
+       margin-bottom: 43px;
+    }
+}
+
+.table{
+    display: table;
+    width: 100%;
+    padding-right: 23px;
+}
+
+.row{
+    display: table-row;
+    .cell{
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: $dark200;
+        @media screen and (max-width: $xs-max){
+            font-size: calc(10px + 0.5vw);
+        }
+        @media screen and (max-width: $mobile-max){
+            font-size: 0.7rem;
+        }
+    }
+    .cell:first-child{
+        text-align: center;
+        padding-right: 47px;
+        @media screen and (max-width: $mobile-max){
+            padding-right: 0;
+            text-align: left;
+            padding-left: 5px;
+        }
+    }
+    .cell:nth-child(2){
+        @media screen and (max-width: $mobile-max){
+          padding-left: 10px;
+        }
+    }
+    .cell:last-child{
+        text-align: right;
+    }
+    .cell:nth-child(3){
+        @media screen and (max-width: 600px){
+            display: none;
+        }
+    }
+}
+.cell{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.user{
+    display: table-row;
+    .cell{
+        padding: 20px 0 21px 0;
+        border-bottom: 1px solid #272832;
+        @media screen and (max-width: $mobile-max){
+          padding: 10px 0;
+          .avatar{
+              margin-right: 4px;
+          }
+        }
+    }
+    .cell:first-child{
+        text-align: center;
+        padding-right: 47px;
+        @media screen and (max-width: $mobile-max){
+            padding-right: 0;
+            text-align: left;
+            width: 1%;
+            img{
+                width: 16px;
+            }
+        }
+    }
+    .cell:nth-child(2){
+        width: 40%;
+        @media screen and (max-width: $mobile-max){
+          padding-left: 10px;
+        }
+    }
+    .cell:nth-child(3){
+        @media screen and (max-width: 600px){
+            display: none;
+        }
+    }
+    .cell:last-child{
+        .group{
+            justify-content: flex-end;
+            color: $pay500;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 18px;
+            span{
+                color: #4c7836;
+            }
+            @media screen and (max-width: $xs-max){
+                font-size: calc(10px + 0.5vw);
+            }
+            @media screen and (max-width: $mobile-max){
+                font-size: 0.7rem;
+            }
+        }
+    }
+}
+
+.group{
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 14px;
+    img{
+        margin-right: 8px;
+    }
+    @media screen and (max-width: $xs-max){
+        font-size: calc(10px + 0.6vw);
+    }
+    @media screen and (max-width: $mobile-max){
+        img{
+            margin-right: 4px;
+            width: 8px;
+            height: 8px;
+        }
+        .avatar{
+            img{
+                width: 32px;
+                height: 32px;
+                border-radius: 100%;
+                @media screen and (max-width: $mobile-max){
+                  width: 16px;
+                  height: 16px;
+                }
+            }
+            @media screen and (max-width: 450px){
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+.wrapper{
+    width: 100%;
+    max-height: 308px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      display: none;
+      width: 0px;
+    }
+    .table{
+        padding-bottom: 77px;
+    }
+}
+
+.scroll{
+    height: 308px !important;
+    @media screen and (max-width: $mobile-max){
+      height: 200px !important;
+    }
+}
+
+.scroll > div:first-child{
+    padding-bottom: 56px;
+    @media screen and (max-width: $mobile-max){
+      padding-bottom: 81px;
+    }
+}
+
+.outerWrapper{
+    position: relative;
+    width: 100%;
+}
+
+.transparent{
+    position: absolute;
+    width: 100%;
+    height: 77px;
+    background: linear-gradient(180deg, rgba(29, 30, 37, 0) 0%, rgba(29, 30, 37, 0.87) 21.88%, #1D1E25 100%);
+    bottom: 0;
+    z-index: 1;
+    @media screen and (max-width: $mobile-max){
+        height: 81px;
+    }
+}
+
+.bottom{
+    margin-right: 28px;
+    padding: 28px 21px 28px 20px;
+    background: #272832;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    .element:last-child{
+        .title{
+            text-align: right;
+            @media screen and (max-width: 900px){
+                text-align: left;
+             }
+        }
+        .group{
+            color: $pay500;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 18px;
+            @media screen and (max-width: $mobile-max){
+                font-size: 0.8rem;
+              }
+            span{
+                color: #4c7836;
+            }
+        }
+    }
+    @media screen and (max-width: 900px){
+       margin-right: 0;
+       padding: 16px;
+       padding-bottom: 23px;
+       flex-direction: column;
+       .avatar{
+           margin-right: 8px;
+           img{
+               width: 32px;
+               height: 32px;
+           }
+       }
+       .nick{
+           font-size: 14px;
+           @media screen and (max-width: $xs-max){
+            font-size: 1rem;
+            }
+           @media screen and (max-width: $mobile-max){
+            font-size: 1rem;
+            }
+       }
+       .element{
+           margin-top: 20px;
+       }
+       .value{
+           margin-top: 4px;
+           .group{
+               img{
+                   width: 16px;
+                   height: 16px;
+                   margin-right: 8px;
+               }
+           }
+       }
+    }
+}
+
+.title{
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: $dark200;
+    @media screen and (max-width: $mobile-max){
+        font-size: 0.8rem;
+      }
+    span{
+        font-weight: 600;
+    }
+}
+
+.value{
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    @media screen and (max-width: $mobile-max){
+        font-size: 0.8rem;
+      }
+}

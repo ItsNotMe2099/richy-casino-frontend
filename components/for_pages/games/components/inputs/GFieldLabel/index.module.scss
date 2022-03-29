@@ -1,0 +1,18 @@
+@import "scss/index";
+
+.root{
+  font-size: 14px;
+  font-weight: 400;
+  color: $dark200;
+  margin-bottom: 10px;
+  display: flex;
+
+  &.error{
+   .label {
+     color: #ED4700;
+   }
+  }
+}
+.label{
+  flex: 1;
+}

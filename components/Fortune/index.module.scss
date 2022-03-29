@@ -1,0 +1,120 @@
+@import "scss/index";
+
+.root{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wheel{
+  position: relative;
+}
+
+.everyday{
+  width: 100%;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 32px 0;
+  background: rgba(37, 37, 37, 0.46);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(32px);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  min-width: 391px;
+  div{
+    flex-shrink: 0;
+  }
+}
+
+.everydayMobile{
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.mobile{
+  width: 100%;
+  @media screen and (max-width: 430px){
+    background: rgba(37, 37, 37, 0.83);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(32px);
+    padding: 0 19px;
+    padding-bottom: 48px;
+    margin-top: -150px;
+    position: relative;
+    width: 100%;
+  }
+}
+
+.right{
+  position: absolute;
+  bottom: 20px;
+  right: 0;
+  @media screen and (max-width: 430px){
+    display: none;
+  }
+}
+
+.left{
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  @media screen and (max-width: 430px){
+    display: none;
+  }
+}
+
+.spin{
+  padding: 27px 0;
+  margin-top: 34px;
+  font-weight: bold;
+  font-size: 20px;
+  color: $white;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.btn{
+  width: 100%;
+  padding: 0 16px;
+}
+
+.wrapper{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.wrapperMobile{
+  margin-top: 37px;
+}
+
+.next{
+  background: rgba(246, 15, 98, 0.05);
+  border: 1px solid #F60F62;
+  box-shadow: 0px 4px 27px rgba(243, 0, 88, 0.1);
+  border-radius: 12px;
+  padding: 12px 0;
+  margin-top: 34px;
+  @media screen and (max-width: 430px){
+    padding: 6px 0;
+  }
+}
+
+.free{
+  font-size: 13px;
+  color: $white;
+}
+
+.timer{
+  display: flex;
+  justify-content: center;
+  margin-top: 9px;
+  letter-spacing: 0.335em;
+  color: #F5075D;
+  font-weight: bold;
+  font-size: 30px;
+}

@@ -1,0 +1,63 @@
+@import "scss/index";
+
+.form {
+  margin-top: 16px;
+  @media screen and (max-width: $sm-min){
+    margin-top: 0px;
+  }
+}
+
+.inputs {
+  margin-top: 8px;
+  @media screen and (max-width: $sm-min){
+    margin-top: 12px;
+  }
+}
+.label{
+  font-size: 1.1rem;
+  color: #717384;
+  font-weight: 400;
+  margin-bottom: 7px;
+  &:first-of-type{
+    margin-bottom: 12px;
+  }
+  text-align: center;
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.8rem;
+  }
+}
+.forgot{
+  cursor: pointer;
+  font-size: 13px;
+  color: $dark200;
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: 20px;
+  &:hover{
+    text-decoration: underline;
+  }
+}
+.socials{
+  margin-top: 13px;
+  margin-bottom: 7px;
+  div{
+    margin-bottom: 0;
+    @media screen and (max-width: 430px){
+      margin-bottom: 10px;
+    }
+  }
+  @media screen and (max-width: $sm-min){
+    margin-top: 20px;
+  }
+}
+
+.login{
+  font-weight: 500;
+  font-size: 13px;
+  color: $dark200;
+  margin-top: 25px;
+  span{
+    color: #FFD12F;
+    cursor: pointer;
+  }
+}

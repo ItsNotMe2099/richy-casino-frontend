@@ -1,0 +1,192 @@
+@import "scss/index";
+
+.root{
+  background-image: url('../../../../public/img/FreeBitcoin/bg.svg');
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-height: 413px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  position: relative;
+  background-size: cover;
+  @media screen and (max-width: $xs-max){
+    min-height: 216px;
+    max-height: 216px;
+    margin-left: 9px;
+    margin-right: 9px;
+    justify-content: flex-start;
+    padding-top: 22px;
+  }
+  @media screen and (max-width: $xs-max){
+    margin-top: 18px;
+    border-radius: 18px;
+  }
+}
+
+.coinsLeft{
+  position: absolute;
+  left: 0;
+  @media screen and (max-width: 1060px){
+    left: -10%;
+  }
+  @media screen and (max-width: $xs-max){
+    left: 0;
+    top: 0;
+  }
+  @media screen and (max-width: 320px){
+    left: -2%;
+  }
+}
+
+.coinsRight{
+  position: absolute;
+  right: 0;
+  @media screen and (max-width: 1060px){
+    right: -10%;
+  }
+  @media screen and (max-width: $xs-max){
+    right: 0;
+    top: 0;
+  }
+}
+
+.digit{
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 60px;
+  color: #FFFFFF;
+  margin-right: 7px;
+  min-width: 79px;
+  padding: 10px 0;
+  @media screen and (max-width: $xs-max){
+    min-width: 40px;
+    max-width: 40px;
+    font-size: 20px;
+    min-height: 50px;
+    border-radius: 9px;
+  }
+}
+
+.amount{
+  display: flex;
+  position: relative;
+}
+
+.btn{
+  color: $white;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 72px;
+  position: relative;
+  @media screen and (max-width: $xs-max){
+      padding: 14px 63px;
+      font-size: 18px;
+      margin-top: 50px;
+  }
+}
+
+.win{
+  padding-top: 24px;
+  padding-left: 22px;
+  padding-right: 22px;
+  padding-bottom: 26px;
+  border-radius: 26px;
+  background-color: rgba(20, 21, 27, 0.5);
+  margin-top: 43px;
+  position: relative;
+  @media screen and (max-width: $xs-max){
+    padding: 11px 44px 15px 44px;
+    margin-top: 15px;
+    border-radius: 13px;
+  }
+}
+
+.you{
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0.205em;
+  color: #FFFFFF;
+  @media screen and (max-width: $xs-max){
+    font-size: 11px;
+  }
+}
+
+.btns{
+  margin-top: 19px;
+  display: flex;
+  @media screen and (max-width: $xs-max){
+    flex-direction: column;
+    margin-top: 9px;
+  }
+}
+
+.coins{
+  color: $balance600;
+  margin-right: 15px;
+  padding: 7px 20px;
+  background-color: rgba(255, 209, 47, 0.2);
+  display: flex;
+  border-radius: 8px;
+  align-items: center;
+  @media screen and (max-width: $xs-max){
+    margin-right: 0;
+    margin-bottom: 5px;
+    font-size: 11px;
+    padding: 5px 20px;
+  }
+  img{
+    margin-right: 11px;
+    @media screen and (max-width: $xs-max){
+      margin-right: 4px;
+      width: 18px;
+    }
+  }
+}
+
+.ticket{
+  color: $white;
+  padding: 7px 20px;
+  background-color: rgba(89, 90, 255, 0.5);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: $xs-max){
+    font-size: 11px;
+    padding: 6px 11px;
+  }
+  img{
+    margin-right: 11px;
+    @media screen and (max-width: $xs-max){
+      margin-right: 4px;
+      width: 16px;
+    }
+  }
+}
+
+.timer{
+  margin-top: 32px;
+  @media screen and (max-width: $xs-max){
+    margin-top: 24px;
+  }
+}
+
+.again{
+  font-size: 16px;
+  text-align: center;
+  color: #FFFFFF;
+  margin-top: 32px;
+  @media screen and (max-width: $xs-max){
+    font-size: 12px;
+    margin-top: 24px;
+  }
+}

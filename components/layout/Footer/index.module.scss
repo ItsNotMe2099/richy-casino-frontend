@@ -1,0 +1,372 @@
+@import "scss/index";
+
+.root{
+  margin-top: auto;
+  margin-top: 95px;
+  @media screen and (max-width: 920px){
+    padding: 0 18px;
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+  @media screen and (max-width: $xs-max){
+    margin-top: 49px;
+}
+}
+
+.top{
+  display: flex;
+  justify-content: space-between;
+}
+
+.mail{
+  margin-top: 28px;
+  a{
+    font-weight: 500;
+    font-size: 13px;
+    color: $white;
+    @media screen and (max-width: $xs-max){
+      font-weight: 400;
+    }
+  }
+
+}
+
+.desc{
+  color: #606168;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  max-width: 260px;
+  @media screen and (max-width: $xs-max){
+    font-weight: 400;
+  }
+}
+
+.btns{
+  display: flex;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.socials{
+  display: flex;
+  align-items: center;
+  align-self: baseline;
+    @media screen and (max-width: 900px){
+      display: none;
+    }
+}
+
+.btn{
+  margin-right: 8px;
+  a{
+    &:hover{
+      svg{
+        fill: $white;
+      }
+    }
+    svg{
+      fill: #484B5C;
+      @media screen and (max-width: $xs-max){
+        fill: $white;
+      }
+    }
+  }
+
+}
+
+.facebook{
+  a{
+  &:hover{
+    background: linear-gradient(270deg, #2C50FF -6.01%, #4785F6 114.87%);
+  }
+}
+  @media screen and (max-width: $xs-max){
+    a{
+      background: linear-gradient(270deg, #2C50FF -6.01%, #4785F6 114.87%);
+    }
+  }
+}
+
+.youtube{
+  a{
+  &:hover{
+    background: #EC4444;
+  }
+}
+  @media screen and (max-width: $xs-max){
+    a{
+      background: #EC4444;
+    }
+  }
+}
+
+.twitter{
+  a{
+    &:hover{
+      background: #00A1E6;
+    }
+  }
+  @media screen and (max-width: $xs-max){
+    a{
+      background: #00A1E6;
+    }
+  }
+}
+
+.linkedIn{
+  a{
+    &:hover{
+      background: #3F6EA6;
+    }
+  }
+  @media screen and (max-width: $xs-max){
+    a{
+      background: #3F6EA6;
+    }
+  }
+}
+
+.support{
+  @media screen and (min-width: 671px){
+    margin-right: 27px;
+  }
+}
+
+.item{
+  font-weight: 500;
+  font-size: 13px;
+  color: #C4C4C4;
+  margin-bottom: 10px;
+  display: block;
+  &:hover{
+    color: $white;
+  }
+  @media screen and (max-width: $xs-max){
+      font-weight: 400;
+  }
+}
+
+.logo{
+  padding-right: 26px;
+  background: #14151B;
+  position: absolute;
+  top: -20px;
+}
+
+.sliders{
+  display: flex;
+  flex-direction: column;
+  @media screen and (max-width: 475px){
+    flex-direction: column-reverse;
+  }
+}
+
+.sliderTop{
+  border-bottom: 1px solid #2D2E38;
+  padding-top: 16px;
+  padding-bottom: 12px;
+  flex: 1 1;
+  flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: clip;
+  clip: auto;
+  @media screen and (max-width: 920px){
+    overflow-X: scroll;
+    overflow-Y: hidden;
+  }
+  @media screen and (max-width: $xs-max){
+    padding-top: 14px;
+    padding-bottom: 16px;
+  }
+}
+
+.sliderBottom{
+  padding-top: 32px;
+  flex: 1 1;
+  flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: auto;
+  clip: auto;
+  .slide{
+    margin-right: 20px;
+  }
+  @media screen and (max-width: 920px){
+    overflow-X: scroll;
+    overflow-Y: hidden;
+  }
+  @media screen and (max-width: $xs-max){
+    padding-top: 14px;
+    padding-bottom: 16px;
+  }
+}
+
+.slide{
+  @media screen and (max-width: 920px){
+    margin-right: 20px;
+  }
+}
+
+.bottom{
+  padding: 64px 0 83px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .desc{
+    font-size: 11px;
+    font-weight: 500;
+    max-width: 700px;
+    @media screen and (max-width: 1360px){
+      max-width: 300px;
+    }
+    @media screen and (max-width: $xs-max){
+      max-width: 100%;
+      flex: 1;
+      font-weight: 400;
+    }
+  }
+  .btns{
+    margin-top: 0;
+    @media screen and (max-width: 900px){
+      display: none;
+    }
+  }
+  @media screen and (max-width: $xs-max){
+    justify-content: flex-start;
+    align-items: flex-start;
+      padding-top: 16px;
+  }
+}
+  .btnsMobile{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #2D2E38;
+    a, button{
+      width: 29px;
+      height: 29px;
+    }
+    @media screen and (min-width: 901px){
+      display: none;
+    }
+    @media screen and (max-width: 320px){
+      justify-content: flex-end;
+      padding-right: 12px;
+    }
+}
+
+.copyright{
+  color: #606168;
+  font-weight: 500;
+  font-size: 12px;
+  @media screen and (max-width: 620px){
+    display: none;
+  }
+}
+
+.left{
+  @media screen and (max-width: 670px){
+    .btns{
+      display: none;
+    }
+  }
+  @media screen and (max-width: 475px){
+    display: none;
+  }
+}
+
+.supportMobile{
+  @media screen and (max-width: 670px){
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  }
+  @media screen and (min-width: 671px){
+    display: none;
+  }
+}
+
+.list{
+  @media screen and (max-width: 475px){
+    display: none;
+  }
+}
+
+.mobile{
+  @media screen and (min-width: 476px){
+    display: none;
+  }
+}
+
+.socialsMobile{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  a{
+    width: 61px;
+    height: 35px;
+  }
+    @media screen and (min-width: 901px){
+      display: none;
+    }
+  @media screen and (max-width: $xs-max){
+  .btn{
+    margin-right: 14px;
+    flex: 1;
+    &:last-of-type{
+      margin-right: 0px;
+    }
+  }
+a{
+  width: 100%;
+}
+  }
+}
+
+.wrapper{
+  border-top: 1px solid #2D2E38;
+  border-bottom: 1px solid #2D2E38;
+  padding: 50px 0;
+  position: relative;
+  @media screen and (max-width: 900px){
+    padding: 24px 0 15px 0;
+  }
+}
+
+.eighteen{
+  @media screen and (max-width: 620px){
+    margin-right: 16px;
+    img{
+      max-width: 25.2px;
+    }
+  }
+}
+
+.show{
+  align-self: flex-end;
+  img{
+    transform: none;
+  }
+  @media screen and (min-width: 476px){
+    display: none;
+  }
+}
+
+.notShow{
+  img{
+    transform: rotate(180deg);
+  }
+}
+.menuMobileToggle{
+  @media screen and (max-width: $xs-max){
+    width: 29px;
+    height: 29px;
+  }
+}

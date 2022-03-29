@@ -1,0 +1,63 @@
+@import "scss/index";
+
+.root{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-bottom: 68px;
+  padding-top: 35px;
+  @media only screen and (max-width: 985px) {
+    padding-bottom: 24px;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+.mines{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  grid-gap: 23px 0px;
+  @media only screen and (max-width: 985px) {
+    flex: 1;
+    overflow-y: auto;
+    max-width: 100%;
+    padding-bottom: 25px;
+  }
+}
+.row{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  &.active,&.passed{
+    .multiplier{
+      color: $blue500;
+    }
+  }
+}
+.multipliersMobile{
+  display: flex;
+  flex-direction: column;
+  grid-gap: 23px 0px;
+  .multiplier{
+    width: auto;
+    height: 20px;
+
+  }
+}
+.multiplier{
+  font-size: 14px;
+  color: $dark100;
+  margin-right: 14px;
+  width: 42px;
+  text-align: right;
+
+}
+.squares{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 0px 4px;
+  flex: 1;
+}

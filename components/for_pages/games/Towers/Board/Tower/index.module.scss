@@ -1,0 +1,34 @@
+@import "scss/index";
+
+
+.root{
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+
+  @media only screen and (max-width: 985px) {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 100%;
+  }
+  border-radius: 2px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  &.disabled{
+    background-image: url('/img/Games/towers/stub.png')
+  }
+  &.active{
+    background-image: url('/img/Games/towers/stub_active.png')
+  }
+  &.mine{
+    background-image: url('/img/Games/towers/mine.png')
+  }
+  &.bonus{
+    background-image: url('/img/Games/towers/bonus.png')
+  }
+
+}

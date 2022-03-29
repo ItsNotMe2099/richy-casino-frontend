@@ -1,0 +1,166 @@
+@import "scss/index";
+
+.list{
+  flex: 1;
+  flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: clip;
+  clip: auto;
+  @media screen and (max-width: 1475px){
+    display: none;
+  }
+  @media screen and (max-width: 920px){
+    display: flex;
+    height: 41px;
+    overflow-X: scroll;
+    overflow-Y: hidden;
+  }
+}
+
+.listMobile{
+  display: flex;
+  flex-direction: column;
+  .item{
+    padding: 25px;
+  }
+}
+
+.listMedium{
+  flex: 1;
+  flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: clip;
+  clip: auto;
+  @media screen and (min-width: 1476px){
+    display: none;
+  }
+  @media screen and (max-width: 1375px){
+    display: none;
+  }
+  @media screen and (max-width: 920px){
+    display: none;
+  }
+}
+
+.listSmall{
+  flex: 1;
+  flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: clip;
+  clip: auto;
+  @media screen and (min-width: 1376px){
+    display: none;
+  }
+  @media screen and (max-width: 1275px){
+    display: none;
+  }
+  @media screen and (max-width: 920px){
+    display: none;
+  }
+}
+
+.listExtraSmall{
+  flex: 1;
+  flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: clip;
+  clip: auto;
+  @media screen and (min-width: 1276px){
+    display: none;
+  }
+  @media screen and (max-width: 1150px){
+    display: none;
+  }
+  @media screen and (max-width: 920px){
+    display: none;
+  }
+}
+
+.listSuperSmall{
+  flex: 1;
+  flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: clip;
+  clip: auto;
+  @media screen and (min-width: 1151px){
+    display: none;
+  }
+  @media screen and (max-width: 950px){
+    display: none;
+  }
+  @media screen and (max-width: 920px){
+    display: none;
+  }
+}
+
+.listTwoItems{
+  flex: 1;
+  flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: clip;
+  clip: auto;
+  margin: 0 2%;
+  @media screen and (min-width: 951px){
+    display: none;
+  }
+  @media screen and (max-width: 920px){
+    display: none;
+  }
+}
+
+.item{
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #FFFFFF;
+  position: relative;
+  @media screen and (max-width: 920px){
+    flex-shrink: 0;
+    margin-right: 18px;
+  }
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.8rem;
+  }
+  &:hover{
+    color: #427BF8;
+  }
+}
+
+.itemActive{
+  color: #427BF8;
+    &::after{
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom:  -20px;
+      height: 3px;
+      background-color: #427BF8;
+      content: "";
+      display: block;
+      @media screen and (max-width: 920px){
+        bottom: -12px;
+      }
+    }
+}
+
+.transparent{
+  width: 18px;
+  position: absolute;
+  height: 41px;
+  right: 0;
+  @include overflowGradient;
+  @media screen and (min-width: 921px){
+    display: none;
+  }
+}

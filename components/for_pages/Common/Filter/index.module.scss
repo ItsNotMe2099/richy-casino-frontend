@@ -1,0 +1,213 @@
+@import "scss/index";
+
+.root{
+  padding: 13px 14px 30px 14px;
+  background: #1D1E25;
+  border-radius: 18px;
+  max-height: 1313px;
+  margin-top: 20px;
+  overflow-y: hidden;
+  @media screen and (max-width: 1024px){
+  max-height: 800px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  }
+}
+
+.col{
+  width: 25% !important;
+  max-width: 25% !important;
+  @media screen and (max-width: 1024px){
+    position: absolute !important;
+    z-index: 1;
+    width: 100% !important;
+    max-width: 300px !important;
+  }
+}
+
+.mobile{
+  width: 100%;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 19px;
+  @media screen and (min-width: 1025px){
+    display: none;
+  }
+}
+
+.search{
+  padding-top: 9px;
+  padding-left: 9px;
+  padding-right: 9px;
+  padding-bottom: 11px;
+  background: #1D1E25;
+  border-radius: 18px;
+}
+
+.close{
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
+  img{
+  cursor: pointer;
+  }
+  @media screen and (min-width: 1025px){
+    display: none;
+  }
+}
+
+.none{
+  @media screen and (max-width: 1024px){
+    display: none;
+  }
+}
+
+.gameFilter{
+  padding: 9px 13px;
+  display: flex;
+  align-items: center;
+  border-radius: 9px;
+  background-color: $dark600;
+  margin-top: 8px;
+  justify-content: space-between;
+  height: 3.3rem;
+  cursor: pointer;
+  @media screen and (max-width: $mobile-max){
+    background: #1D1E25;
+  }
+  &:hover{
+    background-color: $dark500;
+  }
+}
+
+.categoryFilter{
+  padding-top: 11px;
+  padding-left: 20px;
+  padding-bottom: 11px;
+  padding-right: 14px;
+  display: flex;
+  align-items: center;
+  border-radius: 11px;
+  background-color: #1D1E25;
+  justify-content: space-between;
+  cursor: pointer;
+  .label{
+    font-size: 1.1rem;
+    color: $dark100;
+    font-weight: 500;
+    @media screen and (max-width: $mobile-max){
+      font-size: 0.8rem;
+    }
+  }
+  .icon{
+    margin-right: 13px;
+  }
+  &:hover{
+    background-color: $dark600;
+    .quantity, .label{
+      color: #fff;
+    }
+  }
+}
+
+.icon{
+  display: flex;
+  margin-right: 8px;
+  max-width: 46px;
+}
+
+.label{
+  font-weight: normal;
+  font-size: 1rem;
+  @media screen and (max-width: $xs-max){
+    font-weight: 400;
+    font-size: 13px;
+  }
+}
+
+.left{
+  display: flex;
+  align-items: center;
+}
+
+.quantity{
+  font-weight: 500;
+  font-size: 13px;
+  color: $dark300;
+}
+
+.categoriesLbl{
+  margin-top: 8px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 19px;
+  font-weight: bold;
+  font-size: 13px;
+  color: $dark300;
+}
+
+.providers{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  padding: 0 15px;
+  margin-top: 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 385px;
+}
+
+.categories{
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 724px;
+}
+
+.provider{
+  padding-top: 18px;
+  padding-bottom: 9px;
+  border-radius: 8px;
+  background-color: $dark600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  &:hover{
+    .iconProvider{
+    svg{
+      fill: #fff;
+    }
+  }
+  .quantity{
+    color: #fff;
+  }
+  }
+  .iconProvider{
+    display: flex;
+    justify-content: center;
+    svg{
+      fill: #6B6C77;
+    }
+  }
+  .quantity{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+}
+
+.filters{
+  display: flex;
+  margin-top: 8px;
+  justify-content: space-between;
+  div{
+    margin-bottom: 0;
+  }
+  div:last-child{
+    margin-right: 0;
+  }
+}
+
+.filters > div{
+  margin-right: 8px;
+}

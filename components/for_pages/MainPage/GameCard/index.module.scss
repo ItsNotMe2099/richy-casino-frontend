@@ -1,0 +1,162 @@
+@import "scss/index";
+
+.root {
+  background-color: $dark700;
+  border-radius: 18px;
+  padding-top: 38px;
+  padding-right: 41px;
+  padding-bottom: 114px;
+  padding-left: 42px;
+  display: flex;
+  position: relative;
+  @media screen and (max-width: 1360px){
+    overflow: hidden;
+  }
+
+  @media screen and (max-width: $xs-max){
+    padding: 20px 21px 68px 16px;
+    .bg{
+      bottom: -16px;
+    }
+  }
+  @media screen and (max-width: $mobile-max){
+    padding: 27px 21px 100px 16px;
+  }
+  &.chess{
+    @media screen and (max-width: $xs-max){
+      margin-top: 12px;
+      .bg{
+        bottom: -24px;
+      }
+    }
+  }
+
+}
+
+.bg{
+    position: absolute;
+    bottom: -4px;
+    img{
+        width: 100%;
+    }
+    @media screen and (max-width: 850px){
+        left: 0;
+        right: 0;
+    }
+}
+
+.image{
+    position: relative;
+    margin-right: 30px;
+    img{
+        width: 100%;
+        position: relative;
+        @media screen and (max-width: $xs-max){
+          height: 40px;
+          width: 40px;
+        }
+        @media screen and (max-width: $mobile-max){
+          height: 3rem;
+          width: 3rem;
+        }
+    }
+}
+
+.text{
+    align-self: center;
+    position: relative;
+    flex: 1;
+}
+
+.label{
+    font-weight: bold;
+    font-size: 26px;
+    color: $white;
+    margin-bottom: 10px;
+    @media screen and (max-width: 1360px){
+        font-size: 20px;
+    }
+    @media screen and (max-width: 850px){
+        font-size: 26px;
+    }
+    @media screen and (max-width: $xs-max){
+      margin-bottom: 2px;
+        font-size: 19px;
+    }
+    @media screen and (max-width: $mobile-max){
+      font-size: 1.4rem;
+    }
+}
+
+.desc{
+    font-size: 18px;
+    color: #C4C4C4;
+    @media screen and (max-width: 1360px){
+        font-size: 13px;
+    }
+    @media screen and (max-width: 850px){
+        font-size: 18px;
+    }
+
+
+    @media screen and (max-width: $xs-max){
+        font-size: 11px;
+      font-weight: 400;
+    }
+    @media screen and (max-width: $mobile-max){
+      font-size: 0.7rem;
+    }
+
+}
+
+.btn{
+    align-self: center;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 1;
+    a{
+        font-weight: 500;
+        font-size: 16px;
+        color: #FFFFFF;
+        cursor: pointer;
+    }
+    @media screen and (max-width: $xs-max){
+        display: none;
+    }
+
+}
+
+.btnMobile{
+    flex: 1;
+    align-self: center;
+    display: none;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 1;
+  @media screen and (max-width: $xs-max){
+    display: flex;
+    flex: unset;
+    }
+    @media screen and (max-width: $mobile-max){
+      height: 1rem;
+    }
+}
+
+.shadow{
+  position: absolute;
+  width: 134px;
+  height: 134px;
+  left: -25px;
+  bottom: -25px;
+  @media screen and (max-width: $xs-max){
+    width: 70px;
+    height: 70px;
+    left: -15px;
+    bottom: -10px;
+  }
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}

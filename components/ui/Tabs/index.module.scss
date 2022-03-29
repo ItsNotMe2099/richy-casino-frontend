@@ -1,0 +1,53 @@
+@import "scss/index";
+.container{
+  display: flex;
+}
+.root {
+  border-radius: 67px;
+  background-color: $dark600;
+  display: flex;
+  padding: 2px;
+  .item:last-child{
+    margin-right: 0;
+  }
+  &.fluid{
+    flex: 1;
+    .item{
+      align-items: center;
+      justify-content: center;
+      margin-right: 0px;
+      flex: 1;
+    }
+  }
+}
+
+.item{
+  border-radius: 46px;
+  background-color: $dark600;
+  display: flex;
+  padding: 11px 16px;
+  align-items: center;
+  margin-right: 13px;
+  cursor: pointer;
+  svg{
+    fill: #797C86;
+    margin-right: 8px;
+  }
+}
+
+.label{
+  font-weight: 500;
+  font-size: 13px;
+  color: $dark100;
+}
+
+.active{
+  border-radius: 46px;
+  background-color: $dark400;
+  .label{
+    color: $white;
+  }
+  svg{
+    fill: $white;
+  }
+}

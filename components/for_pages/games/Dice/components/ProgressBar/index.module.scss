@@ -1,0 +1,186 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  .xAxis {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 8px 0px 8px;
+    @media only screen and (max-width: $xs-max) {
+      padding: 8px 0px 0px 0px;
+      margin: 0px -3px;
+    }
+    .step {
+      flex-basis: 23px;
+      color: $dark300;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      @media only screen and (max-width: $xs-max) {
+        font-size: 10px;
+      }
+    }
+  }
+}
+.progressContainer{
+  position: relative;
+  width: 100%;
+
+  @media only screen and (max-width: $xs-max) {
+
+    border-radius: 8px;
+  }
+  .progressBar {
+    padding: 19px 18px;
+    position: relative;
+    border-radius: 10px;
+    @media only screen and (max-width: $xs-max) {
+      padding: 10px 8px;
+    }
+    &.up {
+      :global .input-range {
+
+        &__track--active {
+          background: linear-gradient(270deg, #FF530A 47.85%, #FF0000 89.11%);
+          box-shadow: 0px 0px 30px rgb(255 83 10 / 52%);
+          top: 0;
+          height: 100%;
+        }
+
+        &__track--background {
+          background: linear-gradient(270deg, #BDFF00 47.85%, #26BE00 89.11%);
+          box-shadow: 0px 0px 30px rgba(38, 191, 1, 0.4);
+          top: 0;
+          height: 100%;
+        }
+      }
+    }
+
+    &.down {
+      :global .input-range {
+        &__track--active {
+          background: linear-gradient(270deg, #BDFF00 47.85%, #26BE00 89.11%);
+          box-shadow: 0px 0px 30px rgba(38, 191, 1, 0.4);
+          top: 0;
+          height: 100%;
+        }
+
+        &__track--background {
+          background: linear-gradient(270deg, #FF530A 47.85%, #FF0000 89.11%);
+          box-shadow: 0px 0px 30px rgb(255 83 10 / 52%);
+          top: 0;
+          height: 100%;
+        }
+      }
+    }
+  }
+  :global  .input-range {
+    height: 20px;
+    top: 0px;
+    z-index: 1;
+    @media only screen and (max-width: $xs-max) {
+      height: 9px;
+    }
+    &__label {
+      display: none;
+    }
+    &__label--value {
+      transform: translateX(-30%);
+      font-family: "Gilroy", sans-serif;
+      position: absolute;
+      top: -53px;
+      font-weight: 800;
+      font-size: 18px;
+      color: $white;
+      z-index: 2;
+      padding: 6px 8px;
+      height: 35px;
+      line-height: 10px;
+      border: 3px solid rgb(77,77,81);
+      background: rgb(47,47,53);
+      border-radius: 9px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span{
+        margin-top: 2px;
+        left: 0px;
+      }
+      @media only screen and (max-width: 985px) {
+        display: none;
+      }
+    }
+
+    &__slider {
+      &:active {
+        transform: none;
+      }
+      &-container {
+        top: 0px;
+        display: block;
+        transform: translate(-50%, -22%);
+        @media only screen and (max-width: $xs-max) {
+          transform: translate(-50%, -22%);
+        }
+
+      }
+
+      margin: 0px;
+      position: relative;
+      cursor: grab;
+      border: none;
+      width: 16px;
+      height: 35px;
+      background: linear-gradient(
+          180deg,#C4C4C4 0%,#FFFFFF 100%);
+      border-radius: 6px;
+      @media only screen and (max-width: $xs-max) {
+        height: 15px;
+        width: 6px;
+      }
+    }
+  }
+}
+
+.progressBorders{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  z-index: 1;
+  .shadow {
+
+    background: #272832;
+    width: 100%;
+    padding: 5px;
+    border-radius: 18px;
+    @media only screen and (max-width: $xs-max) {
+      border-radius: 8px;
+      padding: 2.5px;
+    }
+    .shadow{
+      background: #30313E;
+      border-radius: 14px;
+      @media only screen and (max-width: $xs-max) {
+        border-radius: 6px;
+        padding: 2.5px;
+      }
+      .shadow{
+        background: #3E404F;
+        border-radius: 10px;
+        padding: 0px;
+        height: 34px;
+        @media only screen and (max-width: $xs-max) {
+          border-radius: 4.44px;
+
+          height: 14.75px;
+          padding: 3px;
+        }
+      }
+    }
+  }
+
+}

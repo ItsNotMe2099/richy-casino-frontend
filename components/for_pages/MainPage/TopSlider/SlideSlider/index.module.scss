@@ -1,0 +1,231 @@
+@import "scss/index";
+
+.root{
+  border-radius: 18px;
+  padding: 43px 0 13px 0;
+  position: relative;
+  max-height: 18rem;
+  overflow: hidden;
+  min-height: 18rem;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @media screen and (max-width: 1360px){
+    padding-left: 18px;
+  }
+  @media screen and (max-width: 1000px){
+    padding-top: 23px;
+  }
+  @media screen and (max-width: 800px){
+    max-height: 14.5rem;
+    min-height: 14.5rem;
+    padding: 20px 0 9px 15px;
+  }
+  @media screen and (max-width: $xs-max){
+    max-height: 12rem;
+    min-height: 12rem;
+  }
+  @media screen and (max-width: $mobile-max){
+    max-height: 10rem;
+    min-height: 10rem;
+  }
+}
+
+.col{
+  width: 50% !important;
+  position: relative;
+  padding: 0 !important;
+  padding-right: 20px !important;
+}
+
+.btn{
+  button{
+    height: 47px;
+    @media screen and (max-width: $xs-max){
+      height: 32px;
+    }
+  }
+}
+
+.bonus{
+  position: fixed;
+  transform: translate(860%, 110%);
+  z-index: 10;
+  cursor: pointer;
+  @media screen and (max-width: $sm-max){
+    transform: translate(610%, 110%);
+  }
+  @media screen and (max-width: 1000px){
+    display: none;
+  }
+}
+
+.timer{
+  transform: translate(860%, 80%);
+  @media screen and (max-width: $sm-max){
+    transform: translate(610%, 80%);
+  }
+  @media screen and (max-width: 1000px){
+    display: block;
+  }
+}
+
+.controls{
+  display: flex;
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  z-index: 1;
+}
+
+.next, .prev{
+  padding: 15px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.56);
+  backdrop-filter: blur(7px);
+  border-radius: 11px;
+  cursor: pointer;
+  width: 41px;
+  height: 41px;
+  &:hover{
+    background: #0075FF;
+    backdrop-filter: blur(7px);
+  }
+}
+
+.prev{
+  margin-right: 5px;
+  svg{
+    transform: rotate(180deg);
+  }
+}
+
+.item{
+  display: flex !important;
+}
+
+.label{
+  font-weight: bold;
+  font-size: 36px;
+  color: $white;
+  line-height: 100%;
+  width: 70%;
+  @media screen and (max-width: $xs-max){
+    font-size: 20px;
+  }
+}
+
+.second{
+  font-size: calc(18px + 0.5vw);
+  @media screen and (max-width: $xs-max){
+    font-size: calc(14px + 0.5vw);
+  }
+}
+
+.btn{
+  margin-top: 23px;
+  button{
+    color: $blue500;
+    font-size: 18px;
+    font-weight: 700;
+    padding-right: 24px;
+    padding-left: 24px;
+    @media screen and (max-width: $xs-max){
+      padding: 12px 15px;
+    }
+    @media screen and (max-width: 570px){
+      font-size: calc(12px + 0.5vw);
+    }
+  }
+}
+
+.alt{
+  button{
+    color: $white;
+  }
+}
+
+.left{
+  align-self: center;
+  margin-left: 28px;
+  width: 100%;
+  @media screen and (max-width: $xs-max){
+    margin-left: 0;
+  }
+}
+
+.dots{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  padding: 0;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 100px;
+  width: 100%;
+  list-style: none;
+  right: 0;
+  bottom: -30%;
+  left: -25%;
+  @media screen and (max-width: 1300px){
+    bottom: -15%;
+  }
+  @media screen and (max-width: 800px){
+    bottom: -10%;
+  }
+  :global .slick-active{
+
+    button{
+      width: 42px !important;
+      height: 2px !important;
+      background: linear-gradient(270deg, #2C50FF -6.01%, #4785F6 114.87%) !important;
+      &::before{
+        opacity: .75 !important;
+        color: black !important;
+      }
+    }
+  }
+  li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    height: 2px;
+    margin: 0 5px;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+
+    button{
+      width: 42px;
+      height: 2px;
+      background: #7a92e9;
+      border: none;
+      color: transparent;
+      text-indent: -9999px;
+      margin: 0;
+      padding: 0;
+      transition: width 0.1s, height 0.1s;
+      font-size: 0;
+      line-height: 0;
+      display: block;
+      cursor: pointer;
+      outline: none;
+
+      &::before{
+        font-family: 'slick';
+        font-size: 6px;
+        line-height: 20px;
+        position: absolute;
+        width: 42px;
+        height: 2px;
+        content: '•';
+        text-align: center;
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@import "scss/index";
+
+
+.root{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+.diamond{
+  opacity: 0;
+  display: inline;
+  height: 80px;
+  max-height: 100%;
+  max-width: 100%;
+  transition: opacity .5s ease-in-out;
+  @media only screen and (max-width: $xs-max) {
+    padding: 0px 4.5px;
+    height: auto;
+  }
+  img{
+    max-width: 100%;
+  }
+  &.visible{
+  opacity: 1;
+  }
+  z-index: 1;
+}
+.ground{
+  margin-top: -9px;
+  img{
+    max-width: 100%;
+  }
+}

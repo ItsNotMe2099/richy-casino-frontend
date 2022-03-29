@@ -1,3 +1,25 @@
-@import "styles/index";
+@import "scss/index";
 
 .root{}
+
+.gameCards{
+    margin-top: 18px;
+    @media screen and (max-width: 850px){
+        display:  block !important;
+      margin-top: 12px;
+    }
+}
+
+.gameCard{
+    @media screen and (max-width: 850px){
+        flex-basis: auto !important;
+        margin-bottom: 12px;
+    }
+}
+
+.gamesLists{
+    @media screen and (max-width: 840px){
+        display:  block !important;
+    }
+}
+

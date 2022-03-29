@@ -1,0 +1,57 @@
+@import "scss/index";
+
+
+.root{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: 700;
+  font-size: 16px;
+
+    width: 100%;
+    height: 100%;
+    padding-bottom: 100%;
+  border-radius: 8px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  &.unActive{
+    cursor: pointer;
+    color: #C6C9E8;
+    background-image: url('/img/Games/keno/item_unactive.svg');
+    &:hover{
+      background-image: url('/img/Games/keno/item_active.svg');
+      color: #C6C9E8;
+    }
+  }
+  &.active{
+    background-image: url('/img/Games/keno/item_active.svg');
+    color: #C6C9E8;
+  }
+  &.win{
+    background-image: url('/img/Games/keno/item_win.svg');
+    color: #191B36;
+  }
+  &.lose{
+    background-image: url('/img/Games/keno/item_lose.svg');
+    color: #ED4700;
+  }
+  &.disabled{
+    mix-blend-mode: pass-th;
+    background-image: url('/img/Games/keno/item_disabled.svg');
+    color: #C6C9E8;
+
+  }
+  @media screen and (max-width: $xs-max){
+    font-size: 16px;
+  }
+}
+.id{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding-top: 2px;
+}

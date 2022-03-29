@@ -1,0 +1,109 @@
+@import "scss/index";
+
+.root{
+  
+}
+
+.placeholder{
+    display: flex;
+    background: rgba(255, 209, 47, 0.05);
+    border-radius: 8px;
+    align-items: center;
+    padding: 0 12px;
+    font-weight: 700;
+    font-size: 14px;
+    height: 41px;
+    min-width: 174px;
+    justify-content: space-evenly;
+    &:hover{
+        background: rgba(255, 209, 47, 0.1);
+    }
+    .image{
+        img{
+            width: 16px;
+            height: 16px;
+        }
+        display: flex;
+        margin-right: 4px;
+    }
+    .label{
+        color: #8f8e8d;
+        @media screen and (max-width: $mobile-max){
+            font-size: 10px;
+         }
+    }
+    @media screen and (max-width: $mobile-max){
+        height: 30px;
+        justify-content: normal;
+        max-width: 112px;
+        min-width: 100%;
+        padding: 0 5px;
+    }
+}
+
+.arrow{
+    display: flex;
+    margin-left: 7px;
+}
+
+.notActive{
+    transform: rotate(270deg);
+}
+
+.option{
+    padding: 10px 21px;
+    display: flex;
+    font-weight: 600;
+    font-size: 16px;
+    align-items: center;
+    justify-content: space-between;
+    &:hover{
+      background: #41424F;
+      z-index: 11;
+    }
+  }
+
+  .symbol{
+    display: flex;
+    margin-right: 6px;
+    @media screen and (max-width: $mobile-max){
+       img{
+           width: 16px;
+           height: 16px;
+           margin-right: 4px;
+       }
+     }
+  }
+  
+  .balance{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .balanceOption{
+    display: flex;
+    font-weight: 600;
+    font-size: 14px;
+    span{
+      color: #89898e;
+    }
+  }
+  
+  .value{
+    display: flex;
+    @media screen and (max-width: $mobile-max){
+       font-size: 10px;
+    }
+  }
+  
+  .dg{
+    font-weight: 600;
+    font-size: 12px;
+    color: #89898e;
+    text-align: right;
+  }
+
+  .group{
+    display: flex;
+    align-items: center;
+  }

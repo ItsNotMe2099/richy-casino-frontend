@@ -1,0 +1,44 @@
+@import "scss/index";
+.input{
+  padding-right: 46px;
+}
+
+.buttons{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 2px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .button{
+    &:first-of-type{
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      margin-left: 0px;
+    }
+    &:last-of-type{
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      margin-right: 0px;
+    }
+  }
+}
+.button{
+  width: 42px;
+  height: 42px;
+  background: $dark400;
+  text-align: center;
+  line-height: 42px;
+  padding-top: 1px;
+  margin: 0px 1px;
+  color: $dark100;
+  cursor: pointer;
+  &:hover{
+    color: $white;
+  }
+  &.active{
+    color: $white;
+  }
+
+}

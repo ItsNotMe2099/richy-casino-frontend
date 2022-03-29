@@ -1,0 +1,51 @@
+@import "scss/index";
+.root{
+  position: absolute;
+  padding: 0px 20px;
+  left: 28px;
+  right: 28px;
+  border-radius: 18px;
+  background-color: $dark700;
+  @media screen and (max-width: $xs-max){
+    left: 16px;
+    right: 16px;
+  }
+
+}
+.wrapper{
+  transition: transform 0.5s;
+}
+.bones{
+  position: relative;
+  left: 0;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
+}
+.value{
+  border-radius: 9px;
+  border-width: 3px;
+  border-style: solid;
+  height: 35px;
+  padding: 2px 5px 0px 5px;
+  font-size: 18px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &.green{
+    background-color: rgba(189, 255, 1, 0.1);
+    border-color: #445f06;
+    color: #BDFF01;
+  }
+  &.red{
+    background-color: rgba(255, 54, 6, 0.1);
+    border-color: #651f18;
+    color: #FF3606;
+  }
+}
+.icon{
+  margin-top: 5px;
+}

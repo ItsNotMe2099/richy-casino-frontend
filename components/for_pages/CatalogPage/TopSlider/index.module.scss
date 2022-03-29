@@ -1,0 +1,85 @@
+@import "scss/index";
+
+.root{
+  margin-top: 20px;
+  padding-right: 0 !important;
+  flex-basis: auto !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  width: 40% !important;
+  @media screen and (max-width: 650px){
+    display: none !important;
+  }
+}
+
+.jackpot{
+  background-image: url('../../../../public/img/TopSlider/bg.svg');
+  background-repeat: no-repeat;
+  min-height: 250px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 18px;
+  background-size: cover;
+  padding: 0 33px;
+  width: auto !important;
+  @media screen and (max-width: 800px){
+    max-height: 14.5rem;
+    min-height: 14.5rem;
+    padding: 15px 0 9px 15px;
+  }
+  @media screen and (max-width: $xs-max){
+    max-height: 12rem;
+    min-height: 12rem;
+    padding: 15px 0 9px 15px;
+    margin: 0px 4px;
+  }
+  @media screen and (max-width: $mobile-max){
+    max-height: 10rem;
+    min-height: 10rem;
+    .timer{
+      display: none;
+    }
+  }
+}
+
+.title{
+  font-weight: bold;
+  font-size: 41px;
+  background: linear-gradient(#fff 0%, #3EAEDF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #FFF7F7;
+}
+
+.money{
+  font-weight: 800;
+  font-size: 60px;
+  @media screen and (max-width: 1360px){
+    font-size: 40px;
+  }
+  @media screen and (max-width: $xs-max){
+    font-size: 30px;
+  }
+}
+
+
+.slider{
+  margin-top: 20px;
+  @media screen and (min-width: 651px){
+    display: none !important;
+  }
+  @media screen and (max-width: $sm-min){
+    margin: 24px -10px 0px -10px;
+
+  }
+}
+
+.desktop{
+  margin-top: 20px;
+}
+.bonusSlideMobile{
+  margin: 0px 4px;
+}

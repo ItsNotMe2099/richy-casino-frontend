@@ -1,0 +1,111 @@
+@import "scss/index";
+
+.link, .btn {
+
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: 8px;
+  border: 0;
+  font-weight: 500;
+  @media screen and (max-width: $xs-max) {
+    font-weight: 400;
+  }
+  text-align: center;
+}
+
+.sizeSuperExtraSmall {
+  width: 28px;
+  height: 28px;
+}
+
+.sizeExtraSmall {
+  width: 41px;
+  height: 41px;
+}
+
+.sizeSmall {
+  padding: 13px 22px;
+}
+
+.sizeNormal {
+  padding: 12px 15px;
+}
+
+.sizeLarge {
+  padding: 25px 130px;
+}
+
+.sizeHuge {
+  padding: 26px 170px;
+}
+
+.sizeSubmit {
+  height: 53px;
+}
+
+.sizePlay {
+  padding: 15px 21px;
+}
+
+.dark700 {
+  background-color: $dark700;
+
+  &:hover {
+    background-color: $dark500;
+  }
+}
+
+.dark600 {
+  color: $white;
+  background-color: $dark600;
+
+  &:hover {
+    background-color: $dark500;
+  }
+}
+
+.dark500 {
+  color: $white;
+  background-color: $dark500;
+  &:hover {
+    background-color: $dark600;
+  }
+}
+
+.white {
+  background-color: $white;
+}
+
+.pink {
+  @include fortuneGradient500;
+}
+
+.payGradient500 {
+  @include payGradient500;
+}
+
+.blueGradient500 {
+  @include blueGradient500;
+  color: $white;
+}
+
+.blackTransparent {
+  background: rgba(39, 40, 50, 0.8);
+  &:hover {
+    background-color: $dark500;
+  }
+}
+
+.variantOutlined {
+  border: 2px solid #fff;
+}
+
+.fluid {
+  width: 100%;
+}

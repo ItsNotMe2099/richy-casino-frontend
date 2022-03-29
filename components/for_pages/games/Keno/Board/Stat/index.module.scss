@@ -1,0 +1,48 @@
+@import "scss/index";
+
+
+.root{
+  margin-top: 27px;
+  display: grid;
+  grid-gap: 0px 3px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  @media screen and (max-width: $mobile-md){
+    display: flex;
+    flex-direction: row;
+    grid-template-columns: unset;
+    padding-bottom: 20px;
+    overflow-y: auto;
+    .item {
+      .number {
+        width: 57px;
+      }
+    }
+  }
+}
+.overflow{
+
+}
+.item{
+  text-align: center;
+  .number, .multiplier{
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2px;
+    background: $dark600;
+    border-radius: 2px;
+    color: $dark200;
+    font-weight: bold;
+    font-size: 12px;
+  }
+  .multiplier{
+    margin-top: 2px;
+  }
+  &.active{
+    .number, .multiplier{
+      background: #FFD12F;
+      color: $dark700;
+    }
+  }
+}

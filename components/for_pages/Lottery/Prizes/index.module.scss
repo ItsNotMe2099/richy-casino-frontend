@@ -1,0 +1,170 @@
+@import "scss/index";
+
+.root{
+  padding: 0 !important;
+  @media screen and (max-width: 1360px){
+    margin-top: 20px;
+  }
+  @media screen and (max-width: 870px){
+    flex-basis: auto !important;
+  }
+}
+
+.top{
+  display: grid;
+  grid-template-areas: 'a a a a'
+   'b b c c';
+  gap: 9px 6px;
+}
+
+.middle{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0 6px;
+  margin-top: 9px;
+}
+
+.bottom{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0 6px;
+  margin-top: 9px;
+}
+
+.place{
+  border-radius: 18px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 55px 0;
+  @media screen and (max-width: 450px){
+    padding: 32px 0;
+    border-radius: 14px;
+  }
+}
+
+.first{
+  @include placeGradient1st200;
+  grid-area: a;
+}
+
+.secondPlace{
+  grid-area: b;
+}
+
+.thirdPlace{
+  grid-area: c;
+}
+
+.second{
+  @include placeGradient2nd200;
+  padding-top: 41px;
+  padding-bottom: 36px;
+  @media screen and (max-width: 450px){
+    padding: 22px 0;
+  }
+}
+
+.third{
+  @include placeGradient4th200;
+  padding-top: 41px;
+  padding-bottom: 36px;
+  @media screen and (max-width: 450px){
+    padding-top: 24px;
+    padding-bottom: 22px;
+  }
+}
+
+.fourth{
+  @include placeGradient7th200;
+  padding-top: 28px;
+  padding-bottom: 20px;
+  @media screen and (max-width: 450px){
+    padding: 20px 0;
+  }
+}
+
+.free{
+  background: #F30058;
+  border-top-left-radius: 21px;
+  border-bottom-right-radius: 21px;
+  padding: 9px 21px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #FFFFFF;
+  position: absolute;
+  top: 0;
+  left: 0;
+  @media screen and (max-width: 450px){
+    font-size: 13px;
+  }
+}
+
+.green{
+  @include placeGradient1st500;
+}
+
+.orange{
+  @include placeGradient2nd500;
+  color: $dark700;
+  font-size: 16px;
+  padding: 7px 13px;
+  @media screen and (max-width: 450px){
+    font-size: 12px;
+  }
+}
+
+.blue{
+  @include blueGradient500NoHover;
+  font-size: 16px;
+  padding: 7px 13px;
+  @media screen and (max-width: 450px){
+    font-size: 12px;
+  }
+}
+
+.purple{
+  @include placeGradient7th500;
+  font-size: 12px;
+  padding: 5px 10px;
+  @media screen and (max-width: 450px){
+    font-size: 11px;
+  }
+}
+
+.bitcoin{
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 22px;
+  @media screen and (max-width: 450px){
+    font-size: 13px;
+  }
+}
+
+.column{
+  flex-direction: column;
+  img{
+    margin-bottom: 14px;
+    @media screen and (max-width: 450px){
+      margin-bottom: 8px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.mediumFont{
+  font-size: 16px;
+  @media screen and (max-width: 450px){
+    font-size: 11px;
+  }
+}
+
+.smallFont{
+  font-size: 13px;
+  @media screen and (max-width: 450px){
+    font-size: 8px;
+  }
+}

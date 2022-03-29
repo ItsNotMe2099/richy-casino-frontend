@@ -1,0 +1,189 @@
+@import "scss/index";
+
+.root{
+  margin-top: 28px;
+  @media screen and (max-width: $xs-max){
+    margin: 24px -10px 0;
+  }
+}
+
+.desktop{
+  @media screen and (max-width: 520px){
+    display: none !important;
+  }
+}
+
+.slider{
+  @media screen and (min-width: 521px){
+    display: none !important;
+  }
+  @media screen and (max-width: $sm-min){
+    height: 167px;
+  }
+  position: relative;
+}
+
+.bonus{
+  position: fixed;
+  top: 170px;
+  right: 10px;
+  z-index: 10;
+  cursor: pointer;
+  @media screen and (max-width: $sm-min){
+    position: absolute;
+    right: -5px;
+  }
+
+}
+
+.col{
+  @media screen and (max-width: $xs-max){
+    padding-right: 0 !important;
+  }
+}
+
+.label{
+  font-weight: bold;
+  font-size: 36px;
+  color: $white;
+  line-height: 100%;
+  width: 70%;
+  @media screen and (max-width: 520px){
+    font-size: 20px;
+    width: 100%;
+  }
+}
+
+.otherLabel{
+  font-weight: 700;
+  font-size: 26px;
+}
+
+.btn{
+  margin-top: 23px;
+  button{
+    color: $blue500;
+    @include textStyle14Bold;
+    padding-right: 38px;
+    padding-left: 38px;
+  }
+}
+
+.left{
+  align-self: center;
+  margin-left: 28px;
+}
+
+.item{
+  display: flex !important;
+  border-radius: 18px;
+  padding: 20px 0 13px 0;
+  position: relative;
+  max-height: 18rem;
+  overflow: hidden;
+  min-height: 18rem;
+  background-position: center center;
+  margin: 0 5px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @media screen and (max-width: 1360px){
+    padding-left: 18px;
+  }
+  @media screen and (max-width: 800px){
+    max-height: 14.5rem;
+    min-height: 14.5rem;
+    padding: 20px 0 9px 15px;
+  }
+  @media screen and (max-width: $xs-max){
+    width: auto;
+    max-height: 12rem;
+    min-height: 12rem;
+  }
+  @media screen and (max-width: $mobile-max){
+    max-height: 10rem;
+    min-height: 10rem;
+  }
+}
+
+.dots{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  padding: 0;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: -25%;
+  width: 100%;
+  list-style: none;
+  z-index: 1;
+  :global .slick-active{
+
+    button{
+      width: 7px !important;
+      height: 7px !important;
+      background: $balance500 !important;
+      &::before{
+        opacity: .75 !important;
+        color: black !important;
+      }
+    }
+  }
+  li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+
+    button{
+      width: 7px;
+      height: 7px;
+      background: $dark700;
+      border-radius: 50%;
+      border: none;
+      color: transparent;
+      text-indent: -9999px;
+      margin: 0;
+      padding: 0;
+      transition: width 0.1s, height 0.1s;
+      font-size: 0;
+      line-height: 0;
+      display: block;
+      cursor: pointer;
+      outline: none;
+
+      &::before{
+        font-family: 'slick';
+        font-size: 6px;
+        line-height: 20px;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        content: '•';
+        text-align: center;
+      }
+    }
+  }
+}
+.bonusSlideMobile{
+  margin: 0px 4px;
+}
+
+.spin{
+  color: #fef494;
+}
+
+.lottery{
+  color: #4148e7;
+}
+
+.itemLabel{
+  @media screen and (max-width: 520px){
+    font-size: calc(14px + 0.5vw);
+    font-weight: 700;
+  }
+}

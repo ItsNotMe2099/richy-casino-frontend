@@ -1,0 +1,43 @@
+@import "scss/index";
+
+
+.root{
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  @media screen and (max-width: $xs-max){
+    position: relative;
+    bottom: 0px;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+  }
+  .button{
+    cursor: pointer;
+    border-radius: 100%;
+    margin: 0px 13.5px;
+    background: $dark800;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover{
+      svg{
+        path{
+          fill: white;
+        }
+      }
+    }
+    &:first-of-type{
+      margin-left: 0px;
+    }
+    &:last-of-type{
+      margin-right: 0px;
+    }
+  }
+}

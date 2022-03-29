@@ -1,0 +1,331 @@
+@import "scss/index";
+
+.root{
+  background: linear-gradient(46.89deg, #4A16E4 2.09%, #933288 11.47%, #C1444E 32.44%, #FF5C00 108.03%);
+  border-radius: 18px;
+  padding: 20px 0 13px 28px;
+  position: relative;
+  overflow: hidden;
+  max-height: 250px;
+  height: 100%;
+  @media screen and (max-width: 1360px){
+    padding-left: 18px;
+  }
+  @media screen and (max-width: 800px){
+    padding: 15px 0 9px 15px;
+  }
+  @media screen and (max-width: 800px){
+    max-height: 14.5rem;
+    min-height: 14.5rem;
+    padding: 20px 0 9px 15px;
+  }
+  @media screen and (max-width: $xs-max){
+    max-height: 12rem;
+    min-height: 12rem;
+  }
+  @media screen and (max-width: $mobile-max){
+    max-height: 10rem;
+    min-height: 10rem;
+  }
+  @media screen and (max-width: $xs-max){
+    padding: 15px 0 9px 15px;
+    margin: 0px 4px;
+  }
+  @media screen and (max-width: $mobile-max){
+    .timer{
+      display: none;
+    }
+  }
+  @media screen and (max-width: $xs-max){
+    width: auto;
+  }
+
+  .hero{
+    position: absolute;
+    top: -10%;
+    right: 10%;
+    z-index: 1;
+    img{
+      width: 100%;
+      max-width: 200px;
+      @media screen and (max-width: 800px){
+        width: 80%;
+      }
+      @media screen and (max-width: $xs-max){
+        width: 60%;
+      }
+    }
+    @media screen and (max-width: 1360px){
+      right: -0.5%;
+    }
+    @media screen and (max-width: $xs-max){
+      right: -93px;
+      top: 0%;
+    }
+  }
+  .btn{
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    button{
+      margin-right: 11px;
+      @include textStyle14Bold;
+      color: $white;
+      padding-right: 55px;
+      padding-left: 55px;
+      height: 46px;
+      font-size: 18px;
+      @media screen and (max-width: $xs-max){
+        padding-right: 35px;
+        padding-left: 35px;
+        border-radius: 4px;
+        height: 32px;
+        font-size: 11px;
+      }
+      @media screen and (max-width: $mobile-max){
+        font-size: 1rem;
+        height: 2.2rem;
+      }
+    }
+    @media screen and (max-width: 800px){
+      margin-top: 8px;
+    }
+  }
+  .moneyBlur{
+    display: none;
+  }
+}
+
+.sheet{
+  background: transparent;
+  border-radius: 0;
+  padding: 12px 0 10px 17px;
+  max-height: none;
+  min-height: auto;
+  @media screen and (max-width: $xs-max){
+    width: auto;
+    .timer{
+      display: block;
+    }
+  }
+  .close{
+    top: 10px;
+    right: 13px;
+  }
+  .hero{
+    top: 0;
+    right: -50px;
+  }
+  .downBanner{
+    .title, .bonus, .fs{
+      text-align: left;
+    }
+    .title{
+      font-size: 21px;
+    }
+    .bonus{
+      font-size: 31px;
+    }
+    .fs{
+      font-size: 1.1rem;
+      line-height: 130%;
+      @media screen and (max-width: $mobile-max){
+        font-size: 0.8rem;
+      }
+    }
+  }
+  .btn{
+    button{
+      padding-right: 26px;
+      padding-left: 26px;
+      font-size: 14px;
+      height: 36px;
+      margin-right: 3px;
+    }
+  }
+  .bottom{
+    margin-top: 3px;
+  }
+}
+
+.footer{
+  padding: 6px 0;
+  min-height: 76px;
+  display: flex;
+  justify-content: center;
+  @media screen and (max-width: 800px){
+    max-height: 100%;
+    min-height: 100%;
+  }
+  @media screen and (max-width: $xs-max){
+    width: auto;
+  }
+  .hero, .money{
+    display: none;
+  }
+  .downBanner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .title, .bonus, .fs, .bottom{
+      margin-right: 12px;
+      margin-top: 0;
+    }
+    .bonus{
+      line-height: 130%;
+    }
+    .title{
+      text-align: left;
+    }
+    @media screen and (max-width: 950px){
+      .title{
+        font-size: 18px;
+      }
+      .bonus{
+        font-size: 35px;
+      }
+      .fs{
+        font-size: 13px;
+      }
+    }
+    .bottom{
+      margin-top: 0;
+    }
+    .btn{
+      button{
+        display: none;
+      }
+    }
+  }
+  .moneyBlur{
+    display: block;
+    position: absolute;
+    top: 0;
+  }
+  .footerGroup{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+  }
+}
+
+///////////
+
+.title{
+  font-weight: 700;
+  font-size: 26px;
+  position: relative;
+  z-index: 2;
+  line-height: 100%;
+  @media screen and (max-width: 800px){
+    font-size: 18px;
+  }
+}
+
+.bonus{
+  font-weight: 800;
+  font-size: 49px;
+  color: #AAFF55;
+  position: relative;
+  z-index: 3;
+  line-height: 100%;
+  margin-top: 11px;
+  @media screen and (max-width: 800px){
+    font-size: 28px;
+    margin-top: 8px;
+    font-weight: 600;
+  }
+  @media screen and (max-width: $mobile-max){
+    font-weight: bold;
+    font-size: 2rem;
+  }
+}
+
+.fs{
+  font-weight: 800;
+  font-size: 22px;
+  color: #AAFF55;
+  line-height: 130%;
+  @media screen and (max-width: 800px){
+    font-size: 13px;
+  }
+}
+
+.bottom{
+  display: flex;
+  margin-top: 14px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(9.04865px);
+  border-radius: 4px;
+  position: relative;
+  z-index: 3;
+  float: left;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  @media screen and (max-width: 520px){
+    margin-top: 5px;
+  }
+  @media screen and (max-width: $mobile-max){
+    margin-top: 3%;
+  }
+}
+
+.satoshi{
+  padding: 3px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  @media screen and (max-width: 800px){
+    font-size: 11px;
+  }
+}
+
+.money{
+  position: absolute;
+  right: 0;
+  bottom: -5px;
+  img{
+    width: 100%;
+    @media screen and (max-width: 800px){
+      width: 70%;
+    }
+  }
+  @media screen and (max-width: 800px){
+    right: -117px;
+  }
+}
+
+.close{
+  position: absolute;
+  cursor: pointer;
+  right: 15px;
+  display: flex;
+  z-index: 11;
+}
+
+.moneyLeft{
+  position: absolute;
+  left: -3%;
+  top: -10%;
+}
+
+.moneyRight{
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+}
+
+.coinUp{
+  position: absolute;
+  top: 0;
+  right: 40%;
+}
+
+.coinDown{
+  position: absolute;
+  bottom: -6px;
+  right: 17%;
+}

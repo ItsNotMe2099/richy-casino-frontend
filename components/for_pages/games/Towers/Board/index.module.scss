@@ -1,0 +1,58 @@
+@import "scss/index";
+
+.root{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-bottom: 103px;
+  padding-top: 35px;
+  @media only screen and (max-width: $xs-max) {
+    padding-bottom: 24px;
+  }
+}
+
+.mines{
+  max-width: 254px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  grid-gap: 4px 0px;
+  width: 100%;
+  @media only screen and (max-width: 985px) {
+    max-width: unset;
+  }
+}
+.row{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  &.active,&.passed{
+    .multiplier{
+      color: $blue500;
+    }
+  }
+}
+.multiplier{
+  font-size: 14px;
+  color: $dark100;
+  margin-right: 6px;
+  width: 42px;
+  text-align: right;
+
+}
+.squares{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 0px 4px;
+  flex: 1;
+}
+.arrow{
+  margin-left: 12px;
+  visibility: hidden;
+  &.visible{
+    visibility: visible;
+  }
+}

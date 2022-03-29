@@ -1,0 +1,107 @@
+@import "scss/index";
+.root{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.wheel{
+  position: relative;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.wheelWrapper{
+  position: relative;
+  max-width: 380px;
+  max-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > div{
+    padding: 12px;
+    > div {
+      box-shadow: 0px 0px 28px 0px rgba(101, 1, 228, 0.67);
+      border-radius: 100%;
+    }
+  }
+}
+.circle{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  border-radius: 100%;
+  width: 47.8%;
+  height: 47.8%;
+  background: rgba(29, 30, 37, 1);
+
+}
+.overlay{
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  border-radius: 100%;
+  width: 66.84%;
+  height: 66.84%;
+  background: #1D1E25;
+  opacity: 0.78;
+}
+.radial{
+   // background: linear-gradient(0deg, rgba(255,199,0,0) 15%, rgba(255,199,0,0.2959558823529411) 20%, rgba(101,1,230,1) 50%, rgba(255,199,0,0.2987570028011205) 80%, rgba(255,199,0,0) 85%);
+margin: -32px;
+  border-radius: 100%;
+  img{
+    max-width: 100%;
+  }
+}
+.radialOverlay{
+
+  border-radius: 100%;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  top: -18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.yellow{
+  border-radius: 100%;
+
+  background: #FFFF97;
+  box-shadow: 0px 0px 10px 0px rgba(255, 245, 0, 0.9);
+  z-index: 4;
+}
+$offset: 0;
+/*
+.deg0 { transform: translate($offset); }
+.deg30 { transform: rotate(80deg) ;  }
+.deg60 { transform: rotate(60deg)  }
+.deg90 { transform: rotate(90deg) translate($offset) rotate(-90deg); }
+
+.deg120 { transform: rotate(120deg) translate($offset) rotate(-120deg); }
+.deg150 { transform: rotate(150deg) translate($offset) rotate(-150deg); }
+.deg180 { transform: rotate(180deg) translate($offset) rotate(-180deg); }
+.deg210 { transform: rotate(210deg) translate($offset) rotate(-210deg); }
+.deg240 { transform: rotate(240deg) translate($offset) rotate(-240deg); }
+.deg300 { transform: rotate(300deg) translate($offset) rotate(-300deg); }
+.deg330 { transform: rotate(330deg) translate($offset) rotate(-330deg); }
+.deg360 { transform: rotate(360deg) translate($offset) rotate(-360deg); }
+*/
+.border{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+
+}

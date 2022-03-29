@@ -1,0 +1,285 @@
+@import "scss/index";
+
+.root{
+
+}
+
+.top{
+  display: flex;
+  padding: 18px 0 23px 0;
+  justify-content: space-between;
+
+  @media screen and (max-width: 920px){
+    padding: 12px 18px;
+  }
+  @media screen and (max-width: $xs-max){
+    margin: 0 -10px;
+    height: 54px;
+  }
+}
+
+.left{
+  display: flex;
+  height: 41px;
+  @media screen and (max-width: 920px){
+    display: none;
+  }
+}
+
+.right{
+  display: flex;
+  align-items: center;
+}
+
+.apps{
+    display: flex;
+    margin-right: 20px;
+}
+
+.bonuses{
+    display: flex;
+}
+
+.bonus{
+  padding: 7px 12px 7px 7px;
+  background: $dark700;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  position: relative;
+  cursor: pointer;
+  &:hover {
+    background-color: $dark500;
+  }
+}
+
+.gift{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 27px;
+  @include giftGradient;
+  box-shadow: 0px 0px 20px rgba(151, 51, 254, 0.58);
+  border-radius: 6px;
+}
+
+.textGift{
+  @include textStyle14600;
+  margin-left: 12px;
+  color: $bonus500;
+}
+
+.bitcoin{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 23px;
+  height: 23px;
+  border-radius: 100%;
+  background: #FFBB03;
+  box-shadow: 0px 0px 13px rgba(245, 179, 0, 0.5);
+}
+
+.textBitcoin{
+  @include textStyle14600;
+  margin-left: 12px;
+  color: $balance500;
+}
+
+.wheel{
+  width: 26px;
+  height: 40px;
+}
+
+.textWheel{
+  @include textStyle14600;
+  margin-left: 12px;
+  color: $tickets500;
+}
+
+.free{
+  background: #F30058;
+  border-radius: 8px 0px 5.5px;
+  padding: 2px 4px;
+  font-weight: 500;
+  font-size: 8px;
+  color: #FFFFFF;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.btn{
+  margin-right: 8px;
+}
+
+.login{
+  margin-right: 6px;
+  button{
+  font-weight: 500;
+  font-size: 16px;
+  color: #FFFFFF;
+  }
+  @media screen and (max-width: $xs-max){
+    button{
+      font-size: 11px;
+      padding: 9px 12px;
+    }
+  }
+}
+
+.reg{
+  margin-right: 11px;
+  button{
+    font-weight: 500;
+    font-size: 16px;
+    color: #FFFFFF;
+    img{
+      margin-right: 14px;
+      @media screen and (max-width: $xs-max){
+        width: 16px;
+        margin-right: 5px;
+      }
+    }
+    }
+    @media screen and (max-width: $xs-max){
+      margin-right: 0;
+      button{
+        font-size: 11px;
+        padding: 9px 7px 7px 8px;
+      }
+    }
+}
+
+.lang{
+  @media screen and (max-width: $xs-max){
+    display: none;
+  }
+}
+
+.chat{
+  @media screen and (max-width: $xs-max){
+    display: none !important;
+  }
+}
+
+.menu{
+  padding: 13px 29px 10px 29px;
+  border-radius: 10px;
+  background: $dark700;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 100;
+  @media screen and (max-width: 950px){
+    border-radius: 0;
+    margin: 0 -10px;
+    padding: 13px 0 10px 18px;
+  }
+  @media screen and (max-width: 920px){
+    padding: 0 0 0 18px;
+    border: 1px solid #272832;
+  }
+
+
+
+}
+
+.logo{
+  margin-right: 36px;
+  @media screen and (max-width: 920px){
+    display: none;
+  }
+}
+
+.logoMobile{
+  align-self: center;
+  @media screen and (min-width: 921px){
+    display: none;
+  }
+  @media screen and (max-width: $xs-max){
+    display: flex;
+    align-self: baseline;
+    svg{
+      width: 60px;
+    }
+  }
+}
+
+.userBtns{
+  display: flex;
+  height: 41px;
+  margin-right: 8px;
+  @media screen and (max-width: $xs-max){
+    height: 30px;
+    margin-right: 0;
+  }
+}
+
+.userBonuses{
+  border-radius: 8px;
+  background-color: $dark700;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px 15px;
+  padding: 5px 12px;
+  margin-right: 8px;
+  cursor: pointer;
+  @media screen and (max-width: 1360px){
+    display: none;
+  }
+  &:hover{
+    background-color: $dark500;
+  }
+}
+
+.userBonus{
+  display: flex;
+  align-items: center;
+}
+
+.icon{
+  display: flex;
+  margin-right: 7px;
+}
+
+.amount{
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.wallet{
+  padding: 12px 15px;
+  @media screen and (max-width: $mobile-max){
+    padding: 9px 4px;
+    font-weight: 500;
+    font-size: 10px;
+    margin-right: 6px;
+    height: 30px;
+    width: 59px;
+  }
+  img{
+    width: 16px;
+    margin-right: 12px;
+  }
+  color: $white;
+  font-weight: 500;
+  font-size: 13px;
+  width: 100%;
+}
+
+.accMenu{
+  margin-right: 8px;
+  @media screen and (max-width: $xs-max){
+    margin-right: 6px;
+  }
+}
+
+.proMenu{
+  margin-right: 8px;
+  @media screen and (max-width: $xs-max){
+    margin-right: 0;
+  }
+}

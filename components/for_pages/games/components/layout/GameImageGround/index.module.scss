@@ -1,0 +1,15 @@
+@import "scss/index";
+
+
+.root{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 13px;
+  img{
+    max-width: 518px;
+  }
+  @media only screen and (max-width: $xs-max) {
+    display: none;
+  }
+}

@@ -1,0 +1,264 @@
+@import "scss/index";
+
+.root {
+  @include componentRoot;
+  @media screen and (max-width: $mobile-max){
+    padding: 16px 16px 12px 16px;
+  }
+
+}
+
+.filters{
+    display: flex;
+    margin-top: 23px;
+    @media screen and (max-width: 1360px){
+        flex-direction: column;
+      }
+      @media screen and (max-width: $mobile-max){
+        display: none;
+      }
+      .drop:first-child{
+        margin-right: 20px;
+      }
+}
+
+.drop{
+  margin-bottom: 28px;
+  max-width: 100%;
+}
+
+.item{
+  position: relative;
+  display: flex;
+  min-width: 100px;
+  min-height: 100px;
+  @media screen and (max-width: $mobile-max){
+    min-width: 78px;
+    min-height: 78px;
+  }
+  &:hover{
+    .shade{
+      visibility: visible;
+    }
+    .btns{
+      visibility: visible;
+    }
+    .favorite{
+      visibility: visible;
+    }
+  }
+    img{
+      width: 100%;
+      border-radius: 18px;
+      @media screen and (max-width: $mobile-max){
+        border-radius: 13px;
+      }
+    }
+}
+
+.shade{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  visibility: hidden;
+  background: rgba(0, 0, 0, .4);
+  border-radius: 12px;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container{
+  position: relative;
+}
+
+.btns{
+  visibility: hidden;
+  right: 0;
+  left: 0;
+  bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  @media screen and (max-width: 1360px){
+    bottom: 0;
+  }
+  @media screen and (max-width: 550px){
+    bottom: 15px;
+  }
+}
+
+.btn{
+  font-weight: 500;
+  font-size: 12px;
+  color: $white;
+  min-width: 80px;
+  margin-bottom: 21px;
+  padding: 13px 20px;
+  @media screen and (max-width: 1150px){
+    min-width: auto;
+    margin-bottom: 11px;
+    max-width: 50px;
+    padding: 8px 12px;
+  }
+  @media screen and (max-width: 840px){
+    min-width: auto;
+    max-width: 80px;
+    padding: 13px 25px;
+  }
+  @media screen and (max-width: 700px){
+    min-width: auto;
+    margin-bottom: 11px;
+    max-width: 50px;
+    padding: 8px 12px;
+  }
+  @media screen and (max-width: $mobile-max){
+    padding: 0;
+    height: 7vw;
+    width: 12vw;
+    margin-bottom: 11px;
+    font-size: 10px;
+  }
+  @media screen and (max-width: 360px){
+    margin-bottom: 2px;
+  }
+}
+
+.demo{
+  font-weight: 500;
+  font-size: 12px;
+  color: $white;
+  min-width: 80px;
+  padding: 13px 25px;
+  @media screen and (max-width: 1150px){
+    min-width: auto;
+    max-width: 50px;
+    padding: 8px 12px;
+  }
+  @media screen and (max-width: 840px){
+    min-width: auto;
+    max-width: 80px;
+    padding: 13px 25px;
+  }
+  @media screen and (max-width: 700px){
+    min-width: auto;
+    max-width: 50px;
+    padding: 8px 12px;
+  }
+  @media screen and (max-width: 450px){
+    padding: 8px 20px;
+  }
+  @media screen and (max-width: $mobile-max){
+    padding: 0;
+    height: 7vw;
+    width: 12vw;
+    font-size: 10px;
+  }
+}
+
+.favorite{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  visibility: hidden;
+  z-index: 1;
+  @media screen and (max-width: 1360px){
+    right: 5px;
+    top: 5px;
+  }
+  @media screen and (max-width: 920px){
+    width: 18px;
+    height: 18px;
+  }
+  @media screen and (max-width: 840px){
+    width: 28px;
+    height: 28px;
+  }
+  @media screen and (max-width: 600px){
+    width: 18px;
+    height: 18px;
+  }
+  @media screen and (max-width: $mobile-max){
+    right: 3px;
+    top: 3px;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+  }
+}
+
+.active{
+  visibility: visible;
+}
+
+.none{
+    display: none;
+}
+
+.list{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    position: relative;
+    gap: 22px;
+    @media screen and (max-width: 1440px){
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    @media screen and (max-width: 840px){
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    @media screen and (max-width: 520px){
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    @media screen and (max-width: $mobile-max){
+        display: none;
+    }
+}
+
+.mobile{
+  display:grid;
+  grid-auto-flow: column;
+  grid-auto-columns:calc((100% - (3 - 1)*8px)/3);
+  grid-gap: 8px;
+  grid-template-rows: repeat(2, auto);
+  padding-top: 14px;
+  overflow:auto;
+  padding-bottom: 21px;
+  .item{
+    display: flex;
+    img{
+      max-width: 100%;
+    }
+  }
+
+}
+
+
+.row{
+  display: flex;
+}
+
+.row > div{
+  margin-right: 8px;
+}
+
+.slider{
+  :global .slick-list{
+    .slick-track{
+      .slick-slide{
+        @media screen and (max-width: $mobile-max){
+          width: 78px !important;
+          margin-right: 8px;
+        }
+        div{
+          display: flex;
+          justify-content: center;
+          margin: 2px;
+        }
+      }
+    }
+  }
+
+}

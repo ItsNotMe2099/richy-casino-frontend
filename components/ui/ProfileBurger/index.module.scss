@@ -1,0 +1,162 @@
+@import "scss/index";
+
+.sheet{
+  :global .react-modal-sheet-container {
+    background: #1a1c23;
+    border-radius: 18px 18px 0px 0px;
+    :global .react-modal-sheet-header {
+      top: -8px;
+    }
+    :global .react-modal-sheet-content {
+      padding: 0 18px;
+      top: -15px;
+    }
+    :global .react-modal-sheet-drag-indicator {
+      background-color: $dark600 !important;
+      width: 27px !important;
+      border-radius: 28px !important;
+    }
+  }
+}
+
+.container{
+  margin-bottom: 189px;
+}
+
+.info{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 29px;
+  span{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+  }
+}
+
+.user{
+  display: flex;
+  align-items: center;
+}
+
+.name{
+  margin-left: 15px;
+}
+
+.id{
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  color: $dark200;
+}
+
+.back{
+  cursor: pointer;
+}
+
+.bonuses{
+  display: flex;
+  margin-top: 16px;
+  .bonus:last-child{
+    margin-right: 0;
+  }
+}
+
+.bonus{
+  border-radius: 12px;
+  background-color: $dark600;
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-right: 7px;
+  .icon{
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gift{
+    background: linear-gradient(49.89deg, #665AFF -5.54%, #8C18FF 128.26%);
+    box-shadow: 0px 0px 20px rgba(151, 51, 254, 0.58);
+    border-radius: 6px;
+  }
+  .bitcoin{
+    border-radius: 100%;
+    background: #FFBB03;
+    box-shadow: 0px 0px 13px rgba(245, 179, 0, 0.5);
+  }
+  .label{
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 16px;
+    margin-top: 10px;
+    text-align: center;
+  }
+}
+
+.block{
+  border-bottom:  1px solid $dark600;
+  margin-top: 23px;
+}
+
+.break{
+  @media screen and (min-width: 429px){
+    display: none;
+  }
+}
+
+.space{
+  @media screen and (max-width: 428px){
+    display: none;
+  }
+}
+
+.label{
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.icon{
+  display: flex;
+}
+
+.option{
+  display: flex;
+  align-items: center;
+  margin-bottom: 29px;
+  cursor: pointer;
+  .icon{
+    padding-right: 12px;
+  }
+}
+
+.chat{
+  padding: 10px 19px 13px 14px;
+  display: flex;
+  align-items: center;
+  margin-top: 23px;
+  border-radius: 8px;
+  background-color: $dark600;
+  justify-content: space-between;
+  cursor: pointer;
+  .name{
+    display: flex;
+    align-items: center;
+    margin-left: 0;
+  }
+  .icon{
+    margin-right: 14px;
+  }
+  .back{
+    display: flex;
+  }
+}
+
+.last{
+  margin-top: 26px;
+}

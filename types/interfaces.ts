@@ -2,17 +2,11 @@ import { HTMLInputTypeAttribute, MouseEventHandler } from 'react'
 import { FieldConfig } from 'formik'
 
 export interface IField extends FieldConfig {
-  label: string
-  iconName?: 'field_name'
-    | 'field_surname'
-    | 'field_country'
-    | 'field_city'
-    | 'field_phone'
-    | 'field_email'
-    | 'field_telegram'
-    | 'field_password'
-    | 'field_repeat_pass'
-  type: HTMLInputTypeAttribute
+  label?: string
+  placeholder?: string
+  type?: HTMLInputTypeAttribute
+  disable?: boolean
+  onChange?: (val) => void
 }
 
 export interface IButton {
@@ -20,4 +14,74 @@ export interface IButton {
   form?: string
   spinner?: boolean
   onClick?: MouseEventHandler
+}
+
+export interface LoginFormData {
+  authInput: string
+  password: string
+}
+
+export interface Country {
+  id: number
+  iso: string
+  iso3: string
+  phone: string
+  name: string
+  currency_iso: string
+  symbol: string
+}
+
+export const CONTACTS = {
+  email: 'support@richy.com',
+  facebook: '#',
+  youtube: '#',
+  twitter: '#',
+  linkedIn: '#'
+}
+
+export const LINKS = {
+
+}
+export interface IOption<T> {
+  label: string
+  value?: T
+  symbol?: string,
+  icon?: string
+}
+export interface IPagination<T>{
+  data: T[]
+  total: number
+}
+export interface IApiResponseErrorDetails{
+  field: string,
+  message: string
+}
+export interface IApiResponseError{
+  code: number,
+  details: IApiResponseErrorDetails[]
+}
+export interface IApiResponse{
+  success: boolean,
+  data: any
+  error?: IApiResponseError
+}
+export interface IApiPaginationResponse{
+  success: boolean,
+  data: any[],
+  _meta: {
+    totalCount: number,
+    pageCount: number,
+    currentPage: number,
+    perPage: number
+  }
+}
+export interface RegistrationPhoneModalArguments {
+  phone: string
+}
+export interface RegistrationSuccessModalArguments {
+  login: string
+  password: string
+}
+export interface PasswordResetModalArguments {
+  login: string
 }

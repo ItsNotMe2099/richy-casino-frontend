@@ -1,0 +1,93 @@
+@import "scss/index";
+
+.root{
+  padding: 0 !important;
+  @media screen and (max-width: 870px){
+    flex-basis: auto !important;
+    margin-top: 23px;
+  }
+}
+
+.panel{
+  @media screen and (max-width: 700px){
+    padding: 28px;
+  }
+  @media screen and (max-width: 450px){
+    background-color: transparent;
+    padding: 0;
+  }
+}
+
+.item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 23px 0;
+  border-radius: 16px;
+  flex: 1;
+}
+
+.title{
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.number{
+  font-weight: 500;
+  font-size: 18px;
+  margin-top: 12px;
+  @media screen and (max-width: 450px){
+    font-size: 13px;
+  }
+}
+
+.top{
+  display: flex;
+}
+
+.your{
+  background: url('../../../../public/img/Lottery/blue.svg') no-repeat;
+  background-size: cover;
+  margin-right: 10px;
+}
+
+.total{
+  background: url('../../../../public/img/Lottery/green.svg') no-repeat;
+  background-size: cover;
+  margin-right: 10px;
+}
+
+.win{
+  background: url('../../../../public/img/Lottery/orange.svg') no-repeat;
+  background-size: cover;
+}
+
+.blue{
+  color: $blue500;
+}
+
+.green{
+  color: $tickets500;
+}
+
+.orange{
+  color: #EEAF4D;
+}
+
+.buy{
+  margin-top: 22px;
+  font-weight: bold;
+  font-size: 25px;
+  text-align: center;
+  @media screen and (max-width: 450px){
+    margin-top: 0;
+    font-size: 20px;
+  }
+}
+
+.statistics{
+  @media screen and (max-width: 450px){
+    display: none !important;
+  }
+}

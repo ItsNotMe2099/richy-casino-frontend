@@ -1,0 +1,27 @@
+@import "scss/index";
+
+.root{
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(21.13deg, #FF2455 6.75%, #5200FF 96.25%);
+  box-shadow: 0px 0px 11px rgba(0, 0, 0, 0.5);
+  border-radius: 12px 12px 6px 6px;
+
+  .imgWrapper{
+    display: flex;
+    padding: 11px 11px;
+  }
+  @media screen and (max-width: $xs-max){
+    width: 64px;
+
+    .imgWrapper{
+      padding: 6px 8px;
+    }
+    img{
+      max-width: 100%;
+    }
+  }
+
+
+}

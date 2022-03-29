@@ -1,0 +1,190 @@
+@import "scss/index";
+
+.root{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .question{
+    display: none;
+  }
+}
+
+.labelOnly{
+  .length{
+    display: none;
+    @media screen and (max-width: $xs-max){
+      display: block;
+    }
+  }
+  .all{
+    display: none;
+  }
+}
+
+.popover{
+  .length{
+    display: none;
+    @media screen and (max-width: $xs-max){
+      display: block;
+    }
+  }
+  .all{
+    display: none;
+  }
+  .question{
+    display: block;
+  }
+}
+
+.fullOnlyOnMobile{
+  .length{
+    display: none;
+    @media screen and (max-width: $xs-max){
+      display: block;
+    }
+  }
+  .all{
+    display: none;
+    @media screen and (max-width: $xs-max){
+      display: block;
+    }
+  }
+}
+
+.withoutLength{
+  .length{
+    display: none;
+    @media screen and (max-width: $xs-max){
+      display: block;
+    }
+  }
+}
+
+.all{
+  padding: 13px 20px;
+  background: #272832;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  @media screen and (max-width: $xs-max){
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.9rem;
+  }
+  &:hover{
+    background-color: $dark400;
+  }
+}
+
+.right{
+  display: flex;
+  align-items: center;
+}
+
+.block{
+  display: flex;
+  align-items: center;
+}
+
+.icon{
+  display: flex;
+  margin-right: 18px;
+  position: relative;
+  @media screen and (max-width: $xs-max){
+    margin-right: 10px;
+  }
+  img{
+    width: 48px;
+    height: 48px;
+    @media screen and (max-width: $xs-max){
+      width: 17px;
+      height: 17px;
+    }
+    @media screen and (max-width: $mobile-max){
+      width: 1.3rem;
+      height: 1.3rem;
+    }
+  }
+}
+
+.image{
+  position: relative;
+}
+
+.shadow{
+  position: absolute;
+  width: 84px;
+  height: 84px;
+  left: -15px;
+  bottom: -15px;
+  img{
+    width: 100%;
+    height: 100%;
+  }
+  @media screen and (max-width: 375px){
+    left: -25px;
+  }
+  @media screen and (max-width: $xs-max){
+    width: 30px;
+    height: 30px;
+    left: -7px;
+    bottom: -5px;
+  }
+}
+
+.label{
+  font-weight: 700;
+  font-size: 26px;
+  color: #FFFFFF;
+  @media screen and (max-width: 920px){
+    font-size: 16px;
+  }
+  @media screen and (max-width: $mobile-max){
+    font-size: 1.3rem;
+  }
+}
+
+.length{
+  font-weight: 600;
+  font-size: 16px;
+  color: #45454D;
+  margin-right: 15px;
+  @media screen and (max-width: $xs-max){
+    margin-right: 10px;
+    font-size: 13px;
+  }
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.9rem;
+  }
+}
+
+.controls{
+  display: flex;
+  margin-left: 13px;
+  @media screen and (max-width: $mobile-max){
+    display: none;
+  }
+}
+
+.next, .prev{
+  padding: 15px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $dark600;
+  border-radius: 8px;
+  cursor: pointer;
+  &:hover{
+    background-color: $dark400;
+  }
+}
+
+.prev{
+  margin-right: 5px;
+  svg{
+    transform: rotate(180deg);
+  }
+}

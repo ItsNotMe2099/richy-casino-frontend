@@ -1,0 +1,14 @@
+@import "scss/index";
+
+.root{
+  position: relative;
+ @include componentRoot();
+  display: flex;
+  flex-direction: column;
+  @media screen and (max-width: $xs-max){
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    padding-bottom: 0px;
+  }
+}
+

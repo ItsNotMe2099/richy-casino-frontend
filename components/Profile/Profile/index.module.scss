@@ -1,0 +1,312 @@
+@import "scss/index";
+
+.root {
+
+}
+
+.top{
+  margin-top: 35px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.accounts{
+  margin-top: 42px;
+  display: flex;
+  @media screen and (max-width: 600px){
+    flex-direction: column;
+  }
+}
+
+.account{
+  padding: 9px 21px;
+  border-radius: 8px;
+  background-color: $dark600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  height: 50px;
+
+}
+
+.mainAccount{
+  background-color: #322c29;
+  margin-top: 12px;
+}
+
+.btc{
+  font-weight: 500;
+  font-size: 12px;
+  color: $dark200;
+  text-align: end;
+}
+
+.numbers{
+  margin-right: 19px;
+}
+
+.left{
+  display: flex;
+  align-items: center;
+}
+
+.right{
+  display: flex;
+  align-items: center;
+  .currency{
+    color: $dark100;
+  }
+}
+
+.usdt{
+  display: flex;
+}
+
+.amount{
+  margin-right: 4px;
+}
+
+.icon{
+  display: flex;
+  margin-right: 6px;
+}
+
+.currency{
+
+}
+
+.avatar{
+  display: flex;
+}
+
+.info{
+  margin-left: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nickname{
+  font-weight: 500;
+  font-size: 22px;
+  text-align: start;
+}
+
+.id{
+  font-weight: 500;
+  font-size: 13px;
+  color: #3c3d46;
+  margin-top: 5px;
+}
+
+.logout{
+  display: flex;
+  align-items: center;
+  button{
+    padding-top: 9px;
+    padding-bottom: 9px;
+    padding-right: 13px;
+    padding-left: 15px;
+    border: 1px solid #272832;
+    color: $white;
+    img{
+      margin-right: 9px;
+    }
+    @media screen and (max-width: 600px){
+      padding: 11px;
+      img{
+        margin-right: 0;
+      }
+      span{
+        display: none;
+      }
+    }
+  }
+}
+
+.main{
+  margin-right: 14px;
+  .title{
+    color: #FFC700;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: start;
+  }
+  @media screen and (max-width: 600px){
+    margin-right: 0;
+  }
+}
+
+.bonus{
+  width: 100%;
+  @media screen and (max-width: 600px){
+    border-bottom: 1px solid #272832;
+    border-top: 1px solid #272832;
+    padding: 32px 0;
+    margin-top: 31px;
+  }
+}
+
+.title{
+  font-weight: 500;
+  font-size: 14px;
+  text-align: start;
+  margin-bottom: 12px;
+}
+
+.actions{
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  @media screen and (max-width: 600px){
+    flex-direction: column-reverse;
+  }
+}
+
+.btn{
+  padding: 18px;
+  background: #24252E;
+  color: $white;
+  margin-right: 7px;
+  font-weight: 500;
+  font-size: 16px;
+  &:hover{
+    background-color: $dark500;
+  }
+}
+
+.wallet{
+  padding: 18px 19px;
+  img{
+    width: 16px;
+    margin-right: 6px;
+  }
+  color: $white;
+  font-weight: 500;
+  font-size: 16px;
+  width: 100%;
+}
+
+.bonusItem{
+  padding: 11px 12px;
+  background: $dark600;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.bonusLeft{
+  display: flex;
+  align-items: center;
+}
+
+.bonusIcon{
+  display: flex;
+  margin-right: 8px;
+}
+
+.number{
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.menuItem{
+  padding: 27px 12px 27px 21px;
+  background: #1D1E25;
+  border-radius: 25px;
+  min-height: 150px;
+  cursor: pointer;
+  border: 1px solid #2C2D38;
+  @media screen and (max-width: 600px){
+    border: 0;
+    display: flex;
+    min-height: auto;
+    padding: 15px 18px;
+    align-items: center;
+    border-radius: 9px;
+  }
+}
+
+.active{
+  background-color: $dark600;
+}
+
+.menuIcon{
+  display: flex;
+  @media screen and (max-width: 600px){
+    margin-right: 15px;
+    img{
+      width: 20px;
+      height: 18px;
+    }
+  }
+}
+
+.menuLabel{
+  margin-top: 22px;
+  font-weight: 500;
+  font-size: 16px;
+  color: $white;
+  text-align: start;
+  @media screen and (max-width: 600px){
+    margin-top: 0;
+    font-size: 13px;
+  }
+}
+
+.menu{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 64px;
+  gap: 8px;
+  @media screen and (max-width: 600px){
+    grid-template-columns: 1fr;
+    margin-top: 32px;
+  }
+}
+
+.drop{
+  display: flex;
+}
+
+.new{
+  max-width: 100% !important;
+  margin-top: 16px;
+}
+
+.new > a {
+  height: 38px !important;
+  border-radius: 8px !important;
+  span{
+    color: #737683;
+  }
+}
+
+.newAcc{
+  margin-top: 16px;
+  .title{
+    color: $white;
+  }
+  .account{
+    margin-top: 16px;
+  }
+}
+
+.notGreen{
+  display: flex;
+  width: 100%;
+  @media screen and (max-width: 600px){
+    margin-top: 16px;
+    .btn:first-child{
+      margin-right: 14px;
+      width: 100%;
+    }
+    .btn:last-child{
+      margin-right: 0;
+      width: 100%;
+    }
+  }
+}

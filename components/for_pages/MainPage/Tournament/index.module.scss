@@ -1,0 +1,268 @@
+@import "scss/index";
+
+.root {
+  border-radius: 16px;
+  background: linear-gradient(200.45deg, #2CA4FB 7.83%, #C5048F 94.57%);
+
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+  position: relative;
+  overflow: hidden;
+  padding: 43px 0;
+  max-height: 247px;
+  height: 25vw;
+  @media screen and (min-width: 1476px){
+    height: 13vw;
+  }
+  @media screen and (min-width: 1281px){
+    height: 15vw;
+  }
+  @media screen and (max-width: 950px){
+    flex-direction: column;
+    padding-left: 30px;
+  }
+  @media screen and (max-width: 685px){
+    height: 30vw;
+  }
+  @media screen and (max-width: $mobile-max){
+    height: 8rem;
+    padding: 13px 0;
+    padding-left: 18px;
+  }
+}
+
+.hero{
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  img{
+    width: auto;
+    height: 25vw;
+  @media screen and (min-width: 1476px){
+    height: 13vw;
+  }
+  @media screen and (min-width: 1281px){
+    height: 15vw;
+  }
+  @media screen and (max-width: 685px){
+    height: 30vw;
+  }
+    @media screen and (max-width: $mobile-max){
+      height: 8rem;
+      width: auto;
+    }
+  }
+  @media screen and (max-width: $mobile-max){
+    right: 0;
+    left: auto;
+  }
+}
+
+.hero2{
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 3%;
+  @media screen and (min-width: $sm-min){
+    display: none;
+  }
+}
+
+.left{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 25%;
+  position: relative;
+  z-index: 2;
+  justify-content: center;
+  @media screen and (max-width: $mobile-max){
+    margin-top: 0;
+    margin-left: 0;
+    align-items: baseline;
+  }
+}
+
+.right{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 3;
+  align-items: center;
+
+  margin-right: 10%;
+  @media screen and (max-width: $sm-max){
+    right: 5%;
+}
+@media screen and (max-width: 950px){
+  position: relative;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  margin-top: 15px;
+  right: auto;
+  z-index: 3;
+  justify-content: center;
+  margin-left: 30%;
+}
+@media screen and (max-width: $mobile-max){
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: 0;
+}
+}
+
+.title{
+  font-weight: 500;
+  font-size: 4.7vw;
+  letter-spacing: 0.275em;
+  color: #FFFFFF;
+  @media screen and (max-width: $mobile-max){
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
+}
+
+.fund{
+  display: flex;
+  @media screen and (max-width: $mobile-max){
+    margin-top: 8px;
+  }
+}
+
+.prize{
+  background-color: rgba(255, 199, 0, 0.4);
+  padding: 11px 12px;
+  padding-right: 24px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: calc(11px + 0.5vw);
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.7rem;
+    padding: 5px 19px 5px 7px;
+  }
+}
+
+.balance{
+  background-color: $balance600;
+  padding: 11px 16px;
+  border-radius: 9px;
+  margin-left: -12px;
+  font-weight: 500;
+  font-size: calc(11px + 0.5vw);
+  color: #000;
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: $sm-max){
+    padding: 4px 5px;
+  }
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.7rem;
+  }
+}
+
+.timer{
+  padding: 13px 16px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(16.5295px);
+}
+
+.end{
+  font-weight: 500;
+  font-size: 16px;
+  color: $white;
+  text-align: center;
+  margin-bottom: 11px;
+  @media screen and (max-width: 950px){
+    display: none;
+  }
+}
+
+.btn{
+  padding: 0px 15px;
+  margin-top: 15px;
+  height: 46px;
+  width: 100%;
+  color: $white;
+  font-weight: bold;
+  @media screen and (max-width: 950px){
+    margin-top: 0;
+  }
+  @media screen and (max-width: 685px){
+    height: 5vw;
+  }
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.9rem;
+    height: 2.2rem;
+  }
+}
+
+.btnContainer{
+  font-size: 18px;
+  font-weight: 700;
+  width: 100%;
+  @media screen and (max-width: 950px){
+    align-self: center;
+    margin-right: 5px;
+    width: auto;
+  }
+}
+
+.coinsBlur{
+  position: absolute;
+  left: 0;
+  top: 0;
+  img{
+    width: 100%;
+  }
+  @media screen and (max-width: 950px){
+    display: none;
+  }
+}
+
+.money{
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  img{
+    width: 100%;
+  }
+  @media screen and (max-width: 870px){
+    display: none;
+  }
+}
+
+.moneyRight{
+  position: absolute;
+  right: 0;
+  top: 0;
+  img{
+    width: 100%;
+  }
+  @media screen and (max-width: 550px){
+    display: none;
+  }
+}
+
+.money2{
+  position: absolute;
+  right: -22px;
+  bottom: -63px;
+  img{
+    width: 100%;
+  }
+  @media screen and (min-width: $sm-min){
+    display: none;
+  }
+  @media screen and (max-width: $mobile-max){
+    right: -32px;
+    bottom: -83px;
+  }
+}
