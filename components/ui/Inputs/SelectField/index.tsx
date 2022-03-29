@@ -11,10 +11,7 @@ interface Props<T> {
   className?: string
   initialStyle?: string
   itemComponent?: (option: IOption<T> , isActive: boolean, onClick: () => void) => ReactElement
-  additional?: (option: IOption<T>) => ReactElement
-  balance?: (option: IOption<T>) => ReactElement
-  active?: (isActive?: boolean) => ReactElement
-  view?: 'settings' | 'exchange' | 'balance' | 'createGame'
+  activeComponent?: (isActive?: boolean) => ReactElement
 }
 
 export  function SelectField<T>(props: Props<T> & FieldConfig){
@@ -36,20 +33,13 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
     setIsActive(false)
   }
 
-  const style = {
-    [styles.settings]: props.view === 'settings',
-    [styles.exchange]: props.view === 'exchange',
-    [styles.balance]: props.view === 'balance',
-    [styles.createGame]: props.view === 'createGame',
-  }
-
   const currentItem = options.find(i => i.value === value)
   const hasError = !!meta.error && meta.touched
 
   return (
-    <div className={classNames(styles.root, {[styles.hasError]: !!meta.error && meta.touched}, className, style)}>
+    <div className={classNames(styles.root, {[styles.hasError]: !!meta.error && meta.touched}, className)}>
       <div onClick={handleClick} className={classNames(styles.dropDownTrigger, initialStyle)}>
-        {props.active(isActive)}
+        {props.activeComponent(isActive)}
       <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
        {options.map((item, index) => props.itemComponent ? props.itemComponent(item, currentItem?.value === item.value, () => handleChange(item.value)) :
        <div key={index}

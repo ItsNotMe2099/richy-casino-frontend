@@ -10,7 +10,7 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import InfoRepository from 'data/repositories/InfoRepository'
 import { ProfileSettingsSelect } from 'components/ui/Inputs/ProfileSettingsSelect'
-import { convertCurrencyToOptions } from 'utils/converter'
+import { convertCurrencyToOptions, currentItem } from 'utils/converter'
 import { useAppContext } from 'context/state'
 
 interface IUser {
@@ -19,7 +19,7 @@ interface IUser {
   name: string
   dateOfBirth: string
   country: string
-  currency: number
+  currency: string
   phone: string
   email: string
   password: string
@@ -84,8 +84,8 @@ export default function Settings(props: Props) {
         <InputField name={'userName'} className={styles.input} label='Username'/>
         <InputField name={'name'} className={styles.input} label='ФИО'/>
         <InputField name={'dateOfBirth'} className={styles.input} label='Дата рождения'/>
-        <ProfileSettingsSelect name='country' options={countries} initial={initialValues.country} inputLabel='Страна'/>
-        <ProfileSettingsSelect name='currency' options={convertCurrencyToOptions(context.currencies)} initial={convertCurrencyToOptions(context.currencies)[0].label} inputLabel='Основная валюта'/>
+        <ProfileSettingsSelect name='country' options={countries} currentItem={currentItem(values, countries)} inputLabel='Страна'/>
+        <ProfileSettingsSelect name='currency' options={convertCurrencyToOptions(currencies)} currentItem={currentItem(values, convertCurrencyToOptions(currencies))} inputLabel='Основная валюта'/>
         <InputField name={'phone'} disabled={true} className={styles.input} label='Номер телефона'/>
         <InputField name={'email'} disabled={true} className={styles.input} label='Почта'/>
         <div className={classNames(styles.change, {[styles.justify]: isChange})}>

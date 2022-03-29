@@ -49,7 +49,7 @@ export const RegCurrencySelectView = (props: Props) => {
   return (
   <SelectField options={props.options} name={props.name} initialStyle={styles.initial}
     itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
-    active={(isActive) => <Placeholder currentItem={props.currentItem} isActive={isActive}/>}
+    activeComponent={(isActive) => <Placeholder currentItem={props.currentItem} isActive={isActive}/>}
     />
   )
 }

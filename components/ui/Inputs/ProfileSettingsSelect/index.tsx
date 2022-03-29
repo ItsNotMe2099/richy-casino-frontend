@@ -1,6 +1,7 @@
 import {IField, IOption} from 'types/interfaces'
 import styles from './index.module.scss'
 import { SelectField } from 'components/ui/Inputs/SelectField'
+import classNames from 'classnames'
 
 export interface ICustomSelectViewOption extends IOption<string>{
   
@@ -28,7 +29,9 @@ const Option = (props: PropsOption) => {
 const Placeholder = (props: PropsOption) => {
   return (
   <div className={styles.placeholder}>
-      {props.currentItem.label}
+      <div className={styles.label}>{props.currentItem.label}</div>
+      <img className={classNames({[styles.reverse]: props.isActive})} 
+        src='/img/Select/arrow-big.svg' alt=''/>
   </div>
   )
 }
@@ -38,9 +41,9 @@ export const ProfileSettingsSelect = (props: Props) => {
   return (
   <div className={styles.root}>
     <div className={styles.label}>{props.inputLabel}</div>
-    <SelectField view='settings' options={props.options}  name={props.name} initialStyle={styles.initial} className={styles.select}
+    <SelectField options={props.options}  name={props.name} initialStyle={styles.initial} className={styles.select}
       itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
-      active={(isActive) => <Placeholder currentItem={props.currentItem} isActive={isActive}/>}
+      activeComponent={(isActive) => <Placeholder currentItem={props.currentItem} isActive={isActive}/>}
     />
   </div>
   )

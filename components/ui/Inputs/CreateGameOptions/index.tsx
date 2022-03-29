@@ -38,9 +38,8 @@ const Option = (props: PropsOption) => {
 export const CreateGameOptions = (props: Props) => {
 
   return (
-  <SelectField view='createGame' options={props.options}  name={props.name} placeholder={props.placeholder} initial={props.initial} initialStyle={styles.initial}
+  <SelectField  options={props.options}  name={props.name} initialStyle={styles.initial}
     itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
-    additional={(option) => <Symbol option={option}/>}
   />
   )
   

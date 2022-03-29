@@ -38,12 +38,22 @@ const Option = (props: PropsOption) => {
     )
 }
 
+{/*const Placeholder = (props: PropsOption) => {
+  return (
+  <div className={styles.placeholder}>
+      <div className={styles.label}>{props.currentItem.label}</div>
+      <img className={classNames({[styles.reverse]: props.isActive})} 
+        src='/img/Select/arrow-big.svg' alt=''/>
+  </div>
+  )
+}*/}
+
+
 export const ExchangeCurrencySelectView = (props: Props) => {
 
   return (
-  <SelectField view='exchange' className={props.className} options={props.options}  name={props.name} placeholder={props.placeholder} initial={props.initial} initialStyle={styles.initial}
+  <SelectField className={props.className} options={props.options}  name={props.name} initialStyle={styles.initial}
     itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
-    additional={(option) => <Symbol separator option={option}/>}
   />
   )
   

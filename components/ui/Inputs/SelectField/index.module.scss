@@ -28,11 +28,6 @@
     flex: 1;
     position: static;
   }
-  .placeholder{
-    @media screen and (max-width: $mobile-max){
-      font-size: 14px;
-    }
-  }
 }
 
 .exchange{
