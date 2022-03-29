@@ -14,7 +14,13 @@ export const RouletteContainer = styled.div`
   pointer-events: none;
 `
 
-export const RotationContainer = styled.div`
+export const RotationContainer = styled.div<{
+  startRotationDegrees: number
+  finalRotationDegrees: number
+  startSpinningTime: number
+  continueSpinningTime: number
+  stopSpinningTime: number
+}>`
   position: relative;
   width: 100%;
   left: 0px;
