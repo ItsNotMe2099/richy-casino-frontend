@@ -179,7 +179,7 @@ export const Wheel = ({
           textDistance={textDistance}
         />
       </RotationContainer>
-      <RouletteSelectorImage src={'/img/Games/Wheel/selector.svg'} alt="roulette-static" />
+      <RouletteSelectorImage src={'/img/Games/wheel/selector.svg'} alt="roulette-static" />
     </RouletteContainer>
   )
 }
