@@ -36,7 +36,7 @@ const Placeholder = (props: PropsOption) => {
   )
 }
 
-export const ProfileSettingsSelect = (props: Props) => {
+export const ProfileSettingsSelectField = (props: Props) => {
 
   return (
   <div className={styles.root}>

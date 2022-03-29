@@ -1,4 +1,4 @@
-import { ProfileSettingsSelect } from 'components/ui/Inputs/ProfileSettingsSelect'
+import { ProfileSettingsSelectField } from 'components/ui/Inputs/ProfileSettingsSelectField'
 import { Form, Formik } from 'formik'
 import styles from 'pages/selectPage/index.module.scss'
 import { currentItem } from 'utils/converter'
@@ -29,7 +29,7 @@ export default function SettingsSelect() {
         <div className={styles.text}>
           Settings
         </div>
-        <ProfileSettingsSelect name='currency' options={currencies} currentItem={currentItem(values, currencies)} inputLabel='Основная валюта'/>
+        <ProfileSettingsSelectField name='currency' options={currencies} currentItem={currentItem(values, currencies)} inputLabel='Основная валюта'/>
       </div>
     </Form>)}
   </Formik>

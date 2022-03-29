@@ -48,7 +48,7 @@ export default class Game {
         wireframes: false,
         background: props.backgroundColor,
       },
-    });
+    })
     Common.setDecomp(decomp)
     this._pegsGrid = this._makePegsGrid()
     this._bucketsRow = this._makeBucketsRow()
@@ -122,7 +122,7 @@ export default class Game {
         )
       }
     )
-    return grid.reduce((acc, curr) => [...acc, ...curr], []);
+    return grid.reduce((acc, curr) => [...acc, ...curr], [])
   }
 
   _makeBucket(x: number, y: number, id: number): Body {

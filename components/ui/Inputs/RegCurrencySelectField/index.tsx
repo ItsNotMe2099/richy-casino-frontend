@@ -44,7 +44,7 @@ const Placeholder = (props: PropsOption) => {
   )
 }
 
-export const RegCurrencySelectView = (props: Props) => {
+export const RegCurrencySelectField = (props: Props) => {
 
   return (
   <SelectField options={props.options} name={props.name} initialStyle={styles.initial}

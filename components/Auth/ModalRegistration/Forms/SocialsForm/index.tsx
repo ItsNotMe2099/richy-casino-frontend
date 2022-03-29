@@ -10,7 +10,7 @@ import {ModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
 import SocialButtons from 'components/Auth/SocialButtons'
 import {convertCurrencyToOptions} from 'utils/converter'
-import { RegCurrencySelectView } from 'components/ui/Inputs/RegCurrencySelectView'
+import { RegCurrencySelectField } from 'components/ui/Inputs/RegCurrencySelectField'
 
 interface Props {
 }
@@ -39,7 +39,7 @@ export default function SocialsForm(props: Props) {
           <SocialButtons/>
 
           <div className={styles.inputs}>
-             <RegCurrencySelectView name='currency' options={convertCurrencyToOptions(context.currencies)} initial={convertCurrencyToOptions(context.currencies)[0].label}/>
+             <RegCurrencySelectField name='currency' options={convertCurrencyToOptions(context.currencies)} initial={convertCurrencyToOptions(context.currencies)[0].label}/>
             <div className={styles.promo} onClick={() => promoCode ? setPromoCode(false) : setPromoCode(true)}>
               <div className={classNames(styles.plus, {[styles.expanded]: promoCode})}>{promoCode ? '-' : '+'}</div>
                <span>У меня есть промокод</span>

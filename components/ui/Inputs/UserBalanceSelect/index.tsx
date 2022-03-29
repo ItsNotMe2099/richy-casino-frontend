@@ -53,11 +53,9 @@ export const UserBalanceSelect = (props: Props) => {
 
   return (
   <div className={styles.root}>
-    <SelectField view='balance' options={props.options}  name={props.name} placeholder={props.placeholder} initial={props.initial} initialStyle={styles.initial}  
+    <SelectField options={props.options}  name={props.name} initialStyle={styles.initial}  
     className={styles.select}
       itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
-      additional={(option) => <Symbol option={option}/>}
-      balance={(option) => <Balance option={option}/>}
       />
   </div>
   )

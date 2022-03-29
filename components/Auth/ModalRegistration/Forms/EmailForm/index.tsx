@@ -14,7 +14,7 @@ import AuthRepository from 'data/repositories/AuthRepository'
 import FormError from 'components/ui/Form/FormError'
 import {convertCurrencyToOptions, currentItem} from 'utils/converter'
 import {RegistrationSuccessModalArguments} from 'types/interfaces'
-import { RegCurrencySelectView } from 'components/ui/Inputs/RegCurrencySelectView'
+import { RegCurrencySelectField } from 'components/ui/Inputs/RegCurrencySelectField'
 
 
 interface Props {
@@ -65,7 +65,7 @@ export default function EmailForm(props: Props) {
       }) => (
       <Form className={styles.form}>
         <div className={styles.inputs}>
-          <RegCurrencySelectView name='currency' options={convertCurrencyToOptions(context.currencies)} currentItem={currentItem(values, convertCurrencyToOptions(context.currencies))}/>
+          <RegCurrencySelectField name='currency' options={convertCurrencyToOptions(context.currencies)} currentItem={currentItem(values, convertCurrencyToOptions(context.currencies))}/>
           <InputField name={'email'} placeholder={'Электронный адрес'}
                       validate={Validator.combine([Validator.required, Validator.email])}/>
           <InputField name={'password'} type={'password'} obscure={true} placeholder={'Придумайте пароль'}
