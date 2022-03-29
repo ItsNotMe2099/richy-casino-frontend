@@ -10,6 +10,7 @@ import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import VisibleXs from 'components/ui/VisibleXS'
 import HiddenXs from 'components/ui/HiddenXS'
 import BuyCrypto from 'components/for_pages/MainPage/BuyCrypto'
+import { richyGames } from 'components/for_pages/Common/GameTypes/game-types'
 
 export default function CatalogPage() {
 
@@ -383,7 +384,6 @@ export default function CatalogPage() {
   ]
 
   const liveCasino = games.filter(item => item.category === 'Live Casino')
-  const richyGames = games.filter(item => item.category === 'Richy Games')
   const topGames = games.filter(item => item.top)
 
   return (
@@ -397,8 +397,8 @@ export default function CatalogPage() {
       </Row>
       <GamesListTop items={topGames}/>
       <BuyCrypto/>
-      <GamesList all items={games}/>
-      <GamesList live items={liveCasino}/>
+      <GamesList all items={richyGames}/>
+      <GamesList live items={richyGames}/>
       <GamesList richy items={richyGames}/>
       </Col>
       </Row>

@@ -46,4 +46,8 @@ export const convertUserBalanceCurrencyToOptions = (currencies: IUserBalanceCurr
   }))
 }
 
+export const currentItem = (values, options: IOption<string>[]) => {
+  const array = options.filter(item => item.value === values.currency)
+  return array[0]
+}
 

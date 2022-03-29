@@ -12,7 +12,7 @@ import {ModalType} from 'types/enums'
 import {useAppContext} from 'context/state'
 import AuthRepository from 'data/repositories/AuthRepository'
 import FormError from 'components/ui/Form/FormError'
-import {convertCurrencyToOptions} from 'utils/converter'
+import {convertCurrencyToOptions, currentItem} from 'utils/converter'
 import {RegistrationSuccessModalArguments} from 'types/interfaces'
 import { RegCurrencySelectView } from 'components/ui/Inputs/RegCurrencySelectView'
 
@@ -59,9 +59,13 @@ export default function EmailForm(props: Props) {
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      {({
+        values,
+        setFieldValue
+      }) => (
       <Form className={styles.form}>
         <div className={styles.inputs}>
-          <RegCurrencySelectView name='currency' options={convertCurrencyToOptions(context.currencies)} initial={convertCurrencyToOptions(context.currencies)[0].label}/>
+          <RegCurrencySelectView name='currency' options={convertCurrencyToOptions(context.currencies)} currentItem={currentItem(values, convertCurrencyToOptions(context.currencies))}/>
           <InputField name={'email'} placeholder={'Электронный адрес'}
                       validate={Validator.combine([Validator.required, Validator.email])}/>
           <InputField name={'password'} type={'password'} obscure={true} placeholder={'Придумайте пароль'}
@@ -82,7 +86,7 @@ export default function EmailForm(props: Props) {
         <div className={styles.login}>
           Уже есть аккаунт? <span onClick={() => context.showModal(ModalType.login)}>Войдите</span>
         </div>
-      </Form>
+      </Form>)}
     </Formik>
   )
 }

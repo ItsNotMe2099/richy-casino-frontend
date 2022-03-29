@@ -19,7 +19,7 @@ interface Props {
   fortune?: boolean
 }
 
-export default function CreateGameModal(props: Props) {
+export default function OpponentsModal(props: Props) {
   const {isOpen, onRequestClose} = props
   const appContext = useAppContext()
   const customStyles = {

@@ -7,19 +7,18 @@ import { IOption} from 'types/interfaces'
 
 interface Props<T> {
   options: IOption<T>[]
-  placeholder?: string
   disabled?: boolean
   className?: string
   initialStyle?: string
-  initial?: string
   itemComponent?: (option: IOption<T> , isActive: boolean, onClick: () => void) => ReactElement
   additional?: (option: IOption<T>) => ReactElement
   balance?: (option: IOption<T>) => ReactElement
+  active?: (isActive?: boolean) => ReactElement
   view?: 'settings' | 'exchange' | 'balance' | 'createGame'
 }
 
 export  function SelectField<T>(props: Props<T> & FieldConfig){
-  const {options, disabled, className, placeholder, initial, initialStyle} = props
+  const {options, disabled, className, initialStyle} = props
   const [field, meta] = useField(props)
   const {value} = field
   const { setFieldValue, setFieldTouched } = useFormikContext()
@@ -50,14 +49,7 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
   return (
     <div className={classNames(styles.root, {[styles.hasError]: !!meta.error && meta.touched}, className, style)}>
       <div onClick={handleClick} className={classNames(styles.dropDownTrigger, initialStyle)}>
-        <div className={styles.placeholder}>{(props.additional && currentItem) && props.additional(currentItem)} {currentItem ? currentItem?.label : initial}</div>
-        <div className={styles.arrow}>
-        {props.balance && currentItem &&
-        <div className={styles.value}>
-          {props.balance(currentItem)}
-          </div>}
-          <img className={classNames({[styles.reverse]: isActive})} 
-        src={(props.view === 'exchange' || props.view === 'balance' || props.view === 'createGame') ? '/img/Select/arrow-exchange.svg' : '/img/Select/arrow.svg'} alt=''/></div>
+        {props.active(isActive)}
       <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
        {options.map((item, index) => props.itemComponent ? props.itemComponent(item, currentItem?.value === item.value, () => handleChange(item.value)) :
        <div key={index}

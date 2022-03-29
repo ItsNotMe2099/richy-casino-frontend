@@ -12,7 +12,7 @@ import {ModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
 import AuthRepository from 'data/repositories/AuthRepository'
 import FormError from 'components/ui/Form/FormError'
-import {convertCurrencyToOptions} from 'utils/converter'
+import {convertCurrencyToOptions, currentItem} from 'utils/converter'
 import {RegistrationPhoneModalArguments} from 'types/interfaces'
 import { RegCurrencySelectView } from 'components/ui/Inputs/RegCurrencySelectView'
 
@@ -52,7 +52,7 @@ export default function PhoneForm(props: Props) {
       }) => (
     <Form className={styles.form}>
       <div className={styles.inputs}>
-        <RegCurrencySelectView name='currency' options={convertCurrencyToOptions(context.currencies)} initial={convertCurrencyToOptions(context.currencies)[0].label}/>
+        <RegCurrencySelectView name='currency' options={convertCurrencyToOptions(context.currencies)} currentItem={currentItem(values, convertCurrencyToOptions(context.currencies))}/>
         <InputField format={'phone'} name={'phone'} placeholder={'Номер телефона'} validate={Validator.required} />
         <div className={styles.promo} onClick={() => promoCode ? setPromoCode(false) : setPromoCode(true)}>
           <div className={classNames(styles.plus, {[styles.expanded]: promoCode})}>{promoCode ? '-' : '+'}</div>

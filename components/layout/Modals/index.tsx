@@ -25,6 +25,7 @@ import FA from 'components/Profile/FA'
 import Withdraw from 'components/Profile/Withdraw'
 import { RemoveScroll } from 'react-remove-scroll'
 import CreateGameModal from 'components/for_pages/MoneyChess/CreateGame/Modals/CreateGameModal'
+import OpponentsModal from 'components/for_pages/MoneyChess/CreateGame/Modals/OpponentsModal'
 interface Props {}
 
 export default function ModalContainer(props: Props) {
@@ -109,6 +110,7 @@ export default function ModalContainer(props: Props) {
           </ProfileModal>
           <Withdraw/>
           <CreateGameModal isOpen={context.modal === ModalType.createGame} {...commonSettings}/>
+          <OpponentsModal isOpen={context.modal === ModalType.opponents} {...commonSettings}/>
           </div>
       )}
     </RemoveScroll>

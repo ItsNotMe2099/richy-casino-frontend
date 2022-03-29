@@ -6,15 +6,17 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import Button from 'components/ui/Button'
 import classNames from 'classnames'
+import ItemGame from 'components/for_pages/Common/ItemGame'
 
 interface IGame{
   label: string
   image: string
-  top: boolean
-  createdAt: string
-  lastWin: string
-  category: string
-  provider: string
+  top?: boolean
+  createdAt?: string
+  lastWin?: string
+  category?: string
+  provider?: string
+  link: string
 }
 
 interface Props {
@@ -104,14 +106,14 @@ export default function GamesList(props: Props) {
         <HiddenXs>
           <>
             {props.items && (isShow ? props.items : props.items.slice(0, 10)).map((item, index) =>
-              <Item item={item} key={index}/>
+              <ItemGame style='catalog' item={item} key={index}/>
             )}
           </>
         </HiddenXs>
         <VisibleXs>
           <>
             {props.items && (isShow ? props.items : props.items.slice(0, 9)).map((item, index) =>
-              <Item item={item} key={index}/>
+              <ItemGame style='catalog' item={item} key={index}/>
             )}
           </>
         </VisibleXs>

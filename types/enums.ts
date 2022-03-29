@@ -9,6 +9,7 @@ export enum ModalType {
   bonus = 10,
   profileBurger = 11,
   createGame = 19,
+  opponents = 20,
 }
 
 export enum ProfileModalType {

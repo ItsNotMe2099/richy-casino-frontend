@@ -1,5 +1,4 @@
 import Slider from 'react-slick'
-import Slide from './Slide'
 import styles from './index.module.scss'
 import { useState } from 'react'
 import Header from 'components/for_pages/Common/Header'
@@ -8,6 +7,8 @@ import VisibleXs from 'components/ui/VisibleXS'
 import Link from 'next/link'
 import Button from 'components/ui/Button'
 import classNames from 'classnames'
+import { richyGames } from 'components/for_pages/Common/GameTypes/game-types'
+import ItemGame from 'components/for_pages/Common/ItemGame'
 
 interface Props {
   slider?: any
@@ -29,24 +30,12 @@ export default function Games(props: Props) {
 
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const [inFavorite, setInFavorite] = useState(false)
-
-  const items = [
-    {image: '/img/Games/blackjack.svg', label: 'Blackjack', link: '#'},
-    {image: '/img/Games/blackjack.svg', label: 'Blackjack', link: '#'},
-    {image: '/img/Games/blackjack.svg', label: 'Blackjack', link: '#'},
-    {image: '/img/Games/blackjack.svg', label: 'Blackjack', link: '#'},
-    {image: '/img/Games/blackjack.svg', label: 'Blackjack', link: '#'},
-    {image: '/img/Games/blackjack.svg', label: 'Blackjack', link: '#'},
-    {image: '/img/Games/blackjack.svg', label: 'Blackjack', link: '#'},
-  ]
-
   const settings = {
     className: `${styles.slider}`,
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: items.length < 6 ? items.length : 6,
+    slidesToShow: richyGames.length < 6 ? richyGames.length : 6,
     slidesToScroll: 1,
     variableWidth: true,
     adaptiveHeight: true,
@@ -56,13 +45,13 @@ export default function Games(props: Props) {
       {
         breakpoint: 570,
         settings: {
-          slidesToShow: items.length < 4 ? items.length : 4,
+          slidesToShow: richyGames.length < 4 ? richyGames.length : 4,
         }
       },
       {
         breakpoint: 400,
         settings: {
-          slidesToShow: items.length < 3 ? items.length : 3,
+          slidesToShow: richyGames.length < 3 ? richyGames.length : 3,
         },
       }
     ]
@@ -107,7 +96,7 @@ export default function Games(props: Props) {
           icon='/img/Contents/gamepad.svg'
           label='Richy Games'
           shadowColor='blue'
-          length={items.length}
+          length={richyGames.length}
           style='withoutLength'
           onPrev={() => slider.slickGoTo(currentIndex - 1)}
           onNext={() => slider.slickGoTo(currentIndex + 1)}
@@ -115,14 +104,14 @@ export default function Games(props: Props) {
       </div>
       <HiddenXs>
         <Slider {...settings} ref={slider1 => (slider = slider1)}>
-          {items.map((item, index) =>
-            <Slide item={item} key={index}/>
+          {richyGames.map((item, index) =>
+            <ItemGame item={item} key={index}/>
           )}
         </Slider>
       </HiddenXs>
       <VisibleXs>
         <div className={styles.overflow}>
-          {items.map((item, index) =>
+          {richyGames.map((item, index) =>
             <OverflowSlide item={item} key={index}/>
           )}
         </div>

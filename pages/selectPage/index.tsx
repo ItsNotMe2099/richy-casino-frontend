@@ -15,12 +15,8 @@ export default function SelectPage() {
   return (
     <Layout>
       <div className={styles.root}>
-        <StandartSelect/>
         <RegistrationSelect/>
         <SettingsSelect/>
-        <ExchangeSelect/>
-        <WithdrawSelect/>
-        <AddNewAccountSelect/>
       </div>
     </Layout>
   )
