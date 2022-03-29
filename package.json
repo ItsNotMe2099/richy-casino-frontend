@@ -28,6 +28,7 @@
     "nookies": "^2.5.2",
     "normalize.css": "8.0.1",
     "numeralize-ru": "^1.0.1",
+    "poly-decomp": "^0.3.0",
     "react": "17.0.2",
     "react-custom-checkbox": "^2.0.0",
     "react-custom-scrollbars-2": "^4.4.0",

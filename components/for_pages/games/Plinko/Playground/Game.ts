@@ -1,5 +1,6 @@
-import { Engine, Render, Bodies, Runner, Body, World } from 'matter-js'
+import { Engine, Render, Bodies, Runner, Body, World, Vector, Common } from 'matter-js'
 import { ICasinoGameFinishEvent } from 'components/for_pages/games/data/interfaces/ICasinoGame'
+import decomp from 'poly-decomp'
 import { coords } from './constants'
 
 interface ISize {
@@ -48,6 +49,7 @@ export default class Game {
         background: props.backgroundColor,
       },
     });
+    Common.setDecomp(decomp)
     this._pegsGrid = this._makePegsGrid()
     this._bucketsRow = this._makeBucketsRow()
   }
@@ -125,15 +127,23 @@ export default class Game {
 
   _makeBucket(x: number, y: number, id: number): Body {
     const size = this._getBucketSize()
-    return Bodies.rectangle(x, y, size.width, size.height, {
+    return Bodies.fromVertices(x, y, [
+      [
+        Vector.create(0, 0),
+        Vector.create(size.width / 2, size.height / 5),
+        Vector.create(size.width, 0),
+        Vector.create(size.width, size.height),
+        Vector.create(0, size.height),
+      ],
+    ], {
       isStatic: true,
-      density: 1,
       render: {
-        sprite: {
-          texture: '/img/Games/plinko/buckets/bucket_long_1.png',
-          xScale: size.width / 84,
-          yScale: size.width / 84,
-        },
+        fillStyle: `hsl(${Math.floor(360 * Math.random())}, 90%, 60%)`,
+        // sprite: {
+        //   texture: '/img/Games/plinko/buckets/bucket_long_1.png',
+        //   xScale: size.width / 84,
+        //   yScale: size.width / 84,
+        // },
       },
       label: `bucket-${id}`
     })
