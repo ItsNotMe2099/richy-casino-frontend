@@ -1,2 +1,2 @@
 [web]
-dev ansible_host= ansible_user=glm-ci
+dev ansible_host=135.181.249.244 ansible_user=glm-ci

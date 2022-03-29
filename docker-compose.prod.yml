@@ -13,7 +13,7 @@ services:
           args:
             - ENV_FILE=.env.prod
         image: ${APP_IMAGE}
-        container_name: arbi-hunter-front-app
+        container_name: richy-casino-front-app
         restart: ${DK_RESTART}
         networks:
           - app
@@ -24,7 +24,7 @@ services:
           args:
             - APP_IMAGE=${APP_IMAGE}
         image: ${NGINX_IMAGE}
-        container_name: arbi-hunter-front-nginx
+        container_name: richy-casino-front-nginx
         restart: ${DK_RESTART}
         networks:
           - app
@@ -32,10 +32,8 @@ services:
         depends_on:
           - app
         environment:
-          API_HOST: http://yt-api-nginx
-          ADMIN_HOST: http://yt-admin
-          VIRTUAL_HOST: arbihunter.ru
-          LETSENCRYPT_HOST: arbihunter.ru
-          LETSENCRYPT_EMAIL: sites.globcom@yandex.ru
+          API_HOST: http://api
+          ADMIN_HOST: http://admin
+          VIRTUAL_HOST: richy.casino
           VIRTUAL_PORT: 80
 
