@@ -5,9 +5,11 @@
     "dev": "next dev -p 3010",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "ts": "tsc --noEmit"
   },
   "dependencies": {
+    "@types/matter-js": "^0.17.7",
     "@types/react-sticky": "^6.0.4",
     "bitcoin-units": "^0.3.0",
     "classnames": "2.3.1",

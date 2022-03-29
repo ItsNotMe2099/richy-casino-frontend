@@ -1,12 +1,12 @@
 import GamePageLayout from 'components/for_pages/games/components/layout/GamePageLayout'
-import Board from './Board'
-import Sidebar from './Sidebar'
 import GamePageHeader from 'components/for_pages/games/components/layout/GamePageHeader'
 import GameHistory from 'components/for_pages/games/components/layout/GameHistory'
 import {ICasinoGameDiceDto} from 'components/for_pages/games/data/interfaces/ICasinoGameData'
 import {CasinoGameType} from 'components/for_pages/games/data/enums'
 import {useGameContext} from 'components/for_pages/games/context/state'
 import {useState} from 'react'
+import Sidebar from './Sidebar'
+import Playground from './Playground'
 
 interface Props{
 
@@ -30,7 +30,7 @@ export default function GamePlinko(props: Props) {
     <GamePageLayout
       header={<GamePageHeader title={'Mines'} icon={''}/>}
       sideBar={<Sidebar onChangePinsCount={(val) => setPinsCount(val)} onChangeDifficulty={(val) => setDifficulty(val)} onSubmit={handleSubmit}/>}
-      board={gameContext.game?.multipliers && <Board pinsCount={pinsCount} difficulty={difficulty}/>} history={<GameHistory items={history}/>}/>
+      board={gameContext.game?.multipliers && <Playground pegsRows={pinsCount} difficulty={difficulty}/>} history={<GameHistory items={history}/>}/>
   )
 }
 

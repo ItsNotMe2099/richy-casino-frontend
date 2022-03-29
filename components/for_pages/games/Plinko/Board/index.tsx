@@ -139,6 +139,10 @@ const coords = {
     17: [2.7]
   }
 }
+
+/**
+ * @deprecated Use instead Playground
+ */
 export default function Board(props: Props) {
   const {pinsCount, difficulty} = props
   const gameContext = useGameContext()
