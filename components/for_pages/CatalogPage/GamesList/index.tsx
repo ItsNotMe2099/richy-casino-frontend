@@ -4,8 +4,6 @@ import SwitchFilter from 'components/for_pages/Common/SwitchFilter'
 import { useState } from 'react'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
-import Button from 'components/ui/Button'
-import classNames from 'classnames'
 import ItemGame from 'components/for_pages/Common/ItemGame'
 
 interface IGame{
@@ -27,35 +25,6 @@ interface Props {
 }
 
 export default function GamesList(props: Props) {
-
-  const Item = (prop:{item: IGame}) => {
-
-    const [inFavorite, setInFavorite] = useState(false)
-
-    return(
-      <div className={styles.item}>
-        <div className={styles.shade}>
-        <Button
-          onClick={() => inFavorite ? setInFavorite(false) : setInFavorite(true)}
-          className={classNames(styles.favorite, {[styles.active]: inFavorite})}
-          size='superExtraSmall'
-          background='blackTransparent'>
-          {inFavorite ?
-            <img src='/img/GamesList/star-fill.svg' alt=''/>
-            :
-            <img src='/img/GamesList/star-stroke.svg' alt=''/>}
-        </Button>
-      <div className={styles.container}>
-        <div className={styles.btns}>
-          <Button className={styles.btn} size='small' background='blueGradient500'>Играть</Button>
-          <Button className={styles.demo} size='small' background='blackTransparent'>Демо</Button>
-        </div>
-      </div>
-      </div>
-        <img src={prop.item.image} alt=''/>
-      </div>
-    )
-  }
 
   const getLabel = () => {
     if(props.all){
