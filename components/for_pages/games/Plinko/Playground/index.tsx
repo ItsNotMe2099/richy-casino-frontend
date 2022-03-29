@@ -22,7 +22,8 @@ export default function Playground(props: Props) {
         backgroundColor: 'rgb(39, 45, 57)',
         pegsRows: props.pegsRows,
       })
-      gameRef.current.run()
+
+      gameRef.current.start()
     }
   }, [rootRef.current])
 
@@ -36,6 +37,7 @@ export default function Playground(props: Props) {
 
     return () => {
       subscriptionGame.unsubscribe()
+      gameRef.current?.stop()
     }
   }, [])
 

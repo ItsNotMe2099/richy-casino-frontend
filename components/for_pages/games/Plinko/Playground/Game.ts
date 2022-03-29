@@ -1,6 +1,6 @@
-import { Engine, Events, Render, Composite, Bodies, Runner, Body, World } from 'matter-js'
+import { Engine, Render, Bodies, Runner, Body, World } from 'matter-js'
 import { ICasinoGameFinishEvent } from 'components/for_pages/games/data/interfaces/ICasinoGame'
-import { coords, colors } from './constants'
+import { coords } from './constants'
 
 interface ISize {
   width: number
@@ -23,6 +23,13 @@ export default class Game {
   _engine: Engine
   _render: Render
   _pegsGrid: Body[]
+  _bucketsRow: Body[]
+  _runner: Runner
+
+  /**
+   * For margins between buckets
+   */
+  _bucketFactor = 1.08
 
   constructor(props: IProps) {
     this._settings = {
@@ -42,16 +49,24 @@ export default class Game {
       },
     });
     this._pegsGrid = this._makePegsGrid()
+    this._bucketsRow = this._makeBucketsRow()
   }
 
   /**
    * Start the game
    */
-  run() {
-    World.add(this._engine.world, [...this._pegsGrid])
+  start() {
+    World.add(this._engine.world, [...this._pegsGrid, ...this._bucketsRow])
 
-    Runner.run(this._engine)
+    this._runner = Runner.run(this._engine)
     Render.run(this._render)
+  }
+
+  /**
+   * Stop the game
+   */
+  stop() {
+    Runner.stop(this._runner)
   }
 
   /**
@@ -89,7 +104,7 @@ export default class Game {
       render: {
         fillStyle: `hsl(${Math.floor(360 * Math.random())}, 90%, 60%)`,
       },
-      label: 'plinko-' + id,
+      label: `plinko-${id}`,
     })
   }
 
@@ -106,5 +121,40 @@ export default class Game {
       }
     )
     return grid.reduce((acc, curr) => [...acc, ...curr], []);
+  }
+
+  _makeBucket(x: number, y: number, id: number): Body {
+    const size = this._getBucketSize()
+    return Bodies.rectangle(x, y, size.width, size.height, {
+      isStatic: true,
+      density: 1,
+      render: {
+        sprite: {
+          texture: '/img/Games/plinko/buckets/bucket_long_1.png',
+          xScale: size.width / 84,
+          yScale: size.width / 84,
+        },
+      },
+      label: `bucket-${id}`
+    })
+  }
+
+  _getBucketSize(): ISize {
+    const onePegWidth = this._settings.size.width / this._settings.pegsColumns
+    const widthRow = this._settings.size.width - onePegWidth
+    const width = widthRow / this._settings.pegsColumns
+    const aspectRatio = 1.29
+    return {
+      width: width / this._bucketFactor,
+      height: width / aspectRatio / this._bucketFactor,
+    }
+  }
+
+  _makeBucketsRow(): Body[] {
+    const size = this._getBucketSize()
+    return Array(this._settings.pegsColumns - 1).fill(null).map((value, index) => {
+      const x = size.width * this._bucketFactor * index + size.width * this._bucketFactor + (this._settings.size.width / this._settings.pegsColumns / 2)
+      return this._makeBucket(x, this._settings.size.height, index)
+    })
   }
 }
