@@ -14,7 +14,7 @@ import {
 } from 'matter-js'
 import { ICasinoGameFinishEvent } from 'components/for_pages/games/data/interfaces/ICasinoGame'
 import decomp from 'poly-decomp'
-import { COORDS, PLINKO_SIZE_FACTOR } from './constants'
+import { COORDS, PLINKO_SIZE_FACTOR, COLORS } from './constants'
 import LabelHelper from './LabelHelper'
 
 interface ISize {
@@ -45,11 +45,7 @@ export default class Game {
   _plinkoInProgress: boolean
   _plinkoReal: Body
   _plinkoFake: Body
-
-  /**
-   * For margins between buckets
-   */
-  _bucketFactor = 1.08
+  _bucketFactor = 1.08 // For margins between buckets
 
   constructor(props: IProps) {
     this._settings = {
@@ -83,9 +79,9 @@ export default class Game {
 
     this._runner = Runner.run(this._engine)
     Render.run(this._render)
-    Events.on(this._engine, 'collisionStart', this._handleCollision.bind(this));
-    Events.on(this._render, 'beforeRender', this._beforeRender.bind(this));
-    Events.on(this._render, 'afterRender', this._afterRender.bind(this));
+    Events.on(this._engine, 'collisionStart', this._handleCollision.bind(this))
+    Events.on(this._render, 'beforeRender', this._beforeRender.bind(this))
+    Events.on(this._render, 'afterRender', this._afterRender.bind(this))
   }
 
   /**
@@ -182,7 +178,7 @@ export default class Game {
         const h = (this._settings.size.height - 40) / this._settings.pegsRows
         const n = y * (this._settings.pegsRows - rowIndex - 1) / 2
         return Array(rowIndex + 3).fill(null).map((valueInner, indexInner) =>
-          this._makePeg(center + y * indexInner + y / 2 + n, h * rowIndex + h / 2, rowIndex * (indexInner + 1))
+          this._makePeg(center + y * indexInner + y / 2 + n, h * rowIndex + h / 2, rowIndex * 1000 + indexInner)
         )
       }
     )
@@ -300,7 +296,27 @@ export default class Game {
   }
 
   _pegPlinkoCollision(pegId: number, plinkoId: number): void {
-    // peg collision
+    this._coloringPeg(pegId)
+  }
+
+  _coloringPeg(id: number) {
+    this._pegsGrid.forEach(peg => {
+      if (peg.label === LabelHelper.createPegLabel(id)) {
+        const size = this._getBucketSize()
+        const sections = Array(this._settings.bucketsColumns).fill(null).map((value, index) => {
+          return size.width * this._bucketFactor * index
+            + size.width * this._bucketFactor
+            + (this._settings.size.width / this._settings.pegsColumns / 2)
+        })
+        const tmpSection = sections.findIndex(item => item > peg.position.x)
+        const section = tmpSection < 0 ? this._settings.bucketsColumns : tmpSection
+        const colorId = Math.abs(section - Math.floor(this._settings.bucketsColumns / 2)) + 1
+        const max = this._settings.bucketsColumns / 2 / COLORS.length
+        const colorIndex = colorId / max
+        peg.render.sprite = null
+        peg.render.fillStyle = COLORS[Math.round(colorIndex)]
+      }
+    })
   }
 
   _bucketPlinkoCollision(bucketId: number, plinkoId: number): void {
@@ -308,7 +324,7 @@ export default class Game {
       this._bucketsRow.forEach((body) => {
         if (body.label === LabelHelper.createRealBucketLabel(bucketId) || body.label === LabelHelper.createFakeBucketLabel(bucketId)) {
           Body.translate(body, {x: 0, y: 10})
-          this._plinkoReal.restitution = 0;
+          this._plinkoReal.restitution = 0
         }
       })
       this._plinkoInProgress = false
