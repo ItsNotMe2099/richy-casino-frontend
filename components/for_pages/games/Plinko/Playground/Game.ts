@@ -41,7 +41,8 @@ export default class Game {
   _bucketsRow: Body[]
   _runner: Runner
   _plinkoInProgress: boolean
-  _plinko: Body
+  _plinkoReal: Body
+  _plinkoFake: Body
 
   /**
    * For margins between buckets
@@ -80,6 +81,7 @@ export default class Game {
     this._runner = Runner.run(this._engine)
     Render.run(this._render)
     Events.on(this._engine, 'collisionStart', this._handleCollision.bind(this));
+    Events.on(this._render, 'beforeRender', this._beforeRender.bind(this));
     Events.on(this._render, 'afterRender', this._afterRender.bind(this));
   }
 
@@ -101,8 +103,23 @@ export default class Game {
     const dx: number = coords[e.data.pins][e.data.bucket][Math.floor(Math.random() * coords[e.data.pins ][e.data.bucket].length)]
     const x = this._settings.size.width / 2 + dx
     this._plinkoInProgress = true
-    this._plinko = this._makePlinko(x, 0, e.data.id ?? 1)
-    World.add(this._engine.world, this._plinko)
+    this._plinkoReal = this._makeRealPlinko(x, 0, e.data.id ?? 1)
+    this._plinkoFake = this._makeFakePlinko(x, 0)
+    World.add(this._engine.world, [this._plinkoReal, this._plinkoFake])
+  }
+
+  /**
+   * Before render hook
+   */
+  _beforeRender(e: IEventTimestamped<Render>): void {
+    this._joinPlinksPositions()
+  }
+
+  /**
+   * After render hook
+   */
+  _afterRender(e: IEventTimestamped<Render>): void {
+    this._joinPlinksPositions()
   }
 
   _getCircleRadius(): number {
@@ -126,10 +143,23 @@ export default class Game {
     })
   }
 
-  _makePlinko(x: number, y: number, id: number): Body {
+  _makeRealPlinko(x: number, y: number, id: number): Body {
     const radius = this._getCircleRadius()
     return Bodies.circle(x, y, radius, {
       restitution: 0.8,
+      render: {
+        visible: false,
+        // fillStyle: `hsl(${Math.floor(360 * Math.random())}, 90%, 60%)`,
+      },
+      label: LabelHelper.createPlinkoLabel(id),
+    })
+  }
+
+  _makeFakePlinko(x: number, y: number): Body {
+    const radius = this._getCircleRadius()
+    return Bodies.circle(x, y, radius, {
+      isStatic: true,
+      isSensor: true,
       render: {
         sprite: {
           texture: '/img/Games/plinko/plinko/plinko.png',
@@ -137,7 +167,7 @@ export default class Game {
           yScale: radius * 2 / 44,
         },
       },
-      label: LabelHelper.createPlinkoLabel(id),
+      label: 'shadow',
     })
   }
 
@@ -254,7 +284,12 @@ export default class Game {
     }
   }
 
-  _afterRender(e: IEventTimestamped<Render>): void {
-    // after render
+  _joinPlinksPositions() {
+    if (this._plinkoReal && this._plinkoFake && (
+      this._plinkoReal.position.y != this._plinkoFake.position.y
+      || this._plinkoReal.position.x != this._plinkoFake.position.x
+    )) {
+      this._plinkoFake.position = this._plinkoReal.position
+    }
   }
 }
