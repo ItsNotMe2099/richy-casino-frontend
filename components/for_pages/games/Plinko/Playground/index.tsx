@@ -13,17 +13,19 @@ export default function Playground(props: Props) {
   const gameContext = useGameContext()
   const rootRef = useRef<HTMLDivElement>()
   const gameRef = useRef<Game>()
+  const createGame = () => {
+    gameRef.current = new Game({
+      element: rootRef.current,
+      size: { width: 800, height: 600 },
+      backgroundColor: 'rgb(39, 45, 57)',
+      pegsRows: props.pegsRows,
+    })
+    gameRef.current.start()
+  }
 
   useEffect(() => {
     if (rootRef.current && !gameRef.current) {
-      gameRef.current = new Game({
-        element: rootRef.current,
-        size: { width: 800, height: 600 },
-        backgroundColor: 'rgb(39, 45, 57)',
-        pegsRows: props.pegsRows,
-      })
-
-      gameRef.current.start()
+      createGame()
     }
   }, [rootRef.current])
 
@@ -32,12 +34,14 @@ export default function Playground(props: Props) {
       if(!e){
         return null
       }
+      gameRef.current?.clear()
+      createGame()
       gameRef.current.dropPlinkoByEvent(e)
     })
 
     return () => {
       subscriptionGame.unsubscribe()
-      gameRef.current?.stop()
+      gameRef.current?.clear()
     }
   }, [])
 

@@ -1,5 +1,3 @@
-
-
 import styles from './index.module.scss'
 import GamePageBoardLayout from 'components/for_pages/games/components/layout/GamePageBoardLayout'
 import {useGameContext} from 'components/for_pages/games/context/state'
