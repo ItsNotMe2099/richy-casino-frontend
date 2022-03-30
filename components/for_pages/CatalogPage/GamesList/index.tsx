@@ -14,7 +14,7 @@ interface IGame{
   lastWin?: string
   category?: string
   provider?: string
-  link: string
+  link?: string
 }
 
 interface Props {

@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import Link from 'next/link'
 import { useState } from 'react'
 import Button from 'components/ui/Button'
 import classNames from 'classnames'
@@ -7,7 +6,7 @@ import classNames from 'classnames'
 interface IItem {
   image: string
   label: string
-  link: string
+  link?: string
 }
 
 interface Props {
@@ -24,7 +23,6 @@ export default function ItemGame(props: Props) {
   }
 
   return (
-    <Link href={props.item.link}>
     <div className={classNames(styles.root, rootClass)} style={props.style !== 'catalog' ? {backgroundImage: `url(${props.item.image})`} : null}>
     <div className={styles.shade}>
     <Button
@@ -39,7 +37,7 @@ export default function ItemGame(props: Props) {
         </Button>
       <div className={styles.container}>
         <div className={styles.btns}>
-          <Button className={styles.btn} size='small' background='blueGradient500'>Играть</Button>
+          <Button className={styles.btn} href={props.item.link} size='small' background='blueGradient500'>Играть</Button>
           <Button className={styles.demo} size='small' background='blackTransparent'>Демо</Button>
         </div>
       </div>
@@ -49,6 +47,5 @@ export default function ItemGame(props: Props) {
         {props.item.label}
       </div>
     </div>
-  </Link>
   )
 }

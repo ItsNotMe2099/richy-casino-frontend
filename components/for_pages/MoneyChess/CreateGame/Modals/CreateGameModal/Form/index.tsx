@@ -6,7 +6,7 @@ import Validator from 'utils/validator'
 import {convertCurrencyToOptionsExchange} from 'utils/converter'
 import { useAppContext } from 'context/state'
 import { ExchangeCurrencySelectView } from 'components/ui/Inputs/ExchangeCurrencySelectView'
-import { CreateGameOptions } from 'components/ui/Inputs/CreateGameOptions'
+import { CreateGameOptions } from 'components/for_pages/MoneyChess/ui/Inputs/CreateGameOptions'
 
 
 interface Props {

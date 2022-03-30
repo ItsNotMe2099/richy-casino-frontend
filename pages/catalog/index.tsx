@@ -397,8 +397,8 @@ export default function CatalogPage() {
       </Row>
       <GamesListTop items={topGames}/>
       <VisibleXs><BuyCrypto/></VisibleXs>
-      <GamesList all items={richyGames}/>
-      <GamesList live items={richyGames}/>
+      <GamesList all items={liveCasino}/>
+      <GamesList live items={liveCasino}/>
       <GamesList richy items={richyGames}/>
       </Col>
       </Row>
