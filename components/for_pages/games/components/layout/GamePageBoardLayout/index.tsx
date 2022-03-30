@@ -28,7 +28,7 @@ export default function GamePageBoardLayout({children, className}: Props) {
         <GamePageBoardToolbar onStatClick={() => setStatOpened(!statOpened)}/>
         </>
       </HiddenXs>
-      {gameContext.showResultModal && <GameResultModal  onClose={handleCloseResultModal}/>}
+      <GameResultModal open={gameContext.showResultModal} onClose={handleCloseResultModal}/>
       {gameContext.error && <GameErrorModal  onClose={handleCloseResultModal}/>}
     </div>
   )

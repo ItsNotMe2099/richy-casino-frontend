@@ -15,7 +15,14 @@
     .overlay{
       background-color: rgba(0,0,0,0.5);
     }
+  }
 
+  &.fade{
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+    &.open{
+      opacity: 1;
+    }
   }
 }
 .overlay{

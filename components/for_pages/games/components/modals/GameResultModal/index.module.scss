@@ -4,6 +4,14 @@
 text-align: center;
   font-size: 22px;
   font-weight: 700;
+  &.win{
+
+  }
+  &.lose{
+    .profit{
+
+    }
+  }
 }
 .icon{
   margin-top: -25px;
