@@ -1,0 +1,82 @@
+@import "scss/index";
+
+
+.root{
+  position: absolute;
+  bottom: 78px;
+  right: 28px;
+  background: $dark900;
+  padding: 15px;
+  border-radius: 18px;
+  min-width: 282px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  @media screen and (max-width: $xs-max) {
+    position: absolute;
+    bottom: 50px;
+    right: 50%;
+    transform: translateX(50%);
+  }
+  &.opened{
+    opacity: 1;
+  }
+
+}
+.header{
+  color: white;
+    font-weight: 700;
+  font-size: 16px;
+}
+.close{
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  cursor: pointer;
+  &:hover{
+
+    rect{
+      fill: white;
+    }
+  }
+}
+.fields{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+  margin-top: 15px;
+}
+.field{
+  &.fieldAmount{
+    .value{
+      margin-top: 5px;
+    }
+  }
+  &.fieldCount{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+.label{
+  color: $dark300;
+  font-size: 15px;
+  font-weight: 500;
+}
+.betAmount{
+  color: white;
+  span{
+    color: #878789;
+  }
+}
+.profitAmount{
+  color: $pay500;
+  span{
+    color: #45712d;
+  }
+}
+.winCount{
+  color: $pay500;
+}
+.loseCount{
+  color: $lose500;
+}

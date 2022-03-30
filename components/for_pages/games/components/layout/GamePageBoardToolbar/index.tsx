@@ -7,7 +7,7 @@ import { useGameSound} from 'components/for_pages/games/context/game_sound'
 import usePressAndHover from 'components/for_pages/games/hooks/usePressAndHover'
 import GameSoundSvg from 'components/for_pages/games/components/svg/GameSoundSvg'
 interface Props{
-
+  onStatClick: () => void
 }
 export default function GamePageBoardToolbar(props: Props) {
   const gameSound = useGameSound()
@@ -18,9 +18,6 @@ export default function GamePageBoardToolbar(props: Props) {
   const handleInfoClick = () => {
 
   }
-  const handleStatClick = () => {
-
-  }
   const handlePfClick = () => {
 
   }
@@ -28,7 +25,7 @@ export default function GamePageBoardToolbar(props: Props) {
     <div className={styles.root}>
       <div className={styles.button} onClick={handleInfoClick}><GameInfoSvg/></div>
       <div className={styles.button} onClick={handleSoundClick} ref={soundBtnRef}>{soundBtnHover ?  (gameSound.disabled ? <GameSoundSvg/> : <GameSoundMutedSvg/>) : (gameSound.disabled ? <GameSoundMutedSvg/> : <GameSoundSvg/>)}</div>
-      <div className={styles.button} onClick={handleStatClick}><GameStatSvg/></div>
+      <div className={styles.button} onClick={props.onStatClick}><GameStatSvg/></div>
       <div className={styles.button} onClick={handlePfClick}><GameArrowSvg/></div>
     </div>
   )
