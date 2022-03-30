@@ -12,6 +12,7 @@ interface IItem {
 interface Props {
   item: IItem
   style?: 'catalog'
+  richy?: boolean
 }
 
 export default function ItemGame(props: Props) {
@@ -42,10 +43,11 @@ export default function ItemGame(props: Props) {
         </div>
       </div>
       </div>
-      {props.style === 'catalog' && <img src={props.item.image} alt=''/>} 
+      {props.style === 'catalog' && <img src={props.item.image} alt=''/>}
+      {props.richy &&
       <div className={styles.label}>
         {props.item.label}
-      </div>
+      </div>}
     </div>
   )
 }

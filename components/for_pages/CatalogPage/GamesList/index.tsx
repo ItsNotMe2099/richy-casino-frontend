@@ -75,14 +75,14 @@ export default function GamesList(props: Props) {
         <HiddenXs>
           <>
             {props.items && (isShow ? props.items : props.items.slice(0, 10)).map((item, index) =>
-              <ItemGame style='catalog' item={item} key={index}/>
+              <ItemGame richy={props.richy} style='catalog' item={item} key={index}/>
             )}
           </>
         </HiddenXs>
         <VisibleXs>
           <>
             {props.items && (isShow ? props.items : props.items.slice(0, 9)).map((item, index) =>
-              <ItemGame style='catalog' item={item} key={index}/>
+              <ItemGame richy={props.richy}  style='catalog' item={item} key={index}/>
             )}
           </>
         </VisibleXs>
