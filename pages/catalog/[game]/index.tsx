@@ -11,7 +11,7 @@ import GameDice from 'components/for_pages/games/Dice'
 import GameKeno from 'components/for_pages/games/Keno'
 import GameLimbo from 'components/for_pages/games/Limbo'
 import {GameWrapper} from 'components/for_pages/games/context/state'
-import {CasinoGameType} from 'components/for_pages/games/data/enums'
+import {CasinoGameType, GameCookiesType} from 'components/for_pages/games/data/enums'
 import GameTowers from 'components/for_pages/games/Towers'
 import GameStairs from 'components/for_pages/games/Stairs'
 import {AudioPlayerProvider} from 'react-use-audio-player'
@@ -24,6 +24,7 @@ import GamePlinko from 'components/for_pages/games/Plinko'
 import GameAuthRepository from 'components/for_pages/games/data/reposittories/GameAuthRepository'
 import {runtimeConfig} from 'config/runtimeConfig'
 import GameCoinFlip from 'components/for_pages/games/ConiFlip'
+import HiddenXs from 'components/ui/HiddenXS'
 interface Props{
   gameToken?: string
 }
@@ -62,7 +63,9 @@ export default function CatalogPage(props: Props) {
   return (<AudioPlayerProvider>
       <Layout>
         <Row className={styles.desktop}>
-          <Filter items={[]} mobile/>
+          <HiddenXs>
+            <Filter items={[]} mobile/>
+          </HiddenXs>
           <Col className={styles.content}>
             <GameSoundWrapper>
             <GameWrapper token={props.gameToken} gameType={query.game as CasinoGameType}>{renderGame()}</GameWrapper>
@@ -76,11 +79,10 @@ export default function CatalogPage(props: Props) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = nookies.get(context)
-  const cookieTokenName = 'gameToken'
-  let gameToken = cookies[cookieTokenName]
+  let gameToken = cookies[GameCookiesType.accessToken]
   if(!gameToken){
     const authRes = await GameAuthRepository.loginGuest(runtimeConfig.GAMES_API_SECRET, 'btc')
-    nookies.set(context, cookieTokenName, authRes.accessToken, {
+    nookies.set(context, GameCookiesType.accessToken, authRes.accessToken, {
       maxAge: 30 * 24 * 60 * 60,
       path: '/',
     })

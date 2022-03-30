@@ -15,6 +15,7 @@ import {CasinoGameType} from 'components/for_pages/games/data/enums'
 import {IGameUser} from 'components/for_pages/games/data/interfaces/IGameUser'
 import GameUserRepository from 'components/for_pages/games/data/reposittories/GameUserRepository'
 import {runtimeConfig} from 'config/runtimeConfig'
+import {ICasinoGameRound} from 'components/for_pages/games/data/interfaces/ICasinoGameRound'
 
 interface IState {
   auth: boolean
@@ -22,6 +23,7 @@ interface IState {
   game?: ICasinoGame | null
   gameState$: Subject<ICasinoGameFinishEvent>
   turnState$: Subject<ICasinoGameTurn>
+  historyState$: Subject<ICasinoGameRound>
   newTurn: (data: any, shouldClear?: boolean) => void
   startGame: (data: ICasinoGameDataDto, shouldClear?: boolean) => void
   finish: () => void
@@ -41,12 +43,14 @@ interface IState {
 
 const gameState$ = new Subject<ICasinoGameFinishEvent>()
 const turnState$ = new Subject<ICasinoGameTurn>()
+const historyState$ = new Subject<ICasinoGameRound>()
 
 const defaultValue: IState = {
   auth: false,
   user: null,
   gameState$: gameState$,
   turnState$: turnState$,
+  historyState$: historyState$,
   roundId: null,
   turn: null,
   result: null,
@@ -154,12 +158,16 @@ export function GameWrapper(props: Props) {
         setUser((user) => ({...(user as IGameUser), balance}))
       }
     }
+    const onGameHistory = (data: ICasinoGameRound) => {
+      historyState$.next(data)
+    }
     socket.on('connect', onConnect)
     socket.on('reconnect', onConnect)
     socket.on('disconnect', onDisConnect)
     socket.on('game:finish', onGameFinish)
     socket.on('game:turn', onGameTurn)
     socket.on('game:error', onGameError)
+    socket.on('game:history', onGameHistory)
     socket.on('user:balance', onUserBalance)
     return () => {
       socket.off('connect', onConnect)

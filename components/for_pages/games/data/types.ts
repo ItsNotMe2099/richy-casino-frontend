@@ -16,6 +16,3 @@ export enum CasinoGameType {
   VideoPoker = 'videoPoker',
   Wheel = 'wheel',
 }
-export enum GameCookiesType {
-  accessToken = 'gameToken',
-}
