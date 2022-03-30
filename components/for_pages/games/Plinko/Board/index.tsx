@@ -1,3 +1,5 @@
+
+
 import styles from './index.module.scss'
 import GamePageBoardLayout from 'components/for_pages/games/components/layout/GamePageBoardLayout'
 import {useGameContext} from 'components/for_pages/games/context/state'
@@ -154,8 +156,6 @@ export default function Board(props: Props) {
   const dataRef = useRef({p: {}, m: {}, f: {}})
 
   useEffect(() => {
-
-    Composite.clear(engine.current.world)
     const render = Render.create({
       element: scene.current,
       engine: engine.current,
@@ -163,7 +163,6 @@ export default function Board(props: Props) {
         wireframes: !1, background: 'rgb(39, 45, 57)', pixelRatio: 3
       }
     })
-    Render.setPixelRatio(render, 'auto')
     const g = []
     const a = pinsCount + 2
     const o = 800 / a / 2
@@ -209,10 +208,6 @@ export default function Board(props: Props) {
       return Array(a + 3).fill(undefined).map((t, e) => ((t, e) => Bodies.circle(t, e, i, {
         isStatic: !0,
         render: {
-         shadowOffsetX: 0,
-        shadowOffsetY: 2.3,
-         shadowBlur: 6,
-         shadowColor: 'red',
           sprite: {
             texture: '/img/Games/plinko/ball.svg',
             xScale: 1,
@@ -281,10 +276,8 @@ export default function Board(props: Props) {
     return () => {
       // destroy Matter
       Render.stop(render)
-      Composite.clear(engine.current.world)
       Engine.clear(engine.current)
       Events.off(render, 'afterRender', afterRender)
-     Runner.stop(engine.current)
       render.canvas.remove()
       render.canvas = null
       render.context = null
