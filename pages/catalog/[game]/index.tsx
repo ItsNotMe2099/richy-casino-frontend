@@ -11,7 +11,7 @@ import GameDice from 'components/for_pages/games/Dice'
 import GameKeno from 'components/for_pages/games/Keno'
 import GameLimbo from 'components/for_pages/games/Limbo'
 import {GameWrapper} from 'components/for_pages/games/context/state'
-import {CasinoGameType, GameCookiesType} from 'components/for_pages/games/data/enums'
+import {CasinoGameType} from 'components/for_pages/games/data/enums'
 import GameTowers from 'components/for_pages/games/Towers'
 import GameStairs from 'components/for_pages/games/Stairs'
 import {AudioPlayerProvider} from 'react-use-audio-player'
@@ -25,6 +25,7 @@ import GameAuthRepository from 'components/for_pages/games/data/reposittories/Ga
 import {runtimeConfig} from 'config/runtimeConfig'
 import GameCoinFlip from 'components/for_pages/games/ConiFlip'
 import HiddenXs from 'components/ui/HiddenXS'
+import {GameCookiesType} from 'components/for_pages/games/data/types'
 interface Props{
   gameToken?: string
 }

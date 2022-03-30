@@ -1,7 +1,7 @@
 import fetch from 'cross-fetch'
 import Cookies from 'js-cookie'
 import {runtimeConfig} from 'config/runtimeConfig'
-import {GameCookiesType} from 'components/for_pages/games/data/enums'
+import {GameCookiesType} from 'components/for_pages/games/data/types'
 
 interface Options {
   url: string
