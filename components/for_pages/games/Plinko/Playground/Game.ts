@@ -10,10 +10,11 @@ import {
   Events,
   IEventCollision,
   IEventTimestamped,
+  IChamferableBodyDefinition,
 } from 'matter-js'
 import { ICasinoGameFinishEvent } from 'components/for_pages/games/data/interfaces/ICasinoGame'
 import decomp from 'poly-decomp'
-import { coords } from './constants'
+import { COORDS, PLINKO_SIZE_FACTOR } from './constants'
 import LabelHelper from './LabelHelper'
 
 interface ISize {
@@ -39,6 +40,7 @@ export default class Game {
   _render: Render
   _pegsGrid: Body[]
   _bucketsRow: Body[]
+  _outlines: Body[]
   _runner: Runner
   _plinkoInProgress: boolean
   _plinkoReal: Body
@@ -70,13 +72,14 @@ export default class Game {
     Common.setDecomp(decomp)
     this._pegsGrid = this._makePegsGrid()
     this._bucketsRow = this._makeBucketsRow()
+    this._outlines = this._makeOutlines()
   }
 
   /**
    * Start the game
    */
   start() {
-    World.add(this._engine.world, [...this._pegsGrid, ...this._bucketsRow])
+    World.add(this._engine.world, [...this._pegsGrid, ...this._bucketsRow, ...this._outlines])
 
     this._runner = Runner.run(this._engine)
     Render.run(this._render)
@@ -100,7 +103,7 @@ export default class Game {
    * Drop a plinko
    */
   dropPlinkoByEvent(e: ICasinoGameFinishEvent) {
-    const dx: number = coords[e.data.pins][e.data.bucket][Math.floor(Math.random() * coords[e.data.pins ][e.data.bucket].length)]
+    const dx: number = COORDS[e.data.pins][e.data.bucket][Math.floor(Math.random() * COORDS[e.data.pins ][e.data.bucket].length)]
     const x = this._settings.size.width / 2 + dx
     this._plinkoInProgress = true
     this._plinkoReal = this._makeRealPlinko(x, 0, e.data.id ?? 1)
@@ -122,14 +125,14 @@ export default class Game {
     this._joinPlinksPositions()
   }
 
-  _getCircleRadius(): number {
+  _getPegRadius(): number {
     return (this._settings.pegsRows - 3)
       / ((this._settings.pegsRows - 7) / 2)
       * (this._settings.size.width / this._settings.size.height)
   }
 
   _makePeg(x: number, y: number, id: number): Body {
-    const radius = this._getCircleRadius()
+    const radius = this._getPegRadius()
     return Bodies.circle(x, y, radius, {
       isStatic: true,
       render: {
@@ -144,7 +147,7 @@ export default class Game {
   }
 
   _makeRealPlinko(x: number, y: number, id: number): Body {
-    const radius = this._getCircleRadius()
+    const radius = this._getPegRadius() * PLINKO_SIZE_FACTOR
     return Bodies.circle(x, y, radius, {
       restitution: 0.8,
       render: {
@@ -156,7 +159,7 @@ export default class Game {
   }
 
   _makeFakePlinko(x: number, y: number): Body {
-    const radius = this._getCircleRadius()
+    const radius = this._getPegRadius() * PLINKO_SIZE_FACTOR
     return Bodies.circle(x, y, radius, {
       isStatic: true,
       isSensor: true,
@@ -224,6 +227,33 @@ export default class Game {
     })
   }
 
+  _makeOutlines(): Body[] {
+    const onePegWidth = this._settings.size.width / this._settings.pegsColumns
+    const pegRadius = this._getPegRadius()
+    const options: IChamferableBodyDefinition = {
+      isStatic: true,
+      render: {
+        visible: false,
+        // fillStyle: '#ffffff',
+      }
+    }
+    const leftSide = Bodies.rectangle(
+      onePegWidth - pegRadius,
+      this._settings.size.height / 2,
+      1,
+      this._settings.size.height,
+      options
+    )
+    const rightSide = Bodies.rectangle(
+      this._settings.size.width - onePegWidth + pegRadius,
+      this._settings.size.height / 2,
+      1,
+      this._settings.size.height,
+      options
+    )
+    return [leftSide, rightSide]
+  }
+
   _getBucketSize(): ISize {
     const onePegWidth = this._settings.size.width / this._settings.pegsColumns
     const widthRow = this._settings.size.width - onePegWidth
@@ -278,6 +308,7 @@ export default class Game {
       this._bucketsRow.forEach((body) => {
         if (body.label === LabelHelper.createRealBucketLabel(bucketId) || body.label === LabelHelper.createFakeBucketLabel(bucketId)) {
           Body.translate(body, {x: 0, y: 10})
+          this._plinkoReal.restitution = 0;
         }
       })
       this._plinkoInProgress = false

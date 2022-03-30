@@ -1,4 +1,4 @@
-export const coords = {
+export const COORDS = {
   8: {
     1: [5, -66],
     2: [-44, -24],
@@ -125,7 +125,9 @@ export const coords = {
   }
 } as const
 
-export const colors = [
+export const PLINKO_SIZE_FACTOR = 1.2
+
+export const COLORS = [
   '#FFBF57',
   '#FF9648',
   '#FF6A41',
