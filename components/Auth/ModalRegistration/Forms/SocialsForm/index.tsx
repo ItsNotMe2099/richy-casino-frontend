@@ -9,7 +9,7 @@ import Button from 'components/ui/Button'
 import {ModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
 import SocialButtons from 'components/Auth/SocialButtons'
-import {convertCurrencyToOptions} from 'utils/converter'
+import {convertCurrencyToOptions, currentItem} from 'utils/converter'
 import { RegCurrencySelectField } from 'components/ui/Inputs/RegCurrencySelectField'
 
 interface Props {
@@ -35,11 +35,17 @@ export default function SocialsForm(props: Props) {
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      {({
+        values,
+        setFieldValue
+      }) => (
         <Form className={styles.form}>
           <SocialButtons/>
 
           <div className={styles.inputs}>
-             <RegCurrencySelectField name='currency' options={convertCurrencyToOptions(context.currencies)} initial={convertCurrencyToOptions(context.currencies)[0].label}/>
+          <div className={styles.select}>
+        <RegCurrencySelectField name='currency' options={convertCurrencyToOptions(context.currencies)} currentItem={currentItem(values, convertCurrencyToOptions(context.currencies))}/>
+        </div>
             <div className={styles.promo} onClick={() => promoCode ? setPromoCode(false) : setPromoCode(true)}>
               <div className={classNames(styles.plus, {[styles.expanded]: promoCode})}>{promoCode ? '-' : '+'}</div>
                <span>У меня есть промокод</span>
@@ -53,7 +59,7 @@ export default function SocialsForm(props: Props) {
           <div className={styles.login}>
             Уже есть аккаунт? <span onClick={() => context.showModal(ModalType.login)}>Войдите</span>
           </div>
-        </Form>
+        </Form>)}
       </Formik>
   )
 }

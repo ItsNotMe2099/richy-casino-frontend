@@ -1,11 +1,11 @@
 import Button from 'components/ui/Button'
 import InputField from 'components/ui/Inputs/InputField'
-import { Form, Formik } from 'formik'
+import { Form,  FormikProvider, useFormik } from 'formik'
 import styles from './index.module.scss'
 import Validator from 'utils/validator'
 import {convertUserBalanceCurrencyToOptions} from 'utils/converter'
 import { useEffect, useState } from 'react'
-import { UserBalanceSelect } from 'components/ui/Inputs/UserBalanceSelect'
+import { UserBalanceSelectField } from 'components/ui/Inputs/UserBalanceSelectField'
 import { IUserBalanceCurrency } from 'data/interfaces/IUser'
 
 
@@ -28,17 +28,18 @@ export default function WithdrawForm(props: Props) {
     }
   }
 
-  const [balance, setBalance] = useState([])
-
-  const array = []
-
-  useEffect(() => {
-    Object.entries(currencies.totals).forEach(([key, value]) => {
+  const currenciesToArray = (object) => {
+    const array = []
+    Object.entries(object.totals).forEach(([key, value]) => {
       array.push({currency: key, value: value})
     })
-    setBalance(array)
-   }, []
-  )
+    return array
+  }
+
+  const [balance, setBalance] = useState(currenciesToArray(currencies))
+  const [currentItem, setCurrentItem] = useState(balance)
+  
+  console.log(balance)
 
   const initialValues = {
     amount: '',
@@ -46,9 +47,21 @@ export default function WithdrawForm(props: Props) {
     accountCurrency: convertUserBalanceCurrencyToOptions(balance as IUserBalanceCurrency[])[0]?.value
   }
 
+  const formik = useFormik({
+    initialValues,
+    onSubmit: handleSubmit,
+    enableReinitialize: true
+  })
+
+  const {values, setFieldValue, handleChange,} = formik
+
+  useEffect(() => {
+    const array = convertUserBalanceCurrencyToOptions(balance as IUserBalanceCurrency[]).filter(item => item.value === values.accountCurrency)
+    setCurrentItem(array)
+  }, [values.accountCurrency])
+
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit} enableReinitialize>
-      {({setFieldValue, values}) => (
+    <FormikProvider value={formik}>
       <Form className={styles.form}>
         {props.step === 1 &&
         <div className={styles.send}>
@@ -57,8 +70,8 @@ export default function WithdrawForm(props: Props) {
               Основной счёт
             </div>
           </div>
-          <UserBalanceSelect name='accountCurrency' options={convertUserBalanceCurrencyToOptions(balance as IUserBalanceCurrency[])}
-            initial={convertUserBalanceCurrencyToOptions(balance as IUserBalanceCurrency[])[0]?.label}
+          <UserBalanceSelectField name='accountCurrency' options={convertUserBalanceCurrencyToOptions(balance as IUserBalanceCurrency[])}
+            currentItem={currentItem[0]}
           />
         </div>}
         {props.step === 3 &&
@@ -86,7 +99,6 @@ export default function WithdrawForm(props: Props) {
         </>
         }
       </Form>
-      )}
-    </Formik>
+    </FormikProvider>
   )
 }

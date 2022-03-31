@@ -41,7 +41,7 @@ export const ProfileSettingsSelectField = (props: Props) => {
   return (
   <div className={styles.root}>
     <div className={styles.label}>{props.inputLabel}</div>
-    <SelectField options={props.options}  name={props.name} initialStyle={styles.initial} className={styles.select}
+    <SelectField options={props.options}  name={props.name} currentItemStyle={styles.current} className={styles.select}
       itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
       activeComponent={(isActive) => <Placeholder currentItem={props.currentItem} isActive={isActive}/>}
     />

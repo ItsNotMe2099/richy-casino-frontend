@@ -1,7 +1,7 @@
 import Button from 'components/ui/Button'
 import { CheckBox } from 'components/ui/Inputs/CheckBox'
 import InputField from 'components/ui/Inputs/InputField'
-import { Form, Formik } from 'formik'
+import { Form, FormikProvider, useFormik } from 'formik'
 import { useEffect, useState } from 'react'
 import Validator from 'utils/validator'
 import styles from './index.module.scss'
@@ -10,8 +10,9 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import InfoRepository from 'data/repositories/InfoRepository'
 import { ProfileSettingsSelectField } from 'components/ui/Inputs/ProfileSettingsSelectField'
-import { convertCurrencyToOptions, currentItem } from 'utils/converter'
+import { convertCurrencyToOptions} from 'utils/converter'
 import { useAppContext } from 'context/state'
+import { IOption } from 'types/interfaces'
 
 interface IUser {
   id: string
@@ -19,7 +20,7 @@ interface IUser {
   name: string
   dateOfBirth: string
   country: string
-  currency: string
+  currency: IOption<string>[]
   phone: string
   email: string
   password: string
@@ -41,7 +42,7 @@ export default function Settings(props: Props) {
     name: props.user.name,
     dateOfBirth: props.user.dateOfBirth,
     country: props.user.country,
-    currency: props.user.currency,
+    currency: props.user.currency[0].value,
     phone: props.user.phone,
     email: props.user.email,
     password: isChange ? '' : props.user.password,
@@ -56,36 +57,43 @@ export default function Settings(props: Props) {
 
   }
 
+  const formik = useFormik({
+    initialValues,
+    onSubmit: handleSubmit,
+    enableReinitialize: true
+  })
+
+  const {values, setFieldValue, handleChange,} = formik
+
   const [countries, setCountries] = useState([])
-  const [currencies, setCurrencies] = useState([])
+  const currencies = convertCurrencyToOptions(context.currencies)
+
+  const [currentCurrency, setCurrentCurrency] = useState(currencies.filter(item => item.value === values.currency))
 
   useEffect(() => {
     const getCountries = async () => {
       const res = await InfoRepository.getCountries()
       setCountries(res)
     }
-    const getCurrencies = async () => {
-      const res = await InfoRepository.getCurrencies()
-    setCurrencies(res)
-  }
-    getCurrencies()
     getCountries()
-  }, [])
+    const array = currencies.filter(item => item.value === values.currency)
+    setCurrentCurrency(array)
+  }, [values.currency])
 
   const allValues = {
     password: props.user.password
   }
 
   return (
-    <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
-      {({values, setFieldValue}) => (
+    <FormikProvider value={formik}>
       <Form className={styles.form}>
         <InputField name={'id'} disabled={true} className={styles.input} label='ID'/>
         <InputField name={'userName'} className={styles.input} label='Username'/>
         <InputField name={'name'} className={styles.input} label='ФИО'/>
         <InputField name={'dateOfBirth'} className={styles.input} label='Дата рождения'/>
-        <ProfileSettingsSelectField name='country' options={countries} currentItem={currentItem(values, countries)} inputLabel='Страна'/>
-        <ProfileSettingsSelectField name='currency' options={convertCurrencyToOptions(currencies)} currentItem={currentItem(values, convertCurrencyToOptions(currencies))} inputLabel='Основная валюта'/>
+        {/*<ProfileSettingsSelectField name='country' options={countries} currentItem={currentItem(values, countries)} inputLabel='Страна'/>*/}
+        <ProfileSettingsSelectField name='currency' 
+        options={currencies} currentItem={currentCurrency[0]} inputLabel='Основная валюта'/>
         <InputField name={'phone'} disabled={true} className={styles.input} label='Номер телефона'/>
         <InputField name={'email'} disabled={true} className={styles.input} label='Почта'/>
         <div className={classNames(styles.change, {[styles.justify]: isChange})}>
@@ -162,7 +170,7 @@ export default function Settings(props: Props) {
         <Button className={styles.save} size='large' background='blueGradient500' type='submit' onClick={handleSubmit}>
           Сохранить
         </Button>
-      </Form>)}
-    </Formik>
+      </Form>
+    </FormikProvider>
   )
 }

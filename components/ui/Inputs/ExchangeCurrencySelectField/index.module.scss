@@ -15,9 +15,15 @@
   }
 }
 
-.initial{
+.current{
   font-weight: 400;
   font-size: 14px;
+  border: 0;
+  font-weight: 700;
+  font-size: 16px;
+  background: #272832;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
 }
 
 .symbol{
@@ -30,4 +36,19 @@
   height: 24px;
   width: 1px;
   margin-right: 13px;
+}
+
+.reverse{
+  transform: rotate(90deg);
+}
+
+.placeholder{
+  display: flex;
+  align-items: center;
+}
+
+.group{
+  display: flex;
+  align-items: center;
+  flex: 1;
 }

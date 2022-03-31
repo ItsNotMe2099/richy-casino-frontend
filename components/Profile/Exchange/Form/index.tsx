@@ -3,10 +3,10 @@ import InputField from 'components/ui/Inputs/InputField'
 import { Form, FormikProvider, useFormik } from 'formik'
 import styles from './index.module.scss'
 import Validator from 'utils/validator'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {convertCurrencyToOptionsExchange} from 'utils/converter'
 import { useAppContext } from 'context/state'
-import { ExchangeCurrencySelectView } from 'components/ui/Inputs/ExchangeCurrencySelectView'
+import { ExchangeCurrencySelectField } from 'components/ui/Inputs/ExchangeCurrencySelectField'
 
 interface IUser{
   id: string
@@ -24,9 +24,9 @@ export default function ExchangeForm(props: Props) {
   const context = useAppContext()
 
   const initialValues = {
-    currencySent: convertCurrencyToOptionsExchange(context.currencies)[0].label,
+    currencySent: convertCurrencyToOptionsExchange(context.currencies)[0].value,
     amountSent: 0,
-    currencyGet: convertCurrencyToOptionsExchange(context.currencies)[1].label,
+    currencyGet: convertCurrencyToOptionsExchange(context.currencies)[1].value,
     amountGet: 0
   }
 
@@ -35,21 +35,27 @@ export default function ExchangeForm(props: Props) {
     props.onSubmit()
   }
 
-  const array = [
-    { iso: 'btc', name: 'BTC', rate: 0, symbol: ''},
-    { iso: 'eht', name: 'EHT', rate: 0, symbol: ''}
-  ]
-
   const formik = useFormik({
     initialValues,
     onSubmit: handleSubmit,
+    enableReinitialize: true
   })
 
-  const {values, setFieldValue, handleChange} = formik
+  const {values, setFieldValue, handleChange,} = formik
+
+  const currencies = convertCurrencyToOptionsExchange(context.currencies)
+
+  const [currentSent, setCurrentSent] = useState(currencies.filter(item => item.value === values.currencySent))
+  const [currentGet, setCurrentGet] = useState(currencies.filter(item => item.value === values.currencyGet))
 
   useEffect(() => {
     setFieldValue('amountGet', (values.amountSent*2))
-  }, [values.amountSent])
+    const array1 = currencies.filter(item => item.value === values.currencySent)
+    const array2 = currencies.filter(item => item.value === values.currencyGet)
+    setCurrentSent(array1)
+    setCurrentGet(array2)
+  }, [values.amountSent, values.currencySent, values.currencyGet])
+  
 
   return (
     <FormikProvider value={formik}>
@@ -65,7 +71,8 @@ export default function ExchangeForm(props: Props) {
           </div>
           <div className={styles.inputs}>
             <InputField name={'amountSent'} className={styles.input} validate={Validator.required}/>
-            <ExchangeCurrencySelectView name='currencySent' options={convertCurrencyToOptionsExchange(context.currencies)} initial={initialValues.currencySent}/>
+            <div className={styles.exchange}><ExchangeCurrencySelectField name='currencySent' options={currencies}
+            currentItem={currentSent[0]}/></div>
           </div>
         </div>
         <div className={styles.equality}>
@@ -80,7 +87,9 @@ export default function ExchangeForm(props: Props) {
           </div>
           <div className={styles.inputs}>
             <InputField name={'amountGet'} className={styles.input} validate={Validator.required} disabled/>
-            <ExchangeCurrencySelectView name='currencyGet' options={convertCurrencyToOptionsExchange(context.currencies)} initial={initialValues.currencyGet}/>
+            <div className={styles.exchange}><ExchangeCurrencySelectField 
+            name='currencyGet' options={convertCurrencyToOptionsExchange(context.currencies)} currentItem={currentGet[0]}/>
+            </div>
           </div>
         </div>
         <Button type='submit' size='play' fluid background='blueGradient500' className={styles.btn}>Обменять</Button>

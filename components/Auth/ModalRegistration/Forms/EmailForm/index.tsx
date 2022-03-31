@@ -65,7 +65,9 @@ export default function EmailForm(props: Props) {
       }) => (
       <Form className={styles.form}>
         <div className={styles.inputs}>
-          <RegCurrencySelectField name='currency' options={convertCurrencyToOptions(context.currencies)} currentItem={currentItem(values, convertCurrencyToOptions(context.currencies))}/>
+        <div className={styles.select}>
+        <RegCurrencySelectField name='currency' options={convertCurrencyToOptions(context.currencies)} currentItem={currentItem(values, convertCurrencyToOptions(context.currencies))}/>
+        </div>
           <InputField name={'email'} placeholder={'Электронный адрес'}
                       validate={Validator.combine([Validator.required, Validator.email])}/>
           <InputField name={'password'} type={'password'} obscure={true} placeholder={'Придумайте пароль'}

@@ -5,7 +5,7 @@ import styles from './index.module.scss'
 import Validator from 'utils/validator'
 import {convertCurrencyToOptionsExchange} from 'utils/converter'
 import { useAppContext } from 'context/state'
-import { ExchangeCurrencySelectView } from 'components/ui/Inputs/ExchangeCurrencySelectView'
+import { ExchangeCurrencySelectField } from 'components/ui/Inputs/ExchangeCurrencySelectField'
 import { CreateGameOptions } from 'components/for_pages/MoneyChess/ui/Inputs/CreateGameOptions'
 
 
@@ -60,7 +60,7 @@ export default function CreateGameForm(props: Props) {
           </div>
           <div className={styles.inputs}>
             <InputField name={'amount'} className={styles.input} validate={Validator.required}/>
-            <ExchangeCurrencySelectView className={styles.exchange} name='currency' options={convertCurrencyToOptionsExchange(context.currencies)} initial={initialValues.currency}/>
+            <ExchangeCurrencySelectField className={styles.exchange} name='currency' options={convertCurrencyToOptionsExchange(context.currencies)} initial={initialValues.currency}/>
           </div>
           <div className={styles.settings}>
             <div className={styles.option}>

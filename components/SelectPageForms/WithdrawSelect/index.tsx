@@ -1,4 +1,4 @@
-import { UserBalanceSelect } from 'components/ui/Inputs/UserBalanceSelect'
+import { UserBalanceSelectField } from 'components/ui/Inputs/UserBalanceSelectField'
 import { Form, Formik } from 'formik'
 import styles from 'pages/selectPage/index.module.scss'
 
@@ -24,8 +24,8 @@ export default function WithdrawSelect() {
         <div className={styles.text}>
           Withdraw
         </div>
-        <UserBalanceSelect name='currency' options={currencies}
-            initial={currencies[0].label}
+        <UserBalanceSelectField name='currency' options={currencies}
+          currentItem={currencies[0]}
         />
       </div>
     </Form>

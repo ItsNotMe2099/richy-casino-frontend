@@ -52,7 +52,9 @@ export default function PhoneForm(props: Props) {
       }) => (
     <Form className={styles.form}>
       <div className={styles.inputs}>
+        <div className={styles.select}>
         <RegCurrencySelectField name='currency' options={convertCurrencyToOptions(context.currencies)} currentItem={currentItem(values, convertCurrencyToOptions(context.currencies))}/>
+        </div>
         <InputField format={'phone'} name={'phone'} placeholder={'Номер телефона'} validate={Validator.required} />
         <div className={styles.promo} onClick={() => promoCode ? setPromoCode(false) : setPromoCode(true)}>
           <div className={classNames(styles.plus, {[styles.expanded]: promoCode})}>{promoCode ? '-' : '+'}</div>

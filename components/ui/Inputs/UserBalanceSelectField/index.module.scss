@@ -38,6 +38,9 @@
   span{
     color: #89898e;
   }
+  img{
+    margin-left: 7px;
+  }
 }
 
 .value{
@@ -51,9 +54,11 @@
   text-align: right;
 }
 
-.initial{
+.current{
   font-weight: 600;
   font-size: 16px;
+  background: #2D2E38;
+  display: flex;
 }
 
 .label{
@@ -82,4 +87,17 @@
 .group{
   display: flex;
   align-items: center;
+}
+
+.placeholder{
+  display: flex;
+  font-weight: 600;
+  font-size: 16px;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.reverse{
+  transform: rotate(90deg);
 }
