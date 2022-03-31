@@ -26,7 +26,6 @@ export default function GameHistory(props: Props) {
   const [data, setData] = useState<ICasinoGameRound[]>([])
   useEffect(() => {
     const subscription = gameContext.historyState$.subscribe((round) => {
-      console.log('newRound', round)
       if(filter === IGameHistoryFilterType.All || (filter === IGameHistoryFilterType.My && round.user?.id && round.user?.id  ===  gameContext.user?.id)){
 
         const newVal = [...data]

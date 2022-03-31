@@ -17,7 +17,6 @@ export default function GamePageBoardStat(props: Props) {
   useEffect(() => {
     const subscription = gameContext.gameState$.subscribe((data: ICasinoGameFinishEvent) => {
         if(props.open){
-          console.log('FinishEvent')
           //TODO check is demo
           CasinoGameRoundRepository.getUserStat().then(i => setStat(i))
         }
@@ -25,7 +24,7 @@ export default function GamePageBoardStat(props: Props) {
     return () => {
       subscription.unsubscribe()
     }
-  }, [])
+  }, [props.open])
   useEffect(() => {
     CasinoGameRoundRepository.getUserStat().then(i => setStat(i))
   }, [props.open])
