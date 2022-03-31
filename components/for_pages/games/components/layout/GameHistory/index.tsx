@@ -85,7 +85,7 @@ export default function GameHistory(props: Props) {
             <Cell className={styles.user}>{item.user?.login}</Cell>
             <Cell>{item.id}</Cell>
             <Cell className={cx(styles.cof, {[styles.red]: item.status === ICasinoGameRoundStatus.Lose, [styles.green]: item.status === ICasinoGameRoundStatus.Win})}><div className={styles.cofBlock}>{item.multiplier}<span className={styles.x}>x</span></div></Cell>
-            <Cell className={cx(styles.win, {[styles.red]: item.multiplier <= 0, [styles.green]: item.multiplier > 0})}>{item.status === ICasinoGameRoundStatus.Win ? item.profit ? `+ ${item.profit} ${item.currency}` : '' : item.wager ? `- ${item.wager} ${item.currency}` : ''}</Cell>
+            <Cell className={cx(styles.win, {[styles.red]: item.status === ICasinoGameRoundStatus.Lose, [styles.green]: item.status === ICasinoGameRoundStatus.Win})}>{item.status === ICasinoGameRoundStatus.Win ? item.profit ? `+ ${item.profit} ${item.currency}` : '' : item.wager ? `- ${item.wager} ${item.currency}` : ''}</Cell>
           </div>
         )}
       </div>
