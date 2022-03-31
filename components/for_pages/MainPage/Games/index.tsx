@@ -105,7 +105,7 @@ export default function Games(props: Props) {
       <HiddenXs>
         <Slider {...settings} ref={slider1 => (slider = slider1)}>
           {richyGames.map((item, index) =>
-            <ItemGame item={item} key={index}/>
+            <ItemGame richy item={item} key={index}/>
           )}
         </Slider>
       </HiddenXs>
