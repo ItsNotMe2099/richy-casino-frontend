@@ -18,9 +18,11 @@
   }
 
   &.fade{
+    visibility: hidden;
     opacity: 0;
     transition: opacity .5s ease-in-out;
     &.open{
+      visibility: hidden;
       opacity: 1;
     }
   }

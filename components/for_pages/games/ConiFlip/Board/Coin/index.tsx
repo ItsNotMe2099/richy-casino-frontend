@@ -12,7 +12,6 @@ interface Props{
 export default function Coin({type, hasResult, showLabel}: Props) {
   const [trigger, setTrigger] = useState(false)
   useEffect(() => {
-    console.log('hasResult', hasResult)
     if(hasResult){
       setTrigger(true)
     }else{
@@ -20,7 +19,6 @@ export default function Coin({type, hasResult, showLabel}: Props) {
     }
   }, [hasResult, type])
   useEffect(() => {
-    console.log('hasResult2', hasResult)
     if(hasResult){
       setTrigger(true)
     }
