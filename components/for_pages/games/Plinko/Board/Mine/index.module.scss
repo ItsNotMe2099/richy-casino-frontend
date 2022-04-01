@@ -17,10 +17,10 @@
   background-repeat: no-repeat;
   background-size: cover;
   &.disabled{
-    background-image: url('/img/Games/mines/mine_disabled.png')
+    background-image: url('/img/Games/mines/mine_disabled@3x.png')
   }
   &.mine{
-    background-image: url('/img/Games/mines/mine_mine.png')
+    background-image: url('/img/Games/mines/mine_mine@3x.png')
   }
   &.bonus{
     background-image: url('/img/Games/mines/mine_bonus.svg')

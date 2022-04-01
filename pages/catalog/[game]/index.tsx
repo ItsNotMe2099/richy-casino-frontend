@@ -26,6 +26,7 @@ import {runtimeConfig} from 'config/runtimeConfig'
 import GameCoinFlip from 'components/for_pages/games/ConiFlip'
 import HiddenXs from 'components/ui/HiddenXS'
 import {GameCookiesType} from 'components/for_pages/games/data/types'
+import GameBlackJack from 'components/for_pages/games/BlackJack'
 interface Props{
   gameToken?: string
 }
@@ -57,6 +58,8 @@ export default function CatalogPage(props: Props) {
         return <GamePlinko/>
       case CasinoGameType.Coinflip:
         return <GameCoinFlip/>
+      case CasinoGameType.Blackjack:
+        return <GameBlackJack/>
       default:
         return <GameMines/>
     }

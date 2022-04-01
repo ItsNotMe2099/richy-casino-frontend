@@ -1,0 +1,54 @@
+@import "scss/index";
+.layout{
+  background: #17754F;
+  min-height: 640px;
+}
+.bg{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 0;
+  .top{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 45%;
+    background-image: url('/img/Games/blackjack/bg.svg');
+    background-repeat: repeat-x;
+  }
+  .bottom{
+    position: absolute;
+bottom: 0;
+    left: 0px;
+    right: 0px;
+    height: 45%;
+    background-image: url('/img/Games/blackjack/bg.svg');
+    background-repeat: repeat-x;
+  }
+  .bottom{
+
+  }
+}
+.board{
+  position: relative;
+  padding-bottom: 68px;
+  padding-top: 35px;
+
+  @media only screen and (max-width: 985px) {
+    padding-bottom: 24px;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+}
+.tip{
+  font-weight: 500;
+  color: $dark200;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 16px;
+  text-transform: uppercase;
+}

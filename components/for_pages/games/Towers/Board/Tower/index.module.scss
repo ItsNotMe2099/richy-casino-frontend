@@ -19,16 +19,16 @@
   background-repeat: no-repeat;
   background-size: cover;
   &.disabled{
-    background-image: url('/img/Games/towers/stub.png')
+    background-image: url('/img/Games/towers/stub@3x.png')
   }
   &.active{
-    background-image: url('/img/Games/towers/stub_active.png')
+    background-image: url('/img/Games/towers/stub_active@3x.png')
   }
   &.mine{
-    background-image: url('/img/Games/towers/mine.png')
+    background-image: url('/img/Games/towers/mine@3x.png')
   }
   &.bonus{
-    background-image: url('/img/Games/towers/bonus.png')
+    background-image: url('/img/Games/towers/bonus@3x.png')
   }
 
 }

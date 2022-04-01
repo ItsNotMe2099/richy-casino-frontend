@@ -216,7 +216,7 @@ export const Roulette = function (_canvas, _context){
     _ball.vertOffset = _innerRing.outerRadius
     _ball.vertRange  = (_outerRing.outerRadius)
     _ball.img = new Image()
-    _ball.img.src = '/img/Games/roulette/ball.png'
+    _ball.img.src = '/img/Games/roulette/ball@3x.png'
     _startOfTime = Date.now()
 
     redrawBackground(ctx)
@@ -227,7 +227,7 @@ export const Roulette = function (_canvas, _context){
     for (let i = 0; i < _slotTotal; i++) {
       let angle = i * _arcAngle, _endAngle = angle + _arcAngle
       _slotsAngle[i] = angle + ((_endAngle - angle)/ 2)
-      ctx.fillStyle = '#1D1E25'
+      ctx.fillStyle = 'red'
       ctx.beginPath()
       ctx.arc(_centerX, _centerY, _outerEdge.radius, 0, FULL_CIRCLE, true)
       ctx.arc(_centerX, _centerY, _outerRing.outerRadius, 0, FULL_CIRCLE, false)

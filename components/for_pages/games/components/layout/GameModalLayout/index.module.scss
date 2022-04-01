@@ -22,7 +22,7 @@
     opacity: 0;
     transition: opacity .5s ease-in-out;
     &.open{
-      visibility: hidden;
+      visibility: visible;
       opacity: 1;
     }
   }

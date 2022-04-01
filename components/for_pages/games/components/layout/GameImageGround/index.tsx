@@ -6,7 +6,7 @@ interface Props{
 export default function GameImageGround(props: Props) {
   return (
     <div className={cx(styles.root)}>
-      <img src={'/img/Games/ground.png'}/>
+      <img src={'/img/Games/ground@3x.png'}/>
     </div>
   )
 }

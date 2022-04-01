@@ -142,7 +142,9 @@
   }
   .bet{
     position: absolute;
-
+    > div {
+      padding-top: 2px;
+    }
   }
 
   &.grey {

@@ -4,8 +4,18 @@
   flex-direction: column;
   position: relative;
   padding-bottom: 103px;
+
   @media only screen and (max-width: $xs-max) {
     padding-bottom: 24px;
+
+  }
+}
+.wheel{
+  padding-left: 27%;
+  padding-right: 27%;
+  @media only screen and (max-width: $xs-max) {
+    padding-left: 22%;
+    padding-right: 22%;
   }
 }
 .totalBet{
