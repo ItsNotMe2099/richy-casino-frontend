@@ -135,7 +135,7 @@ export default function Board(props: Props) {
       <div className={styles.root}>
         <div className={styles.wheel}>
           <div className={styles.radial}>
-            <img src={'/img/Games/wheel/wheel_radius.png'}/>
+            <img src={'/img/Games/wheel/wheel_radius@3x.png'}/>
             <div className={styles.radialOverlay}>
               <div className={styles.wheelWrapper}>
               <Wheel

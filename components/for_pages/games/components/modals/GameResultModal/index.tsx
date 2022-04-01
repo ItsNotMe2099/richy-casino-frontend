@@ -15,7 +15,7 @@ export default function GameResultModal(props: Props) {
   return (
     <GameModalLayout fade open={props.open} onClose={props.onClose} fixed={appContext.isMobile}>
       <div className={classNames(styles.root, {[styles.win]: gameContext.result?.win, [styles.lose]: !gameContext.result?.win})}>
-        <div className={styles.icon}><img src={'/img/Games/icons/win.png'}/></div>
+        <div className={styles.icon}><img src={'/img/Games/icons/win@3x.png'}/></div>
         <div className={styles.profit}>{gameContext.result?.profit?.toFixed(8)} {gameContext.result?.currency}</div>
         <div className={styles.multiplier}>{gameContext.result?.multiplier >= 0 ? `x${gameContext.result?.multiplier}`: ''}</div>
       </div>

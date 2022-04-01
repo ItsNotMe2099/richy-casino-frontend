@@ -216,7 +216,7 @@ export const Roulette = function (_canvas, _context){
     _ball.vertOffset = _innerRing.outerRadius
     _ball.vertRange  = (_outerRing.outerRadius)
     _ball.img = new Image()
-    _ball.img.src = '/img/Games/roulette/ball.png'
+    _ball.img.src = '/img/Games/roulette/ball@3x.png'
     _startOfTime = Date.now()
 
     redrawBackground(ctx)
