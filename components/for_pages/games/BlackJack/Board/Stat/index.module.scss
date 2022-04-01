@@ -1,0 +1,62 @@
+@import "scss/index";
+
+
+.root{
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - 70px)/8);
+    grid-gap: 10px;
+  overflow-y: auto;
+  margin-top: 16px;
+  padding-bottom: 20px;
+  @media screen and (max-width: $xs-max){
+    grid-auto-columns: calc((100% - 20px)/3);
+  }
+}
+
+.item{
+  text-align: center;
+   .multiplier{
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2px;
+    background: $dark600;
+    border-radius: 2px;
+    color: $dark200;
+    font-weight: bold;
+    font-size: 12px;
+     margin-top: 10px;
+  }
+  &.active{
+    .multiplier{
+      box-shadow: inset 0px 0px 0px 2px #427BF8;
+      color: $grey500;
+    }
+  }
+
+  &.lose{
+    .multiplier{
+      box-shadow: inset 0px 0px 0px 2px $lose500;
+      color: $grey500;
+    }
+  }
+  .card{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > div{
+      width: 100%;
+      display: flex;
+    }
+    .action{
+      position: absolute;
+      top: 50%;
+      left: -17px;
+      transform: translate(0, -50%);
+    }
+  }
+}

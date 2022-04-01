@@ -227,7 +227,7 @@ export const Roulette = function (_canvas, _context){
     for (let i = 0; i < _slotTotal; i++) {
       let angle = i * _arcAngle, _endAngle = angle + _arcAngle
       _slotsAngle[i] = angle + ((_endAngle - angle)/ 2)
-      ctx.fillStyle = '#1D1E25'
+      ctx.fillStyle = 'red'
       ctx.beginPath()
       ctx.arc(_centerX, _centerY, _outerEdge.radius, 0, FULL_CIRCLE, true)
       ctx.arc(_centerX, _centerY, _outerRing.outerRadius, 0, FULL_CIRCLE, false)

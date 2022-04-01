@@ -9,7 +9,7 @@ import CasinoGameRoundRepository from 'components/for_pages/games/data/repositto
 import {useGameContext} from 'components/for_pages/games/context/state'
 
 interface Props{
-  items: any[]
+  items?: any[]
 }
 export enum IGameHistoryFilterType{
   All = 'all',
@@ -30,7 +30,7 @@ export default function GameHistory(props: Props) {
 
         const newVal = [...data]
         if(newVal){
-          if( data.length > 0){
+          if( data.length > 30){
             newVal.splice(newVal.length - 1, 1)
           }
         }
@@ -41,7 +41,7 @@ export default function GameHistory(props: Props) {
     return () => {
       subscription.unsubscribe()
     }
-  }, [])
+  }, [data])
   useEffect(() => {
    CasinoGameRoundRepository.listAll().then(res => setData(res?.data ?? []))
   }, [])
