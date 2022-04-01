@@ -153,7 +153,7 @@ export default class Game {
         const sections = Array(this._settings.bucketsColumns).fill(null).map((value, index) => {
           return size.width * BUCKET_FACTOR * index
             + size.width * BUCKET_FACTOR
-            + (this._settings.size.width / this._settings.pegsColumns / 2)
+            + (this._settings.size.width / this._settings.pegsColumns)
         })
         const tmpSection = sections.findIndex(item => item > peg.position.x)
         const section = tmpSection < 0 ? this._settings.bucketsColumns : tmpSection
