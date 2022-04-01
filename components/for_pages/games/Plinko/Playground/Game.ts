@@ -87,11 +87,13 @@ export default class Game {
    * Clear the game
    */
   clear() {
-    Runner.stop(this._runner)
-    Render.stop(this._render)
-    this._render.canvas.remove()
-    this._render = null
-    this._runner = null
+    if (this._render) {
+      Runner.stop(this._runner)
+      Render.stop(this._render)
+      this._render.canvas.remove()
+      this._render = null
+      this._runner = null
+    }
   }
 
   /**

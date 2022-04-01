@@ -14,6 +14,7 @@ export default function Playground(props: Props) {
   const rootRef = useRef<HTMLDivElement>()
   const gameRef = useRef<Game>()
   const createGame = () => {
+    gameRef.current?.clear()
     gameRef.current = new Game({
       element: rootRef.current,
       size: { width: 800, height: 600 },
@@ -30,11 +31,11 @@ export default function Playground(props: Props) {
   }, [rootRef.current])
 
   useEffect(() => {
+    createGame()
     const subscriptionGame = gameContext.gameState$.subscribe((e) => {
       if(!e){
         return null
       }
-      gameRef.current?.clear()
       createGame()
       gameRef.current.dropPlinkoByEvent(e)
     })
