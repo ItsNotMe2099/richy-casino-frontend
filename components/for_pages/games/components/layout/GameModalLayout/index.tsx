@@ -21,7 +21,7 @@ export default function GameModalLayout(props: Props) {
     }
   }
   return (
-    <RemoveScroll enabled={!!fixed}>
+    <RemoveScroll enabled={!!fixed && open}>
     <div className={classNames(styles.root, {[styles.fixed]: fixed, [styles.fade]: fade, [styles.open]: open})}>
      <div className={styles.overlay} onClick={handleOverlayClick}/>
      <div className={styles.content}>
