@@ -113,7 +113,7 @@ export default function ModalContainer(props: Props) {
           </ProfileModal>
           <Withdraw/>
           <CreateGameModal isOpen={context.modal === ModalType.createGame} {...commonSettings}/>
-          <OpponentsModal isOpen={true} {...commonSettings}/>
+          <OpponentsModal isOpen={false} {...commonSettings}/>
           </div>
       )}
     </RemoveScroll>
