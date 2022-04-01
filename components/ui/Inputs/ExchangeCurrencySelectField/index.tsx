@@ -10,7 +10,6 @@ export interface ICustomSelectViewOption extends IOption<string>{
 interface Props extends IField{
   options: ICustomSelectViewOption[]
   placeholder?: string
-  initial?: string
   className?: string
   currentItem?: ICustomSelectViewOption
 }

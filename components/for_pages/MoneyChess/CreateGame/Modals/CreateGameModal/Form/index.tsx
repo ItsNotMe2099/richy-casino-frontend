@@ -7,6 +7,7 @@ import {convertCurrencyToOptionsExchange} from 'utils/converter'
 import { useAppContext } from 'context/state'
 import { ExchangeCurrencySelectField } from 'components/ui/Inputs/ExchangeCurrencySelectField'
 import { CreateGameOptions } from 'components/for_pages/MoneyChess/ui/Inputs/CreateGameOptions'
+import { useEffect, useState } from 'react'
 
 
 interface Props {
@@ -32,7 +33,7 @@ export default function CreateGameForm(props: Props) {
 
   const initialValues = {
     amount: '',
-    currency: convertCurrencyToOptionsExchange(context.currencies)[0].label,
+    currency: convertCurrencyToOptionsExchange(context.currencies)[0].value,
     time: times[0].value,
     type: gameTypes[0].value
   }
@@ -45,9 +46,23 @@ export default function CreateGameForm(props: Props) {
   const formik = useFormik({
     initialValues,
     onSubmit: handleSubmit,
+    enableReinitialize: true
   })
 
   const {values, setFieldValue, handleChange} = formik
+
+  const currencies = convertCurrencyToOptionsExchange(context.currencies)
+
+  console.log(currencies)
+
+  const [currentItem, setCurrentItem] = useState(currencies.filter(item => item.value === values.currency))
+
+  console.log(currentItem[0])
+
+  useEffect(() => {
+    const array = currencies.filter(item => item.value === values.currency)
+    setCurrentItem(array)
+  }, [values.currency])
 
   return (
     <FormikProvider value={formik}>
@@ -60,7 +75,7 @@ export default function CreateGameForm(props: Props) {
           </div>
           <div className={styles.inputs}>
             <InputField name={'amount'} className={styles.input} validate={Validator.required}/>
-            <ExchangeCurrencySelectField className={styles.exchange} name='currency' options={convertCurrencyToOptionsExchange(context.currencies)} initial={initialValues.currency}/>
+            <ExchangeCurrencySelectField className={styles.exchange} name='currency' options={currencies} currentItem={currentItem[0]}/>
           </div>
           <div className={styles.settings}>
             <div className={styles.option}>
