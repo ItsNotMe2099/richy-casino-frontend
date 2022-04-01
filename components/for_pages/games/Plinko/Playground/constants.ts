@@ -134,3 +134,5 @@ export const COLORS = [
   '#FF4444',
   '#FF3155',
 ] as const
+
+export const BUCKET_FACTOR = 1.08 // for margins between buckets

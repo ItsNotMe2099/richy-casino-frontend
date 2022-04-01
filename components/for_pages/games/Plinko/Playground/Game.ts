@@ -1,23 +1,21 @@
 import {
   Engine,
   Render,
-  Bodies,
   Runner,
   Body,
   World,
-  Vector,
   Common,
   Events,
   IEventCollision,
   IEventTimestamped,
-  IChamferableBodyDefinition,
 } from 'matter-js'
 import { ICasinoGameFinishEvent } from 'components/for_pages/games/data/interfaces/ICasinoGame'
 import decomp from 'poly-decomp'
-import { COORDS, PLINKO_SIZE_FACTOR, COLORS } from './constants'
+import { COORDS, BUCKET_FACTOR, COLORS } from './constants'
 import LabelHelper from './LabelHelper'
+import BodyMaker from './BodyMaker'
 
-interface ISize {
+export interface ISize {
   width: number
   height: number
 }
@@ -29,7 +27,7 @@ interface IProps {
   pegsRows: number
 }
 
-interface ISettings extends IProps{
+export interface ISettings extends IProps{
   pegsColumns: number
   bucketsColumns: number
 }
@@ -45,7 +43,7 @@ export default class Game {
   _plinkoInProgress: boolean
   _plinkoReal: Body
   _plinkoFake: Body
-  _bucketFactor = 1.08 // For margins between buckets
+  _bodyMaker: BodyMaker
 
   constructor(props: IProps) {
     this._settings = {
@@ -53,6 +51,7 @@ export default class Game {
       pegsColumns: props.pegsRows + 2,
       bucketsColumns: props.pegsRows + 1
     }
+    this._bodyMaker = new BodyMaker(this._settings)
     this._engine = Engine.create(props.element)
     this._render = Render.create({
       element: props.element,
@@ -66,9 +65,9 @@ export default class Game {
       },
     })
     Common.setDecomp(decomp)
-    this._pegsGrid = this._makePegsGrid()
-    this._bucketsRow = this._makeBucketsRow()
-    this._outlines = this._makeOutlines()
+    this._pegsGrid = this._bodyMaker.makePegsGrid()
+    this._bucketsRow = this._bodyMaker.makeBucketsRow()
+    this._outlines = this._bodyMaker.makeOutlines()
   }
 
   /**
@@ -102,8 +101,8 @@ export default class Game {
     const dx: number = COORDS[e.data.pins][e.data.bucket][Math.floor(Math.random() * COORDS[e.data.pins ][e.data.bucket].length)]
     const x = this._settings.size.width / 2 + dx
     this._plinkoInProgress = true
-    this._plinkoReal = this._makeRealPlinko(x, 0, e.data.id ?? 1)
-    this._plinkoFake = this._makeFakePlinko(x, 0)
+    this._plinkoReal = this._bodyMaker.makeRealPlinko(x, 0, e.data.id ?? 1)
+    this._plinkoFake = this._bodyMaker.makeFakePlinko(x, 0)
     World.add(this._engine.world, [this._plinkoReal, this._plinkoFake])
   }
 
@@ -111,168 +110,14 @@ export default class Game {
    * Before render hook
    */
   _beforeRender(e: IEventTimestamped<Render>): void {
-    this._joinPlinksPositions()
+    this._joinPlinkosPositions()
   }
 
   /**
    * After render hook
    */
   _afterRender(e: IEventTimestamped<Render>): void {
-    this._joinPlinksPositions()
-  }
-
-  _getPegRadius(): number {
-    return (this._settings.pegsRows - 3)
-      / ((this._settings.pegsRows - 7) / 2)
-      * (this._settings.size.width / this._settings.size.height)
-  }
-
-  _makePeg(x: number, y: number, id: number): Body {
-    const radius = this._getPegRadius()
-    return Bodies.circle(x, y, radius, {
-      isStatic: true,
-      render: {
-        sprite: {
-          texture: '/img/Games/plinko/peg/peg.png',
-          xScale: radius * 2 / 28,
-          yScale: radius * 2 / 28,
-        },
-      },
-      label: LabelHelper.createPegLabel(id)
-    })
-  }
-
-  _makeRealPlinko(x: number, y: number, id: number): Body {
-    const radius = this._getPegRadius() * PLINKO_SIZE_FACTOR
-    return Bodies.circle(x, y, radius, {
-      restitution: 0.8,
-      render: {
-        visible: false,
-        // fillStyle: `hsl(${Math.floor(360 * Math.random())}, 90%, 60%)`,
-      },
-      label: LabelHelper.createPlinkoLabel(id),
-    })
-  }
-
-  _makeFakePlinko(x: number, y: number): Body {
-    const radius = this._getPegRadius() * PLINKO_SIZE_FACTOR
-    return Bodies.circle(x, y, radius, {
-      isStatic: true,
-      isSensor: true,
-      render: {
-        sprite: {
-          texture: '/img/Games/plinko/plinko/plinko.png',
-          xScale: radius * 2 / 44,
-          yScale: radius * 2 / 44,
-        },
-      },
-      label: 'shadow',
-    })
-  }
-
-  _makePegsGrid(): Body[] {
-    const center = this._settings.size.width / this._settings.pegsColumns / 2
-    const grid = Array(this._settings.pegsRows).fill(null).map(
-      (value, rowIndex) => {
-        const y = (this._settings.size.width - 2 * center) / this._settings.pegsColumns
-        const h = (this._settings.size.height - 40) / this._settings.pegsRows
-        const n = y * (this._settings.pegsRows - rowIndex - 1) / 2
-        return Array(rowIndex + 3).fill(null).map((valueInner, indexInner) =>
-          this._makePeg(center + y * indexInner + y / 2 + n, h * rowIndex + h / 2, rowIndex * 1000 + indexInner)
-        )
-      }
-    )
-    return grid.reduce((acc, curr) => [...acc, ...curr], [])
-  }
-
-  _makeRealBucket(x: number, y: number, id: number): Body {
-    const size = this._getBucketSize()
-    return Bodies.fromVertices(x, y, [
-      [
-        Vector.create(0, 0),
-        Vector.create(size.width / 2.4, size.height / 5),
-        Vector.create(size.width - size.width / 2.4, size.height / 5),
-        Vector.create(size.width, 0),
-        Vector.create(size.width, size.height),
-        Vector.create(0, size.height),
-      ],
-    ], {
-      isStatic: true,
-      render: {
-        visible: false,
-        fillStyle: `hsl(${Math.floor(360 * Math.random())}, 90%, 60%)`,
-      },
-      label: LabelHelper.createRealBucketLabel(id)
-    })
-  }
-
-  _makeFakeBucket(x: number, y: number, id: number): Body {
-    const size = this._getBucketSize()
-    const imageId = Math.abs(id - Math.floor(this._settings.bucketsColumns / 2)) + 1
-    return Bodies.rectangle(x, y, size.width, size.height, {
-      isStatic: true,
-      isSensor: true,
-      render: {
-        sprite: {
-          texture: `/img/Games/plinko/buckets/bucket_long_${imageId}.png`,
-          xScale: size.width / 84,
-          yScale: size.width / 84,
-        },
-      },
-      label: LabelHelper.createFakeBucketLabel(id)
-    })
-  }
-
-  _makeOutlines(): Body[] {
-    const onePegWidth = this._settings.size.width / this._settings.pegsColumns
-    const pegRadius = this._getPegRadius()
-    const options: IChamferableBodyDefinition = {
-      isStatic: true,
-      render: {
-        visible: false,
-        // fillStyle: '#ffffff',
-      }
-    }
-    const leftSide = Bodies.rectangle(
-      onePegWidth - pegRadius,
-      this._settings.size.height / 2,
-      1,
-      this._settings.size.height,
-      options
-    )
-    const rightSide = Bodies.rectangle(
-      this._settings.size.width - onePegWidth + pegRadius,
-      this._settings.size.height / 2,
-      1,
-      this._settings.size.height,
-      options
-    )
-    return [leftSide, rightSide]
-  }
-
-  _getBucketSize(): ISize {
-    const onePegWidth = this._settings.size.width / this._settings.pegsColumns
-    const widthRow = this._settings.size.width - onePegWidth
-    const width = widthRow / this._settings.pegsColumns
-    const aspectRatio = 1.29
-    return {
-      width: width / this._bucketFactor,
-      height: width / aspectRatio / this._bucketFactor,
-    }
-  }
-
-  _makeBucketsRow(): Body[] {
-    const size = this._getBucketSize()
-    const arrs = Array(this._settings.bucketsColumns).fill(null).map((value, index) => {
-      const x = size.width * this._bucketFactor * index
-        + size.width * this._bucketFactor
-        + (this._settings.size.width / this._settings.pegsColumns / 2)
-      return [
-        this._makeRealBucket(x, this._settings.size.height - size.height / 2, index),
-        this._makeFakeBucket(x, this._settings.size.height - size.height / 2, index)
-      ]
-    })
-    return arrs.reduce((acc, curr) => [...acc, ...curr], [])
+    this._joinPlinkosPositions()
   }
 
   _handleCollision(e: IEventCollision<Engine>): void {
@@ -302,10 +147,10 @@ export default class Game {
   _coloringPeg(id: number) {
     this._pegsGrid.forEach(peg => {
       if (peg.label === LabelHelper.createPegLabel(id)) {
-        const size = this._getBucketSize()
+        const size = this._bodyMaker.getBucketSize()
         const sections = Array(this._settings.bucketsColumns).fill(null).map((value, index) => {
-          return size.width * this._bucketFactor * index
-            + size.width * this._bucketFactor
+          return size.width * BUCKET_FACTOR * index
+            + size.width * BUCKET_FACTOR
             + (this._settings.size.width / this._settings.pegsColumns / 2)
         })
         const tmpSection = sections.findIndex(item => item > peg.position.x)
@@ -331,7 +176,7 @@ export default class Game {
     }
   }
 
-  _joinPlinksPositions() {
+  _joinPlinkosPositions() {
     if (this._plinkoReal && this._plinkoFake && (
       this._plinkoReal.position.y != this._plinkoFake.position.y
       || this._plinkoReal.position.x != this._plinkoFake.position.x
