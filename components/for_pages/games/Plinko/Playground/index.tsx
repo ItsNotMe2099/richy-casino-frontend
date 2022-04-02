@@ -13,22 +13,24 @@ export default function Playground(props: Props) {
   const gameContext = useGameContext()
   const rootRef = useRef<HTMLDivElement>()
   const gameRef = useRef<Game>()
+  const pegsRowsRef = useRef<number>(props.pegsRows)
   const createGame = () => {
     gameRef.current?.clear()
     gameRef.current = new Game({
       element: rootRef.current,
       size: { width: 800, height: 600 },
       backgroundColor: 'rgb(39, 45, 57)',
-      pegsRows: props.pegsRows,
+      pegsRows: pegsRowsRef.current,
     })
     gameRef.current.start()
   }
 
   useEffect(() => {
-    if (rootRef.current && !gameRef.current) {
+    if ((rootRef.current && !gameRef.current) || (pegsRowsRef.current != props.pegsRows)) {
+      pegsRowsRef.current = props.pegsRows
       createGame()
     }
-  }, [rootRef.current])
+  }, [rootRef.current, props.pegsRows])
 
   useEffect(() => {
     createGame()

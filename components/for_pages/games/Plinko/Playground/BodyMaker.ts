@@ -1,7 +1,7 @@
 import { Bodies, Body, IChamferableBodyDefinition, Vector } from 'matter-js'
 import { ISettings, ISize } from './Game'
 import LabelHelper from './LabelHelper'
-import { PLINKO_SIZE_FACTOR, BUCKET_FACTOR } from './constants'
+import { PLINKO_SIZE_FACTOR, BUCKET_FACTOR, BUCKETS_INDEXES } from './constants'
 
 export default class BodyMaker {
   _settings: ISettings
@@ -90,14 +90,14 @@ export default class BodyMaker {
   }
 
   makeFakeBucket(x: number, y: number, id: number): Body {
+    const indexes: number[] = BUCKETS_INDEXES[this._settings.pegsRows]
     const size = this.getBucketSize()
-    const imageId = Math.abs(id - Math.floor(this._settings.bucketsColumns / 2)) + 1
     return Bodies.rectangle(x, y, size.width, size.height, {
       isStatic: true,
       isSensor: true,
       render: {
         sprite: {
-          texture: `/img/Games/plinko/buckets/bucket_long_${imageId}.png`,
+          texture: `/img/Games/plinko/buckets/long/${indexes[id]}.png`,
           xScale: size.width / 84,
           yScale: size.width / 84,
         },

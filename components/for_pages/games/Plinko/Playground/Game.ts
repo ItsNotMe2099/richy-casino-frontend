@@ -11,7 +11,7 @@ import {
 } from 'matter-js'
 import { ICasinoGameFinishEvent } from 'components/for_pages/games/data/interfaces/ICasinoGame'
 import decomp from 'poly-decomp'
-import { COORDS, BUCKET_FACTOR, COLORS } from './constants'
+import { COORDS, BUCKET_FACTOR, COLORS, BUCKETS_INDEXES } from './constants'
 import LabelHelper from './LabelHelper'
 import BodyMaker from './BodyMaker'
 
@@ -156,12 +156,10 @@ export default class Game {
             + (this._settings.size.width / this._settings.pegsColumns)
         })
         const tmpSection = sections.findIndex(item => item > peg.position.x)
-        const section = tmpSection < 0 ? this._settings.bucketsColumns : tmpSection
-        const colorId = Math.abs(section - Math.floor(this._settings.bucketsColumns / 2)) + 1
-        const max = this._settings.bucketsColumns / 2 / COLORS.length
-        const colorIndex = colorId / max
+        const section = tmpSection < 0 ? 0 : tmpSection
+        const indexes = BUCKETS_INDEXES[this._settings.pegsRows]
         peg.render.sprite = null
-        peg.render.fillStyle = COLORS[Math.round(colorIndex)]
+        peg.render.fillStyle = COLORS[indexes[section]]
       }
     })
   }
