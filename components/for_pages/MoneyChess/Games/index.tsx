@@ -6,6 +6,7 @@ import VisibleXs from 'components/ui/VisibleXS'
 import { useState } from 'react'
 import classNames from 'classnames'
 import CreateGame from '../CreateGame'
+import ChessGame from '../Chess/ChessGame'
 
 interface Props {
 
@@ -15,6 +16,7 @@ export default function Games(props: Props) {
 
   const [isStatsView, setStatsView] = useState(false)
   const [isCreateView, setCreateView] = useState(false)
+  const [isChessView, setChessView] = useState(true)
 
   const handleStatistics = () => {
     setStatsView(true)
@@ -56,6 +58,9 @@ export default function Games(props: Props) {
       <>
       {isCreateView ?
       <CreateGame onClick={handleStatistics}/>
+      :
+      isChessView ?
+      <ChessGame/>
       :
       <div className={styles.root}>
         <HiddenXs>

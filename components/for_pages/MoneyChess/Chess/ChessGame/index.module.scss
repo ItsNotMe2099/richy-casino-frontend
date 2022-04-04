@@ -1,0 +1,12 @@
+@import "scss/index";
+
+.root{
+  padding: 8px;
+  display: flex;
+  background-color: $dark700;
+  margin-top: 20px;
+  border-radius: 18px;
+  @media screen and (max-width: $mobile-max){
+    padding: 0;
+  }
+}

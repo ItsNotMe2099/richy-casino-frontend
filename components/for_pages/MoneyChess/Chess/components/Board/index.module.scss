@@ -1,0 +1,42 @@
+@import "scss/index";
+
+.root{
+  display: grid;
+  grid-template-columns: 5.2vw 5.2vw 5.2vw 5.2vw 5.2vw 5.2vw 5.2vw 5.2vw;
+  gap: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  @media screen and (max-width: 870px){
+    grid-template-columns: 46px 46px 46px 46px 46px 46px 46px 46px;
+  }
+  @media screen and (max-width: $mobile-max){
+    margin: 0 -10px;
+  }
+  @media screen and (max-width: $mobile-md){
+    grid-template-columns: 12.5vw 12.5vw 12.5vw 12.5vw 12.5vw 12.5vw 12.5vw 12.5vw;
+  }
+  .square:nth-child(2n){
+    background: #9DA0BF;
+  }
+  .reverse:nth-child(2n){
+    background: #6E7195;
+  }
+}
+
+.square{
+  background: #6E7195;
+  width: 5.2vw;
+  height: 5.2vw;
+  min-height: 46px;
+  min-width: 46px;
+  @media screen and (max-width: $mobile-md){
+    width: 12.5vw;
+    height: 12.5vw;
+    min-height: auto;
+    min-width: auto;
+  }
+}
+
+.reverse{
+  background: #9DA0BF;
+}
