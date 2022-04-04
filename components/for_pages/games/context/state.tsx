@@ -1,4 +1,4 @@
-import {createContext, useContext, useEffect, useState} from 'react'
+import {createContext, useContext, useEffect, useRef, useState} from 'react'
 import {Subject} from 'rxjs'
 import io from 'socket.io-client'
 import {
@@ -90,6 +90,7 @@ export function GameWrapper(props: Props) {
   const [startLoading, setStartLoading] = useState<boolean>(false)
   const [started, setStarted] = useState<boolean>(false)
   const [turnLoading, setTurnLoading] = useState<boolean>(false)
+  const showResultHideRef = useRef(null)
   useEffect(() => {
     const s = io(runtimeConfig.GAMES_HOST, {
       path: '/api/casino-game-ws',
@@ -215,7 +216,19 @@ export function GameWrapper(props: Props) {
     game,
     clear,
     roundId,
-    setShowResultModal,
+    setShowResultModal: (value: boolean) => {
+      setShowResultModal(value)
+      if(showResultHideRef.current ) {
+        clearTimeout(showResultHideRef.current)
+      }
+      if(value){
+        showResultHideRef.current = setTimeout(() => {
+          setShowResultModal(false)
+        }, 2000)
+      }else{
+
+      }
+    },
     showResultModal,
     turn,
     result,

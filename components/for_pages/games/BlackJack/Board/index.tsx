@@ -77,15 +77,19 @@ export default function Board(props: Props) {
         <div className={styles.bottom}/>
       </div>
       <div className={styles.board}>
+        <div className={styles.deckWrapper}>
         {turn?.dealer?.length > 0 && <div className={classNames(styles.deck, styles.dealer)}>
-          <Deck cards={turn.dealer.map( i => i.index)} number={getBlackjackScore(turn.dealer)}/>
+          <Deck cards={[...turn.dealer.map( i => i.index), ...(turn.dealer.length === 1 ? [0] : [])]} number={getBlackjackScore(turn.dealer)}/>
         </div>}
+        <div className={styles.playerDeck}>
         {turn?.split?.length > 0 && <div className={classNames(styles.deck, styles.split)}>
           <Deck cards={turn.split.map( i => i.index)} number={getBlackjackScore(turn.split)}/>
         </div>}
-        {turn?.dealer?.length > 0 && <div className={classNames(styles.deck, styles.player)}>
+        {turn?.player?.length > 0 && <div className={classNames(styles.deck, styles.player)}>
           <Deck cards={turn.player.map( i => i.index)} number={getBlackjackScore(turn.player)}/>
         </div>}
+        </div>
+        </div>
 
       </div>
     </GamePageBoardLayout>

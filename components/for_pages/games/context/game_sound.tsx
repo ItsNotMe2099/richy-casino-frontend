@@ -77,6 +77,7 @@ export function GameSoundWrapper(props: Props) {
   const debounceRef = useRef(null)
   const playersRef = useRef(null)
   const currentPlayer = useRef(null)
+  const enabledRef = useRef(!disabled)
   useEffect(() => {
     playersRef.current = songs.map(file =>  new Howl({
       src: [file],
@@ -87,7 +88,7 @@ export function GameSoundWrapper(props: Props) {
     ...defaultValue,
     disabled,
     play: (file: GameSound, debounce:number = 0) => {
-      if(disabled){
+      if(!enabledRef.current){
         return
       }
       const _play = (file: GameSound) => {
@@ -116,6 +117,7 @@ export function GameSoundWrapper(props: Props) {
     },
     setDisabled(disabled){
       setDisabled(disabled)
+      enabledRef.current = !disabled
       if(!disabled){
         localStorage.removeItem(GameStorageType.soundDisabled)
       }else{

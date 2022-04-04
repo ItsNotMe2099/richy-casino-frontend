@@ -2,6 +2,9 @@
 .layout{
   background: #17754F;
   min-height: 640px;
+  display: flex;
+  justify-content: stretch;
+  flex-direction: row;
 }
 .bg{
   position: absolute;
@@ -33,9 +36,12 @@ bottom: 0;
   }
 }
 .board{
+  flex: 1;
+
   position: relative;
   padding-bottom: 68px;
   padding-top: 35px;
+    display: flex;
 
   @media only screen and (max-width: 985px) {
     padding-bottom: 24px;
@@ -43,6 +49,36 @@ bottom: 0;
     align-items: flex-start;
   }
 
+}
+.deckWrapper{
+  position: relative;
+  height: 100%;
+  flex: 1;
+}
+.deck{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  left: 0px;
+  right: 0px;
+  &.dealer{
+    position: absolute;
+    top: 0px;
+  }
+
+
+}
+.playerDeck{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 17px 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
 }
 .tip{
   font-weight: 500;

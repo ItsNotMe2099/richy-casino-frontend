@@ -13,7 +13,7 @@ export default function Tower({status, onClick}: Props) {
       [styles.active]: status === TowerStatus.Active,
       [styles.mine]: status === TowerStatus.Mine,
       [styles.bonus]: status === TowerStatus.Bonus
-    })} onClick={onClick}/>
+    })} onClick={TowerStatus.Active ? onClick : null}/>
   )
 }
 
