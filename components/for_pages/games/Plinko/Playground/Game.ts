@@ -24,9 +24,9 @@ export interface ISize {
 interface IProps {
   element: HTMLDivElement
   size: ISize
-  backgroundColor: string
   pegsRows: number
   multiplier: number[]
+  backgroundColor?: string
 }
 
 export interface ISettings extends IProps{
@@ -102,7 +102,8 @@ export default class Game {
    * Drop a plinko
    */
   dropPlinkoByEvent(e: ICasinoGameFinishEvent) {
-    const dx: number = COORDS[e.data.pins][e.data.bucket][Math.floor(Math.random() * COORDS[e.data.pins ][e.data.bucket].length)]
+    const index = e.data.bucket + 1
+    const dx: number = COORDS[e.data.pins][index][Math.floor(Math.random() * COORDS[e.data.pins][index].length)]
     const x = this._settings.size.width / 2 + dx
     this._plinkoInProgress = true
     this._plinkoReal = this._bodyMaker.makeRealPlinko(x, 0, e.data.id ?? 1)
@@ -122,20 +123,23 @@ export default class Game {
    */
   _afterRender(e: IEventTimestamped<Render>): void {
     this._mergePlinkosPositions()
-    this._addTextToBuckets()
+    this._renderBucketsText()
   }
 
-  _addTextToBuckets(): void {
-    this._bucketsRow.filter(body => LabelHelper.isFakeBucket(body.label)).forEach((body, index) => {
-      const width = body.bounds.max.x - body.bounds.min.x
-      const height = body.bounds.max.y - body.bounds.min.y
-      const extraOffsetY = height / 7
-      const center = Vector.create(body.bounds.min.x + width / 2, body.bounds.min.y + height / 2 + extraOffsetY)
-      const ctx = this._render.context
-      ctx.font = 'bold 12px Gilroy'
-      ctx.fillStyle = '#ffffff'
-      ctx.textAlign = 'center'
-      ctx.fillText(`${this._settings.multiplier[index]}x`, center.x, center.y)
+  _renderBucketsText(): void {
+    this._bucketsRow.forEach(body => {
+      if (LabelHelper.isFakeBucket(body.label)) {
+        const id = LabelHelper.getId(body.label)
+        const width = body.bounds.max.x - body.bounds.min.x
+        const height = body.bounds.max.y - body.bounds.min.y
+        const extraOffsetY = height / 7
+        const center = Vector.create(body.bounds.min.x + width / 2, body.bounds.min.y + height / 2 + extraOffsetY)
+        const ctx = this._render.context
+        ctx.font = 'bold 12px Gilroy'
+        ctx.fillStyle = '#ffffff'
+        ctx.textAlign = 'center'
+        ctx.fillText(`${this._settings.multiplier[id]}x`, center.x, center.y)
+      }
     })
   }
 
@@ -187,6 +191,7 @@ export default class Game {
         if (body.label === LabelHelper.createRealBucketLabel(bucketId) || body.label === LabelHelper.createFakeBucketLabel(bucketId)) {
           Body.translate(body, {x: 0, y: 10})
           this._plinkoReal.restitution = 0
+          this._plinkoReal.inertia = 1
         }
       })
       this._plinkoInProgress = false

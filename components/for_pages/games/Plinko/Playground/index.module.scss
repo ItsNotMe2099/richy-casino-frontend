@@ -1,4 +1,9 @@
 @import "scss/index";
 
-.root{}
+.root{
+  canvas{
+    background: url('/img/Games/plinko/background.png') center no-repeat;
+    background-size: 100% 100%;
+  }
+}
 

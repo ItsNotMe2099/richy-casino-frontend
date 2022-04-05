@@ -29,6 +29,7 @@ export default class BodyMaker {
     const radius = this._getPegRadius() * PLINKO_SIZE_FACTOR
     return Bodies.circle(x, y, radius, {
       restitution: 0.8,
+      inertia: 100,
       render: {
         visible: false,
         // fillStyle: `hsl(${Math.floor(360 * Math.random())}, 90%, 60%)`,
@@ -54,14 +55,17 @@ export default class BodyMaker {
   }
 
   makePegsGrid(): Body[] {
+    const pegRadius = this._getPegRadius()
+    const bucketSize = this.getBucketSize()
     const center = this._settings.size.width / this._settings.pegsColumns / 2
+    const bottomOffset = pegRadius + bucketSize.height + 20
     const grid = Array(this._settings.pegsRows).fill(null).map(
       (value, rowIndex) => {
-        const y = (this._settings.size.width - 2 * center) / this._settings.pegsColumns
-        const h = (this._settings.size.height - 40) / this._settings.pegsRows
-        const n = y * (this._settings.pegsRows - rowIndex - 1) / 2
+        const w = (this._settings.size.width - 2 * center) / this._settings.pegsColumns
+        const h = (this._settings.size.height - bottomOffset) / this._settings.pegsRows
+        const n = w * (this._settings.pegsRows - rowIndex - 1) / 2
         return Array(rowIndex + 3).fill(null).map((valueInner, indexInner) =>
-          this.makePeg(center + y * indexInner + y / 2 + n, h * rowIndex + h / 2, rowIndex * 1000 + indexInner)
+          this.makePeg(center + w * indexInner + w / 2 + n, h * (rowIndex + 1), rowIndex * 1000 + indexInner)
         )
       }
     )
@@ -113,18 +117,19 @@ export default class BodyMaker {
       isStatic: true,
       render: {
         visible: false,
-        // fillStyle: '#ffffff',
+        fillStyle: '#ffffff',
       }
     }
+    const extraOffset = 2 // plinko stuck in corners
     const leftSide = Bodies.rectangle(
-      onePegWidth - pegRadius,
+      onePegWidth - pegRadius * PLINKO_SIZE_FACTOR + extraOffset,
       this._settings.size.height / 2,
       1,
       this._settings.size.height,
       options
     )
     const rightSide = Bodies.rectangle(
-      this._settings.size.width - onePegWidth + pegRadius,
+      this._settings.size.width - onePegWidth + pegRadius * PLINKO_SIZE_FACTOR - extraOffset,
       this._settings.size.height / 2,
       1,
       this._settings.size.height,
@@ -159,9 +164,7 @@ export default class BodyMaker {
   }
 
   _getPegRadius(): number {
-    return (this._settings.pegsRows - 3)
-      / ((this._settings.pegsRows - 7) / 2)
-      * (this._settings.size.width / this._settings.size.height)
+    return Math.round(this._settings.size.height / this._settings.pegsRows / 6)
   }
 
 }
