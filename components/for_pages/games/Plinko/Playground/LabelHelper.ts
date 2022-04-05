@@ -27,6 +27,10 @@ export default class LabelHelper {
     return label.includes('bucket')
   }
 
+  static isFakeBucket(label: string) {
+    return label.includes('bucket-fake')
+  }
+
   static getId(label: string): number {
     const arr = label.split('-')
     if (arr.length > 0 && !Number.isNaN(Number.parseInt(arr[arr.length - 1]))) {

@@ -8,6 +8,7 @@ import {
   Events,
   IEventCollision,
   IEventTimestamped,
+  Vector,
 } from 'matter-js'
 import { ICasinoGameFinishEvent } from 'components/for_pages/games/data/interfaces/ICasinoGame'
 import decomp from 'poly-decomp'
@@ -25,6 +26,7 @@ interface IProps {
   size: ISize
   backgroundColor: string
   pegsRows: number
+  multiplier: number[]
 }
 
 export interface ISettings extends IProps{
@@ -112,14 +114,29 @@ export default class Game {
    * Before render hook
    */
   _beforeRender(e: IEventTimestamped<Render>): void {
-    this._joinPlinkosPositions()
+    this._mergePlinkosPositions()
   }
 
   /**
    * After render hook
    */
   _afterRender(e: IEventTimestamped<Render>): void {
-    this._joinPlinkosPositions()
+    this._mergePlinkosPositions()
+    this._addTextToBuckets()
+  }
+
+  _addTextToBuckets(): void {
+    this._bucketsRow.filter(body => LabelHelper.isFakeBucket(body.label)).forEach((body, index) => {
+      const width = body.bounds.max.x - body.bounds.min.x
+      const height = body.bounds.max.y - body.bounds.min.y
+      const extraOffsetY = height / 7
+      const center = Vector.create(body.bounds.min.x + width / 2, body.bounds.min.y + height / 2 + extraOffsetY)
+      const ctx = this._render.context
+      ctx.font = 'bold 12px Gilroy'
+      ctx.fillStyle = '#ffffff'
+      ctx.textAlign = 'center'
+      ctx.fillText(`${this._settings.multiplier[index]}x`, center.x, center.y)
+    })
   }
 
   _handleCollision(e: IEventCollision<Engine>): void {
@@ -176,7 +193,7 @@ export default class Game {
     }
   }
 
-  _joinPlinkosPositions() {
+  _mergePlinkosPositions() {
     if (this._plinkoReal && this._plinkoFake && (
       this._plinkoReal.position.y != this._plinkoFake.position.y
       || this._plinkoReal.position.x != this._plinkoFake.position.x

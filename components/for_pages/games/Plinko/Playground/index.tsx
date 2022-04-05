@@ -15,12 +15,14 @@ export default function Playground(props: Props) {
   const gameRef = useRef<Game>()
   const pegsRowsRef = useRef<number>(props.pegsRows)
   const createGame = () => {
+    const multiplier = gameContext.game.multipliers[props.difficulty][props.pegsRows] as number[]
     gameRef.current?.clear()
     gameRef.current = new Game({
       element: rootRef.current,
       size: { width: 800, height: 600 },
       backgroundColor: 'rgb(39, 45, 57)',
       pegsRows: pegsRowsRef.current,
+      multiplier: multiplier
     })
     gameRef.current.start()
   }
