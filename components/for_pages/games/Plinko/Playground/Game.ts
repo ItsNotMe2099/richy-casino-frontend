@@ -34,7 +34,6 @@ export interface ISettings extends IProps{
   bucketsColumns: number
   size: ISize
   isVerticalBucket: boolean
-  widthFactor: number
 }
 
 export default class Game {
@@ -44,6 +43,7 @@ export default class Game {
   _pegsGrid: Body[]
   _bucketsRow: Body[]
   _outlines: Body[]
+  _backgrounds: Body[]
   _runner: Runner
   _plinkoInProgress: boolean
   _plinkoReal: Body
@@ -61,7 +61,6 @@ export default class Game {
       pegsColumns: props.pegsRows + 2,
       bucketsColumns: props.pegsRows + 1,
       isVerticalBucket: isVerticalBucket,
-      widthFactor: props.pegsRows / 6,
     }
     this._bodyMaker = new BodyMaker(this._settings)
     this._engine = Engine.create(props.element)
@@ -80,13 +79,17 @@ export default class Game {
     this._pegsGrid = this._bodyMaker.makePegsGrid()
     this._bucketsRow = this._bodyMaker.makeBucketsRow()
     this._outlines = this._bodyMaker.makeOutlines()
+    this._backgrounds = this._bodyMaker.makeBackgrounds()
   }
 
   /**
    * Start the game
    */
   start() {
-    World.add(this._engine.world, [...this._pegsGrid, ...this._bucketsRow, ...this._outlines])
+    World.add(
+      this._engine.world,
+      [...this._backgrounds, ...this._pegsGrid, ...this._bucketsRow, ...this._outlines]
+    )
 
     this._runner = Runner.run(this._engine)
     Render.run(this._render)
@@ -197,10 +200,9 @@ export default class Game {
 
   _bucketPlinkoCollision(bucketId: number, plinkoId: number): void {
     if (this._plinkoInProgress) {
-      const bucketSize = this._bodyMaker.getBucketSize()
       this._bucketsRow.forEach((body) => {
         if (body.label === LabelHelper.createRealBucketLabel(bucketId) || body.label === LabelHelper.createFakeBucketLabel(bucketId)) {
-          Body.translate(body, {x: 0, y: bucketSize.height / 12})
+          Body.translate(body, {x: 0, y: this._bodyMaker.bucketShiftSize})
           this._plinkoReal.restitution = 0
           this._plinkoReal.inertia = 1
         }

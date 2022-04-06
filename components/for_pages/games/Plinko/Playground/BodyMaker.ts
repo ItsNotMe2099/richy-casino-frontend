@@ -14,6 +14,11 @@ export default class BodyMaker {
     return this._settings.pegsRows === 16
   }
 
+  get bucketShiftSize() {
+    const bucketSize = this.getBucketSize()
+    return bucketSize.height / 4
+  }
+
   makePeg(x: number, y: number, id: number): Body {
     const radius = this._getPegRadius()
     return Bodies.circle(x, y, radius, {
@@ -62,7 +67,7 @@ export default class BodyMaker {
     const pegRadius = this._getPegRadius()
     const bucketSize = this.getBucketSize()
     const center = this._settings.size.width / this._settings.pegsColumns / 2
-    const bottomOffset = pegRadius + bucketSize.height + 10
+    const bottomOffset = pegRadius + bucketSize.height + 10 + this.bucketShiftSize
     const grid = Array(this._settings.pegsRows).fill(null).map(
       (value, rowIndex) => {
         const w = (this._settings.size.width - 2 * center) / this._settings.pegsColumns
@@ -155,16 +160,41 @@ export default class BodyMaker {
 
   makeBucketsRow(): Body[] {
     const size = this.getBucketSize()
+    const y = this._settings.size.height - size.height / 2 - this.bucketShiftSize
     const arrs = Array(this._settings.bucketsColumns).fill(null).map((value, index) => {
       const x = size.width * BUCKET_FACTOR * index
         + size.width * BUCKET_FACTOR
         + (this._settings.size.width / this._settings.pegsColumns / 2)
       return [
-        this.makeRealBucket(x, this._settings.size.height - size.height / 2, index),
-        this.makeFakeBucket(x, this._settings.size.height - size.height / 2, index)
+        this.makeRealBucket(x, y, index),
+        this.makeFakeBucket(x, y, index)
       ]
     })
     return arrs.reduce((acc, curr) => [...acc, ...curr], [])
+  }
+
+  makeBackgrounds(): Body[] {
+    const height = this._settings.size.height - this.bucketShiftSize
+    const pyramid = Bodies.rectangle(
+      this._settings.size.width / 2,
+      height / 2,
+      this._settings.size.width,
+      height,
+      {
+        isStatic: true,
+        isSensor: true,
+        render: {
+          // fillStyle: '#ffffff'
+          sprite: {
+            texture: '/img/Games/plinko/background.png',
+            xScale: height / 906,
+            yScale: height / 906,
+          },
+        },
+        label: 'background'
+      }
+    )
+    return [pyramid]
   }
 
   _getPegRadius(): number {
