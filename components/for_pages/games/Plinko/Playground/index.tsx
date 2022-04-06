@@ -19,7 +19,7 @@ export default function Playground(props: Props) {
     gameRef.current?.clear()
     gameRef.current = new Game({
       element: rootRef.current,
-      size: { width: 800, height: 650 },
+      width: 800,
       pegsRows: pegsRowsRef.current,
       multiplier: multiplier
     })

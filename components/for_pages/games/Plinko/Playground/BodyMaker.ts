@@ -62,7 +62,7 @@ export default class BodyMaker {
     const pegRadius = this._getPegRadius()
     const bucketSize = this.getBucketSize()
     const center = this._settings.size.width / this._settings.pegsColumns / 2
-    const bottomOffset = pegRadius + bucketSize.height + 20
+    const bottomOffset = pegRadius + bucketSize.height + 10
     const grid = Array(this._settings.pegsRows).fill(null).map(
       (value, rowIndex) => {
         const w = (this._settings.size.width - 2 * center) / this._settings.pegsColumns

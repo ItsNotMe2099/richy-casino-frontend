@@ -140,6 +140,8 @@ export const COLORS = [
   '#ff003f',
 ] as const
 
+export const CANVAS_ASPECT_RATIO = 1.24
+
 export const BUCKET_FACTOR = 1.08 // for margins between buckets
 
 export const BUCKETS_INDEXES = {

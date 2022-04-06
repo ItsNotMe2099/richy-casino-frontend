@@ -12,7 +12,7 @@ import {
 } from 'matter-js'
 import { ICasinoGameFinishEvent } from 'components/for_pages/games/data/interfaces/ICasinoGame'
 import decomp from 'poly-decomp'
-import { COORDS, BUCKET_FACTOR, COLORS, BUCKETS_INDEXES } from './constants'
+import { COORDS, BUCKET_FACTOR, COLORS, BUCKETS_INDEXES, CANVAS_ASPECT_RATIO } from './constants'
 import LabelHelper from './LabelHelper'
 import BodyMaker from './BodyMaker'
 
@@ -23,7 +23,7 @@ export interface ISize {
 
 interface IProps {
   element: HTMLDivElement
-  size: ISize
+  width: number
   pegsRows: number
   multiplier: number[]
   backgroundColor?: string
@@ -32,6 +32,9 @@ interface IProps {
 export interface ISettings extends IProps{
   pegsColumns: number
   bucketsColumns: number
+  size: ISize
+  isVerticalBucket: boolean
+  widthFactor: number
 }
 
 export default class Game {
@@ -48,10 +51,17 @@ export default class Game {
   _bodyMaker: BodyMaker
 
   constructor(props: IProps) {
+    const isVerticalBucket = props.pegsRows > 14
     this._settings = {
       ...props,
+      size: {
+        width: props.width,
+        height: props.width / CANVAS_ASPECT_RATIO,
+      },
       pegsColumns: props.pegsRows + 2,
-      bucketsColumns: props.pegsRows + 1
+      bucketsColumns: props.pegsRows + 1,
+      isVerticalBucket: isVerticalBucket,
+      widthFactor: props.pegsRows / 6,
     }
     this._bodyMaker = new BodyMaker(this._settings)
     this._engine = Engine.create(props.element)
@@ -59,8 +69,8 @@ export default class Game {
       element: props.element,
       engine: this._engine,
       options: {
-        width: props.size.width,
-        height: props.size.height,
+        width: this._settings.size.width,
+        height: this._settings.size.height,
         showDebug: false,
         wireframes: false,
         background: props.backgroundColor,
@@ -187,9 +197,10 @@ export default class Game {
 
   _bucketPlinkoCollision(bucketId: number, plinkoId: number): void {
     if (this._plinkoInProgress) {
+      const bucketSize = this._bodyMaker.getBucketSize()
       this._bucketsRow.forEach((body) => {
         if (body.label === LabelHelper.createRealBucketLabel(bucketId) || body.label === LabelHelper.createFakeBucketLabel(bucketId)) {
-          Body.translate(body, {x: 0, y: 10})
+          Body.translate(body, {x: 0, y: bucketSize.height / 12})
           this._plinkoReal.restitution = 0
           this._plinkoReal.inertia = 1
         }
