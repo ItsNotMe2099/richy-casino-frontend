@@ -12,7 +12,7 @@ import {
 } from 'matter-js'
 import { ICasinoGameFinishEvent } from 'components/for_pages/games/data/interfaces/ICasinoGame'
 import decomp from 'poly-decomp'
-import { COORDS, BUCKET_FACTOR, COLORS, BUCKETS_INDEXES, CANVAS_ASPECT_RATIO } from './constants'
+import { COORDS, BUCKET_FACTOR, BUCKETS_INDEXES, CANVAS_ASPECT_RATIO } from './constants'
 import LabelHelper from './LabelHelper'
 import BodyMaker from './BodyMaker'
 
@@ -192,8 +192,7 @@ export default class Game {
         const tmpSection = sections.findIndex(item => item > peg.position.x)
         const section = tmpSection < 0 ? 0 : tmpSection
         const indexes = BUCKETS_INDEXES[this._settings.pegsRows]
-        peg.render.sprite = null
-        peg.render.fillStyle = COLORS[indexes[section]]
+        peg.render.sprite.texture = `/img/Games/plinko/groups/${indexes[section]}/peg.png`
       }
     })
   }

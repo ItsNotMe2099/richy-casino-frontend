@@ -10,17 +10,17 @@ export default class BodyMaker {
     this._settings = setting
   }
 
-  get isVerticalBucket() {
-    return this._settings.pegsRows === 16
-  }
-
   get bucketShiftSize() {
     const bucketSize = this.getBucketSize()
     return bucketSize.height / 4
   }
 
+  get _getPegRadius(): number {
+    return Math.round(this._settings.size.height / this._settings.pegsRows / 6)
+  }
+
   makePeg(x: number, y: number, id: number): Body {
-    const radius = this._getPegRadius()
+    const radius = this._getPegRadius
     return Bodies.circle(x, y, radius, {
       isStatic: true,
       render: {
@@ -35,10 +35,9 @@ export default class BodyMaker {
   }
 
   makeRealPlinko(x: number, y: number, id: number): Body {
-    const radius = this._getPegRadius() * PLINKO_SIZE_FACTOR
+    const radius = this._getPegRadius * PLINKO_SIZE_FACTOR
     return Bodies.circle(x, y, radius, {
       restitution: 0.8,
-      inertia: 100,
       render: {
         visible: false,
         // fillStyle: `hsl(${Math.floor(360 * Math.random())}, 90%, 60%)`,
@@ -48,7 +47,7 @@ export default class BodyMaker {
   }
 
   makeFakePlinko(x: number, y: number): Body {
-    const radius = this._getPegRadius() * PLINKO_SIZE_FACTOR
+    const radius = this._getPegRadius * PLINKO_SIZE_FACTOR
     return Bodies.circle(x, y, radius, {
       isStatic: true,
       isSensor: true,
@@ -64,7 +63,7 @@ export default class BodyMaker {
   }
 
   makePegsGrid(): Body[] {
-    const pegRadius = this._getPegRadius()
+    const pegRadius = this._getPegRadius
     const bucketSize = this.getBucketSize()
     const center = this._settings.size.width / this._settings.pegsColumns / 2
     const bottomOffset = pegRadius + bucketSize.height + 10 + this.bucketShiftSize
@@ -110,7 +109,7 @@ export default class BodyMaker {
       isSensor: true,
       render: {
         sprite: {
-          texture: `/img/Games/plinko/buckets/long/${indexes[id]}.png`,
+          texture: `/img/Games/plinko/groups/${indexes[id]}/long.png`,
           xScale: size.width / 84,
           yScale: size.width / 84,
         },
@@ -121,7 +120,7 @@ export default class BodyMaker {
 
   makeOutlines(): Body[] {
     const onePegWidth = this._settings.size.width / this._settings.pegsColumns
-    const pegRadius = this._getPegRadius()
+    const pegRadius = this._getPegRadius
     const options: IChamferableBodyDefinition = {
       isStatic: true,
       render: {
@@ -195,10 +194,6 @@ export default class BodyMaker {
       }
     )
     return [pyramid]
-  }
-
-  _getPegRadius(): number {
-    return Math.round(this._settings.size.height / this._settings.pegsRows / 6)
   }
 
 }
