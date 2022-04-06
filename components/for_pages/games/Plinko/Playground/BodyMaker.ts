@@ -10,6 +10,10 @@ export default class BodyMaker {
     this._settings = setting
   }
 
+  get isVerticalBucket() {
+    return this._settings.pegsRows === 16
+  }
+
   makePeg(x: number, y: number, id: number): Body {
     const radius = this._getPegRadius()
     return Bodies.circle(x, y, radius, {
