@@ -10,8 +10,8 @@ interface IRuntimeConfig {
 }
 
 function getRuntimeConfig(): IRuntimeConfig {
-  const { publicRuntimeConfig } = getConfig()
-  return publicRuntimeConfig
+  const { publicRuntimeConfig, serverRuntimeConfig } = getConfig() ?? {}
+  return publicRuntimeConfig ?? serverRuntimeConfig
 }
 
 export const runtimeConfig = getRuntimeConfig()

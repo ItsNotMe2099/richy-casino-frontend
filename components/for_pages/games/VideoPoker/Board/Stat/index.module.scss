@@ -1,0 +1,44 @@
+@import "scss/index";
+
+
+.root{
+  display: flex;
+  flex-direction: row;
+  grid-gap: 0px 20px;
+  margin-top: 45px;
+  @media only screen and (max-width: $xs-max) {
+    margin-top: 24px;
+    flex-direction: column;
+  }
+
+}
+.left,.right{
+  display: flex;
+  flex-direction: column;
+  grid-gap: 9px 0px;
+  flex: 1;
+}
+.right{
+  @media only screen and (max-width: $xs-max) {
+    margin-top: 9px;
+  }
+}
+.item{
+  background-color: rgba(22,96,68, 0.63);
+  border-radius: 6px;
+  height: 30px;
+  padding: 0px 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  color: #649E88;
+  font-size: 16px;
+  font-weight: 500;
+  padding-top: 1px;
+
+  &.active{
+    color: $white;
+    background: linear-gradient(270deg, #2C50FF -6.01%, #4785F6 114.87%);
+  }
+}

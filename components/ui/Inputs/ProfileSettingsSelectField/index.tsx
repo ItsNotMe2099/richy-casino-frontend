@@ -4,7 +4,7 @@ import { SelectField } from 'components/ui/Inputs/SelectField'
 import classNames from 'classnames'
 
 export interface ICustomSelectViewOption extends IOption<string>{
-  
+
 }
 
 interface Props extends IField{
@@ -30,7 +30,7 @@ const Placeholder = (props: PropsOption) => {
   return (
   <div className={styles.placeholder}>
       <div className={styles.label}>{props.currentItem.label}</div>
-      <img className={classNames({[styles.reverse]: props.isActive})} 
+      <img className={classNames({[styles.reverse]: props.isActive})}
         src='/img/Select/arrow-big.svg' alt=''/>
   </div>
   )
@@ -43,7 +43,7 @@ export const ProfileSettingsSelectField = (props: Props) => {
     <div className={styles.label}>{props.inputLabel}</div>
     <SelectField options={props.options}  name={props.name} currentItemStyle={styles.current} className={styles.select}
       itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
-      activeComponent={(isActive) => <Placeholder currentItem={props.currentItem} isActive={isActive}/>}
+      activeComponent={(option, isActive) => <Placeholder currentItem={option} isActive={isActive}/>}
     />
   </div>
   )

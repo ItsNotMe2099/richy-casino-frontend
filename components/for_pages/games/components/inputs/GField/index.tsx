@@ -17,6 +17,7 @@ export interface IGFieldProps extends IField{
   disabled?: boolean
   className?: string
   inputClassName?: string
+  inputWrapperClassName?: string
   style?: 'normal' | 'currency',
   suffix?: 'clear' | 'arrow' | string | ReactElement
   labelSuffix?: string | ReactElement
@@ -65,7 +66,7 @@ export default function GField(props: IGFieldProps) {
   return (
     <div className={cx(styles.root, props.className)}>
       <GFieldLabel label={label} labelSuffix={labelSuffix} hasError={showError}/>
-      <div className={styles.inputWrapper}>
+      <div className={cx(styles.inputWrapper, props.inputWrapperClassName)}>
         <input
           {...field}
           onChange={handleChange}

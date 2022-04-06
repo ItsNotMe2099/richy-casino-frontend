@@ -7,6 +7,7 @@ import WithdrawSelect from 'components/SelectPageForms/WithdrawSelect'
 import {GetServerSideProps} from 'next'
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import styles from 'pages/selectPage/index.module.scss'
+import BuyCryptoForm from 'components/Profile/BuyCrypto/Form'
 
 export default function SelectPage() {
 
@@ -18,6 +19,7 @@ export default function SelectPage() {
         <SettingsSelect/>
         <ExchangeSelect/>
         <WithdrawSelect/>
+        <BuyCryptoForm user={null} onSubmit={null}/>
       </div>
     </Layout>
   )

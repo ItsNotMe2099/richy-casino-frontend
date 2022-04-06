@@ -41,6 +41,8 @@ export interface ICasinoGameHiloDto extends ICasinoGameDataDto {
 }
 export interface ICasinoGameBlackjackDto extends ICasinoGameDataDto {
 }
+export interface ICasinoGameVideoPokerDto extends ICasinoGameDataDto {
+}
 
 export interface ICasinoGameCoinFlipDto extends ICasinoGameDataDto {
   side: CoinType

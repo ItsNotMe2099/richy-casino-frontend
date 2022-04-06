@@ -47,8 +47,19 @@ export default function Sidebar(props: Props) {
   }
   const grid = (gameContext.turn as ICasinoGameHiloTurn)?.grid
   const startingCardIndex = grid?.length > 1 ? grid[grid.length - 1] : props.startCard
+  const renderStartedBetButtons = () => {
+    if(gameContext.started && turn){
+      return (<div className={styles.buttons}>
+        <BlackjackBetButton active type={BlackjackBetType.Stand} onClick={props.onBet}>Stand</BlackjackBetButton>
+        <BlackjackBetButton type={BlackjackBetType.Hit} onClick={props.onBet}>Hit</BlackjackBetButton>
+        <BlackjackBetButton type={BlackjackBetType.Double} disabled={turn.hasDouble  /* || ![9, 10, 11].includes(getBlackjackScore(turn.player)) */} onClick={props.onBet}>Double</BlackjackBetButton>
+        <BlackjackBetButton type={BlackjackBetType.Split} disabled={turn.split?.length > 0 || turn.player[0].blackjackValue !== turn.player[1].blackjackValue || turn.player.length !== 2} onClick={props.onBet}>Split</BlackjackBetButton>
+      </div>)
+    }
+    return null
+  }
   return (
-    <GamePageSidebarLayout>
+    <GamePageSidebarLayout className={styles.root}>
       <FormikProvider value={formik}>
         <Form>
           <HiddenXs>
@@ -56,14 +67,11 @@ export default function Sidebar(props: Props) {
               <GFieldBet/>
             </>
           </HiddenXs>
-          {gameContext.started && turn && <div className={styles.buttons}>
-            <BlackjackBetButton active type={BlackjackBetType.Stand} onClick={props.onBet}>Stand</BlackjackBetButton>
-            <BlackjackBetButton type={BlackjackBetType.Hit} onClick={props.onBet}>Hit</BlackjackBetButton>
-            <BlackjackBetButton type={BlackjackBetType.Double} disabled={turn.hasDouble  /* || ![9, 10, 11].includes(getBlackjackScore(turn.player)) */} onClick={props.onBet}>Double</BlackjackBetButton>
-            <BlackjackBetButton type={BlackjackBetType.Split} disabled={turn.split?.length > 0 || turn.player[0].blackjackValue !== turn.player[1].blackjackValue || turn.player.length !== 2} onClick={props.onBet}>Split</BlackjackBetButton>
-          </div>}
           <HiddenXs>
+            <>
             {renderBetButton()}
+            {renderStartedBetButtons()}
+            </>
           </HiddenXs>
 
           <VisibleXs>
@@ -71,6 +79,7 @@ export default function Sidebar(props: Props) {
               <GamePageBetMobileLayout>
                 <GFieldBet/>
                 {renderBetButton()}
+                {renderStartedBetButtons()}
               </GamePageBetMobileLayout>
             </>
           </VisibleXs>

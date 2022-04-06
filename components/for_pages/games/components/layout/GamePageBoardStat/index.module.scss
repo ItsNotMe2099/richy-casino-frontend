@@ -11,6 +11,7 @@
   min-width: 282px;
   opacity: 0;
   transition: opacity 0.4s ease;
+  visibility: hidden;
   @media screen and (max-width: $xs-max) {
     position: absolute;
     bottom: 50px;
@@ -18,6 +19,7 @@
     transform: translateX(50%);
   }
   &.opened{
+    visibility: visible;
     opacity: 1;
   }
 
@@ -49,12 +51,14 @@
   &.fieldAmount{
     .value{
       margin-top: 5px;
+      white-space: nowrap;
     }
   }
   &.fieldCount{
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+    line-height: 20px;
   }
 }
 .label{

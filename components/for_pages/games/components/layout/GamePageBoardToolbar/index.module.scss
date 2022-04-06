@@ -14,7 +14,7 @@
     right: 0px;
     display: flex;
     justify-content: center;
-    margin-top: 32px;
+    margin-top: 20px;
   }
   .button{
     cursor: pointer;
@@ -41,6 +41,19 @@
     }
     &:last-of-type{
       margin-right: 0px;
+    }
+  }
+  &.green{
+    .button{
+      background: #166044;
+      svg{
+        path{
+          fill: #649E88;
+        }
+        rect{
+          fill: #649E88;
+        }
+      }
     }
   }
 }

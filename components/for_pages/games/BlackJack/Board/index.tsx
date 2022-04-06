@@ -71,24 +71,28 @@ export default function Board(props: Props) {
 
 
   return (
-    <GamePageBoardLayout className={styles.layout}>
+    <GamePageBoardLayout className={styles.layout} toolbarColor={'green'}>
       <div className={styles.bg}>
         <div className={styles.top}/>
+        <div className={styles.bgText}>
+          <div className={styles.blackjackText}>Blackjack pays 3 to 2</div>
+          <div className={styles.insuranceText}>Insurance pays 2 to 1</div>
+        </div>
         <div className={styles.bottom}/>
       </div>
       <div className={styles.board}>
-        <div className={styles.deckWrapper}>
+
         {turn?.dealer?.length > 0 && <div className={classNames(styles.deck, styles.dealer)}>
-          <Deck cards={[...turn.dealer.map( i => i.index), ...(turn.dealer.length === 1 ? [0] : [])]} number={getBlackjackScore(turn.dealer)}/>
+          <Deck cards={[...turn.dealer.map( i => i.index), ...(turn.dealer.length === 1 ? [0] : [])]} withHidden={turn.dealer.length === 1} number={getBlackjackScore(turn.dealer)}/>
         </div>}
+
         <div className={styles.playerDeck}>
-        {turn?.split?.length > 0 && <div className={classNames(styles.deck, styles.split)}>
-          <Deck cards={turn.split.map( i => i.index)} number={getBlackjackScore(turn.split)}/>
-        </div>}
-        {turn?.player?.length > 0 && <div className={classNames(styles.deck, styles.player)}>
-          <Deck cards={turn.player.map( i => i.index)} number={getBlackjackScore(turn.player)}/>
-        </div>}
+         <div className={classNames(styles.deck, styles.split, {[styles.visible]: turn?.split?.length > 0 })}>
+          <Deck cards={(turn?.split?.length > 0 ? turn?.split : [{index: -1}]).map( i => i.index)} number={turn?.split.length > 0 ? getBlackjackScore(turn.split) : null}/>
         </div>
+        {turn?.player?.length > 0 && <div className={classNames(styles.deck, styles.player)}>
+          <Deck cards={turn.player.map( i => i.index)} cursor={turn?.split.length > 0} number={getBlackjackScore(turn.player)}/>
+        </div>}
         </div>
 
       </div>

@@ -20,3 +20,20 @@ export interface IBlackjackCard{
   slot: number,
   blackjackValue: number
 }
+export interface IVideoPokerCard{
+  index: number
+  type: IBlackjackCardType
+  value: string,
+  slot: number
+}
+export enum DeckRankType {
+  OnePair = 'onePair',
+  TwoPairs = 'twoPairs',
+  ThreeOfAKind = 'threeOfAKind',
+  Straight = 'straight',
+  Flush = 'flush',
+  RoyalFlush = 'royalFlush',
+  FullHouse = 'fullHouse',
+  FourOfAKind = 'fourOfAKind',
+  StraightFlush = 'straightFlush',
+}

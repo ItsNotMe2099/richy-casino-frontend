@@ -1,59 +1,81 @@
 @import "scss/index";
 .layout{
   background: #17754F;
-  min-height: 640px;
+
   display: flex;
   justify-content: stretch;
   flex-direction: row;
+  @media only screen and (max-width: $xs-max) {
+    flex-direction: column;
+    padding-bottom: 24px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+  }
 }
 .bg{
   position: absolute;
+  border-radius: 18px;
   top: 0px;
   left: 0px;
   right: 0px;
   bottom: 0px;
   z-index: 0;
+  display: flex;
+  flex-direction: column;
   .top{
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    height: 45%;
+    flex: 1;
     background-image: url('/img/Games/blackjack/bg.svg');
     background-repeat: repeat-x;
+    background-position: top center;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+  }
+  .bgText{
+    text-align: center;
+    padding: 15px 0px;
+    color: #0E6944;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    .blackJackText{
+      font-size: 16px;
+      @media only screen and (max-width: $xs-max) {
+        font-size: 15px;
+      }
+    }
+    .insuranceText{
+      margin-top: 4px;
+      font-size: 21px;
+      @media only screen and (max-width: $xs-max) {
+        font-size: 20px;
+      }
+    }
   }
   .bottom{
-    position: absolute;
-bottom: 0;
-    left: 0px;
-    right: 0px;
-    height: 45%;
+    flex: 1;
     background-image: url('/img/Games/blackjack/bg.svg');
     background-repeat: repeat-x;
+    background-position: bottom center;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
   }
-  .bottom{
 
-  }
 }
 .board{
   flex: 1;
-
   position: relative;
-  padding-bottom: 68px;
-  padding-top: 35px;
+  padding-bottom: 60px;
+  padding-top: 8px;
     display: flex;
-
-  @media only screen and (max-width: 985px) {
-    padding-bottom: 24px;
-    flex-direction: row;
-    align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  @media only screen and (max-width: $xs-max) {
+    padding-bottom: 0px;
   }
 
-}
-.deckWrapper{
-  position: relative;
-  height: 100%;
-  flex: 1;
 }
 .deck{
   display: flex;
@@ -62,23 +84,41 @@ bottom: 0;
   align-items: center;
   left: 0px;
   right: 0px;
+
   &.dealer{
-    position: absolute;
+    flex: 1;
     top: 0px;
+    @media only screen and (max-width: $xs-max) {
+      position: relative;
+    }
+  }
+  &.split{
+    visibility: hidden;
+
+    &.visible{
+      visibility: visible;
+    }
   }
 
 
 }
+.deckSeparator{
+  padding-bottom: 20%;
+  width: 100%;
+}
 .playerDeck{
-  position: absolute;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   grid-gap: 17px 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
+  margin-top: 68px;
+  @media only screen and (max-width: $xs-max) {
+    position: relative;
+    margin-top: 34px;
+    grid-gap: 16px 0px;
+  }
 }
 .tip{
   font-weight: 500;

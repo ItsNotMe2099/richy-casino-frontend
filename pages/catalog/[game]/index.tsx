@@ -27,6 +27,7 @@ import GameCoinFlip from 'components/for_pages/games/ConiFlip'
 import HiddenXs from 'components/ui/HiddenXS'
 import {GameCookiesType} from 'components/for_pages/games/data/types'
 import GameBlackJack from 'components/for_pages/games/BlackJack'
+import GameVideoPoker from 'components/for_pages/games/VideoPoker'
 interface Props{
   gameToken?: string
 }
@@ -60,6 +61,8 @@ export default function CatalogPage(props: Props) {
         return <GameCoinFlip/>
       case CasinoGameType.Blackjack:
         return <GameBlackJack/>
+      case CasinoGameType.VideoPoker:
+        return <GameVideoPoker/>
       default:
         return <GameMines/>
     }

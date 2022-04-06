@@ -60,7 +60,7 @@ const Placeholder = (props: PropsOption) => {
     </div>
     <div className={styles.balanceOption}>
       <Balance option={props.currentItem}/>
-      <img className={classNames(styles.arrow, {[styles.reverse]: props.isActive})} 
+      <img className={classNames(styles.arrow, {[styles.reverse]: props.isActive})}
         src='/img/Select/arrow-exchange.svg' alt=''/>
     </div>
   </div>
@@ -70,10 +70,10 @@ const Placeholder = (props: PropsOption) => {
 export const UserBalanceSelectField = (props: Props) => {
 
   return (
-    <SelectField options={props.options}  name={props.name} currentItemStyle={styles.current}  
+    <SelectField options={props.options}  name={props.name} currentItemStyle={styles.current}
     className={styles.select}
       itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
-      activeComponent={(isActive) => <Placeholder currentItem={props.currentItem} isActive={isActive}/>}
+      activeComponent={(option, isActive) => <Placeholder currentItem={option} isActive={isActive}/>}
       />
   )
 }

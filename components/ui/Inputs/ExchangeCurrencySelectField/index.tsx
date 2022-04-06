@@ -18,15 +18,14 @@ interface PropsOption{
   isActive?: boolean
   onClick?: () => void
   separator?: boolean
-  currentItem?: ICustomSelectViewOption
 }
 
 const Symbol = (props: PropsOption) => {
   return (
   <>
-  {props.separator && <div className={styles.separator}></div>}
+  {props.separator && <div className={styles.separator}/>}
   <div className={styles.symbol}>
-    <img src={props.option.symbol} alt=''/>
+    <img src={props.option?.symbol} alt=''/>
   </div>
   </>
   )
@@ -35,7 +34,7 @@ const Symbol = (props: PropsOption) => {
 const Option = (props: PropsOption) => {
     return (
     <div className={styles.option} onClick={props.onClick}>
-      <Symbol option={props.option}/>{props.option.label}
+      <Symbol option={props.option}/>{props.option?.label}
     </div>
     )
 }
@@ -45,10 +44,10 @@ const Placeholder = (props: PropsOption) => {
   <div className={styles.placeholder}>
     <div className={styles.group}>
       <div className={styles.separator}></div>
-      <Symbol option={props.currentItem}/>
-      {props.currentItem.label}
+      <Symbol option={props.option}/>
+      {props.option?.label}
     </div>
-    <img className={classNames(styles.arrow, {[styles.reverse]: props.isActive})} 
+    <img className={classNames(styles.arrow, {[styles.reverse]: props.isActive})}
         src='/img/Select/arrow-exchange.svg' alt=''/>
   </div>
   )
@@ -60,8 +59,8 @@ export const ExchangeCurrencySelectField = (props: Props) => {
   return (
   <SelectField className={props.className} options={props.options}  name={props.name} currentItemStyle={styles.current}
     itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
-    activeComponent={(isActive) => <Placeholder currentItem={props.currentItem} isActive={isActive}/>}
+    activeComponent={(option ,isActive) => <Placeholder option={option} isActive={isActive}/>}
   />
   )
-  
+
 }

@@ -1,0 +1,22 @@
+@import "../../../../../../scss/index";
+.root{
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: $white;
+  img{
+    margin-right: 6px;
+  }
+}
+.currency{
+  opacity: 0.5;
+}
+.green{
+  color: $pay500;
+
+}
+.red{
+  color: $lose500;
+
+}

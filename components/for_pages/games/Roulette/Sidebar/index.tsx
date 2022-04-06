@@ -10,7 +10,6 @@ import GamePageBetButton from 'components/for_pages/games/components/GamePageBet
 import GFieldMode from 'components/for_pages/games/components/inputs/GFieldMode'
 import GamePageSidebarLayout from 'components/for_pages/games/components/layout/GamePageSidebarLayout'
 import {CasinoGameModeType} from 'components/ui/Tabs'
-import styles from 'components/for_pages/games/components/inputs/GFieldMode/index.module.scss'
 import Validator from 'utils/validator'
 import {ICasinoGameDataDto} from 'components/for_pages/games/data/interfaces/ICasinoGameData'
 import {GFieldSelectChipTabs} from 'components/for_pages/games/Roulette/Sidebar/GFieldSelectChipTabs'
@@ -52,9 +51,10 @@ export default function Sidebar(props: Props) {
             <>
               <GFieldMode/>
               <GFieldBet/>
+              <GFieldSelectChipTabs label={'Цена фишки'} style={'small'} fluid name={'chip'} options={RouletteChipList} onChange={(value) => props.onChangeChip(RouletteChipList.find(i => i.value === value))} validate={Validator.required}/>
+
             </>
           </HiddenXs>
-          <GFieldSelectChipTabs label={'Цена фишки'} style={'small'} fluid className={styles.field}  name={'chip'} options={RouletteChipList} onChange={(value) => props.onChangeChip(RouletteChipList.find(i => i.value === value))} validate={Validator.required}/>
 
           {gameMode ===CasinoGameModeType.Auto && <>
             <GFieldBetAmount name={'betAmount'}/>

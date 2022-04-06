@@ -5,7 +5,7 @@ export interface IField extends FieldConfig {
   label?: string
   placeholder?: string
   type?: HTMLInputTypeAttribute
-  disable?: boolean
+  disabled?: boolean
   onChange?: (val) => void
 }
 

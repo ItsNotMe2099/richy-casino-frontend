@@ -5,9 +5,9 @@ import { NonDraggableImage } from 'components/for_pages/games/components/WheelOf
 export const RouletteContainer = styled.div`
   position: relative;
   width: 80vw;
-  max-width: 380px;
+  max-width: 450px;
   height: 80vw;
-  max-height: 380px;
+  max-height: 450px;
   object-fit: contain;
   flex-shrink: 0;
 

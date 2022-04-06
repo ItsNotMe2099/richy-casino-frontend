@@ -55,7 +55,7 @@ export default function GameRoulette(props: Props) {
     <GamePageLayout
       header={<GamePageHeader title={'Wheel of Fortune'} icon={''}/>}
       sideBar={<Sidebar initialChip={chip} onChangeChip={setChip} onSubmit={handleSubmit}/>}
-      board={<Board chip={chip} bets={bets} onBet={handleBet} onClear={handleClear} onUndo={handleUndo}/>} history={<GameHistory items={history}/>}/>
+      board={<Board initialChip={chip} onChangeChip={setChip} chip={chip} bets={bets} onBet={handleBet} onClear={handleClear} onUndo={handleUndo}/>} history={<GameHistory items={history}/>}/>
   )
 }
 

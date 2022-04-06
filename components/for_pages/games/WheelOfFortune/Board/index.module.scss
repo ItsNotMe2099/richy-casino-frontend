@@ -14,8 +14,7 @@
 }
 .wheelWrapper{
   position: relative;
-  max-width: 380px;
-  max-height: 380px;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,6 +56,7 @@
    // background: linear-gradient(0deg, rgba(255,199,0,0) 15%, rgba(255,199,0,0.2959558823529411) 20%, rgba(101,1,230,1) 50%, rgba(255,199,0,0.2987570028011205) 80%, rgba(255,199,0,0) 85%);
 margin: -32px;
   border-radius: 100%;
+  max-width: 515px;
   img{
     max-width: 100%;
   }
@@ -103,5 +103,7 @@ $offset: 0;
   right: 0px;
   top: 0px;
   bottom: 0px;
-
+img{
+  width: 100%;
+}
 }

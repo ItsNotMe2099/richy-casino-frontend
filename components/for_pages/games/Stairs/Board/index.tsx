@@ -131,7 +131,8 @@ export default function Board(props: Props) {
     </div>)
   }
   return (
-    <GamePageBoardLayout className={styles.root}>
+    <GamePageBoardLayout>
+      <div className={styles.root}>
       <VisibleXs>
         <div className={styles.multipliersMobile}>
         {[...rows].reverse().map((row, index) => renderMultiplier(rows.length - index - 1))}
@@ -140,6 +141,7 @@ export default function Board(props: Props) {
 
       <div className={styles.mines}>
         {[...rows].reverse().map(renderRow)}
+      </div>
       </div>
     </GamePageBoardLayout>
   )

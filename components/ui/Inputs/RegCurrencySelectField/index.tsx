@@ -38,7 +38,7 @@ const Placeholder = (props: PropsOption) => {
       <Symbol option={props.currentItem}/>
       {props.currentItem.label}
     </div>
-    <img className={classNames({[styles.reverse]: props.isActive})} 
+    <img className={classNames({[styles.reverse]: props.isActive})}
         src='/img/Select/arrow.svg' alt=''/>
   </div>
   )
@@ -49,7 +49,7 @@ export const RegCurrencySelectField = (props: Props) => {
   return (
   <SelectField options={props.options} name={props.name} currentItemStyle={styles.current}
     itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
-    activeComponent={(isActive) => <Placeholder currentItem={props.currentItem} isActive={isActive}/>}
+    activeComponent={(option, isActive) => <Placeholder currentItem={option} isActive={isActive}/>}
     />
   )
 }

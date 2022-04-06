@@ -65,6 +65,9 @@
   }
   .fieldChance{
     width: 246px;
+    @media only screen and (max-width: $xs-max) {
+      margin-bottom: 0px;
+    }
   }
 
 }

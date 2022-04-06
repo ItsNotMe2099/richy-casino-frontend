@@ -15,7 +15,6 @@ import Validator from 'utils/validator'
 import GamePageTakeActionButton from 'components/for_pages/games/components/GamePageFinishButton'
 import {useGameContext} from 'components/for_pages/games/context/state'
 import {GFieldSelectTabs} from 'components/for_pages/games/components/inputs/GFieldSelectTabs'
-import styles from 'components/for_pages/games/components/inputs/GFieldMode/index.module.scss'
 
 interface Props {
   onSubmit: (data: ICasinoGameDataDto) => void
@@ -56,7 +55,7 @@ export default function Sidebar(props: Props) {
               <GFieldBet/>
             </>
           </HiddenXs>
-          <GFieldSelectTabs label={'Mines'} style={'small'} fluid className={styles.field}  name={'mines'} options={Array.from({length: 4}, (_, i) => i + 1).map(i => ({value: i, label: `${i}`}))} onChange={(val) => props.onChangeTowersCount(val as number)} validate={Validator.required}/>
+          <GFieldSelectTabs label={'Mines'} style={'small'} fluid name={'mines'} options={Array.from({length: 4}, (_, i) => i + 1).map(i => ({value: i, label: `${i}`}))} onChange={(val) => props.onChangeTowersCount(val as number)} validate={Validator.required}/>
           {gameMode ===CasinoGameModeType.Auto && <>
             <GFieldBetAmount name={'betAmount'}/>
             <GFieldAutoAction typeName={'onWinType'} valueName={'onWinValue'}/>

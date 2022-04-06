@@ -30,7 +30,8 @@ export const StatItem = ({card, action, multiplier, index, lose}: PropsStatItem)
         return '/img/Games/hilo/bet_skip.svg'
     }
   }
-  return <div className={cx(styles.item, {[styles.active]: !lose && typeof card !== 'undefined', [styles.lose]: lose })} data-stat-item={index}>
+  console.log('DeckCard', typeof card !== 'undefined' )
+  return <div className={cx(styles.item, {[styles.active]: !lose && card > 0, [styles.lose]: lose })} data-stat-item={index}>
     <div className={styles.card}><GameCard backStyle={'dark'} card={card}/>
       {action && <img className={styles.action} src={getIcon()}/>}
     </div>

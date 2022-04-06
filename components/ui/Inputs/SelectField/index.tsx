@@ -11,7 +11,7 @@ interface Props<T> {
   className?: string
   currentItemStyle?: string
   itemComponent?: (option: IOption<T> , isActive: boolean, onClick: () => void) => ReactElement
-  activeComponent?: (isActive?: boolean, option?: IOption<T>) => ReactElement
+  activeComponent?: (option?: IOption<T>, isActive?: boolean) => ReactElement
 }
 
 export  function SelectField<T>(props: Props<T> & FieldConfig){
@@ -23,7 +23,9 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
   const handleClick = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     setIsActive(!isActive)
+    console.log('HandleClick', !isActive)
   }
   const handleChange = (value) => {
     if(disabled){
@@ -39,15 +41,16 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
   return (
     <div className={classNames(styles.root, {[styles.hasError]: !!meta.error && meta.touched}, className)}>
       <div onClick={handleClick} className={classNames(styles.dropDownTrigger, currentItemStyle)}>
-        {props.activeComponent(isActive)}
-      <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
+        {props.activeComponent ? props.activeComponent(currentItem, isActive) : null}
+      <div ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
        {options.map((item, index) => props.itemComponent ? props.itemComponent(item, currentItem?.value === item.value, () => handleChange(item.value)) :
        <div key={index}
          className={classNames(styles.option, {[styles.optionActive]: currentItem?.value === item.value })} onClick={() => handleChange(item.value)}>
           <div className={styles.name}>{item.label}</div>
        </div>)}
-       </nav>
+       </div>
       </div>
+
     </div>
   )
 }

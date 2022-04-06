@@ -13,7 +13,7 @@ export enum CasinoGameType {
   Roulette = 'roulette',
   Stairs = 'stairs',
   Tower = 'tower',
-  VideoPoker = 'videoPoker',
+  VideoPoker = 'videopoker',
   Wheel = 'wheel',
 }
 
