@@ -19,14 +19,21 @@ export default class BodyMaker {
   }
 
   get bucketSize(): ISize {
-    const onePegWidth = this._settings.size.width / this._settings.pegsColumns
-    const widthRow = this._settings.size.width - onePegWidth
-    const width = widthRow / this._settings.pegsColumns
+    const innerColumn = this._innerWidth / this._settings.pegsColumns
     const aspectRatio = this._settings.isVerticalBucket ? 0.65 : 1.29
     return {
-      width: width / BUCKET_FACTOR,
-      height: width / aspectRatio / BUCKET_FACTOR,
+      width: innerColumn / BUCKET_FACTOR,
+      height: innerColumn / aspectRatio / BUCKET_FACTOR,
     }
+  }
+
+  get _sidePadding(): number {
+    const offsetFactor = this._settings.isVerticalBucket ? 1 : 0.5 // the more the narrower
+    return this._settings.size.width / this._settings.pegsColumns * offsetFactor
+  }
+
+  get _innerWidth(): number {
+    return this._settings.size.width - 2 * this._sidePadding
   }
 
   makePeg(x: number, y: number, id: number): Body {
@@ -75,16 +82,15 @@ export default class BodyMaker {
   makePegsGrid(): Body[] {
     const pegRadius = this._pegRadius
     const bucketSize = this.bucketSize
-    const halfColumn = this._settings.size.width / this._settings.pegsColumns / 2
     const bottomOffset = pegRadius + bucketSize.height + 10 + this.bucketShiftSize
     const grid = Array(this._settings.pegsRows).fill(null).map(
       (value, rowIndex) => {
-        const innerColumn = (this._settings.size.width - 2 * halfColumn) / this._settings.pegsColumns
+        const innerColumn = this._innerWidth / this._settings.pegsColumns
         const h = (this._settings.size.height - bottomOffset) / this._settings.pegsRows
-        const n = innerColumn * (this._settings.pegsRows - rowIndex - 1) / 2
+        const freeSpace = innerColumn * (this._settings.pegsRows - rowIndex - 1) / 2
         return Array(rowIndex + 3).fill(null).map((valueInner, indexInner) =>
           this.makePeg(
-            halfColumn + innerColumn * indexInner + innerColumn / 2 + n,
+            this._sidePadding + innerColumn * indexInner + innerColumn / 2 + freeSpace,
             h * (rowIndex + 1),
             rowIndex * 1000 + indexInner,
           )
@@ -139,7 +145,6 @@ export default class BodyMaker {
   }
 
   makeOutlines(): Body[] {
-    const onePegWidth = this._settings.size.width / this._settings.pegsColumns
     const options: IChamferableBodyDefinition = {
       isStatic: true,
       render: {
@@ -147,16 +152,16 @@ export default class BodyMaker {
         fillStyle: '#ffffff',
       }
     }
-    const extraOffset = 2 // plinko stuck in corners
+    const offset = this._sidePadding + this._innerWidth / this._settings.pegsColumns / 2 - this._pegRadius
     const leftSide = Bodies.rectangle(
-      onePegWidth - this._pegRadius * PLINKO_SIZE_FACTOR + extraOffset,
+      offset,
       this._settings.size.height / 2,
       1,
       this._settings.size.height,
       options
     )
     const rightSide = Bodies.rectangle(
-      this._settings.size.width - onePegWidth + this._pegRadius * PLINKO_SIZE_FACTOR - extraOffset,
+      this._settings.size.width - offset,
       this._settings.size.height / 2,
       1,
       this._settings.size.height,
@@ -168,9 +173,8 @@ export default class BodyMaker {
   makeBucketsRow(): Body[] {
     const y = this._settings.size.height - this.bucketSize.height / 2 - this.bucketShiftSize
     const arrs = Array(this._settings.bucketsColumns).fill(null).map((value, index) => {
-      const x = this.bucketSize.width * BUCKET_FACTOR * index
-        + this.bucketSize.width * BUCKET_FACTOR
-        + (this._settings.size.width / this._settings.pegsColumns / 2)
+      const innerColumn = this._innerWidth / this._settings.pegsColumns
+      const x = this._sidePadding + innerColumn * index + this.bucketSize.width + this._pegRadius / 2
       return [
         this.makeRealBucket(x, y, index),
         this.makeFakeBucket(x, y, index)
