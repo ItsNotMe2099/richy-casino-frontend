@@ -14,8 +14,9 @@ export default function Playground(props: Props) {
   const rootRef = useRef<HTMLDivElement>()
   const gameRef = useRef<Game>()
   const pegsRowsRef = useRef<number>(props.pegsRows)
+  const difficultyRef = useRef<string>(props.difficulty)
   const createGame = () => {
-    const multiplier = gameContext.game.multipliers[props.difficulty][pegsRowsRef.current] as number[]
+    const multiplier = gameContext.game.multipliers[difficultyRef.current][pegsRowsRef.current] as number[]
     gameRef.current?.clear()
     gameRef.current = new Game({
       element: rootRef.current,
@@ -27,11 +28,16 @@ export default function Playground(props: Props) {
   }
 
   useEffect(() => {
-    if ((rootRef.current && !gameRef.current) || (pegsRowsRef.current != props.pegsRows)) {
+    if (
+      (rootRef.current && !gameRef.current)
+      || (pegsRowsRef.current != props.pegsRows)
+      || (difficultyRef.current != props.difficulty)
+    ) {
       pegsRowsRef.current = props.pegsRows
+      difficultyRef.current = props.difficulty
       createGame()
     }
-  }, [rootRef.current, props.pegsRows])
+  }, [rootRef.current, props.pegsRows, props.difficulty])
 
   useEffect(() => {
     createGame()
