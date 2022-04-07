@@ -42,7 +42,9 @@ export default function Board(props: Props) {
   useEffect(() => {
     const subscriptionGame = gameContext.gameState$.subscribe((data: ICasinoGameFinishEvent) => {
       setResult(data)
-      gameContext.setShowResultModal(true)
+      if(data) {
+        gameContext.setShowResultModal(true)
+      }
     })
     const subscriptionRound = gameContext.turnState$.subscribe((data: ICasinoGameTurn) => {
       setTurn(data)
@@ -67,7 +69,7 @@ export default function Board(props: Props) {
     }
   }, [])
   const handleClick = (row, key) => {
-    if ((turn && [CasinoGameRoundTurnType.Finish, CasinoGameRoundTurnType.Lose].includes(turn?.type)) || !gameContext.roundId || (row !== (turn?.turn ?? 0))) {
+    if ((turn && [CasinoGameRoundTurnType.Finish, CasinoGameRoundTurnType.Lose].includes(turn?.type)) || !gameContext.roundId || (row !== (turn?.turn ?? 0))  || !gameContext.started) {
       return
     }
     gameContext.newTurn({cell: key})

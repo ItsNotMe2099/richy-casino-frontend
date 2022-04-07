@@ -27,6 +27,9 @@ export default function Board(props: Props) {
   useEffect(() => {
     const subscriptionGame = gameContext.gameState$.subscribe((data: ICasinoGameFinishEvent) => {
       setResult(data)
+      if(data) {
+        gameContext.setShowResultModal(true)
+      }
     })
     const subscriptionRound = gameContext.turnState$.subscribe((data: ICasinoGameTurn) => {
       setTurn(data)
@@ -51,7 +54,7 @@ export default function Board(props: Props) {
     }
   }, [])
   const handleClick = (key) => {
-    if ((turn && [CasinoGameRoundTurnType.Finish, CasinoGameRoundTurnType.Lose].includes(turn?.type)) || !gameContext.roundId) {
+    if ((turn && [CasinoGameRoundTurnType.Finish, CasinoGameRoundTurnType.Lose].includes(turn?.type)) || !gameContext.roundId || !gameContext.started) {
       return
     }
     gameContext.newTurn({cell: key})

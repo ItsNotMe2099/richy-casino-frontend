@@ -4,6 +4,10 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  margin-top: 10px;
+  @media only screen and (max-width: $xs-max) {
+    margin-top: 17px;
+  }
 }
 .wheel{
   position: relative;

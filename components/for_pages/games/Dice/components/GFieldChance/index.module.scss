@@ -1,6 +1,6 @@
 @import "scss/index";
 .input{
-  padding-right: 156px;
+  padding-right: 201px !important;
 }
 
 .buttons{
@@ -15,6 +15,10 @@
   .percent{
     color: $pay500;
     padding-right: 15px;
+    padding-left: 2px;
+    @media screen and (max-width: $xs-max) {
+      padding-top: 2px;
+    }
   }
   .button{
     &:first-of-type{
@@ -39,6 +43,11 @@
   margin: 0px 1px;
   color: $dark100;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  @media only screen and (max-width: $xs-max) {
+
+  }
   &:hover{
     color: $white;
   }

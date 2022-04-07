@@ -23,6 +23,9 @@
     &:hover{
       background-image: url('/img/Games/keno/item_active.svg');
       color: #C6C9E8;
+      @media screen and (max-width: $xs-max){
+        background-image: url('/img/Games/keno/item_unactive.svg');
+      }
     }
   }
   &.active{

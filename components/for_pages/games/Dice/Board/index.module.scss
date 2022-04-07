@@ -1,5 +1,13 @@
 @import "scss/index";
-.form{
+.layout{
+  padding-top: 40px;
+  overflow: hidden;
+  @media only screen and (max-width: $xs-max) {
+    padding-top: 30px;
+  }
+}
+.board{
+
 
 }
 
@@ -42,29 +50,32 @@
   margin-top: 47px;
   display: flex;
   margin-bottom: 40px;
-
+  flex-direction: row;
+  justify-content: center;
+  grid-gap: 16px;
   .subFields{
-    flex: 1;
     display: flex;
     flex-direction: row;
+    grid-gap: 0px 16px;
     @media only screen and (max-width: $xs-max) {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-gap: 12px;
+      grid-gap: 0px 12px;
+    }
+    .field{
+      max-width: 154px;
+      @media only screen and (max-width: $xs-max) {
+        max-width: unset;
+      }
     }
   }
   @media only screen and (max-width: $xs-max) {
     display: block;
     margin-bottom: 0px;
   }
-  .fieldRoll{
-    padding: 0px 16px;
-    @media only screen and (max-width: $xs-max) {
-      padding: 0px;
-    }
-  }
+
   .fieldChance{
-    width: 246px;
+    width: 250px;
     @media only screen and (max-width: $xs-max) {
       margin-bottom: 0px;
     }

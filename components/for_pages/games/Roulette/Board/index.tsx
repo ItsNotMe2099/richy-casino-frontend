@@ -61,7 +61,7 @@ export default function Board(props: Props) {
         <WheelCanvas width={'600px'} height={'600px'} number={result?.data.slot} hasResult={!!result}/>
         </div>
 
-        <div className={styles.totalBet}>Общая ставка <span className={styles.bet}>{Object.keys(props.bets).map(i => props.bets[i]).reduce((a, b) => a + b, 0).toFixed(8)}</span> {gameContext.user?.currency?.toUpperCase() ?? ''}</div>
+        <div className={styles.totalBet}>Общая ставка <span className={styles.bet}>{Object.keys(props.bets).map(i => props.bets[i].reduce((a, b) => a + b, 0)).reduce((a, b) => a + b, 0).toFixed(8)}</span> {gameContext.user?.currency?.toUpperCase() ?? ''}</div>
         <VisibleXs>
           <FormikProvider value={formik}>
             <GFieldSelectChipTabs label={'Цена фишки'} style={'small'} className={styles.chipFields} fluid name={'chip'} options={RouletteChipList} onChange={(value) => props.onChangeChip(RouletteChipList.find(i => i.value === value))} validate={Validator.required}/>

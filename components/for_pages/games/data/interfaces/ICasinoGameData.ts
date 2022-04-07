@@ -1,6 +1,7 @@
 import {CasinoGameType} from 'components/for_pages/games/data/enums'
 import {CasinoGameModeType} from 'components/ui/Tabs'
 import {CoinType} from 'components/for_pages/games/ConiFlip/data/enums'
+import {RouletteBets} from 'components/for_pages/games/Roulette/data/enums'
 
 export interface ICasinoGameDataDto {
   gameMode: CasinoGameModeType
@@ -31,7 +32,7 @@ export interface ICasinoGameMinesDto extends ICasinoGameDataDto {
 }
 export interface ICasinoGameRouletteDto extends ICasinoGameDataDto {
   // Ставки
- bets: {[key: string]: number}
+ bets: RouletteBets
 }
 export interface ICasinoDiamondsDto extends ICasinoGameDataDto {
 

@@ -17,6 +17,7 @@ import {useGameContext} from 'components/for_pages/games/context/state'
 import {GFieldSelectTabs} from 'components/for_pages/games/components/inputs/GFieldSelectTabs'
 
 interface Props {
+  initialMinesCount: number
   onSubmit: (data: ICasinoGameDataDto) => void
   onChangeTowersCount: (count: number) => void
 }
@@ -36,7 +37,7 @@ export default function Sidebar(props: Props) {
       onWinValue: null,
       onLooseType: null,
       onLooseValue: null,
-      mines: 1
+      mines: props.initialMinesCount
     },
     onSubmit,
   })
@@ -55,7 +56,7 @@ export default function Sidebar(props: Props) {
               <GFieldBet/>
             </>
           </HiddenXs>
-          <GFieldSelectTabs label={'Mines'} style={'small'} fluid name={'mines'} options={Array.from({length: 4}, (_, i) => i + 1).map(i => ({value: i, label: `${i}`}))} onChange={(val) => props.onChangeTowersCount(val as number)} validate={Validator.required}/>
+          <GFieldSelectTabs label={'Mines'} style={'small'} fluid disabled={gameContext.started}  name={'mines'} options={Array.from({length: 4}, (_, i) => i + 1).map(i => ({value: i, label: `${i}`}))} onChange={(val) => props.onChangeTowersCount(val as number)} validate={Validator.required}/>
           {gameMode ===CasinoGameModeType.Auto && <>
             <GFieldBetAmount name={'betAmount'}/>
             <GFieldAutoAction typeName={'onWinType'} valueName={'onWinValue'}/>

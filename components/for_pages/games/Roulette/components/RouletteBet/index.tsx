@@ -8,6 +8,7 @@ interface Props {
   label: string
   isActive?: boolean
   onClick?: () => void
+  index?: number
 }
 
 export const RouletteBet = (props: Props) => {
@@ -15,7 +16,7 @@ export const RouletteBet = (props: Props) => {
   return (
     <div className={cx(styles.root, className, {
       [styles.active]: isActive,
-    })} onClick={onClick}>
+    })} onClick={onClick} style={props.index >= 1 ? {marginTop: `-${props.index * 0.3}rem`} : {}}>
       <div className={cx(styles.chip, {
         [styles.blue]: type === RouletteBetType.Blue,
         [styles.green]: type === RouletteBetType.Green,

@@ -80,16 +80,16 @@ export default function Board(props: Props) {
     setDiceProfit(values.target, newValue)
   }
   return (
-    <GamePageBoardLayout>
+    <GamePageBoardLayout className={styles.layout}>
         <div className={styles.diceContainer}>
-            <div className='dice' style={{ backgroundImage: 'url()' }} />
+
           </div>
       {result?.data && <DiceProgressResult value={result.data.value} isWin={result.win}/>}
               <GDiceProgressBar className={styles.progressBar} maxValue={99} minValue={2}  state={values.target} name={'value'} onChange={handleChangeValueByProgressBar}/>
               <div className={styles.fields}>
                 <div className={styles.subFields}>
-                <GField name={'payout'} disabled label={'Выплата'} suffix={'clear'}/>
-                <GField name={'value'} onChange={handleChangeValue} className={styles.fieldRoll} label={values.target === 'lower' ? 'Прокрутить вниз' : 'Прокрутить вверх'} suffix={<img onClick={handleChangeTarget} className={styles.exchangeSuffix} src={'/img/Games/exchange.svg'}/>}/>
+                <GField name={'payout'} disabled label={'Выплата'}  className={styles.field}  suffix={'clear'}/>
+                <GField name={'value'} onChange={handleChangeValue} className={styles.field} label={values.target === 'lower' ? 'Прокрутить вниз' : 'Прокрутить вверх'} suffix={<img onClick={handleChangeTarget} className={styles.exchangeSuffix} src={'/img/Games/exchange.svg'}/>}/>
                 </div>
                 <GFieldChance name={'chance'} onChange={handleChangeChance}  className={styles.fieldChance} label={'Шанс выиграть'} min={1} max={98}/>
               </div>

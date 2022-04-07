@@ -17,6 +17,7 @@ import {useGameContext} from 'components/for_pages/games/context/state'
 import GamePageTakeActionButton from 'components/for_pages/games/components/GamePageFinishButton'
 
 interface Props {
+  initialMinesCount: number
   onSubmit: (data: ICasinoGameDataDto) => void
   onChangeMinesCount: (count: number) => void
 }
@@ -36,7 +37,7 @@ export default function Sidebar(props: Props) {
       onWinValue: null,
       onLooseType: null,
       onLooseValue: null,
-      mines: 3
+      mines: props.initialMinesCount
     },
     onSubmit,
   })
@@ -60,7 +61,7 @@ export default function Sidebar(props: Props) {
               <GFieldBet/>
             </>
           </HiddenXs>
-          <GField name={'mines'}  label={'Mines'} suffix={'arrow'} type={'number'} validate={Validator.combine([Validator.required, validateMines])} onChange={(val) => props.onChangeMinesCount(val as number)}/>
+          <GField name={'mines'}  label={'Mines'} suffix={'arrow'}  disabled={gameContext.started}  type={'number'} validate={Validator.combine([Validator.required, validateMines])} onChange={(val) => props.onChangeMinesCount(val as number)}/>
           {gameMode ===CasinoGameModeType.Auto && <>
             <GFieldBetAmount name={'betAmount'}/>
             <GFieldAutoAction typeName={'onWinType'} valueName={'onWinValue'}/>
