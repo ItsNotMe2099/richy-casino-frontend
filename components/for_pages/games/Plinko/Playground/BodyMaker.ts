@@ -11,16 +11,26 @@ export default class BodyMaker {
   }
 
   get bucketShiftSize() {
-    const bucketSize = this.getBucketSize()
-    return bucketSize.height / 4
+    return this._settings.isVerticalBucket ? this.bucketSize.height / 6 : this.bucketSize.height / 4
   }
 
-  get _getPegRadius(): number {
+  get _pegRadius(): number {
     return Math.round(this._settings.size.height / this._settings.pegsRows / 6)
   }
 
+  get bucketSize(): ISize {
+    const onePegWidth = this._settings.size.width / this._settings.pegsColumns
+    const widthRow = this._settings.size.width - onePegWidth
+    const width = widthRow / this._settings.pegsColumns
+    const aspectRatio = this._settings.isVerticalBucket ? 0.65 : 1.29
+    return {
+      width: width / BUCKET_FACTOR,
+      height: width / aspectRatio / BUCKET_FACTOR,
+    }
+  }
+
   makePeg(x: number, y: number, id: number): Body {
-    const radius = this._getPegRadius
+    const radius = this._pegRadius
     return Bodies.circle(x, y, radius, {
       isStatic: true,
       render: {
@@ -35,7 +45,7 @@ export default class BodyMaker {
   }
 
   makeRealPlinko(x: number, y: number, id: number): Body {
-    const radius = this._getPegRadius * PLINKO_SIZE_FACTOR
+    const radius = this._pegRadius * PLINKO_SIZE_FACTOR
     return Bodies.circle(x, y, radius, {
       restitution: 0.8,
       render: {
@@ -47,7 +57,7 @@ export default class BodyMaker {
   }
 
   makeFakePlinko(x: number, y: number): Body {
-    const radius = this._getPegRadius * PLINKO_SIZE_FACTOR
+    const radius = this._pegRadius * PLINKO_SIZE_FACTOR
     return Bodies.circle(x, y, radius, {
       isStatic: true,
       isSensor: true,
@@ -63,17 +73,21 @@ export default class BodyMaker {
   }
 
   makePegsGrid(): Body[] {
-    const pegRadius = this._getPegRadius
-    const bucketSize = this.getBucketSize()
-    const center = this._settings.size.width / this._settings.pegsColumns / 2
+    const pegRadius = this._pegRadius
+    const bucketSize = this.bucketSize
+    const halfColumn = this._settings.size.width / this._settings.pegsColumns / 2
     const bottomOffset = pegRadius + bucketSize.height + 10 + this.bucketShiftSize
     const grid = Array(this._settings.pegsRows).fill(null).map(
       (value, rowIndex) => {
-        const w = (this._settings.size.width - 2 * center) / this._settings.pegsColumns
+        const innerColumn = (this._settings.size.width - 2 * halfColumn) / this._settings.pegsColumns
         const h = (this._settings.size.height - bottomOffset) / this._settings.pegsRows
-        const n = w * (this._settings.pegsRows - rowIndex - 1) / 2
+        const n = innerColumn * (this._settings.pegsRows - rowIndex - 1) / 2
         return Array(rowIndex + 3).fill(null).map((valueInner, indexInner) =>
-          this.makePeg(center + w * indexInner + w / 2 + n, h * (rowIndex + 1), rowIndex * 1000 + indexInner)
+          this.makePeg(
+            halfColumn + innerColumn * indexInner + innerColumn / 2 + n,
+            h * (rowIndex + 1),
+            rowIndex * 1000 + indexInner,
+          )
         )
       }
     )
@@ -81,12 +95,13 @@ export default class BodyMaker {
   }
 
   makeRealBucket(x: number, y: number, id: number): Body {
-    const size = this.getBucketSize()
+    const size = this.bucketSize
+    const dy = this._settings.isVerticalBucket ? size.height / 12 : size.height / 5
     return Bodies.fromVertices(x, y, [
       [
         Vector.create(0, 0),
-        Vector.create(size.width / 2.4, size.height / 5),
-        Vector.create(size.width - size.width / 2.4, size.height / 5),
+        Vector.create(size.width / 2.4, dy),
+        Vector.create(size.width - size.width / 2.4, dy),
         Vector.create(size.width, 0),
         Vector.create(size.width, size.height),
         Vector.create(0, size.height),
@@ -95,7 +110,7 @@ export default class BodyMaker {
       isStatic: true,
       render: {
         visible: false,
-        fillStyle: `hsl(${Math.floor(360 * Math.random())}, 90%, 60%)`,
+        fillStyle: '#ffffff',
       },
       label: LabelHelper.createRealBucketLabel(id)
     })
@@ -103,12 +118,17 @@ export default class BodyMaker {
 
   makeFakeBucket(x: number, y: number, id: number): Body {
     const indexes: number[] = BUCKETS_INDEXES[this._settings.pegsRows]
-    const size = this.getBucketSize()
+    const size = this.bucketSize
     return Bodies.rectangle(x, y, size.width, size.height, {
       isStatic: true,
       isSensor: true,
       render: {
-        sprite: {
+        // fillStyle: '#ffffff'
+        sprite: this._settings.isVerticalBucket ? {
+          texture: `/img/Games/plinko/groups/${indexes[id]}/short_w.png`,
+          xScale: size.width / 57,
+          yScale: size.width / 57,
+        } : {
           texture: `/img/Games/plinko/groups/${indexes[id]}/long.png`,
           xScale: size.width / 84,
           yScale: size.width / 84,
@@ -120,7 +140,6 @@ export default class BodyMaker {
 
   makeOutlines(): Body[] {
     const onePegWidth = this._settings.size.width / this._settings.pegsColumns
-    const pegRadius = this._getPegRadius
     const options: IChamferableBodyDefinition = {
       isStatic: true,
       render: {
@@ -130,14 +149,14 @@ export default class BodyMaker {
     }
     const extraOffset = 2 // plinko stuck in corners
     const leftSide = Bodies.rectangle(
-      onePegWidth - pegRadius * PLINKO_SIZE_FACTOR + extraOffset,
+      onePegWidth - this._pegRadius * PLINKO_SIZE_FACTOR + extraOffset,
       this._settings.size.height / 2,
       1,
       this._settings.size.height,
       options
     )
     const rightSide = Bodies.rectangle(
-      this._settings.size.width - onePegWidth + pegRadius * PLINKO_SIZE_FACTOR - extraOffset,
+      this._settings.size.width - onePegWidth + this._pegRadius * PLINKO_SIZE_FACTOR - extraOffset,
       this._settings.size.height / 2,
       1,
       this._settings.size.height,
@@ -146,23 +165,11 @@ export default class BodyMaker {
     return [leftSide, rightSide]
   }
 
-  getBucketSize(): ISize {
-    const onePegWidth = this._settings.size.width / this._settings.pegsColumns
-    const widthRow = this._settings.size.width - onePegWidth
-    const width = widthRow / this._settings.pegsColumns
-    const aspectRatio = 1.29
-    return {
-      width: width / BUCKET_FACTOR,
-      height: width / aspectRatio / BUCKET_FACTOR,
-    }
-  }
-
   makeBucketsRow(): Body[] {
-    const size = this.getBucketSize()
-    const y = this._settings.size.height - size.height / 2 - this.bucketShiftSize
+    const y = this._settings.size.height - this.bucketSize.height / 2 - this.bucketShiftSize
     const arrs = Array(this._settings.bucketsColumns).fill(null).map((value, index) => {
-      const x = size.width * BUCKET_FACTOR * index
-        + size.width * BUCKET_FACTOR
+      const x = this.bucketSize.width * BUCKET_FACTOR * index
+        + this.bucketSize.width * BUCKET_FACTOR
         + (this._settings.size.width / this._settings.pegsColumns / 2)
       return [
         this.makeRealBucket(x, y, index),
@@ -186,8 +193,8 @@ export default class BodyMaker {
           // fillStyle: '#ffffff'
           sprite: {
             texture: '/img/Games/plinko/background.png',
-            xScale: height / 906,
-            yScale: height / 906,
+            xScale: height / 617,
+            yScale: height / 617,
           },
         },
         label: 'background'

@@ -145,13 +145,29 @@ export default class Game {
         const id = LabelHelper.getId(body.label)
         const width = body.bounds.max.x - body.bounds.min.x
         const height = body.bounds.max.y - body.bounds.min.y
-        const extraOffsetY = height / 7
-        const center = Vector.create(body.bounds.min.x + width / 2, body.bounds.min.y + height / 2 + extraOffsetY)
+        const extraOffsetY = this._settings.isVerticalBucket ? 0 : height / 7
+        const extraOffsetX = this._settings.isVerticalBucket ? -width / 10 : 0
+        const center = Vector.create(
+          body.bounds.min.x + width / 2 + extraOffsetX,
+          body.bounds.min.y + height / 2 + extraOffsetY,
+        )
         const ctx = this._render.context
+        ctx.translate(center.x, center.y)
+
+        if (this._settings.isVerticalBucket) {
+          ctx.rotate(Math.PI / 2)
+        }
+
         ctx.font = 'bold 12px Gilroy'
         ctx.fillStyle = '#ffffff'
         ctx.textAlign = 'center'
-        ctx.fillText(`${this._settings.multiplier[id]}x`, center.x, center.y)
+        ctx.fillText(`${this._settings.multiplier[id]}x`, 0, 0)
+
+        if (this._settings.isVerticalBucket) {
+          ctx.rotate(-Math.PI / 2)
+        }
+
+        ctx.translate(-center.x, -center.y)
       }
     })
   }
@@ -183,10 +199,9 @@ export default class Game {
   _coloringPeg(id: number) {
     this._pegsGrid.forEach(peg => {
       if (peg.label === LabelHelper.createPegLabel(id)) {
-        const size = this._bodyMaker.getBucketSize()
         const sections = Array(this._settings.bucketsColumns).fill(null).map((value, index) => {
-          return size.width * BUCKET_FACTOR * index
-            + size.width * BUCKET_FACTOR
+          return this._bodyMaker.bucketSize.width * BUCKET_FACTOR * index
+            + this._bodyMaker.bucketSize.width * BUCKET_FACTOR
             + (this._settings.size.width / this._settings.pegsColumns)
         })
         const tmpSection = sections.findIndex(item => item > peg.position.x)
@@ -200,7 +215,7 @@ export default class Game {
   _bucketPlinkoCollision(bucketId: number, plinkoId: number): void {
     if (this._plinkoInProgress) {
       this._bucketsRow.forEach((body) => {
-        if (body.label === LabelHelper.createRealBucketLabel(bucketId) || body.label === LabelHelper.createFakeBucketLabel(bucketId)) {
+        if (LabelHelper.getId(body.label) === bucketId) {
           Body.translate(body, {x: 0, y: this._bodyMaker.bucketShiftSize})
           this._plinkoReal.restitution = 0
           this._plinkoReal.inertia = 1
