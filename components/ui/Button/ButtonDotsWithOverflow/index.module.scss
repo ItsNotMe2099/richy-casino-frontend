@@ -1,7 +1,7 @@
 @import "scss/index";
 
 .root{
-  position: relative;
+  
 }
 
 .dots{
@@ -15,6 +15,7 @@
 }
 
 .dropDownTrigger{
+  position: relative;
   width: 50px;
   height: 35px;
   display: flex;
@@ -33,16 +34,15 @@
   visibility: hidden;
   border-radius: 3px;
   z-index: 10;
-  min-width: 150px;
   display: flex;
   flex-direction: column;
-  right: 0px;
+  right: 0;
+  margin-right: 10px;
   a{
     color: #fff !important;
     padding: 5px 10px;
     width: 100%;
     display: flex;
-    justify-content: center;
     &:hover{
       background: #41424F;
     }
@@ -55,7 +55,6 @@
   transform: translateY(0);
   background: $dark500;
   border-radius: 3px;
-  min-width: 150px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -81,5 +80,5 @@
   height: 22px;
   background: #2D2E38;
   top: -12px;
-  left: 45%;
+  left: 50%;
 }
