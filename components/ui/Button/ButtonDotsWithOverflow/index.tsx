@@ -27,9 +27,10 @@ export const ButtonDotsWithOverflow = (props: Props, ref) => {
         <div className={styles.dots}>
           <Dots/>
         </div>
+        <div className={classNames(styles.triangle, {[styles.none]: !isActive})}></div>
       </div>
+
       <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
-        <div className={styles.triangle}></div>
         {props.children && props.children}
       </nav>
     </div>
