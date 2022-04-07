@@ -64,11 +64,7 @@ export default class Game {
     }
     this._bodyMaker = new BodyMaker(this._settings)
     this._engine = Engine.create(props.element)
-    this._engine.gravity = {
-      x: 0,
-      y: 1,
-      scale: 0.0009,
-    }
+    this._engine.velocityIterations = 50
     this._render = Render.create({
       element: props.element,
       engine: this._engine,
