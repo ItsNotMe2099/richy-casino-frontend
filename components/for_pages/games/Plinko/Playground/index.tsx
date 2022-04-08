@@ -11,7 +11,7 @@ interface Props {
 
 export default function Playground(props: Props) {
   const gameContext = useGameContext()
-  const rootRef = useRef<HTMLDivElement>()
+  const canvasWrapperRef = useRef<HTMLDivElement>()
   const gameRef = useRef<Game>()
   const pegsRowsRef = useRef<number>(props.pegsRows)
   const difficultyRef = useRef<string>(props.difficulty)
@@ -19,7 +19,7 @@ export default function Playground(props: Props) {
     const multiplier = gameContext.game.multipliers[difficultyRef.current][pegsRowsRef.current] as number[]
     gameRef.current?.clear()
     gameRef.current = new Game({
-      element: rootRef.current,
+      element: canvasWrapperRef.current,
       width: 800,
       pegsRows: pegsRowsRef.current,
       multiplier: multiplier
@@ -29,7 +29,7 @@ export default function Playground(props: Props) {
 
   useEffect(() => {
     if (
-      (rootRef.current && !gameRef.current)
+      (canvasWrapperRef.current && !gameRef.current)
       || (pegsRowsRef.current != props.pegsRows)
       || (difficultyRef.current != props.difficulty)
     ) {
@@ -37,7 +37,7 @@ export default function Playground(props: Props) {
       difficultyRef.current = props.difficulty
       createGame()
     }
-  }, [rootRef.current, props.pegsRows, props.difficulty])
+  }, [canvasWrapperRef.current, props.pegsRows, props.difficulty])
 
   useEffect(() => {
     createGame()
@@ -57,7 +57,10 @@ export default function Playground(props: Props) {
 
   return (
     <GamePageBoardLayout>
-      <div ref={rootRef} className={styles.root} />
+      <div className={styles.root}>
+        <div ref={canvasWrapperRef} className={styles.canvasWrapper} />
+        <img src="/img/Games/plinko/ground.png" alt="" className={styles.ground}/>
+      </div>
     </GamePageBoardLayout>
   )
 }
