@@ -1,12 +1,21 @@
 @import "scss/index";
-.board{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: fit-content!important;
-  height: fit-content!important;
+
+.root{
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.canvasWrapper{
   canvas{
-    width: 100%;
+    max-width: 100%;
   }
 }
 
+.ground{
+  display: block;
+  width: 100%;
+  margin-top: 40px;
+  @media (max-width: $xs-max) {
+    display: none;
+  }
+}
