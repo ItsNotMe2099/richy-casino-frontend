@@ -1,24 +1,23 @@
-import {Form, FormikProvider, useFormik} from 'formik'
-import GField from 'components/for_pages/games/components/inputs/GField'
-import GFieldBet from 'components/for_pages/games/components/inputs/GFieldBet'
-import GFieldAutoAction from 'components/for_pages/games/components/inputs/GFieldAutoAction'
-import {CheckBox} from 'components/ui/Inputs/CheckBox'
-import HiddenXs from 'components/ui/HiddenXS'
-import GamePageBetMobileLayout from 'components/for_pages/games/components/layout/GamePageBetMobileLayout'
-import VisibleXs from 'components/ui/VisibleXS'
-import GamePageBetButton from 'components/for_pages/games/components/GamePageBetButton'
-import GFieldMode from 'components/for_pages/games/components/inputs/GFieldMode'
 import GamePageSidebarLayout from 'components/for_pages/games/components/layout/GamePageSidebarLayout'
-import {CasinoGameModeType} from 'components/ui/Tabs'
+import { ICasinoGameDataDto } from 'components/for_pages/games/data/interfaces/ICasinoGameData'
+import { Form, FormikProvider, useFormik } from 'formik'
+import { CasinoGameModeType } from 'components/ui/Tabs'
+import HiddenXs from 'components/ui/HiddenXS'
+import GFieldMode from 'components/for_pages/games/components/inputs/GFieldMode'
+import GFieldBet from 'components/for_pages/games/components/inputs/GFieldBet'
+import GField from 'components/for_pages/games/components/inputs/GField'
 import GFieldInfinite from 'components/for_pages/games/components/inputs/GFieldInfinite'
-import {ICasinoGameDataDto} from 'components/for_pages/games/data/interfaces/ICasinoGameData'
+import GFieldAutoAction from 'components/for_pages/games/components/inputs/GFieldAutoAction'
+import { CheckBox } from 'components/ui/Inputs/CheckBox'
+import GamePageBetButton from 'components/for_pages/games/components/GamePageBetButton'
+import VisibleXs from 'components/ui/VisibleXS'
+import GamePageBetMobileLayout from 'components/for_pages/games/components/layout/GamePageBetMobileLayout'
 
 interface Props {
-    onSubmit: (data: ICasinoGameDataDto) => void
+  onSubmit: (data: ICasinoGameDataDto) => void
 }
 
 export default function Sidebar(props: Props) {
-
   const onSubmit = (data) => {
     props.onSubmit(data)
   }
@@ -73,8 +72,6 @@ export default function Sidebar(props: Props) {
         </Form>
       </FormikProvider>
     </GamePageSidebarLayout>
-
   )
 }
-
 

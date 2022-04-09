@@ -22,7 +22,7 @@ export default function GamePlinko(props: Props) {
     {user: 'Иван иванов', wins: 1.332, cof: 1.323, id: 23223 },
     {user: 'Иван иванов', wins: 1.332, cof: 1.323, id: 23223 },
   ]
-  const [selected, setSelected] = useState([])
+
   const handleSubmit = async (data: ICasinoGameDiceDto) => {
     await gameContext.startGame({...data, gameType: CasinoGameType.Plinko})
   }

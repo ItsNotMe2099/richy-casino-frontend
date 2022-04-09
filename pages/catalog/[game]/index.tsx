@@ -21,6 +21,7 @@ import GameRoulette from 'components/for_pages/games/Roulette'
 import GameDiamonds from 'components/for_pages/games/Diamonds'
 import GameHilo from 'components/for_pages/games/Hilo'
 import GamePlinko from 'components/for_pages/games/Plinko'
+import GameCrash from 'components/for_pages/games/Crash'
 import GameAuthRepository from 'components/for_pages/games/data/reposittories/GameAuthRepository'
 import {runtimeConfig} from 'config/runtimeConfig'
 import GameCoinFlip from 'components/for_pages/games/ConiFlip'
@@ -57,6 +58,8 @@ export default function CatalogPage(props: Props) {
         return <GameHilo/>
       case CasinoGameType.Plinko:
         return <GamePlinko/>
+      case CasinoGameType.Crash:
+        return <GameCrash/>
       case CasinoGameType.Coinflip:
         return <GameCoinFlip/>
       case CasinoGameType.Blackjack:
