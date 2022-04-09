@@ -49,6 +49,7 @@
     "react-timer-hook": "^3.0.5",
     "react-tiny-popover": "^7.0.1",
     "react-use-audio-player": "^1.2.5",
+    "rive-react": "^1.0.4",
     "rxjs": "^7.5.5",
     "sass": "1.43.4",
     "slick-carousel": "^1.8.1",
