@@ -3,7 +3,6 @@ import Header from 'components/for_pages/Common/Header'
 import { useAppContext } from 'context/state'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 import classNames from 'classnames'
-import { ReactElement } from 'react'
 
 interface IUser {
   nickname: string
@@ -14,7 +13,7 @@ interface IUser {
 }
 
 interface Props {
-  row: (isMobile: boolean, item: IUser) => ReactElement
+  
 }
 
 export default function Winners(props: Props) {
