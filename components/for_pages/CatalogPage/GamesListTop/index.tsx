@@ -68,7 +68,7 @@ export default function GamesListTop(props: Props) {
         style='fullOnlyOnMobile'
         onPrev={() => slider.slickGoTo(currentIndex - 1)}
         onNext={() => slider.slickGoTo(currentIndex + 1)}
-        slider />
+  slider />
       <div className={styles.wrapper}><SwitchFilter top/></div>
       <HiddenXs>
         <Slider {...settings} ref={slider1 => (slider = slider1)}>

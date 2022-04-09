@@ -42,7 +42,7 @@ const dropClass = classNames({
         <img src={activeIcon} alt=''/> {lang}
       </div>
        <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive }, dropClass)}>
-        {style !== 'footer' && <div className={styles.triangle}></div>}
+        {/*style !== 'footer' && <div className={styles.triangle}></div>*/}
         <Scrollbars style={{ width: 73, height: 170}} 
         renderTrackVertical={props => <div {...props} className={styles.track}/>}
         renderView={props => <div {...props} className={styles.view}/>}>

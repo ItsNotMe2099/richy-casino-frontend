@@ -375,7 +375,7 @@ export default function CatalogPage() {
     category: 'Richy Games',
     provider: '6'},
     {label: 'Classic dice',
-    image: '/img/Games/blackjack.png',
+    image: '/img/Games/blackjack.svg',
     top: true,
     createdAt: '2021-12-17T12:46:24.007Z',
     lastWin: '2021-12-17T12:46:24.007Z',
