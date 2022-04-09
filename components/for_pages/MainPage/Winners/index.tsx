@@ -2,9 +2,19 @@ import styles from './index.module.scss'
 import Header from 'components/for_pages/Common/Header'
 import { useAppContext } from 'context/state'
 import { Scrollbars } from 'react-custom-scrollbars-2'
+import classNames from 'classnames'
+import { ReactElement } from 'react'
+
+interface IUser {
+  nickname: string
+  sort: number
+  usdt: string
+  amount: string
+  avatar: string
+}
 
 interface Props {
-  
+  row: (isMobile: boolean, item: IUser) => ReactElement
 }
 
 export default function Winners(props: Props) {
@@ -38,7 +48,58 @@ export default function Winners(props: Props) {
             </div>
             <div className={styles.outerWrapper}>
             <div className={styles.transparent}></div>
-            <Scrollbars className={styles.scroll}>
+            <table className={classNames(styles.table)}>
+        <thead>
+        <tr className={styles.row}>
+          <th className={styles.cell}>
+            #
+          </th>
+          <th className={styles.cell}>
+            Игрок
+          </th>
+          <th className={styles.cell}>
+            Пари сделано
+          </th>
+          <th className={styles.cell}>
+            Приз
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <Scrollbars className={styles.scroll}>
+        {users.map((item, index) => 
+                  <tr className={styles.user} key={index}>
+                    <td className={styles.cell}>
+                      <img 
+                      src={item.sort === 1 ? '/img/Winners/award1.svg' : item.sort === 2 ? '/img/Winners/award2.svg' : '/img/Winners/award3.svg'} 
+                      alt=''/>
+                    </td>
+                    <td className={styles.cell}>
+                    <div className={styles.group}>
+                      <div className={styles.avatar}>
+                        <img src={item.avatar} alt=''/>
+                      </div>
+                      <div className={styles.nick}>
+                        {item.nickname}
+                      </div>
+                    </div>
+                    </td>
+                    <td className={styles.cell}>
+                      <div className={styles.group}>
+                        <img src='/img/Winners/t.png' alt=''/>{item.usdt} USDT
+                      </div>
+                    </td>
+                    <td className={styles.cell}>
+                    <div className={styles.group}>
+                        <img src='/img/Winners/BTC.png' alt=''/>{item.amount}
+                      </div>
+                    </td>
+                  </tr>
+                )}
+        </Scrollbars>
+        </tbody>
+      </table>
+            {/*<Scrollbars className={styles.scroll}>
               <div className={styles.table}>
               <div className={styles.row}>
                 <div className={styles.cell}>
@@ -84,7 +145,7 @@ export default function Winners(props: Props) {
                   </div>
                 )}
             </div>
-            </Scrollbars>
+                </Scrollbars>*/}
             </div>
           </div>
           {user &&
