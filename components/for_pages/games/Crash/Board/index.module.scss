@@ -1,6 +1,8 @@
 @import "scss/index";
 
 .root{
-  height: 600px;
+  canvas{
+    max-width: 100%;
+  }
 }
 
