@@ -392,7 +392,7 @@ export default function CatalogPage() {
       <Row className={styles.desktop}>
       <Filter items={games} mobile/>
       <Col className={styles.content}>
-      <Row>
+      <Row className={styles.row}>
       <HiddenXs><TopSlider money={money}/></HiddenXs>
       </Row>
       <GamesListTop items={topGames}/>

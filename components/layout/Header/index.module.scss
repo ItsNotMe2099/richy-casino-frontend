@@ -206,6 +206,11 @@
       width: 60px;
     }
   }
+  @media screen and (max-width: $mobile-max){
+    svg{
+      height: 30px;
+    }
+  }
 }
 
 .userBtns{
