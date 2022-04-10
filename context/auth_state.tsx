@@ -34,7 +34,6 @@ export function AuthWrapper(props: Props) {
     try {
       setError(null)
       const res = await AuthRepository.login(values?.authInput, values.password)
-
       if (!res) {
         return
       }
@@ -48,7 +47,7 @@ export function AuthWrapper(props: Props) {
       appContext.updateUserFromCookies()
       appContext.hideModal()
     }catch (e){
-      setError(e.message)
+      setError(e)
     }
   }
 

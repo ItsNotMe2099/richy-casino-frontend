@@ -25,11 +25,9 @@ export default function ModalPasswordReset(props: Props) {
     try {
       setError(null)
       const res = await AuthRepository.resetPassword({identity: login, token: data.code, password: data.password})
-
       context.showModal(ModalType.login)
-
     } catch (e) {
-      setError(e.message)
+      setError(e)
     }
   }
   const initialValues = {

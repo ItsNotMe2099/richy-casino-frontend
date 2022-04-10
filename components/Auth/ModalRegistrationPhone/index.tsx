@@ -39,7 +39,7 @@ export default function ModalRegistrationPhone(props: Props) {
       context.updateUserFromCookies()
       context.showModal(ModalType.registrationSuccess, {login: args.phone, password: data.password} as RegistrationSuccessModalArguments)
     } catch (e) {
-      setError(e.message)
+      setError(e)
     }
   }
   const initialValues = {

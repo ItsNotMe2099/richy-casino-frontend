@@ -26,7 +26,7 @@ export default function ModalPasswordRecovery(props: Props) {
       const res = await AuthRepository.forgotPassword(data.login)
       context.showModal(ModalType.passwordReset, {login: data.login} as PasswordResetModalArguments)
     } catch (e) {
-      setError(e.message)
+      setError(e)
     }
   }
 

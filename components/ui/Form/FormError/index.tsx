@@ -9,9 +9,14 @@ export default function FormError({ error }: Props) {
   }
   return (
     <div className={styles.root}>
-      {Array.isArray(error)
-        ? error.map((error, index) => <div className={styles.errorListItem} key={index}>{error}</div>)
-        : error}
+      <img src='/img/icons/error.svg' alt=''/>
+      <div className={styles.list}>
+        {Array.isArray(error)
+          ? error.map((error, index) => <div className={styles.errorListItem} key={index}>{error}</div>)
+          : error}
+      </div>
+
+
     </div>
   )
 }

@@ -41,7 +41,7 @@ export default function EmailForm(props: Props) {
       context.updateUserFromCookies()
       context.showModal(ModalType.registrationSuccess, {login: data.email, password: data.password} as RegistrationSuccessModalArguments)
     } catch (e) {
-      setError(e.message)
+      setError(e)
     }
   }
 

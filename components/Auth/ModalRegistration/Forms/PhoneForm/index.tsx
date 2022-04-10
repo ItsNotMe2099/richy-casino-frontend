@@ -31,7 +31,7 @@ export default function PhoneForm(props: Props) {
       })
       context.showModal(ModalType.registrationPhone, {phone: data.phone} as RegistrationPhoneModalArguments)
     } catch (e) {
-      setError(e.message)
+      setError(e)
     }
   }
   const initialValues = {
