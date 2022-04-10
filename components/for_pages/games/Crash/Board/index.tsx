@@ -6,7 +6,7 @@ import { ICasinoGameFinishEvent } from 'components/for_pages/games/data/interfac
 import dynamic from 'next/dynamic'
 import { CANVAS_ASPECT_RATIO } from 'components/for_pages/games/Crash/Board/constants'
 import { StateMachineInput } from 'rive-react'
-import Plane from './Plane'
+import RiveStateMachine from 'components/ui/RiveStateMachine'
 
 interface Props {}
 
@@ -35,7 +35,11 @@ export default function Board(props: Props) {
     <GamePageBoardLayout>
       <div className={styles.root}>
         <CanvasBackground width={canvasWidth} height={canvasHeight} />
-        <Plane inputRef={stateMachineInputRef} className={styles.plane} />
+        <RiveStateMachine
+          src="/animations/crash/plane.riv"
+          inputRef={stateMachineInputRef}
+          className={styles.plane}
+        />
       </div>
     </GamePageBoardLayout>
   )
