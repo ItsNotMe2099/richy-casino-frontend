@@ -62,7 +62,7 @@ export default function Sidebar(props: Props) {
             values.mode === 'double' ?
               [
                 {label: '2.00x', value: 'red', color: 'blue'},
-                {label: '14.00x', value: 'green', color: 'yellow'},
+                {label: '14.00x', value: 'yellow', color: 'yellow'},
                 {label: '2.00x', value: 'black', color: 'darkBlue'}
               ] : [
                 {label: '2.00x', value: 'black', color: 'darkBlue'},
