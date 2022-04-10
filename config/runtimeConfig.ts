@@ -4,6 +4,7 @@ interface IRuntimeConfig {
   HOST: string
   GAMES_HOST: string
   GAMES_API_SECRET: string
+  ROBOTS_FILE: string
   NODE_ENV: 'development' | 'production'
   DEV: boolean
   PROD: boolean

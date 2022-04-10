@@ -9,20 +9,16 @@ import classNames from 'classnames'
 import { useState } from 'react'
 import VisibleXs from 'components/ui/VisibleXS'
 import DropdownMenu from 'components/ui/DropdownMenu'
+import {IFaqItem} from 'data/interfaces/IFaqItem'
+import FaqRepository from 'data/repositories/FaqRepository'
 
+interface Props{
+  faqItems: IFaqItem[]
+}
+export default function Faq(props: Props) {
 
-export default function Faq() {
-
-  const options = [
-    {label: 'Общие положения и условия', text: 'Посещая какой-либо из разделов Интернет-сайта Букмекерской компании «1Win» (далее – Интернет-сайт) или открывая игровой счет, пользователь соглашается со всеми пунктами Пользовательского соглашения (далее - Соглашение), Политикой конфиденциальности, условиями рекламной деятельности, правилами игр, бонусами и специальными предложениями, которые в настоящее время имеются на Интернет-сайте. Перед тем как принять условия Соглашения, необходимо внимательно ознакомиться со всеми его пунктами. Если Игрок (далее - Клиент) выражает свое несогласие с данным Соглашением, то ему необходимо покинуть или прекратить использование Интернет-сайта. Последующее использование Интернет-сайта будет расцениваться как принятие Клиентом всех нижеперечисленных пунктов данного Соглашения.'},
-    {label: 'Пользовательское соглашение', text: ''},
-    {label: 'Политика конфиденциальности', text: ''},
-    {label: 'Ответственная игра', text: ''},
-    {label: 'Условия возврата', text: ''},
-    {label: 'Уведомления о рисках', text: ''},
-  ]
-
-  const [active, setActive] = useState(options[0].label)
+  const options = props.faqItems.map(i => ({label: i.question, text: i.answer}))
+  const [active, setActive] = useState(options.length > 0 ? options[0].label : null)
 
   const Contents = () => {
     return (
@@ -73,9 +69,11 @@ export default function Faq() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context ) => {
+  const faqItems = await FaqRepository.fetchList()
   return {
     props: {
       ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      faqItems
     },
   }
 }

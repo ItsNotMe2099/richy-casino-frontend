@@ -20,4 +20,12 @@ module.exports = {
     DEV: process.env.NODE_ENV === 'development',
     PROD: process.env.NODE_ENV !== 'development',
   },
+  async rewrites() {
+    return [
+      {
+        source: '/robots.txt',
+        destination: '/api/robots'
+      }
+    ]
+  }
 }
