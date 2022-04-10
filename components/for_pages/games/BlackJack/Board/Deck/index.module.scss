@@ -8,6 +8,7 @@
       @media only screen and (max-width: $xs-max) {
         .card {
           display: inline-block;
+          vertical-align: top;
           &:first-of-type {
             margin-left: 0;
           }
@@ -56,6 +57,7 @@
       box-shadow: 1px 1px 14px rgba(0, 0, 0, 0.25);
       .card{
         display: inline-block;
+        vertical-align: top;
         img {
           box-shadow: none;
         }
@@ -91,8 +93,8 @@
 
 }
 .card{
-  width: 12vh;
-  height: 17vh;
+  width: 12vmin;
+  height: 17vmin;
   display: flex;
   img{
     display: block;
@@ -101,7 +103,7 @@
   position: relative;
   z-index: 1;
   &.withHidden{
-      margin-left: -6vh;
+      margin-left: -6vmin;
     z-index: 0;
   }
 }

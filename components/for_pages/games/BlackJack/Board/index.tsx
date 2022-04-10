@@ -82,17 +82,17 @@ export default function Board(props: Props) {
       </div>
       <div className={styles.board}>
 
-        {turn?.dealer?.length > 0 && <div className={classNames(styles.deck, styles.dealer)}>
-          <Deck cards={[...turn.dealer.map( i => i.index), ...(turn.dealer.length === 1 ? [0] : [])]} withHidden={turn.dealer.length === 1} number={getBlackjackScore(turn.dealer)}/>
-        </div>}
+         <div className={classNames(styles.deck, styles.dealer, {[styles.visible]: turn?.dealer?.length > 0 })}>
+          <Deck cards={[...(turn?.dealer.length > 0 ? turn?.dealer.map( i => i.index) : [-1]), ...(turn?.dealer?.length === 1 ? [0] : [])]} withHidden={turn?.dealer?.length === 1} number={turn?.dealer?.length > 0 ? getBlackjackScore(turn.dealer) : null}/>
+        </div>
 
         <div className={styles.playerDeck}>
          <div className={classNames(styles.deck, styles.split, {[styles.visible]: turn?.split?.length > 0 })}>
           <Deck cards={(turn?.split?.length > 0 ? turn?.split : [{index: -1}]).map( i => i.index)} number={turn?.split.length > 0 ? getBlackjackScore(turn.split) : null}/>
         </div>
-        {turn?.player?.length > 0 && <div className={classNames(styles.deck, styles.player)}>
-          <Deck cards={turn.player.map( i => i.index)} cursor={turn?.split.length > 0} number={getBlackjackScore(turn.player)}/>
-        </div>}
+        <div className={classNames(styles.deck, styles.player, {[styles.visible]: turn?.player?.length > 0 })}>
+          <Deck cards={turn?.player.length > 0 ? turn?.player?.map( i => i.index) : [-1]} cursor={turn?.split?.length > 0} number={turn?.player.length > 0 ? getBlackjackScore(turn?.player) : null}/>
+        </div>
         </div>
 
       </div>

@@ -27,6 +27,7 @@
     background-image: url('/img/Games/blackjack/bg.svg');
     background-repeat: repeat-x;
     background-position: top center;
+    background-size: contain;
     border-top-left-radius: 18px;
     border-top-right-radius: 18px;
   }
@@ -59,6 +60,7 @@
     background-image: url('/img/Games/blackjack/bg.svg');
     background-repeat: repeat-x;
     background-position: bottom center;
+    background-size: contain;
     border-bottom-left-radius: 18px;
     border-bottom-right-radius: 18px;
   }
@@ -92,14 +94,11 @@
       position: relative;
     }
   }
-  &.split{
-    visibility: hidden;
-
-    &.visible{
-      visibility: visible;
-    }
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  &.visible{
+    opacity: 1;
   }
-
 
 }
 .deckSeparator{
