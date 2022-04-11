@@ -11,11 +11,12 @@
   .moneyWallet, .moneyWallet2, .moneyBlurWallet, .moneyFooter, .moneyFooter2, .moneyBurger{
     display: none;
   }
-  @media screen and (max-width: $xs-max){
+  @media screen and (max-width: $mobile-max){
     padding: 5px 0;
     padding-left: 25px;
     .title{
-      font-size: 16px;
+      font-size: 12px;
+      margin-bottom: 5px;
       span{
         font-size: 12px;
       }
@@ -67,13 +68,13 @@
 .wallet{
   padding-left: 85px;
   padding-top: 17px;
-  @media screen and (max-width: $xs-max){
+  @media screen and (max-width: $mobile-max){
     padding-left: 25px;
     padding-right: 10px;
     padding-top: 4px;
   }
   .money, .money2, .hero{
-    @media screen and (max-width: $xs-max){
+    @media screen and (max-width: $mobile-max){
       display: none;
     }
   }
@@ -103,7 +104,7 @@
   }
   .break{
     display: none;
-    @media screen and (max-width: $xs-max){
+    @media screen and (max-width: $mobile-max){
       display: block;
     }
   }
@@ -127,10 +128,8 @@
     left: 0px;
   }
   .bottom{
-    line-height: 130%;
   }
   .title{
-    line-height: 130%;
     span{
       font-size: 12px;
     }
@@ -139,7 +138,7 @@
     bottom: 10px;
   }
   .money, .money2 {
-    @media screen and (max-width: $xs-max){
+    @media screen and (max-width: $mobile-max){
       display: none;
     }
   }
@@ -149,7 +148,7 @@
     top: 10px;
   }
 
-  @media screen and (max-width: $xs-max){
+  @media screen and (max-width: $mobile-max){
     max-height: initial;
     padding-bottom: 55px;
     .content{
@@ -172,11 +171,18 @@
 
 .title{
   font-weight: bold;
-  font-size: 16px;
+  font-size: 12px;
   position: relative;
   z-index: 2;
   color: #AAFF55;
   text-align: left;
+}
+
+.fs{
+  color: #AAFF55;
+  font-weight: 700;
+  margin-top: -5px;
+  font-size: 16px;
 }
 
 .bottom{
@@ -191,6 +197,8 @@
 }
 .left{
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 .satoshi{
   font-weight: 500;
@@ -212,7 +220,7 @@
   right: -20px;
   bottom: -35px;
   position: absolute;
-  @media screen and (max-width: $xs-max){
+  @media screen and (max-width: $mobile-max){
     left: 0;
     right: auto;
     bottom: 0;
@@ -223,7 +231,7 @@
   position: absolute;
   bottom: -24px;
   left: -22px;
-  @media screen and (max-width: $xs-max){
+  @media screen and (max-width: $mobile-max){
     left: auto;
     right: -10px;
     bottom: -40px;

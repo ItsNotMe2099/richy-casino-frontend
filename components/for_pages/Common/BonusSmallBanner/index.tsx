@@ -95,9 +95,9 @@ export default function BonusSmallBanner(props: Props) {
       </VisibleXs>
       <div className={styles.content}>
         <div className={classNames(styles.left, {[styles.noMargin]: !user})}>
-          <div className={styles.title}>
-            <span className={styles.bonusTimer}>Бонус</span><br
-            className={styles.break}/> 30 000 ₽ + 300 FS
+          <span className={styles.title}>Бонус</span>
+          <div className={styles.fs}>
+            30 000 ₽ + 300 FS
           </div>
           <div className={styles.bottom}>
           <div className={styles.satoshi}>
