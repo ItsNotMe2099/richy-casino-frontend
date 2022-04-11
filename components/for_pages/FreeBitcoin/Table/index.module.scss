@@ -30,18 +30,33 @@
 }
 
 .table{
-  display: table;
   width: 100%;
-  border-collapse: separate;
+  table-layout: fixed;
+  border-collapse: collapse;
   .rowInner:nth-child(odd){
       .cell{
       background-color: transparent;
       }
   }
+  tbody{
+    display: block;
+    width: 100%;
+    overflow: auto;  
+    tr{
+      td:nth-child(2){
+        padding-right: 28px;
+      }
+    }
+    tr:nth-child(odd){
+      background-color: #272832;
+    }
+  }
 }
 
 .row{
-  display: table-row;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 8px;
   .cell{
       padding-bottom: 26px;
       @media screen and (max-width: 550px){
@@ -52,7 +67,6 @@
       }
   }
   .cell:first-child{
-      padding-left: 28px;
       .text{
         text-align: unset;
       }
@@ -61,20 +75,18 @@
 
 .rowInner{
   .cell{
-      background-color: $dark600;
       padding-top: 23px;
       padding-bottom: 21px;
   }
   .cellPayout{
     .text{
-      padding-right: 28px;
       text-align: right;
     }
   }
   .cell:first-child{
+    padding-left: 28px;
       border-top-left-radius: 8px;
       border-bottom-left-radius: 8px;
-      padding-left: 28px;
       @media screen and (max-width: 700px){
           border-top-left-radius: 0;
           border-bottom-left-radius: 0;
@@ -143,4 +155,16 @@
   @media screen and (max-width: 1360px){
     font-size: 12px;
 }
+}
+
+.scroll{
+  height: 408px !important;
+  @media screen and (max-width: $mobile-max){
+    height: 200px !important;
+  }
+}
+
+.scroll > div:first-child{
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
 }

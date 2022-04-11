@@ -2,6 +2,7 @@ import styles from './index.module.scss'
 import classNames from 'classnames'
 import { Col } from 'react-grid-system'
 import {format} from 'date-fns'
+import { Scrollbars } from 'react-custom-scrollbars-2'
 
 interface ILuckyNumber {
   number: string
@@ -28,30 +29,36 @@ export default function Table(props: Props) {
   return (
     <Col className={classNames(styles.col, {[styles.last]: props.last})}>
     <div className={styles.root}>
-      <div className={styles.table}>
-        <div className={styles.row}>
-          <div className={styles.cell}>
-            {!props.last ? <>LUCKY NUMBER</> : <>ПОСЛЕДНИЕ ВЫИГРЫШИ</>}
-          </div>
-          <div className={styles.cell}>
-            {!props.last ? <div className={classNames(styles.text, styles.payout)}>PAYOUT</div> : null}
-          </div>
-        </div>
+      <table className={styles.table}>
+        <thead>
+          <tr className={styles.row}>
+            <th className={styles.cell}>
+              {!props.last ? <>LUCKY NUMBER</> : <>ПОСЛЕДНИЕ ВЫИГРЫШИ</>}
+            </th>
+            <th className={styles.cell}>
+              {!props.last ? <div className={classNames(styles.text, styles.payout)}>PAYOUT</div> : null}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+        <Scrollbars className={styles.scroll}>
         {props.items.map((item, index) =>
-          <div className={classNames(styles.row, styles.rowInner)} key={index}>
-            <div className={styles.cell}>
+          <tr className={classNames(styles.row, styles.rowInner)} key={index}>
+            <td className={styles.cell}>
               <div className={classNames(styles.text, {[styles.date]: props.last})}>
                 {props.last ? handleDate(item) : item.number}
               </div>
-            </div>
-            <div className={classNames(styles.cell, {[styles.cellPayout]: !props.last})}>
+            </td>
+            <td className={classNames(styles.cell, {[styles.cellPayout]: !props.last})}>
               <div className={styles.text}>
                 {item.payout} <span>BTC</span>
               </div>
-            </div>
-          </div>
+            </td>
+          </tr>
             )}
-      </div>
+          </Scrollbars>
+        </tbody>
+      </table>
     </div>
     </Col>
   )
