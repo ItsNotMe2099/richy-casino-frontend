@@ -33,7 +33,7 @@ export default function Modal(props: Props) {
       zIndex: '30',
     },
     content: {
-      width: '100%',
+      //width: '100%',
       borderRadius: '21px',
       padding: '0',
       border: '0',
@@ -59,7 +59,6 @@ export default function Modal(props: Props) {
   if (appContext.isDesktop) {
     return (
       <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
-        <div className={styles.frame}>
           <div
             className={`${!props.fortune && styles.root} ${getSizeClass(props.size)} ${props.className} ${
               props.center && styles.rootFlex} ${props.fortune && styles.fortune}
@@ -101,7 +100,6 @@ export default function Modal(props: Props) {
               {props.children}
             </div>
           </div>
-        </div>
       </ReactModal>
     )
   } else {
