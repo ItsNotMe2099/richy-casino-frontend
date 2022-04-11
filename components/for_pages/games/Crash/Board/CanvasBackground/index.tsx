@@ -2,11 +2,13 @@ import { Stage, Layer, Rect, Line } from 'react-konva'
 import { colors } from 'scss/variables'
 import { useMemo } from 'react'
 import { IPosition, ISize } from 'types/interfaces'
+import { positionsToPoints } from 'utils/converter'
 
 interface Props {
   size: ISize
   position: IPosition
   startPosition: IPosition
+  dots: IPosition[]
 }
 
 export default function CanvasBackground(props: Props) {
@@ -38,13 +40,10 @@ export default function CanvasBackground(props: Props) {
           fill={colors.dark600}
         />
         <Line
-          points={[
-            0, props.startPosition.y,
-            props.position.x, props.position.y,
-          ]}
+          points={positionsToPoints(props.dots)}
           stroke={lineGradient}
           strokeWidth={4}
-          tension={0.5}
+          tension={0.1}
           fillAfterStrokeEnabled
         />
       </Layer>

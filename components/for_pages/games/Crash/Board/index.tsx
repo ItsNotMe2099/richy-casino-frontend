@@ -9,9 +9,7 @@ import { StateMachineInput } from 'rive-react'
 import Plane from './Plane'
 import { IPosition, ISize } from 'types/interfaces'
 
-interface Props {
-  position: IPosition
-}
+interface Props {}
 
 const CanvasBackground = dynamic(() => import('./CanvasBackground'), { ssr: false })
 
@@ -29,6 +27,8 @@ export default function Board(props: Props) {
   const stateMachineInputRef = useRef<StateMachineInput>(null)
   const progressRef = useRef(0) // from 0 to 1
   const positionRef = useRef<IPosition>(startPosition)
+  const animationId = useRef<number>()
+  const dotsRef = useRef<IPosition[]>([])
   const [position, setPosition] = useState<IPosition>(positionRef.current)
 
   useEffect(() => {
@@ -44,32 +44,40 @@ export default function Board(props: Props) {
     }
   }, [])
 
-  const start = () => {
+  const animate = () => {
+    progressRef.current = progressRef.current + 0.001
+    positionRef.current = progressToPosition(progressRef.current)
     if (progressRef.current < 1) {
-      requestAnimationFrame(() => {
-        progressRef.current = progressRef.current + 0.001
-        positionRef.current = progressToPosition(progressRef.current)
-        setPosition(positionRef.current)
-        start()
-      })
-    } else {
-      progressRef.current = 0
-      positionRef.current = progressToPosition(progressRef.current)
+      dotsRef.current.push(positionRef.current)
       setPosition(positionRef.current)
+      requestAnimationFrame(animate)
+    } else {
+      cancelAnimationFrame(animationId.current)
     }
+  }
+
+  const start = () => {
+    dotsRef.current = []
+    animationId.current = requestAnimationFrame(animate)
   }
 
   const progressToPosition = (progress: number): IPosition => {
     const x = startPosition.x + (canvasSize.width - startPosition.x) * progress
-    const y = startPosition.y - startPosition.y * progress
+    const max = Math.log(startPosition.y)
+    const y = startPosition.y - Math.exp(max * progress)
     return {x, y}
   }
 
   return (
     <GamePageBoardLayout>
       <div className={styles.root}>
-        <CanvasBackground startPosition={startPosition} position={position} size={canvasSize} />
-        <Plane position={position} inputRef={stateMachineInputRef} />
+        <CanvasBackground
+          startPosition={startPosition}
+          position={positionRef.current}
+          size={canvasSize}
+          dots={dotsRef.current}
+        />
+        <Plane position={positionRef.current} inputRef={stateMachineInputRef} />
       </div>
     </GamePageBoardLayout>
   )

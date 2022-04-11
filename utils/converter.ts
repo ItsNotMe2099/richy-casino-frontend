@@ -1,5 +1,5 @@
 import {mapKeys, mapValues, camelCase, isObject} from 'lodash'
-import {IApiPaginationResponse, IApiResponse, IOption} from 'types/interfaces'
+import { IApiPaginationResponse, IApiResponse, IOption, IPosition } from 'types/interfaces'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import { IUserBalanceCurrency } from 'data/interfaces/IUser'
 export const convertLibphonenumberToMask = (value: string): string => value
@@ -54,3 +54,11 @@ export const currentItem = (values, options: IOption<string>[]) => {
   return array[0]
 }
 
+export const positionsToPoints = (positions: IPosition[]): number[] => {
+  const points: number[] = []
+  positions.forEach(item => {
+    points.push(item.x)
+    points.push(item.y)
+  })
+  return points
+}
