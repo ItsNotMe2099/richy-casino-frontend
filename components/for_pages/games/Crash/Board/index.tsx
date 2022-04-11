@@ -4,24 +4,37 @@ import { useGameContext } from 'components/for_pages/games/context/state'
 import { useEffect, useRef, useState } from 'react'
 import { ICasinoGameFinishEvent } from 'components/for_pages/games/data/interfaces/ICasinoGame'
 import dynamic from 'next/dynamic'
-import { CANVAS_ASPECT_RATIO } from 'components/for_pages/games/Crash/Board/constants'
+import { CANVAS_ASPECT_RATIO } from './constants'
 import { StateMachineInput } from 'rive-react'
-import RiveStateMachine from 'components/ui/RiveStateMachine'
+import Plane from './Plane'
+import { IPosition, ISize } from 'types/interfaces'
 
-interface Props {}
+interface Props {
+  position: IPosition
+}
 
 const CanvasBackground = dynamic(() => import('./CanvasBackground'), { ssr: false })
 
 export default function Board(props: Props) {
-  const canvasWidth = 800
-  const canvasHeight = canvasWidth / CANVAS_ASPECT_RATIO
+  const canvasSize: ISize = {
+    width: 800,
+    height: 800 / CANVAS_ASPECT_RATIO,
+  }
+  const startPosition: IPosition = {
+    x: canvasSize.width / 10,
+    y: canvasSize.height - canvasSize.height / 10,
+  }
   const gameContext = useGameContext()
   const [result, setResult] = useState<ICasinoGameFinishEvent>(null)
   const stateMachineInputRef = useRef<StateMachineInput>(null)
+  const progressRef = useRef(0) // from 0 to 1
+  const positionRef = useRef<IPosition>(startPosition)
+  const [position, setPosition] = useState<IPosition>(positionRef.current)
 
   useEffect(() => {
     const subscription = gameContext.gameState$.subscribe((data) => {
-      stateMachineInputRef.current.fire()
+      // stateMachineInputRef.current.fire()
+      start()
       if (data && stateMachineInputRef.current) {
         setResult(data)
       }
@@ -31,15 +44,32 @@ export default function Board(props: Props) {
     }
   }, [])
 
+  const start = () => {
+    if (progressRef.current < 1) {
+      requestAnimationFrame(() => {
+        progressRef.current = progressRef.current + 0.001
+        positionRef.current = progressToPosition(progressRef.current)
+        setPosition(positionRef.current)
+        start()
+      })
+    } else {
+      progressRef.current = 0
+      positionRef.current = progressToPosition(progressRef.current)
+      setPosition(positionRef.current)
+    }
+  }
+
+  const progressToPosition = (progress: number): IPosition => {
+    const x = startPosition.x + (canvasSize.width - startPosition.x) * progress
+    const y = startPosition.y - startPosition.y * progress
+    return {x, y}
+  }
+
   return (
     <GamePageBoardLayout>
       <div className={styles.root}>
-        <CanvasBackground width={canvasWidth} height={canvasHeight} />
-        <RiveStateMachine
-          src="/animations/crash/plane.riv"
-          inputRef={stateMachineInputRef}
-          className={styles.plane}
-        />
+        <CanvasBackground startPosition={startPosition} position={position} size={canvasSize} />
+        <Plane position={position} inputRef={stateMachineInputRef} />
       </div>
     </GamePageBoardLayout>
   )

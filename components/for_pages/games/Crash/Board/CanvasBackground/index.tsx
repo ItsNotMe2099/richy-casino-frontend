@@ -1,17 +1,19 @@
 import { Stage, Layer, Rect, Line } from 'react-konva'
 import { colors } from 'scss/variables'
 import { useMemo } from 'react'
+import { IPosition, ISize } from 'types/interfaces'
 
 interface Props {
-  width: number
-  height: number
+  size: ISize
+  position: IPosition
+  startPosition: IPosition
 }
 
 export default function CanvasBackground(props: Props) {
   const lineGradient = useMemo((): CanvasGradient => {
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
-    const gradient = ctx.createLinearGradient(0, props.height, props.width, 0)
+    const gradient = ctx.createLinearGradient(0, props.size.height, props.size.width, 0)
     gradient.addColorStop(0, '#2C342E')
     gradient.addColorStop(0.5, '#695B33')
     gradient.addColorStop(1, '#DD4851')
@@ -19,27 +21,26 @@ export default function CanvasBackground(props: Props) {
   }, [])
 
   return (
-    <Stage width={props.width} height={props.height}>
+    <Stage width={props.size.width} height={props.size.height}>
       <Layer>
         <Rect
           x={0}
           y={0}
           width={4}
-          height={props.height}
+          height={props.size.height}
           fill={colors.dark600}
         />
         <Rect
           x={0}
-          y={props.height - 4}
-          width={props.width}
+          y={props.size.height - 4}
+          width={props.size.width}
           height={4}
           fill={colors.dark600}
         />
         <Line
           points={[
-            4, props.height - 6,
-            props.width * 0.7, props.height * 0.7,
-            props.width - 6, 0,
+            0, props.startPosition.y,
+            props.position.x, props.position.y,
           ]}
           stroke={lineGradient}
           strokeWidth={4}

@@ -27,6 +27,9 @@ export const convertApiResponseError = (res: IApiResponse) => {
   return messages.length === 1 ? messages[0] : messages
 }
 export const convertCurrencyToOptions = (currencies: ICurrency[]): IOption<string>[] => {
+  if (!currencies) {
+    return []
+  }
   return currencies.map(i => ({
     label:`${i.name} (${i.iso})`,
     value: i.iso
