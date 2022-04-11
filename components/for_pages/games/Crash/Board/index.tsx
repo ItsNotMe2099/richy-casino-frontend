@@ -33,7 +33,6 @@ export default function Board(props: Props) {
 
   useEffect(() => {
     const subscription = gameContext.gameState$.subscribe((data) => {
-      // stateMachineInputRef.current.fire()
       start()
       if (data && stateMachineInputRef.current) {
         setResult(data)
@@ -53,6 +52,7 @@ export default function Board(props: Props) {
       requestAnimationFrame(animate)
     } else {
       cancelAnimationFrame(animationId.current)
+      stateMachineInputRef.current.fire()
     }
   }
 
@@ -77,7 +77,11 @@ export default function Board(props: Props) {
           size={canvasSize}
           dots={dotsRef.current}
         />
-        <Plane position={positionRef.current} inputRef={stateMachineInputRef} />
+        <Plane
+          progress={progressRef.current}
+          position={positionRef.current}
+          inputRef={stateMachineInputRef}
+        />
       </div>
     </GamePageBoardLayout>
   )
