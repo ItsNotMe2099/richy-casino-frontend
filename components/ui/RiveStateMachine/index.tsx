@@ -15,6 +15,10 @@ export default function RiveStateMachine(props: Props) {
     src: props.src,
     autoplay: true,
     stateMachines: STATE_MACHINE_NAME,
+  }, {
+    fitCanvasToArtboardHeight: false,
+    useDevicePixelRatio: false,
+    useOffscreenRenderer: true,
   })
 
   const stateMachineInput = useStateMachineInput(

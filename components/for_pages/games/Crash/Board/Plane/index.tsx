@@ -11,9 +11,9 @@ interface Props{
 }
 
 export default function Plane(props: Props) {
-  const left = props.position.x - 150
+  const left = props.position.x - 160
   const top = props.position.y - 175
-  const maxAngle = Math.log(80)
+  const maxAngle = Math.log(85)
 
   return (
     <div className={styles.root} style={{left, top, transform: `rotate(-${Math.exp(maxAngle * props.progress)}deg)` }}>

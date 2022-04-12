@@ -44,7 +44,7 @@ export default function Board(props: Props) {
   }, [])
 
   const animate = () => {
-    progressRef.current = progressRef.current + 0.001
+    progressRef.current = progressRef.current + 0.002
     positionRef.current = progressToPosition(progressRef.current)
     if (progressRef.current < 1) {
       dotsRef.current.push(positionRef.current)
@@ -63,7 +63,7 @@ export default function Board(props: Props) {
 
   const progressToPosition = (progress: number): IPosition => {
     const x = startPosition.x + (canvasSize.width - startPosition.x) * progress
-    const max = Math.log(startPosition.y)
+    const max = Math.log(startPosition.y - startPosition.y / 10)
     const y = startPosition.y - Math.exp(max * progress)
     return {x, y}
   }
