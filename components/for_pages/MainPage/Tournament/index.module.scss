@@ -25,11 +25,6 @@
   @media screen and (max-width: 685px){
     height: 30vw;
   }
-  @media screen and (max-width: $mobile-max){
-    height: 8rem;
-    padding: 13px 0;
-    padding-left: 18px;
-  }
 }
 
 .hero{
@@ -49,14 +44,6 @@
   @media screen and (max-width: 685px){
     height: 30vw;
   }
-    @media screen and (max-width: $mobile-max){
-      height: 8rem;
-      width: auto;
-    }
-  }
-  @media screen and (max-width: $mobile-max){
-    right: 0;
-    left: auto;
   }
 }
 
@@ -80,11 +67,6 @@
   position: relative;
   z-index: 2;
   justify-content: center;
-  @media screen and (max-width: $mobile-max){
-    margin-top: 0;
-    margin-left: 0;
-    align-items: baseline;
-  }
 }
 
 .right{
@@ -109,11 +91,6 @@
   justify-content: center;
   margin-left: 30%;
 }
-@media screen and (max-width: $mobile-max){
-  align-items: center;
-  justify-content: flex-end;
-  margin-left: 0;
-}
 }
 
 .title{
@@ -121,17 +98,10 @@
   font-size: 4.7vw;
   letter-spacing: 0.275em;
   color: #FFFFFF;
-  @media screen and (max-width: $mobile-max){
-    font-weight: bold;
-    font-size: 1.3rem;
-  }
 }
 
 .fund{
   display: flex;
-  @media screen and (max-width: $mobile-max){
-    margin-top: 8px;
-  }
 }
 
 .prize{
@@ -143,10 +113,6 @@
   align-items: center;
   font-weight: 400;
   font-size: calc(11px + 0.5vw);
-  @media screen and (max-width: $mobile-max){
-    font-size: 0.7rem;
-    padding: 5px 19px 5px 7px;
-  }
 }
 
 .balance{
@@ -161,9 +127,6 @@
   align-items: center;
   @media screen and (max-width: $sm-max){
     padding: 4px 5px;
-  }
-  @media screen and (max-width: $mobile-max){
-    font-size: 0.7rem;
   }
 }
 
@@ -197,10 +160,6 @@
   }
   @media screen and (max-width: 685px){
     height: 5vw;
-  }
-  @media screen and (max-width: $mobile-max){
-    font-size: 0.9rem;
-    height: 2.2rem;
   }
 }
 
@@ -261,8 +220,92 @@
   @media screen and (min-width: $sm-min){
     display: none;
   }
-  @media screen and (max-width: $mobile-max){
-    right: -32px;
-    bottom: -83px;
+}
+
+.mobile{
+  background: linear-gradient(263.15deg, #2CA4FC 1.61%, #9735B0 101.55%);
+  border-radius: 16px;
+  padding: 6px 9px 7px 0;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  margin-top: 16px;
+  overflow: hidden;
+  max-height: 176px;
+  .title{
+    font-weight: 700;
+    font-size: 23px;
+    letter-spacing: 0.2em;
+    text-align: center;
   }
+  .fund{
+    display: block;
+    .prize{
+      display: block;
+      padding: 0;
+      border-radius: 3px;
+      text-align: center;
+      span{
+        padding: 4px 8px;
+        font-size: 10px;
+      }
+    }
+    .balance{
+      display: block;
+      margin-left: 0;
+      border-radius: 3px;
+      font-size: 8px;
+    }
+  }
+}
+
+.btnMobile{
+  margin-top: 6px;
+  height: 30px;
+  width: 100%;
+  color: $white;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 4px;
+  border-radius: 3px;
+}
+
+.leftMobile{
+  margin-top: -6px;
+  position: relative;
+  width: 100%;
+}
+
+.coins{
+  position: absolute;
+}
+
+.coins2{
+  position: absolute;
+  top: 20%;
+  right: 25%;
+}
+
+.moneyMobile{
+  position: absolute;
+  left: -60px;
+  bottom: -50px;
+  z-index: 2;
+}
+
+.heroMobile{
+  z-index: 1;
+  position: relative;
+  max-width: 153px;
+}
+
+.coin{
+  position: absolute;
+  top: 0;
+}
+
+.cash{
+  position: absolute;
+  top: 50%;
+  right: 20%;
 }

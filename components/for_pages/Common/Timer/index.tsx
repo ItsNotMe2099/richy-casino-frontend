@@ -2,12 +2,11 @@ import styles from './index.module.scss'
 import classNames from 'classnames'
 import {useTimer} from 'react-timer-hook'
 import {pad} from 'utils/formatters'
-import HiddenXs from 'components/ui/HiddenXS'
 
 interface Props {
   expiredAt: Date | string
   days?: boolean
-  style?: 'bonus' | 'freebitcoin' | 'tournament' | 'gift' | 'footer' | 'sheet' | 'wallet' | 'footerSmall'
+  style?: 'bonus' | 'freebitcoin' | 'tournament' | 'gift' | 'footer' | 'sheet' | 'wallet' | 'footerSmall' | 'tournamentMobile'
 }
 
 export default function Timer(props: Props) {
@@ -32,6 +31,7 @@ export default function Timer(props: Props) {
     [styles.bonus]: props.style === 'bonus',
     [styles.freebitcoin]: props.style === 'freebitcoin',
     [styles.tournament]: props.style === 'tournament',
+    [styles.tournamentMobile]: props.style === 'tournamentMobile',
     [styles.gift]: props.style === 'gift',
     [styles.footer]: props.style === 'footer',
     [styles.footerSmall]: props.style === 'footerSmall',
@@ -42,11 +42,9 @@ export default function Timer(props: Props) {
 
   return (
     <div className={classNames(styles.root, timerClass)}>
-      <HiddenXs>
-        <div className={styles.end}>
+      <div className={styles.end}>
           До окончания
-        </div>
-      </HiddenXs>
+      </div>
       <div className={styles.timer}>
       <div className={styles.hours}>
         <div className={styles.input}>

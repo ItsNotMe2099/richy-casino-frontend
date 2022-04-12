@@ -20,10 +20,10 @@ enum ActionType{
 export default function UserFooter(props: Props) {
 
   const items = [
-    {label: 'Main', icon: '/img/UserFooter/user.svg', key: ActionType.Sheet},
+    {label: 'Main', icon: '/img/UserFooter/user.svg', key: null},
     {label: 'Poker', icon: '/img/UserFooter/poker.svg', key: null},
     {label: 'Casino', icon: '/img/UserFooter/casino.svg', key: null},
-    {label: 'Menu', icon: '/img/UserFooter/close.svg', key: null},
+    {label: 'Menu', icon: '/img/UserFooter/menu.svg', key: ActionType.Sheet},
   ]
 
   const Item = ({icon, label, onClick}: ItemProps) => {
@@ -40,11 +40,17 @@ export default function UserFooter(props: Props) {
   }
 
   const {showModal} = useAppContext()
+  const context = useAppContext()
 
   const handleClickItem = (item) => {
     switch (item.key) {
       case ActionType.Sheet:
-        showModal(ModalType.profileBurger)
+        if(context.modal === ModalType.profileBurger){
+          context.hideModal()
+        }
+        else{
+          showModal(ModalType.profileBurger)
+        }
         break
     }
   }
@@ -59,7 +65,9 @@ export default function UserFooter(props: Props) {
           <img src='/img/UserFooter/joystick.svg' alt=''/>
         </div>
         {items.slice(2, items.length).map((item, index) =>
-          <Item onClick={() => handleClickItem(item)} icon={item.icon} label={item.label} key={item.key}/>
+          <Item 
+          onClick={() => handleClickItem(item)} 
+          icon={item.label === 'Menu' && context.modal === ModalType.profileBurger ? '/img/UserFooter/close.svg' : item.icon} label={item.label} key={item.key}/>
         )}
       </div>
     </VisibleXs>
