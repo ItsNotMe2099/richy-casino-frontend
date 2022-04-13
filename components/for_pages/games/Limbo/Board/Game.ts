@@ -24,7 +24,7 @@ export interface ISettings{
 }
 
 export default class Game {
-  _settings: ISettings
+  readonly _settings: ISettings
   _interval: NodeJS.Timer
   _counterMs: number = 0
   stage: GameStage = GameStage.idle

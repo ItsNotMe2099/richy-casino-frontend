@@ -8,6 +8,7 @@ import { CANVAS_ASPECT_RATIO } from './constants'
 import { StateMachineInput } from 'rive-react'
 import Plane from './Plane'
 import { IPosition, ISize } from 'types/interfaces'
+import Game from './Game'
 
 interface Props {}
 
@@ -18,24 +19,25 @@ export default function Board(props: Props) {
     width: 800,
     height: 800 / CANVAS_ASPECT_RATIO,
   }
-  const startPosition: IPosition = {
-    x: canvasSize.width / 10,
-    y: canvasSize.height - canvasSize.height / 10,
-  }
   const gameContext = useGameContext()
-  const [result, setResult] = useState<ICasinoGameFinishEvent>(null)
-  const stateMachineInputRef = useRef<StateMachineInput>(null)
-  const progressRef = useRef(0) // from 0 to 1
-  const positionRef = useRef<IPosition>(startPosition)
-  const animationId = useRef<number>()
-  const dotsRef = useRef<IPosition[]>([])
-  const [position, setPosition] = useState<IPosition>(positionRef.current)
+  const [position, setPosition] = useState<IPosition>()
+  const resultRef = useRef<ICasinoGameFinishEvent>(null)
+  const inputPlaneRef = useRef<StateMachineInput>(null)
+  const handleProgress = (position: IPosition, progress: number) => {
+    setPosition(position)
+  }
+  const gameRef = useRef(new Game({
+    resultRef,
+    inputPlaneRef,
+    onProgress: handleProgress,
+    size: canvasSize,
+  }))
 
   useEffect(() => {
-    const subscription = gameContext.gameState$.subscribe((data) => {
-      start()
-      if (data && stateMachineInputRef.current) {
-        setResult(data)
+    const subscription = gameContext.gameState$.subscribe((e) => {
+      if (e) {
+        resultRef.current = e
+        gameRef.current.start()
       }
     })
     return () => {
@@ -43,44 +45,19 @@ export default function Board(props: Props) {
     }
   }, [])
 
-  const animate = () => {
-    progressRef.current = progressRef.current + 0.002
-    positionRef.current = progressToPosition(progressRef.current)
-    if (progressRef.current < 1) {
-      dotsRef.current.push(positionRef.current)
-      setPosition(positionRef.current)
-      requestAnimationFrame(animate)
-    } else {
-      cancelAnimationFrame(animationId.current)
-      stateMachineInputRef.current.fire()
-    }
-  }
-
-  const start = () => {
-    dotsRef.current = []
-    animationId.current = requestAnimationFrame(animate)
-  }
-
-  const progressToPosition = (progress: number): IPosition => {
-    const x = startPosition.x + (canvasSize.width - startPosition.x) * progress
-    const max = Math.log(startPosition.y - startPosition.y / 10)
-    const y = startPosition.y - Math.exp(max * progress)
-    return {x, y}
-  }
-
   return (
     <GamePageBoardLayout>
       <div className={styles.root}>
         <CanvasBackground
-          startPosition={startPosition}
-          position={positionRef.current}
+          startPosition={gameRef.current.startPosition}
+          position={position ?? gameRef.current.position}
           size={canvasSize}
-          dots={dotsRef.current}
+          track={gameRef.current.track}
         />
         <Plane
-          progress={progressRef.current}
-          position={positionRef.current}
-          inputRef={stateMachineInputRef}
+          progress={gameRef.current.progress}
+          position={position ?? gameRef.current.position}
+          inputRef={inputPlaneRef}
         />
       </div>
     </GamePageBoardLayout>
