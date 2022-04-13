@@ -5,43 +5,47 @@ import { useEffect, useRef, useState } from 'react'
 import { ICasinoGameFinishEvent } from 'components/for_pages/games/data/interfaces/ICasinoGame'
 import { StateMachineInput } from 'rive-react'
 import RiveStateMachine from 'components/ui/RiveStateMachine'
-import { GameStage } from './constants'
+import Game, { EventData, GameStage } from './Game'
+import FloatResult, { FloatResultStyleType } from 'components/ui/FloatResult'
 
 interface Props{}
 
-interface EventData {
-  target: number
-  number: number
-}
-
 export default function Board(props: Props) {
   const gameContext = useGameContext()
-  const [result, setResult] = useState<ICasinoGameFinishEvent>(null)
+  const resultRef = useRef<ICasinoGameFinishEvent<EventData>>(null)
   const inputRocketRef = useRef<StateMachineInput>(null)
   const inputPlanetsRef = useRef<StateMachineInput>(null)
-  const [gameStage, setGameStage] = useState(GameStage.idle)
-  const gameStageRef = useRef<GameStage>(gameStage)
-
-  useEffect(() => {
-    gameStageRef.current = gameStage
-  }, [gameStage])
+  const [resultCounter, setResultCounter] = useState(0)
+  const [messageStyleType, setMessageStyleType] = useState(FloatResultStyleType.progress)
+  const gameRef = useRef(new Game({
+    resultRef,
+    inputRocketRef,
+    inputPlanetsRef,
+    onStageChanged(stage) {
+      if (stage === GameStage.idle) {
+        setResultCounter(0)
+        setMessageStyleType(FloatResultStyleType.progress)
+      }
+      if (stage === GameStage.finish) {
+        if (resultRef.current.win) {
+          setMessageStyleType(FloatResultStyleType.success)
+        } else {
+          setMessageStyleType(FloatResultStyleType.fail)
+        }
+      }
+    },
+    onTick(stage, progress) {
+      if (stage === GameStage.inProgress) {
+        setResultCounter(Math.round(resultRef.current.data.number * progress * 100) / 100)
+      }
+    }
+  }))
 
   useEffect(() => {
     const subscription = gameContext.gameState$.subscribe((e) => {
-      if (e && inputRocketRef.current && gameStageRef.current === GameStage.idle) {
-        const data = e.data as EventData
-        console.log('log: ', data)
-        setResult(e)
-        setGameStage(GameStage.inProgress)
-        inputPlanetsRef.current.fire()
-        setTimeout(() => {
-          inputRocketRef.current.fire()
-          setTimeout(() => {
-            setGameStage(GameStage.idle)
-            inputPlanetsRef.current.fire()
-            inputRocketRef.current.fire()
-          }, 2000)
-        }, 1000)
+      if (e) {
+        resultRef.current = e
+        gameRef.current.start()
       }
     })
     return () => {
@@ -66,6 +70,13 @@ export default function Board(props: Props) {
             className={styles.rocket}
           />
         </div>
+        {resultCounter > 0 && (
+          <div className={styles.messageLayer}>
+            <FloatResult className={styles.message} styleType={messageStyleType}>
+              {`${resultCounter}x`}
+            </FloatResult>
+          </div>
+        )}
       </div>
     </GamePageBoardLayout>
   )

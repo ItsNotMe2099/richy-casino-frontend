@@ -1,5 +1,5 @@
 import { MutableRefObject, useEffect } from 'react'
-import { StateMachineInput, useRive, useStateMachineInput } from 'rive-react'
+import { Rive, StateMachineInput, useRive, useStateMachineInput } from 'rive-react'
 
 export const STATE_MACHINE_NAME = 'State'
 export const INPUT_NAME = 'Toggle'
@@ -8,6 +8,7 @@ interface Props{
   src: string
   inputRef: MutableRefObject<StateMachineInput>
   className?: string
+  riveRef?: MutableRefObject<Rive>
 }
 
 export default function RiveStateMachine(props: Props) {
@@ -30,6 +31,9 @@ export default function RiveStateMachine(props: Props) {
   useEffect(() => {
     if (!props.inputRef.current && stateMachineInput) {
       props.inputRef.current = stateMachineInput
+      if (props.riveRef) {
+        props.riveRef.current = rive
+      }
     }
   }, [stateMachineInput])
 

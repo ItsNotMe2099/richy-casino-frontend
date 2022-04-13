@@ -1,0 +1,27 @@
+@import "scss/index";
+
+.root{
+  position: relative;
+  width: 139px;
+  height: 82px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.background{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.text{
+  position: relative;
+  font-size: 30px;
+  text-align: center;
+  font-weight: 700;
+}

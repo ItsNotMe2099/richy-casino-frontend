@@ -15,10 +15,11 @@ export interface ICasinoGameErrorEvent {
   errorCode: CasinoGameErrorCode
   errorName: any
 }
-export interface ICasinoGameFinishEvent {
+
+export interface ICasinoGameFinishEvent<T = any> {
   id: number
   win: boolean
-  data: any
+  data: T
   profit: number
   multiplier: number
   currency: string
