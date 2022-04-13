@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect } from 'react'
+import { CSSProperties, MutableRefObject, useEffect } from 'react'
 import { Rive, StateMachineInput, useRive, useStateMachineInput } from 'rive-react'
 
 export const STATE_MACHINE_NAME = 'State'
@@ -9,6 +9,7 @@ interface Props{
   inputRef: MutableRefObject<StateMachineInput>
   className?: string
   riveRef?: MutableRefObject<Rive>
+  style?: CSSProperties
 }
 
 export default function RiveStateMachine(props: Props) {
@@ -37,5 +38,5 @@ export default function RiveStateMachine(props: Props) {
     }
   }, [stateMachineInput])
 
-  return <RiveComponent className={props.className} />
+  return <RiveComponent className={props.className} style={props.style}/>
 }
