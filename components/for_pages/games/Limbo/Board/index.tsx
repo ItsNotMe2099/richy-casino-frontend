@@ -72,7 +72,7 @@ export default function Board(props: Props) {
         </div>
         {resultCounter > 0 && (
           <div className={styles.messageLayer}>
-            <FloatResult className={styles.message} styleType={messageStyleType}>
+            <FloatResult styleType={messageStyleType}>
               {`${resultCounter}x`}
             </FloatResult>
           </div>
