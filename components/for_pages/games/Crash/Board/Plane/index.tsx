@@ -13,11 +13,11 @@ interface Props{
 
 export default function Plane(props: Props) {
   const appContext = useAppContext()
-  const planeSize: number = appContext.isMobile ? 270 : 300
+  const planeSize: number = appContext.isMobile ? 240 : 300
   const left = props.planePosition.x - planeSize / 2 - 10
   const top = props.planePosition.y - planeSize / 2 - 20
   const startAngle = 5
-  const maxAngle = 60 - startAngle
+  const maxAngle = (appContext.isMobile ? 70 : 60) - startAngle
   const angle = maxAngle / 2 * props.progress + Math.exp(Math.log(maxAngle / 2) * props.progress) + startAngle
 
   return (

@@ -31,7 +31,7 @@ export default class Game {
     this._settings = settings
     this.startPosition = {
       x: settings.size.width / 10,
-      y: settings.size.height - settings.size.height / 15,
+      y: settings.size.height - settings.size.height / 13,
     }
     this.planePosition = this.startPosition
   }
@@ -63,7 +63,8 @@ export default class Game {
   }
 
   _progressToPosition(progress: number): IPosition {
-    const dx = (this._settings.size.width - this.startPosition.x) * progress
+    const rightPadding = this._settings.size.width / 8
+    const dx = (this._settings.size.width - this.startPosition.x - rightPadding) * progress
     const x = this.startPosition.x + dx
     const max = Math.log(this.startPosition.y - this.startPosition.y / 2)
     const y = this.startPosition.y - Math.exp(max * progress) - dx / 5

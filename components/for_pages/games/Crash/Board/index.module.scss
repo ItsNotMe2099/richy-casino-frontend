@@ -2,6 +2,7 @@
 
 .root{
   position: relative;
+  overflow: hidden;
 }
 
 .messageLayer{
@@ -12,12 +13,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  .message{
-    margin-bottom: 30%;
-    @media (max-width: $xs-max) {
-      margin-bottom: 80%;
-    }
-  }
+  padding-top: 10%;
 }

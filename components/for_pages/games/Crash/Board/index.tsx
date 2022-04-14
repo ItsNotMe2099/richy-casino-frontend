@@ -11,6 +11,7 @@ import { ISize } from 'types/interfaces'
 import Game, { GameTickData } from './Game'
 import FloatResult, { FloatResultStyleType } from 'components/ui/FloatResult'
 import { useAppContext } from 'context/state'
+import { isMdMax } from 'utils/media'
 
 interface Props {}
 
@@ -19,8 +20,8 @@ const CanvasBackground = dynamic(() => import('./CanvasBackground'), { ssr: fals
 export default function Board(props: Props) {
   const appContext = useAppContext()
   const canvasSize: ISize = {
-    width: appContext.isMobile ? 320 : 800,
-    height: appContext.isMobile ? 320 * CANVAS_ASPECT_RATIO : 800 / CANVAS_ASPECT_RATIO,
+    width: appContext.isMobile ? 330 : isMdMax() ? 600 : 800,
+    height: appContext.isMobile ? 400 : 800 / CANVAS_ASPECT_RATIO,
   }
   const gameContext = useGameContext()
   const [tickData, setTickData] = useState<GameTickData>()
@@ -69,7 +70,7 @@ export default function Board(props: Props) {
         />
         {tickData && (
           <div className={styles.messageLayer}>
-            <FloatResult className={styles.message} styleType={FloatResultStyleType.idle}>
+            <FloatResult styleType={FloatResultStyleType.idle}>
               {`${tickData.factor}x`}
             </FloatResult>
           </div>
