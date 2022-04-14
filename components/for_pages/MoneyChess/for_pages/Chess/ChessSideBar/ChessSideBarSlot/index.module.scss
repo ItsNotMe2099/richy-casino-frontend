@@ -1,0 +1,31 @@
+@import "../../../../../../../scss/index";
+.root{
+  position: relative;
+  background: linear-gradient(205.49deg, #696C87 16.14%, #43455A 104%);
+  border-radius: 18%;
+  min-width: 54px;
+  min-height: 54px;
+  width: 100%;
+  padding-bottom: 100%;
+
+}
+.bg{
+  position: absolute;
+  background: linear-gradient(205.49deg, #9DA0BF 16.14%, #6E7195 104%);
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  opacity: 0.3;
+  border-radius: 16%;
+}
+.wrapper{
+  position: absolute;
+  left: 5.56%;
+  right: 5.56%;
+  top: 5.56%;
+  bottom: 5.56%;
+
+  border-radius: 16%;
+
+}

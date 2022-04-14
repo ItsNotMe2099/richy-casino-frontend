@@ -1,0 +1,50 @@
+@import "../../../../../../../scss/index";
+$width: 85vh;
+.root{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 0;
+
+  border-radius: 1.2vh;
+  overflow: hidden;
+  max-width: $width;
+  flex-basis: $width;
+  max-height: $width;
+  @media screen and (max-width: $xs-land){
+   max-width: 100%;
+    max-height: unset;
+    flex-basis: unset;
+    border-radius: 8px;
+  }
+
+  @media screen and (max-width: $mobile-max){
+
+  }
+  @media screen and (max-width: $mobile-md){
+
+  }
+  .square:nth-child(2n){
+    background: #9DA0BF;
+  }
+  .reverse:nth-child(2n){
+    background: #6E7195;
+  }
+}
+
+.square{
+  background: #6E7195;
+  width: 5.2vw;
+  height: 5.2vw;
+  min-height: 46px;
+  min-width: 46px;
+  @media screen and (max-width: $mobile-md){
+    width: 12.5vw;
+    height: 12.5vw;
+    min-height: auto;
+    min-width: auto;
+  }
+}
+
+.reverse{
+  background: #9DA0BF;
+}

@@ -17,13 +17,24 @@ export interface IChessGameBoard {
   table: IChessGame;
   tableId: number;
   status: ChessGameBoardStatus;
+  isFinished: boolean
   currentTurn: number;
   currentTurnSetAt: string;
-  offerDraw: number;
+  offerDrawUserId: number;
   dices: number[]
   currentDices: number[];
   pieces: IChessGameBoardPiece[];
   players: IChessGameBoardPlayer[];
+  actionWaitExpiredAt?: string
+  actionWaitStartedAt?: string
+  actionDrawExpiredAt?: string
+  winnerUserId?: number,
+  countDrawOffers: number,
+  winAmount: number
+  ownerUserId: number
+  loseAmount: number
+  startedAt: string,
+  finishedAt: string
   createdAt: Date;
 }
 

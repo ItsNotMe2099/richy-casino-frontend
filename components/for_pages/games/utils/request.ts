@@ -56,6 +56,11 @@ async function request(options: string | Options): Promise<Res> {
         data: jsonData,
         err: null,
       }
+    }else{
+      return {
+        err: jsonData?.errors ?? jsonData,
+        data: null
+      }
     }
   } catch (err) {
     return {

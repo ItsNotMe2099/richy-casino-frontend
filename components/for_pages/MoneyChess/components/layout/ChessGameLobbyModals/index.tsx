@@ -1,8 +1,8 @@
 import {useChessGameLobbyContext} from 'components/for_pages/MoneyChess/context/lobby_state'
-import CreateGameModal from 'components/for_pages/MoneyChess/components/modals/CreateGameModal'
+import CreateGameModal from 'components/for_pages/MoneyChess/for_pages/Lobby/CreateGameModal'
 import ReactModal from 'react-modal'
 import {ChessGameLobbyModalType} from 'components/for_pages/MoneyChess/types/enums'
-import OpponentsModal from 'components/for_pages/MoneyChess/components/modals/OpponentsModal'
+import OpponentsModal from 'components/for_pages/MoneyChess/for_pages/Lobby/OpponentsModal'
 import { RemoveScroll } from 'react-remove-scroll'
 interface Props {
 

@@ -1,0 +1,14 @@
+@import "scss/index";
+.root{
+  font-size: 24px;
+  font-weight: 700;
+  color: $dark100;
+  margin-top: 4px;
+  text-align: center;
+  @media screen and (max-width: 1023px){
+    font-size: 12px;
+  }
+}
+.description{
+  color: $dark300;
+}

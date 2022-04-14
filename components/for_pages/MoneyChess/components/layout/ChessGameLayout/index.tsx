@@ -2,12 +2,9 @@ import styles from 'components/for_pages/MoneyChess/components/layout/ChessGameL
 import {ReactElement} from 'react'
 import Layout from 'components/layout/Layout'
 import PageTitle from 'components/for_pages/Common/PageTitle'
-import Bets from 'components/for_pages/MoneyChess/Bets'
-import {ChessGameLobbyWrapper} from 'components/for_pages/MoneyChess/context/lobby_state'
-import ChessGameLobbyModalContainer from 'components/for_pages/MoneyChess/components/layout/ChessGameLobbyModals'
+import Bets from 'components/for_pages/MoneyChess/for_pages/Chess/Bets'
 
 interface Props {
-  token?: string
   children: ReactElement
 }
 
@@ -17,10 +14,7 @@ export default function ChessGameLayout(props: Props) {
     <Layout>
       <div className={styles.root}>
         <PageTitle icon='/img/GameCard/chess-small.svg' title='Chess' style='chess'/>
-        <ChessGameLobbyWrapper token={props.token}>
         {props.children}
-        <ChessGameLobbyModalContainer/>
-        </ChessGameLobbyWrapper>
         <Bets/>
       </div>
     </Layout>

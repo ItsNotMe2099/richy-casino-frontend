@@ -18,7 +18,7 @@ export default class InfoRepository {
       url: '/api/finance/currency/index',
     })
     if (res.err) {
-      return null
+      return []
     }
     return res.data?.data ?? []
   }

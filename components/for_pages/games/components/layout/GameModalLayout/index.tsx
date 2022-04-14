@@ -26,7 +26,7 @@ export default function GameModalLayout(props: Props) {
      <div className={styles.overlay} onClick={handleOverlayClick}/>
      <div className={styles.content}>
        <div className={styles.close} onClick={onClose}><GameModalCloseSvg/></div>
-       {children}
+       {open && children}
      </div>
     </div>
     </RemoveScroll>

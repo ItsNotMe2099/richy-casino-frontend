@@ -1,0 +1,11 @@
+@import "../../../../../../scss/index";
+
+.root {
+    @include componentRoot;
+    margin-top: 20px;
+}
+
+.wrapper{
+    display: flex;
+    margin-bottom: 29px;
+ }

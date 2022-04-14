@@ -33,6 +33,7 @@
     "normalize.css": "8.0.1",
     "numeralize-ru": "^1.0.1",
     "poly-decomp": "^0.3.0",
+    "rc-progress": "^3.2.4",
     "react": "17.0.2",
     "react-custom-checkbox": "^2.0.0",
     "react-custom-scrollbars-2": "^4.4.0",
@@ -58,6 +59,7 @@
     "socket.io-client": "^4.4.1",
     "spinners-react": "^1.0.6",
     "styled-components": "^5.3.5",
+    "use-interval": "^1.4.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

@@ -15,6 +15,7 @@ export interface IChessGame {
   id: number;
   status: ChessGameStatus;
   currentBoard: IChessGameBoard;
+  isReplay: boolean
   currentBoardId: number;
   gameType: ChessGameType;
   lifetime: number;
@@ -26,6 +27,7 @@ export interface IChessGame {
   ownerUserId: number;
   opponentUser: IGameUser;
   opponentUserId: number;
+
   finishedAt: string
   startedAt: string
   createdAt: string;

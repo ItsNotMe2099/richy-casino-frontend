@@ -1,0 +1,92 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 0px 16px;
+  &.disabled{
+    .button {
+      opacity: 0.5;
+    }
+  }
+
+  @media screen and (max-width: $xs-land){
+    margin-top: 18px;
+    grid-gap: 0px 10px;
+  }
+}
+.button{
+  height: 9vh;
+  max-height: 75px;
+  font-size: 3vh;
+  font-weight: 500;
+  padding: 0px 22px;
+  @media screen and (max-width: 1023px){
+    height: 42px;
+    font-size: 16px;
+    padding: 0px 20px;
+    flex: unset;
+  }
+}
+.buttonCircle{
+  cursor: pointer;
+  height: 8vh;
+  width: 8vh;
+  background-color: $dark600;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover{
+    svg{
+      path{
+        fill: white;
+      }
+    }
+  }
+  svg{
+    width: 100%;
+    display: block;
+  }
+  @media screen and (max-width: 1023px){
+    height: 38px;
+    width: 38px;
+
+    svg{
+      max-width: 18px;
+    }
+  }
+
+}
+
+
+.btnWrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  grid-gap: 0px 16px;
+  max-width: 436px;
+  @media screen and (max-width: 1023px){
+    justify-content: center;
+    grid-gap: 0px 8px;
+    margin-top: 8px;
+  }
+  @media screen and (max-width: $xs-land){
+    margin-top: 18px;
+  }
+}
+.buttonDraw{
+  height: 9vh;
+  max-height: 75px;
+  flex: 1;
+  font-size: 3vh;
+  font-weight: 500;
+  padding: 0px;
+  @media screen and (max-width: 1023px){
+    height: 42px;
+    font-size: 16px;
+    padding: 0px 23px;
+    flex: unset;
+  }
+}

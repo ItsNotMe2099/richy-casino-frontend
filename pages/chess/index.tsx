@@ -1,19 +1,25 @@
 import {GetServerSideProps} from 'next'
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
-import ChessGameLobby from 'components/for_pages/MoneyChess/Lobby'
+import ChessGameLobby from 'components/for_pages/MoneyChess/for_pages/Lobby'
 import {GameCookiesType} from 'components/for_pages/games/data/types'
 import ChessGameLayout from 'components/for_pages/MoneyChess/components/layout/ChessGameLayout'
 import nookies from 'nookies'
 import GameAuthRepository from 'components/for_pages/games/data/reposittories/GameAuthRepository'
 import {runtimeConfig} from 'config/runtimeConfig'
+import {ChessGameLobbyWrapper} from 'components/for_pages/MoneyChess/context/lobby_state'
+import ChessGameLobbyModalContainer from 'components/for_pages/MoneyChess/components/layout/ChessGameLobbyModals'
 interface Props{
-  token?: string
+  gameToken?: string
 }
 export default function Chess(props: Props) {
 
   return (
-    <ChessGameLayout token={props.token}>
+    <ChessGameLayout>
+      <ChessGameLobbyWrapper token={props.gameToken}>
         <ChessGameLobby/>
+        <ChessGameLobbyModalContainer/>
+      </ChessGameLobbyWrapper>
+
     </ChessGameLayout>
   )
 }
