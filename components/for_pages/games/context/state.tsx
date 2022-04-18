@@ -119,7 +119,7 @@ export function GameWrapper(props: Props) {
     }
     const onConnect = () => {
       // setSocket(socket)
-
+    socket.emit('game:join', {type: props.gameType})
     }
     const onDisConnect = () => {
       socket.once('reconnect', () => {
@@ -252,8 +252,11 @@ export function GameWrapper(props: Props) {
           setRoundId(id)
         })
         setStartLoading(true)
-        socket.emit('game:start', {...data, currency: data.currency || 'BTC'})
+       const dat =  await CasinoGameRepository.startGame({...data, currency: data.currency || 'btc'})
+        setStartLoading(false)
+
       } catch (e) {
+        console.error(e)
         setError(e)
       }
     },
