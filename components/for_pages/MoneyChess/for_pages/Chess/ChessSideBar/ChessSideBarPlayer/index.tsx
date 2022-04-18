@@ -4,7 +4,7 @@ import {useEffect, useRef, useState} from 'react'
 import classNames from 'classnames'
 import {getPercentFromDuration} from 'components/for_pages/MoneyChess/utils/time'
 import { differenceInSeconds, intervalToDuration} from 'date-fns'
-import {pad} from 'utils/formatters'
+import {pad} from 'utils/formatter'
 
 
 interface Props {

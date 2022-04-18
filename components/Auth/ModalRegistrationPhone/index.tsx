@@ -5,7 +5,7 @@ import Button from 'components/ui/Button'
 import InputField from 'components/ui/Inputs/InputField'
 import Validator from 'utils/validator'
 import {useAppContext} from 'context/state'
-import {formatPhone} from 'utils/formatters'
+import Formatter from 'utils/formatter'
 import {useState} from 'react'
 import AuthRepository from 'data/repositories/AuthRepository'
 import {ModalType} from 'types/enums'
@@ -58,7 +58,7 @@ export default function ModalRegistrationPhone(props: Props) {
         <Form className={styles.form}>
           <div className={styles.description}>
             Введите ниже <span className={styles.code}>код</span>, отправленный на указанный
-            Вами номер тел. <span className={styles.phone}>{formatPhone(args.phone)}</span>
+            Вами номер тел. <span className={styles.phone}>{Formatter.formatPhone(args.phone)}</span>
           </div>
           <div className={styles.inputs}>
             <InputField

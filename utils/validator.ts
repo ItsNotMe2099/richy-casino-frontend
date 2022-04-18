@@ -28,4 +28,8 @@ export default class Validator {
   static passwordsMustMatch = (allValues: any) => (value: string): string | undefined => {
     return value !== allValues.password ? 'Пароли не совпадают' : undefined
   }
+  static otpValidation(value: string | number) {
+    return !value || `${value}`.length === 4  ? undefined : 'Введите 4-x значный код'
+  }
+
 }

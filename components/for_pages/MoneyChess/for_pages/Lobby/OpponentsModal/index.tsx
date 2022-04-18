@@ -10,7 +10,7 @@ import {ChessGameBoardStatus, IChessGameBoard} from 'components/for_pages/MoneyC
 import {useEffect, useState} from 'react'
 import FormError from 'components/ui/Form/FormError'
 import ChessGameRepository from 'components/for_pages/MoneyChess/data/repositories/ChessGameRepository'
-import {pad} from 'utils/formatters'
+import {pad} from 'utils/formatter'
 import {
   getChessGameTimeIcon,
   getChessGameTimeName,

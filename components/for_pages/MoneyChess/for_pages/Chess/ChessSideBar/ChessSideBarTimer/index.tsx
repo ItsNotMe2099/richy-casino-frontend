@@ -2,7 +2,7 @@ import styles from './index.module.scss'
 import {useEffect} from 'react'
 import classNames from 'classnames'
 
-import {pad} from 'utils/formatters'
+import {pad} from 'utils/formatter'
 import {useTimer} from 'react-timer-hook'
 
 

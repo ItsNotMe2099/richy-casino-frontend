@@ -5,7 +5,7 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import {useTimer} from 'react-timer-hook'
 import {addHours} from 'date-fns'
-import {pad} from 'utils/formatters'
+import {pad} from 'utils/formatter'
 
 interface Props {
 

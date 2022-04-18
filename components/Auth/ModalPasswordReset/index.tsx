@@ -8,7 +8,8 @@ import {ModalType} from 'types/enums'
 import {useAppContext} from 'context/state'
 import {useState} from 'react'
 import AuthRepository from 'data/repositories/AuthRepository'
-import {formatPhone} from 'utils/formatters'
+import Formatter from 'utils/formatter'
+
 
 interface Props {
   isOpen?: boolean
@@ -47,7 +48,7 @@ export default function ModalPasswordReset(props: Props) {
         <Form className={styles.form}>
           <div className={styles.description}>
             Введите ниже код, отправленный на указанный<br/>
-            Вами {isEmail ? 'Email' : 'Тел.'} <span className={styles.login}>{isEmail ? login : formatPhone(login)}</span>
+            Вами {isEmail ? 'Email' : 'Тел.'} <span className={styles.login}>{isEmail ? login : Formatter.formatPhone(login)}</span>
           </div>
           <div className={styles.inputs}>
             <InputField

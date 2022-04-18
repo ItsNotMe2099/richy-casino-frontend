@@ -1,6 +1,6 @@
 import { useTimer } from 'react-timer-hook'
 import styles from './index.module.scss'
-import {pad} from 'utils/formatters'
+import {pad} from 'utils/formatter'
 
 interface Props {
   expiredAt: Date
@@ -32,7 +32,7 @@ export default function Timer(props: Props) {
       <div className={styles.timer}>
       <div className={styles.days}>
         <div className={styles.digit}>
-          { pad('00', 
+          { pad('00',
            days
           )}
         </div>
@@ -42,7 +42,7 @@ export default function Timer(props: Props) {
       </div>
       <div className={styles.days}>
         <div className={styles.digit}>
-        { pad('00', 
+        { pad('00',
            hours
           )}
         </div>
@@ -52,7 +52,7 @@ export default function Timer(props: Props) {
       </div>
       <div className={styles.days}>
         <div className={styles.digit}>
-        { pad('00', 
+        { pad('00',
            minutes
           )}
         </div>
@@ -62,7 +62,7 @@ export default function Timer(props: Props) {
       </div>
       <div className={styles.days}>
         <div className={styles.digit}>
-        { pad('00', 
+        { pad('00',
            seconds
           )}
         </div>

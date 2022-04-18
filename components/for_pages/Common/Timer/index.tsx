@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import {useTimer} from 'react-timer-hook'
-import {pad} from 'utils/formatters'
+import {pad} from 'utils/formatter'
 
 interface Props {
   expiredAt: Date | string
