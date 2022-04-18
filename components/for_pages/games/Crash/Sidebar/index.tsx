@@ -48,7 +48,7 @@ export default function Sidebar(props: Props) {
               <GFieldBet/>
             </>
           </HiddenXs>
-          <GField name={'target'} type={'number'} label={'Коэффициент'} suffix={'clear'}/>
+          <GField name={'autoStopMultiplier'} type={'number'} label={'Коэффициент'} suffix={'clear'}/>
           {gameMode ===CasinoGameModeType.Auto && <>
             <GFieldInfinite name={'countGames'} label={'Кол-во игр'}/>
             <GFieldAutoAction typeName={'onWinType'} valueName={'onWinValue'}/>
