@@ -2,7 +2,7 @@ export enum CasinoGameType {
   Baccarat = 'baccarat',
   Blackjack = 'blackjack',
   Coinflip = 'coinflip',
-  Crash = 'crash',
+  Aviator = 'aviator',
   Diamonds = 'diamonds',
   Dice = 'dice',
   HiLo = 'hilo',
@@ -13,7 +13,7 @@ export enum CasinoGameType {
   Roulette = 'roulette',
   Stairs = 'stairs',
   Tower = 'tower',
-  VideoPoker = 'videopoker',
+  MiniPoker = 'minipoker',
   Wheel = 'wheel',
 }
 

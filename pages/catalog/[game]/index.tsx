@@ -58,13 +58,13 @@ export default function CatalogPage(props: Props) {
         return <GameHilo/>
       case CasinoGameType.Plinko:
         return <GamePlinko/>
-      case CasinoGameType.Crash:
+      case CasinoGameType.Aviator:
         return <GameCrash/>
       case CasinoGameType.Coinflip:
         return <GameCoinFlip/>
       case CasinoGameType.Blackjack:
         return <GameBlackJack/>
-      case CasinoGameType.VideoPoker:
+      case CasinoGameType.MiniPoker:
         return <GameVideoPoker/>
       default:
         return <GameMines/>

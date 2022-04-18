@@ -33,7 +33,7 @@ export default function GameVideoPoker(props: Props) {
   const handleSubmit = async (data: ICasinoGameVideoPokerDto) => {
    // setHold([])
     gameSound.play(GameSound.Roll)
-    await gameContext.startGame({...data, gameType: CasinoGameType.VideoPoker} as any)
+    await gameContext.startGame({...data, gameType: CasinoGameType.MiniPoker} as any)
   }
   const handleHold = (item: number)=>{
     gameSound.play(GameSound.Click)

@@ -19,7 +19,7 @@ export default function Crash(props: Props) {
   ]
 
   const handleSubmit = async (data) => {
-    await gameContext.startGame({...data, gameType: CasinoGameType.Crash})
+    await gameContext.startGame({...data, gameType: CasinoGameType.Aviator})
   }
 
   return (
