@@ -7,10 +7,13 @@ export default interface IUser {
   email: string
   phone: string
   currencyIso?: string
+  countryId: number,
+  cityId: number,
   countryIso: string,
   birthdayDate?: string,
   username?: string
-  fullname?: string,
+  surname?: string,
+  name?: string,
   balance: {
     total_calculated_amount: number,
     currencies: {

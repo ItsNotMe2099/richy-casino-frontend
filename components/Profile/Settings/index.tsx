@@ -10,9 +10,9 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import InfoRepository from 'data/repositories/InfoRepository'
 import { ProfileSettingsSelectField } from 'components/ui/Inputs/ProfileSettingsSelectField'
-import { convertCurrencyToOptions} from 'utils/converter'
 import { useAppContext } from 'context/state'
 import { IOption } from 'types/interfaces'
+import Converter from 'utils/converter'
 
 interface IUser {
   id: string
@@ -66,7 +66,7 @@ export default function Settings(props: Props) {
   const {values, setFieldValue, handleChange,} = formik
 
   const [countries, setCountries] = useState([])
-  const currencies = convertCurrencyToOptions(context.currencies)
+  const currencies = Converter.convertCurrencyToOptions(context.currencies)
 
   const [currentCurrency, setCurrentCurrency] = useState(currencies.filter(item => item.value === values.currency))
 
@@ -92,7 +92,7 @@ export default function Settings(props: Props) {
         <InputField name={'name'} className={styles.input} label='ФИО'/>
         <InputField name={'dateOfBirth'} className={styles.input} label='Дата рождения'/>
         {/*<ProfileSettingsSelectField name='country' options={countries} currentItem={currentItem(values, countries)} inputLabel='Страна'/>*/}
-        <ProfileSettingsSelectField name='currency' 
+        <ProfileSettingsSelectField name='currency'
         options={currencies} currentItem={currentCurrency[0]} inputLabel='Основная валюта'/>
         <InputField name={'phone'} disabled={true} className={styles.input} label='Номер телефона'/>
         <InputField name={'email'} disabled={true} className={styles.input} label='Почта'/>
@@ -139,10 +139,10 @@ export default function Settings(props: Props) {
         }
         <div className={styles.fa}>
           <div className={styles.faInput}>
-            {values.fa ? <>Двухфакторная аутентификация <span className={styles.blue}>включена</span></> : 
+            {values.fa ? <>Двухфакторная аутентификация <span className={styles.blue}>включена</span></> :
             <>Двухфакторная аутентификация <span className={styles.red}>отключена</span></>}
           </div>
-          <Button className={classNames(styles.btn, {[styles.faBtn]: values.fa})} background={values.fa ? 'dark600' : 'payGradient500'} type='submit' 
+          <Button className={classNames(styles.btn, {[styles.faBtn]: values.fa})} background={values.fa ? 'dark600' : 'payGradient500'} type='submit'
           onClick={() => values.fa ? setFieldValue('fa', false) : setFieldValue('fa', true)}>
             {values.fa ? <>Отключить 2FA</> : <>Включить 2FA</>}
           </Button>

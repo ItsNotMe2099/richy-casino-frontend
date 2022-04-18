@@ -8,7 +8,7 @@ import DropdownMenu from 'components/ui/DropdownMenu'
 import { useState } from 'react'
 import InfoRepository from 'data/repositories/InfoRepository'
 import AddNewAccount from './components/AddNewAccount'
-import { convertCurrencyToOptions } from 'utils/converter'
+import Converter from 'utils/converter'
 
 interface Props {
 
@@ -40,7 +40,7 @@ export default function Profile(props: Props) {
   const user = {avatar: '/img/Avatar/avatar.png',
   nickname: 'Alex',
   id: '6171361',
-  accounts: [{main: true, currency: 'BTC', icon: '/img/currencies/BTC.svg', amount: '0.00000000', usdt: '0.00000001'}],
+  accounts: [{main: true, currency: 'BTC', icon: '/img/currencies/btc.png', amount: '0.00000000', usdt: '0.00000001'}],
   tickets: '256', freebtc: '0.00000001', bonus: '1500 RUB', spins: '23'
 }
 
@@ -52,9 +52,9 @@ const options = [
 ]
 
 const newAccounts = [
-  {main: false, currency: 'BTC', icon: '/img/currencies/BTC.svg', amount: '0.00000000', usdt: '0.00000001'},
-  {main: false, currency: 'RUB', icon: '/img/currencies/RUB.svg', amount: '1000', usdt: null},
-  {main: false, currency: 'RUB', icon: '/img/currencies/RUB.svg', amount: '1000', usdt: null}
+  {main: false, currency: 'BTC', icon: '/img/currencies/btc.png', amount: '0.00000000', usdt: '0.00000001'},
+  {main: false, currency: 'RUB', icon: '/img/currencies/rub.png', amount: '1000', usdt: null},
+  {main: false, currency: 'RUB', icon: '/img/currencies/rub.png', amount: '1000', usdt: null}
 ]
 
 const [accounts, setAccount] = useState([])
@@ -175,8 +175,8 @@ const context = useAppContext()
 
               )}
             </div>}
-            <AddNewAccount 
-            options={convertCurrencyToOptions(currencies)}
+            <AddNewAccount
+            options={Converter.convertCurrencyToOptions(currencies)}
             onChange={(item) => handleAddNewAccount(item)}
             onTriggerClick={getCurrencies}
             />
@@ -206,8 +206,8 @@ const context = useAppContext()
 
               )}
             </div>}
-            <AddNewAccount 
-            options={convertCurrencyToOptions(currencies)}
+            <AddNewAccount
+            options={Converter.convertCurrencyToOptions(currencies)}
             onChange={(item) => handleAddNewAccount(item)}
             onTriggerClick={getCurrencies}
             />

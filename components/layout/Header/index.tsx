@@ -35,7 +35,7 @@ export default function Header(props: Props) {
   const context = useAppContext()
 
   const user = context.user
-
+  console.log('user', user)
   const UserBonus = ({icon, amount, color}: UserBonusProps) => {
     return (
       <div className={styles.userBonus}>

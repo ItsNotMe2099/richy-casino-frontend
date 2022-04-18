@@ -1,6 +1,6 @@
 import request from 'utils/request'
 import IUser from 'data/interfaces/IUser'
-import {objectKeysToCamelCase} from 'utils/converter'
+import Converter from 'utils/converter'
 import {UserFormData} from 'types/form-data'
 
 export default class UserRepository {
@@ -12,7 +12,7 @@ export default class UserRepository {
     if (res.err) {
       return null
     }
-    return res.data?.data ? {...objectKeysToCamelCase(res.data?.data)} : null
+    return res.data?.data ? {...Converter.objectKeysToCamelCase(res.data?.data)} : null
   }
   static async updateUser(data: UserFormData): Promise<IUser | null> {
     const res = await request({
@@ -23,7 +23,7 @@ export default class UserRepository {
     if (res.err) {
       return null
     }
-    return res.data?.data ? {...objectKeysToCamelCase(res.data?.data)} : null
+    return res.data?.data ? {...Converter.objectKeysToCamelCase(res.data?.data)} : null
   }
   static async changePassword({currentPassword, newPassword}): Promise<any> {
     const res = await request({

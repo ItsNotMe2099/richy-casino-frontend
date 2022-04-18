@@ -40,15 +40,15 @@ export default function ModalLogin(props: Props) {
           <div className={styles.inputs}>
             <InputField
               format={'phoneAndEmail'}
-
               name={'authInput'}
+              disabled={authContext.loading}
               placeholder={'Email / Телефон'} validate={Validator.required}/>
-            <InputField name={'password'} placeholder={'Пароль'} type={'password'} obscure
+            <InputField name={'password'} placeholder={'Пароль'} type={'password'} obscure disabled={authContext.loading}
                         validate={Validator.required}/>
           </div>
           <div className={styles.forgot} onClick={() => { context.showModal(ModalType.passwordRecovery) }}>Забыли пароль?</div>
           <FormError error={authContext.error}/>
-          <Button type='submit' size='play' fluid background='blueGradient500'>Авторизация</Button>
+          <Button type='submit' size='play' fluid background='blueGradient500' spinner={authContext.loading}>Авторизация</Button>
           <div className={styles.login}>
             Еще нет аккаунта? <span onClick={() => context.showModal(ModalType.registration)}>Зарегистрируйтесь</span>
           </div>

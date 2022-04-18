@@ -24,7 +24,7 @@ import BuyCrypto from 'components/Profile/BuyCrypto'
 import FA from 'components/Profile/FA'
 import Withdraw from 'components/Profile/Withdraw'
 import { RemoveScroll } from 'react-remove-scroll'
-import { convertCurrencyToOptions } from 'utils/converter'
+import Converter from 'utils/converter'
 interface Props {}
 
 export default function ModalContainer(props: Props) {
@@ -36,7 +36,7 @@ export default function ModalContainer(props: Props) {
 
 
   const user = {id: '6171361', balance: '$275.16', userName: 'Alex', name: 'Ерохин Иван Иванович', dateOfBirth: '15.12.1998',
-  country: '185', currency: convertCurrencyToOptions(context.currencies), phone: '8 (800) 800 88 88', email: 'pochta@mail.ru', password: 'qwerty123'
+  country: '185', currency: Converter.convertCurrencyToOptions(context.currencies), phone: '8 (800) 800 88 88', email: 'pochta@mail.ru', password: 'qwerty123'
 }
 
 

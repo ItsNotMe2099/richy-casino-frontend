@@ -5,6 +5,7 @@ import AuthRepository from 'data/repositories/AuthRepository'
 
 interface IState {
   error: string,
+  loading: boolean,
   loginFormData: LoginFormData | null
   setLoginFormData: (values: LoginFormData) => void
   login: (values: LoginFormData) => void,
@@ -13,6 +14,7 @@ interface IState {
 
 const defaultValue: IState = {
   error: null,
+  loading: false,
   loginFormData: null,
   setLoginFormData: (values) => null,
   login: (values) => null
@@ -28,9 +30,11 @@ export function AuthWrapper(props: Props) {
   const appContext = useAppContext()
   const [loginFormData, setLoginFormData] = useState<LoginFormData | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
 
   const login = async (values: LoginFormData) => {
     setLoginFormData(values)
+    setLoading(true)
     try {
       setError(null)
       const res = await AuthRepository.login(values?.authInput, values.password)
@@ -47,13 +51,16 @@ export function AuthWrapper(props: Props) {
       appContext.updateUserFromCookies()
       appContext.hideModal()
     }catch (e){
+
       setError(e)
     }
+    setLoading(false)
   }
 
   const value: IState = {
     ...defaultValue,
     error,
+    loading,
     login,
   }
 

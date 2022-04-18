@@ -9,7 +9,7 @@ import Button from 'components/ui/Button'
 import {ModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
 import SocialButtons from 'components/Auth/SocialButtons'
-import {convertCurrencyToOptions, currentItem} from 'utils/converter'
+import Converter from 'utils/converter'
 import { RegCurrencySelectField } from 'components/ui/Inputs/RegCurrencySelectField'
 
 interface Props {
@@ -23,7 +23,7 @@ export default function SocialsForm(props: Props) {
   }
 
   const initialValues = {
-      currency: convertCurrencyToOptions(context.currencies)[0].value,
+      currency: Converter.convertCurrencyToOptions(context.currencies)[0].value,
       checkBox: false
     }
 
@@ -44,7 +44,7 @@ export default function SocialsForm(props: Props) {
 
           <div className={styles.inputs}>
           <div className={styles.select}>
-        <RegCurrencySelectField name='currency' options={convertCurrencyToOptions(context.currencies)} currentItem={currentItem(values, convertCurrencyToOptions(context.currencies))}/>
+        <RegCurrencySelectField name='currency' options={Converter.convertCurrencyToOptions(context.currencies)} currentItem={Converter.currentItem(values, Converter.convertCurrencyToOptions(context.currencies))}/>
         </div>
             <div className={styles.promo} onClick={() => promoCode ? setPromoCode(false) : setPromoCode(true)}>
               <div className={classNames(styles.plus, {[styles.expanded]: promoCode})}>{promoCode ? '-' : '+'}</div>

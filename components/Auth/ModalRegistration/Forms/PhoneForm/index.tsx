@@ -12,7 +12,7 @@ import {ModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
 import AuthRepository from 'data/repositories/AuthRepository'
 import FormError from 'components/ui/Form/FormError'
-import {convertCurrencyToOptions, currentItem} from 'utils/converter'
+import Converter from 'utils/converter'
 import {RegistrationPhoneModalArguments} from 'types/interfaces'
 import { RegCurrencySelectField } from 'components/ui/Inputs/RegCurrencySelectField'
 
@@ -22,7 +22,9 @@ interface Props {
 export default function PhoneForm(props: Props) {
   const context = useAppContext()
   const [error, setError] = useState<string | null>(null)
+  const [sending, setSending] = useState<boolean>(false)
   const handleSubmit = async (data) => {
+    setSending(true)
     try {
       setError(null)
       await AuthRepository.registerPhoneSendOtp({
@@ -33,10 +35,11 @@ export default function PhoneForm(props: Props) {
     } catch (e) {
       setError(e)
     }
+    setSending(false)
   }
   const initialValues = {
       phone: null,
-      currency: convertCurrencyToOptions(context.currencies)[0].value,
+      currency: Converter.convertCurrencyToOptions(context.currencies)[0].value,
       checkBox: false
     }
 
@@ -53,7 +56,7 @@ export default function PhoneForm(props: Props) {
     <Form className={styles.form}>
       <div className={styles.inputs}>
         <div className={styles.select}>
-        <RegCurrencySelectField name='currency' options={convertCurrencyToOptions(context.currencies)} currentItem={currentItem(values, convertCurrencyToOptions(context.currencies))}/>
+        <RegCurrencySelectField name='currency' options={Converter.convertCurrencyToOptions(context.currencies)} currentItem={Converter.currentItem(values, Converter.convertCurrencyToOptions(context.currencies))}/>
         </div>
         <InputField format={'phone'} name={'phone'} placeholder={'Номер телефона'} validate={Validator.required} />
         <div className={styles.promo} onClick={() => promoCode ? setPromoCode(false) : setPromoCode(true)}>

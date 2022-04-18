@@ -3,7 +3,7 @@ import InputField from 'components/ui/Inputs/InputField'
 import { Form,  FormikProvider, useFormik } from 'formik'
 import styles from './index.module.scss'
 import Validator from 'utils/validator'
-import {convertUserBalanceCurrencyToOptions} from 'utils/converter'
+import Converter from 'utils/converter'
 import { useEffect, useState } from 'react'
 import { UserBalanceSelectField } from 'components/ui/Inputs/UserBalanceSelectField'
 import { IUserBalanceCurrency } from 'data/interfaces/IUser'
@@ -38,13 +38,13 @@ export default function WithdrawForm(props: Props) {
 
   const [balance, setBalance] = useState(currenciesToArray(currencies))
   const [currentItem, setCurrentItem] = useState(balance)
-  
+
   console.log(balance)
 
   const initialValues = {
     amount: '',
     address: '',
-    accountCurrency: convertUserBalanceCurrencyToOptions(balance as IUserBalanceCurrency[])[0]?.value
+    accountCurrency: Converter.convertUserBalanceCurrencyToOptions(balance as IUserBalanceCurrency[])[0]?.value
   }
 
   const formik = useFormik({
@@ -56,7 +56,7 @@ export default function WithdrawForm(props: Props) {
   const {values, setFieldValue, handleChange,} = formik
 
   useEffect(() => {
-    const array = convertUserBalanceCurrencyToOptions(balance as IUserBalanceCurrency[]).filter(item => item.value === values.accountCurrency)
+    const array = Converter.convertUserBalanceCurrencyToOptions(balance as IUserBalanceCurrency[]).filter(item => item.value === values.accountCurrency)
     setCurrentItem(array)
   }, [values.accountCurrency])
 
@@ -70,7 +70,7 @@ export default function WithdrawForm(props: Props) {
               Основной счёт
             </div>
           </div>
-          <UserBalanceSelectField name='accountCurrency' options={convertUserBalanceCurrencyToOptions(balance as IUserBalanceCurrency[])}
+          <UserBalanceSelectField name='accountCurrency' options={Converter.convertUserBalanceCurrencyToOptions(balance as IUserBalanceCurrency[])}
             currentItem={currentItem[0]}
           />
         </div>}

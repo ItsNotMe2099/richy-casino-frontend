@@ -1,5 +1,5 @@
 import request from 'utils/request'
-import {convertApiPaginationResponse} from 'utils/converter'
+import Converter from 'utils/converter'
 import {IPagination} from 'types/interfaces'
 import {IBalanceTransaction, IBalanceTransactionType} from 'data/interfaces/IBalanceTransaction'
 
@@ -17,7 +17,7 @@ export default class BalanceTransactionRepository {
     if (res.err) {
       return null
     }
-   return convertApiPaginationResponse(res.data)
+   return Converter.convertApiPaginationResponse(res.data)
   }
 
 }

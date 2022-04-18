@@ -3,7 +3,7 @@ import { runtimeConfig } from 'config/runtimeConfig'
 import Cookies from 'js-cookie'
 import { CookiesType } from 'types/enums'
 import {IApiResponse} from 'types/interfaces'
-import {convertApiResponseError} from 'utils/converter'
+import Converter from 'utils/converter'
 
 interface Options {
   url: string
@@ -57,7 +57,7 @@ async function request(options: string | Options): Promise<Res> {
     if(!jsonData?.success){
       return {
         data: jsonData,
-        err: convertApiResponseError(jsonData),
+        err: Converter.convertApiResponseError(jsonData),
       }
     }
     if (res.status === 200 || res.status === 201) {

@@ -2,7 +2,7 @@ import Button from 'components/ui/Button'
 import { Form, FormikProvider, useFormik } from 'formik'
 import styles from 'components/for_pages/MoneyChess/for_pages/Lobby/CreateGameModal/Form/index.module.scss'
 import Validator from 'utils/validator'
-import {convertCurrencyToOptionsExchange} from 'utils/converter'
+import Converter from 'utils/converter'
 import { useAppContext } from 'context/state'
 import { CreateGameOptions } from 'components/for_pages/MoneyChess/ui/Inputs/CreateGameOptions'
 import { useState } from 'react'
@@ -31,7 +31,7 @@ export default function CreateGameForm(props: Props) {
 
   const context = useAppContext()
   const lobbyContext = useChessGameLobbyContext()
-  const currencies = convertCurrencyToOptionsExchange(context.currencies ?? [])
+  const currencies = Converter.convertCurrencyToOptionsExchange(context.currencies ?? [])
   const [sending, setSending] = useState(false)
   const [error, setError] = useState(null)
   const gameTypes = [ChessGameType.Classic].map(i => ({label: getChessGameTypeName(i), value: i, icon: getChessGameTypeIcon(i)}))

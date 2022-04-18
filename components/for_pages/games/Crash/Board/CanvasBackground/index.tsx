@@ -3,7 +3,7 @@ import { Stage, Layer, Rect, Line, Text } from 'react-konva'
 import { colors } from 'scss/variables'
 import { useEffect, useMemo, useRef } from 'react'
 import { IPosition, ISize } from 'types/interfaces'
-import { positionsToPoints } from 'utils/converter'
+import Converter from 'utils/converter'
 import { MAX_FACTOR, ANIMATION_SPEED } from '../constants'
 import konva from 'konva'
 
@@ -92,7 +92,7 @@ export default function CanvasBackground(props: Props) {
           fill={colors.dark600}
         />
         <Line
-          points={positionsToPoints(props.track)}
+          points={Converter.positionsToPoints(props.track)}
           stroke={lineGradient}
           strokeWidth={4}
           tension={0.1}

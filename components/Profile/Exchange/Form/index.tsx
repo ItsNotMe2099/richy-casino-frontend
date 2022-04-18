@@ -4,7 +4,7 @@ import { Form, FormikProvider, useFormik } from 'formik'
 import styles from './index.module.scss'
 import Validator from 'utils/validator'
 import { useEffect, useState } from 'react'
-import {convertCurrencyToOptionsExchange} from 'utils/converter'
+import Converter from 'utils/converter'
 import { useAppContext } from 'context/state'
 import { ExchangeCurrencySelectField } from 'components/ui/Inputs/ExchangeCurrencySelectField'
 
@@ -24,9 +24,9 @@ export default function ExchangeForm(props: Props) {
   const context = useAppContext()
 
   const initialValues = {
-    currencySent: convertCurrencyToOptionsExchange(context.currencies)[0].value,
+    currencySent: Converter.convertCurrencyToOptionsExchange(context.currencies)[0].value,
     amountSent: 0,
-    currencyGet: convertCurrencyToOptionsExchange(context.currencies)[1].value,
+    currencyGet: Converter.convertCurrencyToOptionsExchange(context.currencies)[1].value,
     amountGet: 0
   }
 
@@ -43,7 +43,7 @@ export default function ExchangeForm(props: Props) {
 
   const {values, setFieldValue, handleChange,} = formik
 
-  const currencies = convertCurrencyToOptionsExchange(context.currencies)
+  const currencies = Converter.convertCurrencyToOptionsExchange(context.currencies)
 
   const [currentSent, setCurrentSent] = useState(currencies.filter(item => item.value === values.currencySent))
   const [currentGet, setCurrentGet] = useState(currencies.filter(item => item.value === values.currencyGet))
@@ -55,7 +55,7 @@ export default function ExchangeForm(props: Props) {
     setCurrentSent(array1)
     setCurrentGet(array2)
   }, [values.amountSent, values.currencySent, values.currencyGet])
-  
+
 
   return (
     <FormikProvider value={formik}>
@@ -87,8 +87,8 @@ export default function ExchangeForm(props: Props) {
           </div>
           <div className={styles.inputs}>
             <InputField name={'amountGet'} className={styles.input} validate={Validator.required} disabled/>
-            <div className={styles.exchange}><ExchangeCurrencySelectField 
-            name='currencyGet' options={convertCurrencyToOptionsExchange(context.currencies)} currentItem={currentGet[0]}/>
+            <div className={styles.exchange}><ExchangeCurrencySelectField
+            name='currencyGet' options={Converter.convertCurrencyToOptionsExchange(context.currencies)} currentItem={currentGet[0]}/>
             </div>
           </div>
         </div>

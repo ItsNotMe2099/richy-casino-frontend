@@ -1,7 +1,7 @@
 import { ExchangeCurrencySelectField } from 'components/ui/Inputs/ExchangeCurrencySelectField'
 import { Form, Formik } from 'formik'
 import styles from 'pages/selectPage/index.module.scss'
-import { currentItem } from 'utils/converter'
+import Converter  from 'utils/converter'
 
 export default function ExchangeSelect() {
 
@@ -29,7 +29,7 @@ export default function ExchangeSelect() {
         <div className={styles.text}>
           Exchange
         </div>
-        <ExchangeCurrencySelectField name='currency' options={currencies} currentItem={currentItem(values, currencies)}/>
+        <ExchangeCurrencySelectField name='currency' options={currencies} currentItem={Converter.currentItem(values, currencies)}/>
       </div>
     </Form>)}
   </Formik>

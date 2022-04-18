@@ -1,5 +1,6 @@
 import { formatRelative } from 'date-fns'
 import { ru } from 'date-fns/locale'
+import IUser from 'data/interfaces/IUser'
 const PNF = require('google-libphonenumber').PhoneNumberFormat
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance()
 
@@ -50,5 +51,13 @@ export const pad = (pad, str, padLeft = true) => {
     return (pad + str).slice(-pad.length)
   } else {
     return (str + pad).substring(0, pad.length)
+  }
+}
+
+export const formatUserName = (user: IUser, isProfile?: boolean) => {
+  if(user.username){
+    return `${user.username}`
+  }else{
+    return `id${user.id}`
   }
 }

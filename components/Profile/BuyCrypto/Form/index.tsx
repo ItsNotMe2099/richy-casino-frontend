@@ -6,7 +6,7 @@ import Validator from 'utils/validator'
 import { SelectField } from 'components/ui/Inputs/SelectField'
 import { useEffect } from 'react'
 import {ICurrency} from 'data/interfaces/ICurrency'
-import {convertCurrencyToOptions} from 'utils/converter'
+import Converter from 'utils/converter'
 
 interface IUser{
   id: string
@@ -60,7 +60,7 @@ export default function BuyCryptoForm(props: Props) {
           </div>
           <div className={styles.inputs}>
             <InputField name={'amountSent'} className={styles.input} validate={Validator.required}/>
-            <SelectField name='currencySent' options={convertCurrencyToOptions(array as ICurrency[])} className={styles.select}/>
+            <SelectField name='currencySent' options={Converter.convertCurrencyToOptions(array as ICurrency[])} className={styles.select}/>
           </div>
         </div>
         <div className={styles.send}>
@@ -71,7 +71,7 @@ export default function BuyCryptoForm(props: Props) {
           </div>
           <div className={styles.inputs}>
             <InputField name={'amountGet'} className={styles.input} validate={Validator.required} disabled/>
-            <SelectField name='currencyGet' options={convertCurrencyToOptions(array as ICurrency[])}className={styles.select}/>
+            <SelectField name='currencyGet' options={Converter.convertCurrencyToOptions(array as ICurrency[])}className={styles.select}/>
           </div>
         </div>
         <div className={styles.disclaimer}>

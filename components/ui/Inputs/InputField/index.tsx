@@ -5,7 +5,7 @@ import {  useEffect, useState } from 'react'
 import { FieldValidator } from 'formik/dist/types'
 import { useIMask } from 'react-imask'
 import { AsYouType, isValidPhoneNumber } from 'libphonenumber-js'
-import { convertLibphonenumberToMask } from 'utils/converter'
+import Converter  from 'utils/converter'
 import {IField} from 'types/interfaces'
 import Eye from 'components/svg/Eye'
 import ErrorInput from 'components/ui/Inputs/components/ErrorInput'
@@ -39,7 +39,7 @@ export default function InputField(props: Props) {
           setPhoneIsValid(true)
           const asYouType = new AsYouType()
           asYouType.input(field.value || '')
-          setPattern(convertLibphonenumberToMask(asYouType.getTemplate()))
+          setPattern(Converter.convertLibphonenumberToMask(asYouType.getTemplate()))
           updateValueFromMask()
         }
       } else if (phoneIsValid) {
