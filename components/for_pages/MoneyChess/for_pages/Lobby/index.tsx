@@ -13,6 +13,7 @@ import Table from 'components/for_pages/MoneyChess/components/Table'
 import EmptyLobby from 'components/for_pages/MoneyChess/for_pages/Lobby/EmptyLobby'
 import {IChessTableActionEvent} from 'components/for_pages/MoneyChess/data/types'
 import {ChessGameTableActionType} from 'components/for_pages/MoneyChess/data/enums'
+import classNames from 'classnames'
 
 interface Props {
 
@@ -87,7 +88,7 @@ export default function ChessGameLobby(props: Props) {
     return <>
       <div className={styles.header}>
         <div className={styles.statistics}>
-          <Button background='dark500' href={'/chess/stats'}>Статистика</Button>
+          <Button className={styles.statButton} background='dark500' href={'/chess/stats'}>Статистика</Button>
         </div>
         <div className={styles.btnsGroup}>
           <Button className={styles.filter} background='dark500'>Фильтр</Button>
@@ -110,11 +111,12 @@ export default function ChessGameLobby(props: Props) {
     }
     return null
   }
+  const showEmpty = init && (myGamesTotal === 0 && allGamesTotal === 0)
   return (
-    <div className={styles.root}>
+    <div className={classNames(styles.root, {[styles.empty]: showEmpty})}>
 
 
-      {init && (myGamesTotal === 0 && allGamesTotal === 0) && <EmptyLobby/>}
+      {showEmpty && <EmptyLobby/>}
       {init && (myGamesTotal > 0 || allGamesTotal > 0) && <div className={styles.content}>
         <HiddenXs>
           {renderToolbar()}

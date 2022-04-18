@@ -2,7 +2,6 @@ import Button from 'components/ui/Button'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import { useAppContext } from 'context/state'
-import { ModalType } from 'types/enums'
 import styles from 'components/for_pages/MoneyChess/for_pages/Lobby/EmptyLobby/index.module.scss'
 import {useChessGameLobbyContext} from 'components/for_pages/MoneyChess/context/lobby_state'
 import {ChessGameLobbyModalType} from 'components/for_pages/MoneyChess/types/enums'
@@ -41,7 +40,7 @@ export default function EmptyLobby(props: Props) {
           <div className={styles.statistics}>
             <Button background='dark500' onClick={props.onClick}>Статистика</Button>
           </div>
-          <Button className={styles.create} background='blueGradient500' onClick={() => context.showModal(ModalType.createGame)}>Создать игру</Button>
+          <Button className={styles.create} background='blueGradient500' onClick={() => lobbyContext.showModal(ChessGameLobbyModalType.createGame)}>Создать игру</Button>
           </div>
         </VisibleXs>
       </div>

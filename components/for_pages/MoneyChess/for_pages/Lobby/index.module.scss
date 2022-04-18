@@ -1,11 +1,13 @@
 @import "../../../../../scss/index";
 
 .root {
-
-    margin-top: 20px;
+  @include componentRoot;
+  &.empty{
+    padding: 0px;
+  }
 }
 .content{
-  @include componentRoot;
+
 }
 
 .header{
@@ -13,30 +15,34 @@
   align-items: center;
   margin-bottom: 23px;
   justify-content: space-between;
-  @media screen and (max-width: $mobile-max){
+  @media screen and (max-width: $xs-max){
     margin-bottom: 0;
-    margin-top: 23px;
+    margin-top: 11px;
+  }
+  .btnsGroup{
+    display: flex;
+    align-items: center;
   }
 }
 
 .statistics{
-  display: flex;
-  align-items: center;
-  button{
-    padding: 13px;
-    color: $white;
-    font-weight: 600;
-    font-size: 16px;
-    @media screen and (max-width: $mobile-max){
-      padding: 13px 10px;
+  flex: 1;
+    .statButton {
+      padding: 13px;
+      color: $white;
+      font-weight: 600;
+      font-size: 16px;
+      @media screen and (max-width: $mobile-max) {
+        padding: 13px 10px;
+      }
+      @media screen and (max-width: 370px) {
+        font-size: 14px;
+      }
+      @media screen and (max-width: 340px) {
+        font-size: 12px;
+      }
     }
-    @media screen and (max-width: 370px){
-      font-size: 14px;
-    }
-    @media screen and (max-width: 340px){
-      font-size: 12px;
-    }
-  }
+
 }
 
 .filter{

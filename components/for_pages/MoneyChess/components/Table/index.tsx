@@ -56,14 +56,14 @@ export default function Table<T>(props: Props<T>) {
         </Scrollbars>
 
       </table>
-      <section>
+      <div className={styles.mobile}>
         <Scrollbars style={{width: '100%', height: 250}}
                     renderTrackVertical={props => <div {...props} className={styles.track}/>}>
           {props.items?.length > 0 && props.items.map((item) => props.row(true, item))}
-          {props.itemsSeparated?.length > 0 && props.itemsSeparated.map((group, index) => <>{group.map( item => props.row(false, item))}<div className={styles.separatorMobile}/></>)}
+          {props.itemsSeparated?.length > 0 && props.itemsSeparated.map((group, index) => <>{group.map( item => props.row(true, item))}<div className={styles.separatorMobile}/></>)}
 
         </Scrollbars>
-      </section>
+      </div>
     </div>
   )
 }

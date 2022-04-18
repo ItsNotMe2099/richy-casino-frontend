@@ -1,7 +1,7 @@
 @import "../../../../../../scss/index";
 
 .root{
-  background-image: url('../../../../../../public/img/Chess/create-bg.svg');
+  background-image: url('/img/Chess/create-bg.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -9,11 +9,12 @@
   padding: 28px;
   padding-bottom: 0;
   border-radius: 18px;
+  overflow: hidden;
   @media screen and (max-width: $mobile-max){
     margin: 0 -10px;
     border-radius: 0;
     padding: 0;
-    background-image: url('../../../../../../public/img/Chess/create-bg-mobile.svg');
+    background-image: url('/img/Chess/create-bg-mobile.svg');
   }
 }
 
@@ -22,6 +23,7 @@
   justify-content: center;
   img{
     width: 100%;
+    max-width: 100%;
   }
   @media screen and (max-width: $mobile-max){
     margin: 0 -56px;
@@ -66,7 +68,8 @@
   align-items: center;
   margin-top: 12%;
   @media screen and (max-width: $mobile-max){
-    padding: 200px 0;
+    margin-top: 0px;
+    padding: 100px 0;
   }
 }
 
