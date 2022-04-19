@@ -1,0 +1,27 @@
+@import "scss/index";
+
+.root{
+  position: relative;
+  background: $dark700;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 5px #303030;
+}
+
+.section{
+  position: absolute;
+  transform-origin: bottom center;
+}
+
+.sectionBackground{
+  width: 90%;
+  height: 90%;
+}
+
+.sectionText{
+  font-size: 12px;
+  color: #fff;
+  transform: rotate(-90deg);
+  position: absolute;
+  top: 20%;
+  left: 15%;
+}

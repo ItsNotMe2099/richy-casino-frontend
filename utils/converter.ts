@@ -63,12 +63,19 @@ export default class Converter {
     return array[0]
   }
 
-  static  positionsToPoints(positions: IPosition[]): number[]{
+  static positionsToPoints(positions: IPosition[]): number[]{
     const points: number[] = []
     positions.forEach(item => {
       points.push(item.x)
       points.push(item.y)
     })
     return points
+  }
+
+  static angleToPosition(angle: number, radius: number): IPosition {
+    return {
+      x: radius * Math.cos(angle),
+      y: radius * Math.sin(angle),
+    }
   }
 }

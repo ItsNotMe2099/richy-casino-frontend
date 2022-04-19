@@ -6,6 +6,9 @@ import VisibleXs from 'components/ui/VisibleXS'
 import {useTimer} from 'react-timer-hook'
 import {addHours} from 'date-fns'
 import {pad} from 'utils/formatter'
+import dynamic from 'next/dynamic'
+
+const Board = dynamic(() => import('./Board'), { ssr: false })
 
 interface Props {
 
@@ -35,7 +38,9 @@ export default function Fortune(props: Props) {
   return (
     <div className={styles.root}>
       <div className={styles.wheel}>
-        <img src='/img/Fortune/wheel.svg' alt=''/>
+        <div className={styles.board}>
+          <Board />
+        </div>
         <HiddenXs>
         <div className={styles.wrapper}>
           <div className={styles.everyday}>
