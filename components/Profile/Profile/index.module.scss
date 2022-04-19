@@ -70,6 +70,10 @@
 .icon{
   display: flex;
   margin-right: 6px;
+  img{
+    max-width: 24px;
+    max-height: 24px;
+  }
 }
 
 .currency{
@@ -98,6 +102,7 @@
   font-size: 13px;
   color: #3c3d46;
   margin-top: 5px;
+  text-align: left;
 }
 
 .logout{

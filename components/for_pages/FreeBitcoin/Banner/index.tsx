@@ -3,6 +3,7 @@ import Button from 'components/ui/Button'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import styles from './index.module.scss'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
   children?: React.ReactNode
@@ -12,7 +13,7 @@ interface Props {
 }
 
 export default function Banner(props: Props) {
-
+  const {t} = useTranslation()
   const Digit = (prop: {digit: string}) => {
     return (
       <div className={styles.digit}>
@@ -30,7 +31,7 @@ export default function Banner(props: Props) {
   const someDate = '2021-12-27T12:46:24.007Z'
 
   const expiredAt = new Date(someDate)
-  
+
   return (
     <div className={styles.root}>
       <HiddenXs>
@@ -50,12 +51,12 @@ export default function Banner(props: Props) {
           <Digit digit={item} key={index}/>
         )}
       </div>
-      {props.state === 'play' && 
-        <Button className={styles.btn} size='huge' background='blueGradient500'>PLAY NOW</Button>
+      {props.state === 'play' &&
+        <Button className={styles.btn} size='huge' background='blueGradient500'>   {t('freebitcoin_play_now')}</Button>
       }
-      {props.state === 'win' && 
+      {props.state === 'win' &&
         <div className={styles.win}>
-          <div className={styles.you}>YOU WIN</div>
+          <div className={styles.you}>{t('freebitcoin_win_title')}</div>
           <div className={styles.btns}>
             <div className={styles.coins}>
               <img src='/img/FreeBitcoin/bitcoin.svg' alt=''/>
@@ -63,7 +64,7 @@ export default function Banner(props: Props) {
             </div>
             <div className={styles.ticket}>
               <img src='/img/FreeBitcoin/ticket.svg' alt=''/>
-              <div>2 free lottery ticket</div>
+              <div>{t('freebitcoin_win_tickets')}</div>
             </div>
           </div>
         </div>
@@ -72,7 +73,7 @@ export default function Banner(props: Props) {
         <div className={styles.timer}>
           <Timer expiredAt={expiredAt} style='freebitcoin'/>
           <div className={styles.again}>
-            Before you can play free again
+            {t('freebitcoin_before_play')}
           </div>
         </div>
       }

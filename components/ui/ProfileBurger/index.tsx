@@ -5,6 +5,8 @@ import UserFooter from 'components/for_pages/Common/UserFooter'
 import Avatar from '../Avatar'
 import BonusSmallBanner from 'components/for_pages/Common/BonusSmallBanner'
 import classNames from 'classnames'
+import UserUtils from 'utils/user'
+import {useTranslation} from 'next-i18next'
 
 interface IUser{
   id: string
@@ -28,6 +30,7 @@ interface BonusProps {
 }
 
 export default function ProfileBurger(props: Props) {
+  const {t} = useTranslation()
   const {isOpen, onRequestClose} = props
   const appContext = useAppContext()
   const customStyles = {
@@ -50,21 +53,21 @@ export default function ProfileBurger(props: Props) {
   }
 
   const bonuses = [
-    {icon: '/img/ProfileBurger/gift.svg', label: 'Бонусы и призы', key: 'gift'},
-    {icon: '/img/ProfileBurger/bitcoin.svg', label: 'Free Bitcoin', key: 'bitcoin'},
-    {icon: '/img/ProfileBurger/wheel.svg', label: 'Wheel of fortune', key: 'wheel'},
+    {icon: '/img/ProfileBurger/gift.svg', label: t('profile_mobile_bonuses_bonus'), key: 'gift'},
+    {icon: '/img/ProfileBurger/bitcoin.svg', label: t('profile_mobile_bonuses_free_bitcoin'), key: 'bitcoin'},
+    {icon: '/img/ProfileBurger/wheel.svg', label: t('profile_mobile_bonuses_wheel_of_frotune'), key: 'wheel'},
   ]
 
   const options = [
-    {icon: '/img/ProfileBurger/joystick.svg', label: 'Richy Games'},
-    {icon: '/img/ProfileBurger/ticket.svg', label: 'Richy Lottery'},
-    {icon: '/img/ProfileBurger/youtube.svg', label: 'Live Casino'},
-    {icon: '/img/ProfileBurger/rocket.svg', label: 'Crash'},
-    {icon: '/img/ProfileBurger/poker.svg', label: 'Poker'},
-    {icon: '/img/ProfileBurger/chess.svg', label: 'Шахматы'},
-    {icon: '/img/ProfileBurger/cup.svg', label: 'Лидерборд'},
-    {icon: '/img/ProfileBurger/referral.svg', label: 'Реферальная программа'},
-    {icon: '/img/ProfileBurger/like.svg', label: 'Любимые игры'},
+    {icon: '/img/ProfileBurger/joystick.svg', label: t('profile_mobile_menu_richy_games')},
+    {icon: '/img/ProfileBurger/ticket.svg', label: t('profile_mobile_menu_richy_lottery')},
+    {icon: '/img/ProfileBurger/youtube.svg', label: t('profile_mobile_menu_live_casino')},
+    {icon: '/img/ProfileBurger/rocket.svg', label: t('profile_mobile_menu_aviator')},
+    {icon: '/img/ProfileBurger/poker.svg', label: t('profile_mobile_menu_poker')},
+    {icon: '/img/ProfileBurger/chess.svg', label: t('profile_mobile_menu_chess')},
+    {icon: '/img/ProfileBurger/cup.svg', label: t('profile_mobile_menu_leaderboard')},
+    {icon: '/img/ProfileBurger/referral.svg', label: t('profile_mobile_menu_referral')},
+    {icon: '/img/ProfileBurger/like.svg', label: t('profile_mobile_menu_favorite')},
   ]
 
   const Bonus = ({icon, label, style}: BonusProps) => {
@@ -81,12 +84,12 @@ export default function ProfileBurger(props: Props) {
           <img src={icon} alt=''/>
         </div>
         <div className={styles.label}>
-          <>{label.split(' ').map((word, index) => 
+          <>{label.split(' ').map((word, index) =>
             index === 0 && <span>{word}</span>
           )}</>
           <span className={styles.space}>&nbsp;</span>
           <br className={styles.break}/>
-          {label.split(' ').slice(1).map((word, index) => 
+          {label.split(' ').slice(1).map((word, index) =>
             <>{word}&nbsp;</>
           )}
         </div>
@@ -115,15 +118,15 @@ export default function ProfileBurger(props: Props) {
       <div className={styles.sheet}>
       <Sheet.Container onViewportBoxUpdate>
         <Sheet.Header onViewportBoxUpdate />
-        <Sheet.Content onViewportBoxUpdate>{isOpen && 
+        <Sheet.Content onViewportBoxUpdate>{isOpen &&
         <div className={styles.container}>
           <div className={styles.info}>
             <div className={styles.user}>
             <Avatar avatar='/img/Avatar/avatar.png' style='circle'/>
             <div className={styles.name}>
-              <span>{props.user.userName}</span>
+              <span>{UserUtils.formatUserName(appContext.user)}</span>
               <div className={styles.id}>
-                ID: {props.user.id}
+                ID: {appContext.user.id}
               </div>
             </div>
             </div>
@@ -133,22 +136,22 @@ export default function ProfileBurger(props: Props) {
           </div>
           <BonusSmallBanner style='profileBurger'/>
           <div className={styles.bonuses}>
-            {bonuses.map((item, index) => 
-              <Bonus 
-              key={index} 
-              icon={item.icon} 
-              label={item.label} 
+            {bonuses.map((item, index) =>
+              <Bonus
+              key={index}
+              icon={item.icon}
+              label={item.label}
               style={item.key === 'gift' ? 'gift' : item.key === 'bitcoin' ? 'bitcoin' : 'wheel'}
             />
             )}
           </div>
           <div className={styles.block}>
-            {options.slice(0, 3).map((item, index) => 
+            {options.slice(0, 3).map((item, index) =>
               <Option icon={item.icon} label={item.label} key={index}/>
             )}
           </div>
           <div className={styles.block}>
-            {options.slice(3, 7).map((item, index) => 
+            {options.slice(3, 7).map((item, index) =>
               <Option icon={item.icon} label={item.label} key={index}/>
             )}
           </div>
@@ -164,7 +167,7 @@ export default function ProfileBurger(props: Props) {
             </div>
           </div>
           <div className={styles.last}>
-            {options.slice(7).map((item, index) => 
+            {options.slice(7).map((item, index) =>
               <Option icon={item.icon} label={item.label} key={index}/>
             )}
           </div>

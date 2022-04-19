@@ -1,7 +1,7 @@
 @import "scss/index";
 
 .root{
-  
+
 }
 
 .placeholder{
@@ -49,7 +49,22 @@
 .notActive{
     transform: rotate(270deg);
 }
-
+.symbol{
+  display: flex;
+  margin-right: 6px;
+  img{
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+  }
+  @media screen and (max-width: $mobile-max){
+    img{
+      width: 16px;
+      height: 16px;
+      margin-right: 4px;
+    }
+  }
+}
 .option{
     padding: 10px 21px;
     display: flex;
@@ -63,23 +78,12 @@
     }
   }
 
-  .symbol{
-    display: flex;
-    margin-right: 6px;
-    @media screen and (max-width: $mobile-max){
-       img{
-           width: 16px;
-           height: 16px;
-           margin-right: 4px;
-       }
-     }
-  }
-  
+
   .balance{
     display: flex;
     flex-direction: column;
   }
-  
+
   .balanceOption{
     display: flex;
     font-weight: 600;
@@ -88,14 +92,14 @@
       color: #89898e;
     }
   }
-  
+
   .value{
     display: flex;
     @media screen and (max-width: $mobile-max){
        font-size: 10px;
     }
   }
-  
+
   .dg{
     font-weight: 600;
     font-size: 12px;

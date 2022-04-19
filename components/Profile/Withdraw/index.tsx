@@ -12,6 +12,7 @@ import WalletCryptoTeth from 'components/svg/WalletCryptoTeth'
 import WalletCrypto13 from 'components/svg/WalletCrypto13'
 import WalletVisa from 'components/svg/WalletVisa'
 import WithdrawForm from './Form'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
   isOpen?: boolean
@@ -48,7 +49,7 @@ interface CryptoIconsProps {
 }
 
 export default function Withdraw(props: Props) {
-
+  const {t} = useTranslation()
   const CryptoIcons = ({mainColor, iconColor, lastIconMainColor, lastMainColor, style}: CryptoIconsProps) => {
 
     const classes = {
@@ -66,8 +67,8 @@ export default function Withdraw(props: Props) {
   }
 
   const methods = [
-    {iconLabel: 'crypto', label: 'Криптовалюта', bonus: true},
-    {iconLabel: 'visa', label: 'Карты банка'},
+    {iconLabel: 'crypto', label: t('withdraw_type_crypto'), bonus: true},
+    {iconLabel: 'visa', label: t('wwithdraw_type_card')},
     {icon: '/img/Wallet/paypal.svg', label: 'PayPal'},
     {icon: '/img/Wallet/yoo.svg', label: 'YooMoney'},
     {icon: '/img/Wallet/web.svg', label: 'WebMoney'},
@@ -115,26 +116,27 @@ export default function Withdraw(props: Props) {
   const [isSubmit, setIsSubmit] = useState(false)
 
   const Method = ({icon, iconLabel, label, iso, bonus, onClick, blue, mobile}: MethodProps) => {
+    const {t} = useTranslation()
     return (
       <div className={classNames(styles.method, {[styles.blue]: blue}, {[styles.iso]: (iso || mobile)})} onClick={onClick}>
-        {bonus && 
+        {bonus &&
           <div className={styles.bonus}>
-            Bonus
+            {t('withdraw_bonus')}
           </div>
         }
         <div className={classNames(styles.icon, {[styles.isoIcon]: iso})}>
-          {iconLabel === 'crypto' && <CryptoIcons 
-          mainColor={blue ? '#628CFF' : '#373945'} 
+          {iconLabel === 'crypto' && <CryptoIcons
+          mainColor={blue ? '#628CFF' : '#373945'}
           iconColor={blue ? '#fff' : '#cacaca'}
           lastIconMainColor={blue ? '#A7D5FF': '#959595'}
           lastMainColor={blue ? '#628CFF' : '#373845'}
           />}
-          {iconLabel === 'visa' && 
-          <WalletVisa 
+          {iconLabel === 'visa' &&
+          <WalletVisa
            className={styles.visaHover}
-           color1={blue ? '#fff' : '#FAA61A'} 
-           color2={blue ? '#fff' :'#FF5F00'} 
-           color3={blue ? '#fff' :'#EB001B'} 
+           color1={blue ? '#fff' : '#FAA61A'}
+           color2={blue ? '#fff' :'#FF5F00'}
+           color3={blue ? '#fff' :'#EB001B'}
            color4={blue ? '#EDEDED' :'#F79E1B'}/>}
           {!iconLabel && <img src={icon} alt=''/>}
         </div>
@@ -154,7 +156,7 @@ export default function Withdraw(props: Props) {
             {step === 2 &&
             (array.length && !currency) &&
               <div className={classNames(styles.methods, {[styles.nextStep]: step > 1})}>
-                {array && array.map((item, index) => 
+                {array && array.map((item, index) =>
                   <Method icon={item.icon} iconLabel={item.iconLabel} label={item.label} key={index} onClick={() => handleCurrencyAndIso(item)}/>
                 )}
               </div>
@@ -167,8 +169,8 @@ export default function Withdraw(props: Props) {
     return (
       <div className={classNames(styles.mobileMethod, {[styles.withCurrency]: currency})}>
         <div className={styles.iconMobile}>
-          {iconLabel === 'crypto' && <CryptoIcons 
-          mainColor={'#628CFF'} 
+          {iconLabel === 'crypto' && <CryptoIcons
+          mainColor={'#628CFF'}
           iconColor={'#fff'}
           lastIconMainColor={'#A7D5FF'}
           lastMainColor={'#628CFF'}
@@ -178,10 +180,10 @@ export default function Withdraw(props: Props) {
           {!iconLabel && <img src={icon} alt=''/>}
         </div>
         <div className={styles.middle}>
-          <div className={styles.fill}>Способ пополнения</div>
+          <div className={styles.fill}>{t('withdraw_type_title')}</div>
           <div className={classNames(styles.label, styles.labelMobile)}>{label}</div>
         </div>
-        {!currency && <div className={styles.change} onClick={handleChange}>Изменить</div>}
+        {!currency && <div className={styles.change} onClick={handleChange}>{t('withdraw_type_change')}</div>}
       </div>
     )
   }
@@ -247,11 +249,11 @@ const handleBack = () => {
     }
   }
 }
-  
+
   return (
     <ProfileModal size='small'
-          key={18} 
-          isOpen={context.modal === ProfileModalType.withdraw} {...commonSettings} title='Вывод' user={user} wallet noBorder
+          key={18}
+          isOpen={context.modal === ProfileModalType.withdraw} {...commonSettings} title={t('withdraw_title')} user={user} wallet noBorder
           isBack={step > 1 ? true : false}
           step={step}
           setStep={() => step === 2  ? handleBack() : step === 3 ? handleBack() : null}
@@ -263,12 +265,12 @@ const handleBack = () => {
       <>
       <WithdrawForm onSubmit={() => null} step={1}/>
       <div className={styles.choose}>
-        Выберите метод вывода
+        {t('withdraw_type_choose')}
       </div>
       </>
       }
-      {method && 
-        <Choice array={method === 'Криптовалюта' ? crypto : bank}/>
+      {method &&
+        <Choice array={method === t('withdraw_type_crypto') ? crypto : bank}/>
       }
       {!method && !isSubmit &&
       <div className={styles.methods}>
@@ -278,7 +280,7 @@ const handleBack = () => {
       </div>}
       {method && !isSubmit &&
         <>
-        <Options array={method === 'Криптовалюта' ? crypto : method === 'Карты банка' && bank} method={method}/>
+        <Options array={method === t('withdraw_type_crypto') ? crypto : method === t('withdraw_type_card') && bank} method={method}/>
         {currency &&
           <WithdrawForm onSubmit={() => null} step={3}/>
         }

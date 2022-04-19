@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import Panel from 'components/layout/Panel'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
+import {useTranslation} from 'next-i18next'
 
 interface IWinner {
   number: number
@@ -16,12 +17,12 @@ interface Props {
 }
 
 export default function Table(props: Props) {
-
+  const {t} = useTranslation()
   return (
     <Panel className={styles.panel}>
     <div className={styles.root}>
       <div className={styles.title}>
-        ТОП 10 ПОБЕДИТЕЛЕЙ 
+        {t('lottery_top_10')}
       </div>
       <HiddenXs>
       <div className={styles.table}>
@@ -30,13 +31,13 @@ export default function Table(props: Props) {
             №
           </div>
           <div className={styles.cell}>
-            User ID
+            {t('lottery_top_10_user_id')}
           </div>
           <div className={styles.cell}>
-            Amount won
+            {t('lottery_top_10_amount_won')}
           </div>
           <div className={styles.cell}>
-            Tickets
+            {t('lottery_top_10_tickets')}
           </div>
         </div>
         {props.items.slice(0, 3).map((item, index) =>

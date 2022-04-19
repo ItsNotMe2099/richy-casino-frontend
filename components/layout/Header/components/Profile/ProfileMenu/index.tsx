@@ -6,6 +6,7 @@ import Avatar from 'components/ui/Avatar'
 import HiddenXs from 'components/ui/HiddenXS'
 import {useAppContext} from 'context/state'
 import {ProfileModalType} from 'types/enums'
+import {useTranslation} from 'next-i18next'
 
 interface Option {
   label: string
@@ -26,19 +27,20 @@ enum ActionType{
 }
 
 export default function ProfileMenu(props: Props){
+  const {t} = useTranslation()
   const dropdownRef = useRef(null)
   const {showModal, logout} = useAppContext()
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
 
   const options = [
-    {label: 'Профиль', key: ActionType.Profile},
-    {label: 'Пополнить счет',  key: ActionType.AddMoney},
-    {label: 'Вывод средств', key: ActionType.Payout},
-    {label: 'История ставок', key: ActionType.Transactions},
-    {label: 'Реферальная программа', key: ActionType.Referral},
-    {label: 'Настройки', key: ActionType.Settings},
-    {label: 'Кошелек', key: ActionType.Wallet},
-    {label: 'Выйти', key: ActionType.Logout},
+    {label: t('header_profile_menu_profile'), key: ActionType.Profile},
+    {label: t('header_profile_menu_deposit'),  key: ActionType.AddMoney},
+    {label: t('header_profile_menu_withdrawal'), key: ActionType.Payout},
+    {label: t('header_profile_menu_bets_history'), key: ActionType.Transactions},
+    {label: t('header_profile_menu_referral'), key: ActionType.Referral},
+    {label: t('header_profile_menu_settings'), key: ActionType.Settings},
+    {label: t('header_profile_menu_wallet'), key: ActionType.Wallet},
+    {label: t('header_profile_menu_logout'), key: ActionType.Logout},
   ]
   const handleClickItem = (e, item) => {
     e.preventDefault()

@@ -20,7 +20,7 @@ export default function Select<T>(props: Props<T>){
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
 
   const handleClick = (e) => {
-    if(options.length === 0){
+    if(options.length === 0 && onTriggerClick){
       onTriggerClick()
     }
     e.preventDefault()

@@ -1,28 +1,29 @@
 import FAForm from './Form'
 import styles from './index.module.scss'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
-  
+
 }
 
 export default function FA(props: Props) {
-
+  const {t} = useTranslation()
   return (
       <div className={styles.root}>
         <div className={styles.scan}>
-          Отсканируйте QR-код с помощью приложения Google Authenticator или введите секретный ключ вручную.
+          {t('2fa_text')}
         </div>
         <div className={styles.qr}>
           <img src='/img/2FA/qr.png' alt=''/>
         </div>
           <div className={styles.your}>
-            Ваш секретный ключ
+            {t('2fa_secret_key')}
           </div>
           <div className={styles.key}>
             18e6Ktb8GuyhfEq7r9mRfvk9xyJLzUN7XD
           </div>
           <div className={styles.important}>
-            <span>ВАЖНО:&nbsp;</span>Запишите этот код, никогда не раскрывайте его другим. Вы можете использовать его для восстановления доступа к своей учетной записи, если нет доступа к аутентификатору.
+            <span>{t('2fa_attention')}&nbsp;</span>  {t('2fa_text_2')}
           </div>
           <FAForm/>
       </div>

@@ -81,7 +81,7 @@ export function GameWrapper(props: Props) {
   const [roundId, setRoundId] = useState(null)
   const [error, setError] = useState(null)
   const [gameData, setGameData] = useState<ICasinoGameDataDto>(null)
-  const [auth, setAuth] = useState(false)
+  const [auth, setAuth] = useState<boolean>(!!props.token)
   const [user, setUser] = useState<IGameUser | null>(null)
   const [game, setGame] = useState<ICasinoGame | null>(null)
   const [result, setResult] = useState<ICasinoGameFinishEvent | null>(null)

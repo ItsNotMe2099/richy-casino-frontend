@@ -5,13 +5,16 @@ import { Col } from 'react-grid-system'
 import BuyTicketsForm from './Form'
 import Statistics from '../Statistics'
 import HiddenXs from 'components/ui/HiddenXS'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
-  
+  yourTicket: number
+  totalTickets: number
+  winChance: number
 }
 
 export default function BuyTickets(props: Props) {
-
+  const {t} = useTranslation()
   const TopItem = (prop:{title: string, number: string, className: string, classColor: string}) => {
 
     return (
@@ -30,10 +33,10 @@ export default function BuyTickets(props: Props) {
     <Col className={styles.root}>
     <Panel className={styles.panel}>
       <HiddenXs>
-        <Statistics className={styles.statistics}/>
+        <Statistics className={styles.statistics} yourTicket={props.yourTicket} totalTickets={props.totalTickets} winChance={props.winChance}/>
       </HiddenXs>
       <div className={styles.buy}>
-        BUY LOTTERY TICKETS
+        {t('lottery_buy')}
       </div>
       <BuyTicketsForm/>
     </Panel>

@@ -3,7 +3,10 @@ import styles from './index.module.scss'
 import { Col } from 'react-grid-system'
 import classNames from 'classnames'
 import DropdownMenu from 'components/ui/DropdownMenu'
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
+import {IGameProvider} from 'data/interfaces/IGameProvider'
+import GameListRepository from 'data/repositories/GameListRepository'
+import {IGameCategory} from 'data/interfaces/IGameCategory'
 
 interface IGame{
   label: string
@@ -16,8 +19,6 @@ interface IGame{
 }
 
 interface Props {
-  path?: string
-  items?: IGame[]
   className?: string
   state?: boolean
   mobile?: boolean
@@ -25,8 +26,13 @@ interface Props {
 }
 
 export default function Filter(props: Props) {
-
-  const GameFilter = (prop: {icon: string, label: string, items: IGame[]}) => {
+  const [providers, setProviders] = useState<IGameProvider[]>([])
+  const [categories, setCategories] = useState<IGameCategory[]>([])
+  useEffect(() => {
+    GameListRepository.fetchProviders().then(i => setProviders(i.data ?? []))
+    GameListRepository.fetchCategories().then(i => setCategories(i.data ?? []))
+  }, [])
+  const GameFilter = (prop: {icon: string, label: string}) => {
     return(
     <div className={styles.gameFilter}>
       <div className={styles.left}>
@@ -34,22 +40,22 @@ export default function Filter(props: Props) {
         <div className={styles.label}>{prop.label}</div>
       </div>
       <div className={styles.quantity}>
-        {prop.items.length}
+        0
       </div>
     </div>
     )
   }
 
-  const CategoryFilter = (prop: {icon: string, label: string,  items: IGame[]}) => {
+  const CategoryFilter = (props: {icon: string, label: string,  amount: string | number}) => {
 
     return (
     <div className={styles.categoryFilter}>
       <div className={styles.left}>
-        <div className={styles.icon}><img src={prop.icon} alt=''/></div>
-        <div className={styles.label}>{prop.label}</div>
+        <div className={classNames(styles.icon, {[styles.hidden]: !props.icon})}><img src={props.icon} alt=''/></div>
+        <div className={styles.label}>{props.label}</div>
       </div>
       <div className={styles.quantity}>
-        {prop.items.length}
+        {props.amount}
       </div>
     </div>
     )
@@ -67,6 +73,7 @@ export default function Filter(props: Props) {
     </svg>
     )
   }
+  /*
   const providers = [
     {icon: <Netent/>, label: 'Netent'},
     {icon: <Netent/>, label: 'Gamomat'},
@@ -78,14 +85,14 @@ export default function Filter(props: Props) {
     {icon: <Netent/>, label: '5'},
     {icon: <Netent/>, label: '6'},
     {icon: <Netent/>, label: '8'}
-  ]
+  ] */
 
   const games = [
     {icon: '/img/Filter/icons/24.svg', label: 'Последние игры'},
     {icon: '/img/Filter/icons/top.svg', label: 'ТОП игры'},
     {icon: '/img/Filter/icons/favorite.svg', label: 'Избранные'},
   ]
-
+/*
   const categories = [
     {icon: '/img/Filter/icons/all.svg', label: 'Все игры'},
     {icon: '/img/Filter/icons/richy.svg', label: 'Richy Games'},
@@ -100,7 +107,8 @@ export default function Filter(props: Props) {
     {icon: '/img/Filter/icons/vr.svg', label: 'Виртуальные игры'},
     {icon: '/img/Filter/icons/lottery.svg', label: 'Лотереи'},
     {icon: '/img/Filter/icons/other.svg', label: 'Другие'},
-  ]
+  ];
+  */
 
   const [category, setCategory] = useState('')
   const [provider, setProvider] = useState('')
@@ -113,8 +121,8 @@ export default function Filter(props: Props) {
             <img src='/img/icons/close.svg' alt='' onClick={props.onClick}/>
           </div>
          <InputSearch placeholder='Поиск'/>
-         {games.map((item, index) => 
-          <GameFilter key={index} icon={item.icon} label={item.label} items={props.items}/>
+         {games.map((item, index) =>
+          <GameFilter key={index} icon={item.icon} label={item.label}/>
          )
          }
          <div className={styles.categoriesLbl}>
@@ -122,7 +130,7 @@ export default function Filter(props: Props) {
          </div>
          <div className={styles.categories}>
          {categories.map((item, index) =>
-          <CategoryFilter key={index} icon={item.icon} label={item.label} items={props.items}/>
+          <CategoryFilter key={index} icon={item.imageIconUrl} label={item.name} amount={item.gamesAmount}/>
          )}
          </div>
          <div className={styles.categoriesLbl}>
@@ -132,10 +140,10 @@ export default function Filter(props: Props) {
          {providers.map((item, index) =>
             <div className={styles.provider} key={index}>
               <div className={styles.iconProvider}>
-                {item.icon}
+                {item.imagePreviewUrl ? <img src={item.imagePreviewUrl}/> : item.name}
               </div>
               <div className={styles.quantity}>
-                {props.items.length}
+                {item.gamesAmount}
               </div>
             </div>
          )}
@@ -146,15 +154,15 @@ export default function Filter(props: Props) {
         <div className={styles.search}>
           <InputSearch placeholder='Поиск'/>
           <div className={styles.filters}>
-          <DropdownMenu options={categories} label='Категория' allOption
+          <DropdownMenu options={categories.map(i => ({label: i.name, }))} label='Категория' allOption
            onAll={() => setCategory('')} onChange={(item) => setCategory(item.label)} activeTab={category} type='category'/>
-          <DropdownMenu options={providers} label='Провайдеры' allOption
+          <DropdownMenu options={providers.map(i => ({label: i.name, }))} label='Провайдеры' allOption
             onAll={() => setProvider('')}
            onChange={(item) => setProvider(item.label)} activeTab={provider} type='provider'/>
         </div>
         </div>
-        {games.map((item, index) => 
-          <GameFilter key={index} icon={item.icon} label={item.label} items={props.items}/>
+        {games.map((item, index) =>
+          <GameFilter key={index} icon={item.icon} label={item.label}/>
          )
          }
     </div>

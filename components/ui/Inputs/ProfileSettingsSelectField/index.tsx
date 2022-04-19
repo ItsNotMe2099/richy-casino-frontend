@@ -11,7 +11,6 @@ interface Props extends IField{
   options: ICustomSelectViewOption[]
   placeholder?: string
   initial?: string
-  inputLabel?: string
   currentItem?: ICustomSelectViewOption
 }
 interface PropsOption{
@@ -29,7 +28,7 @@ const Option = (props: PropsOption) => {
 const Placeholder = (props: PropsOption) => {
   return (
   <div className={styles.placeholder}>
-      <div className={styles.label}>{props.currentItem.label}</div>
+      <div className={styles.label}>{props.option?.label}</div>
       <img className={classNames({[styles.reverse]: props.isActive})}
         src='/img/Select/arrow-big.svg' alt=''/>
   </div>
@@ -40,10 +39,10 @@ export const ProfileSettingsSelectField = (props: Props) => {
 
   return (
   <div className={styles.root}>
-    <div className={styles.label}>{props.inputLabel}</div>
+    <div className={styles.label}>{props.label}</div>
     <SelectField options={props.options}  name={props.name} currentItemStyle={styles.current} className={styles.select}
       itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
-      activeComponent={(option, isActive) => <Placeholder currentItem={option} isActive={isActive}/>}
+      activeComponent={(option, isActive) => <Placeholder option={option} isActive={isActive}/>}
     />
   </div>
   )

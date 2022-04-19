@@ -18,6 +18,7 @@ interface Props {
 }
 
 export default function ModalPasswordRecovery(props: Props) {
+  const { t } = useTranslation()
   const context = useAppContext()
   const [error, setError] = useState<string | null>(null)
   const handleSubmit = async (data) => {
@@ -35,26 +36,22 @@ export default function ModalPasswordRecovery(props: Props) {
   }
 
 
-
-  const { t } = useTranslation('common')
-
-
   return (
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         <Form className={styles.form}>
           <div className={styles.description}>
-            Пожалуйста, укажите email или номер телефона от Вашего аккаунта Richy и мы отправим Вам инструкцию по восстановлению пароля
+            {t('password_forgot_text')}
           </div>
           <div className={styles.inputs}>
             <InputField
               format={'phoneAndEmail'}
               name={'login'}
-              placeholder={'Email / Телефон'} validate={Validator.required}/>
+              placeholder={t('password_forgot_field_identity')} validate={Validator.required}/>
                 </div>
           <FormError error={error}/>
           <div className={styles.buttons}>
-            <Button type='button' className={styles.cancel} size='submit' background='dark600' onClick={() => context.showModal(ModalType.login)}>Отменить</Button>
-            <Button type='submit' className={styles.button} size='submit' background='blueGradient500' >Продолжить</Button>
+            <Button type='button' className={styles.cancel} size='submit' background='dark600' onClick={() => context.showModal(ModalType.login)}>{t('password_forgot_cancel')}</Button>
+            <Button type='submit' className={styles.button} size='submit' background='blueGradient500' >{t('password_forgot_next')}</Button>
           </div>
 
         </Form>

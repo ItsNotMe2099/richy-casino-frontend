@@ -14,6 +14,7 @@ import WalletCryptoBtc from 'components/svg/WalletCryptoBtc'
 import WalletCryptoTeth from 'components/svg/WalletCryptoTeth'
 import WalletCrypto13 from 'components/svg/WalletCrypto13'
 import WalletVisa from 'components/svg/WalletVisa'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
   isOpen?: boolean
@@ -50,7 +51,7 @@ interface CryptoIconsProps {
 }
 
 export default function Wallet(props: Props) {
-
+  const {t} = useTranslation()
   const CryptoIcons = ({mainColor, iconColor, lastIconMainColor, lastMainColor, style}: CryptoIconsProps) => {
 
     const classes = {
@@ -68,8 +69,8 @@ export default function Wallet(props: Props) {
   }
 
   const methods = [
-    {iconLabel: 'crypto', label: 'Криптовалюта', bonus: true},
-    {iconLabel: 'visa', label: 'Карты банка'},
+    {iconLabel: 'crypto', label: t('wallet_payment_type_crypto'), bonus: true},
+    {iconLabel: 'visa', label: t('wallet_payment_type_card')},
     {icon: '/img/Wallet/paypal.svg', label: 'PayPal'},
     {icon: '/img/Wallet/yoo.svg', label: 'YooMoney'},
     {icon: '/img/Wallet/web.svg', label: 'WebMoney'},
@@ -118,26 +119,27 @@ export default function Wallet(props: Props) {
   const [isSubmit, setIsSubmit] = useState(false)
 
   const Method = ({icon, iconLabel, label, iso, bonus, onClick, blue, mobile}: MethodProps) => {
+    const {t} = useTranslation()
     return (
       <div className={classNames(styles.method, {[styles.blue]: blue}, {[styles.iso]: (iso || mobile)})} onClick={onClick}>
-        {bonus && 
+        {bonus &&
           <div className={styles.bonus}>
-            Bonus
+            {t('wallet_payment_method_bonus')}
           </div>
         }
         <div className={classNames(styles.icon, {[styles.isoIcon]: iso})}>
-          {iconLabel === 'crypto' && <CryptoIcons 
-          mainColor={blue ? '#628CFF' : '#373945'} 
+          {iconLabel === 'crypto' && <CryptoIcons
+          mainColor={blue ? '#628CFF' : '#373945'}
           iconColor={blue ? '#fff' : '#cacaca'}
           lastIconMainColor={blue ? '#A7D5FF': '#959595'}
           lastMainColor={blue ? '#628CFF' : '#373845'}
           />}
-          {iconLabel === 'visa' && 
-          <WalletVisa 
+          {iconLabel === 'visa' &&
+          <WalletVisa
            className={styles.visaHover}
-           color1={blue ? '#fff' : '#FAA61A'} 
-           color2={blue ? '#fff' :'#FF5F00'} 
-           color3={blue ? '#fff' :'#EB001B'} 
+           color1={blue ? '#fff' : '#FAA61A'}
+           color2={blue ? '#fff' :'#FF5F00'}
+           color3={blue ? '#fff' :'#EB001B'}
            color4={blue ? '#EDEDED' :'#F79E1B'}/>}
           {!iconLabel && <img src={icon} alt=''/>}
         </div>
@@ -152,15 +154,16 @@ export default function Wallet(props: Props) {
   }
 
   const Options = ({method, array}: OptionsProps) => {
+    const {t} = useTranslation()
     return (
     <div className={styles.options}>
-      {method === 'Криптовалюта' &&
+      {method === t('wallet_payment_type_crypto') &&
           <>
           <div className={styles.actions}>
               <div className={styles.top}>
-                <Button className={styles.btn} background='dark600'><img src='/img/Wallet/wallet+.svg' alt=''/>Завести кошелек</Button>
-                <Button 
-                  className={styles.btn} 
+                <Button className={styles.btn} background='dark600'><img src='/img/Wallet/wallet+.svg' alt=''/>{t('wallet_create')}</Button>
+                <Button
+                  className={styles.btn}
                   background='dark600'
                   onClick={() => context.showModal(ProfileModalType.exchange)}
                 >
@@ -169,16 +172,16 @@ export default function Wallet(props: Props) {
                 </Button>
               </div>
               <div className={styles.btnWrap}>
-                <Button 
+                <Button
                   onClick={() => context.showModal(ProfileModalType.buyCrypto)}
-                  className={styles.btn} background='dark600'><img src='/img/Wallet/buy.svg' alt=''/>Купить криптовалюту
+                  className={styles.btn} background='dark600'><img src='/img/Wallet/buy.svg' alt=''/>{t('wallet_buy_crypto')}
                 </Button>
               </div>
             </div></>}
             {step === 2 &&
             (array.length && !currency) &&
               <div className={styles.methods}>
-                {array && array.map((item, index) => 
+                {array && array.map((item, index) =>
                   <Method icon={item.icon} iconLabel={item.iconLabel} label={item.label} key={index} onClick={() => handleCurrencyAndIso(item)}/>
                 )}
               </div>
@@ -188,11 +191,12 @@ export default function Wallet(props: Props) {
   }
 
   const MobileMethod = ({icon, label, iconLabel}: MethodProps) => {
+    const {t} = useTranslation()
     return (
       <div className={classNames(styles.mobileMethod, {[styles.withCurrency]: currency})}>
         <div className={styles.iconMobile}>
-          {iconLabel === 'crypto' && <CryptoIcons 
-          mainColor={'#628CFF'} 
+          {iconLabel === 'crypto' && <CryptoIcons
+          mainColor={'#628CFF'}
           iconColor={'#fff'}
           lastIconMainColor={'#A7D5FF'}
           lastMainColor={'#628CFF'}
@@ -202,7 +206,7 @@ export default function Wallet(props: Props) {
           {!iconLabel && <img src={icon} alt=''/>}
         </div>
         <div className={styles.middle}>
-          <div className={styles.fill}>Способ пополнения</div>
+          <div className={styles.fill}>{t('wallet_payment_method_title')}</div>
           <div className={classNames(styles.label, styles.labelMobile)}>{label}</div>
         </div>
         {!currency && <div className={styles.change} onClick={handleChange}>Изменить</div>}
@@ -232,13 +236,14 @@ export default function Wallet(props: Props) {
   }
 
   const QrCode = ({iso, walletNumber}: QrCodeProps) => {
+    const {t} = useTranslation()
     return (
       <div className={styles.qr}>
-        <div className={styles.choose}>Сумма пополнения</div>
+        <div className={styles.choose}>{t('wallet_qr_sum')}</div>
         <div className={styles.input}>
           0.0557123 <span>{iso}</span>
         </div>
-        <div className={styles.choose2}><span>{iso}</span> кошелек пополнения</div>
+        <div className={styles.choose2}><span>{iso}</span> {t('wallet_qr_wallet')}</div>
         <div className={styles.input2}>
           <div className={styles.forFill}>{walletNumber}</div>
           <div className={styles.copy} onClick={() => {navigator.clipboard.writeText(walletNumber)}}>
@@ -249,7 +254,7 @@ export default function Wallet(props: Props) {
           <img src='/img/Wallet/qr.png' alt=''/>
         </div>
         <div className={styles.important}>
-          <span>ВАЖНО:</span> Отправляйте только BTC на этот депозитный адрес. Отправка любой другой валюты на этот адрес может привести к потере вашего депозита.
+          <span>{t('wallet_qr_attention')}</span> {t('wallet_qr_attention_text')}
         </div>
       </div>
     )
@@ -295,11 +300,11 @@ const handleBack = () => {
     }
   }
 }
-  
+
   return (
     <ProfileModal size='small'
-          key={8} 
-          isOpen={context.modal === ProfileModalType.wallet} {...commonSettings} title='Пополнение' user={user} wallet noBorder
+          key={8}
+          isOpen={context.modal === ProfileModalType.wallet} {...commonSettings} title={t('wallet_title')} user={user} wallet noBorder
           isBack={step > 1 ? true : false}
           step={step}
           setStep={() => step === 2  ? handleBack() : step === 3 ? handleBack() : null}
@@ -308,14 +313,14 @@ const handleBack = () => {
     <div className={styles.root}>
       {!method &&
       <div className={styles.choose}>
-        Выберите платежный метод
+        {t('wallet_payment_method_choose')}
       </div>}
       {!isSubmit &&
       <div className={styles.banner}>
         <BonusSmallBanner style='wallet'/>
       </div>}
-      {method && 
-        <Choice array={method === 'Криптовалюта' ? crypto : bank}/>
+      {method &&
+        <Choice array={method === t('wallet_payment_type_crypto') ? crypto : bank}/>
       }
       {!method && !isSubmit &&
       <div className={styles.methods}>
@@ -325,9 +330,9 @@ const handleBack = () => {
       </div>}
       {method && !isSubmit &&
         <>
-        <Options array={method === 'Криптовалюта' ? crypto : method === 'Карты банка' && bank} method={method}/>
+        <Options array={method === t('wallet_payment_type_crypto') ? crypto : method === t('wallet_payment_type_card') && bank} method={method}/>
         {currency &&
-          <WalletForm onSubmit={() => method === 'Криптовалюта' ? setIsSubmit(true) : null}/>
+          <WalletForm onSubmit={() => method === t('wallet_payment_type_crypto') ? setIsSubmit(true) : null}/>
         }
         </>
       }

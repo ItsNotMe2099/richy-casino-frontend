@@ -1,10 +1,11 @@
-import SwitchFilter from 'components/for_pages/Common/SwitchFilter'
 import Button from 'components/ui/Button'
 import { format } from 'date-fns'
 import styles from './index.module.scss'
+import {useTranslation} from 'next-i18next'
+import SwitchFilterPayments from 'components/for_pages/Common/SwitchFilterPayments'
 
 interface Props {
-  
+
 }
 
 interface ItemProps {
@@ -15,7 +16,7 @@ interface ItemProps {
 }
 
 export default function PaymentHistory(props: Props) {
-
+  const {t} = useTranslation()
   const items = [
     {label: 'Qiwi', card: null, date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
     {label: null, card: '0000000000000001', date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
@@ -23,7 +24,6 @@ export default function PaymentHistory(props: Props) {
     {label: null, card: '0000000000000001', date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
     {label: null, card: '0000000000000001', date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
   ]
-
   const Item = ({label, card, date, amount}: ItemProps) => {
 
     return (
@@ -50,15 +50,15 @@ export default function PaymentHistory(props: Props) {
   return (
       <div className={styles.root}>
         <div className={styles.wrapper}>
-          <SwitchFilter payment/>
+          <SwitchFilterPayments />
         </div>
         <div className={styles.list}>
-        {items.map((item, index) => 
+        {items.map((item, index) =>
           <Item label={item.label} card={item.card} date={item.date} amount={item.amount} key={index}/>
         )}
         </div>
         <div className={styles.btn}>
-        <Button size='normal' background='payGradient500'>Пополнить</Button>
+        <Button size='normal' background='payGradient500'>{t('payment_history_deposit')}</Button>
         </div>
       </div>
   )

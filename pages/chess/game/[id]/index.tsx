@@ -49,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
   const initialGame = await ChessGameRepository.findById(parseInt(context.query.id as string, 10), gameToken)
   const initialUser = await GameUserRepository.getUser(gameToken)
-  console.log('initialGame', initialGame)
+
   return {
     props: {
       ...await serverSideTranslations(context.locale ?? 'en', ['common']),

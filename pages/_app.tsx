@@ -15,6 +15,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import 'react-input-range/lib/css/index.css'
 import NotificationBanner from 'components/for_pages/Common/NotificationBanner'
 import HiddenXs from 'components/ui/HiddenXS'
+import UserRepository from 'data/repositories/UserRepository'
 function MyApp({ Component, pageProps }: AppProps) {
   setConfiguration({
     gutterWidth: 20,
@@ -22,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     //containerWidths: [950, 960, 1320],
   })
   return (
-    <AppWrapper isMobile={pageProps.isMobile} token={pageProps.token}>
+    <AppWrapper isMobile={pageProps.isMobile} token={pageProps.token} initialUser={pageProps.initialUser}>
       <AuthWrapper>
         <Component {...pageProps} />
         <ModalContainer/>
@@ -48,6 +49,7 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   }
   if ((appContext.ctx.req as any).cookies) {
     props.pageProps.token = (appContext.ctx as any).req.cookies[CookiesType.accessToken]
+    props.pageProps.initialUser = await UserRepository.getUser(props.pageProps.token)
   }
   return props
 }

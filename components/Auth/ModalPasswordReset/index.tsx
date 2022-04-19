@@ -47,30 +47,30 @@ export default function ModalPasswordReset(props: Props) {
         {({values}) => (
         <Form className={styles.form}>
           <div className={styles.description}>
-            Введите ниже код, отправленный на указанный<br/>
-            Вами {isEmail ? 'Email' : 'Тел.'} <span className={styles.login}>{isEmail ? login : Formatter.formatPhone(login)}</span>
+            {t('password_restore_text')}<br/>
+            {t('password_restore_text_you')} {isEmail ? t('password_restore_text_email') : t('password_restore_text_phone')} <span className={styles.login}>{isEmail ? login : Formatter.formatPhone(login)}</span>
           </div>
           <div className={styles.inputs}>
             <InputField
               name={'code'}
-              placeholder={`Код из ${isEmail ? 'Email' : 'СМС'}`} validate={Validator.required}/>
+              placeholder={isEmail ? t('password_restore_field_code_email') : t('password_restore_field_code_sms')} validate={Validator.required}/>
             <InputField
               name={'password'}
               type={'password'}
               obscure={true}
-              placeholder={'Пароль'} validate={Validator.required}/>
+              placeholder={t('password_restore_field_password')} validate={Validator.required}/>
             <InputField
               name={'passwordConfirm'}
               type={'password'}
               obscure={true}
-              placeholder={'Повторите пароль'}
+              placeholder={t('password_restore_field_password_confirm')}
               validate={Validator.combine([Validator.required, Validator.passwordsMustMatch(values)])}
             />
           </div>
           <div className={styles.buttons}>
-            <Button type='button' className={styles.button} size='submit' background='dark600' onClick={() => context.showModal(ModalType.passwordRecovery, {login: context.modalArguments.login})}>Отменить</Button>
+            <Button type='button' className={styles.button} size='submit' background='dark600' onClick={() => context.showModal(ModalType.passwordRecovery, {login: context.modalArguments.login})}>{t('password_restore_cancel')}</Button>
             <div className={styles.spacer}/>
-            <Button type='submit' className={styles.button} size='submit' background='blueGradient500' >Сменить</Button>
+            <Button type='submit' className={styles.button} size='submit' background='blueGradient500' >{t('password_restore_next')}</Button>
           </div>
 
         </Form>)}

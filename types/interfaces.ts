@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute, MouseEventHandler } from 'react'
+import {HTMLInputTypeAttribute, MouseEventHandler, ReactElement} from 'react'
 import { FieldConfig } from 'formik'
 
 export interface IField extends FieldConfig {
@@ -32,7 +32,7 @@ export interface Country {
 }
 
 export const CONTACTS = {
-  email: 'support@richy.com',
+  email: 'support@richy.casino',
   facebook: '#',
   youtube: '#',
   twitter: '#',
@@ -94,4 +94,9 @@ export interface IPosition{
 export interface ISize{
   width: number
   height: number
+}
+export interface ISwitchFilterItem<T>{
+  label?: string,
+  icon?: string | ReactElement,
+  value: T
 }

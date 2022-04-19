@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import Converter from 'utils/converter'
 import { useAppContext } from 'context/state'
 import { ExchangeCurrencySelectField } from 'components/ui/Inputs/ExchangeCurrencySelectField'
+import {useTranslation} from 'next-i18next'
 
 interface IUser{
   id: string
@@ -20,7 +21,7 @@ interface Props {
 }
 
 export default function ExchangeForm(props: Props) {
-
+  const {t} = useTranslation()
   const context = useAppContext()
 
   const initialValues = {
@@ -63,10 +64,10 @@ export default function ExchangeForm(props: Props) {
         <div className={styles.send}>
           <div className={styles.texts}>
             <div className={styles.youSend}>
-              Вы отправите
+              {t('exchange_you_send')}
             </div>
             <div className={styles.balance}>
-              Баланс: {props.user.balance}
+              {t('exchange_balance')} {props.user.balance}
             </div>
           </div>
           <div className={styles.inputs}>
@@ -82,7 +83,7 @@ export default function ExchangeForm(props: Props) {
         <div className={styles.send}>
           <div className={styles.texts}>
             <div className={styles.youSend}>
-              Вы получите
+              {t('exchange_you_get')}
             </div>
           </div>
           <div className={styles.inputs}>
@@ -92,7 +93,7 @@ export default function ExchangeForm(props: Props) {
             </div>
           </div>
         </div>
-        <Button type='submit' size='play' fluid background='blueGradient500' className={styles.btn}>Обменять</Button>
+        <Button type='submit' size='play' fluid background='blueGradient500' className={styles.btn}>{t('exchange_button')}</Button>
       </Form>
     </FormikProvider>
   )

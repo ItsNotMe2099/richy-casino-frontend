@@ -7,6 +7,7 @@ import classNames from 'classnames'
 
 import {Sticky} from 'react-sticky'
 import {useAppContext} from 'context/state'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
   children?: React.ReactNode
@@ -29,19 +30,19 @@ interface Option {
 }
 
 export default function Menu(props: Props) {
+  const {t} = useTranslation()
   const appContext = useAppContext()
   const {route: currentRoute, asPath: currentPath} = useRouter()
   const options = [
-    {label: 'Главная', link: '/'},
-    {label: 'Казино', link: '/catalog'},
-    {label: 'Richy Game', link: '#'},
-    {label: 'Free Bitcoin', link: '/freebitcoin'},
-    {label: 'Wheel of Fortuna', link: '#'},
-    {label: 'Лотерея', link: '/lottery'},
-    {label: 'Live Casino', link: '#'},
-    {label: 'Aviator', link: '#'},
-    {label: 'Poker', link: '#'},
-    {label: 'Some Option', link: '#'},
+    {label: t('menu_main'), link: '/'},
+    {label: t('menu_casino'), link: '/catalog'},
+    {label: t('menu_richy'), link: '#'},
+    {label: t('menu_free_bitcoin'), link: '/freebitcoin'},
+    {label: t('menu_wheel_of_fortune'), link: '#'},
+    {label: t('menu_lottery'), link: '/lottery'},
+    {label: t('menu_live_casino'), link: '#'},
+    {label: t('menu_aviator'), link: '#'},
+    {label: t('menu_poker'), link: '#'},
   ]
   const renderMobile = () => {
     return  <div className={classNames(styles.menu, )} >

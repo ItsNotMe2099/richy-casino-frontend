@@ -29,7 +29,7 @@ export default function SettingsSelect() {
         <div className={styles.text}>
           Settings
         </div>
-        <ProfileSettingsSelectField name='currency' options={currencies} currentItem={Converter.currentItem(values, currencies)} inputLabel='Основная валюта'/>
+        <ProfileSettingsSelectField name='currency' options={currencies} currentItem={Converter.currentItem(values, currencies)} label='Основная валюта'/>
       </div>
     </Form>)}
   </Formik>

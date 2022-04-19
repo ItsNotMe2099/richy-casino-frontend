@@ -1,54 +1,25 @@
 import styles from './index.module.scss'
 import Header from 'components/for_pages/Common/Header'
-import SwitchFilter from 'components/for_pages/Common/SwitchFilter'
-import { useState } from 'react'
+import {ReactElement, useState} from 'react'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import ItemGame from 'components/for_pages/Common/ItemGame'
-
-interface IGame{
-  label: string
-  image: string
-  top?: boolean
-  createdAt?: string
-  lastWin?: string
-  category?: string
-  provider?: string
+import {IGame} from 'data/interfaces/IGame'
+import InfiniteScroll from 'react-infinite-scroll-component'
+interface Item extends IGame{
   link?: string
 }
-
 interface Props {
-  items?: IGame[]
-  all?: boolean
-  live?: boolean
-  richy?: boolean
+  items: Item[]
+  title: string
+  icon?: string
+  totalItems: number
+  switchFilter?: ReactElement
+  onScrollNext?: () => void
 }
 
 export default function GamesList(props: Props) {
 
-  const getLabel = () => {
-    if(props.all){
-      return 'Игры'
-    }
-    else if(props.live){
-      return 'Live Casino'
-    }
-    else{
-      return 'Richy Games'
-    }
-  }
-
-  const getIcon = () => {
-    if(props.all){
-      return '/img/Contents/all-games.svg'
-    }
-    else if(props.live){
-      return '/img/Contents/live.svg'
-    }
-    else{
-      return '/img/Contents/gamepad.svg'
-    }
-  }
 
   const getShadow = (icon) => {
     switch (icon){
@@ -66,35 +37,48 @@ export default function GamesList(props: Props) {
 
   return (
     <div className={styles.root}>
-      <Header icon={getIcon()} label={getLabel()} length={props.items.length} shadowColor={getShadow(getIcon())}/>
-      <HiddenXs>
-        {!props.richy &&
-        <div className={styles.wrapper}><SwitchFilter all={props.all}/></div>}
-      </HiddenXs>
-      <div className={styles.list}>
+      <Header icon={props.icon} label={props.title} length={props.totalItems} shadowColor={getShadow(props.icon)}/>
+      {props.switchFilter && <HiddenXs>
+        <div className={styles.wrapper}>{props.switchFilter}</div>
+      </HiddenXs>}
+
         <HiddenXs>
-          <>
+            <InfiniteScroll
+              dataLength={props.items.length}
+              next={props.onScrollNext}
+              loader={<div></div>}
+              hasMore={isShow && props.totalItems !== props.items.length}
+              style={{overflow: 'inherit'}}
+              className={styles.list}
+            >
             {props.items && (isShow ? props.items : props.items.slice(0, 10)).map((item, index) =>
-              <ItemGame richy={props.richy} style='catalog' item={item} key={index}/>
+              <ItemGame style='catalog' item={item} key={item.id} link={item.link}/>
             )}
-          </>
+            </InfiniteScroll>
         </HiddenXs>
         <VisibleXs>
-          <>
+          <InfiniteScroll
+            dataLength={props.items.length}
+            next={props.onScrollNext}
+            loader={<div></div>}
+            hasMore={isShow && props.totalItems !== props.items.length}
+            style={{overflow: 'inherit'}}
+            className={styles.list}
+          >
             {props.items && (isShow ? props.items : props.items.slice(0, 9)).map((item, index) =>
-              <ItemGame richy={props.richy}  style='catalog' item={item} key={index}/>
+              <ItemGame  style='catalog' item={item} key={item.id} link={item.link}/>
             )}
-          </>
+          </InfiniteScroll>
         </VisibleXs>
-      </div>
-      <div className={styles.more} onClick={() => isShow ? setIsShow(false) : setIsShow(true)}>
+
+      {props.totalItems > 10 && <div className={styles.more} onClick={() => isShow ? setIsShow(false) : setIsShow(true)}>
         <div className={styles.icon}>
           <img src='/img/CatalogPage/more.svg' alt=''/>
         </div>
         <div className={styles.text}>
           {isShow ? <>Меньше игр</> : <>Больше игр</>}
         </div>
-      </div>
+      </div>}
     </div>
   )
 }

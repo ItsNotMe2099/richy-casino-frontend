@@ -1,18 +1,30 @@
 import request from 'utils/request'
-import IUser from 'data/interfaces/IUser'
+import IUser, {IUserBalanceCurrencyRaw} from 'data/interfaces/IUser'
 import Converter from 'utils/converter'
 import {UserFormData} from 'types/form-data'
 
 export default class UserRepository {
-  static async getUser(): Promise<IUser | null> {
+  static async getUser(token?: string): Promise<IUser | null> {
     const res = await request({
       method: 'get',
       url: '/api/user/info',
+      token
     })
     if (res.err) {
       return null
     }
-    return res.data?.data ? {...Converter.objectKeysToCamelCase(res.data?.data)} : null
+    const convertCurrencyToArray = (data: IUserBalanceCurrencyRaw) => {
+      return Object.keys(data).map(key => ({currency: key?.toUpperCase(), value: data[key]}))
+    }
+    if(res.data?.data) {
+      const data = {...Converter.objectKeysToCamelCase(res.data?.data)}
+      data.balance.currencies.totals = convertCurrencyToArray(data.balance.currencies.totals)
+      data.balance.currencies.bonus = convertCurrencyToArray(data.balance.currencies.bonus)
+      data.balance.currencies.real = convertCurrencyToArray(data.balance.currencies.real)
+      return data
+    }else{
+      return null
+    }
   }
   static async updateUser(data: UserFormData): Promise<IUser | null> {
     const res = await request({

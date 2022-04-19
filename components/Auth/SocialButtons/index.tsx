@@ -18,9 +18,9 @@ export default function SocialButtons() {
 
   const host = runtimeConfig.HOST
   const socials = [
-    {image: '/img/Auth/G+.svg', link: `${host}/api/auth/register/google`},
+    {image: '/img/Auth/G+.svg', link: `${host}/api/user/social/login?authclient=google`},
     {image: '/img/Auth/ok.svg', link: `${host}/api/auth/register/google`},
-    {image: '/img/Auth/vk.svg', link:  `${host}/api/auth/register/vk`},
+    {image: '/img/Auth/vk.svg', link:  `${host}/api/user/social/login?authclient=vkontakte`},
     {image: '/img/Auth/ya.svg', link:  `${host}/api/auth/register/yandex`},
     {image: '/img/Auth/telegram.svg', link: '${host}/api/auth/register/telegram'},
     {image: '/img/Auth/mailRu.svg', link: `${host}/api/auth/register/mailru`},

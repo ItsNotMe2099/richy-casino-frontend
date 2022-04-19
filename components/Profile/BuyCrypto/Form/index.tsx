@@ -1,14 +1,15 @@
 import Button from 'components/ui/Button'
 import InputField from 'components/ui/Inputs/InputField'
-import { Form, FormikProvider, useFormik } from 'formik'
+import {Form, FormikProvider, useFormik} from 'formik'
 import styles from './index.module.scss'
 import Validator from 'utils/validator'
-import { SelectField } from 'components/ui/Inputs/SelectField'
-import { useEffect } from 'react'
+import {SelectField} from 'components/ui/Inputs/SelectField'
+import {useEffect} from 'react'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import Converter from 'utils/converter'
+import {useTranslation} from 'react-i18next'
 
-interface IUser{
+interface IUser {
   id: string
   balance: string
 }
@@ -20,7 +21,7 @@ interface Props {
 }
 
 export default function BuyCryptoForm(props: Props) {
-
+  const {t} = useTranslation()
   const initialValues = {
     currencySent: 1,
     amountSent: 0,
@@ -34,8 +35,8 @@ export default function BuyCryptoForm(props: Props) {
   }
 
   const array = [
-    { iso: 'btc', name: 'BTC', rate: 0, /*symbol: '/img/Exchange/bitcoin.png'*/},
-    { iso: 'eht', name: 'EHT', rate: 0, /*symbol: '/img/Exchange/eth.png'*/ }
+    {iso: 'btc', name: 'BTC', rate: 0, /*symbol: '/img/Exchange/bitcoin.png'*/},
+    {iso: 'eht', name: 'EHT', rate: 0, /*symbol: '/img/Exchange/eth.png'*/}
   ]
 
   const formik = useFormik({
@@ -46,7 +47,7 @@ export default function BuyCryptoForm(props: Props) {
   const {values, setFieldValue, handleChange} = formik
 
   useEffect(() => {
-    setFieldValue('amountGet', (values.amountSent*2))
+    setFieldValue('amountGet', (values.amountSent * 2))
   }, [values.amountSent])
 
   return (
@@ -55,29 +56,32 @@ export default function BuyCryptoForm(props: Props) {
         <div className={styles.send}>
           <div className={styles.texts}>
             <div className={styles.youSend}>
-              Купить
+              {t('buy_crypto_buy')}
             </div>
           </div>
           <div className={styles.inputs}>
             <InputField name={'amountSent'} className={styles.input} validate={Validator.required}/>
-            <SelectField name='currencySent' options={Converter.convertCurrencyToOptions(array as ICurrency[])} className={styles.select}/>
+            <SelectField name='currencySent' options={Converter.convertCurrencyToOptions(array as ICurrency[])}
+                         className={styles.select}/>
           </div>
         </div>
         <div className={styles.send}>
           <div className={styles.texts}>
             <div className={styles.youSend}>
-              Оплатить в
+              {t('buy_crypto_pay_in')}
             </div>
           </div>
           <div className={styles.inputs}>
             <InputField name={'amountGet'} className={styles.input} validate={Validator.required} disabled/>
-            <SelectField name='currencyGet' options={Converter.convertCurrencyToOptions(array as ICurrency[])}className={styles.select}/>
+            <SelectField name='currencyGet' options={Converter.convertCurrencyToOptions(array as ICurrency[])}
+                         className={styles.select}/>
           </div>
         </div>
         <div className={styles.disclaimer}>
-          Дисклеймер: MoonPay - это сторонний партнер, оказывающий услуги по покупке криптовалюты за деньги. Регистрируясь на его платформе, вы соглашаетесь на его условия оказания услуг с предоставлением запрашиваемых ими личных данных, и этот процесс протекает независимо от нас.
+          {t('buy_crypto_disclaimer')} {t('buy_crypto_disclaimer_text')}
         </div>
-        <Button type='submit' size='play' fluid background='blueGradient500' className={styles.btn}>Купить криптовалюту</Button>
+        <Button type='submit' size='play' fluid background='blueGradient500'
+                className={styles.btn}>{t('buy_crypto_but_button')}</Button>
       </Form>
     </FormikProvider>
   )

@@ -1,5 +1,5 @@
-import SwitchFilter from 'components/for_pages/Common/SwitchFilter'
 import styles from 'components/for_pages/MoneyChess/for_pages/Chess/Bets/index.module.scss'
+import SwitchFilterBets from 'components/for_pages/Common/SwitchFilterBets'
 
 interface Props {
 
@@ -41,7 +41,7 @@ export default function Bets(props: Props) {
   return (
       <div className={styles.root}>
         <div className={styles.wrapper}>
-          <SwitchFilter chessBets/>
+          <SwitchFilterBets/>
         </div>
 
       </div>

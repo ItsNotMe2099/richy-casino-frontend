@@ -5,7 +5,7 @@ export default class InfoRepository {
   static async getCountries(): Promise<any | null> {
     const res = await request({
       method: 'get',
-      url: '/api/countries',
+      url: '/api/user/info/countries',
     })
     if (res.err) {
       return []

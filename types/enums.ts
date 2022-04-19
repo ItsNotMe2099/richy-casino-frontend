@@ -1,3 +1,4 @@
+
 export enum ModalType {
   login,
   registration,
@@ -46,4 +47,15 @@ export enum GameType{
   Tower = 'tower',
   VideoPoker = 'videoPoker',
   Wheel = 'wheel',
+}
+
+export enum BetSwitchFilterKey{
+  All = 'all',
+  My = 'my'
+}
+
+export enum PaymentSwitchFilterKey{
+  All = 'all',
+  Deposit = 'deposit',
+  Withdrawal = 'withdrawal'
 }

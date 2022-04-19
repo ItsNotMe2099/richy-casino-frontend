@@ -25,9 +25,11 @@ import FA from 'components/Profile/FA'
 import Withdraw from 'components/Profile/Withdraw'
 import { RemoveScroll } from 'react-remove-scroll'
 import Converter from 'utils/converter'
+import {useTranslation} from 'next-i18next'
 interface Props {}
 
 export default function ModalContainer(props: Props) {
+  const {t} = useTranslation()
   const context = useAppContext()
   const commonSettings = {
     onRequestClose: context.hideModal,
@@ -45,28 +47,28 @@ export default function ModalContainer(props: Props) {
       {!isServer && (
 
           <div aria-hidden="true">
-          <Modal key={0} isOpen={context.modal === ModalType.login} {...commonSettings} title='Авторизация'>
+          <Modal key={0} isOpen={context.modal === ModalType.login} {...commonSettings} title={t('login_title')}>
             <ModalLogin/>
           </Modal>
-          <Modal key={3} isOpen={context.modal === ModalType.passwordRecovery} {...commonSettings} title='Восстановление пароля'>
+          <Modal key={3} isOpen={context.modal === ModalType.passwordRecovery} {...commonSettings} title={t('password_forgot_title')}>
             <ModalPasswordRecovery/>
           </Modal>
-          <Modal key={2} isOpen={context.modal === ModalType.passwordReset} {...commonSettings} title='Восстановление пароля'>
+          <Modal key={2} isOpen={context.modal === ModalType.passwordReset} {...commonSettings} title={t('password_restore_title')}>
             <ModalPasswordReset/>
           </Modal>
-          <Modal key={1} isOpen={context.modal === ModalType.registration} {...commonSettings} title='Регистрация'>
+          <Modal key={1} isOpen={context.modal === ModalType.registration} {...commonSettings} title={t('registration_title')}>
             <ModalRegistration/>
           </Modal>
           <Modal key={4} isOpen={context.modal === ModalType.registrationSuccess} {...commonSettings} noBorder>
             <ModalRegistrationSuccess/>
           </Modal>
-          <ProfileModal isBack={true} size='large' key={5} isOpen={context.modal === ProfileModalType.paymentHistory} {...commonSettings} title='История платежей' user={user} payment>
+          <ProfileModal isBack={true} size='large' key={5} isOpen={context.modal === ProfileModalType.paymentHistory} {...commonSettings} title={t('payment_history_title')} user={user} payment>
             <PaymentHistory/>
           </ProfileModal>
-          <ProfileModal key={6} isOpen={context.modal === ProfileModalType.profile} {...commonSettings} title='Профиль' user={user} profile>
+          <ProfileModal key={6} isOpen={context.modal === ProfileModalType.profile} {...commonSettings} title={t('profile_title')} user={user} profile>
             <Profile/>
           </ProfileModal>
-          <ProfileModal isBack={true} size='large' key={7} isOpen={context.modal === ProfileModalType.settings} {...commonSettings} title='Настройки' user={user}>
+          <ProfileModal isBack={true} size='large' key={7} isOpen={context.modal === ProfileModalType.settings} {...commonSettings} title={t('settings_title')} user={user}>
             <Settings user={user}/>
           </ProfileModal>
           <Wallet/>
@@ -80,7 +82,7 @@ export default function ModalContainer(props: Props) {
           <ProfileBurger key={11} isOpen={context.modal === ModalType.profileBurger} {...commonSettings} user={user}/>
           <ProfileModal
           size='small'
-          key={13} isBack={true} isOpen={context.modal === ProfileModalType.exchange} {...commonSettings} title='Обмен' user={user} payment noBorder>
+          key={13} isBack={true} isOpen={context.modal === ProfileModalType.exchange} {...commonSettings} title={t('exchange_title')} user={user} payment noBorder>
             <Exchange user={user}/>
           </ProfileModal>
           <ProfileModal
@@ -88,25 +90,25 @@ export default function ModalContainer(props: Props) {
            key={14}
            isOpen={context.modal === ProfileModalType.favorite}
            size='large' {...commonSettings}
-           title='Избранное' user={user}
+           title={t('favorite_title')} user={user}
            isBack={true}
            style='favorite'
            >
             <Favorite/>
           </ProfileModal>
-          <ProfileModal isBack={true} size='large' key={15} isOpen={context.modal === ProfileModalType.betsHistory} {...commonSettings} title='История ставок' user={user} payment>
+          <ProfileModal isBack={true} size='large' key={15} isOpen={context.modal === ProfileModalType.betsHistory} {...commonSettings} title={t('bets_history')} user={user} payment>
             <BetsHistory/>
           </ProfileModal>
           <ProfileModal
           size='small'
           style='buyCrypto'
-          key={16} isBack={true} isOpen={context.modal === ProfileModalType.buyCrypto} {...commonSettings} title='Купить криптовалюту' user={user} payment noBorder>
+          key={16} isBack={true} isOpen={context.modal === ProfileModalType.buyCrypto} {...commonSettings} title={t('buy_crypto_title')} user={user} payment noBorder>
             <BuyCrypto user={user}/>
           </ProfileModal>
           <ProfileModal
           size='small'
           style='2fa'
-          key={17} isBack={true} isOpen={context.modal === ProfileModalType.FA} {...commonSettings} title='Безопасность 2FA' user={user}>
+          key={17} isBack={true} isOpen={context.modal === ProfileModalType.FA} {...commonSettings} title={t('2fa_title')} user={user}>
             <FA/>
           </ProfileModal>
           <Withdraw/>

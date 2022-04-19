@@ -32,7 +32,7 @@ export default function ModalRegistrationPhone(props: Props) {
       const accessToken = res.token
 
       if (!accessToken) {
-        setError('Ошибка Регистрации')
+        setError(t('registration_error'))
       }
 
       context.setToken(accessToken)
@@ -57,23 +57,23 @@ export default function ModalRegistrationPhone(props: Props) {
         {({values}) => (
         <Form className={styles.form}>
           <div className={styles.description}>
-            Введите ниже <span className={styles.code}>код</span>, отправленный на указанный
-            Вами номер тел. <span className={styles.phone}>{Formatter.formatPhone(args.phone)}</span>
+            {t('registration_phone_text_1')} <span className={styles.code}>{t('registration_phone_text_2')}</span>{t('registration_phone_text_3')}
+            {t('registration_phone_text_4')} <span className={styles.phone}>{Formatter.formatPhone(args.phone)}</span>
           </div>
           <div className={styles.inputs}>
             <InputField
               name={'code'}
-              placeholder={'Код из Email'} validate={Validator.required}/>
+              placeholder={t('registration_phone_field_code')} validate={Validator.required}/>
             <InputField
               name={'password'}
               type={'password'}
               obscure={true}
-              placeholder={'Создайте пароль'} validate={Validator.required}/>
+              placeholder={t('registration_phone_field_password')} validate={Validator.required}/>
             <InputField
               name={'passwordConfirm'}
               type={'password'}
               obscure={true}
-              placeholder={'Повторите пароль'}
+              placeholder={t('registration_phone_field_password_confirm')}
               validate={Validator.combine([Validator.required, Validator.passwordsMustMatch(values)])}
             />
           </div>

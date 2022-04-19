@@ -38,17 +38,14 @@ const Tab = ({logo, label, tab, isActive, onSelect}: TabProps) => {
 }
 
 export default function ModalRegistration(props: Props) {
+  const {t} = useTranslation()
   const [variant, setVariant] = useState<TabType>(TabType.Phone)
-
-
   const variants = [
-    {logo: '/img/Auth/mail.svg', label: 'Быстрая', tab: TabType.Email},
-    {logo: '/img/Auth/phone.svg', label: 'Телефон', tab: TabType.Phone},
-    {logo: '/img/Auth/chat.svg', label: 'Соц. сети', tab: TabType.Socials},
+    {logo: '/img/Auth/mail.svg', label: t('registration_tab_fast'), tab: TabType.Email},
+    {logo: '/img/Auth/phone.svg', label: t('registration_tab_phone'), tab: TabType.Phone},
+    {logo: '/img/Auth/chat.svg', label: t('registration_tab_socials'), tab: TabType.Socials},
   ]
 
-
-  const { t } = useTranslation('common')
 
   return (
     <>

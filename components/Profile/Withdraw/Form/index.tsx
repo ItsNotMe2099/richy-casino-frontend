@@ -7,6 +7,7 @@ import Converter from 'utils/converter'
 import { useEffect, useState } from 'react'
 import { UserBalanceSelectField } from 'components/ui/Inputs/UserBalanceSelectField'
 import { IUserBalanceCurrency } from 'data/interfaces/IUser'
+import {useTranslation} from 'next-i18next'
 
 
 interface Props {
@@ -15,7 +16,7 @@ interface Props {
 }
 
 export default function WithdrawForm(props: Props) {
-
+  const {t} = useTranslation()
   const handleSubmit = /*async*/ () => {
     //temp
     props.onSubmit()
@@ -67,7 +68,7 @@ export default function WithdrawForm(props: Props) {
         <div className={styles.send}>
           <div className={styles.textTop}>
             <div className={styles.amount}>
-              Основной счёт
+              {t('withdraw_form_account_main')}
             </div>
           </div>
           <UserBalanceSelectField name='accountCurrency' options={Converter.convertUserBalanceCurrencyToOptions(balance as IUserBalanceCurrency[])}
@@ -79,10 +80,10 @@ export default function WithdrawForm(props: Props) {
         <div className={styles.send}>
           <div className={styles.texts}>
             <div className={styles.amount}>
-              Сумма
+              {t('withdraw_form_sum')}
             </div>
             <div className={styles.limit}>
-              Лимит одного вывода 7-1000$
+              {t('withdraw_form_limit')} 7-1000$
             </div>
           </div>
           <InputField name={'amount'} className={styles.input} validate={Validator.required}/>
@@ -90,12 +91,12 @@ export default function WithdrawForm(props: Props) {
         <div className={styles.send}>
           <div className={styles.texts}>
             <div className={styles.amount}>
-              Адрес получателя
+              {t('withdraw_form_address')}
             </div>
           </div>
           <InputField name={'address'} className={styles.input} validate={Validator.required}/>
         </div>
-        <Button type='submit' size='normal' background='blueGradient500' className={styles.btn}>Продолжить</Button>
+        <Button type='submit' size='normal' background='blueGradient500' className={styles.btn}>{t('withdraw_form_continue')}</Button>
         </>
         }
       </Form>

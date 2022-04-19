@@ -4,42 +4,61 @@ import SwitchFilter from 'components/for_pages/Common/SwitchFilter'
 import Slider from 'react-slick'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
-import { useState } from 'react'
+import {useEffect, useRef, useState} from 'react'
+import { ISwitchFilterItem} from 'types/interfaces'
+import GameListRepository from 'data/repositories/GameListRepository'
+import {IGameWin} from 'data/interfaces/IGameWin'
+import New from 'components/svg/New'
+import Calendar from 'components/svg/Calendar'
+import Top from 'components/svg/Top'
+enum GameSwitchFilterKey{
 
-interface IGame{
-  label: string
-  image: string
-  top: boolean
-  createdAt: string
-  lastWin: string
-  category: string
-  provider: string
+  WinNow = 'winNow',
+  TopWeek = 'topWeek',
+  TopMonth = 'topMonth'
 }
 
+
 interface Props {
-  items?: IGame[]
-  slider?: any
 }
 
 export default function GamesListTop(props: Props) {
 
-  let { slider } = props
 
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [data, setData] = useState<IGameWin[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [filter, setFilter] = useState<GameSwitchFilterKey>(GameSwitchFilterKey.WinNow)
 
-  const Item = (prop:{item: IGame}) => {
+
+  const filters: ISwitchFilterItem<GameSwitchFilterKey>[] = [
+    {label: 'Выигрывают сейчас', value: GameSwitchFilterKey.WinNow, icon: <New/>},
+    {label: 'Топ игр за неделю', value: GameSwitchFilterKey.TopWeek, icon: <Top/>},
+    {label: 'Топ игр месяца', value: GameSwitchFilterKey.TopMonth, icon: <Calendar/>},
+  ]
+  const sliderRef = useRef<Slider>(null)
+  useEffect(() => {
+    GameListRepository.fetchLatestWinGames().then(i => {
+      setData(i)
+      setLoading(false)
+    })
+  }, [])
+  const handleChangeFilter = (item: GameSwitchFilterKey) => {
+    setFilter(item)
+  }
+  const Item = (prop:{item: IGameWin}) => {
 
     return(
       <div className={styles.item}>
-        <img src={prop.item.image} alt=''/>
+        <img src={prop.item.game.imageIconPreviewUrl} alt=''/>
         <div className={styles.label}>
-          {prop.item.label}
+          {prop.item.game.name}
         </div>
         <div className={styles.user}>
-          Username
+          {prop.item.username}
         </div>
         <div className={styles.win}>
-          <span>Win:</span> 8410 Р
+          <span>Win:</span> {prop.item.winAmount} {prop.item.currencyIso?.toUpperCase()}
         </div>
       </div>
     )
@@ -66,20 +85,20 @@ export default function GamesListTop(props: Props) {
         label='ТОП игры'
         shadowColor='red'
         style='fullOnlyOnMobile'
-        onPrev={() => slider.slickGoTo(currentIndex - 1)}
-        onNext={() => slider.slickGoTo(currentIndex + 1)}
+        onPrev={() => sliderRef.current?.slickGoTo(currentIndex - 1)}
+        onNext={() => sliderRef.current?.slickGoTo(currentIndex + 1)}
   slider />
-      <div className={styles.wrapper}><SwitchFilter top/></div>
+      <div className={styles.wrapper}><SwitchFilter<GameSwitchFilterKey> items={filters} onClick={handleChangeFilter} active={filter}/></div>
       <HiddenXs>
-        <Slider {...settings} ref={slider1 => (slider = slider1)}>
-          {props.items && props.items.map((item, index) =>
+        <Slider {...settings} ref={sliderRef}>
+          {data.map((item, index) =>
             <Item item={item} key={index}/>
           )}
         </Slider>
       </HiddenXs>
       <VisibleXs>
         <div className={styles.overflow}>
-          {props.items && props.items.map((item, index) =>
+          {data.map((item, index) =>
             <Item item={item} key={index}/>
           )}
         </div>

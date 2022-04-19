@@ -9,6 +9,8 @@ import { useState } from 'react'
 import InfoRepository from 'data/repositories/InfoRepository'
 import AddNewAccount from './components/AddNewAccount'
 import Converter from 'utils/converter'
+import UserUtils from 'utils/user'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
 
@@ -17,7 +19,7 @@ interface Props {
 interface AccountProps {
   icon: string
   currency: string
-  amount: string
+  amount: number
   main?: boolean
   usdt?: string
 }
@@ -26,7 +28,7 @@ interface BonusProps {
   color: string
   icon: string
   label: string
-  amount: string
+  amount: string | number
 }
 
 interface MenuProps {
@@ -36,25 +38,13 @@ interface MenuProps {
 }
 
 export default function Profile(props: Props) {
-
-  const user = {avatar: '/img/Avatar/avatar.png',
-  nickname: 'Alex',
-  id: '6171361',
-  accounts: [{main: true, currency: 'BTC', icon: '/img/currencies/btc.png', amount: '0.00000000', usdt: '0.00000001'}],
-  tickets: '256', freebtc: '0.00000001', bonus: '1500 RUB', spins: '23'
-}
+  const {t} = useTranslation()
 
 const options = [
-  {label: 'Cделать основным'},
-  {label: 'Пополнить'},
-  {label: 'Вывести'},
-  {label: 'Закрыть счет'},
-]
-
-const newAccounts = [
-  {main: false, currency: 'BTC', icon: '/img/currencies/btc.png', amount: '0.00000000', usdt: '0.00000001'},
-  {main: false, currency: 'RUB', icon: '/img/currencies/rub.png', amount: '1000', usdt: null},
-  {main: false, currency: 'RUB', icon: '/img/currencies/rub.png', amount: '1000', usdt: null}
+  {label: t('profile_account_action_set_main')},
+  {label: t('profile_account_action_deposit')},
+  {label: t('profile_account_action_withdrawal')},
+  {label: t('profile_account_action_close')},
 ]
 
 const [accounts, setAccount] = useState([])
@@ -69,7 +59,7 @@ const handleAddNewAccount = (itemNew) => {
     setAccount(accounts => [...accounts, itemNew])
 }
 
-const context = useAppContext()
+  const context = useAppContext()
 
   const Account = ({icon, currency, amount, usdt, main}: AccountProps) => {
     return (
@@ -122,7 +112,7 @@ const context = useAppContext()
 
   const MenuItem = ({icon, label, onClick}: MenuProps) => {
     return (
-      <div className={classNames(styles.menuItem, {[styles.active]: label === 'Управлять кошельком'})} onClick={onClick}>
+      <div className={classNames(styles.menuItem, {[styles.active]: label === t('profile_menu_wallet')})} onClick={onClick}>
         <div className={styles.menuIcon}>
           <img src={icon} alt=''/>
         </div>
@@ -132,48 +122,49 @@ const context = useAppContext()
       </div>
     )
   }
-
+  const handleLogout = () => {
+    context.hideModal()
+    context.logout()
+  }
+  const mainAccount = UserUtils.getMainBalance(context.user)
+  const otherAccounts = UserUtils.getOtherBalances(context.user)
+  console.log('MainAccount', mainAccount)
   return (
       <div className={styles.root}>
         <div className={styles.top}>
           <div className={styles.avatar}>
-            <Avatar avatar={user.avatar}/>
+            <Avatar avatar={'/img/Avatar/avatar.png'}/>
             <div className={styles.info}>
               <div className={styles.nickname}>
-                {user.nickname}
+                {UserUtils.formatUserName(context.user)}
               </div>
               <div className={styles.id}>
-                ID {user.id}
+                ID {context.user.id}
               </div>
             </div>
           </div>
           <div className={styles.logout}>
-            <Button>
+            <Button onClick={handleLogout}>
               <img src='/img/icons/logout.svg' alt=''/>
-              <span>Выйти</span>
+              <span>{t('profile_logout')}</span>
             </Button>
           </div>
         </div>
         <div className={styles.accounts}>
           <div className={styles.main}>
             <div className={styles.title}>
-              Основной счет
+              {t('profile_accounts_main_title')}
             </div>
-            {user.accounts.filter(item => item.main).map((item, index) =>
-              <Account icon={item.icon} currency={item.currency} amount={item.amount} usdt={item.usdt} main={item.main} key={index}/>
-            )}
+            {mainAccount && <Account icon={UserUtils.getCurrencyIcon(mainAccount.currency)} currency={mainAccount.currency} amount={mainAccount.value} main />}
+
             {context.isDesktop &&
             <>
             {accounts.length > 0 &&
             <div className={styles.newAcc}>
               <div className={styles.title}>
-                Бонусные счета
+                {t('profile_accounts_bonus_title')}
               </div>
-                {newAccounts.map((acc, index) =>
-                  accounts.find(item => acc.currency === item.iso) &&
-                    <Account icon={acc.icon} currency={acc.currency} amount={acc.amount} usdt={acc.usdt} main={acc.main} key={index}/>
 
-              )}
             </div>}
             <AddNewAccount
             options={Converter.convertCurrencyToOptions(currencies)}
@@ -185,10 +176,10 @@ const context = useAppContext()
             <div className={styles.actions}>
               <div className={styles.notGreen}>
               <Button className={styles.btn} onClick={() => context.showModal(ProfileModalType.withdraw)}>
-                Вывод
+                {t('profile_withdrawal')}
               </Button>
               <Button className={styles.btn} onClick={() => context.showModal(ProfileModalType.exchange)}>
-                Обмен
+                {t('profile_exchange')}
               </Button>
               </div>
               <Button  onClick={() => context.showModal(ProfileModalType.wallet)} size='normal' background='payGradient500' className={styles.wallet}><img src='/img/icons/wallet.svg' alt=''/>Пополнить</Button>
@@ -198,11 +189,9 @@ const context = useAppContext()
             {accounts.length > 0 &&
             <div className={styles.newAcc}>
               <div className={styles.title}>
-                Дополнительные
+                {t('profile_accounts_additional_title')}
               </div>
-                {newAccounts.map((acc, index) =>
-                  accounts.find(item => acc.currency === item.iso) &&
-                    <Account icon={acc.icon} currency={acc.currency} amount={acc.amount} usdt={acc.usdt} main={acc.main} key={index}/>
+                {otherAccounts.map((acc, index) => <Account icon={UserUtils.getCurrencyIcon(acc.currency)} currency={acc.currency} amount={acc.value} key={acc.value}/>
 
               )}
             </div>}
@@ -216,21 +205,22 @@ const context = useAppContext()
           </div>
           <div className={styles.bonus}>
             <div className={styles.title}>
-              Бонусные счета
+              {t('profile_accounts_bonus_title')}
             </div>
-            <Bonus color='#587DFF' label='Lottery tickets' amount={user.tickets} icon='/img/Profile/icons/ticket.svg'/>
-            <Bonus color='#FFD12F' label='FreeBitcoin' amount={user.freebtc} icon='/img/Profile/icons/btc.svg'/>
-            <Bonus color='#7BD245' label='Bonus' amount={user.bonus} icon='/img/Profile/icons/gift.svg'/>
-            <Bonus color='#F81AAC' label='Free spin' amount={user.spins} icon='/img/Profile/icons/spin.svg'/>
+            <Bonus color='#587DFF' label={t('profile_accounts_bonus_lottery')} amount={context.user.extraBalances.lotteryTickets ?? 0} icon='/img/Profile/icons/ticket.svg'/>
+            <Bonus color='#FFD12F' label={t('profile_accounts_bonus_free_bitcoin')} amount={context.user.extraBalances.freeBitcoin ?? 0} icon='/img/Profile/icons/btc.svg'/>
+            {Converter.convertUserBalanceCurrencyToOptions(context.user.balance.currencies.bonus).map( i => <Bonus key={i.value} color='#7BD245' label={t('profile_accounts_bonus_bonus')} amount={`${i.value} ${i.label}`} icon='/img/Profile/icons/gift.svg'/>)}
+
+            <Bonus color='#F81AAC' label={t('profile_accounts_bonus_free_spin')} amount={context.user.extraBalances.freespinAmount ?? 0} icon='/img/Profile/icons/spin.svg'/>
           </div>
         </div>
         <div className={styles.menu}>
-            <MenuItem icon='/img/Profile/icons/wallet.svg' label='Управлять кошельком'/>
-            <MenuItem icon='/img/Profile/icons/clock.svg' label='История ставок' onClick={() => context.showModal(ProfileModalType.betsHistory)}/>
-            <MenuItem icon='/img/Profile/icons/favorite.svg' label='Избранное' onClick={() => context.showModal(ProfileModalType.favorite)}/>
-            <MenuItem icon='/img/Profile/icons/support.svg' label='Поддержка'/>
-            <MenuItem icon='/img/Profile/icons/wallet2.svg' label='История платежей' onClick={() => context.showModal(ProfileModalType.paymentHistory)}/>
-            <MenuItem icon='/img/Profile/icons/settings.svg' label='Настройки' onClick={() => context.showModal(ProfileModalType.settings)}/>
+            <MenuItem icon='/img/Profile/icons/wallet.svg' label={t('profile_menu_wallet')}/>
+            <MenuItem icon='/img/Profile/icons/clock.svg' label={t('profile_menu_bets_history')} onClick={() => context.showModal(ProfileModalType.betsHistory)}/>
+            <MenuItem icon='/img/Profile/icons/favorite.svg' label={t('profile_menu_favorite')} onClick={() => context.showModal(ProfileModalType.favorite)}/>
+            <MenuItem icon='/img/Profile/icons/support.svg' label={t('profile_menu_support')}/>
+            <MenuItem icon='/img/Profile/icons/wallet2.svg' label={t('profile_menu_payments_history')} onClick={() => context.showModal(ProfileModalType.paymentHistory)}/>
+            <MenuItem icon='/img/Profile/icons/settings.svg' label={t('profile_menu_settings')} onClick={() => context.showModal(ProfileModalType.settings)}/>
         </div>
       </div>
   )

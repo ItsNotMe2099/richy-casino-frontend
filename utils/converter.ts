@@ -2,6 +2,7 @@ import {mapKeys, mapValues, camelCase, isObject} from 'lodash'
 import { IApiPaginationResponse, IApiResponse, IOption, IPosition } from 'types/interfaces'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import { IUserBalanceCurrency } from 'data/interfaces/IUser'
+import UserUtils from 'utils/user'
 
 export default class Converter {
   static convertLibphonenumberToMask = (value: string): string => value
@@ -45,11 +46,16 @@ export default class Converter {
     }))
   }
 
+  static  convertUserBalanceCurrencyToOption(item: IUserBalanceCurrency): IOption<string>{
+    return {
+      label: item.currency,
+      value: `${item.value}`,
+      symbol: UserUtils.getCurrencyIcon(item.currency)
+    }
+  }
+
   static  convertUserBalanceCurrencyToOptions(currencies: IUserBalanceCurrency[]): IOption<string>[]{
-    return currencies.map(i => ({
-      label: i.currency,
-      value: `${i.value}`
-    }))
+    return currencies.map(i => this.convertUserBalanceCurrencyToOption(i))
   }
 
   static currentItem(values, options: IOption<string>[]){

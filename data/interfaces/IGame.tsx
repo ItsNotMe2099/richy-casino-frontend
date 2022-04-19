@@ -1,7 +1,7 @@
 export interface IGame {
-  id: number
+  id?: number
   name: string
-  providerId: number
-  imageIconPreviewUrl: string
-  categoryId: number,
+  providerId?: number
+  imageIconPreviewUrl?: string
+  categoryId?: number,
 }

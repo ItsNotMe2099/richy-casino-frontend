@@ -17,6 +17,7 @@ interface Props {
 }
 
 export default function ModalLogin(props: Props) {
+  const {t} = useTranslation()
   const context = useAppContext()
   const authContext = useAuthContext()
 
@@ -27,30 +28,28 @@ export default function ModalLogin(props: Props) {
   }
 
 
-  const {t} = useTranslation('common')
-
   return (
       <Formik initialValues={initialValues} onSubmit={authContext.login}>
         <Form className={styles.form}>
-          <div className={styles.label}>Через социальные сети</div>
+          <div className={styles.label}>{t('login_socials_title')}</div>
           <div className={styles.socials}>
             <SocialButtons/>
           </div>
-          <div className={styles.label}>или</div>
+          <div className={styles.label}>{t('login_or')}</div>
           <div className={styles.inputs}>
             <InputField
               format={'phoneAndEmail'}
               name={'authInput'}
               disabled={authContext.loading}
-              placeholder={'Email / Телефон'} validate={Validator.required}/>
-            <InputField name={'password'} placeholder={'Пароль'} type={'password'} obscure disabled={authContext.loading}
+              placeholder={t('login_field_identity')} validate={Validator.required}/>
+            <InputField name={'password'} placeholder={t('login_field_password')} type={'password'} obscure disabled={authContext.loading}
                         validate={Validator.required}/>
           </div>
-          <div className={styles.forgot} onClick={() => { context.showModal(ModalType.passwordRecovery) }}>Забыли пароль?</div>
+          <div className={styles.forgot} onClick={() => { context.showModal(ModalType.passwordRecovery) }}>{t('login_forgot')}</div>
           <FormError error={authContext.error}/>
-          <Button type='submit' size='play' fluid background='blueGradient500' spinner={authContext.loading}>Авторизация</Button>
+          <Button type='submit' size='play' fluid background='blueGradient500' spinner={authContext.loading}>{t('login_button')}</Button>
           <div className={styles.login}>
-            Еще нет аккаунта? <span onClick={() => context.showModal(ModalType.registration)}>Зарегистрируйтесь</span>
+            {t('login_no_account')} <span onClick={() => context.showModal(ModalType.registration)}>{t('login_register')}</span>
           </div>
         </Form>
       </Formik>

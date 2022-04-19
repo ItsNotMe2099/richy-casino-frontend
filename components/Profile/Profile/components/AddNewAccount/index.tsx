@@ -2,6 +2,7 @@ import styles from './index.module.scss'
 import { IOption } from 'types/interfaces'
 import Select from 'components/ui/Select'
 import classNames from 'classnames'
+import {useTranslation} from 'next-i18next'
 
 export interface ICustomSelectViewOption extends IOption<string>{
   symbol?: string
@@ -18,7 +19,7 @@ interface Props{
 }
 
 export default function AddNewAccount(props: Props){
-  
+
   const Option = (props: Props) => {
       return (
       <div className={styles.option} onClick={props.onClick}>
@@ -28,6 +29,7 @@ export default function AddNewAccount(props: Props){
   }
 
   const Placeholder = (props: Props) => {
+    const {t} = useTranslation()
     return (
     <div className={styles.placeholder}>
       {!props.isActive ?
@@ -36,13 +38,13 @@ export default function AddNewAccount(props: Props){
           <img src='/img/DropdownMenu/subtract.svg' alt=''/>
         </div>
         <div className={styles.label}>
-          Новый счет
+          {t('profile_account_new')}
         </div>
         </div>
         :
         <div className={classNames(styles.newAccount, {[styles.active]: props.isActive})}>
         <div className={styles.label}>
-          Новый счет
+          {t('profile_account_new')}
         </div>
         <div className={classNames(styles.arrow, {[styles.active]: props.isActive})}><img
         src='/img/DropdownMenu/arrow.svg' alt=''/></div>
@@ -57,7 +59,7 @@ export default function AddNewAccount(props: Props){
       <Select
       style='newAccount'
       placeholder={(isActive) => <Placeholder isActive={isActive}/>}
-      options={props.options} 
+      options={props.options}
       onTriggerClick={props.onTriggerClick}
       onChange={props.onChange}
       itemComponent={(option, onClick) => <Option key={option.value} option={option} onClick={onClick}/>}

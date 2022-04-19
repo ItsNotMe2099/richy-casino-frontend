@@ -4,6 +4,7 @@ import {useState} from 'react'
 import {Form,FormikProvider, useFormik} from 'formik'
 import ErrorInput from 'components/ui/Inputs/components/ErrorInput'
 import InputField from 'components/ui/Inputs/InputField'
+import {useTranslation} from 'react-i18next'
 
 interface Props{
 
@@ -12,6 +13,7 @@ interface Props{
 
 export default function PromoCode(props: Props) {
   const [error, setError] = useState(null)
+  const {t} = useTranslation()
   const formik = useFormik({
     initialValues: {
       couponCode: null
@@ -21,21 +23,14 @@ export default function PromoCode(props: Props) {
     },
   })
 
-  const handleDelete = async () => {
-
-
-  }
-
-  const {values} = formik
-
   return (
     <div className={styles.root}>
       <FormikProvider value={formik}>
             <Form>
               <div className={styles.form}>
-                <div className={styles.input}><InputField name='couponCode' placeholder='Введите промокод' /></div>
+                <div className={styles.input}><InputField name='couponCode' placeholder={t('promocode_form_field')} /></div>
                 <ErrorInput error={error} touched={true}/>
-                <Button className={styles.button} size='play' background='blueGradient500'>Использовать</Button>
+                <Button className={styles.button} size='play' background='blueGradient500'>{t('promocode_form_use')}</Button>
               </div>
             </Form>
       </FormikProvider>

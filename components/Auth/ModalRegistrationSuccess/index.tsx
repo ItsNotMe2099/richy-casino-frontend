@@ -17,11 +17,11 @@ interface FieldProps {
 
 export default function ModalRegistrationSuccess(props: Props) {
 
-  const { t } = useTranslation('common')
+  const { t } = useTranslation()
 
   const {modalArguments} = useAppContext()
   const handleDownload = () => {
-    saveDownloadedData('richy_casino-credentials.txt', `Login: ${modalArguments.login}\r\n Password: ${modalArguments.password}`)
+    saveDownloadedData('richy_casino-credentials.txt', `${t('registration_completed_field_login')}: ${modalArguments.login}\r\n ${t('registration_completed_field_password')}: ${modalArguments.password}`)
   }
   const Field = ({text, value, className}: FieldProps) => {
 
@@ -48,15 +48,14 @@ export default function ModalRegistrationSuccess(props: Props) {
         <img src='/img/Auth/Vector.svg' alt=''/>
       </div>
       <div className={styles.title}>
-        Регистрация завершена
+        {t('registration_completed_title')}
       </div>
       <div className={styles.reminder}>
-        Не забудьте сохранить
-          логин и пароль:
+        {t('registration_completed_text')}
       </div>
-      <Field text='Логин' value={modalArguments.login}/>
-      <Field text='Пароль' value={modalArguments.password} className={styles.password}/>
-      <Button className={styles.button} size='submit' background='blueGradient500' onClick={handleDownload}>Скачать в TXT</Button>
+      <Field text={t('registration_completed_field_login')} value={modalArguments.login}/>
+      <Field text={t('registration_completed_field_password')} value={modalArguments.password} className={styles.password}/>
+      <Button className={styles.button} size='submit' background='blueGradient500' onClick={handleDownload}>{t('registration_completed_download')}</Button>
     </div>
   )
 }

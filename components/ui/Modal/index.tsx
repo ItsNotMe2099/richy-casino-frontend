@@ -97,7 +97,7 @@ export default function Modal(props: Props) {
                   <img src={props.image} alt=''/>
                 </div>
               )}
-              {props.children}
+              {props.isOpen && props.children}
             </div>
           </div>
       </ReactModal>
@@ -127,7 +127,8 @@ export default function Modal(props: Props) {
             <Sheet.Content onViewportBoxUpdate>{isOpen &&
             <div className={classNames(styles.centerSheet, {[styles.centerSheetFortune]: props.fortune})}>
 
-              {props.children}</div>}</Sheet.Content>
+              {props.isOpen && props.children}
+            </div>}</Sheet.Content>
           </Sheet.Container>
         </div>
 

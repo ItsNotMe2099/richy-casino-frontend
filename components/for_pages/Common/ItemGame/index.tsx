@@ -2,6 +2,8 @@ import styles from './index.module.scss'
 import { useState } from 'react'
 import Button from 'components/ui/Button'
 import classNames from 'classnames'
+import {IGame} from 'data/interfaces/IGame'
+import {Routes} from 'types/routes'
 
 interface IItem {
   image: string
@@ -10,21 +12,18 @@ interface IItem {
 }
 
 interface Props {
-  item: IItem
+  item: IGame
   style?: 'catalog'
+  link?: string
   richy?: boolean
 }
 
 export default function ItemGame(props: Props) {
 
   const [inFavorite, setInFavorite] = useState(false)
-
-  const rootClass = {
-    [styles.catalog]: props.style === 'catalog'
-  }
-
+  const link = props.link || Routes.catalogGame(props.item.id)
   return (
-    <div className={classNames(styles.root, rootClass)} style={props.style !== 'catalog' ? {backgroundImage: `url(${props.item.image})`} : null}>
+    <div className={classNames(styles.root)} style={props.style !== 'catalog' ? {backgroundImage: `url(${props.item.imageIconPreviewUrl})`} : null}>
     <div className={styles.shade}>
     <Button
           onClick={() => inFavorite ? setInFavorite(false) : setInFavorite(true)}
@@ -38,15 +37,15 @@ export default function ItemGame(props: Props) {
         </Button>
       <div className={styles.container}>
         <div className={styles.btns}>
-          <Button className={styles.btn} href={props.item.link} size='small' background='blueGradient500'>Играть</Button>
-          <Button className={styles.demo} size='small' background='blackTransparent'>Демо</Button>
+          <Button className={styles.btn} href={link} size='small' background='blueGradient500'>Играть</Button>
+          <Button className={styles.demo} href={`${link}?demo=1`} size='small' background='blackTransparent'>Демо</Button>
         </div>
       </div>
       </div>
-      {props.style === 'catalog' && <img src={props.item.image} alt=''/>}
+      {props.style === 'catalog' && <img src={props.item.imageIconPreviewUrl} alt=''/>}
       {props.richy &&
       <div className={styles.label}>
-        {props.item.label}
+        {props.item.name}
       </div>}
     </div>
   )

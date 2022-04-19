@@ -105,7 +105,7 @@ export default function Games(props: Props) {
       <HiddenXs>
         <Slider {...settings} ref={slider1 => (slider = slider1)}>
           {richyGames.map((item, index) =>
-            <ItemGame richy item={item} key={index}/>
+            <ItemGame richy item={{imageIconPreviewUrl: item.image, name: item.label}} link={item.link} key={index}/>
           )}
         </Slider>
       </HiddenXs>
