@@ -2,7 +2,7 @@ import styles from './index.module.scss'
 import classNames from 'classnames'
 import HiddenXs from 'components/ui/HiddenXS'
 import QuestionPopover from 'components/ui/QuestionPopover'
-
+import Link from 'next/link'
 interface Props {
   length?: number
   icon: string
@@ -13,6 +13,7 @@ interface Props {
   style?: 'labelOnly' | 'withoutLength' | 'fullOnlyOnMobile' | 'popover'
   shadowColor?: 'red' | 'blue' | 'yellow' | 'violet'
   className?: string
+  allLink?: string
 }
 
 export default function Header(props: Props) {
@@ -48,10 +49,10 @@ export default function Header(props: Props) {
   return (
         <div className={classNames(styles.root, rootClasses, props.className)}>
           <div className={styles.block}>
-          <div className={styles.icon}>
+            {props.icon && <div className={styles.icon}>
             {props.shadowColor && <div className={styles.shadow}><img src={getShadow(props.shadowColor)} alt=''/></div>}
             <div className={styles.image}><img src={props.icon} alt=''/></div>
-          </div>
+          </div>}
           <div className={styles.label}>
             {props.label}
           </div>
@@ -61,9 +62,12 @@ export default function Header(props: Props) {
           <div className={styles.length}>
             {props.length}
           </div>
-          <div className={styles.all}>
-            Все <HiddenXs><>игры</></HiddenXs>
-          </div>
+          {props.allLink && <Link href={props.allLink}>
+            <a className={styles.all}>
+              Все <HiddenXs><>игры</></HiddenXs>
+            </a>
+          </Link>}
+
           {props.slider &&
           <div className={styles.controls}>
             <div className={styles.prev} onClick={props.onPrev}>

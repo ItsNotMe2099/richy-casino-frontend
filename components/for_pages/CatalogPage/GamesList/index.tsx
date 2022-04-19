@@ -13,6 +13,7 @@ interface Props {
   items: Item[]
   title: string
   icon?: string
+  loading: boolean
   totalItems: number
   switchFilter?: ReactElement
   onScrollNext?: () => void

@@ -23,7 +23,7 @@ flex: 1;
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 8px;
   .option:first-child{
     a{
     &:hover{
@@ -77,7 +77,7 @@ flex: 1;
   background: $dark600;
   border-radius: 12px;
   text-decoration: none;
-  justify-content: space-between;
+  align-items: center;
   display: flex;
   color: #000;
   flex-shrink: 0;
@@ -91,98 +91,29 @@ flex: 1;
   }
 }
 
-.dots{
-  background-color: transparent;
-  padding: 0;
-  margin-bottom: 0;
-  height: auto;
-  position: static;
-  .active{
-    transform: none;
-  }
-  .dropDown{
-    max-width: 150px;
-    right: 0;
-    margin-top: 20px;
-    a{
-      padding: 9px 12px;
-    }
-  }
-}
 
-.newAccount{
-  justify-content: center;
-  .active{
-    transform: none;
-  }
-}
-
-.subtract{
-  display: flex;
-  margin-right: 8px;
-}
-
-.isSelected{
-  position: relative;
-  padding-left: 6px;
-  &:before{
-    content: '';
-    width: 4px;
-    height: 4px;
-    background: #27AE60;
-    border-radius: 4px;
-    position: absolute;
-    top: 50%;
-    margin-top: -2px;
-    left: 0px
-  }
-}
-
-
-.dropdownTriggerActive{
-  position: relative;
-  font-size: 13px;
-  color: #000000;
-  padding-bottom: 6px;
-}
-
-.isActive{
-  color: #27AE60;
-}
-
-.option{
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-}
-
-.textRight{
-  text-align: start;
-}
-
-.textLeft{
-  text-align: left;
-}
-
-.label{
-  display: flex;
-  align-items: center;
-  img{
-    margin-right: 12px;
-  }
+.icon{
+  margin-right: 12px;
   @media screen and (max-width: $xs-max){
-    img{
+    img {
       height: 16px;
     }
   }
-  span{
+}
+
+.label{
+  font-weight: normal;
+  flex: 1;
+  padding-top: 2px;
+  display: flex;
+  align-items: center;
+  text-align: left;
     font-size: 13px;
     color: #FFFFFF;
-  }
+
   @media screen and (max-width: $xs-max){
-    span{
+    font-weight: 400;
       font-size: 11px;
-    }
   }
 }
 
@@ -191,120 +122,4 @@ flex: 1;
   align-self: center;
 }
 
-.arrow{
-  align-self: center;
-  @media screen and (max-width: $xs-max){
-    img{
 
-    }
-  }
-}
-
-
-.categoryFilter{
-  padding-top: 11px;
-  padding-left: 20px;
-  padding-bottom: 11px;
-  padding-right: 14px;
-  display: flex;
-  align-items: center;
-  border-radius: 11px;
-  background-color: #1D1E25;
-  justify-content: space-between;
-  cursor: pointer;
-  .label{
-    font-size: 1.1rem;
-    color: $dark100;
-    font-weight: 500;
-    @media screen and (max-width: $mobile-max){
-      font-size: 0.8rem;
-    }
-  }
-  .icon{
-    margin-right: 13px;
-  }
-  &:hover{
-    background-color: $dark600;
-    .quantity, .label{
-      color: #fff;
-    }
-  }
-}
-
-.icon{
-  display: flex;
-  margin-right: 8px;
-  max-width: 46px;
-}
-
-.label{
-  font-weight: normal;
-  font-size: 12px;
-  @media screen and (max-width: $xs-max){
-    font-weight: 400;
-  }
-}
-
-.left{
-  display: flex;
-  align-items: center;
-}
-
-.quantity{
-  font-weight: 500;
-  font-size: 13px;
-  color: $dark300;
-}
-
-.provider{
-  padding-top: 18px;
-  padding-bottom: 9px;
-  border-radius: 8px;
-  background-color: $dark600;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  &:hover{
-    .iconProvider{
-    svg{
-      fill: #fff;
-    }
-  }
-  .quantity{
-    color: #fff;
-  }
-  }
-  .iconProvider{
-    display: flex;
-    justify-content: center;
-    svg{
-      fill: #6B6C77;
-    }
-  }
-  .quantity{
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
-  }
-}
-
-.providers{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 7px;
-  padding: 0 15px;
-  padding-bottom: 15px;
-  margin-top: 8px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  max-height: 250px;
-}
-
-.categories{
-  padding: 0 15px;
-  margin-top: 8px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  max-height: 220px;
-}

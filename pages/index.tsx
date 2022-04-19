@@ -1,14 +1,14 @@
 import {GetServerSideProps} from 'next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import styles from 'pages/index.module.scss'
-import { Col, Row } from 'react-grid-system'
+import {Col, Row} from 'react-grid-system'
 import Layout from 'components/layout/Layout'
 import Contents from 'components/for_pages/MainPage/Contents'
 import Games from 'components/for_pages/MainPage/Games'
 import GameCard from 'components/for_pages/MainPage/GameCard'
 import Winners from 'components/for_pages/MainPage/Winners'
 import Statistics from 'components/for_pages/MainPage/Statistics'
-import GamesList from 'components/for_pages/MainPage/GamesList'
+import GamesList, {MainGameListType} from 'components/for_pages/MainPage/GamesList'
 import Tournament from 'components/for_pages/MainPage/Tournament'
 import TopSlider from 'components/for_pages/MainPage/TopSlider'
 import BuyCrypto from 'components/for_pages/MainPage/BuyCrypto'
@@ -49,10 +49,10 @@ export default function IndexPage() {
           <Games/>
           <Row className={styles.gamesLists}>
             <Col>
-            <GamesList label='Казино' icon='/img/Contents/casino.svg' items={casinos} shadowColor='red'/>
+            <GamesList type={MainGameListType.All} label='Казино' icon='/img/Contents/casino.svg' items={casinos} shadowColor='red'/>
             </Col>
             <Col>
-            <GamesList label='Live Casino' icon='/img/Contents/live.svg' items={live} shadowColor='blue'/>
+            <GamesList type={MainGameListType.Live} label='Live Casino' icon='/img/Contents/live.svg' items={live} shadowColor='blue'/>
             </Col>
           </Row>
           <VisibleXs>

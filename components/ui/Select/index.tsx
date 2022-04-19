@@ -3,6 +3,7 @@ import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import { IOption } from 'types/interfaces'
+import DropDownTriangle from 'components/ui/DropDownTriangle'
 
 
 interface Props<T> {
@@ -11,7 +12,8 @@ interface Props<T> {
   onTriggerClick?: () => void
   itemComponent?: (option: IOption<T>, onClick: () => void) => ReactElement
   placeholder?: (isActive?) => ReactElement
-  style?: 'balance' | 'newAccount'
+  style?: 'balance' | 'newAccount',
+  className?: string
 }
 
 export default function Select<T>(props: Props<T>){
@@ -41,8 +43,8 @@ export default function Select<T>(props: Props<T>){
     <div className={classNames(styles.root, rootClass)} onClick={handleClick}>
        <div onClick={handleClick} className={classNames(styles.dropDownTrigger)}>
           {props.placeholder(isActive)}
-       <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
-        <div className={styles.triangle}></div>
+       <nav ref={dropdownRef} className={classNames(styles.dropDown,props.className, { [styles.dropDownActive]: isActive })}>
+        <DropDownTriangle />
         {options.map((item, index) => props.itemComponent(item, () => handleChange(item)))}
        </nav>
        </div>

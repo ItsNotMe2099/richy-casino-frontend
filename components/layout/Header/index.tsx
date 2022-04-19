@@ -136,11 +136,11 @@ export default function Header(props: Props) {
                 </HiddenXs>}
                 {!user.flags.isHideBalance && <ProfileAccountsMenu/>}
                 <HiddenXs>
-                  <ProfileMenu className={styles.accMenu}/>
+                  <ProfileMenu/>
                 </HiddenXs>
                 <Button onClick={() => context.showModal(ProfileModalType.wallet)} size='normal'
                         background='payGradient500' className={styles.wallet}>
-                  <HiddenXs><img src='/img/icons/wallet.svg' alt=''/></HiddenXs>{t('header_registration')}</Button>
+                  <HiddenXs><img src='/img/icons/wallet.svg' alt=''/></HiddenXs>{t('header_deposit')}</Button>
                 <VisibleXs>
                   <ProfileMenu className={styles.proMenu}/>
                 </VisibleXs>

@@ -74,6 +74,7 @@ export default function ProfileAccountsMenu(props: Props){
   return (
     <div className={styles.root}>
       <Select
+      className={styles.select}
       style='balance'
       placeholder={(isActive) => <Placeholder currentItem={Converter.convertUserBalanceCurrencyToOption(mainAccount)} isActive={isActive}/>}
       options={Converter.convertUserBalanceCurrencyToOptions([mainAccount, ...otherAccounts])}

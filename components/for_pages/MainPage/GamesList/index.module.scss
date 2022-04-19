@@ -11,21 +11,16 @@
 .filters{
     display: flex;
     margin-top: 23px;
+  grid-gap: 0px 22px; //20px
     @media screen and (max-width: 1360px){
         flex-direction: column;
       }
       @media screen and (max-width: $mobile-max){
         display: none;
       }
-      .drop:first-child{
-        margin-right: 20px;
-      }
+
 }
 
-.drop{
-  margin-bottom: 28px;
-  max-width: 100%;
-}
 
 .item{
   position: relative;
@@ -39,6 +34,7 @@
   &:hover{
     .shade{
       visibility: visible;
+      opacity: 1;
     }
     .btns{
       visibility: visible;

@@ -1,0 +1,40 @@
+@import "scss/index";
+
+.root{
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #FFFFFF;
+  position: relative;
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 920px){
+    flex-shrink: 0;
+    margin-right: 18px;
+  }
+  @media screen and (max-width: $sm-max){
+    font-weight: 500;
+  }
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.8rem;
+  }
+  &.active, &:hover {
+    color: #427BF8;
+    overflow: hidden;
+    position: relative;
+    &:after {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0px;
+      height: 3px;
+      background: linear-gradient(270deg, #2C50FF -6.01%, #4785F6 114.87%);
+      content: "";
+      display: block;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+      @media screen and (max-width: 920px) {
+        bottom: 0px;
+      }
+    }
+  }
+}

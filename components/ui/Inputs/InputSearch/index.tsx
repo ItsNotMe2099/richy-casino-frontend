@@ -19,7 +19,9 @@ export default function InputSearch(props: Props) {
 
   const handleSearch = (e) => {
     setValue(e.currentTarget.value)
-    props.onChange(e.currentTarget.value)
+    if(props.onChange) {
+      props.onChange(e.currentTarget.value)
+    }
   }
   return (
     <form className={styles.root} action="/search">

@@ -52,6 +52,7 @@ export default function GamesListAll(props: Props) {
     <GamesList title={'Live Casino'} icon={'/img/Contents/live.svg'}
                totalItems={data.total}
                items={data.data}
+               loading={loading}
                onScrollNext={handleScrollNext}
                switchFilter={<SwitchFilter<GameSwitchFilterKey> items={filters} onClick={handleChangeFilter} active={filter}/>}
     />

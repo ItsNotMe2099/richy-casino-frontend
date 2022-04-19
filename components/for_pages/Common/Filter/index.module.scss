@@ -62,8 +62,9 @@
   }
 }
 
-.gameFilter{
-  padding: 9px 13px;
+.staticCard{
+  padding: 0px 13px;
+
   display: flex;
   align-items: center;
   border-radius: 9px;
@@ -72,73 +73,45 @@
   justify-content: space-between;
   height: 3.3rem;
   cursor: pointer;
+  color: $white;
   @media screen and (max-width: $mobile-max){
     background: #1D1E25;
   }
-  &:hover{
+  &:hover,&.active{
     background-color: $dark500;
-  }
-}
-
-.categoryFilter{
-  padding: 11px 14px 11px 20px;
-  display: flex;
-  align-items: center;
-  border-radius: 11px;
-  background-color: #1D1E25;
-  justify-content: space-between;
-  cursor: pointer;
-  .label{
-    font-size: 1.1rem;
-    color: $dark100;
-    font-weight: 500;
-    @media screen and (max-width: $mobile-max){
-      font-size: 0.8rem;
+    .quantity{
+      color: $white;
     }
   }
+
   .icon{
-    width: 32px;
-    &.hidden{
-      visibility: hidden;
-    }
-    img{
-      max-width: 32px;
-    }
-    margin-right: 13px;
+    display: flex;
+    margin-right: 8px;
+    max-width: 46px;
   }
-  &:hover{
-    background-color: $dark600;
-    .quantity, .label{
-      color: #fff;
+
+  .label{
+    font-weight: normal;
+    font-size: 1rem;
+    @media screen and (max-width: $xs-max){
+      font-weight: 400;
+      font-size: 13px;
     }
   }
-}
 
-.icon{
-  display: flex;
-  margin-right: 8px;
-  max-width: 46px;
-}
+  .left{
+    display: flex;
+    align-items: center;
+  }
 
-.label{
-  font-weight: normal;
-  font-size: 1rem;
-  @media screen and (max-width: $xs-max){
-    font-weight: 400;
+  .quantity{
+    font-weight: 500;
     font-size: 13px;
+    color: $dark300;
   }
 }
 
-.left{
-  display: flex;
-  align-items: center;
-}
 
-.quantity{
-  font-weight: 500;
-  font-size: 13px;
-  color: $dark300;
-}
 
 .categoriesLbl{
   margin-top: 8px;
@@ -165,43 +138,6 @@
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 724px;
-}
-
-.provider{
-  padding-top: 18px;
-  padding-bottom: 9px;
-  border-radius: 8px;
-  background-color: $dark600;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  overflow: hidden;
-  &:hover{
-    .iconProvider{
-    svg{
-      fill: #fff;
-    }
-  }
-  .quantity{
-    color: #fff;
-  }
-  }
-  .iconProvider{
-    display: flex;
-    justify-content: center;
-    img{
-      max-height: 18px;
-    }
-    svg{
-      fill: #6B6C77;
-    }
-  }
-  .quantity{
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
-  }
 }
 
 .filters{

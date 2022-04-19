@@ -1,0 +1,37 @@
+@import "scss/index";
+
+.root{
+
+}
+
+.content{
+  width: 75% !important;
+}
+
+.desktop{
+
+}
+
+.row{
+  flex-wrap: nowrap !important;
+}
+.children{
+  opacity: 1;
+  transition: max-height 0ms, opacity 600ms;
+  &.hidden{
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 500ms, opacity 600ms;
+  }
+}
+.search{
+  opacity: 1;
+  transition: max-height 0ms, opacity 600ms;
+  &.hidden{
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 500ms, opacity 600ms;
+  }
+}

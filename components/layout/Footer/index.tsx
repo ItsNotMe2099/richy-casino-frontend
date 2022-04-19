@@ -1,4 +1,4 @@
-import { CONTACTS } from 'types/interfaces'
+import { CONTACTS } from 'types/constants'
 import styles from './index.module.scss'
 import Button from 'components/ui/Button'
 import Link from 'next/link'

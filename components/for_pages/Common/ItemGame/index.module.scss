@@ -10,41 +10,36 @@
   background-size: contain;
   background-repeat: no-repeat;
   position: relative;
-  margin-right: 1vw;
   overflow: hidden;
   &:after {
     content: '';
     padding-bottom: 100%;
   }
-  @media screen and (max-width: 1360px) {
-    width: 120px;
-    height: 120px;
-  }
+
   @media screen and (max-width: 600px) {
     width: 100px;
     height: 100px;
-    margin-right: 8px;
     border-radius: 14px;
   }
   @media screen and (max-width: $xs-max) {
     flex-shrink: 0;
-    margin-right: 8px;
   }
-  @media screen and (max-width: 570px) {
-    margin-right: 16px;
-  }
+
 
   &:hover {
     .shade {
       visibility: visible;
+      opacity: 1;
     }
 
     .btns {
       visibility: visible;
+      opacity: 1;
     }
 
     .favorite {
       visibility: visible;
+      opacity: 1;
     }
   }
   img {
@@ -71,6 +66,7 @@
 
 .btns {
   visibility: hidden;
+  opacity: 0;
   right: 0;
   left: 0;
   bottom: 25px;
@@ -152,6 +148,7 @@
   right: 10px;
   top: 10px;
   visibility: hidden;
+  opacity: 0;
   z-index: 1;
   @media screen and (max-width: 1360px) {
     right: 5px;
@@ -183,6 +180,7 @@
   height: 100%;
   width: 100%;
   visibility: hidden;
+  opacity: 0;
   background: rgba(0, 0, 0, .4);
   left: 0;
   bottom: 0;

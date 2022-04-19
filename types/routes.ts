@@ -20,6 +20,9 @@ export class Routes{
   static catalogGame(id: number): string{
     return `/catalog/game/${id}`
   }
+  static catalogProvider(providerId: string | number): string{
+    return `/catalog/providers/${providerId}`
+  }
 
   static get richyGames(){
     return '/catalog/category/richy-games'

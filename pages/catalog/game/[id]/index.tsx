@@ -1,7 +1,3 @@
-import Filter from 'components/for_pages/Common/Filter'
-import Layout from 'components/layout/Layout'
-import styles from 'pages/catalog/index.module.scss'
-import {Row, Col} from 'react-grid-system'
 import {GetServerSideProps} from 'next'
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import nookies from 'nookies'
@@ -25,10 +21,10 @@ import GameCrash from 'components/for_pages/games/Crash'
 import GameAuthRepository from 'components/for_pages/games/data/reposittories/GameAuthRepository'
 import {runtimeConfig} from 'config/runtimeConfig'
 import GameCoinFlip from 'components/for_pages/games/ConiFlip'
-import HiddenXs from 'components/ui/HiddenXS'
 import {GameCookiesType} from 'components/for_pages/games/data/types'
 import GameBlackJack from 'components/for_pages/games/BlackJack'
 import GameVideoPoker from 'components/for_pages/games/VideoPoker'
+import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 interface Props{
   gameToken?: string
 }
@@ -71,18 +67,11 @@ export default function CatalogPage(props: Props) {
     }
   }
   return (<AudioPlayerProvider>
-      <Layout>
-        <Row className={styles.desktop}>
-          <HiddenXs>
-            <Filter mobile/>
-          </HiddenXs>
-          <Col className={styles.content}>
+      <WithGameFilterLayout>
             <GameSoundWrapper>
             <GameWrapper token={props.gameToken} gameType={query.game as CasinoGameType}>{renderGame()}</GameWrapper>
             </GameSoundWrapper>
-          </Col>
-        </Row>
-      </Layout>
+      </WithGameFilterLayout>
     </AudioPlayerProvider>
   )
 }

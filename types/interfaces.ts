@@ -31,17 +31,7 @@ export interface Country {
   symbol: string
 }
 
-export const CONTACTS = {
-  email: 'support@richy.casino',
-  facebook: '#',
-  youtube: '#',
-  twitter: '#',
-  linkedIn: '#'
-}
 
-export const LINKS = {
-
-}
 export interface IOption<T> {
   label: string
   value?: T

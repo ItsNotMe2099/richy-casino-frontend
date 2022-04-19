@@ -7,6 +7,7 @@ import HiddenXs from 'components/ui/HiddenXS'
 import {useAppContext} from 'context/state'
 import {ProfileModalType} from 'types/enums'
 import {useTranslation} from 'next-i18next'
+import DropDownTriangle from 'components/ui/DropDownTriangle'
 
 interface Option {
   label: string
@@ -88,7 +89,7 @@ export default function ProfileMenu(props: Props){
         </HiddenXs>
       </div>
        <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
-        <div className={styles.triangle}></div>
+       <DropDownTriangle className={styles.triangle}/>
         {options.map((item, index) =>   <a key={item.key} className={styles.option} onClick={ e => handleClickItem(e, item)}>
           {item.label}
         </a>)}

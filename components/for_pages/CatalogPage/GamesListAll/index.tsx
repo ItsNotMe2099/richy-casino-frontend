@@ -54,7 +54,7 @@ export default function GamesListLive(props: Props) {
     const newPage = page + 1
     setPage(newPage)
     setLoading(true)
-    const res = await GameListRepository.fetchLiveGames({}, newPage, limit)
+    const res = await GameListRepository.fetchGames({}, newPage, limit)
     setData(data => ({data: [...data.data, ...res.data], total: res.total}))
     setLoading(false)
   }
@@ -63,6 +63,7 @@ export default function GamesListLive(props: Props) {
                icon={'/img/Contents/all-games.svg'}
                totalItems={data.total}
                items={data.data}
+               loading={loading}
                onScrollNext={handleScrollNext}
       switchFilter={<SwitchFilter<GameSwitchFilterKey> items={filters} onClick={handleChangeFilter} active={filter}/> }
     />

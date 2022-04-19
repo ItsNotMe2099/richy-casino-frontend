@@ -38,11 +38,14 @@ export default function Menu(props: Props) {
     {label: t('menu_casino'), link: '/catalog'},
     {label: t('menu_richy'), link: '#'},
     {label: t('menu_free_bitcoin'), link: '/freebitcoin'},
-    {label: t('menu_wheel_of_fortune'), link: '#'},
+    {label: t('menu_wheel_of_fortune'), link: '/wheel_of_fortune'},
     {label: t('menu_lottery'), link: '/lottery'},
-    {label: t('menu_live_casino'), link: '#'},
-    {label: t('menu_aviator'), link: '#'},
-    {label: t('menu_poker'), link: '#'},
+    {label: t('menu_live_casino'), link: '/catalog/category/live'},
+    {label: t('menu_aviator'), link: '/aviator'},
+    {label: t('menu_poker'), link: '/poker'},
+    {label: t('menu_tournaments'), link: '/tournaments'},
+    {label: t('menu_bonuses'), link: '/bonuses'},
+    {label: t('menu_chess'), link: '/chess'},
   ]
   const renderMobile = () => {
     return  <div className={classNames(styles.menu, )} >

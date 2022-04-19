@@ -3,7 +3,12 @@
 .root{
 
 }
+.select{
 
+  @media screen and (max-width: $xs-max) {
+    margin-top: 12px;
+  }
+}
 .placeholder{
     display: flex;
     background: rgba(255, 209, 47, 0.05);
@@ -13,7 +18,6 @@
     font-weight: 700;
     font-size: 14px;
     height: 41px;
-    min-width: 174px;
     justify-content: space-evenly;
     &:hover{
         background: rgba(255, 209, 47, 0.1);

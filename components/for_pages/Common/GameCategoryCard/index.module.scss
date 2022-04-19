@@ -1,0 +1,42 @@
+@import "scss/index";
+.root{
+  height: 54px;
+  padding: 0px 19px;
+  display: flex;
+  align-items: center;
+  border-radius: 11px;
+  background-color: #1D1E25;
+  cursor: pointer;
+  .label{
+    flex: 1;
+    font-size: 1.1rem;
+    color: $dark100;
+    font-weight: 500;
+    @media screen and (max-width: $mobile-max){
+      font-size: 0.8rem;
+    }
+  }
+  .icon{
+    margin-right: 13px;
+    img{
+      min-width: 24px;
+      max-width: 24px;
+      @media screen and (max-width: $xs-max){
+        min-width: 16px;
+        max-width: 16px;
+      }
+    }
+  }
+  .quantity{
+    font-weight: 500;
+    font-size: 14px;
+    color: $dark300;
+  }
+
+  &:hover, &.active{
+    background-color: $dark600;
+    .quantity, .label{
+      color: #fff;
+    }
+  }
+}
