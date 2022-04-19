@@ -39,6 +39,7 @@ interface Props {
   style?: 'wallet' | 'favorite' | 'buyCrypto' | '2fa' | 'withdraw'
   faFooter?: boolean
   withdraw?: boolean
+  fixed?: boolean
 }
 
 export default function ProfileModal(props: Props) {
@@ -85,12 +86,13 @@ export default function ProfileModal(props: Props) {
   const styleClassMobile = {
     [styles.buyCrypto]: props.style === 'buyCrypto'
   }
+  const showModalMobileHeader = !props.wallet
 
   return (
     <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
       <div className={styles.frame}>
         <div
-          className={`${styles.root} ${getSizeClass(props.size)} ${props.className}`}
+          className={classNames(styles.root, getSizeClass(props.size),props.className, {[styles.showHeader]: showModalMobileHeader})}
         >
           <HiddenXs><>{(props.faFooter && props.step === 1) && <FAFooter className={styles.footer}/>}</>
           </HiddenXs>
@@ -128,7 +130,7 @@ export default function ProfileModal(props: Props) {
           </HiddenXs>
           <VisibleXs>
             <div className={classNames(styles.mobile, styleClassMobile)}>
-              {!props.wallet && <div className={styles.top}>
+              {showModalMobileHeader && <div className={styles.top}>
                 <Logo className={styles.logo}/>
                 <div className={styles.balance}>
                   <div className={styles.text}>
@@ -138,7 +140,7 @@ export default function ProfileModal(props: Props) {
                     {props.user.balance}
                   </div>
                 </div>
-                <Button background='payGradient500' className={styles.btnFill}><img src='/img/icons/wallet.svg' alt=''/>{t('profile_deposit')}</Button>
+                <Button background='payGradient500' className={styles.btnFill} onClick={() => context.showModal(ProfileModalType.wallet)}><img src='/img/icons/wallet.svg' alt=''/>{t('profile_deposit')}</Button>
                 {props.onRequestClose && (
                   <div className={styles.close} onClick={props.onRequestClose}>
                     <Close/>

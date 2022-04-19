@@ -1,14 +1,13 @@
 import styles from './index.module.scss'
-import Sheet from 'react-modal-sheet'
 import {useAppContext} from 'context/state'
-import UserFooter from 'components/for_pages/Common/UserFooter'
 import Avatar from '../Avatar'
 import BonusSmallBanner from 'components/for_pages/Common/BonusSmallBanner'
 import classNames from 'classnames'
 import UserUtils from 'utils/user'
 import {useTranslation} from 'next-i18next'
+import {ProfileModalType} from 'types/enums'
 
-interface IUser{
+interface IUser {
   id: string
   userName: string
 }
@@ -35,7 +34,7 @@ export default function ProfileBurger(props: Props) {
   const appContext = useAppContext()
   const customStyles = {
     overlay: {
-      backgroundColor: !props.singlePage  ? 'rgba(0, 0, 0, 0.5)' : 'transparent',
+      backgroundColor: !props.singlePage ? 'rgba(0, 0, 0, 0.5)' : 'transparent',
       display: 'flex',
       zIndex: '11',
     },
@@ -110,78 +109,59 @@ export default function ProfileBurger(props: Props) {
     )
   }
 
-  if(appContext.isMobile) {
-    /* eslint-disable */
-    // @ts-ignore
-    return (
-    <Sheet isOpen={isOpen} onClose={onRequestClose}>
-      <div className={styles.sheet}>
-      <Sheet.Container onViewportBoxUpdate>
-        <Sheet.Header onViewportBoxUpdate />
-        <Sheet.Content onViewportBoxUpdate>{isOpen &&
-        <div className={styles.container}>
-          <div className={styles.info}>
-            <div className={styles.user}>
-            <Avatar avatar='/img/Avatar/avatar.png' style='circle'/>
-            <div className={styles.name}>
-              <span>{UserUtils.formatUserName(appContext.user)}</span>
-              <div className={styles.id}>
-                ID: {appContext.user.id}
-              </div>
-            </div>
-            </div>
-            <div className={styles.back} onClick={onRequestClose}>
-              <img src='/img/icons/back-arrow-white.svg'/>
+  return (
+    <div className={styles.container}>
+      <div className={styles.info} onClick={() => appContext.showModal(ProfileModalType.profile)}>
+        <div className={styles.user}>
+          <Avatar avatar='/img/Avatar/avatar.png' style='circle'/>
+          <div className={styles.name}>
+            <span>{UserUtils.formatUserName(appContext.user)}</span>
+            <div className={styles.id}>
+              ID: {appContext.user.id}
             </div>
           </div>
-          <BonusSmallBanner style='profileBurger'/>
-          <div className={styles.bonuses}>
-            {bonuses.map((item, index) =>
-              <Bonus
-              key={index}
-              icon={item.icon}
-              label={item.label}
-              style={item.key === 'gift' ? 'gift' : item.key === 'bitcoin' ? 'bitcoin' : 'wheel'}
-            />
-            )}
-          </div>
-          <div className={styles.block}>
-            {options.slice(0, 3).map((item, index) =>
-              <Option icon={item.icon} label={item.label} key={index}/>
-            )}
-          </div>
-          <div className={styles.block}>
-            {options.slice(3, 7).map((item, index) =>
-              <Option icon={item.icon} label={item.label} key={index}/>
-            )}
-          </div>
-          <div className={styles.chat}>
-            <div className={styles.name}>
-              <div className={styles.icon}>
-                <img src='/img/ProfileBurger/chat.svg' alt=''/>
-              </div>
-              <div className={styles.label}>Чат</div>
-            </div>
-            <div className={styles.back}>
-              <img src='/img/icons/back-arrow-white.svg'/>
-            </div>
-          </div>
-          <div className={styles.last}>
-            {options.slice(7).map((item, index) =>
-              <Option icon={item.icon} label={item.label} key={index}/>
-            )}
-          </div>
-          <UserFooter/>
-        </div>}
-        </Sheet.Content>
-      </Sheet.Container>
+        </div>
+        <div className={styles.back} onClick={onRequestClose}>
+          <img src='/img/icons/back-arrow-white.svg'/>
+        </div>
       </div>
-
-      <Sheet.Backdrop onViewportBoxUpdate/>
-    </Sheet>
-    )
-  }
-  else{
-    return null
-  }
+      <BonusSmallBanner style='profileBurger'/>
+      <div className={styles.bonuses}>
+        {bonuses.map((item, index) =>
+          <Bonus
+            key={index}
+            icon={item.icon}
+            label={item.label}
+            style={item.key === 'gift' ? 'gift' : item.key === 'bitcoin' ? 'bitcoin' : 'wheel'}
+          />
+        )}
+      </div>
+      <div className={styles.block}>
+        {options.slice(0, 3).map((item, index) =>
+          <Option icon={item.icon} label={item.label} key={index}/>
+        )}
+      </div>
+      <div className={styles.block}>
+        {options.slice(3, 7).map((item, index) =>
+          <Option icon={item.icon} label={item.label} key={index}/>
+        )}
+      </div>
+      <div className={styles.chat}>
+        <div className={styles.name}>
+          <div className={styles.icon}>
+            <img src='/img/ProfileBurger/chat.svg' alt=''/>
+          </div>
+          <div className={styles.label}>Чат</div>
+        </div>
+        <div className={styles.back}>
+          <img src='/img/icons/back-arrow-white.svg'/>
+        </div>
+      </div>
+      <div className={styles.last}>
+        {options.slice(7).map((item, index) =>
+          <Option icon={item.icon} label={item.label} key={index}/>
+        )}
+      </div>
+    </div>
+  )
 }

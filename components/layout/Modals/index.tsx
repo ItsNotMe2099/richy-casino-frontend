@@ -71,6 +71,7 @@ export default function ModalContainer(props: Props) {
           <ProfileModal isBack={true} size='large' key={7} isOpen={context.modal === ProfileModalType.settings} {...commonSettings} title={t('settings_title')} user={user}>
             <Settings user={user}/>
           </ProfileModal>
+
           <Wallet/>
           <Modal fortune key={9} isOpen={context.modal === ModalType.fortune} {...commonSettings} noBorder size='fortune'>
             <Fortune/>
@@ -79,7 +80,7 @@ export default function ModalContainer(props: Props) {
             <ModalRegistrationPhone/>
           </Modal>
           <BonusModal isOpen={context.modal === ModalType.bonus} {...commonSettings}/>
-          <ProfileBurger key={11} isOpen={context.modal === ModalType.profileBurger} {...commonSettings} user={user}/>
+
           <ProfileModal
           size='small'
           key={13} isBack={true} isOpen={context.modal === ProfileModalType.exchange} {...commonSettings} title={t('exchange_title')} user={user} payment noBorder>
@@ -112,6 +113,10 @@ export default function ModalContainer(props: Props) {
             <FA/>
           </ProfileModal>
           <Withdraw/>
+
+            <Modal key={19} isOpen={context.modal === ModalType.profileBurger} {...commonSettings} noBorder>
+              <ProfileBurger isOpen={context.modal === ModalType.profileBurger}  user={user}/>
+            </Modal>
           </div>
       )}
     </RemoveScroll>

@@ -1,23 +1,5 @@
 @import "scss/index";
 
-.sheet{
-  :global .react-modal-sheet-container {
-    background: #1a1c23;
-    border-radius: 18px 18px 0px 0px;
-    :global .react-modal-sheet-header {
-      top: -8px;
-    }
-    :global .react-modal-sheet-content {
-      padding: 0 18px;
-      top: -15px;
-    }
-    :global .react-modal-sheet-drag-indicator {
-      background-color: $dark600 !important;
-      width: 27px !important;
-      border-radius: 28px !important;
-    }
-  }
-}
 
 .container{
   margin-bottom: 189px;

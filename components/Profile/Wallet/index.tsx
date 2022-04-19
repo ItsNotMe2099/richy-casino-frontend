@@ -8,13 +8,14 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import ProfileModal from 'components/ui/ProfileModal'
 import { useAppContext } from 'context/state'
-import { ProfileModalType } from 'types/enums'
+import { ProfileModalType} from 'types/enums'
 import WalletCryptoEth from 'components/svg/WalletCryptoEth'
 import WalletCryptoBtc from 'components/svg/WalletCryptoBtc'
 import WalletCryptoTeth from 'components/svg/WalletCryptoTeth'
 import WalletCrypto13 from 'components/svg/WalletCrypto13'
 import WalletVisa from 'components/svg/WalletVisa'
 import {useTranslation} from 'next-i18next'
+import Modal from 'components/ui/Modal'
 
 interface Props {
   isOpen?: boolean
@@ -300,46 +301,56 @@ const handleBack = () => {
     }
   }
 }
-
+const renderBody = () => {
+    return (
+  <div className={styles.root}>
+    {!method &&
+    <div className={styles.choose}>
+      {t('wallet_payment_method_choose')}
+    </div>}
+    {!isSubmit &&
+    <div className={styles.banner}>
+      <BonusSmallBanner style='wallet'/>
+    </div>}
+    {method &&
+    <Choice array={method === t('wallet_payment_type_crypto') ? crypto : bank}/>
+    }
+    {!method && !isSubmit &&
+    <div className={styles.methods}>
+      {methods.map((item, index) =>
+        <Method iconLabel={item.iconLabel} icon={item.icon} label={item.label} key={index} bonus={item.bonus} onClick={() => setMethod(item.label)}/>
+      )}
+    </div>}
+    {method && !isSubmit &&
+    <>
+      <Options array={method === t('wallet_payment_type_crypto') ? crypto : method === t('wallet_payment_type_card') && bank} method={method}/>
+      {currency &&
+      <WalletForm onSubmit={() => method === t('wallet_payment_type_crypto') ? setIsSubmit(true) : null}/>
+      }
+    </>
+    }
+    {isSubmit && step === 3 &&
+    <QrCode iso={iso} walletNumber='18e6Ktb8GuyhfEq7r9mRfvk9xyJLzUN7XD'/>
+    }
+  </div>)
+}
+if(context.isMobile){
+  return ( <Modal  isOpen={context.modal === ProfileModalType.wallet} {...commonSettings} title={t('wallet_title')}>
+    {renderBody()}
+  </Modal>)
+}else {
   return (
     <ProfileModal size='small'
-          key={8}
-          isOpen={context.modal === ProfileModalType.wallet} {...commonSettings} title={t('wallet_title')} user={user} wallet noBorder
-          isBack={step > 1 ? true : false}
-          step={step}
-          setStep={() => step === 2  ? handleBack() : step === 3 ? handleBack() : null}
-          style='wallet'
-          >
-    <div className={styles.root}>
-      {!method &&
-      <div className={styles.choose}>
-        {t('wallet_payment_method_choose')}
-      </div>}
-      {!isSubmit &&
-      <div className={styles.banner}>
-        <BonusSmallBanner style='wallet'/>
-      </div>}
-      {method &&
-        <Choice array={method === t('wallet_payment_type_crypto') ? crypto : bank}/>
-      }
-      {!method && !isSubmit &&
-      <div className={styles.methods}>
-        {methods.map((item, index) =>
-          <Method iconLabel={item.iconLabel} icon={item.icon} label={item.label} key={index} bonus={item.bonus} onClick={() => setMethod(item.label)}/>
-        )}
-      </div>}
-      {method && !isSubmit &&
-        <>
-        <Options array={method === t('wallet_payment_type_crypto') ? crypto : method === t('wallet_payment_type_card') && bank} method={method}/>
-        {currency &&
-          <WalletForm onSubmit={() => method === t('wallet_payment_type_crypto') ? setIsSubmit(true) : null}/>
-        }
-        </>
-      }
-      {isSubmit && step === 3 &&
-        <QrCode iso={iso} walletNumber='18e6Ktb8GuyhfEq7r9mRfvk9xyJLzUN7XD'/>
-      }
-    </div>
+                  key={8}
+                  isOpen={context.modal === ProfileModalType.wallet} {...commonSettings} title={t('wallet_title')}
+                  user={user} wallet noBorder
+                  isBack={step > 1 ? true : false}
+                  step={step}
+                  setStep={() => step === 2 ? handleBack() : step === 3 ? handleBack() : null}
+                  style='wallet'
+    >
+      {renderBody()}
     </ProfileModal>
   )
+}
 }

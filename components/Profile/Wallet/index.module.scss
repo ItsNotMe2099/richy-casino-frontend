@@ -68,6 +68,9 @@
   padding: 10px;
   border-radius: 8px;
   height: 43px;
+  @media screen and (max-width: $xs-max){
+    flex: 1;
+  }
 }
 
 .fill{
@@ -109,10 +112,14 @@
   padding-bottom: 16px;
   margin-top: 16px;
   @media screen and (max-width: $xs-max){
+    grid-template-columns: none;
+    display: flex;
+    align-items: stretch;
    border: 0;
   }
   @media screen and (max-width: 375px){
-    display: flex;
+
+    justify-content: stretch;
   }
 }
 
@@ -163,6 +170,7 @@
 .btn{
   padding: 11px 0;
   width: 100%;
+
   img{
     margin-right: 10px;
   }
@@ -194,7 +202,7 @@
     padding-bottom: 17px;
     margin: 0 -15px;
   }
-  @media screen and (max-width: 375px){
+  @media screen and (max-width: $xs-max){
     font-size: 12px;
     img{
       margin-right: 6px;
@@ -210,7 +218,8 @@
 }
 
 .iso{
-  @media screen and (max-width: 375px){
+  @media screen and (max-width: $xs-max){
+    flex: 1;
     flex-direction: row;
     align-items: center;
     padding: 9px 0;
@@ -219,6 +228,7 @@
     border-radius: 8px;
     width: 100%;
   }
+
 }
 
 .isoIcon{
@@ -228,7 +238,7 @@
 }
 
 .isoLabel{
-  @media screen and (max-width: 375px){
+  @media screen and (max-width: $xs-max){
   font-weight: 500;
   font-size: 16px;
   color: $white !important;

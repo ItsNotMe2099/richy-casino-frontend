@@ -28,6 +28,9 @@ export class Routes{
     return '/catalog/category/richy-games'
   }
   static get aviator(){
-    return '/catalog/game/aviator'
+    return '/catalog/aviator'
+  }
+  static get poker(){
+    return '/catalog/game/poker'
   }
 }

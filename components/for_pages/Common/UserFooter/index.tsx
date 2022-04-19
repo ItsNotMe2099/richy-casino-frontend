@@ -1,10 +1,14 @@
 import styles from './index.module.scss'
 import VisibleXs from 'components/ui/VisibleXS'
-import { useAppContext } from 'context/state'
-import { ModalType } from 'types/enums'
+import {useAppContext} from 'context/state'
+import {ModalType, ProfileModalType} from 'types/enums'
+import {Routes} from 'types/routes'
+import {useRouter} from 'next/router'
+import Link from 'next/link'
+import classNames from 'classnames'
 
 interface Props {
-  
+
 }
 
 interface ItemProps {
@@ -14,16 +18,19 @@ interface ItemProps {
 }
 
 enum ActionType{
-  Sheet
+  Main = 'main',
+  Poker = 'poker',
+  Casino = 'casino',
+  Menu = 'menu'
 }
 
 export default function UserFooter(props: Props) {
-
+  const router = useRouter()
   const items = [
-    {label: 'Main', icon: '/img/UserFooter/user.svg', key: null},
-    {label: 'Poker', icon: '/img/UserFooter/poker.svg', key: null},
-    {label: 'Casino', icon: '/img/UserFooter/casino.svg', key: null},
-    {label: 'Menu', icon: '/img/UserFooter/menu.svg', key: ActionType.Sheet},
+    {label: 'Main', icon: '/img/UserFooter/user.svg', key: ActionType.Main},
+    {label: 'Poker', icon: '/img/UserFooter/poker.svg', key: ActionType.Poker},
+    {label: 'Casino', icon: '/img/UserFooter/casino.svg', key: ActionType.Casino},
+    {label: 'Menu', icon: '/img/UserFooter/menu.svg', key: ActionType.Menu},
   ]
 
   const Item = ({icon, label, onClick}: ItemProps) => {
@@ -44,11 +51,25 @@ export default function UserFooter(props: Props) {
 
   const handleClickItem = (item) => {
     switch (item.key) {
-      case ActionType.Sheet:
-        if(context.modal === ModalType.profileBurger){
-          context.hideModal()
+      case ActionType.Poker:
+        router.push(Routes.poker)
+        break
+      case ActionType.Casino:
+        router.push(Routes.catalog)
+        break
+      case ActionType.Main:
+        if(!context.user){
+          context.showModal(ModalType.login)
+        } else{
+          context.showModal(ProfileModalType.profile)
         }
-        else{
+        break
+      case ActionType.Menu:
+        if(!context.user){
+          context.showModal(ModalType.login)
+        } else if(context.modal === ModalType.profileBurger){
+          context.hideModal()
+        } else{
           showModal(ModalType.profileBurger)
         }
         break
@@ -57,16 +78,18 @@ export default function UserFooter(props: Props) {
 
   return (
     <VisibleXs>
-      <div className={styles.root}>
+      <div className={classNames(styles.root, {[styles.isOverAll]: context.modal === ModalType.profileBurger})}>
         {items.slice(0, 2).map((item, index) =>
           <Item onClick={() => handleClickItem(item)} icon={item.icon} label={item.label} key={item.key}/>
         )}
-        <div className={styles.joystick}>
+        <Link href={Routes.catalog}>
+        <a className={styles.joystick}>
           <img src='/img/UserFooter/joystick.svg' alt=''/>
-        </div>
+        </a>
+        </Link>
         {items.slice(2, items.length).map((item, index) =>
-          <Item 
-          onClick={() => handleClickItem(item)} 
+          <Item
+          onClick={() => handleClickItem(item)}
           icon={item.label === 'Menu' && context.modal === ModalType.profileBurger ? '/img/UserFooter/close.svg' : item.icon} label={item.label} key={item.key}/>
         )}
       </div>

@@ -112,9 +112,10 @@ export default function Modal(props: Props) {
     /* eslint-disable */
     // @ts-ignore
     return (
-      <Sheet isOpen={isOpen} onClose={onRequestClose} onOpenStart={openModal} onCloseEnd={hideModal}>
+      <Sheet isOpen={isOpen} onClose={onRequestClose} onOpenStart={openModal} onCloseEnd={hideModal}   snapPoints={[620]}>
+        <Sheet.Container onViewportBoxUpdate>
         <div className={classNames(styles.rootSheet, {[styles.sheet]: props.fortune})}>
-          <Sheet.Container onViewportBoxUpdate>
+
             <Sheet.Header onViewportBoxUpdate/>
             <div className={classNames(styles.title, {[styles.mobile]: true})}>
               {props.title}
@@ -129,9 +130,9 @@ export default function Modal(props: Props) {
 
               {props.isOpen && props.children}
             </div>}</Sheet.Content>
-          </Sheet.Container>
-        </div>
 
+        </div>
+        </Sheet.Container>
         <Sheet.Backdrop onViewportBoxUpdate onTap={props.onRequestClose}/>
       </Sheet>
     )
