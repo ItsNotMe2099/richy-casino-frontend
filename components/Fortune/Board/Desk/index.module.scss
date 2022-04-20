@@ -17,11 +17,35 @@
   height: 90%;
 }
 
-.sectionText{
-  font-size: 12px;
-  color: #fff;
-  transform: rotate(-90deg);
+.sectionContent{
   position: absolute;
-  top: 20%;
-  left: 15%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  top: 5%;
+  left: 0;
+  right: 0;
+  bottom: 20%;
+  writing-mode: vertical-lr;
+}
+
+.sectionText{
+  font-size: 16px;
+  color: #fff;
+  transform: rotate(180deg);
+}
+
+.sectionIcon{
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5%;
+}
+
+.cursor{
+  width: 60px;
+  height: 91px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

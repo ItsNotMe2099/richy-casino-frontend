@@ -32,6 +32,7 @@ export default function Desk(props: Props) {
   return (
     <div className={styles.root} style={{ width: props.settings.size, height: props.settings.size }}>
       {renderSections()}
+      <img src="/img/Fortune/cursor.svg" alt="" className={styles.cursor}/>
     </div>
   )
 }
@@ -70,8 +71,11 @@ function Section(props: SectionProps) {
       <svg className={styles.sectionBackground} viewBox="0 0 68 148" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
         <path d="M0.516765 11.7757C-0.341416 7.44158 2.47466 3.21381 6.84264 2.54904C24.8982 -0.198867 43.2674 -0.182833 61.3182 2.59659C65.685 3.26899 68.4937 7.50167 67.6279 11.8343L41.8058 141.061C40.0905 149.645 27.8135 149.634 26.1132 141.047L0.516765 11.7757Z" fill={color} />
       </svg>
-      <div className={styles.sectionText}>
-        {props.text}
+      <div className={styles.sectionContent}>
+        <img src="/img/Fortune/coin.png" className={styles.sectionIcon} alt=""/>
+        <div className={styles.sectionText}>
+          {props.text}
+        </div>
       </div>
     </div>
   )
