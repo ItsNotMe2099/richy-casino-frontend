@@ -71,7 +71,6 @@ export default function GamesList(props: Props) {
             next={props.onScrollNext}
             loader={<div></div>}
             hasMore={isShow && props.totalItems > props.items.length}
-            style={{overflow: 'inherit'}}
             className={styles.list}
             scrollThreshold={0.6}
           >
