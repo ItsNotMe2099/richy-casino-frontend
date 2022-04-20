@@ -39,7 +39,7 @@ export default function Fortune(props: Props) {
     <div className={styles.root}>
       <div className={styles.wheel}>
         <div className={styles.board}>
-          <Board />
+          <Board inProgress={currentDate} />
         </div>
         <HiddenXs>
         <div className={styles.wrapper}>
