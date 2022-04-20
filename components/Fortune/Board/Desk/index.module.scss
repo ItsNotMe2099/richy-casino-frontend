@@ -1,18 +1,24 @@
 @import "scss/index";
 
+$firstAnimationDuration: 1700ms;
+$secondAnimationDuration: 300ms;
+
 .root{
   position: relative;
   background: $dark700;
   border-radius: 50%;
   box-shadow: inset 0 0 0 5px #303030;
   &.inProgress{
-    animation: rotateAnimation 2s linear infinite;
+    animation: rotateAnimation $firstAnimationDuration linear infinite;
   }
 }
 
 .section{
   position: absolute;
   transform-origin: bottom center;
+  &.active{
+    transition: transform $secondAnimationDuration ease-in-out;
+  }
 }
 
 .sectionBackground{
@@ -42,6 +48,19 @@
   width: 24px;
   height: 24px;
   margin-bottom: 5%;
+}
+
+.stroke{
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity $secondAnimationDuration ease-in-out;
+  &.active{
+    opacity: 1;
+  }
 }
 
 @keyframes rotateAnimation {

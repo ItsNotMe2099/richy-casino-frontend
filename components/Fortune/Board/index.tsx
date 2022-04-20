@@ -16,7 +16,7 @@ export default function Board(props: Props) {
           numberOfSections: 16,
         }}
         inProgress={props.inProgress}
-        activeSectionIndex={3}
+        activeSectionIndex={4}
       />
       <img src="/img/Fortune/cursor.svg" alt="" className={styles.cursor}/>
     </div>
