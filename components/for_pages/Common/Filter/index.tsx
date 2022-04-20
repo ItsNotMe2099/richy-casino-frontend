@@ -24,9 +24,7 @@ interface IGame{
 
 interface Props {
   className?: string
-  state?: boolean
-  mobile?: boolean
-  onClick?: () => void
+  showMobile?: boolean
   onSearch?: (value: string) => void
 }
 const GameCategoryStaticCard = (props: {icon: string, label: string, link: string}) => {
@@ -65,11 +63,9 @@ export default function Filter(props: Props) {
 
   return (
     <>
-    <Col className={classNames(styles.col, {[styles.none]: (!props.state || props.mobile)})}>
+    <Col className={classNames(styles.col, {[styles.none]: true})}>
       <div className={classNames(styles.root, props.className)}>
-          <div className={styles.close}>
-            <img src='/img/icons/close.svg' alt='' onClick={props.onClick}/>
-          </div>
+
          <InputSearch placeholder='Поиск' onChange={props.onSearch}/>
          {games.map((item, index) =>
           <GameCategoryStaticCard key={index} icon={item.icon} label={item.label} link={item.link}/>
@@ -91,7 +87,7 @@ export default function Filter(props: Props) {
          </div>
       </div>
     </Col>
-    <div className={classNames(styles.mobile, {[styles.none]: !props.mobile})}>
+    <div className={classNames(styles.mobile, {[styles.none]: !props.showMobile})}>
         <div className={styles.search}>
           <InputSearch placeholder='Поиск' onChange={props.onSearch}/>
           <div className={styles.filters}>

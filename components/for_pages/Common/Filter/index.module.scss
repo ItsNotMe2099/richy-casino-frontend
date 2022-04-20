@@ -33,6 +33,10 @@
   @media screen and (min-width: 1025px){
     display: none;
   }
+  @media screen and (max-width: $xs-max) {
+    margin-right: 18px;
+    margin-left: 18px;
+  }
 }
 
 .search{

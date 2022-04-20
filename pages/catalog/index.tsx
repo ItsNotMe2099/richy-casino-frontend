@@ -17,7 +17,7 @@ export default function CatalogPage() {
   const money = '25 572 257 ₽'
 
   return (
-    <WithGameFilterLayout top={<VisibleXs><TopSlider money={money}/></VisibleXs>}>
+    <WithGameFilterLayout showMobile top={<VisibleXs><TopSlider money={money}/></VisibleXs>}>
        <Row className={styles.row}>
             <HiddenXs><TopSlider money={money}/></HiddenXs>
           </Row>

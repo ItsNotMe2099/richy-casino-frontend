@@ -1,10 +1,8 @@
-import Filter from 'components/for_pages/Common/Filter'
 import PageTitle from 'components/for_pages/Common/PageTitle'
 import Banner from 'components/for_pages/FreeBitcoin/Banner'
 import Table from 'components/for_pages/FreeBitcoin/Table'
-import Layout from 'components/layout/Layout'
 import {useEffect, useState} from 'react'
-import {Row, Col} from 'react-grid-system'
+import {Row} from 'react-grid-system'
 import {GetServerSideProps} from 'next'
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import FreeBitcoinRepository from 'data/repositories/FreeBitcoinRepository'
@@ -14,6 +12,7 @@ import {IFreeBitcoinUserStatus} from 'data/interfaces/IFreeBitcoinUserStatus'
 import {IFreeBitcoinGame} from 'data/interfaces/IFreeBitcoinGame'
 import {useAppContext} from 'context/state'
 import {useTranslation} from 'next-i18next'
+import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 
 export default function FreeBitcoin() {
   const {t} = useTranslation()
@@ -36,10 +35,7 @@ export default function FreeBitcoin() {
   const [isShow, setIsShow] = useState(false)
 
   return (
-    <Layout>
-      <Row>
-        <Filter state={isShow} onClick={() => setIsShow(false)}/>
-        <Col>
+    <WithGameFilterLayout>
           <PageTitle icon='/img/Contents/bitcoin.svg' title={t('freebitcoin_title')}
                      onClick={() => isShow ? setIsShow(false) : setIsShow(true)} shadowColor='yellow'/>
           <Banner coins='0.0000010001' state='timer'/>
@@ -47,9 +43,7 @@ export default function FreeBitcoin() {
             <Table items={slots}/>
             <Table items={history} history/>
           </Row>
-        </Col>
-      </Row>
-    </Layout>
+    </WithGameFilterLayout>
   )
 }
 export const getServerSideProps: GetServerSideProps = async (context) => {

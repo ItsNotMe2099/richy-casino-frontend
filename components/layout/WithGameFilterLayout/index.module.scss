@@ -6,6 +6,9 @@
 
 .content{
   width: 75% !important;
+  @media screen and (max-width: $xs-max) {
+    padding: 0px 18px !important;
+  }
 }
 
 .desktop{

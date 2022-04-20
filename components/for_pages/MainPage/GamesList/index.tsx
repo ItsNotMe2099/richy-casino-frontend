@@ -57,8 +57,8 @@ export default function MainGamesList(props: Props) {
   }
 
   return (
-    <div className={classNames(styles.root, {[styles.none]: props.items.length === 0})}>
-      <Header icon={props.icon} label={props.label} length={props.items.length} shadowColor={props.shadowColor}/>
+    <div className={classNames(styles.root, {[styles.none]: data.total === 0})}>
+      <Header icon={props.icon} label={props.label} length={data.total} shadowColor={props.shadowColor}/>
       <HiddenXs>
         <>
           <div className={styles.filters}>

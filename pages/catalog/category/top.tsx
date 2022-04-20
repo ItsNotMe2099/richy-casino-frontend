@@ -9,7 +9,7 @@ interface Props{
 
 export default function CatalogPage(props: Props) {
   return (
-    <WithGameFilterLayout>
+    <WithGameFilterLayout showMobile>
          <GamesListTop/>
     </WithGameFilterLayout>
   )

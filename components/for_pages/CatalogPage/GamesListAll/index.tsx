@@ -42,6 +42,7 @@ export default function GamesListLive(props: Props) {
   ]
   useEffect(() => {
     GameListRepository.fetchGames({}, 1, limit).then(i => {
+      console.log('LoadGames', i)
       setData(i)
       setLoading(false)
     })
@@ -51,6 +52,7 @@ export default function GamesListLive(props: Props) {
     setFilter(item)
   }
   const handleScrollNext = async () => {
+    console.log('handleScrollNext')
     const newPage = page + 1
     setPage(newPage)
     setLoading(true)
@@ -61,8 +63,8 @@ export default function GamesListLive(props: Props) {
   return (
     <GamesList title={'Игры'}
                icon={'/img/Contents/all-games.svg'}
-               totalItems={data.total}
-               items={data.data}
+               totalItems={data?.total}
+               items={data?.data ?? []}
                loading={loading}
                onScrollNext={handleScrollNext}
       switchFilter={<SwitchFilter<GameSwitchFilterKey> items={filters} onClick={handleChangeFilter} active={filter}/> }

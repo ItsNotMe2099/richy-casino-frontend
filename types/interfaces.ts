@@ -49,6 +49,7 @@ export interface IApiResponseErrorDetails{
 export interface IApiResponseError{
   code: number,
   details: IApiResponseErrorDetails[]
+  message?: string
 }
 export interface IApiResponse{
   success: boolean,

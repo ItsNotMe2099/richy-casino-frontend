@@ -19,7 +19,7 @@
 
     @media screen and (max-width: 600px){
         flex-basis: auto !important;
-        padding: 0 19px !important;
+
     }
 }
 
@@ -41,7 +41,7 @@
   tbody{
     display: block;
     width: 100%;
-    overflow: auto;  
+    overflow: auto;
     tr{
       td:nth-child(2){
         padding-right: 28px;

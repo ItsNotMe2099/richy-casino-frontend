@@ -22,8 +22,8 @@ export default function GamesListSearch({data, loading, onScrollNext}: Props) {
   return (
     <GamesList title={'Поиск'}
                icon={'/img/Contents/all-games.svg'}
-               totalItems={data.total}
-               items={data.data}
+               totalItems={data?.total ?? 0}
+               items={data?.data ?? []}
                loading={loading}
                onScrollNext={onScrollNext}
     />

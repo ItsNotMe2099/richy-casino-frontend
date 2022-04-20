@@ -10,7 +10,7 @@ interface Props{
 
 export default function CatalogPage(props: Props) {
   return (
-    <WithGameFilterLayout>
+    <WithGameFilterLayout showMobile>
          <GamesListCategory category={props.category}/>
     </WithGameFilterLayout>
   )

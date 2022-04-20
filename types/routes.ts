@@ -17,9 +17,10 @@ export class Routes{
   static catalogCategory(key?: number): string{
     return `/catalog/category/${key}`
   }
-  static catalogGame(id: number): string{
-    return `/catalog/game/${id}`
+  static catalogGame(id: number, isDemo?: boolean): string{
+    return `/game/${id}${isDemo ? '?demo=true' : ''}`
   }
+
   static catalogProvider(providerId: string | number): string{
     return `/catalog/providers/${providerId}`
   }

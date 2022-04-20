@@ -1,8 +1,6 @@
-import Filter from 'components/for_pages/Common/Filter'
 import PageTitle from 'components/for_pages/Common/PageTitle'
-import Layout from 'components/layout/Layout'
 import {useEffect, useState} from 'react'
-import { Row, Col } from 'react-grid-system'
+import { Row } from 'react-grid-system'
 import styles from 'pages/lottery/index.module.scss'
 import Timer from 'components/for_pages/Lottery/Timer'
 import Table from 'components/for_pages/Lottery/Table'
@@ -15,6 +13,7 @@ import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import {ILotteryRound, ILotteryRoundCurrent} from 'data/interfaces/ILotteryRound'
 import LotteryRepository from 'data/repositories/LotteryRepository'
 import {useTranslation} from 'next-i18next'
+import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 
 export default function Lottery() {
   const {t} = useTranslation()
@@ -50,10 +49,7 @@ export default function Lottery() {
   ]
 
   return (
-    <Layout>
-      <Row>
-      <Filter state={isShow} onClick={() => setIsShow(false)}/>
-      <Col className={styles.content}>
+    <WithGameFilterLayout>
         <PageTitle icon='/img/Lottery/lottery.svg' title={t('lottery_title')} onClick={() => isShow ? setIsShow(false) : setIsShow(true)} lottery/>
         <Timer expiredAt={expiredAt}/>
         <VisibleXs>
@@ -70,9 +66,7 @@ export default function Lottery() {
           <Prizes/>
         </Row>
         <Table items={topWinners}/>
-      </Col>
-      </Row>
-    </Layout>
+    </WithGameFilterLayout>
   )
 }
 export const getServerSideProps: GetServerSideProps = async (context ) => {

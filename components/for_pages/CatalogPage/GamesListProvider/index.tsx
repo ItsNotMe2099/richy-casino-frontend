@@ -33,8 +33,8 @@ export default function GamesListProvider(props: Props) {
   return (
     <GamesList title={props.provider.name}
                icon={props.provider.imagePreviewUrl}
-               totalItems={data.total}
-               items={data.data}
+               totalItems={data?.total ?? 0}
+               items={data?.data ?? []}
                loading={loading}
                onScrollNext={handleScrollNext}
     />

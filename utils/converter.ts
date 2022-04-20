@@ -24,6 +24,9 @@ export default class Converter {
     } : null
   }
   static  convertApiResponseError(res: IApiResponse){
+    if(res?.error?.message){
+      return res?.error?.message
+    }
     if (!res.error.details?.length) {
       return 'Unknown error'
     }

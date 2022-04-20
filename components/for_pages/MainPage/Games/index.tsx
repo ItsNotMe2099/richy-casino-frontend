@@ -35,10 +35,11 @@ export default function Games(props: Props) {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: richyGames.length < 6 ? richyGames.length : 6,
     slidesToScroll: 1,
     variableWidth: true,
     adaptiveHeight: true,
+    slidesToShow: richyGames.length < 6 ? richyGames.length : 6,
+
     arrows: false,
     beforeChange: (current: number, next: number) => setCurrentIndex(next),
     responsive: [
@@ -105,14 +106,14 @@ export default function Games(props: Props) {
       <HiddenXs>
         <Slider {...settings} ref={slider1 => (slider = slider1)}>
           {richyGames.map((item, index) =>
-            <ItemGame richy item={{imageIconPreviewUrl: item.image, name: item.label}} link={item.link} key={index}/>
+            <ItemGame slider item={{imageIconPreviewUrl: item.image, name: item.label}} link={item.link} key={index}/>
           )}
         </Slider>
       </HiddenXs>
       <VisibleXs>
         <div className={styles.overflow}>
           {richyGames.map((item, index) =>
-            <OverflowSlide item={item} key={index}/>
+            <ItemGame  item={{imageIconPreviewUrl: item.image, name: item.label}} link={item.link} key={index}/>
           )}
         </div>
       </VisibleXs>

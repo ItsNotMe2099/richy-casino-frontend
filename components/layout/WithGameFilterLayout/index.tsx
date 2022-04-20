@@ -10,19 +10,22 @@ import GamesListSearch from 'components/for_pages/CatalogPage/GamesListSearch'
 interface Props{
   children?: ReactElement | ReactElement[]
   top?: ReactElement | ReactElement[]
+  showMobile?: boolean
 }
 export default function WithGameFilterLayout(props: Props) {
 const [searchGames, setSearchGames] = useState({data: [], total: 0})
   const [isSearch, setIsSearch] = useState<boolean>(false)
   const [isSearchLoading, setIsSearchLoading] = useState<boolean>(false)
   const [searchPage, setSearchPage] = useState<number>(0)
+  const [searchValue, setSearchValue] = useState<string | null>(null)
   const searchLimit = 30
   const handleSearch =  debounce(async (value: string) => {
-  console.log('handleSearch', value)
     if(!value?.length){
       setIsSearch(false)
+     setSearchValue(null)
       return
     }
+    setSearchValue(value)
     setIsSearch(true)
     setIsSearchLoading(true)
     const res = await GameListRepository.fetchGames({name: value}, 1, searchLimit)
@@ -32,7 +35,7 @@ const [searchGames, setSearchGames] = useState({data: [], total: 0})
     const newPage = searchPage + 1
     setSearchPage(newPage)
     setIsSearchLoading(true)
-    const res = await GameListRepository.fetchGames({}, newPage, searchLimit)
+    const res = await GameListRepository.fetchGames({name: searchValue}, newPage, searchLimit)
     setSearchGames(data => ({data: [...data.data, ...res.data], total: res.total}))
     setIsSearchLoading(false)
   }
@@ -40,7 +43,7 @@ const [searchGames, setSearchGames] = useState({data: [], total: 0})
     <Layout>
       {props.top}
       <Row className={styles.desktop}>
-        <Filter  mobile onSearch={handleSearch}/>
+        <Filter showMobile={props.showMobile} onSearch={handleSearch}/>
         <Col className={styles.content}>
           <div className={classNames(styles.children, {[styles.hidden]: isSearch})}>{props.children}</div>
           <div className={classNames(styles.search, {[styles.hidden]: !isSearch})}>

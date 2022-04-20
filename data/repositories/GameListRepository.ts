@@ -5,6 +5,7 @@ import {IGameProvider} from 'data/interfaces/IGameProvider'
 import {IGameCategory} from 'data/interfaces/IGameCategory'
 import {IGame} from 'data/interfaces/IGame'
 import {IGameWin} from 'data/interfaces/IGameWin'
+import {IGameSession} from 'data/interfaces/IGameSession'
 
 export default class GameListRepository {
   static async fetchProviders(name: string = null, page: number = 1, limit: number = 1000): Promise<IPagination<IGameProvider>> {
@@ -18,7 +19,7 @@ export default class GameListRepository {
       }
     })
     if (res.err) {
-      return null
+      return {data: [], total: 0}
     }
     return Converter.convertApiPaginationResponse(res.data)
   }
@@ -35,7 +36,7 @@ export default class GameListRepository {
       }
     })
     if (res.err) {
-      return null
+      return {data: [], total: 0}
     }
     return Converter.convertApiPaginationResponse(res.data)
   }
@@ -48,7 +49,7 @@ export default class GameListRepository {
         ...(providerId ? {provider_id: providerId} : {}),
         ...(categoryId ? {category_id: categoryId} : {}),
         page,
-        'pe_-page': limit
+        'per-page': limit
       }
     })
     if (res.err) {
@@ -92,6 +93,21 @@ export default class GameListRepository {
     return Converter.convertApiPaginationResponse(res.data)
   }
 
+  static async fetchPopularGames(page: number = 1, limit: number = 1000): Promise<IPagination<IGame>> {
+    const res = await request({
+      method: 'get',
+      url: '/api/games/game/popular',
+      data:{
+        page,
+        'per-page': limit
+      }
+    })
+    if (res.err) {
+      return null
+    }
+    return Converter.convertApiPaginationResponse(res.data)
+  }
+
   static async fetchLatestWinGames(): Promise<IGameWin[]> {
     const res = await request({
       method: 'get',
@@ -101,6 +117,36 @@ export default class GameListRepository {
       return null
     }
     return res.data.data?.map(i => Converter.objectKeysToCamelCase(i)) ?? []
+  }
+
+  static async createGame(gameId: number, clientType: string, token?: string): Promise<IGameSession> {
+    const res = await request({
+      method: 'post',
+      url: '/api/games/session/start',
+      token,
+      data: {game_id: gameId, client_type: clientType}
+    })
+    console.log('gameId', gameId)
+    console.error(res.err)
+    if (res.err) {
+      return null
+    }
+    return res.data.data ?  Converter.objectKeysToCamelCase(res.data.data) : null
+  }
+
+
+  static async createGameDemo(gameId: number, clientType: string, token?: string): Promise<IGameSession> {
+    const res = await request({
+      method: 'post',
+      url: '/api/games/session/demo',
+      token,
+      data: {game_id: gameId, client_type: clientType}
+    })
+    if (res.err) {
+      return null
+    }
+    console.log('ResData', res.data)
+    return res.data.data ?  Converter.objectKeysToCamelCase(res.data.data) : null
   }
 
 }

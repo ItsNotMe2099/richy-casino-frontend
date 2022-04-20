@@ -33,8 +33,8 @@ export default function GamesListCategory(props: Props) {
   return (
     <GamesList title={props.category.name}
                icon={props.category.imageIconUrl}
-               totalItems={data.total}
-               items={data.data}
+               totalItems={data?.total ?? 0}
+               items={data?.data ?? []}
                loading={loading}
                onScrollNext={handleScrollNext}
     />

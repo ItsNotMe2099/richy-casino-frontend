@@ -33,8 +33,8 @@ export default function GamesListLast(props: Props) {
   return (
     <GamesList title={'Последние игры'}
                icon={'/img/Contents/all-games.svg'}
-               totalItems={data.total}
-               items={data.data}
+               totalItems={data?.total ?? 0}
+               items={data?.data ?? []}
                loading={loading}
                onScrollNext={handleScrollNext}
     />

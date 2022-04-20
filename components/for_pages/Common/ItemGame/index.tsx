@@ -13,9 +13,10 @@ interface IItem {
 
 interface Props {
   item: IGame
-  style?: 'catalog'
+  slider?: boolean
   link?: string
   richy?: boolean
+  inSlider?: boolean
 }
 
 export default function ItemGame(props: Props) {
@@ -23,7 +24,7 @@ export default function ItemGame(props: Props) {
   const [inFavorite, setInFavorite] = useState(false)
   const link = props.link || Routes.catalogGame(props.item.id)
   return (
-    <div className={classNames(styles.root)} style={props.style !== 'catalog' ? {backgroundImage: `url(${props.item.imageIconPreviewUrl})`} : null}>
+    <div className={classNames(styles.root)} style={!props.slider ? {backgroundImage: `url(${props.item.imageIconPreviewUrl})`} : null}>
     <div className={styles.shade}>
     <Button
           onClick={() => inFavorite ? setInFavorite(false) : setInFavorite(true)}
@@ -42,7 +43,7 @@ export default function ItemGame(props: Props) {
         </div>
       </div>
       </div>
-      {props.style === 'catalog' && <img src={props.item.imageIconPreviewUrl} alt=''/>}
+      {props.slider && <img src={props.item.imageIconPreviewUrl} alt=''/>}
       {props.richy &&
       <div className={styles.label}>
         {props.item.name}

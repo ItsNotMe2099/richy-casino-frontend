@@ -74,7 +74,7 @@ export default function CatalogPage(props: Props) {
       <Layout>
         <Row className={styles.desktop}>
           <HiddenXs>
-            <Filter mobile/>
+            <Filter />
           </HiddenXs>
           <Col className={styles.content}>
             <GameSoundWrapper>
