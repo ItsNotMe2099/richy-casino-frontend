@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function GameIframe(props: Props) {
-  console.log('props.session.gameUrl', props.session.gameUrl)
+  console.log('props.session.gameUrl', props.session?.gameUrl)
   return (
     <div className={styles.root}>
       <GameIFrameHeader icon={''} title={'Игра'}/>
