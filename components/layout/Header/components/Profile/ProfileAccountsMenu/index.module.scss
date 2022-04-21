@@ -32,11 +32,11 @@
     }
     .label{
         color: #8f8e8d;
-        @media screen and (max-width: $mobile-max){
+        @media screen and (max-width: $xs-max){
             font-size: 10px;
          }
     }
-    @media screen and (max-width: $mobile-max){
+    @media screen and (max-width: $xs-max){
         height: 30px;
         justify-content: normal;
         max-width: 112px;
@@ -61,7 +61,7 @@
     height: 24px;
     margin-right: 4px;
   }
-  @media screen and (max-width: $mobile-max){
+  @media screen and (max-width: $xs-max){
     img{
       width: 16px;
       height: 16px;
@@ -99,7 +99,7 @@
 
   .value{
     display: flex;
-    @media screen and (max-width: $mobile-max){
+    @media screen and (max-width: $xs-max){
        font-size: 10px;
     }
   }
