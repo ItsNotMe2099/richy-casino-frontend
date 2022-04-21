@@ -1,13 +1,12 @@
 @import "scss/index";
-
+.wrapper{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0px 20px;
+}
 .root{
   overflow: hidden;
   margin-top: 20px;
-  padding-right: 0 !important;
-  flex-basis: auto !important;
-  flex-grow: 0 !important;
-  flex-shrink: 0 !important;
-  width: 40% !important;
   @media screen and (max-width: 650px){
     display: none !important;
   }
@@ -80,6 +79,7 @@
 
 .desktop{
   margin-top: 20px;
+  overflow: hidden;
 }
 .bonusSlideMobile{
   margin: 0px 4px;

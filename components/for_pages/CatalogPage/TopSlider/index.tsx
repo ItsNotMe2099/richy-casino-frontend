@@ -53,16 +53,20 @@ export default function TopSlider(props: Props) {
     <>
       <HiddenXs>
         <>
-          <Col className={styles.root}>
+          <Col>
+            <div className={styles.wrapper}>
+          <div className={styles.root}>
             <div className={styles.jackpot}>
               <div className={styles.title}>JACKPOT</div>
               <div className={styles.money}>
                 {props.money}
               </div>
             </div>
-          </Col>
-          <Col className={styles.desktop}>
+          </div>
+          <div className={styles.desktop}>
           <SlideSlider items={items} style='catalog'/>
+          </div>
+            </div>
           </Col>
         </>
       </HiddenXs>
