@@ -11,6 +11,8 @@ import {IGameWin} from 'data/interfaces/IGameWin'
 import New from 'components/svg/New'
 import Calendar from 'components/svg/Calendar'
 import Top from 'components/svg/Top'
+import {Routes} from 'types/routes'
+import useIsActiveLink from 'hooks/useIsActiveLink'
 enum GameSwitchFilterKey{
 
   WinNow = 'winNow',
@@ -29,7 +31,8 @@ export default function GamesListTop(props: Props) {
   const [data, setData] = useState<IGameWin[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [filter, setFilter] = useState<GameSwitchFilterKey>(GameSwitchFilterKey.WinNow)
-
+  const allLink = Routes.catalogTop
+  const currentPage = useIsActiveLink(allLink)
 
   const filters: ISwitchFilterItem<GameSwitchFilterKey>[] = [
     {label: 'Выигрывают сейчас', value: GameSwitchFilterKey.WinNow, icon: <New/>},
@@ -83,6 +86,7 @@ export default function GamesListTop(props: Props) {
       <Header
         icon='/img/Contents/money.svg'
         label='ТОП игры'
+        allLink={!currentPage? allLink : null}
         shadowColor='red'
         style='fullOnlyOnMobile'
         onPrev={() => sliderRef.current?.slickGoTo(currentIndex - 1)}

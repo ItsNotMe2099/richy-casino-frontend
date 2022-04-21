@@ -10,6 +10,8 @@ import New from 'components/svg/New'
 import Roulettes from 'components/svg/Roulettes'
 import Slots from 'components/svg/Slots'
 import Blackjack from 'components/svg/Blackjack'
+import {Routes} from 'types/routes'
+import useIsActiveLink from 'hooks/useIsActiveLink'
 
 enum GameSwitchFilterKey{
   All = 'all',
@@ -31,7 +33,8 @@ export default function GamesListLive(props: Props) {
   const limit = 30
   const [filter, setFilter] = useState<GameSwitchFilterKey>(GameSwitchFilterKey.All)
 
-
+  const allLink = Routes.catalogAll
+  const currentPage = useIsActiveLink(allLink)
   const filters: ISwitchFilterItem<GameSwitchFilterKey>[] = [
     {label: 'Все', value: GameSwitchFilterKey.All, icon: <Dice/>},
     {label: 'Популярные', value: GameSwitchFilterKey.Popular, icon: <Favorite/>},
@@ -63,6 +66,7 @@ export default function GamesListLive(props: Props) {
   return (
     <GamesList title={'Игры'}
                icon={'/img/Contents/all-games.svg'}
+               allLink={!currentPage? allLink : null}
                totalItems={data?.total}
                items={data?.data ?? []}
                loading={loading}

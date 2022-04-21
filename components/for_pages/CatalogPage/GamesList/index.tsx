@@ -18,6 +18,7 @@ interface Props {
   totalItems: number
   switchFilter?: ReactElement
   onScrollNext?: () => void
+  allLink?: string
 }
 
 export default function GamesList(props: Props) {
@@ -44,7 +45,7 @@ export default function GamesList(props: Props) {
   }
   return (
     <div className={styles.root}>
-      <Header icon={props.icon} label={props.title} length={`${Formatter.formatNumber(props.totalItems)}`} shadowColor={getShadow(props.icon)}/>
+      <Header icon={props.icon} allLink={props.allLink} label={props.title} length={`${Formatter.formatNumber(props.totalItems)}`} shadowColor={getShadow(props.icon)}/>
       {props.switchFilter && <HiddenXs>
         <div className={styles.wrapper}>{props.switchFilter}</div>
       </HiddenXs>}

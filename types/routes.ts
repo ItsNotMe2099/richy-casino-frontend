@@ -21,8 +21,15 @@ export class Routes{
     return `/game/${id}${isDemo ? '?demo=true' : ''}`
   }
 
+  static get catalogAll(){
+    return '/catalog/category/all'
+  }
+
   static get catalogLive(){
     return '/catalog/category/live'
+  }
+  static get catalogTop(){
+    return '/catalog/category/top'
   }
 
   static catalogProvider(providerId: string | number): string{

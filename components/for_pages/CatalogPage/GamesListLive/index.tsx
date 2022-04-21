@@ -7,6 +7,8 @@ import GameListRepository from 'data/repositories/GameListRepository'
 import Dice from 'components/svg/Dice'
 import Favorite from 'components/svg/Favorite'
 import New from 'components/svg/New'
+import useIsActiveLink from 'hooks/useIsActiveLink'
+import {Routes} from 'types/routes'
 
 
 enum GameSwitchFilterKey{
@@ -25,6 +27,8 @@ export default function GamesListAll(props: Props) {
   const [loading, setLoading] = useState<boolean>(true)
   const limit = 30
   const [filter, setFilter] = useState<GameSwitchFilterKey>(GameSwitchFilterKey.All)
+  const allLink = Routes.catalogLive
+  const currentPage = useIsActiveLink(allLink)
   const filters: ISwitchFilterItem<GameSwitchFilterKey>[] = [
     {label: 'Все', value: GameSwitchFilterKey.All, icon: <Dice/>},
     {label: 'Популярные', value: GameSwitchFilterKey.Popular, icon: <Favorite/>},
@@ -53,6 +57,7 @@ export default function GamesListAll(props: Props) {
                totalItems={data?.total ?? 0}
                items={data?.data ?? []}
                loading={loading}
+               allLink={!currentPage? allLink : null}
                onScrollNext={handleScrollNext}
                switchFilter={<SwitchFilter<GameSwitchFilterKey> items={filters} onClick={handleChangeFilter} active={filter}/>}
     />
