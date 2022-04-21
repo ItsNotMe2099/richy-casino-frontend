@@ -11,16 +11,17 @@
 }
 
 .row{
-  margin-left: 0 !important;
-  margin-right: 0 !important;
+  display: flex;
+  flex-direction: row;
+  grid-gap: 0px 20px;
   margin-top: 23px;
   margin-bottom: 20px;
   @media screen and (max-width: 870px){
     flex-direction: column-reverse !important;
+    grid-gap: 23px 0px;
   }
   @media screen and (max-width: 450px){
     margin-bottom: 22px;
-    margin-top: 0;
   }
 }
 

@@ -33,11 +33,11 @@ export default class UserRepository {
       data
     })
     if (res.err) {
-      return null
+      throw res.err
     }
     return res.data?.data ? {...Converter.objectKeysToCamelCase(res.data?.data)} : null
   }
-  static async changePassword({currentPassword, newPassword}): Promise<any> {
+  static async changePassword(currentPassword: string, newPassword: string): Promise<any> {
     const res = await request({
       method: 'post',
       url: '/api/user/password/change',
@@ -60,6 +60,27 @@ export default class UserRepository {
       data: {
         currency_iso: currencyIso,
       },
+    })
+    if (res?.err) {
+      throw res.err
+    }
+    return res.data?.data
+  }
+  static async twoFaEnable(): Promise<any> {
+    const res = await request({
+      method: 'put',
+      url: '/api/user/two-factor/activate',
+    })
+    if (res?.err) {
+      throw res.err
+    }
+    console.log('qrUrlD', res.data)
+    return res.data?.qrUrl
+  }
+  static async twoFaDisable(): Promise<string> {
+    const res = await request({
+      method: 'put',
+      url: '/api/user/two-factor/disable',
     })
     if (res?.err) {
       throw res.err

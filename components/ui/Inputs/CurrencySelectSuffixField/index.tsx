@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import DropdownArrow from 'components/ui/Inputs/components/DropdownArrow'
 
 export interface ICustomSelectViewOption extends IOption<string>{
-  symbol?: string
+
 }
 
 interface Props extends IField{
@@ -26,7 +26,7 @@ const Symbol = (props: PropsOption) => {
   <>
   {props.separator && <div className={styles.separator}/>}
   <div className={styles.symbol}>
-    <img src={props.option?.symbol} alt=''/>
+    <img src={props.option?.symbol as string} alt=''/>
   </div>
   </>
   )

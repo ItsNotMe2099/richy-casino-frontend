@@ -1,5 +1,4 @@
 import {GetServerSideProps} from 'next'
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import styles from 'pages/index.module.scss'
 import {Col, Row} from 'react-grid-system'
 import Layout from 'components/layout/Layout'
@@ -13,6 +12,7 @@ import Tournament from 'components/for_pages/MainPage/Tournament'
 import TopSlider from 'components/for_pages/MainPage/TopSlider'
 import BuyCrypto from 'components/for_pages/MainPage/BuyCrypto'
 import VisibleXs from 'components/ui/VisibleXS'
+import {getServerSideTranslation} from 'utils/i18'
 
 const casinos = [
   {image: '/img/GamesList/hotline.png', label: 'hotline', provider: 'provider1', category: 'category1'},
@@ -74,9 +74,10 @@ export default function IndexPage() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context ) => {
+  console.log('ContextLocal', context.locale)
   return {
     props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...await getServerSideTranslation(context),
     },
   }
 }

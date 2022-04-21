@@ -41,8 +41,7 @@ export default function SocialsForm(props: Props) {
           <SocialButtons/>
           <div className={styles.inputs}>
             <div className={styles.select}>
-              <RegCurrencySelectField name='currency' options={Converter.convertCurrencyToOptions(context.currencies)}
-                                      currentItem={Converter.currentItem(values, Converter.convertCurrencyToOptions(context.currencies))}/>
+              <RegCurrencySelectField name='currency'/>
             </div>
             <FormPromocode/>
             <CheckBox size={'small'} name='checkBox'

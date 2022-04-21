@@ -128,7 +128,6 @@ const handleAddNewAccount = (itemNew) => {
   }
   const mainAccount = UserUtils.getMainBalance(context.user)
   const otherAccounts = UserUtils.getOtherBalances(context.user)
-  console.log('MainAccount', mainAccount)
   return (
       <div className={styles.root}>
         <div className={styles.top}>

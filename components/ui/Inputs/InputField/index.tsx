@@ -20,6 +20,7 @@ interface Props extends IField {
   className?: string
   label?: string
   alt?: boolean
+  errorClassName?: string
 }
 
 export default function InputField(props: Props) {
@@ -34,11 +35,12 @@ export default function InputField(props: Props) {
 
   useEffect(() => {
     if (maskRef.current && (props.format === 'phone' || props.format === 'phoneAndEmail')) {
-      if (isValidPhoneNumber(field.value || '')) {
+      const phone = `${field.value && !`${field.value}`.startsWith('+') ? '+' : ''}${field.value}`
+      if (isValidPhoneNumber(phone || '')) {
         if (!phoneIsValid) {
           setPhoneIsValid(true)
           const asYouType = new AsYouType()
-          asYouType.input(field.value || '')
+          asYouType.input(phone || '')
           setPattern(Converter.convertLibphonenumberToMask(asYouType.getTemplate()))
           updateValueFromMask()
         }
@@ -77,7 +79,7 @@ export default function InputField(props: Props) {
   }
 
   return (
-    <div className={classNames(styles.root, props.className)}>
+    <div className={classNames(styles.root, props.className, {  [props.errorClassName]: showError})}>
       <div className={styles.wrapper}>
         <div className={classNames(styles.inputWrapper, {[styles.withLabel]: props.label})}>
         {props.label &&

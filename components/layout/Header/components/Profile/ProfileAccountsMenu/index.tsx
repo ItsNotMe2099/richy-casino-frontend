@@ -8,7 +8,6 @@ import {useAppContext} from 'context/state'
 import Converter from 'utils/converter'
 
 export interface ICustomSelectViewOption extends IOption<string>{
-  symbol?: string
   crypto?: boolean
 }
 
@@ -22,7 +21,7 @@ interface SelectProps{
 const Symbol = (props: SelectProps) => {
   return (
     <div className={styles.symbol}>
-      {props.currentItem ? <img src={props.currentItem.symbol} alt=''/> : <img src={props.option.symbol} alt=''/>}
+      {props.currentItem ? <img src={props.currentItem.symbol as string} alt=''/> : <img src={props.option.symbol as string} alt=''/>}
     </div>
   )
 }

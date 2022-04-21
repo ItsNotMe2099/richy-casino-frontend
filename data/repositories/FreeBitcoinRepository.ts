@@ -34,12 +34,13 @@ export default class FreeBitcoinRepository {
       url: '/api/freebitcoin/slot/status',
     })
     if (res.err) {
-      return null
+      throw res.err
     }
     return res.data?.data ? Converter.objectKeysToCamelCase(res.data?.data) : null
   }
 
-  static async fetchGame(): Promise<IFreeBitcoinGame | null> {
+
+  static async play(): Promise<IFreeBitcoinGame | null> {
     const res = await request({
       method: 'get',
       url: '/api/freebitcoin/slot/game',

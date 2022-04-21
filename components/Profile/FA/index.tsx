@@ -1,6 +1,8 @@
 import FAForm from './Form'
 import styles from './index.module.scss'
 import {useTranslation} from 'next-i18next'
+import { TwoFaModalArguments} from 'types/interfaces'
+import {useAppContext} from 'context/state'
 
 interface Props {
 
@@ -8,13 +10,16 @@ interface Props {
 
 export default function FA(props: Props) {
   const {t} = useTranslation()
+  const context = useAppContext()
+  const args = context.modalArguments as TwoFaModalArguments
+
   return (
       <div className={styles.root}>
         <div className={styles.scan}>
           {t('2fa_text')}
         </div>
         <div className={styles.qr}>
-          <img src='/img/2FA/qr.png' alt=''/>
+          <img src={args.qrUrl} alt=''/>
         </div>
           <div className={styles.your}>
             {t('2fa_secret_key')}

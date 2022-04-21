@@ -9,6 +9,7 @@ import {useAppContext} from 'context/state'
 import {useState} from 'react'
 import AuthRepository from 'data/repositories/AuthRepository'
 import Formatter from 'utils/formatter'
+import FormError from 'components/ui/Form/FormError'
 
 
 interface Props {
@@ -20,9 +21,11 @@ interface Props {
 export default function ModalPasswordReset(props: Props) {
   const context = useAppContext()
   const modalArguments = context.modalArguments
-  const login = modalArguments.login
+  const login = modalArguments?.login
   const [error, setError] = useState<string | null>(null)
+  const [sending, setSending] = useState<boolean>(false)
   const handleSubmit = async (data) => {
+    setSending(true)
     try {
       setError(null)
       const res = await AuthRepository.resetPassword({identity: login, token: data.code, password: data.password})
@@ -30,6 +33,7 @@ export default function ModalPasswordReset(props: Props) {
     } catch (e) {
       setError(e)
     }
+    setSending(false)
   }
   const initialValues = {
     code: '',
@@ -53,24 +57,28 @@ export default function ModalPasswordReset(props: Props) {
           <div className={styles.inputs}>
             <InputField
               name={'code'}
+              disabled={sending}
               placeholder={isEmail ? t('password_restore_field_code_email') : t('password_restore_field_code_sms')} validate={Validator.required}/>
             <InputField
               name={'password'}
               type={'password'}
               obscure={true}
+              disabled={sending}
               placeholder={t('password_restore_field_password')} validate={Validator.required}/>
             <InputField
               name={'passwordConfirm'}
               type={'password'}
               obscure={true}
+              disabled={sending}
               placeholder={t('password_restore_field_password_confirm')}
               validate={Validator.combine([Validator.required, Validator.passwordsMustMatch(values)])}
             />
           </div>
+          <FormError error={error}/>
           <div className={styles.buttons}>
             <Button type='button' className={styles.button} size='submit' background='dark600' onClick={() => context.showModal(ModalType.passwordRecovery, {login: context.modalArguments.login})}>{t('password_restore_cancel')}</Button>
             <div className={styles.spacer}/>
-            <Button type='submit' className={styles.button} size='submit' background='blueGradient500' >{t('password_restore_next')}</Button>
+            <Button type='submit' className={styles.button} spinner={sending} size='submit' background='blueGradient500' >{t('password_restore_next')}</Button>
           </div>
 
         </Form>)}

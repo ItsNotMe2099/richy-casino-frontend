@@ -2,6 +2,8 @@ import {IField, IOption} from 'types/interfaces'
 import styles from './index.module.scss'
 import { SelectField } from 'components/ui/Inputs/SelectField'
 import classNames from 'classnames'
+import {useField} from 'formik'
+import ErrorInput from 'components/ui/Inputs/components/ErrorInput'
 
 export interface ICustomSelectViewOption extends IOption<string>{
 
@@ -36,14 +38,18 @@ const Placeholder = (props: PropsOption) => {
 }
 
 export const ProfileSettingsSelectField = (props: Props) => {
-
+  const [field, meta] = useField(props)
+  const hasError = !!meta.error && meta.touched
   return (
-  <div className={styles.root}>
+    <div>
+  <div className={classNames(styles.root, {[styles.error]: hasError})}>
     <div className={styles.label}>{props.label}</div>
-    <SelectField options={props.options}  name={props.name} currentItemStyle={styles.current} className={styles.select}
+    <SelectField {...props} currentItemStyle={styles.current} className={styles.select}
       itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
       activeComponent={(option, isActive) => <Placeholder option={option} isActive={isActive}/>}
     />
   </div>
+      <ErrorInput {...meta} className={styles.errorMessage}/>
+    </div>
   )
 }

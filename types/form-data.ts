@@ -5,7 +5,10 @@ export interface UserFormData{
   surname: string
   name: string
   birthday_datе: string
+  fakePassword?: string
+  currentPassword?: string
   password?: string
+  passwordConfirm?: string
   country_iso: string
   city_id: number
   gender: number

@@ -1,11 +1,12 @@
 import {createContext, useContext, useEffect, useState} from 'react'
-import {CookiesType, ModalType, ProfileModalType} from 'types/enums'
+import {CookiesType, ModalType, ProfileModalType, SnackbarType} from 'types/enums'
 import ReactModal from 'react-modal'
 import UserRepository from 'data/repositories/UserRepository'
 import Cookies from 'js-cookie'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import InfoRepository from 'data/repositories/InfoRepository'
 import IUser from 'data/interfaces/IUser'
+import {SnackbarData} from 'types/interfaces'
 
 interface IState {
   isMobile: boolean
@@ -23,6 +24,8 @@ interface IState {
   showBonusExpanded: boolean,
   setBonusExpanded: (show) => void,
   currencies: ICurrency[]
+  snackbar: SnackbarData | null,
+  showSnackbar: (text: string, type: SnackbarType) => void
 }
 
 const defaultValue: IState = {
@@ -40,7 +43,9 @@ const defaultValue: IState = {
   showBonus: false,
   showBonusExpanded: false,
   setBonusExpanded: (show) => null,
-  currencies: []
+  currencies: [],
+  snackbar: null,
+  showSnackbar: (text, type) => null,
 }
 
 const AppContext = createContext<IState>(defaultValue)
@@ -60,6 +65,7 @@ export function AppWrapper(props: Props) {
   const [showBonus, setShowBonus] = useState<boolean>(true)
   const [showBonusExpanded, setShowBonusExpanded] = useState<boolean>(true)
   const [currencies, setCurrencies] = useState<ICurrency[]>([])
+  const [snackbar, setSnackbar] = useState<SnackbarData | null>(null)
   const value: IState = {
     ...defaultValue,
     isMobile: props.isMobile,
@@ -69,6 +75,7 @@ export function AppWrapper(props: Props) {
     modalArguments,
     currencies,
     user,
+    snackbar,
     showModal: (type, props: any) => {
       ReactModal.setAppElement('body')
       setModalArguments(props)
@@ -95,6 +102,12 @@ export function AppWrapper(props: Props) {
     showBonusExpanded,
     setBonusExpanded(show){
       setShowBonusExpanded(show)
+    },
+    showSnackbar: (text, type: SnackbarType) => {
+      setSnackbar({text, type})
+      setTimeout(() => {
+        setSnackbar(null)
+      }, 2000)
     },
 
 

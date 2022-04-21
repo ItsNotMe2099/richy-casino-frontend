@@ -2,6 +2,7 @@ import 'normalize.css'
 import '../scss/globals.scss'
 import type { AppContext, AppProps } from 'next/app'
 import { appWithTranslation } from 'next-i18next'
+import nextI18NextConfig from '../next-i18next.config.js'
 import { setConfiguration } from 'react-grid-system'
 import { AppWrapper } from 'context/state'
 import { getSelectorsByUserAgent } from 'react-device-detect'
@@ -16,7 +17,15 @@ import 'react-input-range/lib/css/index.css'
 import NotificationBanner from 'components/for_pages/Common/NotificationBanner'
 import HiddenXs from 'components/ui/HiddenXS'
 import UserRepository from 'data/repositories/UserRepository'
+import Snackbar from 'components/layout/Snackbar'
+import {useEffect, useState} from 'react'
+import {FavoriteWrapper} from 'context/favorite_state'
 function MyApp({ Component, pageProps }: AppProps) {
+  const [clientVisible, setClientVisible] = useState(false)
+
+  useEffect(() => {
+    setClientVisible(true)
+  }, [])
   setConfiguration({
     gutterWidth: 20,
     //breakpoints: [700, 950, 1360],
@@ -25,13 +34,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AppWrapper isMobile={pageProps.isMobile} token={pageProps.token} initialUser={pageProps.initialUser}>
       <AuthWrapper>
+        <FavoriteWrapper>
         <Component {...pageProps} />
-        <ModalContainer/>
+        </FavoriteWrapper>
+        {clientVisible && <ModalContainer/>}
         <AuthUserFeatures/>
         <HiddenXs>
           <NotificationBanner/>
         </HiddenXs>
       </AuthWrapper>
+      {clientVisible && <Snackbar/>}
     </AppWrapper>
   )
 }
@@ -54,4 +66,4 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   return props
 }
 
-export default appWithTranslation(MyApp)
+export default appWithTranslation(MyApp, nextI18NextConfig)

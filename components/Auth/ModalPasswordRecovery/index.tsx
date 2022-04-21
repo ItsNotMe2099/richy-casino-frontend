@@ -21,7 +21,9 @@ export default function ModalPasswordRecovery(props: Props) {
   const { t } = useTranslation()
   const context = useAppContext()
   const [error, setError] = useState<string | null>(null)
+  const [sending, setSending] = useState<boolean>(false)
   const handleSubmit = async (data) => {
+    setSending(true)
     try {
       setError(null)
       const res = await AuthRepository.forgotPassword(data.login)
@@ -29,6 +31,7 @@ export default function ModalPasswordRecovery(props: Props) {
     } catch (e) {
       setError(e)
     }
+    setSending(false)
   }
 
   const initialValues = {
@@ -45,13 +48,14 @@ export default function ModalPasswordRecovery(props: Props) {
           <div className={styles.inputs}>
             <InputField
               format={'phoneAndEmail'}
+              disabled={sending}
               name={'login'}
               placeholder={t('password_forgot_field_identity')} validate={Validator.required}/>
                 </div>
           <FormError error={error}/>
           <div className={styles.buttons}>
             <Button type='button' className={styles.cancel} size='submit' background='dark600' onClick={() => context.showModal(ModalType.login)}>{t('password_forgot_cancel')}</Button>
-            <Button type='submit' className={styles.button} size='submit' background='blueGradient500' >{t('password_forgot_next')}</Button>
+            <Button type='submit' className={styles.button}  spinner={sending} size='submit' background='blueGradient500' >{t('password_forgot_next')}</Button>
           </div>
 
         </Form>

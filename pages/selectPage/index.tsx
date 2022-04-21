@@ -5,9 +5,9 @@ import RegistrationSelect from 'components/SelectPageForms/RegistrationSelect'
 import SettingsSelect from 'components/SelectPageForms/SettingsSelect'
 import WithdrawSelect from 'components/SelectPageForms/WithdrawSelect'
 import {GetServerSideProps} from 'next'
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import styles from 'pages/selectPage/index.module.scss'
 import BuyCryptoForm from 'components/Profile/BuyCrypto/Form'
+import {getServerSideTranslation} from 'utils/i18'
 
 export default function SelectPage() {
 
@@ -27,7 +27,7 @@ export default function SelectPage() {
 export const getServerSideProps: GetServerSideProps = async (context ) => {
   return {
     props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...await getServerSideTranslation(context),
     },
   }
 }

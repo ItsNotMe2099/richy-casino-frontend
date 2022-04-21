@@ -7,6 +7,6 @@ export const CONTACTS = {
 }
 
 export const LINKS = {
-
+  RICHY_GAMES: '/catalog/category/richy'
 }
 

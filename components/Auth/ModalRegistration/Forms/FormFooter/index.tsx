@@ -7,6 +7,7 @@ import {useAppContext} from 'context/state'
 
 
 interface Props {
+  sending?: boolean
 }
 
 export default function FormFooter(props: Props) {
@@ -14,7 +15,7 @@ export default function FormFooter(props: Props) {
   const context = useAppContext()
 
   return (<>
-        <Button type='submit' className={styles.button} size='submit' background='blueGradient500'>{t('registration_button')}</Button>
+        <Button type='submit' spinner={props.sending} className={styles.button} size='submit' background='blueGradient500'>{t('registration_button')}</Button>
         <div className={styles.login}>
           {t('registration_has_account')} <span onClick={() => context.showModal(ModalType.login)}>{t('registration_login')}</span>
         </div>

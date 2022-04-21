@@ -9,6 +9,16 @@ export default class Formatter {
   static pluralize(number, word1, word2, word3){
     return pluralizeNative(number, word1, word2, word3)
   }
+  static  cleanPhone = (phone: string) => {
+    if (phone) {
+      let phoneCleaned = phone.replace(/[^\+0-9]/g, '')
+      if (!phoneCleaned.startsWith('+')) {
+        phoneCleaned = '+' + phoneCleaned
+      }
+      return phoneCleaned
+    }
+    return phone
+  };
   static formatDateRelative(date){
     const formatRelativeLocale = {
       yesterday: 'Вчера в HH:mm',
@@ -44,7 +54,7 @@ export default class Formatter {
       return (str + pad).substring(0, pad.length)
     }
   }
-  static formatNumber(num){
+  static formatNumber(num: number, separator?: string){
     return num?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
   }
 

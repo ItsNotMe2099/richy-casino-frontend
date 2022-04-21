@@ -1,9 +1,9 @@
 import {GetServerSideProps} from 'next'
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import GameListRepository from 'data/repositories/GameListRepository'
 import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import GamesListCategory from 'components/for_pages/CatalogPage/GamesListCategory'
 import {IGameCategory} from 'data/interfaces/IGameCategory'
+import {getServerSideTranslation} from 'utils/i18'
 interface Props{
   category: IGameCategory
 }
@@ -29,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       category,
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...await getServerSideTranslation(context),
     },
   }
 }

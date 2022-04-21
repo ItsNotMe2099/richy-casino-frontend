@@ -12,13 +12,25 @@
     background-color: #1D1E25;
     height: 50px;
   }
+  &.error{
+    border: 1px solid $lose500;
+
+    padding-right: 2px;
+    .select{
+      height: 68px;
+      @media screen and (max-width: $mobile-max){
+        background-color: #1D1E25;
+        height: 48px;
+      }
+    }
+  }
 }
 
 .option{
   padding: 7px 19px;
   display: flex;
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 16px;
   align-items: center;
   &:hover{
     background: #41424F;
@@ -61,8 +73,6 @@
   flex: 1 1;
   font-weight: 500;
   margin-bottom: 0;
-  display: flex;
-  align-items: center;
   @media screen and (max-width: $mobile-max){
     background-color: #1D1E25;
     height: 50px;
@@ -86,8 +96,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex: 1;
   .label{
     color: #fff;
     margin-left: 0;
   }
+}
+.errorMessage{
+  padding-top: 0px;
+  margin-top: -5px;
+  margin-bottom: 10px;
 }

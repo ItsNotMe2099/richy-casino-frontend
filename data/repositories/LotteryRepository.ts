@@ -14,26 +14,29 @@ export default class LotteryRepository {
     return res.data?.data ? Converter.objectKeysToCamelCase(res.data?.data) : null
   }
 
-  static async fetchRound(): Promise<ILotteryRound> {
+  static async fetchRound(id: number): Promise<ILotteryRound> {
     const res = await request({
       method: 'get',
       url: '/api/lottery/round/view',
+      data: {id}
     })
     if (res.err) {
       throw res.err
     }
-    return res.data.data?.map(i => Converter.objectKeysToCamelCase(i)) ?? []
+    console.log('CurRound', res.data?.data)
+    return res.data?.data ? Converter.objectKeysToCamelCase(res.data?.data) : null
   }
 
-  static async buyTicket(): Promise<ILotteryBuyResponse> {
+  static async buyTicket(data:{tickets: number}): Promise<ILotteryBuyResponse> {
     const res = await request({
-      method: 'post',
-      url: '/api/lottery/round/view',
+      method: 'get',
+      url: '/api/lottery/ticket/buy',
+      data
     })
     if (res.err) {
       throw res.err
     }
-    return res.data.data?.map(i => Converter.objectKeysToCamelCase(i)) ?? []
+    return res.data?.data ? Converter.objectKeysToCamelCase(res.data?.data) : null
   }
 
 

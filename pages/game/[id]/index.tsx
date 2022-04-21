@@ -1,4 +1,3 @@
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import {AudioPlayerProvider} from 'react-use-audio-player'
 import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import GameListRepository from 'data/repositories/GameListRepository'
@@ -6,6 +5,7 @@ import {GameSessionStrategy, IGameSession} from 'data/interfaces/IGameSession'
 import {CookiesType} from 'types/enums'
 import {getSelectorsByUserAgent} from 'react-device-detect'
 import GameIframe from 'components/for_pages/CatalogPage/GameIframe'
+import {getServerSideTranslation} from 'utils/i18'
 
 interface Props {
   session?: IGameSession
@@ -39,7 +39,7 @@ export const getServerSideProps = async (context) => {
   console.log('session', session)
   return {
     props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...await getServerSideTranslation(context),
       session
     },
   }

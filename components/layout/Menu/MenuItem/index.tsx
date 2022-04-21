@@ -11,11 +11,18 @@ interface IOption{
 interface Props {
   label: string
   link: string
+  onClick?: () => void
 
 }
 
 export default function MenuItem(props: Props) {
   const active = useIsActiveLink(props.link)
+  const handleClick = (e) => {
+    if(props.onClick){
+      e.preventDefault()
+      props.onClick()
+    }
+  }
     return(
       <Link href={props.link}>
           <a
@@ -23,6 +30,7 @@ export default function MenuItem(props: Props) {
             [styles.active]: active,
             })}
             href={props.link}
+            onClick={handleClick}
           >
             {props.label}
           </a>

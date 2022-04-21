@@ -1,7 +1,6 @@
 import Layout from 'components/layout/Layout'
 import { Row, Col } from 'react-grid-system'
 import {GetServerSideProps} from 'next'
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import styles from 'pages/faq/index.module.scss'
 import SupportButton from 'components/for_pages/Common/SupportButton'
 import HiddenXs from 'components/ui/HiddenXS'
@@ -11,6 +10,7 @@ import VisibleXs from 'components/ui/VisibleXS'
 import DropdownMenu from 'components/ui/DropdownMenu'
 import {IFaqItem} from 'data/interfaces/IFaqItem'
 import FaqRepository from 'data/repositories/FaqRepository'
+import {getServerSideTranslation} from 'utils/i18'
 
 interface Props{
   faqItems: IFaqItem[]
@@ -72,7 +72,7 @@ export const getServerSideProps: GetServerSideProps = async (context ) => {
   const faqItems = await FaqRepository.fetchList()
   return {
     props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...await getServerSideTranslation(context),
       faqItems
     },
   }

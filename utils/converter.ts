@@ -1,8 +1,8 @@
-import {mapKeys, mapValues, camelCase, isObject} from 'lodash'
 import { IApiPaginationResponse, IApiResponse, IOption, IPosition } from 'types/interfaces'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import { IUserBalanceCurrency } from 'data/interfaces/IUser'
 import UserUtils from 'utils/user'
+const camelcaseObjectDeep = require('camelcase-object-deep')
 
 export default class Converter {
   static convertLibphonenumberToMask = (value: string): string => value
@@ -10,11 +10,7 @@ export default class Converter {
     .replaceAll('x', '0')
 
   static objectKeysToCamelCase(entity) {
-    if (!isObject(entity)) return entity
-    let result
-    result = mapKeys(entity, (value, key) => camelCase(key))
-    result = mapValues(result, (value) => this.objectKeysToCamelCase(value))
-    return result
+      return camelcaseObjectDeep(entity)
   }
 
   static convertApiPaginationResponse(res: IApiPaginationResponse){
@@ -24,14 +20,16 @@ export default class Converter {
     } : null
   }
   static  convertApiResponseError(res: IApiResponse){
+    if (res.error.details?.length > 0) {
+      const messages = res.error.details.map(i => i.message)
+      return messages.length === 1 ? messages[0] : messages
+    }
     if(res?.error?.message){
       return res?.error?.message
     }
-    if (!res.error.details?.length) {
-      return 'Unknown error'
-    }
-    const messages = res.error.details.map(i => i.message)
-    return messages.length === 1 ? messages[0] : messages
+
+    return 'api_error_unknown'
+
   }
   static convertCurrencyToOptions(currencies: ICurrency[]): IOption<string>[]{
     if (!currencies) {

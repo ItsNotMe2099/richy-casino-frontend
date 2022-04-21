@@ -46,16 +46,7 @@ export default function Header(props: Props) {
     )
   }
 
-  const langs = [
-    {icon: '/img/layout/top/russia.svg', lang: 'Ru'},
-    {icon: '/img/layout/top/russia.svg', lang: 'En'},
-    {icon: '/img/layout/top/russia.svg', lang: 'Ru'},
-    {icon: '/img/layout/top/russia.svg', lang: 'Ru'},
-    {icon: '/img/layout/top/russia.svg', lang: 'Ru'},
-  ]
 
-  const [activeLangIcon, setActiveLangIcon] = useState(langs[0].icon)
-  const [activeLang, setActiveLang] = useState(langs[0].lang)
 
   const currencies = [
     {label: 'USD', value: '99.99', symbol: '/img/Select/BTC.png'},
@@ -68,10 +59,7 @@ export default function Header(props: Props) {
     setCurrent(item)
   }
 
-  const handleChangeLang = (item: Lang) => {
-    setActiveLangIcon(item.icon)
-    setActiveLang(item.lang)
-  }
+
 
 
   return (
@@ -131,7 +119,7 @@ export default function Header(props: Props) {
                     <UserBonus icon='/img/icons/ticket.svg' amount={context.user.extraBalances.lotteryTickets ?? 0} color='#427BF8'/>
                     <UserBonus icon='/img/icons/bitcoin.svg' amount={context.user.extraBalances.freeBitcoin ?? 0} color='#FFD12F'/>
                     <UserBonus icon='/img/icons/spin.svg' amount={context.user.extraBalances.freespinAmount ?? 0} color='#F81AAC'/>
-                    <UserBonus icon='/img/icons/dollar.svg' amount={context.user.balance.currencies.bonus[0].value} color='#7BD245'/>
+                    <UserBonus icon='/img/icons/dollar.svg' amount={context.user.balance.currencies.bonus[0]?.value ?? 0} color='#7BD245'/>
                   </div>
                 </HiddenXs>}
                 {!user.flags.isHideBalance && <ProfileAccountsMenu/>}
@@ -146,7 +134,7 @@ export default function Header(props: Props) {
                 </VisibleXs>
               </div>
             }
-            <div className={styles.lang}><LangSelect options={langs} activeIcon={activeLangIcon} lang={activeLang} onChange={(item) => handleChangeLang(item)}/></div>
+            <div className={styles.lang}><LangSelect /></div>
             {/*<Button className={styles.chat} size='normal' background='dark700'><img src='/img/layout/top/chat.svg' alt=''/></Button>*/}
           </div>
         </div>

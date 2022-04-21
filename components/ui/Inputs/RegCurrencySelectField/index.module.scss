@@ -1,23 +1,30 @@
 @import "scss/index";
 
 .root{
-  
+
 }
 
 .option{
-  padding: 7px 19px;
+  padding: 0px 19px;
   display: flex;
   font-weight: 400;
   font-size: 14px;
   align-items: center;
+  line-height: 38px;
+  img{
+    max-width: 24px;
+  }
   &:hover{
     background: #41424F;
   }
 }
-
+.select{
+  flex: 1;
+}
 .current{
   font-weight: 400;
   font-size: 14px;
+
 }
 
 .symbol{
@@ -25,6 +32,8 @@
   font-size: 20px;
   color: #6B6C77;
   margin-right: 19px;
+  display: flex;
+  align-items: center;
 }
 
 .reverse{
@@ -35,6 +44,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex: 1;
+  line-height: 40px;
+  img{
+    max-width: 24px;
+  }
 }
 
 .group{

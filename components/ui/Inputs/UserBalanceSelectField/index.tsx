@@ -4,7 +4,6 @@ import { SelectField } from 'components/ui/Inputs/SelectField'
 import classNames from 'classnames'
 
 export interface ICustomSelectViewOption extends IOption<string>{
-  symbol?: string
   crypto?: boolean
 }
 
@@ -24,7 +23,7 @@ interface PropsOption{
 const Symbol = (props: PropsOption) => {
   return (
   <div className={styles.symbol}>
-    <img src={props.option.symbol} alt=''/>
+    <img src={props.option.symbol as string} alt=''/>
   </div>
   )
 }

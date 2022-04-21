@@ -1,5 +1,4 @@
 import {GetServerSideProps} from 'next'
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import ChessGameLobby from 'components/for_pages/MoneyChess/for_pages/Lobby'
 import {GameCookiesType} from 'components/for_pages/games/data/types'
 import ChessGameLayout from 'components/for_pages/MoneyChess/components/layout/ChessGameLayout'
@@ -8,6 +7,7 @@ import GameAuthRepository from 'components/for_pages/games/data/reposittories/Ga
 import {runtimeConfig} from 'config/runtimeConfig'
 import {ChessGameLobbyWrapper} from 'components/for_pages/MoneyChess/context/lobby_state'
 import ChessGameLobbyModalContainer from 'components/for_pages/MoneyChess/components/layout/ChessGameLobbyModals'
+import {getServerSideTranslation} from 'utils/i18'
 interface Props{
   gameToken?: string
 }
@@ -37,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
   return {
     props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...await getServerSideTranslation(context),
       gameToken
     },
   }

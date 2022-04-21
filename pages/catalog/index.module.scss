@@ -1,5 +1,7 @@
 @import "scss/index";
 
 .row{
-    flex-wrap: nowrap !important;
+  flex-wrap: nowrap !important;
+  overflow: hidden;
 }
+

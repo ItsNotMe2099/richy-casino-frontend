@@ -58,7 +58,7 @@ export default function Button(props: Props) {
     </Link>
   ) : (
     <button
-      disabled={props.disabled}
+      disabled={props.disabled || props.spinner}
       type={props.type}
       onClick={!props.disabled ? props.onClick : null}
       className={classNames(styles.btn, btnClass, props.className)}

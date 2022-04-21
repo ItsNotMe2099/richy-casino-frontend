@@ -25,8 +25,8 @@ export default function ModalRegistrationPhone(props: Props) {
     try {
       setError(null)
       const res = await AuthRepository.registerPhone({
-        code: data.code,
-        phone: args.phone,
+        code:  data.code,
+        phone: Formatter.cleanPhone(args.phone),
         password: data.password
       })
       const accessToken = res.token

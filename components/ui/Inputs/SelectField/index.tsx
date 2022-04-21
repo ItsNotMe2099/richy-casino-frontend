@@ -22,6 +22,9 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
   const dropdownRef = useRef(null)
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
   const handleClick = (e) => {
+    if(props.disabled){
+      return
+    }
     e.preventDefault()
     e.stopPropagation()
     setIsActive(!isActive)
@@ -39,7 +42,7 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
   const hasError = !!meta.error && meta.touched
 
   return (
-    <div className={classNames(styles.root, {[styles.hasError]: !!meta.error && meta.touched}, className)}>
+    <div className={classNames(styles.root, {[styles.hasError]: !!meta.error && meta.touched}, className)} data-field={props.name}>
       <div onClick={handleClick} className={classNames(styles.dropDownTrigger, currentItemStyle)}>
         {props.activeComponent ? props.activeComponent(currentItem, isActive) : null}
       <div ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>

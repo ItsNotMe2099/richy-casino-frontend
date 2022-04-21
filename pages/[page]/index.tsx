@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import {ITextPage} from 'data/interfaces/ITextPage'
 import {GetServerSideProps} from 'next'
 import PagesRepository from 'data/repositories/PagesRepository'
+import {getServerSideTranslation} from 'utils/i18'
 
 interface Props {
   page: ITextPage
@@ -38,8 +39,9 @@ export const getServerSideProps: GetServerSideProps = async (context ) => {
 
   return {
     props: {
+      ...await getServerSideTranslation(context),
       page,
-    } as Props,
+    },
     notFound: !page
   }
 }

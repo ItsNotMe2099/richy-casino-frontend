@@ -1,5 +1,7 @@
 import request from 'utils/request'
 import {ICurrency} from 'data/interfaces/ICurrency'
+import {ICity} from 'data/interfaces/ICity'
+
 
 export default class InfoRepository {
   static async getCountries(): Promise<any | null> {
@@ -21,6 +23,24 @@ export default class InfoRepository {
       return []
     }
     return res.data?.data ?? []
+  }
+
+  static async getCities(countryIso: string): Promise<ICity[]> {
+    const res = await request({
+      method: 'post',
+      url: '/api/user/info/city?country_iso=RU',
+      data: {
+        country_iso: countryIso
+      }
+    })
+    if (res.err) {
+      return []
+    }
+    if(!res.data.data?.city){
+      return []
+    }
+
+    return Object.keys(res.data.data?.city).map(key => ({id: key, name: res.data.data.city[key]}))
   }
 
 }

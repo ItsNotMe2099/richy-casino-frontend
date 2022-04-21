@@ -6,6 +6,7 @@ import {useTranslation} from 'next-i18next'
 
 interface Props {
   expiredAt: Date
+  roundId: number
 }
 
 export default function Timer(props: Props) {
@@ -28,7 +29,7 @@ export default function Timer(props: Props) {
   return (
     <div className={styles.root}>
       <div className={styles.left}>
-        {t('lottery_round_title')} <span>334</span> {t('lottery_round_ends_in')}
+        {t('lottery_round_title')} <span>{props.roundId}</span> {t('lottery_round_ends_in')}
       </div>
       <div className={styles.timer}>
       <div className={styles.days}>

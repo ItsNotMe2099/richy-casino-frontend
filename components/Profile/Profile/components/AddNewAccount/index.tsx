@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import {useTranslation} from 'next-i18next'
 
 export interface ICustomSelectViewOption extends IOption<string>{
-  symbol?: string
+
 }
 
 interface Props{

@@ -17,14 +17,14 @@ export interface ILotteryRound {
   roundId: number,
   totalBankAmount: number
   currencyIso: string
-  totalTicketsCount: number,
+  totalTickets: number,
   roundWinners?: ILotteryRoundWinner[]
 }
 export interface ILotteryRoundCurrent {
   roundId: number,
   totalBankAmount: number
   currencyIso: string
-  totalTicketsCount: number,
+  totalTickets: number,
   currentUserInfo: ILotteryCurrentUserInfo
   slots: ILotterySlot[]
 }

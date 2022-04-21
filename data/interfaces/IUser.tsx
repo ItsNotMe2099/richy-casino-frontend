@@ -33,8 +33,8 @@ export default interface IUser {
     freespinAmount: number
   },
   flags: {
-    isHideUserName: boolean,
-    iHideFromLeaderboard: boolean,
+    isHideUsername: boolean,
+    isHideFromLeaderboard: boolean,
     isHideFromStatistics: boolean,
     isHideBalance: boolean,
   }

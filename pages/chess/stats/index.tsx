@@ -2,9 +2,9 @@ import PageTitle from 'components/for_pages/Common/PageTitle'
 import Layout from 'components/layout/Layout'
 import Bets from 'components/for_pages/MoneyChess/for_pages/Chess/Bets'
 import {GetServerSideProps} from 'next'
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import styles from 'pages/faq/index.module.scss'
 import ChessGameStats from 'components/for_pages/MoneyChess/for_pages/Stats'
+import {getServerSideTranslation} from 'utils/i18'
 
 export default function Chess() {
 
@@ -22,7 +22,7 @@ export default function Chess() {
 export const getServerSideProps: GetServerSideProps = async (context ) => {
   return {
     props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...await getServerSideTranslation(context),
     },
   }
 }

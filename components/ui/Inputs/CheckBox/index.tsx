@@ -14,7 +14,7 @@ export const CheckBox = (props: Props & FieldConfig) => {
   const [field, meta] = useField(props)
   const { setFieldValue } = useFormikContext()
   const hasError = !!meta.error && meta.touched
-
+  console.log('CheckBoxCheck', props.name, field.value)
   return (
     <div className={cx(styles.root, {
       [styles.large]: props.size === 'large'

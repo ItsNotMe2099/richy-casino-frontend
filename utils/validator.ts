@@ -16,20 +16,25 @@ export default class Validator {
   }
 
   static required(value: string | number): string | undefined {
-    return value || typeof value === 'number' ? undefined : 'Обязательное поле'
+    return value || typeof value === 'number' ? undefined : 'form_field_validation_required'
   }
 
   static email(value: string): string | undefined {
     return value && !Validator.emailRe.test(value)
-      ? 'Неверный формат email'
+      ? 'form_field_validation_email'
       : undefined
   }
 
   static passwordsMustMatch = (allValues: any) => (value: string): string | undefined => {
-    return value !== allValues.password ? 'Пароли не совпадают' : undefined
+    return value !== allValues.password ? 'form_field_validation_password_match' : undefined
+  }
+  static password(value: string): string | undefined {
+    return value && value.length < 6
+      ? 'form_field_validation_password'
+      : undefined
   }
   static otpValidation(value: string | number) {
-    return !value || `${value}`.length === 4  ? undefined : 'Введите 4-x значный код'
+    return !value || `${value}`.length === 4  ? undefined : 'form_field_validation_otp'
   }
 
 }

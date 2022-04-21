@@ -1,7 +1,6 @@
 import { RegCurrencySelectField } from 'components/ui/Inputs/RegCurrencySelectField'
 import { Form, Formik } from 'formik'
 import styles from 'pages/selectPage/index.module.scss'
-import Converter  from 'utils/converter'
 
 export default function RegistrationSelect() {
 
@@ -29,7 +28,7 @@ export default function RegistrationSelect() {
         <div className={styles.text}>
           Registration
         </div>
-        <RegCurrencySelectField name='currency' options={currencies} currentItem={Converter.currentItem(values, currencies)}/>
+        <RegCurrencySelectField name='currency' />
       </div>
     </Form>)}
   </Formik>

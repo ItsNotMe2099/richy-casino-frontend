@@ -1,13 +1,7 @@
 @import "scss/index";
 
 .root{
-  padding: 0 !important;
-  @media screen and (max-width: 1360px){
-    margin-top: 20px;
-  }
-  @media screen and (max-width: 870px){
-    flex-basis: auto !important;
-  }
+  flex: 1;
 }
 
 .top{
@@ -47,6 +41,11 @@
 .first{
   @include placeGradient1st200;
   grid-area: a;
+  .bitcoin{
+    span {
+      padding-top: 2px;
+    }
+  }
 }
 
 .secondPlace{
@@ -56,6 +55,7 @@
 .thirdPlace{
   grid-area: c;
 }
+
 
 .second{
   @include placeGradient2nd200;

@@ -1,5 +1,6 @@
 import {HTMLInputTypeAttribute, MouseEventHandler, ReactElement} from 'react'
 import { FieldConfig } from 'formik'
+import {FavoriteEntityType, SnackbarType} from 'types/enums'
 
 export interface IField extends FieldConfig {
   label?: string
@@ -35,7 +36,7 @@ export interface Country {
 export interface IOption<T> {
   label: string
   value?: T
-  symbol?: string,
+  symbol?: string | ReactElement,
   icon?: string
 }
 export interface IPagination<T>{
@@ -66,8 +67,14 @@ export interface IApiPaginationResponse{
     perPage: number
   }
 }
+export interface ProfileModalArguments {
+  onBack?: () => void
+}
 export interface RegistrationPhoneModalArguments {
   phone: string
+}
+export interface TwoFaModalArguments extends ProfileModalArguments{
+  qrUrl: string
 }
 export interface RegistrationSuccessModalArguments {
   login: string
@@ -91,3 +98,8 @@ export interface ISwitchFilterItem<T>{
   icon?: string | ReactElement,
   value: T
 }
+export interface SnackbarData {
+  text: string
+  type: SnackbarType
+}
+export type FavoritesStoreType = {[entityType in FavoriteEntityType]: number[]}

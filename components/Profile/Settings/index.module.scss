@@ -87,6 +87,7 @@
 .isChange{
   display: flex;
   align-items: center;
+  margin-top: 12px;
 }
 
 .boxes{
@@ -136,4 +137,21 @@
 
 .blue{
   color: #427bf8;
+}
+.fieldError{
+  > div > div:first-child{
+    border: 1px solid $lose500;
+    padding-right: 3px;
+    padding-left: 2px;
+    border-radius: 12px;
+    background: $dark600;
+  }
+  input{
+    border: none !important;
+    height: 68px;
+    @media screen and (max-width: $xs-max) {
+      height: 48px;
+    }
+  }
+
 }

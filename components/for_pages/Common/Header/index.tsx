@@ -4,7 +4,7 @@ import HiddenXs from 'components/ui/HiddenXS'
 import QuestionPopover from 'components/ui/QuestionPopover'
 import Link from 'next/link'
 interface Props {
-  length?: number
+  length?: number | string
   icon: string
   label: string
   onPrev?: () => void

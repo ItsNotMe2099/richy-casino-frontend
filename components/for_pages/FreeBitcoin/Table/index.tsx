@@ -45,11 +45,11 @@ export default function Table(props: Props) {
       <table className={styles.table}>
         <thead>
           <tr className={styles.row}>
-            <th className={styles.cell}>
+            <th className={classNames(styles.cell, styles.cellHeader)}>
               {props.history ? t('freebitcoin_last_wins'): t('freebitcoin_lucky_number')}
             </th>
-            <th className={styles.cell}>
-              {!props.history ? <div className={classNames(styles.text, styles.payout)}>{t('freebitcoin_payout')}</div> : null}
+            <th className={classNames(styles.cell, styles.cellHeader)}>
+              {!props.history ? <div className={classNames(styles.payout)}>{t('freebitcoin_payout')}</div> : null}
             </th>
           </tr>
         </thead>
@@ -71,7 +71,7 @@ export default function Table(props: Props) {
             <td className={classNames(styles.cell, {[styles.cellPayout]: props.history})}>
               <div className={styles.text}>
                 {props.history ? formatHistoryAmount(item) : formatSlotAmount(item)}
-                <span>{props.history ? formatHistoryCurrency(item)?.toUpperCase() : formatSlotCurrency(item)?.toUpperCase()}</span>
+                <span> {props.history ? formatHistoryCurrency(item)?.toUpperCase() : formatSlotCurrency(item)?.toUpperCase()}</span>
               </div>
             </td>
           </tr>

@@ -2,7 +2,6 @@ import PageTitle from 'components/for_pages/Common/PageTitle'
 import Layout from 'components/layout/Layout'
 import Bets from 'components/for_pages/MoneyChess/for_pages/Chess/Bets'
 import {GetServerSideProps} from 'next'
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import styles from 'pages/faq/index.module.scss'
 import ChessGame from 'components/for_pages/MoneyChess/for_pages/Chess'
 import nookies from 'nookies'
@@ -14,6 +13,7 @@ import {ChessGameWrapper} from 'components/for_pages/MoneyChess/context/game_sta
 import {IChessGame} from 'components/for_pages/MoneyChess/data/interfaces/IChessGame'
 import GameUserRepository from 'components/for_pages/games/data/reposittories/GameUserRepository'
 import {IGameUser} from 'components/for_pages/games/data/interfaces/IGameUser'
+import {getServerSideTranslation} from 'utils/i18'
 interface Props{
   gameToken?: string
   gameId: number
@@ -52,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...await getServerSideTranslation(context),
       gameToken,
       initialGame,
       initialUser

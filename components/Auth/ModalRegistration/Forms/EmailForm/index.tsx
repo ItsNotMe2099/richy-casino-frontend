@@ -54,7 +54,7 @@ export default function EmailForm(props: Props) {
   const initialValues = {
     email: null,
     password: null,
-    currency: Converter.convertCurrencyToOptions(context.currencies)[0].value,
+    currency: Converter.convertCurrencyToOptions(context.currencies)[0]?.value,
     checkBox: false
   }
 
@@ -70,21 +70,20 @@ export default function EmailForm(props: Props) {
         <Form className={styles.form}>
           <div className={styles.inputs}>
             <div className={styles.select}>
-              <RegCurrencySelectField name='currency' options={Converter.convertCurrencyToOptions(context.currencies)}
-                                      currentItem={Converter.currentItem(values, Converter.convertCurrencyToOptions(context.currencies))}/>
+              <RegCurrencySelectField name='currency' disabled={sending}/>
             </div>
-            <InputField name={'email'} placeholder={t('registration_field_email')}
+            <InputField name={'email'} disabled={sending} placeholder={t('registration_field_email')}
                         validate={Validator.combine([Validator.required, Validator.email])}/>
-            <InputField name={'password'} type={'password'} obscure={true}
+            <InputField name={'password'} type={'password'} obscure={true} disabled={sending}
                         placeholder={t('registration_field_password')}
                         validate={Validator.required}/>
 
             <FormPromocode/>
-            <CheckBox size={'small'} name='checkBox'
+            <CheckBox size={'small'} disabled={sending} name='checkBox'
                       label={t('registration_terms')} validate={Validator.required}/>
           </div>
           <FormError error={error}/>
-          <FormFooter/>
+          <FormFooter sending={sending}/>
         </Form>)}
     </Formik>
   )

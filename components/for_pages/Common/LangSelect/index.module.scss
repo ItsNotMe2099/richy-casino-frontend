@@ -32,6 +32,7 @@
   color: #fff;
   img{
     margin-right: 10px;
+    max-width: 17px;
   }
   &:hover{
     background-color: $dark500;
@@ -131,23 +132,21 @@
 
 .option{
   display: flex;
+  align-items: center;
   cursor: pointer;
   z-index: 1;
-  padding: 18px 14px;
+  padding: 0px 14px;
+  height: 52px;
   &:hover{
     background: #41424F;
   }
   .image{
     margin-right: 10px;
-  }
-  a{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .image{
-      margin-right: 10px;
+    img{
+      max-width: 17px;
     }
   }
+
 }
 
 .track{

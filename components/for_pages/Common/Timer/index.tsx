@@ -2,19 +2,16 @@ import styles from './index.module.scss'
 import classNames from 'classnames'
 import {useTimer} from 'react-timer-hook'
 import {pad} from 'utils/formatter'
+import {useEffect} from 'react'
 
 interface Props {
-  expiredAt: Date | string
+  expiredAt: Date
   days?: boolean
   style?: 'bonus' | 'freebitcoin' | 'tournament' | 'gift' | 'footer' | 'sheet' | 'wallet' | 'footerSmall' | 'tournamentMobile'
+  onExpire?: () => void
 }
 
 export default function Timer(props: Props) {
-
-  const currentDate = Date.now()
-
-  const expireDate = new Date(props.expiredAt)
-
   const {
     seconds,
     minutes,
@@ -25,8 +22,10 @@ export default function Timer(props: Props) {
     pause,
     resume,
     restart,
-  } = useTimer({ expiryTimestamp: expireDate, onExpire: () => console.warn('onExpire called') })
-
+  } = useTimer({ expiryTimestamp: new Date(props.expiredAt), onExpire: props.onExpire })
+  useEffect(() => {
+    restart(props.expiredAt)
+  }, [props.expiredAt])
   const timerClass = classNames({
     [styles.bonus]: props.style === 'bonus',
     [styles.freebitcoin]: props.style === 'freebitcoin',

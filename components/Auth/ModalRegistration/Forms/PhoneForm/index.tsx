@@ -14,6 +14,7 @@ import {RegistrationPhoneModalArguments} from 'types/interfaces'
 import { RegCurrencySelectField } from 'components/ui/Inputs/RegCurrencySelectField'
 import FormFooter from 'components/Auth/ModalRegistration/Forms/FormFooter'
 import FormPromocode from 'components/Auth/ModalRegistration/Forms/FormPromocode'
+import Formatter from 'utils/formatter'
 
 interface Props {
 }
@@ -27,7 +28,7 @@ export default function PhoneForm(props: Props) {
     try {
       setError(null)
       await AuthRepository.registerPhoneSendOtp({
-        phone: data.phone,
+        phone: Formatter.cleanPhone(data.phone),
         currency: data.currency
       })
       context.showModal(ModalType.registrationPhone, {phone: data.phone} as RegistrationPhoneModalArguments)
@@ -55,15 +56,15 @@ export default function PhoneForm(props: Props) {
     <Form className={styles.form}>
       <div className={styles.inputs}>
         <div className={styles.select}>
-        <RegCurrencySelectField name='currency' options={Converter.convertCurrencyToOptions(context.currencies)} currentItem={Converter.currentItem(values, Converter.convertCurrencyToOptions(context.currencies))}/>
+        <RegCurrencySelectField name='currency' disabled={sending}/>
         </div>
-        <InputField format={'phone'} name={'phone'} placeholder={t('registration_phone')} validate={Validator.required} />
+        <InputField disabled={sending} format={'phone'} name={'phone'} placeholder={t('registration_field_phone')} validate={Validator.required} />
         <FormPromocode/>
-        <CheckBox size={'small'} name='checkBox'
+        <CheckBox size={'small'} name='checkBox' disabled={sending}
                   label={t('registration_terms')} validate={Validator.required}/>
       </div>
       <FormError error={error}/>
-      <FormFooter/>
+      <FormFooter sending={sending}/>
     </Form>)}
   </Formik>
   )

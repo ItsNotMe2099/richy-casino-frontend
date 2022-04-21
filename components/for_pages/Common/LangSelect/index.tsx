@@ -1,54 +1,66 @@
 import styles from './index.module.scss'
 import classNames from 'classnames'
-import { useRef } from 'react'
-import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
+import {useEffect, useMemo, useRef, useState} from 'react'
 import { Scrollbars } from 'react-custom-scrollbars-2'
-
-interface Option {
+import {useTranslation} from 'next-i18next'
+import {listenForOutsideClicks} from 'components/hooks/useDetectOutsideClick'
+import {CookiesType} from 'types/enums'
+import Cookies from 'js-cookie'
+interface ILanguage {
   icon: string
-  lang: string
+  code: string
+  name: string
 }
 
 
 interface Props {
   children?: React.ReactNode
-  activeIcon?: string
-  lang?: string
+
   className?: string
-  options: Option[],
-  onChange?: (item: Option) => void
   style?: 'footer'
 }
 
 export default function LangSelect(props: Props) {
-
+  const {t, i18n} = useTranslation()
   const dropdownRef = useRef(null)
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
-  const {options, activeIcon, lang, onChange, style} = props
-  
+  const items: ILanguage[] = [
+    {icon: '/img/langs/ru.svg', name: 'Ru', code: 'ru'},
+    {icon: '/img/langs/en.svg', name: 'En', code: 'en'},
+  ]
+  const currentLanguage = useMemo<ILanguage>(() => items.find(i => i.code === i18n.language) ?? items.find(i => i.code === 'en'), [i18n.language])
+  const [listening, setListening] = useState(false)
+  const [isActive, setIsActive] = useState( false)
+  useEffect(listenForOutsideClicks(
+    listening,
+    setListening,
+    dropdownRef,
+    setIsActive,
+  ))
+  const { style} = props
+
 
 const handleClick = (e) => {
-  e.preventDefault()
   setIsActive(!isActive)
 }
-
-const dropClass = classNames({
-  [styles.footer]: style === 'footer',
-})
+const handleChange = (item: ILanguage) => {
+    i18n.changeLanguage(item.code)
+  Cookies.set(CookiesType.Language, item.code, {expires: 3 * 365})
+}
+console.log('dsadasdasd', i18n.languages)
 
   return (
-    <div className={classNames(styles.root, props.className)} onClick={handleClick}>
+    <div  ref={dropdownRef} className={classNames(styles.root, props.className)} onClick={handleClick}>
       <div className={styles.dropDownTrigger}>
-        <img src={activeIcon} alt=''/> {lang}
+        <img src={currentLanguage.icon} alt=''/> {currentLanguage.name}
       </div>
-       <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive }, dropClass)}>
+       <nav  className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive,   [styles.footer]: style === 'footer', })}>
         {/*style !== 'footer' && <div className={styles.triangle}></div>*/}
-        <Scrollbars style={{ width: 73, height: 170}} 
+        <Scrollbars autoHeightMax={170}  style={{ width: 73}}
         renderTrackVertical={props => <div {...props} className={styles.track}/>}
         renderView={props => <div {...props} className={styles.view}/>}>
-        {options && options.map((item, index) => 
-          <div className={styles.option} onClick={() => onChange(item)} key={index}>
-            <div className={styles.image}><img key={index} src={item.icon} alt=''/></div> {item.lang}
+        {items.map((item, index) =>
+          <div className={styles.option} onClick={() => handleChange(item)} key={index}>
+            <div className={styles.image}><img key={index} src={item.icon} alt=''/></div> {item.name}
           </div>
         )}
         </Scrollbars>

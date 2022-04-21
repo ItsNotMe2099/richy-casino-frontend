@@ -28,6 +28,7 @@ export enum ProfileModalType {
 
 export enum CookiesType {
   accessToken = 'accessToken',
+  Language = 'language'
 }
 
 export enum GameType{
@@ -58,4 +59,11 @@ export enum PaymentSwitchFilterKey{
   All = 'all',
   Deposit = 'deposit',
   Withdrawal = 'withdrawal'
+}
+export enum SnackbarType {
+  error,
+  success,
+}
+export enum FavoriteEntityType {
+  games = 'games',
 }

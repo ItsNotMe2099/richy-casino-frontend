@@ -2,19 +2,19 @@ import {IField, IOption} from 'types/interfaces'
 import styles from './index.module.scss'
 import { SelectField } from 'components/ui/Inputs/SelectField'
 import classNames from 'classnames'
+import {useAppContext} from 'context/state'
+import Converter from 'utils/converter'
+import {useMemo} from 'react'
+import UserUtils from 'utils/user'
 
 export interface ICustomSelectViewOption extends IOption<string>{
-  symbol?: string
+
 }
 
 interface Props extends IField{
-  options: ICustomSelectViewOption[]
-  placeholder?: string
-  initial?: string
-  option?: ICustomSelectViewOption
-  isActive?: boolean
+
   onClick?: () => void
-  currentItem?: ICustomSelectViewOption
+
 }
 interface PropsOption{
   option?: ICustomSelectViewOption
@@ -45,9 +45,10 @@ const Placeholder = (props: PropsOption) => {
 }
 
 export const RegCurrencySelectField = (props: Props) => {
-
+  const context = useAppContext()
+  const data = useMemo( () => Converter.convertCurrencyToOptions(context.currencies).map(i => ({...i, symbol: <img src={UserUtils.getCurrencyIcon(i.value)}/> })), [context.currencies])
   return (
-  <SelectField options={props.options} name={props.name} currentItemStyle={styles.current}
+  <SelectField<string> disabled={props.disabled} options={data} name={props.name} currentItemStyle={styles.current} className={styles.select}
     itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
     activeComponent={(option, isActive) => <Placeholder currentItem={option} isActive={isActive}/>}
     />
