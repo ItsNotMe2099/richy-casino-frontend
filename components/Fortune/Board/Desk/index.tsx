@@ -3,10 +3,11 @@ import { ISize } from 'types/interfaces'
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 import StrokeSvg from './StrokeSvg'
+import { IWheelSlot } from 'data/interfaces/IWheel'
 
 interface ISettings {
-  numberOfSections: number
   size: number
+  slots: IWheelSlot[]
 }
 
 interface Props {
@@ -17,7 +18,8 @@ interface Props {
 
 export default function Desk(props: Props) {
   const rootRef = useRef<HTMLDivElement>()
-  const circlePart = Math.PI * 2 / props.settings.numberOfSections
+  const numberOfSections = props.settings.slots.length
+  const circlePart = Math.PI * 2 / numberOfSections
   const [stopped, setStopped] = useState(false)
   const finishAngle = circlePart * -props.activeSectionIndex
   const currentAngle = stopped ? finishAngle : 0
@@ -32,23 +34,6 @@ export default function Desk(props: Props) {
     }
   }, [rootRef.current])
 
-  const renderSections = (): React.ReactNode[] => {
-    const result: React.ReactNode[] = []
-    for (let i=0; i<props.settings.numberOfSections; i++) {
-      result.push(
-        <Section
-          key={i}
-          angle={circlePart * i}
-          settings={props.settings}
-          even={i % 2 === 0}
-          text={`Секция ${i + 1}`}
-          active={stopped && (i === props.activeSectionIndex)}
-        />
-      )
-    }
-    return result
-  }
-
   const handleAnimationIteration = () => {
     if (periodTimeStamp.current) {
       stopFirstAnimation()
@@ -58,7 +43,7 @@ export default function Desk(props: Props) {
   }
 
   const stopFirstAnimation = () => {
-    const oneSectionTime = (Date.now() - periodTimeStamp.current) / props.settings.numberOfSections
+    const oneSectionTime = (Date.now() - periodTimeStamp.current) / numberOfSections
     setTimeout(() => {
       setStopped(true)
     }, oneSectionTime * props.activeSectionIndex)
@@ -77,7 +62,17 @@ export default function Desk(props: Props) {
         transform: `rotate(${currentAngle}rad)`,
       }}
     >
-      {renderSections()}
+      {props.settings.slots.map((item, index) => (
+        <Section
+          key={`${index}${item.winMoneyAmount}`}
+          angle={circlePart * index}
+          settings={props.settings}
+          even={index % 2 === 0}
+          text={`${item.winMoneyAmount}`}
+          active={stopped && (index === props.activeSectionIndex)}
+          numberOfSections={numberOfSections}
+        />
+      ))}
     </div>
   )
 }
@@ -88,6 +83,7 @@ interface SectionProps {
   even: boolean
   text: string
   active: boolean
+  numberOfSections: number
 }
 
 function Section(props: SectionProps) {
@@ -98,7 +94,7 @@ function Section(props: SectionProps) {
   const radius = props.settings.size / 2 - outerPadding
   const imgSize: ISize = {
     height: radius,
-    width: radius * imgAspectRation * (16 / props.settings.numberOfSections)
+    width: radius * imgAspectRation * (16 / props.numberOfSections)
   }
   const color = props.even ? '#FF1B00' : '#1D1E25'
   const transformBase = `rotate(${props.angle}rad)`
@@ -107,10 +103,11 @@ function Section(props: SectionProps) {
     : ''
 
   useEffect(() => {
-    if (rootRef.current) {
-      rootRef.current.addEventListener('transitionend', handleTransitionEnd)
+    const el = rootRef.current
+    if (el) {
+      el.addEventListener('transitionend', handleTransitionEnd)
       return () => {
-        rootRef.current?.removeEventListener('transitionend', handleTransitionEnd)
+        el.removeEventListener('transitionend', handleTransitionEnd)
       }
     }
   }, [rootRef.current])

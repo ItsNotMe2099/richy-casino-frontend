@@ -1,8 +1,10 @@
 import styles from './index.module.scss'
 import Desk from './Desk'
+import { IWheelSlot } from 'data/interfaces/IWheel'
 
 interface Props {
   inProgress: boolean
+  slots: IWheelSlot[]
 }
 
 export default function Board(props: Props) {
@@ -13,10 +15,10 @@ export default function Board(props: Props) {
       <Desk
         settings={{
           size: canvasSize,
-          numberOfSections: 16,
+          slots: props.slots
         }}
         inProgress={props.inProgress}
-        activeSectionIndex={4}
+        activeSectionIndex={3}
       />
       <img src="/img/Fortune/cursor.svg" alt="" className={styles.cursor}/>
     </div>

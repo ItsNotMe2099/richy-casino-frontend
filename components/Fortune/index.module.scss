@@ -10,6 +10,13 @@
   position: relative;
 }
 
+.board{
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .everyday{
   width: 100%;
   text-transform: uppercase;
