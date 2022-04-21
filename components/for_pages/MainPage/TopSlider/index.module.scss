@@ -8,15 +8,14 @@
 }
 
 .desktop{
-  @media screen and (max-width: 520px){
-    display: none !important;
-  }
+  display: grid;
+  grid-gap: 0px 10px;
+  grid-template-columns: 1fr 1fr;
+
 }
 
 .slider{
-  @media screen and (min-width: 521px){
-    display: none !important;
-  }
+
   @media screen and (max-width: $sm-min){
     height: 167px;
   }
@@ -37,9 +36,7 @@
 }
 
 .col{
-  @media screen and (max-width: $xs-max){
-    padding-right: 0 !important;
-  }
+overflow: hidden;
 }
 
 .label{

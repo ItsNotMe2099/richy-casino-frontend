@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import { Col } from 'react-grid-system'
 import Button from 'components/ui/Button'
 import { ReactElement, useState } from 'react'
 import Slider from 'react-slick'
@@ -70,7 +69,6 @@ export default function SlideSlider(props: Props) {
   }
 
   return (
-      <Col className={classNames(styles.col, colClass)}>
       <div className={classNames(styles.root, rootClass)} style={{backgroundImage: `url(${props.items[currentIndex].image})`}}>
       <div className={styles.controls}>
         <div className={styles.prev} onClick={() => slider.slickGoTo(currentIndex - 1)}>
@@ -98,7 +96,6 @@ export default function SlideSlider(props: Props) {
         )}
       </Slider>
       </div>
-      </Col>
   )
 }
 

@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import {Col, Row} from 'react-grid-system'
 import BonusSlide from 'components/for_pages/Common/BonusSlide'
 import SlideSlider from './SlideSlider'
 import Button from 'components/ui/Button'
@@ -9,6 +8,7 @@ import VisibleXs from 'components/ui/VisibleXS'
 import { useAppContext } from 'context/state'
 import Gift from 'components/for_pages/Common/Gift'
 import classNames from 'classnames'
+import {Col, Row} from 'react-grid-system'
 
 interface Props {
   children?: React.ReactNode
@@ -34,7 +34,7 @@ export default function TopSlider(props: Props) {
     dotsClass: `${styles.dots}`,
     responsive: [
       {
-        breakpoint: 428,
+        breakpoint: 1023,
         settings: {
           variableWidth: false,
           centerMode: true,
@@ -55,12 +55,17 @@ export default function TopSlider(props: Props) {
     <div className={styles.root}>
       {(context.showBonus && !context.showBonusExpanded) && <div className={styles.bonus}><Gift timer/></div>}
       <HiddenXs>
-
-        <Row className={styles.desktop}>
-          <Col className={styles.col}>
+        <Row>
+          <Col>
+        <div className={styles.desktop}>
+          <div className={styles.col}>
           <BonusSlide/>
-          </Col>
+          </div>
+          <div className={styles.col}>
           <SlideSlider items={items}/>
+          </div>
+        </div>
+          </Col>
         </Row>
       </HiddenXs>
       <VisibleXs>
