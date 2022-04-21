@@ -20,6 +20,9 @@
 
 
   &:hover {
+    .shade{
+      background-color: rgba(0, 0, 0, .4);
+    }
     .favoriteInActive{
       opacity: 1;
     }
@@ -81,8 +84,7 @@
   right: 0;
   left: 0;
   bottom: 0;
-
-  background: rgba(0, 0, 0, .4);
+  transition: background-color .3s ease-in-out;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -117,7 +119,7 @@
 }
 .favoriteInActive{
   opacity: 0;
-  transition: opacity .5s ease-in-out;
+  transition: opacity .3s ease-in-out;
 }
 .btnsWrapper{
   grid-gap: 11.6% 0;
@@ -134,7 +136,7 @@
 .btns {
   flex: 1;
   opacity: 0;
-  transition: opacity .5s ease-in-out;
+  transition: opacity .3s ease-in-out;
   width: 100%;
   display: flex;
   flex-direction: column;
