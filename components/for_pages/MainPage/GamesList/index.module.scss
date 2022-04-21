@@ -12,9 +12,7 @@
     display: flex;
     margin-top: 23px;
   grid-gap: 0px 22px; //20px
-    @media screen and (max-width: 1360px){
-        flex-direction: column;
-      }
+
       @media screen and (max-width: $mobile-max){
         display: none;
       }
@@ -217,7 +215,7 @@
   display:grid;
   grid-auto-flow: column;
   grid-auto-columns:calc((100% - (3 - 1)*8px)/3);
-  grid-gap: 8px;
+  @include mobileGamesGrid;
   grid-template-rows: repeat(2, auto);
   padding-top: 14px;
   overflow:auto;

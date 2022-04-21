@@ -21,6 +21,10 @@ export class Routes{
     return `/game/${id}${isDemo ? '?demo=true' : ''}`
   }
 
+  static get catalogLive(){
+    return '/catalog/category/live'
+  }
+
   static catalogProvider(providerId: string | number): string{
     return `/catalog/providers/${providerId}`
   }

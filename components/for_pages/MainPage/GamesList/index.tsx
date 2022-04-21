@@ -10,6 +10,8 @@ import {IPagination} from 'types/interfaces'
 import {IGame} from 'data/interfaces/IGame'
 import GameListRepository from 'data/repositories/GameListRepository'
 import ProviderFilter from 'components/for_pages/MainPage/GamesList/ProviderFilter'
+import {Routes} from 'types/routes'
+import Formatter from 'utils/formatter'
 export enum MainGameListType{
   All = 'all',
   Live = 'live'
@@ -58,7 +60,7 @@ export default function MainGamesList(props: Props) {
 
   return (
     <div className={classNames(styles.root, {[styles.none]: data.total === 0})}>
-      <Header icon={props.icon} label={props.label} length={data.total} shadowColor={props.shadowColor}/>
+      <Header icon={props.icon} label={props.label} length={Formatter.formatNumber(data.total)} shadowColor={props.shadowColor} allLink={props.type === MainGameListType.All ? Routes.catalog :  Routes.catalogLive}/>
       <HiddenXs>
         <>
           <div className={styles.filters}>

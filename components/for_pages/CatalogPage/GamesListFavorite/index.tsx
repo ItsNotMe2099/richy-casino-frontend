@@ -2,7 +2,7 @@ import GamesList from 'components/for_pages/CatalogPage/GamesList'
 import {useEffect, useState} from 'react'
 import {IPagination} from 'types/interfaces'
 import {IGame} from 'data/interfaces/IGame'
-import GameListRepository from 'data/repositories/GameListRepository'
+import GameFavoriteRepository from 'data/repositories/GameFavoriteRepository'
 
 interface Props {
 
@@ -15,20 +15,14 @@ export default function GamesListFavorite(props: Props) {
   const limit = 30
 
   useEffect(() => {
-    GameListRepository.fetchGames({}, 1, limit).then(i => {
-      setData(i)
-      setLoading(false)
+    GameFavoriteRepository.fetchGames().then(i => {
+      setData({data: i, total: i.length})
     })
   }, [])
 
 
   const handleScrollNext = async () => {
-    const newPage = page + 1
-    setPage(newPage)
-    setLoading(true)
-    const res = await GameListRepository.fetchGames({}, newPage, limit)
-    setData(data => ({data: [...data.data, ...res.data], total: res.total}))
-    setLoading(false)
+
   }
   return (
     <GamesList title={'Избранные'}

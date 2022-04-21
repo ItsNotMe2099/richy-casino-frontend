@@ -44,17 +44,18 @@ export function FavoriteWrapper(props: Props) {
   }, [store])
 
   useEffect(() => {
-    if (!isLoggedRef.current && isLogged) {
-      debouncedSave()
-    }
+    console.log('isLoggedRef.current && isLogged', isLoggedRef.current , isLogged)
     if (isLoggedRef.current && !isLogged) {
       setStore({...initStore})
+    }
+    if (isLogged) {
+      debouncedSave()
     }
     isLoggedRef.current = isLogged
   }, [isLogged])
 
   const debouncedSave = debounce(async () => {
-    if (isLoggedRef.current && tmpList.length > 0) {
+    if (isLoggedRef.current) {
       const likes = await GameFavoriteRepository.fetchStatus()
       tmpList.length = 0
       if (likes) {
@@ -66,8 +67,7 @@ export function FavoriteWrapper(props: Props) {
     ...defaultValue,
     store,
     addRecord(id: number) {
-      tmpList.push(id)
-      debouncedSave()
+
     },
     async like(id: number) {
       setStore(join(storeRef.current, {

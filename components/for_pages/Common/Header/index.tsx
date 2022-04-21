@@ -10,7 +10,7 @@ interface Props {
   onPrev?: () => void
   onNext?: () => void
   slider?: boolean
-  style?: 'labelOnly' | 'withoutLength' | 'fullOnlyOnMobile' | 'popover'
+  style?: 'labelOnly' | 'withoutLength' | 'fullOnlyOnMobile' | 'popover' | null
   shadowColor?: 'red' | 'blue' | 'yellow' | 'violet'
   className?: string
   allLink?: string
