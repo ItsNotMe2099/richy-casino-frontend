@@ -1,6 +1,6 @@
 export enum IFreeBitcoinGameStatus{
-  Win = 'win',
-  Loose = 'lose'
+  Win = 'Win',
+  Lose = 'Lose'
 }
 export interface IFreeBitcoinGame {
   luckyNumber: number,

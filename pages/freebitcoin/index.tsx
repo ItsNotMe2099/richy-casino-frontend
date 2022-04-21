@@ -27,7 +27,7 @@ export default function FreeBitcoin() {
       FreeBitcoinRepository.fetchHistory().then(i => setHistory(i)),
       ...(context.auth ? [FreeBitcoinRepository.fetchUserStatus().then(i => setUserStatus(i))] : []),
     ]).then(() => setLoading(false))
-  }, [])
+  }, [context.auth])
 
   const [isShow, setIsShow] = useState(false)
 

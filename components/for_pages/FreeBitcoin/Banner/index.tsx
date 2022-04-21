@@ -9,7 +9,7 @@ import {useEffect, useState} from 'react'
 import FreeBitcoinRepository from 'data/repositories/FreeBitcoinRepository'
 import {useAppContext} from 'context/state'
 import {differenceInSeconds} from 'date-fns'
-import {IFreeBitcoinGame} from 'data/interfaces/IFreeBitcoinGame'
+import {IFreeBitcoinGame, IFreeBitcoinGameStatus} from 'data/interfaces/IFreeBitcoinGame'
 import Formatter from 'utils/formatter'
 
 enum State{
@@ -36,9 +36,9 @@ export default function Banner(props: Props) {
     }
     FreeBitcoinRepository.fetchUserStatus().then(i => {
       setUserStatus(i)
-      console.log('Date111', new Date(i.freebitcoinTimeNewFreeAccrual * 1000))
-      const isExpired = differenceInSeconds(new Date(i.freebitcoinTimeNewFreeAccrual * 1000), new Date()) <= 0
-      console.log('Date111', new Date(i.freebitcoinTimeNewFreeAccrual * 1000), isExpired, state)
+      console.log('Date111', new Date(i.freebitcoinTimeNewFreeAccrual))
+      const isExpired = differenceInSeconds(new Date(i.freebitcoinTimeNewFreeAccrual), new Date()) <= 0
+      console.log('Date111', new Date(i.freebitcoinTimeNewFreeAccrual), isExpired, state)
 
       if(isExpired && !state){
         setState(State.Play)
@@ -65,6 +65,9 @@ export default function Banner(props: Props) {
     try {
       const res = await FreeBitcoinRepository.play()
       setResult(res)
+      if(res){
+        setUserStatus((status) => ({...status, balanceFreebitcoin: res.balanceLeft}))
+      }
       setState(State.Win)
     }catch (e){
       setError(e)
@@ -94,26 +97,26 @@ export default function Banner(props: Props) {
         )}
       </div>
       {state === State.Play &&
-        <Button className={styles.btn} spinner={sending} size='huge' background='blueGradient500'>   {t('freebitcoin_play_now')}</Button>
+        <Button className={styles.btn} spinner={sending} size='huge' background='blueGradient500' onClick={handlePlay}>   {t('freebitcoin_play_now')}</Button>
       }
       {state === State.Win &&
         <div className={styles.win}>
-          <div className={styles.you}>{t('freebitcoin_win_title')}</div>
+          <div className={styles.you}>{result.status === IFreeBitcoinGameStatus.Win ?  t('freebitcoin_win_title') : 'YOU LOSE'}</div>
           <div className={styles.btns}>
             <div className={styles.coins}>
               <img src='/img/FreeBitcoin/bitcoin.svg' alt=''/>
               <div>{result.amount}</div>
             </div>
-            <div className={styles.ticket}>
+            <div className={styles.ticket} onClick={handlePlay}>
               <img src='/img/FreeBitcoin/ticket.svg' alt=''/>
-              <div>{result.status}{t('freebitcoin_win_tickets')}</div>
+              <div>{result.status} {t('freebitcoin_win_tickets')}</div>
             </div>
           </div>
         </div>
       }
       {state === State.Timer &&
         <div className={styles.timer}>
-          <Timer expiredAt={new Date(userStatus.freebitcoinTimeNewFreeAccrual * 1000)} style='freebitcoin' onExpire={handleExpired}/>
+          <Timer expiredAt={new Date(userStatus.freebitcoinTimeNewFreeAccrual)} style='freebitcoin' onExpire={handleExpired}/>
           <div className={styles.again}>
             {t('freebitcoin_before_play')}
           </div>
