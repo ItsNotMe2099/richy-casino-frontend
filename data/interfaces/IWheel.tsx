@@ -4,7 +4,7 @@ export interface IWheelSlot {
 }
 export interface IWheelInfoUser{
   balanceSpins: number
-  balanceSpinsTimeNewFreeAccrual: number
+  balanceSpinsTimeNewFreeAccrual: string
 }
 export interface IWheelPlayResponse{
   winAmount: number

@@ -69,6 +69,7 @@ export default function Desk(props: Props) {
           settings={props.settings}
           even={index % 2 === 0}
           text={`${item.winMoneyAmount}`}
+          iconName={item.currencyIso.toLocaleLowerCase()}
           active={stopped && (index === props.activeSectionIndex)}
           numberOfSections={numberOfSections}
         />
@@ -82,6 +83,7 @@ interface SectionProps {
   settings: ISettings
   even: boolean
   text: string
+  iconName: string
   active: boolean
   numberOfSections: number
 }
@@ -142,7 +144,7 @@ function Section(props: SectionProps) {
         [styles.active]: props.active,
       })}/>
       <div className={styles.sectionContent}>
-        <img src="/img/Fortune/coin.png" className={styles.sectionIcon} alt=""/>
+        <img src={`/img/currencies/${props.iconName}.png`} className={styles.sectionIcon} alt=""/>
         <div className={styles.sectionText}>
           {props.text}
         </div>

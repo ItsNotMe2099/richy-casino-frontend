@@ -10,8 +10,10 @@
   position: relative;
 }
 
-.board{
-  min-height: 300px;
+.board{}
+
+.loader{
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
