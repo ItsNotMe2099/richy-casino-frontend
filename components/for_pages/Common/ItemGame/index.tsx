@@ -42,7 +42,7 @@ export default function ItemGame(props: Props) {
       [styles.exSmall]: width <= 120
     })} style={!props.slider ? {backgroundImage: `url(${props.item.imageIconPreviewUrl})`} : null}>
     <div className={styles.shade}>
-      <div className={styles.top}><FavoriteBtn id={props.item.id} inActiveClassName={styles.favoriteInActive} className={styles.favorite} onChange={(val) => val ? props.onDeleteFromFavorite(props.item) : null}/></div>
+      <div className={styles.top}><FavoriteBtn id={props.item.id} inActiveClassName={styles.favoriteInActive} className={styles.favorite} onChange={(val) => !val &&  props.onDeleteFromFavorite ? props.onDeleteFromFavorite(props.item) : null}/></div>
       <div className={styles.btns}>
         <div className={styles.btnsWrapper}>
           <Button className={classNames(styles.btn)} href={link} onClick={handlePlayClick} size='small' background='blueGradient500'>Играть</Button>
