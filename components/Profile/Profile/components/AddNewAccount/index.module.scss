@@ -74,7 +74,7 @@
 .select{
   background: $dark600;
   border-radius: 8px;
-  max-width: 100%;
+  max-width: 100% !important;
   .dropDownTrigger{
     display: block;
   }
