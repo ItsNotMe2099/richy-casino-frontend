@@ -1,4 +1,4 @@
-import { IApiPaginationResponse, IApiResponse, IOption, IPosition } from 'types/interfaces'
+import {IApiPaginationResponse, IApiResponse, IOption, IOptionUserAccount, IPosition} from 'types/interfaces'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import { IUserBalanceCurrency } from 'data/interfaces/IUser'
 import UserUtils from 'utils/user'
@@ -31,13 +31,23 @@ export default class Converter {
     return 'api_error_unknown'
 
   }
-  static convertCurrencyToOptions(currencies: ICurrency[]): IOption<string>[]{
+  static prepareUserCurrency(currencies: ICurrency[]): IOption<string>[]{
     if (!currencies) {
       return []
     }
     return currencies.map(i => ({
       label: `${i.name} (${i.iso})`,
       value: i.iso
+    }))
+  }
+  static convertCurrencyToOptions(currencies: ICurrency[]): IOption<string>[]{
+    if (!currencies) {
+      return []
+    }
+    return currencies.map(i => ({
+      label: `${i.name} (${i.iso})`,
+      value: i.iso,
+      symbol: UserUtils.getCurrencyIcon(i.iso)
     }))
   }
   static convertCurrencyToOptionsExchange(currencies: ICurrency[]): IOption<string>[]{
@@ -47,15 +57,18 @@ export default class Converter {
     }))
   }
 
-  static  convertUserBalanceCurrencyToOption(item: IUserBalanceCurrency): IOption<string>{
+  static  convertUserBalanceCurrencyToOption(item: IUserBalanceCurrency): IOptionUserAccount{
     return {
       label: item.currency,
-      value: `${item.value}`,
+      value: item.currency,
+      balance: item.value,
+      mainCurrency: item.mainCurrency,
+      calculatedBalance: item.calculated,
       symbol: UserUtils.getCurrencyIcon(item.currency)
     }
   }
 
-  static  convertUserBalanceCurrencyToOptions(currencies: IUserBalanceCurrency[]): IOption<string>[]{
+  static  convertUserBalanceCurrencyToOptions(currencies: IUserBalanceCurrency[]): IOptionUserAccount[]{
     return currencies.map(i => this.convertUserBalanceCurrencyToOption(i))
   }
 

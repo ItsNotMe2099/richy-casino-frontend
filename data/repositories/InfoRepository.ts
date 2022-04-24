@@ -1,6 +1,7 @@
 import request from 'utils/request'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import {ICity} from 'data/interfaces/ICity'
+import Converter from 'utils/converter'
 
 
 export default class InfoRepository {
@@ -22,7 +23,7 @@ export default class InfoRepository {
     if (res.err) {
       return []
     }
-    return res.data?.data ?? []
+    return res.data.data?.map(i => Converter.objectKeysToCamelCase(i)) ?? []
   }
 
   static async getCities(countryIso: string): Promise<ICity[]> {

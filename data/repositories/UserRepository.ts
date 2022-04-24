@@ -13,14 +13,14 @@ export default class UserRepository {
     if (res.err) {
       return null
     }
-    const convertCurrencyToArray = (data: IUserBalanceCurrencyRaw) => {
-      return Object.keys(data).map(key => ({currency: key?.toUpperCase(), value: data[key]}))
+    const convertCurrencyToArray = (data: IUserBalanceCurrencyRaw, calculated: IUserBalanceCurrencyRaw, mainCurrency: string) => {
+      return Object.keys(data).map(key => ({currency: key?.toUpperCase(), value: data[key], calculated: calculated[key], mainCurrency}))
     }
     if(res.data?.data) {
       const data = {...Converter.objectKeysToCamelCase(res.data?.data)}
-      data.balance.currencies.totals = convertCurrencyToArray(data.balance.currencies.totals)
-      data.balance.currencies.bonus = convertCurrencyToArray(data.balance.currencies.bonus)
-      data.balance.currencies.real = convertCurrencyToArray(data.balance.currencies.real)
+      data.balance.currencies.totals = convertCurrencyToArray(data.balance.currencies.totals, data.balance.calculated.totals, data.currencyIso)
+      data.balance.currencies.bonus = convertCurrencyToArray(data.balance.currencies.bonus, data.balance.calculated.bonus, data.currencyIso)
+      data.balance.currencies.real = convertCurrencyToArray(data.balance.currencies.real, data.balance.calculated.real, data.currencyIso)
       return data
     }else{
       return null

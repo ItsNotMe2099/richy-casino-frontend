@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
-import { useField } from 'formik'
+import {FieldConfig, useField} from 'formik'
 import classNames from 'classnames'
-import {  useEffect, useState } from 'react'
+import {ReactElement, useEffect, useState} from 'react'
 import { FieldValidator } from 'formik/dist/types'
 import { useIMask } from 'react-imask'
 import { AsYouType, isValidPhoneNumber } from 'libphonenumber-js'
@@ -9,6 +9,7 @@ import Converter  from 'utils/converter'
 import {IField} from 'types/interfaces'
 import Eye from 'components/svg/Eye'
 import ErrorInput from 'components/ui/Inputs/components/ErrorInput'
+import cx from 'classnames'
 
 type FormatType = 'phone' | 'phoneAndEmail'
 
@@ -16,18 +17,18 @@ interface Props extends IField {
   obscure?: boolean
   format?: FormatType
   blurValidate?: FieldValidator
-  disabled?: boolean
   className?: string
   label?: string
-  alt?: boolean
   errorClassName?: string
+  suffix?: 'clear' | 'arrow' | string | ReactElement
+  prefix?: string | ReactElement
 }
 
 export default function InputField(props: Props) {
   const defaultPhonePattern = '+*[********************]'
   const [focused, setFocus] = useState(false)
   const [obscureShow, setObscureShow] = useState(false)
-  const [field, meta, helpers] = useField(props)
+  const [field, meta, helpers] = useField(props as FieldConfig)
   const [phoneIsValid, setPhoneIsValid] = useState(false)
   const [pattern, setPattern] = useState<string | null>(props.format === 'phone' ? defaultPhonePattern : null)
   const showError = meta.touched && !!meta.error && !focused
@@ -77,7 +78,15 @@ export default function InputField(props: Props) {
       }
     }
   }
-
+  const renderSuffix = () => {
+    return props.suffix
+  }
+  const renderPrefix = () => {
+    if(typeof props.prefix === 'string') {
+      return  <div className={cx(styles.prefix, styles.currency)}>{props.prefix}</div>
+    }
+    return props.prefix
+  }
   return (
     <div className={classNames(styles.root, props.className, {  [props.errorClassName]: showError})}>
       <div className={styles.wrapper}>
@@ -96,7 +105,8 @@ export default function InputField(props: Props) {
             [styles.input]: true,
             [styles.inputError]: showError,
             [styles.inputFocused]: focused,
-            [styles.inputAlt]: props.alt
+            [styles.withSuffix]: !!props.suffix,
+            [styles.withPrefix]: !!props.prefix,
           })}
           placeholder={props.placeholder}
           onFocus={(e) => {
@@ -113,6 +123,12 @@ export default function InputField(props: Props) {
             <Eye/>
           </div>
         )}
+          {props.prefix && (
+            renderPrefix()
+          )}
+          {props.suffix && (
+            renderSuffix()
+          )}
         </div>
          <ErrorInput {...meta}/>
       </div>

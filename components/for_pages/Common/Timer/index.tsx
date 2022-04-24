@@ -7,6 +7,7 @@ import {useEffect} from 'react'
 interface Props {
   expiredAt: Date
   days?: boolean
+  minutes?: boolean
   style?: 'bonus' | 'freebitcoin' | 'tournament' | 'gift' | 'footer' | 'sheet' | 'wallet' | 'footerSmall' | 'tournamentMobile'
   onExpire?: () => void
 }
@@ -49,12 +50,11 @@ export default function Timer(props: Props) {
         <div className={styles.input}>
           { pad('00', props.days ?
            days
-            :
-            hours
+            : props.minutes ? minutes : hours
           )}
         </div>
         <div className={styles.label}>
-          {props.days? <>дней</> : <>часов</>}
+          {props.days? 'дней' : props.minutes ? 'минут': 'часов'}
         </div>
       </div>
       <div className={styles.separator}>
@@ -66,7 +66,7 @@ export default function Timer(props: Props) {
         {pad('00', props.days ?
             hours
             :
-            minutes
+          props.minutes ? seconds :  minutes
           )}
         </div>
         <div className={styles.label}>

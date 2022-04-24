@@ -28,9 +28,16 @@ export enum ProfileModalType {
 
 export enum CookiesType {
   accessToken = 'accessToken',
-  Language = 'language'
+  sessionId = 'sessionId',
+  language = 'language',
+  notificationShown = 'notificationShown',
+  firstVisitAt = 'firstVisitAt',
+  bonusDepositShowMode = 'bonusDepositShowMode',
 }
-
+export enum TimerType{
+  ShowNotificationBanner = 'showNotificationBanner',
+  ShowBonusesBanner = 'showNotificationBanner',
+}
 export enum GameType{
   Baccarat = 'baccarat',
   Blackjack = 'blackjack',
@@ -66,4 +73,15 @@ export enum SnackbarType {
 }
 export enum FavoriteEntityType {
   games = 'games',
+}
+
+export enum BonusDepositShowMode{
+  Modal = 'modal',
+  Spoiler = 'spoiler',
+  Gift = 'gift'
+}
+export enum UserBalanceType{
+  Totals = 'totals',
+  Real = 'real',
+  Bonus = 'bonus'
 }

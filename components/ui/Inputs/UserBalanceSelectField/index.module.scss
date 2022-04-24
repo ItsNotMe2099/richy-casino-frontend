@@ -24,6 +24,9 @@
 .symbol{
   display: flex;
   margin-right: 6px;
+  img{
+    max-width: 24px;
+  }
 }
 
 .balance{
@@ -78,6 +81,7 @@
   flex: 1 1;
   font-weight: 500;
   margin-bottom: 0;
+  margin-top: 10px !important;
   nav{
     width: 100%;
     top: 65px;
@@ -90,12 +94,19 @@
 }
 
 .placeholder{
+  background: $dark500;
+  border-radius: 12px;
+  height: 52px;
+  padding: 0px 8px 0px 20px;
   display: flex;
   font-weight: 600;
   font-size: 16px;
   align-items: center;
   justify-content: space-between;
   flex: 1;
+  .group{
+    line-height: 52px;
+  }
 }
 
 .reverse{

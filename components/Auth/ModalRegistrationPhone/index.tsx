@@ -21,8 +21,11 @@ export default function ModalRegistrationPhone(props: Props) {
   const args = context.modalArguments as RegistrationPhoneModalArguments
 
   const [error, setError] = useState<string | null>(null)
+  const [sending, setSending] = useState<boolean>(false)
+
   const handleSubmit = async (data) => {
     try {
+      setSending(true)
       setError(null)
       const res = await AuthRepository.registerPhone({
         code:  data.code,
@@ -35,12 +38,14 @@ export default function ModalRegistrationPhone(props: Props) {
         setError(t('registration_error'))
       }
 
+      setSending(false)
       context.setToken(accessToken)
       context.updateUserFromCookies()
       context.showModal(ModalType.registrationSuccess, {login: args.phone, password: data.password} as RegistrationSuccessModalArguments)
     } catch (e) {
       setError(e)
     }
+    setSending(false)
   }
   const initialValues = {
     code: '',
@@ -63,22 +68,25 @@ export default function ModalRegistrationPhone(props: Props) {
           <div className={styles.inputs}>
             <InputField
               name={'code'}
+              disabled={sending}
               placeholder={t('registration_phone_field_code')} validate={Validator.required}/>
             <InputField
               name={'password'}
               type={'password'}
               obscure={true}
+              disabled={sending}
               placeholder={t('registration_phone_field_password')} validate={Validator.required}/>
             <InputField
               name={'passwordConfirm'}
               type={'password'}
               obscure={true}
+              disabled={sending}
               placeholder={t('registration_phone_field_password_confirm')}
               validate={Validator.combine([Validator.required, Validator.passwordsMustMatch(values)])}
             />
           </div>
           <FormError error={error}/>
-            <Button type='submit' fluid className={styles.button} size='submit' background='blueGradient500' >Продолжить</Button>
+            <Button type='submit' fluid spinner={sending} className={styles.button} size='submit' background='blueGradient500' >Продолжить</Button>
 
         </Form>)}
       </Formik>

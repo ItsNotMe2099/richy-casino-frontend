@@ -117,9 +117,7 @@ export default function Header(props: Props) {
                 {context.user.extraBalances && <HiddenXs>
                  <div className={styles.userBonuses} onClick={() => context.showModal(ProfileModalType.profile)}>
                     <UserBonus icon='/img/icons/ticket.svg' amount={context.user.extraBalances.lotteryTickets ?? 0} color='#427BF8'/>
-                    <UserBonus icon='/img/icons/bitcoin.svg' amount={context.user.extraBalances.freeBitcoin ?? 0} color='#FFD12F'/>
                     <UserBonus icon='/img/icons/spin.svg' amount={context.user.extraBalances.freespinAmount ?? 0} color='#F81AAC'/>
-                    <UserBonus icon='/img/icons/dollar.svg' amount={context.user.balance.currencies.bonus[0]?.value ?? 0} color='#7BD245'/>
                   </div>
                 </HiddenXs>}
                 {!user.flags.isHideBalance && <ProfileAccountsMenu/>}

@@ -62,17 +62,18 @@ export default function ModalContainer(props: Props) {
           <Modal key={4} isOpen={context.modal === ModalType.registrationSuccess} {...commonSettings} noBorder>
             <ModalRegistrationSuccess/>
           </Modal>
-          <ProfileModal isBack={true} size='large' key={5} isOpen={context.modal === ProfileModalType.paymentHistory} {...commonSettings} title={t('payment_history_title')} user={user} payment>
+          <ProfileModal isBack={true} size='large' key={5} isOpen={context.modal === ProfileModalType.paymentHistory} {...commonSettings} title={t('payment_history_title')}  payment>
             <PaymentHistory/>
           </ProfileModal>
-          <ProfileModal key={6} isOpen={context.modal === ProfileModalType.profile} {...commonSettings} title={t('profile_title')} user={user} profile>
+          <ProfileModal key={6} isOpen={context.modal === ProfileModalType.profile} {...commonSettings} title={t('profile_title')} profile>
             <Profile/>
           </ProfileModal>
-          <ProfileModal isBack={true} size='large' key={7} isOpen={context.modal === ProfileModalType.settings} {...commonSettings} title={t('settings_title')} user={user}>
+          <ProfileModal isBack={true} size='large' key={7} isOpen={context.modal === ProfileModalType.settings} {...commonSettings} title={t('settings_title')} >
             <Settings user={user}/>
           </ProfileModal>
 
-          <Wallet/>
+            {context.user && <Wallet/>}
+            {context.user && <Withdraw/>}
           <Modal fortune key={9} isOpen={context.modal === ModalType.fortune} {...commonSettings} noBorder size='fortune'>
             <Fortune/>
           </Modal>
@@ -83,7 +84,7 @@ export default function ModalContainer(props: Props) {
 
           <ProfileModal
           size='small'
-          key={13} isBack={true} isOpen={context.modal === ProfileModalType.exchange} {...commonSettings} title={t('exchange_title')} user={user} payment noBorder>
+          key={13} isBack={true} isOpen={context.modal === ProfileModalType.exchange} {...commonSettings} title={t('exchange_title')}  payment noBorder>
             <Exchange user={user}/>
           </ProfileModal>
           <ProfileModal
@@ -91,28 +92,28 @@ export default function ModalContainer(props: Props) {
            key={14}
            isOpen={context.modal === ProfileModalType.favorite}
            size='large' {...commonSettings}
-           title={t('favorite_title')} user={user}
+           title={t('favorite_title')}
            isBack={true}
            style='favorite'
            >
             <Favorite/>
           </ProfileModal>
-          <ProfileModal isBack={true} size='large' key={15} isOpen={context.modal === ProfileModalType.betsHistory} {...commonSettings} title={t('bets_history')} user={user} payment>
+          <ProfileModal isBack={true} size='large' key={15} isOpen={context.modal === ProfileModalType.betsHistory} {...commonSettings} title={t('bets_history')}  payment>
             <BetsHistory/>
           </ProfileModal>
           <ProfileModal
           size='small'
           style='buyCrypto'
-          key={16} isBack={true} isOpen={context.modal === ProfileModalType.buyCrypto} {...commonSettings} title={t('buy_crypto_title')} user={user} payment noBorder>
+          key={16} isBack={true} isOpen={context.modal === ProfileModalType.buyCrypto} {...commonSettings} title={t('buy_crypto_title')}  payment noBorder>
             <BuyCrypto user={user}/>
           </ProfileModal>
           <ProfileModal
           size='small'
           style='2fa'
-          key={17} isBack={true} isOpen={context.modal === ProfileModalType.FA} {...commonSettings} title={t('2fa_title')} user={user}>
+          key={17} isBack={true} isOpen={context.modal === ProfileModalType.FA} {...commonSettings} title={t('2fa_title')} >
             <FA/>
           </ProfileModal>
-          <Withdraw/>
+
 
             <Modal key={19} isOpen={context.modal === ModalType.profileBurger} {...commonSettings} noBorder>
               <ProfileBurger isOpen={context.modal === ModalType.profileBurger}  user={user}/>

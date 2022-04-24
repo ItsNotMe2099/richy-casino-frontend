@@ -40,7 +40,6 @@ export default function GField(props: IGFieldProps) {
 
 
   const renderSuffix = () => {
-
     if(typeof props.suffix === 'string') {
       switch (props.suffix) {
         case 'clear':

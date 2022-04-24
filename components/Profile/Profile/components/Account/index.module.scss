@@ -1,0 +1,60 @@
+@import "scss/index";
+.root{
+  padding: 0px 21px;
+  border-radius: 8px;
+  background-color: $dark600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  height: 50px;
+  &.isMain{
+    background-color: #322c29;
+  }
+}
+
+.numbers{
+  .amount{
+    margin-right: 4px;
+  }
+
+
+  .main{
+    font-weight: 500;
+    font-size: 12px;
+    color: $dark200;
+    text-align: end;
+    margin-top: 1px;
+    line-height: 10px;
+  }
+}
+.calculated{
+  display: flex;
+}
+.left{
+  display: flex;
+  align-items: center;
+  grid-gap: 0px 6px;
+  .icon{
+    max-width: 24px;
+    max-height: 24px;
+  }
+  .currency {
+    line-height: 50px;
+  }
+}
+
+
+.right{
+  display: flex;
+  align-items: center;
+  grid-gap: 0px 19px;
+  .currency{
+    color: $dark100;
+  }
+
+}
+
+
+
+

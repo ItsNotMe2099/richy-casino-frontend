@@ -1,0 +1,41 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: row;
+  grid-gap: 3px;
+ &.selected{
+  .card{
+    background: rgba(98, 140, 255, 1);
+    color: rgba(167, 213, 255, 1);
+  }
+   .icon{
+       path{
+         fill: $white;
+       }
+   }
+ }
+}
+.card{
+  width: 17px;
+  height: 17px;
+  background: rgba(55, 57, 69, 1);
+  border-radius: 6px;
+  padding: 3px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.number{
+    background: rgba(98, 140, 255, 1);
+    color: rgba(167, 213, 255, 1);
+  }
+
+}
+
+.icon{
+    max-height: 15px;
+    path{
+      fill: #cacaca;
+    }
+
+}

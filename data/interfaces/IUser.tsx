@@ -1,6 +1,8 @@
 export interface IUserBalanceCurrency{
   currency: string,
   value: number
+  calculated: number,
+  mainCurrency: string
 }
 export interface IUserBalanceCurrencyRaw{
   [key: string]: number
@@ -24,7 +26,13 @@ export default interface IUser {
       totals: IUserBalanceCurrency[],
       real: IUserBalanceCurrency[],
       bonus: IUserBalanceCurrency[],
-    }
+    },
+    calculated: {
+      totals: IUserBalanceCurrency[],
+      real: IUserBalanceCurrency[],
+      bonus: IUserBalanceCurrency[],
+    },
+
   }
   extraBalances: {
     wheelSpins: number,
@@ -37,5 +45,6 @@ export default interface IUser {
     isHideFromLeaderboard: boolean,
     isHideFromStatistics: boolean,
     isHideBalance: boolean,
+    is2faEnabled: boolean
   }
 }

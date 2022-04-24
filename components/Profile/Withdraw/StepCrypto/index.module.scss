@@ -1,0 +1,108 @@
+@import "scss/index";
+.root{
+  margin-top: 16px;
+  .choose:nth-child(2){
+    margin-top: 20px;
+  }
+  padding-bottom: 34px;
+  @media screen and (max-width: $xs-max){
+    padding-bottom: 20px;
+  }
+}
+.separator{
+  margin: 16px 0px;
+
+}
+
+
+.input{
+  padding: 14px 0;
+  padding-left: 20px;
+  background: $dark600;
+  border-radius: 9px;
+  font-weight: 500;
+  font-size: 16px;
+  display: flex;
+  margin-top: 14px;
+  padding-right: 15px;
+  span{
+    color: #2f56fd;
+    text-transform: uppercase;
+    margin-left: 5px;
+  }
+}
+
+.choose{
+  font-weight: 500;
+  font-size: 14px;
+  color: $dark200;
+  text-align: left;
+  @media screen and (max-width: $xs-max){
+    font-size: 12px;
+  }
+}
+
+
+
+.choose2{
+  margin-top: 20px;
+  font-weight: 500;
+  font-size: 13px;
+  color: $dark200;
+  text-align: left;
+}
+
+.input2{
+  padding: 14px 0;
+  padding-left: 20px;
+  background: $dark600;
+  border-radius: 9px;
+  font-weight: 500;
+  font-size: 16px;
+  display: flex;
+  margin-top: 14px;
+  padding-right: 15px;
+  justify-content: space-between;
+}
+
+
+.forFill{
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copy{
+  cursor: pointer;
+}
+
+
+.qrCodeArea{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
+  .qrCode{
+    max-width: 164px;
+  }
+
+  @media screen and (max-width: $xs-max){
+    margin-top: 20px;
+  }
+}
+
+
+.important{
+  margin-top: 25px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: -0.01em;
+  color: #a5a5a8;
+  @media screen and (max-width: $xs-max){
+    margin-top: 12px;
+  }
+  span{
+    color: #2f56fd;
+    text-transform: uppercase;
+  }
+}

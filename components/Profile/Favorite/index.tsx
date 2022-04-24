@@ -1,7 +1,11 @@
 import styles from './index.module.scss'
+import {useEffect, useState} from 'react'
+import {IGame} from 'data/interfaces/IGame'
+import GameFavoriteRepository from 'data/repositories/GameFavoriteRepository'
+import ItemGame from 'components/for_pages/Common/ItemGame'
 
 interface Props {
-  
+
 }
 
 interface ItemProps {
@@ -9,47 +13,20 @@ interface ItemProps {
 }
 
 export default function Favorite(props: Props) {
-
-  const Item = ({icon}: ItemProps) => {
-    return (
-      <div className={styles.item} style={{backgroundImage: `url(${icon})`}}>
-        <div className={styles.star}>
-          <img src='/img/Favorite/star.svg' alt=''/>
-        </div>
-      </div>
-    )
+  const [data, setData] = useState<IGame[]>([])
+  useEffect(() => {
+    GameFavoriteRepository.fetchGames().then(i => {
+      setData(i)
+    })
+  }, [])
+  const handleDelete = (game: IGame) => {
+    setData(data => data.filter(i => i.id !== game.id))
   }
-
-  const games = [
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-    {icon: '/img/Favorite/games.png'},
-  ]
 
   return (
     <div className={styles.root}>
-      {games.map((item, index) => 
-        <Item icon={item.icon} key={index}/>
+      {data.map((item, index) =>
+        <ItemGame  item={item} key={item.id} onDeleteFromFavorite={handleDelete} />
       )}
     </div>
   )

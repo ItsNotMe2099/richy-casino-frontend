@@ -8,7 +8,6 @@ html, body {
   background: $dark800;
   color: $white;
   @media screen and (max-width: $mobile-max) {
-    font-size: calc(14px + 1vw);
   }
 }
 

@@ -111,7 +111,9 @@ max-width: 280px;
   justify-content: center;
   cursor: pointer;
 }
-
+.options{
+  z-index: 2;
+}
 .symbol{
   font-weight: 500;
   font-size: 13px;

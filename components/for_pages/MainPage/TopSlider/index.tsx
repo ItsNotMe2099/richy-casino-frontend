@@ -9,6 +9,7 @@ import { useAppContext } from 'context/state'
 import Gift from 'components/for_pages/Common/Gift'
 import classNames from 'classnames'
 import {Col, Row} from 'react-grid-system'
+import {BonusDepositShowMode} from 'types/enums'
 
 interface Props {
   children?: React.ReactNode
@@ -53,7 +54,7 @@ export default function TopSlider(props: Props) {
 
   return (
     <div className={styles.root}>
-      {(context.showBonus && !context.showBonusExpanded) && <div className={styles.bonus}><Gift timer/></div>}
+      {(context.showBonus && context.bonusShowMode === BonusDepositShowMode.Gift) && <div className={styles.bonus}><Gift timer/></div>}
       <HiddenXs>
         <Row>
           <Col>

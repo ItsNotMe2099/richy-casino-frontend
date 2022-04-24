@@ -28,7 +28,6 @@ interface Props {
   className?: string
   closeClassName?: string
   singlePage?: boolean
-  user: IUser
   payment?: boolean
   wallet?: boolean
   profile?: boolean
@@ -44,6 +43,7 @@ interface Props {
 
 export default function ProfileModal(props: Props) {
   const {t} = useTranslation()
+  const context = useAppContext()
   const customStyles = {
     overlay: {
       backgroundColor: !props.singlePage ? 'rgba(0, 0, 0, 0.5)' : 'transparent',
@@ -62,8 +62,6 @@ export default function ProfileModal(props: Props) {
       background: 'none',
     },
   }
-
-  const context = useAppContext()
 
   const getSizeClass = (size) => {
     switch (size) {
@@ -110,8 +108,7 @@ export default function ProfileModal(props: Props) {
                   </div>
                 </div>
                 <div className={styles.right}>
-                  {(props.payment || props.wallet) &&
-                  <div className={styles.id}>
+                  {(props.payment || props.wallet) && context.user && <div className={styles.id}>
                     ID {context.user?.id}
                   </div>}
                   {props.onRequestClose && (
@@ -132,14 +129,14 @@ export default function ProfileModal(props: Props) {
             <div className={classNames(styles.mobile, styleClassMobile)}>
               {showModalMobileHeader && <div className={styles.top}>
                 <Logo className={styles.logo}/>
-                <div className={styles.balance}>
+                {context.user && <div className={styles.balance}>
                   <div className={styles.text}>
                     BALANCE
                   </div>
                   <div className={styles.money}>
-                    {props.user.balance}
+                    {context.user.balance.totalCalculatedAmount} {context.user.currencyIso}
                   </div>
-                </div>
+                </div>}
                 <Button background='payGradient500' className={styles.btnFill} onClick={() => context.showModal(ProfileModalType.wallet)}><img src='/img/icons/wallet.svg' alt=''/>{t('profile_deposit')}</Button>
                 {props.onRequestClose && (
                   <div className={styles.close} onClick={props.onRequestClose}>
@@ -164,7 +161,7 @@ export default function ProfileModal(props: Props) {
               </div>}
               <div className={classNames(styles.title, {[styles.walletBackTitle]: props.wallet})}>
                 <div>{props.title}</div>
-                {props.wallet && <div className={styles.id}>ID {props.user.id}</div>}
+                {props.wallet && context.user && <div className={styles.id}>ID {context.user.id}</div>}
               </div>
             </div>
           </VisibleXs>

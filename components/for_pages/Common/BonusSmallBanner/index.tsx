@@ -1,11 +1,11 @@
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import Timer from 'components/for_pages/Common/Timer'
-import {ModalType} from 'types/enums'
+import {ModalType, ProfileModalType} from 'types/enums'
 import {useAppContext} from 'context/state'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
-import { useEffect, useState } from 'react'
+import Formatter from 'utils/formatter'
 
 interface Props {
   children?: React.ReactNode
@@ -16,9 +16,8 @@ interface Props {
 
 export default function BonusSmallBanner(props: Props) {
   const appContext = useAppContext()
-  const someDate = '2022-03-27T12:46:24.007Z'
-
-  const expiredAt = new Date(someDate)
+  const details = appContext.bonusBannerDetails
+  const expiredAt = new Date(details?.validTill)
 
   const bannerClass = classNames({
     [styles.footer]: props.style === 'footer',
@@ -27,22 +26,18 @@ export default function BonusSmallBanner(props: Props) {
     [styles.profileBurger]: props.style === 'profileBurger'
   })
 
-  const [isTimerVisible, setIsTimerVisible] = useState(false)
 
   const user = appContext.auth
-
-  useEffect(() => {
-    if(user){
-      setIsTimerVisible(true)
+  const handleClick = () => {
+    if(!appContext.auth){
+      appContext.showModal(ModalType.registration)
+    }else if(props.style !== 'wallet' && props.style !== 'registration'){
+      appContext.showModal(ProfileModalType.wallet)
     }
-    else{
-      setIsTimerVisible(false)
-    }
-  }, [user])
-
+  }
   return (
     <div className={classNames(styles.root, bannerClass)}
-         onClick={() => appContext.showModal(ModalType.bonus)}>
+         onClick={handleClick}>
       {props.style === 'footer' &&
       <div className={styles.close} onClick={(e) => {
         e.stopPropagation()
@@ -97,18 +92,18 @@ export default function BonusSmallBanner(props: Props) {
         <div className={classNames(styles.left, {[styles.noMargin]: !user})}>
           <span className={styles.title}>Бонус</span>
           <div className={styles.fs}>
-            30 000 ₽ + 300 FS
+            {Formatter.formatNumber(details?.amount)} {details?.currency.toUpperCase()} + {Formatter.formatNumber(details?.freeSpins)} FS
           </div>
           <div className={styles.bottom}>
           <div className={styles.satoshi}>
-              10 Лотерейных билетов
+            {Formatter.formatNumber(details?.lotteryTickets)} Лотерейных билетов
             </div>
             <div className={styles.satoshi}>
-              50 Satoshi
+              {Formatter.formatNumber(details?.freeBitcoin)} Satoshi
             </div>
           </div>
         </div>
-        {isTimerVisible && <div className={styles.timer}><Timer style={props.style === 'wallet'? 'wallet' : 'footerSmall'} expiredAt={expiredAt}/></div>}
+        {appContext.showBonus && <div className={styles.timer}><Timer minutes style={props.style === 'wallet'? 'wallet' : 'footerSmall'} expiredAt={expiredAt}/></div>}
       </div>
     </div>
   )

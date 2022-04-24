@@ -1,12 +1,15 @@
 import {createContext, useContext, useEffect, useState} from 'react'
-import {CookiesType, ModalType, ProfileModalType, SnackbarType} from 'types/enums'
+import {BonusDepositShowMode, CookiesType, ModalType, ProfileModalType, SnackbarType} from 'types/enums'
 import ReactModal from 'react-modal'
 import UserRepository from 'data/repositories/UserRepository'
 import Cookies from 'js-cookie'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import InfoRepository from 'data/repositories/InfoRepository'
 import IUser from 'data/interfaces/IUser'
-import {SnackbarData} from 'types/interfaces'
+import {IBonusBannerDetails, SnackbarData} from 'types/interfaces'
+import {CookiesLifeTime, Timers} from 'types/constants'
+import PromoCodeRepository from 'data/repositories/PromoCodeRepository'
+import UserUtils from 'utils/user'
 
 interface IState {
   isMobile: boolean
@@ -21,8 +24,10 @@ interface IState {
   updateUserFromCookies: () => void
   user: IUser,
   showBonus: boolean,
-  showBonusExpanded: boolean,
-  setBonusExpanded: (show) => void,
+  bonusShowMode: BonusDepositShowMode | null
+  setBonusShowMode: (show: BonusDepositShowMode) => void,
+  bonusBannerDetails: IBonusBannerDetails | null
+  updatePromoCodes: () => void
   currencies: ICurrency[]
   snackbar: SnackbarData | null,
   showSnackbar: (text: string, type: SnackbarType) => void
@@ -40,9 +45,11 @@ const defaultValue: IState = {
   setToken: (token) => null,
   logout: () => null,
   updateUserFromCookies: () => null,
+  updatePromoCodes: () => null,
   showBonus: false,
-  showBonusExpanded: false,
-  setBonusExpanded: (show) => null,
+  bonusShowMode: null,
+  setBonusShowMode: (show) => null,
+  bonusBannerDetails: null,
   currencies: [],
   snackbar: null,
   showSnackbar: (text, type) => null,
@@ -62,8 +69,9 @@ export function AppWrapper(props: Props) {
   const [modalArguments, setModalArguments] = useState<ModalType | ProfileModalType | null>(null)
   const [user, setUser] = useState<IUser | null>(props.initialUser)
   const [auth, setAuth] = useState<boolean>(!!props.initialUser)
-  const [showBonus, setShowBonus] = useState<boolean>(true)
-  const [showBonusExpanded, setShowBonusExpanded] = useState<boolean>(true)
+  const [showBonus, setShowBonus] = useState<boolean>(false)
+  const [bonusShowMode, setBonusShowMode] = useState<BonusDepositShowMode | null>(null)
+  const [bonusBannerDetails, setBonusBannerDetails] = useState<IBonusBannerDetails>(null)
   const [currencies, setCurrencies] = useState<ICurrency[]>([])
   const [snackbar, setSnackbar] = useState<SnackbarData | null>(null)
   const value: IState = {
@@ -77,16 +85,14 @@ export function AppWrapper(props: Props) {
     user,
     snackbar,
     showModal: (type, props: any) => {
-      ReactModal.setAppElement('body')
-      setModalArguments(props)
-      setModal(type)
+      showModal(type, props)
 
     },
     hideModal: () => {
       setModal(null)
     },
     setToken: (token: string) => {
-      Cookies.set(CookiesType.accessToken, token, {expires: 365})
+      Cookies.set(CookiesType.accessToken, token, {expires: CookiesLifeTime.accessToken})
       setAuth(true)
     },
     logout: () => {
@@ -94,15 +100,22 @@ export function AppWrapper(props: Props) {
       setAuth(false)
       setUser(null)
     },
-    updateUserFromCookies() {
-      updateUserDetails()
+    async updateUserFromCookies() {
+      return updateUserDetails()
+    },
+    async updatePromoCodes() {
+      return updatePromoCodes()
+    },
+    showBonus,
+    bonusShowMode,
+    bonusBannerDetails,
+    setBonusShowMode(mode) {
+      console.log('setBonusShowMode', mode)
+      setBonusShowMode(mode)
+      Cookies.set(CookiesType.bonusDepositShowMode, mode, {expires: CookiesLifeTime.bonusDepositShowMode})
+
     },
 
-    showBonus,
-    showBonusExpanded,
-    setBonusExpanded(show){
-      setShowBonusExpanded(show)
-    },
     showSnackbar: (text, type: SnackbarType) => {
       setSnackbar({text, type})
       setTimeout(() => {
@@ -116,22 +129,46 @@ export function AppWrapper(props: Props) {
   useEffect(() => {
     if (props.token) {
       setAuth(true)
-
       updateUserDetails()
     }
 
   }, [props.token])
-
   useEffect(() => {
-    setTimeout(() => {
-     // setModal(ModalType.fortune)
-    })
-    InfoRepository.getCurrencies().then( i => setCurrencies(i))
+    updatePromoCodes()
+    if (!Cookies.get(CookiesType.firstVisitAt)) {
+      Cookies.set(CookiesType.firstVisitAt, (new Date()).toISOString(), {expires: CookiesLifeTime.firstVisitAt})
+    }
+    if (Cookies.get(CookiesType.bonusDepositShowMode)) {
+      setBonusShowMode(Cookies.get(CookiesType.bonusDepositShowMode) as BonusDepositShowMode)
+    }
   }, [])
+  useEffect(() => {
+    InfoRepository.getCurrencies().then(i => setCurrencies(i))
+  }, [])
+  const showModal = (type: ModalType | ProfileModalType, props?: any) => {
+    ReactModal.setAppElement('body')
+    setModalArguments(props)
+    setModal(type)
+  }
   const updateUserDetails = async () => {
     const res = await UserRepository.getUser()
-
     setUser(res)
+  }
+  const updatePromoCodes = async () => {
+    try {
+      const promoCodes = await PromoCodeRepository.fetchList()
+      const isEnabled = UserUtils.isBonusEnabled(promoCodes)
+      const details = UserUtils.getBonusBannerDetails(promoCodes)
+      setBonusBannerDetails(details)
+      setShowBonus(isEnabled)
+      if (isEnabled && !auth && !Cookies.get(CookiesType.bonusDepositShowMode)) {
+        setTimeout(() => {
+          showModal(ModalType.bonus)
+        }, Timers.showBonusesBanner)
+      }
+    } catch (e) {
+      console.error(e)
+    }
   }
   return (
     <AppContext.Provider value={value}>

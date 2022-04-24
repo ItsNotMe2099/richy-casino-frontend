@@ -228,12 +228,12 @@
 .userBonuses{
   border-radius: 8px;
   background-color: $dark700;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3px 15px;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 3px 0px;
   padding: 5px 12px;
   cursor: pointer;
-  @media screen and (max-width: 1200px){
+  @media screen and (max-width: 1023px){
     display: none;
   }
   &:hover{

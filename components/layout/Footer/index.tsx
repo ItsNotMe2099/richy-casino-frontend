@@ -1,4 +1,4 @@
-import { CONTACTS } from 'types/constants'
+import {CONTACTS} from 'types/constants'
 import styles from './index.module.scss'
 import Button from 'components/ui/Button'
 import Link from 'next/link'
@@ -9,12 +9,13 @@ import LinkedIn from 'components/svg/LinkedIn'
 import Twitter from 'components/svg/Twitter'
 import Logo from 'components/svg/Logo'
 import LangSelect from 'components/for_pages/Common/LangSelect'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
+import {useState} from 'react'
+import {useRouter} from 'next/router'
 import SupportButton from 'components/for_pages/Common/SupportButton'
 import {useAppContext} from 'context/state'
 import {format} from 'date-fns'
 import {useTranslation} from 'next-i18next'
+import {BonusDepositShowMode} from 'types/enums'
 
 interface Props {
   children?: React.ReactNode
@@ -97,7 +98,7 @@ export default function Footer(props: Props) {
 
   return (
     <div className={styles.root} style={{
-      paddingBottom: `${(appContext.auth  ? 81 : 0) + (appContext.showBonusExpanded ? 20 : 0)}px`
+      paddingBottom: `${(appContext.auth  ? 81 : 0) + (appContext.showBonus && appContext.bonusShowMode === BonusDepositShowMode.Spoiler ? 20 : 0)}px`
     }}>
         <div className={styles.wrapper}>
         {currentRoute === '/' || currentPath === '/' ?

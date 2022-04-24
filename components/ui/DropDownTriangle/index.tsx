@@ -6,11 +6,12 @@ interface Option {
 
 interface Props {
   className?: string
+  bottom?: boolean
 }
 
 export default function DropDownTriangle(props: Props){
   return (
-    <div className={classNames(styles.root, props.className)}>
+    <div className={classNames(styles.root, props.className, {[styles.bottom]: props.bottom})}>
       <div className={styles.triangle}/>
     </div>
   )

@@ -2,17 +2,26 @@
 
 .root{
   width: 100%;
-  margin-top: 16px;
+  margin-top: 0px;
 }
 
 .placeholder{
-  padding: 11px 0;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    .label {
+      color: $white;
+    }
+  }
 }
 
 .newAccount{
   justify-content: center;
   display: flex;
   align-items: center;
+  margin-bottom: 0px;
   .active{
     transform: none;
   }
@@ -39,6 +48,7 @@
 
 .arrow{
   align-self: center;
+  margin-left: 8px;
 }
 
 .option{
@@ -47,6 +57,10 @@
   font-weight: 500;
   font-size: 14px;
   align-items: center;
+  img{
+    max-width: 24px;
+    margin-right: 19px;
+  }
   span{
     font-weight: 600;
     font-size: 14px;
@@ -56,4 +70,28 @@
   &:hover{
     background: #41424F;
   }
+}
+.select{
+  background: $dark600;
+  border-radius: 8px;
+  max-width: 100%;
+  .dropDownTrigger{
+    display: block;
+  }
+
+}
+
+.select{
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0px !important;
+  .active{
+    transform: none;
+  }
+}
+
+
+.dropDown{
+  margin-top: 10px !important;
 }

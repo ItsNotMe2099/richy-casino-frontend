@@ -38,7 +38,12 @@
     color: $white;
     font-weight: 500;
   }
-
+  &.withSuffix{
+    padding-right: 40px;
+  }
+  &.withPrefix{
+    padding-left: 49px;
+  }
   &.inputError{
     color: #ED4700;
     border: 1px solid #ED4700;
@@ -46,12 +51,6 @@
       color:  #ED4700 !important;
     }
   }
-}
-
-.inputAlt{
-  color: $white;
-  font-weight: 500;
-  font-size: 16px;
 }
 
 .inputWrapper{
@@ -99,3 +98,4 @@
     }
   }
 }
+

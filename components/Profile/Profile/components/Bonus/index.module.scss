@@ -1,0 +1,30 @@
+@import "scss/index";
+
+.bonusItem{
+  padding: 10px 12px;
+  background: $dark600;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.bonusLeft{
+  display: flex;
+  align-items: center;
+}
+
+.bonusIcon{
+  display: flex;
+  margin-right: 8px;
+}
+
+.number{
+  font-weight: 500;
+  font-size: 12px;
+}
+
+
+
+

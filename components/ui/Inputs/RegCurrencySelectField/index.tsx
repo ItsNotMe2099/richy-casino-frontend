@@ -6,6 +6,7 @@ import {useAppContext} from 'context/state'
 import Converter from 'utils/converter'
 import {useMemo} from 'react'
 import UserUtils from 'utils/user'
+import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
 
 export interface ICustomSelectViewOption extends IOption<string>{
 
@@ -24,7 +25,7 @@ interface PropsOption{
 }
 
 const Symbol = (props: PropsOption) => {
-  return <div className={styles.symbol}>{props.option.symbol}</div>
+  return <CurrencySvg className={styles.symbol} currencyIso={props.option.value} color/>
 }
 
 const Option = (props: PropsOption) => {

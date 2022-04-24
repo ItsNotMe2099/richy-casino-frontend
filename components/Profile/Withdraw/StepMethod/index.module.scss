@@ -1,0 +1,28 @@
+@import "scss/index";
+
+.root{
+
+}
+.label{
+  margin-top: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  color: $dark200;
+  text-align: left;
+  margin-bottom: 12px;
+  &.labelAccount{
+    @media screen and (max-width: $xs-max){
+      font-size: 12px;
+    }
+  }
+  @media screen and (max-width: $xs-max){
+    margin-bottom: 10px;
+  }
+}
+
+.account{
+  margin-bottom: 14px;
+  @media screen and (max-width: $xs-max) {
+    margin-bottom: 18px;
+  }
+}

@@ -1,19 +1,31 @@
-
+export enum IPromoCodeBonusType{
+  Fix = 'fix',
+  Percent = 'percent'
+}
 export interface IPromoCodeBonus {
   currencyIso?: string,
-  type: number,
+  type: IPromoCodeBonusType,
   bonusBalance: {
-    wheel_spin: number,
-    freebitcoin: number,
-    lottery_ticket: number,
+    wheelSpin: number | string,
+    freebitcoin: number | string,
+    lotteryTicket: number | string,
+    freespins: number | string,
   },
   accountLevel: number
-  amount: number
+  amount: number | string
+  maxAmount?: number | string
+}
+export enum IPromoCodeActivationEvent{
+  Deposit = 'deposit'
+}
+export interface IPromoCodeActivation{
+  event: IPromoCodeActivationEvent,
+  deposit?: {min: number, currencyIso: string}
 }
 export interface IPromoCode {
-  validTill: number
-  imageIconUrl: string
-  imageFullsizeUrl: string
+  keyword: string
+  validTill: string
+  activation:IPromoCodeActivation,
   bonuses: IPromoCodeBonus[]
 }
 

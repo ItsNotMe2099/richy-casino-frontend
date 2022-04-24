@@ -1,6 +1,7 @@
 import {HTMLInputTypeAttribute, MouseEventHandler, ReactElement} from 'react'
 import { FieldConfig } from 'formik'
 import {FavoriteEntityType, SnackbarType} from 'types/enums'
+import {IUserBalanceCurrency} from 'data/interfaces/IUser'
 
 export interface IField extends FieldConfig {
   label?: string
@@ -36,6 +37,13 @@ export interface Country {
 export interface IOption<T> {
   label: string
   value?: T
+  symbol?: string | ReactElement,
+  icon?: string
+}
+export interface IOptionUserAccount extends IOption<string> {
+  balance?: number
+  calculatedBalance: number,
+  mainCurrency: string
   symbol?: string | ReactElement,
   icon?: string
 }
@@ -83,6 +91,9 @@ export interface RegistrationSuccessModalArguments {
 export interface PasswordResetModalArguments {
   login: string
 }
+export interface WithdrawModalArguments {
+  account: IUserBalanceCurrency
+}
 
 export interface IPosition{
   x: number
@@ -103,3 +114,24 @@ export interface SnackbarData {
   type: SnackbarType
 }
 export type FavoritesStoreType = {[entityType in FavoriteEntityType]: number[]}
+
+export enum PaymentMethod{
+  Crypto = 'crypto',
+  Card = 'card'
+}
+export enum PaymentStep {
+  Method = 'method',
+  Currency = 'currency',
+  Form = 'form',
+  Success = 'success'
+}
+
+export interface IBonusBannerDetails{
+  amount: number
+  currency: string
+  freeSpins: number
+  freeBitcoin: number
+  lotteryTickets: number
+  wheelSpins: number
+  validTill: string
+}

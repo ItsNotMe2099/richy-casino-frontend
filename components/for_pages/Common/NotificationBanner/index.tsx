@@ -3,9 +3,11 @@ import { useAppContext } from 'context/state'
 import { useEffect, useState } from 'react'
 import styles from './index.module.scss'
 import cookie from 'js-cookie'
+import {CookiesLifeTime, Timers} from 'types/constants'
+import {CookiesType} from 'types/enums'
 
 interface Props {
-  
+
 }
 
 export default function NotificationBanner(props: Props) {
@@ -13,18 +15,21 @@ export default function NotificationBanner(props: Props) {
   const context = useAppContext()
 
   const user = context.auth
-  const showCookie = cookie.get('show_notification')
+
   const [isShow, setIsShow] = useState(false)
   const modal = context.modal
-
   useEffect(() => {
-    setTimeout(()=>{
-      setIsShow(showCookie === 'no' ? false : true)
-     }, 5000)
+    setTimeout(() => {
+      const showCookie = cookie.get(CookiesType.notificationShown)
+      if(!showCookie){
+        setIsShow(true)
+      }
+    }, Timers.showNotificationBanner)
   }, [])
 
+
   const handleClose = () => {
-    cookie.set('show_notification', 'no', { expires: 365 * 3 })
+    cookie.set(CookiesType.notificationShown, '1', { expires: CookiesLifeTime.notificationShown})
     setIsShow(false)
   }
 

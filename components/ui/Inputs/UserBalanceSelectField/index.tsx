@@ -1,30 +1,26 @@
-import {IField, IOption} from 'types/interfaces'
+import { IOptionUserAccount} from 'types/interfaces'
 import styles from './index.module.scss'
-import { SelectField } from 'components/ui/Inputs/SelectField'
+
 import classNames from 'classnames'
+import Select from 'components/ui/Select'
+import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
 
-export interface ICustomSelectViewOption extends IOption<string>{
-  crypto?: boolean
-}
-
-interface Props extends IField{
-  options: ICustomSelectViewOption[]
-  placeholder?: string
-  currentItem?: ICustomSelectViewOption
+interface Props {
+  options: IOptionUserAccount[]
+  onChange: (value: IOptionUserAccount) =>  void
+  currentItem?: IOptionUserAccount
+  className: string
 
 }
 interface PropsOption{
-  option?: ICustomSelectViewOption
+  option?: IOptionUserAccount
   isActive?: boolean
   onClick?: () => void
-  currentItem?: ICustomSelectViewOption
+  currentItem?: IOptionUserAccount
 }
 
 const Symbol = (props: PropsOption) => {
-  return (
-  <div className={styles.symbol}>
-    <img src={props.option.symbol as string} alt=''/>
-  </div>
+  return (<CurrencySvg currencyIso={props.option.value} color className={styles.symbol}/>
   )
 }
 
@@ -32,12 +28,11 @@ const Balance = (props: PropsOption) => {
   return (
     <div className={styles.balance}>
       <div className={styles.value}>
-        {props.option.value}&nbsp;<span>{props.option.label}</span>
+        {props.option.calculatedBalance}&nbsp;<span>{props.option.mainCurrency}</span>
       </div>
-      {props.option.crypto &&
       <div className={styles.dg}>
-        0.0000004 DG
-      </div>}
+        {props.option.balance}&nbsp;{props.option.label}
+      </div>
     </div>
   )
 }
@@ -69,10 +64,12 @@ const Placeholder = (props: PropsOption) => {
 export const UserBalanceSelectField = (props: Props) => {
 
   return (
-    <SelectField options={props.options}  name={props.name} currentItemStyle={styles.current}
+    <Select options={props.options}
     className={styles.select}
-      itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
-      activeComponent={(option, isActive) => <Placeholder currentItem={option} isActive={isActive}/>}
+            rootClassName={props.className}
+            onChange={props.onChange}
+      itemComponent={(option, onClick) => <Option key={option.value} isActive={false} option={option as IOptionUserAccount} onClick={onClick}/>}
+            placeholder={(isActive) => <Placeholder currentItem={props.currentItem} isActive={isActive}/>}
       />
   )
 }

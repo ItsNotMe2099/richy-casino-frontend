@@ -10,6 +10,7 @@ interface Props {
   className?: string
   inActiveClassName?: string
   big?: boolean
+  onChange?: (state: boolean) => void
 }
 
 export default function FavoriteBtn(props: Props) {
@@ -48,8 +49,14 @@ export default function FavoriteBtn(props: Props) {
 
       if (activeRef.current) {
         await favoriteContext.unlike(props.id)
+        if(props.onChange){
+          props.onChange(false)
+        }
       } else {
         await favoriteContext.like(props.id)
+        if(props.onChange){
+          props.onChange(true)
+        }
       }
     }
     if (ref.current) {

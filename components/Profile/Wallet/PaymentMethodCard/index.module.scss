@@ -1,0 +1,68 @@
+@import "scss/index";
+
+.root{
+  background: #272832;
+  border-radius: 14px;
+  padding: 7px 11px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  height: 63px;
+  justify-content: space-between;
+  position: relative;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 12px;
+  color: $dark200;
+  @media only screen and (max-width: $xs-land) {
+    height: 66px;
+  }
+  &:hover, &.selected{
+    @include blueGradient500NoHover;
+
+      color: #A7BFFF;
+    .iconsGroup{
+      svg{
+        rect{
+          fill: #628CFF !important;
+        }
+        path{
+          fill: $white !important;
+        }
+      }
+      svg:last-child{
+        path{
+          fill: #A7D5FF !important;
+        }
+      }
+    }
+
+  }
+}
+.icon{
+  max-height: 24px;
+}
+
+.selected{
+  @include blueGradient500NoHover;
+  height: 66px;
+  .label{
+    color: #A7BFFF;
+  }
+
+  @media only screen and (max-width: $xs-land) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    grid-gap: 0px 7px;
+    height: 43px;
+    .label{
+      color: $white;
+      font-size: 14px;
+    }
+  }
+
+}
+.label{
+
+}

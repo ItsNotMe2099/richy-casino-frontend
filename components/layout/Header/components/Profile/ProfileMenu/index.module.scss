@@ -2,7 +2,6 @@
 
 .root {
   position: relative;
-  width: 100%;
   @media screen and (max-width: $xs-max) {
     display: flex;
     align-items: center;

@@ -6,6 +6,8 @@ import {useTranslation} from 'next-i18next'
 import {listenForOutsideClicks} from 'components/hooks/useDetectOutsideClick'
 import {CookiesType} from 'types/enums'
 import Cookies from 'js-cookie'
+import {CookiesLifeTime} from 'types/constants'
+import DropDownTriangle from 'components/ui/DropDownTriangle'
 interface ILanguage {
   icon: string
   code: string
@@ -44,9 +46,8 @@ const handleClick = (e) => {
 }
 const handleChange = (item: ILanguage) => {
     i18n.changeLanguage(item.code)
-  Cookies.set(CookiesType.Language, item.code, {expires: 3 * 365})
+  Cookies.set(CookiesType.language, item.code, {expires: CookiesLifeTime.language})
 }
-console.log('dsadasdasd', i18n.languages)
 
   return (
     <div  ref={dropdownRef} className={classNames(styles.root, props.className)} onClick={handleClick}>
@@ -55,7 +56,8 @@ console.log('dsadasdasd', i18n.languages)
       </div>
        <nav  className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive,   [styles.footer]: style === 'footer', })}>
         {/*style !== 'footer' && <div className={styles.triangle}></div>*/}
-        <Scrollbars autoHeightMax={170}  style={{ width: 73}}
+        <div className={styles.options}>
+        <Scrollbars  style={{ width: 73, height: items.length > 3 ? 52 : items.length * 52}}
         renderTrackVertical={props => <div {...props} className={styles.track}/>}
         renderView={props => <div {...props} className={styles.view}/>}>
         {items.map((item, index) =>
@@ -64,7 +66,8 @@ console.log('dsadasdasd', i18n.languages)
           </div>
         )}
         </Scrollbars>
-        {style === 'footer' && <div className={styles.triangle}></div>}
+        </div>
+        <DropDownTriangle bottom={style === 'footer'}/>
       </nav>
     </div>
   )

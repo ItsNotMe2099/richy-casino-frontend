@@ -3,7 +3,7 @@ import Converter from 'utils/converter'
 import {IPromoCode, IPromoCodeActivateResponse} from 'data/interfaces/IPromocode'
 
 export default class PromoCodeRepository {
-  static async fetchCurrentActiveRound(): Promise<IPromoCode> {
+  static async fetchList(): Promise<IPromoCode[]> {
     const res = await request({
       method: 'get',
       url: '/api/promocodes/promocode/list',
@@ -11,7 +11,21 @@ export default class PromoCodeRepository {
     if (res.err) {
       throw res.err
     }
-    return res.data.data?.map(i => Converter.objectKeysToCamelCase(i)) ?? []
+    return (res.data.data?.map(i => Converter.objectKeysToCamelCase(i)) as IPromoCode[]).map(i => ({
+      ...i,
+      bonuses: i.bonuses.map( i => ({
+        ...i,
+        amount: parseInt(i.amount as string,  10),
+        maxAmount: parseInt(i.maxAmount as string,  10),
+        bonusBalance: {...i.bonusBalance,
+          freebitcoin: parseInt(i.bonusBalance.freebitcoin as string, 10),
+          freespins: parseInt(i.bonusBalance.freespins as string, 10),
+          lotteryTicket: parseInt(i.bonusBalance.lotteryTicket as string, 10),
+          wheelSpin: parseInt(i.bonusBalance.wheelSpin as string, 10)
+        }
+
+      }))
+    })) ?? []
   }
 
   static async activate(keyword: string): Promise<IPromoCodeActivateResponse> {
