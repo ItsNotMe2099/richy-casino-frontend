@@ -81,7 +81,7 @@ export default function UserFooter(props: Props) {
         {items.slice(0, 2).map((item, index) =>
           <Item onClick={() => handleClickItem(item)} icon={item.icon} label={item.label} key={item.key}/>
         )}
-        <Link href={Routes.catalog}>
+        <Link href={Routes.richyGames}>
         <a className={styles.joystick}>
           <img src='/img/UserFooter/joystick.svg' alt=''/>
         </a>

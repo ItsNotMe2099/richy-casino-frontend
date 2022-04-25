@@ -22,7 +22,7 @@ export default function NotificationBanner(props: Props) {
     setTimeout(() => {
       const showCookie = cookie.get(CookiesType.notificationShown)
       if(!showCookie){
-        setIsShow(true)
+       // setIsShow(true)
       }
     }, Timers.showNotificationBanner)
   }, [])
