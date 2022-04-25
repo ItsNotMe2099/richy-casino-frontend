@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 import StrokeSvg from './StrokeSvg'
 import { IWheelSlot } from 'data/interfaces/IWheel'
+import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
 
 interface ISettings {
   size: number
@@ -80,7 +81,7 @@ export default function Desk(props: Props) {
           settings={props.settings}
           even={index % 2 === 0}
           text={`${item.winMoneyAmount}`}
-          iconName={item.currencyIso.toLocaleLowerCase()}
+          currencyIso={item.currencyIso}
           active={stopped && (index === props.activeSectionIndex)}
           numberOfSections={numberOfSections}
         />
@@ -94,7 +95,7 @@ interface SectionProps {
   settings: ISettings
   even: boolean
   text: string
-  iconName: string
+  currencyIso: string
   active: boolean
   numberOfSections: number
 }
@@ -155,7 +156,7 @@ function Section(props: SectionProps) {
         [styles.active]: props.active,
       })}/>
       <div className={styles.sectionContent}>
-        <img src={`/img/currencies/${props.iconName}.png`} className={styles.sectionIcon} alt=""/>
+        <CurrencySvg currencyIso={props.currencyIso} className={styles.sectionIcon} />
         <div className={styles.sectionText}>
           {props.text}
         </div>
