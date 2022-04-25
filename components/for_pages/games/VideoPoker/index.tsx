@@ -49,7 +49,7 @@ export default function GameVideoPoker(props: Props) {
   }
   return (
     <GamePageLayout
-      header={<GamePageHeader title={'Blackjack'} icon={''}/>}
+      header={<GamePageHeader title={'Mini Poker'} icon={''}/>}
       sideBar={<Sidebar  onSubmit={handleSubmit} onBet={handleBet} />}
       board={<Board hold={hold} onHold={handleHold} />} history={<GameHistory/>}/>
   )
