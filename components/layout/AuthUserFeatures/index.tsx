@@ -29,10 +29,10 @@ export default function AuthUserFeatures(props: Props) {
         </div>
       </>
     }
-    {context.auth && <VisibleXs>
+     <VisibleXs>
       <UserFooter/>
     </VisibleXs>
-    }
+
     </>
   )
 }

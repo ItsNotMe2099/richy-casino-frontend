@@ -24,7 +24,7 @@ export default function FreeBitcoin() {
     console.log('context.auth ', context.user )
     Promise.all([
       FreeBitcoinRepository.fetchSlots().then(i => setSlots(i)),
-      FreeBitcoinRepository.fetchHistory().then(i => setHistory(i)),
+      FreeBitcoinRepository.fetchHistory().then(i => setHistory(i ?? [])),
       ...(context.auth ? [FreeBitcoinRepository.fetchUserStatus().then(i => setUserStatus(i))] : []),
     ]).then(() => setLoading(false))
   }, [context.auth])
