@@ -1,11 +1,11 @@
 export class Routes{
 
   static get bonuses(){
-    return '/freeBitcoin'
+    return '/freebitcoin'
   }
 
   static get freeBitcoin(){
-    return '/freeBitcoin'
+    return '/freebitcoin'
   }
   static get lottery(){
     return '/lottery'
