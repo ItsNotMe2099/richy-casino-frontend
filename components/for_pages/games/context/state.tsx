@@ -16,6 +16,7 @@ import {IGameUser} from 'components/for_pages/games/data/interfaces/IGameUser'
 import GameUserRepository from 'components/for_pages/games/data/reposittories/GameUserRepository'
 import {runtimeConfig} from 'config/runtimeConfig'
 import {ICasinoGameRound} from 'components/for_pages/games/data/interfaces/ICasinoGameRound'
+import {IAviatorEvent} from 'data/interfaces/IAviatorEvent'
 
 interface IState {
   auth: boolean
@@ -24,6 +25,7 @@ interface IState {
   gameState$: Subject<ICasinoGameFinishEvent>
   turnState$: Subject<ICasinoGameTurn>
   historyState$: Subject<ICasinoGameRound>
+  aviatorState$: Subject<IAviatorEvent>
   newTurn: (data: any, shouldClear?: boolean) => void
   startGame: (data: ICasinoGameDataDto, shouldClear?: boolean) => void
   finish: () => void
@@ -44,6 +46,7 @@ interface IState {
 const gameState$ = new Subject<ICasinoGameFinishEvent>()
 const turnState$ = new Subject<ICasinoGameTurn>()
 const historyState$ = new Subject<ICasinoGameRound>()
+const aviatorState$ = new Subject<IAviatorEvent>()
 
 const defaultValue: IState = {
   auth: false,
@@ -51,6 +54,7 @@ const defaultValue: IState = {
   gameState$: gameState$,
   turnState$: turnState$,
   historyState$: historyState$,
+  aviatorState$: aviatorState$,
   roundId: null,
   turn: null,
   result: null,
@@ -119,7 +123,8 @@ export function GameWrapper(props: Props) {
     }
     const onConnect = () => {
       // setSocket(socket)
-    socket.emit('game:join', {type: props.gameType})
+      socket.emit('game:join', {type: props.gameType})
+      socket.emit('game:state', {type: props.gameType})
     }
     const onDisConnect = () => {
       socket.once('reconnect', () => {
@@ -162,11 +167,15 @@ export function GameWrapper(props: Props) {
     const onGameHistory = (data: ICasinoGameRound) => {
       historyState$.next(data)
     }
+    const onAviatorEvent = (data: IAviatorEvent) => {
+      aviatorState$.next(data)
+    }
     socket.on('connect', onConnect)
     socket.on('reconnect', onConnect)
     socket.on('disconnect', onDisConnect)
     socket.on('game:finish', onGameFinish)
     socket.on('game:turn', onGameTurn)
+    socket.on('aviator', onAviatorEvent)
     socket.on('game:error', onGameError)
     socket.on('game:history', onGameHistory)
     socket.on('user:balance', onUserBalance)
@@ -175,6 +184,7 @@ export function GameWrapper(props: Props) {
       socket.off('reconnect', onConnect)
       socket.off('disconnect', onDisConnect)
       socket.off('game:finish', onGameFinish)
+      socket.off('aviator')
       socket.off('game:round')
       socket.off('game:turn')
     }

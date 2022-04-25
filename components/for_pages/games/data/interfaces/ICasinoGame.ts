@@ -15,7 +15,9 @@ export interface ICasinoGameErrorEvent {
   errorCode: CasinoGameErrorCode
   errorName: any
 }
+export interface ICasinoInitialGameState {
 
+}
 export interface ICasinoGameFinishEvent<T = any> {
   id: number
   win: boolean
