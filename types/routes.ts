@@ -62,6 +62,9 @@ export class Routes{
   static get chess(){
     return '/catalog/game/poker'
   }
+  static get tournaments(){
+    return '/#tournaments'
+  }
   static get leaderBoard(){
     return '/#leader-board'
   }

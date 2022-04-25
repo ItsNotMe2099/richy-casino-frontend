@@ -13,7 +13,7 @@ interface IUser {
 }
 
 interface Props {
-  
+
 }
 
 export default function Winners(props: Props) {
@@ -37,7 +37,7 @@ export default function Winners(props: Props) {
 }
 
   return (
-      <div className={styles.root}>
+      <div className={styles.root} id={'leader-board'}>
           <div className={styles.header}>
             <Header icon='/img/Winners/icon.svg' label='ТОП 10 победителей за сегодня' style='popover' shadowColor='violet'/>
           </div>
@@ -66,11 +66,11 @@ export default function Winners(props: Props) {
         </thead>
         <tbody>
         <Scrollbars className={styles.scroll}>
-        {users.map((item, index) => 
+        {users.map((item, index) =>
                   <tr className={styles.user} key={index}>
                     <td className={styles.cell}>
-                      <img 
-                      src={item.sort === 1 ? '/img/Winners/award1.svg' : item.sort === 2 ? '/img/Winners/award2.svg' : '/img/Winners/award3.svg'} 
+                      <img
+                      src={item.sort === 1 ? '/img/Winners/award1.svg' : item.sort === 2 ? '/img/Winners/award2.svg' : '/img/Winners/award3.svg'}
                       alt=''/>
                     </td>
                     <td className={styles.cell}>
@@ -114,11 +114,11 @@ export default function Winners(props: Props) {
                   Приз
                 </div>
               </div>
-                {users.map((item, index) => 
+                {users.map((item, index) =>
                   <div className={styles.user} key={index}>
                     <div className={styles.cell}>
-                      <img 
-                      src={item.sort === 1 ? '/img/Winners/award1.svg' : item.sort === 2 ? '/img/Winners/award2.svg' : '/img/Winners/award3.svg'} 
+                      <img
+                      src={item.sort === 1 ? '/img/Winners/award1.svg' : item.sort === 2 ? '/img/Winners/award2.svg' : '/img/Winners/award3.svg'}
                       alt=''/>
                     </div>
                     <div className={styles.cell}>
@@ -196,7 +196,7 @@ export default function Winners(props: Props) {
                 </div>
               </div>
             </div>
-          } 
+          }
       </div>
   )
 }

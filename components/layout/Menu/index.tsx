@@ -45,7 +45,7 @@ export default function Menu(props: Props) {
     {label: t('menu_live_casino'), link: Routes.catalogLive},
     {label: t('menu_aviator'), link: Routes.aviator},
     {label: t('menu_poker'), link: Routes.poker},
-    {label: t('menu_tournaments'), link: '/tournaments'},
+    {label: t('menu_tournaments'), link: Routes.tournaments},
     {label: t('menu_bonuses'), link: Routes.bonuses},
     {label: t('menu_chess'), link: Routes.chess},
   ]

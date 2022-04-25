@@ -1,6 +1,7 @@
 import styles from './index.module.scss'
 import Link from 'next/link'
 import { Row } from 'react-grid-system'
+import {Routes} from 'types/routes'
 
 
 
@@ -12,12 +13,12 @@ interface Props {
 export default function Contents(props: Props) {
 
   const items = [
-    {image: '/img/Contents/bitcoin.svg', label: 'Free Bitcoin', desc: 'Win satoshi every hour', link: '#', value: 'bitcoin'},
-    {image: '/img/Contents/gamepad.svg', label: 'Richy Games', desc: 'Our best crypto games', link: '#', value: 'richy'},
-    {image: '/img/Contents/casino.svg', label: 'Casino', desc: 'Over 5000 games', link: '#', value: 'casino'},
-    {image: '/img/Contents/poker.png', label: 'Poker', desc: 'Top tournaments', link: '#', value: 'poker'},
-    {image: '/img/Contents/cup.svg', label: 'Tournaments', desc: 'Top tournaments', link: '#', value: 'tournaments'},
-    {image: '/img/Contents/live.svg', label: 'Live Casino', desc: 'Our best crypto games', link: '#', value: 'live'},
+    {image: '/img/Contents/bitcoin.svg', label: 'Free Bitcoin', desc: 'Win satoshi every hour', link: Routes.freeBitcoin, value: 'bitcoin'},
+    {image: '/img/Contents/gamepad.svg', label: 'Richy Games', desc: 'Our best crypto games', link: Routes.richyGames, value: 'richy'},
+    {image: '/img/Contents/casino.svg', label: 'Casino', desc: 'Over 5000 games', link: Routes.catalog, value: 'casino'},
+    {image: '/img/Contents/poker.png', label: 'Poker', desc: 'Top tournaments', link: Routes.poker, value: 'poker'},
+    {image: '/img/Contents/cup.svg', label: 'Tournaments', desc: 'Top tournaments', link: Routes.tournaments, value: 'tournaments'},
+    {image: '/img/Contents/live.svg', label: 'Live Casino', desc: 'Our best crypto games', link: Routes.catalogLive, value: 'live'},
   ]
 
   const getShadow = (item) => {
@@ -54,11 +55,11 @@ export default function Contents(props: Props) {
               {item.label}
             </div>
             <div className={styles.desc}>
-              {item.desc.split(' ').map((word, index) => 
+              {item.desc.split(' ').map((word, index) =>
                 index !== (item.desc.split(' ').length - 1) && <span>{word}&nbsp;</span>
               )}
               <br className={styles.break}/>
-              {item.desc.split(' ').slice(item.desc.split(' ').length - 1).map((word, index) => 
+              {item.desc.split(' ').slice(item.desc.split(' ').length - 1).map((word, index) =>
                 <>{word}&nbsp;</>
               )}
             </div>

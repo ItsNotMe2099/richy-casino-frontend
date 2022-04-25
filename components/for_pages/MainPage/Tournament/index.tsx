@@ -18,7 +18,7 @@ export default function Tournament(props: Props) {
   return (
     <>
     <HiddenXs>
-    <div className={styles.root}>
+    <div className={styles.root} id={'tournaments'}>
         <div className={styles.hero}><img src={`/img/Tournament/${appContext.isMobile ? 'hero_mobile' : 'hero@3x'}.png`} alt=''/></div>
         <div className={styles.coinsBlur}><img src='/img/Tournament/coins-blur.png' alt=''/></div>
         <div className={styles.money}><img src='/img/Tournament/money.svg' alt=''/></div>
