@@ -34,6 +34,17 @@ export default function Desk(props: Props) {
     }
   }, [rootRef.current])
 
+  useEffect(() => {
+    if (stopped && !props.inProgress) {
+      clear()
+    }
+  }, [props.inProgress])
+
+  const clear = () => {
+    periodTimeStamp.current = 0
+    setStopped(false)
+  }
+
   const handleAnimationIteration = () => {
     if (periodTimeStamp.current) {
       stopFirstAnimation()

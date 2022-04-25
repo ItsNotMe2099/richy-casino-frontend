@@ -14,9 +14,13 @@ import { isAfter } from 'date-fns'
 
 const Board = dynamic(() => import('./Board'), { ssr: false })
 
-interface Props {
-
+const mockRes: IWheelPlayResponse = {
+  currencyIso: 'BTC',
+  player: {balanceSpins: 2, balanceSpinsTimeNewFreeAccrual: '2022-04-24T16:00:47+03:00'},
+  winAmount: 0.005,
 }
+
+interface Props {}
 
 export default function Fortune(props: Props) {
   const totalTime = 5000
@@ -27,18 +31,15 @@ export default function Fortune(props: Props) {
   const [expirationDate, setExpirationDate] = useState<Date>(null)
   const [loaded, setLoaded] = useState(false)
   const [available, setAvailable] = useState<boolean>(false)
-
-  const {
-    seconds,
-    minutes,
-    hours,
-    days,
-    isRunning,
-  } = useTimer({ expiryTimestamp: expirationDate })
+  const timer = useTimer({ expiryTimestamp: expirationDate })
 
   useEffect(() => {
     init()
   }, [])
+
+  useEffect(() => {
+    timer.restart(expirationDate)
+  }, [expirationDate])
 
   const init = async () => {
     slotsRef.current = await WheelRepository.fetchSlots()
@@ -123,22 +124,22 @@ export default function Fortune(props: Props) {
           </Button>
         </div>
       )}
-      {!available &&
+      {!available && appContext.auth &&
       <div className={styles.next}>
         <div className={styles.free}>
           Next free spin bonus
         </div>
         <div className={styles.timer}>
           <div className={styles.hours}>
-            {pad('00', hours)}
+            {pad('00', timer.hours)}
           </div>
           :
           <div className={styles.hours}>
-            {pad('00', minutes)}
+            {pad('00', timer.minutes)}
           </div>
           :
           <div className={styles.hours}>
-            {pad('00', seconds)}
+            {pad('00', timer.seconds)}
           </div>
         </div>
       </div>}
