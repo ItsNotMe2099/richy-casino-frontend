@@ -13,6 +13,7 @@ import useIsActiveLink from 'hooks/useIsActiveLink'
 import DropdownFilter from 'components/for_pages/Common/Filter/DropdownFilter'
 import {Routes} from 'types/routes'
 import {useFavoriteContext} from 'context/favorite_state'
+import {useAppContext} from 'context/state'
 interface IGame{
   label: string
   image: string
@@ -46,6 +47,7 @@ const GameCategoryStaticCard = (props: {icon: string, label: string, link: strin
 }
 export default function Filter(props: Props) {
   const favoriteContext = useFavoriteContext()
+  const appContext = useAppContext()
   const [providers, setProviders] = useState<IGameProvider[]>([])
   const [categories, setCategories] = useState<IGameCategory[]>([])
   useEffect(() => {
@@ -55,8 +57,9 @@ export default function Filter(props: Props) {
 
 
   const games = [
-    {icon: '/img/Filter/icons/24.svg', label: 'Последние игры', link: Routes.catalogLast, quantity: 0},
+    ...(appContext.user ? [{icon: '/img/Filter/icons/24.svg', label: 'Последние игры', link: Routes.catalogLast, quantity: 0}] : []),
     {icon: '/img/Filter/icons/top.svg', label: 'ТОП игры', link: Routes.catalogTop, quantity: 0},
+    ...(appContext.user ? [{icon: '/img/Filter/icons/favorite.svg', label: 'Избранные', link: Routes.catalogFavorite, quantity: favoriteContext.store.games.length}] : []),
     {icon: '/img/Filter/icons/favorite.svg', label: 'Избранные', link: Routes.catalogFavorite, quantity: favoriteContext.store.games.length},
   ]
 

@@ -13,12 +13,11 @@ import LotteryRepository from 'data/repositories/LotteryRepository'
 import {useTranslation} from 'next-i18next'
 import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import {getServerSideTranslation} from 'utils/i18'
+import {useAppContext} from 'context/state'
 
 export default function Lottery() {
   const {t} = useTranslation()
-  const games = [
-
-  ]
+ const appContext = useAppContext()
   const [currentRound, setCurrentRound] = useState<ILotteryRoundCurrent | null>(null)
   const [loading, setLoading] = useState(true)
   const [isShow, setIsShow] = useState(false)
@@ -30,7 +29,7 @@ export default function Lottery() {
         setLoading(false)
       }),
     ]).then(() => setLoading(false))
-  }, [])
+  }, [appContext.auth])
   const handleBuy = async (data: ILotteryBuyResponse) => {
     console.log('handleBuy', data)
     setCurrentRound(round => ({...round,
