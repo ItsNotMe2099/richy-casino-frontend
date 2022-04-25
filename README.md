@@ -137,3 +137,17 @@ FAQ
 }
 ]
 }
+
+
+height: 100%;
+display: flex;
+flex-direction: column;
+justify-content: stretch;
+
+display: flex;
+align-items: center;
+flex-direction: column;
+padding-top: 85px;
+padding-bottom: 85px;
+min-height: -webkit-fill-available;
+

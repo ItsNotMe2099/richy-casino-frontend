@@ -7,6 +7,8 @@
   margin:  auto;
   display: flex;
   flex-direction: column;
+
+
   &.fixed{
 
   }
@@ -27,7 +29,8 @@
     bottom: 0;
     position: fixed;
     background: $dark800;
-
+    height: 100%;
+    justify-content: stretch;
 
   }
   @media screen and (max-width: $xs-max){
@@ -54,6 +57,7 @@
   @media screen and (max-width: 900px){
     padding-top: 0px;
     padding-bottom: 0px;
+    min-height: -webkit-fill-available;
   }
 }
 

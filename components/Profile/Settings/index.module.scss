@@ -1,7 +1,12 @@
 @import "scss/index";
 
 .form {
-
+  @media screen and (max-width: $xs-max) {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: auto;
+  }
 }
 
 .input {
@@ -151,6 +156,7 @@
 
   @media screen and (max-width: $xs-max) {
     flex-direction: column;
+    grid-gap: 12px 0px;
 
   }
 }
