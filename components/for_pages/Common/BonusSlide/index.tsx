@@ -35,7 +35,7 @@ export default function BonusSlide(props: Props) {
   }
 
   return (
-    <div className={classNames(styles.root, props.className, slideClass)} onClick={handleClick}>
+    <div className={classNames(styles.root, props.className, slideClass)} >
       {(props.style === 'modal' || props.style === 'sheet' || props.style === 'footer') &&
       <div className={styles.close} onClick={(e) => {
         e.stopPropagation()
@@ -83,7 +83,7 @@ export default function BonusSlide(props: Props) {
         </div>
         <div className={styles.footerGroup}>
           <div className={styles.btnWrapper}>
-            <Button size='normal' background='payGradient500' className={styles.btn}>Получить</Button>
+            <Button size='normal' background='payGradient500' className={styles.btn} onClick={handleClick}>Получить</Button>
             {appContext.showBonus &&
             <div className={styles.timer}>
               <Timer minutes style={props.style === 'footer' ? 'footer' : props.style === 'sheet' ? 'sheet' : 'bonus'}
