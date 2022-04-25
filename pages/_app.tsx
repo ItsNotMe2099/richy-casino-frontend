@@ -78,6 +78,10 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     }
     props.pageProps.token = (appContext.ctx as any).req.cookies[CookiesType.accessToken]
     props.pageProps.initialUser = await UserRepository.getUser(props.pageProps.token)
+    if( props.pageProps.initialUser === null){
+      props.pageProps.token = null
+      nookies.destroy(appContext.ctx, CookiesType.accessToken)
+    }
   }
   return props
 }

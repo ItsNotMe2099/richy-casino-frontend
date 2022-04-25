@@ -193,12 +193,14 @@
   width: 100%;
   @media screen and (max-width: 600px){
     flex-direction: column-reverse;
+    grid-gap: 0px;
   }
 }
 .notGreen{
   display: flex;
   grid-gap: 0px 7px;
   @media screen and (max-width: 600px){
+    margin-top: 16px;
     grid-gap: 0px 14px;
     width: 100%;
   }
