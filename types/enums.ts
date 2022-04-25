@@ -1,16 +1,16 @@
 
 export enum ModalType {
-  login,
-  registration,
-  passwordReset,
-  passwordRecovery,
-  registrationSuccess,
-  registrationPhone = 12,
-  fortune = 9,
-  bonus = 10,
-  profileBurger = 11,
-  createGame = 19,
-  opponents = 20,
+  login = 'login',
+  registration = 'registration',
+  passwordReset = 'passwordReset',
+  passwordRecovery = 'passwordRecovery',
+  registrationSuccess = 'registrationSuccess',
+  registrationPhone = 'registrationPhone',
+  fortune = 'fortune',
+  bonus = 'bonus',
+  profileBurger = 'profileBurger',
+  createGame = 'createGame',
+  opponents = 'opponents',
 }
 
 export enum ProfileModalType {

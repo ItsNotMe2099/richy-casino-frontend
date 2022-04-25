@@ -134,7 +134,6 @@ export function AppWrapper(props: Props) {
       }
     },
     hideModal: () => {
-
       hideModal()
     },
     showBottomSheet: (type, props: any) => {
@@ -209,6 +208,7 @@ export function AppWrapper(props: Props) {
 
   }
   const hideModal = () => {
+    console.log('hideModal', bottomSheet)
     if(bottomSheet){
       hideBottomSheet()
       return
