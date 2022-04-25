@@ -48,7 +48,7 @@ export default function UserFooter(props: Props) {
 
   const {showModal} = useAppContext()
   const context = useAppContext()
-
+  const isMenuOpen = context.modal === ModalType.profileBurger || context.bottomSheet === ModalType.profileBurger
   const handleClickItem = (item) => {
     switch (item.key) {
       case ActionType.Poker:
@@ -65,9 +65,7 @@ export default function UserFooter(props: Props) {
         }
         break
       case ActionType.Menu:
-        if(!context.user){
-          context.showModal(ModalType.login)
-        } else if(context.modal === ModalType.profileBurger){
+       if(isMenuOpen){
           context.hideModal()
         } else{
           showModal(ModalType.profileBurger)
@@ -76,9 +74,10 @@ export default function UserFooter(props: Props) {
     }
   }
 
+
   return (
     <VisibleXs>
-      <div className={classNames(styles.root, {[styles.isOverAll]: context.modal === ModalType.profileBurger})}>
+      <div className={classNames(styles.root, {[styles.isOverAll]: isMenuOpen})}>
         {items.slice(0, 2).map((item, index) =>
           <Item onClick={() => handleClickItem(item)} icon={item.icon} label={item.label} key={item.key}/>
         )}
@@ -90,7 +89,7 @@ export default function UserFooter(props: Props) {
         {items.slice(2, items.length).map((item, index) =>
           <Item
           onClick={() => handleClickItem(item)}
-          icon={item.label === 'Menu' && context.modal === ModalType.profileBurger ? '/img/UserFooter/close.svg' : item.icon} label={item.label} key={item.key}/>
+          icon={item.label === 'Menu' && isMenuOpen ? '/img/UserFooter/close.svg' : item.icon} label={item.label} key={item.key}/>
         )}
       </div>
     </VisibleXs>

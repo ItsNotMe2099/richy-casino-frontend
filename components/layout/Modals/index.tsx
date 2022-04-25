@@ -132,7 +132,7 @@ export default function ModalContainer(props: Props) {
         size='small'
         key={16}  isOpen={context.modal === ModalType.profileBurger} {...commonSettings}
         >
-            <ProfileBurger isOpen={context.modal === ModalType.profileBurger} user={user}/>
+            <ProfileBurger onRequestClose={() => context.hideModal()}/>
         </ProfileModalNew>
         </div>
       )}

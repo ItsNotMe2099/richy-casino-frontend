@@ -55,9 +55,9 @@ export default function Filter(props: Props) {
 
 
   const games = [
-    {icon: '/img/Filter/icons/24.svg', label: 'Последние игры', link: '/catalog/category/last', quantity: 0},
-    {icon: '/img/Filter/icons/top.svg', label: 'ТОП игры', link: '/catalog/category/top', quantity: 0},
-    {icon: '/img/Filter/icons/favorite.svg', label: 'Избранные', link: '/catalog/category/favorite', quantity: favoriteContext.store.games.length},
+    {icon: '/img/Filter/icons/24.svg', label: 'Последние игры', link: Routes.catalogLast, quantity: 0},
+    {icon: '/img/Filter/icons/top.svg', label: 'ТОП игры', link: Routes.catalogTop, quantity: 0},
+    {icon: '/img/Filter/icons/favorite.svg', label: 'Избранные', link: Routes.catalogFavorite, quantity: favoriteContext.store.games.length},
   ]
 
   const [category, setCategory] = useState('')

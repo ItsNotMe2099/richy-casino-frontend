@@ -12,6 +12,7 @@ import ProfileMenu from './components/Profile/ProfileMenu'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import {useTranslation} from 'next-i18next'
+import {Routes} from 'types/routes'
 
 interface Props {
   children?: React.ReactNode
@@ -74,19 +75,23 @@ export default function Header(props: Props) {
               <Button size='extraSmall' background='dark700'><img src='/img/layout/top/apple.svg' alt=''/></Button>
             </div>
             <div className={styles.bonuses}>
-              <div className={styles.bonus}>
+              <Link href={Routes.bonuses}>
+                <a className={styles.bonus}>
                 <div className={styles.gift}>
                   <img src='/img/layout/top/gift.svg' alt=''/>
                 </div>
                 <div className={styles.textGift}>{t('header_bonuses')}</div>
-              </div>
-              <div className={styles.bonus}>
+                </a>
+              </Link>
+              <Link href={Routes.freeBitcoin}>
+              <a className={styles.bonus}>
                 <div className={styles.free}>{t('header_freebitcoin_badge')}</div>
                 <div className={styles.bitcoin}>
                   <img src='/img/layout/top/bitcoin.svg' alt=''/>
                 </div>
                 <div className={styles.textBitcoin}>{t('header_freebitcoin')}</div>
-              </div>
+              </a>
+             </Link>
               <div className={styles.bonus} onClick={() => context.showModal(ModalType.fortune)}>
                 <div className={styles.wheel}>
                   <img src='/img/layout/top/wheel.svg' alt=''/>

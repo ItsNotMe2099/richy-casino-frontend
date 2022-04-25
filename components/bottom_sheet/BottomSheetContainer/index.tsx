@@ -13,6 +13,7 @@ import ModalRegistration from 'components/Auth/ModalRegistration'
 import ModalLogin from 'components/Auth/ModalLogin'
 import Fortune from 'components/Fortune'
 import BottomSheetLayout from 'components/layout/BottomSheetLayout'
+import ProfileBurger from 'components/ui/ProfileBurger'
 
 
 interface Props {}
@@ -21,7 +22,7 @@ export default function BottomSheetContainer(props: Props) {
   const appContext = useAppContext()
 
   const handleClose = () => {
-
+    appContext.hideBottomSheet()
   }
   return (
     <RemoveScroll enabled={!!appContext.bottomSheet}>
@@ -82,6 +83,14 @@ export default function BottomSheetContainer(props: Props) {
           snapPoints={[620]}
         >
           {appContext.bottomSheet == ProfileModalType.withdraw && <Widraw isBottomSheet={true} />}
+        </Sheet>
+
+        <Sheet
+          isOpen={appContext.bottomSheet == ModalType.profileBurger}
+          onClose={appContext.hideBottomSheet}
+          snapPoints={[620]}
+        >
+          {appContext.bottomSheet == ModalType.profileBurger && <ProfileBurger onRequestClose={handleClose} isBottomSheet={true} />}
         </Sheet>
 
         <Sheet

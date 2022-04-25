@@ -1,5 +1,9 @@
 export class Routes{
 
+  static get bonuses(){
+    return '/freeBitcoin'
+  }
+
   static get freeBitcoin(){
     return '/freeBitcoin'
   }
@@ -8,6 +12,10 @@ export class Routes{
   }
   static get wheelOfFortune(){
     return '/wheelOfFortune'
+  }
+
+  static get referral(){
+    return '/referral'
   }
 
   /*      Catalog    */
@@ -31,6 +39,12 @@ export class Routes{
   static get catalogTop(){
     return '/catalog/category/top'
   }
+  static get catalogFavorite(){
+    return '/catalog/category/favorite'
+  }
+  static get catalogLast(){
+    return '/catalog/category/last'
+  }
 
   static catalogProvider(providerId: string | number): string{
     return `/catalog/providers/${providerId}`
@@ -44,5 +58,11 @@ export class Routes{
   }
   static get poker(){
     return '/catalog/game/poker'
+  }
+  static get chess(){
+    return '/catalog/game/poker'
+  }
+  static get leaderBoard(){
+    return '/#leader-board'
   }
 }

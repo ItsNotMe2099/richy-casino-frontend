@@ -76,6 +76,7 @@ const ModalsBottomSheet = [
   ModalType.passwordRecovery,
   ModalType.passwordReset,
   ModalType.fortune,
+  ModalType.profileBurger
 ]
 const AppContext = createContext<IState>(defaultValue)
 
