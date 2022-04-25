@@ -51,7 +51,7 @@ export class Routes{
   }
 
   static get richyGames(){
-    return '/catalog/category/richy-games'
+    return '/catalog/category/richy'
   }
   static get aviator(){
     return '/catalog/aviator'
