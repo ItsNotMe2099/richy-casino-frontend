@@ -1,0 +1,53 @@
+@import "scss/index";
+
+.root{
+  width: 240px;
+  height: 280px;
+  background: rgba(29, 30, 37, 0.7);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.wrapImage{
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+  .image{
+    width: 130px;
+    height: auto;
+  }
+}
+
+.title{
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: $balance600;
+}
+
+.wrapValue{
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  text-transform: uppercase;
+  .value{
+    color: $white;
+    margin-right: 10px;
+  }
+  .currency{
+    color: $dark100;
+  }
+}
+
+.wrapButton{
+  padding: 5px 20px 20px 20px;
+  .button{
+    padding: 17px 0;
+    font-size: 16px;
+    color: $white;
+    width: 100%;
+  }
+}

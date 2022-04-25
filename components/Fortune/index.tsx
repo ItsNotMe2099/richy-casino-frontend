@@ -11,6 +11,8 @@ import WheelRepository from 'data/repositories/WheelRepository'
 import Spinner from 'components/ui/Spinner'
 import { useAppContext } from 'context/state'
 import { isAfter } from 'date-fns'
+import Winner from './Winner'
+import classNames from 'classnames'
 
 const Board = dynamic(() => import('./Board'), { ssr: false })
 
@@ -27,6 +29,8 @@ export default function Fortune(props: Props) {
   const appContext = useAppContext()
   const slotsRef = useRef<IWheelSlot[]>([])
   const [gameResult, setGameResult] = useState<IWheelPlayResponse>(null)
+  const gameResultRef = useRef<IWheelPlayResponse>(null)
+  const [winnerResult, setWinnerResult] = useState<IWheelPlayResponse>(null)
   const userRef = useRef<IWheelInfoUser>()
   const [expirationDate, setExpirationDate] = useState<Date>(null)
   const [loaded, setLoaded] = useState(false)
@@ -40,6 +44,10 @@ export default function Fortune(props: Props) {
   useEffect(() => {
     timer.restart(expirationDate)
   }, [expirationDate])
+
+  useEffect(() => {
+    gameResultRef.current = gameResult
+  }, [gameResult])
 
   const init = async () => {
     slotsRef.current = await WheelRepository.fetchSlots()
@@ -55,6 +63,7 @@ export default function Fortune(props: Props) {
   const play = async () => {
     if (appContext.auth) {
       const res = await WheelRepository.play()
+      // const res = mockRes
       userRef.current = res.player
       setGameResult(res)
       const isAvailable = checkAvailable(userRef.current)
@@ -65,7 +74,13 @@ export default function Fortune(props: Props) {
   }
 
   const clear = () => {
-    setGameResult(null)
+    if (gameResultRef.current && gameResultRef.current.winAmount) {
+      // win
+      setWinnerResult(gameResultRef.current)
+    } else {
+      // lose
+      setGameResult(null)
+    }
   }
 
   const checkAvailable = (userData: IWheelInfoUser): boolean => {
@@ -105,44 +120,58 @@ export default function Fortune(props: Props) {
         </div>
       </div>
       <div className={styles.mobile}>
-      <VisibleXs>
-        <div className={styles.wrapperMobile}>
-          <div className={styles.everydayMobile}>
-            <div>lucky spin everyday</div>
+        <VisibleXs>
+          <div className={styles.wrapperMobile}>
+            <div className={styles.everydayMobile}>
+              <div>lucky spin everyday</div>
+            </div>
           </div>
-        </div>
-      </VisibleXs>
-      {available && (
-        <div className={styles.btn}>
-          <Button
-            onClick={play}
-            className={styles.spin}
-            background="pink"
-            disabled={!!gameResult}
-          >
-            Spin the wheel
-          </Button>
-        </div>
-      )}
-      {!available && appContext.auth &&
-      <div className={styles.next}>
-        <div className={styles.free}>
-          Next free spin bonus
-        </div>
-        <div className={styles.timer}>
-          <div className={styles.hours}>
-            {pad('00', timer.hours)}
+        </VisibleXs>
+        {available && (
+          <div className={styles.btn}>
+            <Button
+              onClick={play}
+              className={styles.spin}
+              background="pink"
+              disabled={!!gameResult}
+            >
+              Spin the wheel
+            </Button>
           </div>
-          :
-          <div className={styles.hours}>
-            {pad('00', timer.minutes)}
+        )}
+        {!available && appContext.auth && (
+          <div className={styles.next}>
+            <div className={styles.free}>
+              Next free spin bonus
+            </div>
+            <div className={styles.timer}>
+              <div className={styles.hours}>
+                {pad('00', timer.hours)}
+              </div>
+              :
+              <div className={styles.hours}>
+                {pad('00', timer.minutes)}
+              </div>
+              :
+              <div className={styles.hours}>
+                {pad('00', timer.seconds)}
+              </div>
+            </div>
           </div>
-          :
-          <div className={styles.hours}>
-            {pad('00', timer.seconds)}
-          </div>
-        </div>
-      </div>}
+        )}
+      </div>
+      <div className={classNames({
+        [styles.winnerOverlay]: true,
+        [styles.visible]: winnerResult,
+      })}>
+        <Winner
+          data={winnerResult}
+          className={styles.winner}
+          onRequestClose={() => {
+            setWinnerResult(null)
+            setGameResult(null)
+          }}
+        />
       </div>
     </div>
   )

@@ -27,7 +27,7 @@
   padding: 32px 0;
   background: rgba(37, 37, 37, 0.46);
   border: 1px solid rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(32px);
+  backdrop-filter: blur(20px);
   border-radius: 12px;
   display: flex;
   justify-content: center;
@@ -126,4 +126,27 @@
   color: #F5075D;
   font-weight: bold;
   font-size: 30px;
+}
+
+.winnerOverlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms, visibility 200ms;
+  &.visible{
+    visibility: visible;
+    opacity: 1;
+  }
+  .winner{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 12px;
+  }
 }
