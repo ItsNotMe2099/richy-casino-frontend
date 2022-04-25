@@ -108,7 +108,7 @@ export default function Wallet(props: Props) {
       {step === PaymentStep.Method && <div className={styles.stepTitle}>
         {t('wallet_payment_method_choose')}
       </div>}
-      {step !== PaymentStep.Success && <div className={styles.banner}>
+      {(step !== PaymentStep.Success && context.showBonus) && <div className={styles.banner}>
         <BonusSmallBanner style='wallet'/>
       </div>}
 

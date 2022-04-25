@@ -20,6 +20,7 @@
 }
 .select{
   flex: 1;
+  height: 53px !important;
 }
 .current{
   font-weight: 400;
@@ -45,7 +46,7 @@
   justify-content: space-between;
   align-items: center;
   flex: 1;
-  line-height: 40px;
+  line-height: 100%;
   img{
     max-width: 24px;
   }

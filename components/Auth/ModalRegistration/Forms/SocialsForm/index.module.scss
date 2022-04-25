@@ -2,9 +2,14 @@
 
 .form {
   margin-top: 24px;
+  @media screen and (max-width: $xs-max) {
+    margin-top: 12px;
+  }
 }
 
+.socials{
 
+}
 .active {
   @include blueGradient500NoHover;
   @media screen and (max-width: 430px) {
@@ -50,16 +55,9 @@
 }
 
 .socials {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
-  @media screen and (max-width: 430px) {
-    justify-content: center;
-    margin-bottom: 10px;
-    a {
-      margin-right: 10px;
-    }
+  margin-bottom: 14px;
+  @media screen and (max-width: $xs-max) {
+    margin-bottom: 3px;
   }
 }
 

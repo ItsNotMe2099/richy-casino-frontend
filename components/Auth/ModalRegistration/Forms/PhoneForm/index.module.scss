@@ -2,6 +2,9 @@
 
 .form {
   margin-top: 24px;
+  @media screen and (max-width: $xs-max) {
+    margin-top: 12px;
+  }
 }
 
 

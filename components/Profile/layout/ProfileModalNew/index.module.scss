@@ -45,13 +45,16 @@
   right: 0;
   top: 0;
   bottom: 0;
-  padding-top: 50px;
-  padding-bottom: 50px;
   z-index: 3;
-  @media screen and (max-width: 430px){
-    padding-bottom: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 85px;
+  @media screen and (max-width: 900px){
+    padding-top: 0px
   }
 }
+
 .overlay{
   position: absolute;
   left: 0;

@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import {useState} from 'react'
 import {useTranslation} from 'react-i18next'
 import {Form, Formik} from 'formik'
 import {CheckBox} from 'components/ui/Inputs/CheckBox'
@@ -29,7 +28,6 @@ export default function SocialsForm(props: Props) {
 
   const {t} = useTranslation('common')
 
-  const [promoCode, setPromoCode] = useState(false)
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
@@ -38,7 +36,9 @@ export default function SocialsForm(props: Props) {
           setFieldValue
         }) => (
         <Form className={styles.form}>
-          <SocialButtons/>
+          <div className={styles.socials}>
+          <SocialButtons currency={values.currency}/>
+          </div>
           <div className={styles.inputs}>
             <div className={styles.select}>
               <RegCurrencySelectField name='currency'/>
