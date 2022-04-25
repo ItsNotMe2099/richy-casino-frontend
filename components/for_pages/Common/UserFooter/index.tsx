@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 import VisibleXs from 'components/ui/VisibleXS'
 import {useAppContext} from 'context/state'
-import {ModalType, ProfileModalType} from 'types/enums'
+import {ModalType} from 'types/enums'
 import {Routes} from 'types/routes'
 import {useRouter} from 'next/router'
 import Link from 'next/link'
@@ -58,11 +58,7 @@ export default function UserFooter(props: Props) {
         router.push(Routes.catalog)
         break
       case ActionType.Main:
-        if(!context.user){
-          context.showModal(ModalType.login)
-        } else{
-          context.showModalProfile(ProfileModalType.profile)
-        }
+        router.push('/')
         break
       case ActionType.Menu:
        if(isMenuOpen){
