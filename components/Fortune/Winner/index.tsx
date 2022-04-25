@@ -10,24 +10,34 @@ interface Props {
 }
 
 export default function Winner(props: Props) {
+  const isWin = !!props.data?.winAmount
+
   return (
     <div className={classNames(styles.root, props.className)}>
       <div className={styles.wrapImage}>
         <img src="/img/Fortune/winner.svg" alt="" className={styles.image}/>
       </div>
 
-      <div className={styles.title}>
-        You Win
-      </div>
+      {isWin ? (
+        <div className={classNames(styles.title, styles.win)}>
+          You Win
+        </div>
+      ) : (
+        <div className={classNames(styles.title, styles.lose)}>
+          You Lose
+        </div>
+      )}
 
-      <div className={styles.wrapValue}>
-        <span className={styles.value}>
-          {props.data?.winAmount}
-        </span>
-        <span className={styles.currency}>
-          {props.data?.currencyIso}
-        </span>
-      </div>
+      {isWin && (
+        <div className={styles.wrapValue}>
+          <span className={styles.value}>
+            {props.data?.winAmount}
+          </span>
+            <span className={styles.currency}>
+            {props.data?.currencyIso}
+          </span>
+        </div>
+      )}
 
       <div className={styles.wrapButton}>
         <Button
@@ -37,7 +47,7 @@ export default function Winner(props: Props) {
           className={styles.button}
           background="pink"
         >
-          Collect Now
+          {isWin ? 'Collect Now' : 'Close'}
         </Button>
       </div>
     </div>

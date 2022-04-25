@@ -74,8 +74,8 @@ const ModalsBottomSheet = [
   ModalType.registrationPhone,
   ModalType.registrationSuccess,
   ModalType.passwordRecovery,
-  ModalType.passwordReset
-
+  ModalType.passwordReset,
+  ModalType.fortune,
 ]
 const AppContext = createContext<IState>(defaultValue)
 

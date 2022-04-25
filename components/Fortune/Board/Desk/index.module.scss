@@ -18,6 +18,8 @@ $secondAnimationDuration: 300ms;
 .section{
   position: absolute;
   transform-origin: bottom center;
+  display: flex;
+  justify-content: center;
   &.active{
     transition: transform $secondAnimationDuration ease-in-out;
   }

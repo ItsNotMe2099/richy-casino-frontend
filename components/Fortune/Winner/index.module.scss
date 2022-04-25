@@ -25,7 +25,13 @@
   font-size: 22px;
   font-weight: bold;
   text-transform: uppercase;
-  color: $balance600;
+  &.win{
+    color: $balance600;
+  }
+  &.lose{
+    color: $lose500;
+    margin-bottom: 20px;
+  }
 }
 
 .wrapValue{

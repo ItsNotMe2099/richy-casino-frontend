@@ -11,6 +11,9 @@ import ModalRegistrationSuccess from 'components/Auth/ModalRegistrationSuccess'
 import ModalRegistrationPhone from 'components/Auth/ModalRegistrationPhone'
 import ModalRegistration from 'components/Auth/ModalRegistration'
 import ModalLogin from 'components/Auth/ModalLogin'
+import Fortune from 'components/Fortune'
+import BottomSheetLayout from 'components/layout/BottomSheetLayout'
+import BottomSheetBody from 'components/layout/BottomSheetBody'
 
 
 interface Props {}
@@ -80,6 +83,20 @@ export default function BottomSheetContainer(props: Props) {
           snapPoints={[400]}
         >
           {appContext.bottomSheet == ProfileModalType.withdraw && <Widraw isBottomSheet={true} />}
+        </Sheet>
+
+        <Sheet
+          isOpen={appContext.bottomSheet === ModalType.fortune}
+          onClose={appContext.hideBottomSheet}
+          snapPoints={[500]}
+        >
+          {appContext.bottomSheet == ModalType.fortune && (
+            <BottomSheetLayout>
+              <BottomSheetBody>
+                <Fortune isBottomSheet />
+              </BottomSheetBody>
+            </BottomSheetLayout>
+          )}
         </Sheet>
       </div>
     </RemoveScroll>

@@ -22,11 +22,14 @@ const mockRes: IWheelPlayResponse = {
   winAmount: 0.005,
 }
 
-interface Props {}
+interface Props {
+  isBottomSheet?: boolean
+}
 
 export default function Fortune(props: Props) {
   const totalTime = 5000
   const appContext = useAppContext()
+  const canvasSize = appContext.isMobile ? 320 : 390
   const slotsRef = useRef<IWheelSlot[]>([])
   const [gameResult, setGameResult] = useState<IWheelPlayResponse>(null)
   const gameResultRef = useRef<IWheelPlayResponse>(null)
@@ -66,20 +69,14 @@ export default function Fortune(props: Props) {
       // const res = mockRes
       userRef.current = res.player
       setGameResult(res)
-      const isAvailable = checkAvailable(userRef.current)
-      if (isAvailable) {
-        setTimeout(clear, totalTime)
-      }
+      checkAvailable(userRef.current)
+      setTimeout(clear, totalTime)
     }
   }
 
   const clear = () => {
-    if (gameResultRef.current && gameResultRef.current.winAmount) {
-      // win
+    if (gameResultRef.current) {
       setWinnerResult(gameResultRef.current)
-    } else {
-      // lose
-      setGameResult(null)
     }
   }
 
@@ -103,7 +100,7 @@ export default function Fortune(props: Props) {
     <div className={styles.root}>
       <div className={styles.wheel}>
         <div className={styles.board}>
-          <Board gameResult={gameResult} slots={slotsRef.current} />
+          <Board canvasSize={canvasSize} gameResult={gameResult} slots={slotsRef.current} />
         </div>
         <HiddenXs>
         <div className={styles.wrapper}>
