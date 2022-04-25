@@ -40,7 +40,7 @@ export default function ModalLogin(props: Props) {
         return
       }
       const accessToken = res.token
-
+      console.log('AccessToken', accessToken)
       if (!accessToken) {
         setError(t('api_error_unknown'))
         setLoading(false)
@@ -51,7 +51,7 @@ export default function ModalLogin(props: Props) {
       appContext.updateUserFromCookies()
       appContext.hideModal()
     }catch (e){
-
+      console.error(e)
       setError(e)
     }
     setLoading(false)

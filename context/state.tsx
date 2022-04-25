@@ -134,6 +134,7 @@ export function AppWrapper(props: Props) {
       }
     },
     hideModal: () => {
+
       hideModal()
     },
     showBottomSheet: (type, props: any) => {
@@ -208,6 +209,10 @@ export function AppWrapper(props: Props) {
 
   }
   const hideModal = () => {
+    if(bottomSheet){
+      hideBottomSheet()
+      return
+    }
     setModal(null)
     setModalProfileStack([])
   }

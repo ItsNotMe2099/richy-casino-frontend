@@ -24,6 +24,7 @@ import nookies from 'nookies'
 import { v4 as uuidv4 } from 'uuid'
 import {CookiesLifeTime} from 'types/constants'
 import BottomSheetContainer from 'components/bottom_sheet/BottomSheetContainer'
+import Head from 'next/head'
 function MyApp({ Component, pageProps }: AppProps) {
   const [clientVisible, setClientVisible] = useState(false)
 
@@ -39,10 +40,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AppWrapper isMobile={pageProps.isMobile} token={pageProps.token} initialUser={pageProps.initialUser}>
       <AuthWrapper>
         <FavoriteWrapper>
+          <Head>
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+          </Head>
         <Component {...pageProps} />
+          {clientVisible && <ModalContainer/>}
+          {clientVisible && <BottomSheetContainer/>}
         </FavoriteWrapper>
-        {clientVisible && <ModalContainer/>}
-        {clientVisible && <BottomSheetContainer/>}
+
         <AuthUserFeatures/>
         <HiddenXs>
           <NotificationBanner/>
