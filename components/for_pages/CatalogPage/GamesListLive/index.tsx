@@ -23,7 +23,7 @@ interface Props {
 
 export default function GamesListAll(props: Props) {
   const [data, setData] = useState<IPagination<IGame>>({data: [], total: 0})
-  const [page, setPage] = useState<number>(0)
+  const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(true)
   const limit = 30
   const [filter, setFilter] = useState<GameSwitchFilterKey>(GameSwitchFilterKey.All)

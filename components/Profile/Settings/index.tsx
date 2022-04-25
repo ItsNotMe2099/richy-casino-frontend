@@ -44,14 +44,15 @@ interface Props {
 
 export default function Settings(props: Props) {
   const {t} = useTranslation()
+
+  const context = useAppContext()
   const [isChange, setIsChange] = useState<boolean>(false)
   const [sending, setSending] = useState<boolean>(false)
   const [sending2Fa, setSending2Fa] = useState<boolean>(false)
-  const [enabled2Fa, setEnabled2Fa] = useState<boolean>(false)
+  const [enabled2Fa, setEnabled2Fa] = useState<boolean>(context.user.flags.is2faEnabled)
   const [error, setError] = useState(null)
   const [error2Fa, setError2Fa] = useState(null)
 
-  const context = useAppContext()
   const initialValues: UserFormData = {
     id: context.user.id,
     username: context.user.username,

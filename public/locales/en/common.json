@@ -106,7 +106,7 @@
   "payment_history_filter_all": "Все",
   "payment_history_filter_deposit": "Пополения",
   "payment_history_filter_withdrawal": "Выводы",
-
+  "payment_history_filter_apps": "Заявки",
 
   "profile_title": "Профиль",
   "profile_2fa_instruction_gauth": "Загрузите и установите",

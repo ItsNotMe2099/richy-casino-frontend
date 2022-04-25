@@ -11,6 +11,7 @@ interface Props {
   totalTickets: number
   winChance: number
   pricePerTicket: number
+  currency?: string
   onBuy: (data: ILotteryBuyResponse) => void
 }
 
@@ -27,7 +28,7 @@ export default function BuyTickets(props: Props) {
       <div className={styles.buy}>
         {t('lottery_buy')}
       </div>
-      <BuyTicketsForm pricePerTicket={props.pricePerTicket} onBuy={props.onBuy}/>
+      <BuyTicketsForm pricePerTicket={props.pricePerTicket} currency={props.currency} onBuy={props.onBuy}/>
     </Panel>
     </div>
   )

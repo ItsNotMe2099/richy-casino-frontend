@@ -11,6 +11,7 @@ import {useState} from 'react'
 import FormError from 'components/ui/Form/FormError'
 interface Props {
   pricePerTicket: number,
+  currency?: string
   onBuy: (data: ILotteryBuyResponse) => void
 }
 
@@ -22,7 +23,7 @@ export default function BuyTicketsForm(props: Props) {
     setSending(true)
     setError(null)
     try {
-      const res = await LotteryRepository.buyTicket(data)
+      const res = await LotteryRepository.buyTicket(parseInt(data.amount, 10))
       props.onBuy(res)
     }catch (e) {
       setError(e)
@@ -34,7 +35,7 @@ export default function BuyTicketsForm(props: Props) {
     <div className={styles.root}>
       <Formik
             initialValues={{
-              tickets: '1'
+              amount: '1'
             }}
 
             onSubmit={handleBuy}
@@ -44,7 +45,7 @@ export default function BuyTicketsForm(props: Props) {
               <div className={styles.block}>
               <div className={styles.top}>
                 <div className={styles.number}>{t('lottery_form_num_of_tickets')}</div>
-                <InputTicket className={styles.input} name='tickets' disabled={sending} placeholder={t('lottery_form_enter_num_of_tickets')} validate={Validator.required}/>
+                <InputTicket className={styles.input} name='amount' disabled={sending} placeholder={t('lottery_form_enter_num_of_tickets')} validate={Validator.required}/>
               </div>
               <div className={styles.bottom}>
                 <div className={cx(styles.total, styles.price)}>
@@ -52,7 +53,7 @@ export default function BuyTicketsForm(props: Props) {
                     {t('lottery_form_price_per_ticket')}
                   </div>
                   <div className={styles.digits}>
-                    {props.pricePerTicket.toFixed(8)} BTC
+                    {props.pricePerTicket} {props.currency}
                   </div>
                 </div>
                 <div className={styles.total}>
@@ -60,7 +61,7 @@ export default function BuyTicketsForm(props: Props) {
                     {t('lottery_form_total_amounts')}
                   </div>
                   <div className={styles.digits}>
-                    {(parseInt(formik.values.tickets, 10) > 0 ? parseInt(formik.values.tickets, 10) * props.pricePerTicket : props.pricePerTicket).toFixed(8)} BTC
+                    {(parseInt(formik.values.amount, 10) > 0 ? parseInt(formik.values.amount, 10) * props.pricePerTicket : props.pricePerTicket)} {props.currency}
                   </div>
                 </div>
               </div>

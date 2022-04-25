@@ -11,12 +11,14 @@ interface IUser {
 interface Props {
   fixed?: boolean
   children?: ReactElement | ReactElement[]
+  id?: string
+  className?: string
 }
 
 export default function ProfileModalBody(props: Props) {
   const context = useAppContext()
   return (
-    <div className={classNames(styles.root, {[styles.fixed]: props.fixed || context.isMobile})}>
+    <div className={classNames(styles.root, {[styles.fixed]: props.fixed || context.isMobile}, props.className)} id={props.id}>
       {props.children}
     </div>
     )

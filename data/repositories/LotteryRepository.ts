@@ -27,11 +27,13 @@ export default class LotteryRepository {
     return res.data?.data ? Converter.objectKeysToCamelCase(res.data?.data) : null
   }
 
-  static async buyTicket(data:{tickets: number}): Promise<ILotteryBuyResponse> {
+  static async buyTicket(amount: number): Promise<ILotteryBuyResponse> {
     const res = await request({
       method: 'get',
       url: '/api/lottery/ticket/buy',
-      data
+      data: {
+        amount
+      }
     })
     if (res.err) {
       throw res.err

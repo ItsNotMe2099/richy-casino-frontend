@@ -79,7 +79,7 @@ export default function BottomSheetContainer(props: Props) {
         <Sheet
           isOpen={appContext.bottomSheet == ProfileModalType.withdraw}
           onClose={appContext.hideBottomSheet}
-          snapPoints={[400]}
+          snapPoints={[620]}
         >
           {appContext.bottomSheet == ProfileModalType.withdraw && <Widraw isBottomSheet={true} />}
         </Sheet>

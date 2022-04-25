@@ -41,14 +41,11 @@ export default function Lottery() {
       setCurrentRound(i)
     })
   }
-  const someDate = '2023-12-27T12:46:24.007Z'
 
-  const expiredAt = new Date(someDate)
-  console.log('CurrentRound', currentRound)
   return (
     <WithGameFilterLayout>
         <PageTitle icon='/img/Lottery/lottery.svg' title={t('lottery_title')} onClick={() => isShow ? setIsShow(false) : setIsShow(true)} lottery/>
-      {!loading && currentRound && <><Timer roundId={currentRound.roundId} expiredAt={expiredAt}/>
+      {!loading && currentRound?.roundEndTime && <><Timer roundId={currentRound.roundId} expiredAt={new Date(currentRound?.roundEndTime)}/>
         <VisibleXs>
           <Statistics className={styles.statistics}
                       yourTicket={currentRound?.currentUserInfo?.ticketsCount}
@@ -60,7 +57,8 @@ export default function Lottery() {
           <BuyTickets  yourTicket={currentRound?.currentUserInfo?.ticketsCount}
                        winChance={currentRound?.currentUserInfo?.chancePercent}
                        totalTickets={currentRound?.totalTickets}
-                       pricePerTicket={0.00000001}
+                       pricePerTicket={parseFloat(currentRound?.ticketCost?.amount as string)}
+                       currency={currentRound?.ticketCost?.currencyIso}
                        onBuy={handleBuy}
           />
           <Prizes slots={currentRound?.slots}/>

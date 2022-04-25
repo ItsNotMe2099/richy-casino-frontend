@@ -18,6 +18,7 @@ import BottomSheetBody from 'components/layout/BottomSheetBody'
 import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
 import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
 import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
+import ModalFooterTwoFa from 'components/Profile/layout/ModalFooterTwoFa'
 
 
 
@@ -117,7 +118,7 @@ export default function Widraw(props: Props) {
       <BottomSheetBody className={styles.sheetBody}>
         {result}
       </BottomSheetBody>
-
+      <ModalFooterTwoFa/>
     </BottomSheetLayout>)
   } else {
     return (<ProfileModalLayout>
@@ -125,6 +126,7 @@ export default function Widraw(props: Props) {
         <ProfileModalBody>
           {result}
         </ProfileModalBody>
+        <ModalFooterTwoFa/>
       </ProfileModalLayout>
     )
   }

@@ -5,6 +5,7 @@ import { TwoFaModalArguments} from 'types/interfaces'
 import {useAppContext} from 'context/state'
 import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
 import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
+import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 
 interface Props {
 
@@ -18,6 +19,7 @@ export default function FA(props: Props) {
   return (
     <ProfileModalLayout>
       <ProfileModalHeader title={t('2fa_title')}/>
+      <ProfileModalBody>
       <div className={styles.root}>
         <div className={styles.scan}>
           {t('2fa_text')}
@@ -36,6 +38,7 @@ export default function FA(props: Props) {
           </div>
           <FAForm/>
       </div>
+      </ProfileModalBody>
     </ProfileModalLayout>
   )
 }

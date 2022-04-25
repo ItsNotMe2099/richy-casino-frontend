@@ -27,6 +27,11 @@ export interface ILotteryRoundCurrent {
   totalTickets: number,
   currentUserInfo: ILotteryCurrentUserInfo
   slots: ILotterySlot[]
+  roundEndTime?: string
+  ticketCost: {
+    amount: number | string
+    currencyIso: string
+  }
 }
 export interface ILotteryBuyResponse {
   currencyIso: string

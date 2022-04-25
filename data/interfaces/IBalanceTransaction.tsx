@@ -1,4 +1,4 @@
-export enum IBalanceTransactionType{
+export enum BalanceTransactionType{
   Initial = 0,
   Deposit = 1,
   GameDeposit= 2,
@@ -10,7 +10,7 @@ export  interface IBalanceTransaction {
   unixtimestamp: string
   amount: number,
   currencyIso: string,
-  type: IBalanceTransactionType,
+  type: BalanceTransactionType,
   typeName: string,
   comment: string,
   providerId: number,

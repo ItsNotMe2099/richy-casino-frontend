@@ -12,6 +12,7 @@ export default function SwitchFilterPayments(props: Props) {
     {label: t('payment_history_filter_all'), value: PaymentSwitchFilterKey.All},
     {label: t('payment_history_filter_deposit'), value: PaymentSwitchFilterKey.Deposit},
     {label: t('payment_history_filter_withdrawal'), value: PaymentSwitchFilterKey.Withdrawal},
+    {label: t('payment_history_filter_apps'), value: PaymentSwitchFilterKey.Applications},
   ]
 
   return (

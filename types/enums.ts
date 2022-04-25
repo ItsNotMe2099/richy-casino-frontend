@@ -65,7 +65,8 @@ export enum BetSwitchFilterKey{
 export enum PaymentSwitchFilterKey{
   All = 'all',
   Deposit = 'deposit',
-  Withdrawal = 'withdrawal'
+  Withdrawal = 'withdrawal',
+  Applications = 'applications'
 }
 export enum SnackbarType {
   error,

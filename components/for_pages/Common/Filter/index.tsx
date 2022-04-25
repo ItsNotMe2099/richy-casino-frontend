@@ -12,6 +12,7 @@ import Link from 'next/link'
 import useIsActiveLink from 'hooks/useIsActiveLink'
 import DropdownFilter from 'components/for_pages/Common/Filter/DropdownFilter'
 import {Routes} from 'types/routes'
+import {useFavoriteContext} from 'context/favorite_state'
 interface IGame{
   label: string
   image: string
@@ -27,7 +28,7 @@ interface Props {
   showMobile?: boolean
   onSearch?: (value: string) => void
 }
-const GameCategoryStaticCard = (props: {icon: string, label: string, link: string}) => {
+const GameCategoryStaticCard = (props: {icon: string, label: string, link: string, quantity: number}) => {
   const active = useIsActiveLink(props.link)
   return(
     <Link href={props.link}>
@@ -37,13 +38,14 @@ const GameCategoryStaticCard = (props: {icon: string, label: string, link: strin
         <div className={styles.label}>{props.label}</div>
       </div>
       <div className={styles.quantity}>
-        0
+        {props.quantity}
       </div>
     </a>
     </Link>
   )
 }
 export default function Filter(props: Props) {
+  const favoriteContext = useFavoriteContext()
   const [providers, setProviders] = useState<IGameProvider[]>([])
   const [categories, setCategories] = useState<IGameCategory[]>([])
   useEffect(() => {
@@ -53,9 +55,9 @@ export default function Filter(props: Props) {
 
 
   const games = [
-    {icon: '/img/Filter/icons/24.svg', label: 'Последние игры', link: '/catalog/category/last'},
-    {icon: '/img/Filter/icons/top.svg', label: 'ТОП игры', link: '/catalog/category/top'},
-    {icon: '/img/Filter/icons/favorite.svg', label: 'Избранные', link: '/catalog/category/favorite'},
+    {icon: '/img/Filter/icons/24.svg', label: 'Последние игры', link: '/catalog/category/last', quantity: 0},
+    {icon: '/img/Filter/icons/top.svg', label: 'ТОП игры', link: '/catalog/category/top', quantity: 0},
+    {icon: '/img/Filter/icons/favorite.svg', label: 'Избранные', link: '/catalog/category/favorite', quantity: favoriteContext.store.games.length},
   ]
 
   const [category, setCategory] = useState('')
@@ -68,7 +70,7 @@ export default function Filter(props: Props) {
 
          <InputSearch placeholder='Поиск' onChange={props.onSearch}/>
          {games.map((item, index) =>
-          <GameCategoryStaticCard key={index} icon={item.icon} label={item.label} link={item.link}/>
+          <GameCategoryStaticCard key={index} icon={item.icon} label={item.label} link={item.link} quantity={item.quantity}/>
          )
          }
          <div className={styles.categoriesLbl}>
@@ -99,7 +101,7 @@ export default function Filter(props: Props) {
         </div>
         </div>
         {games.map((item, index) =>
-          <GameCategoryStaticCard key={index} icon={item.icon} label={item.label} link={item.link}/>
+          <GameCategoryStaticCard key={index} icon={item.icon} label={item.label} link={item.link} quantity={item.quantity}/>
          )
          }
     </div>

@@ -94,7 +94,10 @@
     }
   }
   &.footer {
-    transform: translate(-50%, -157%);
+    bottom: 58px;
+    @media only screen and (max-width: $xs-max) {
+      bottom: 44px;
+    }
   }
 
 }

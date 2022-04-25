@@ -6,11 +6,16 @@
 
 .wrapper{
   display: flex;
-  margin-top: 22px;
-  margin-bottom: 23px;
+
+  padding: 23px $space-modal;
+  @media screen and (max-width: $xs-max){
+    padding: 16px $space-modal-mobile;
+  }
 }
 
-
+.body{
+  padding-top: 0px;
+}
 
 .item{
   display: flex;
@@ -55,6 +60,9 @@
   color: $pay500;
   margin-top: 20px;
   text-align: end;
+  &.red{
+    color: $lose500;
+  }
   @media screen and (max-width: 500px){
     font-size: 16px;
     margin-top: 10px;

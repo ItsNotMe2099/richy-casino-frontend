@@ -28,7 +28,7 @@ interface Props {
 
 export default function GamesListLive(props: Props) {
   const [data, setData] = useState<IPagination<IGame>>({data: [], total: 0})
-  const [page, setPage] = useState<number>(0)
+  const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(true)
   const limit = 30
   const [filter, setFilter] = useState<GameSwitchFilterKey>(GameSwitchFilterKey.All)
@@ -55,7 +55,6 @@ export default function GamesListLive(props: Props) {
     setFilter(item)
   }
   const handleScrollNext = async () => {
-    console.log('handleScrollNext')
     const newPage = page + 1
     setPage(newPage)
     setLoading(true)
