@@ -21,7 +21,7 @@ export default function Layout({children}: Props){
       </>
   }
    return (
-    <Container fluid style={{height: '100%', minHeight: '100%', maxWidth: '1320px'}}>
+    <Container fluid style={{height: '100%', minHeight: '100%'}}>
     <div className={styles.root}>
         <Header/>
       {appContext.isDesktop ? <StickyContainer>
