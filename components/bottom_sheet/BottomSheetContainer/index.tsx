@@ -13,7 +13,6 @@ import ModalRegistration from 'components/Auth/ModalRegistration'
 import ModalLogin from 'components/Auth/ModalLogin'
 import Fortune from 'components/Fortune'
 import BottomSheetLayout from 'components/layout/BottomSheetLayout'
-import BottomSheetBody from 'components/layout/BottomSheetBody'
 
 
 interface Props {}
@@ -88,13 +87,11 @@ export default function BottomSheetContainer(props: Props) {
         <Sheet
           isOpen={appContext.bottomSheet === ModalType.fortune}
           onClose={appContext.hideBottomSheet}
-          snapPoints={[500]}
+          snapPoints={[450]}
         >
           {appContext.bottomSheet == ModalType.fortune && (
-            <BottomSheetLayout>
-              <BottomSheetBody>
-                <Fortune isBottomSheet />
-              </BottomSheetBody>
+            <BottomSheetLayout lineOver>
+              <Fortune isBottomSheet />
             </BottomSheetLayout>
           )}
         </Sheet>

@@ -16,11 +16,11 @@ import classNames from 'classnames'
 
 const Board = dynamic(() => import('./Board'), { ssr: false })
 
-const mockRes: IWheelPlayResponse = {
-  currencyIso: 'BTC',
-  player: {balanceSpins: 2, balanceSpinsTimeNewFreeAccrual: '2022-04-24T16:00:47+03:00'},
-  winAmount: 0.005,
-}
+// const mockRes: IWheelPlayResponse = {
+//   currencyIso: 'BTC',
+//   player: {balanceSpins: 2, balanceSpinsTimeNewFreeAccrual: '2022-04-24T16:00:47+03:00'},
+//   winAmount: 0.005,
+// }
 
 interface Props {
   isBottomSheet?: boolean
@@ -103,11 +103,11 @@ export default function Fortune(props: Props) {
           <Board canvasSize={canvasSize} gameResult={gameResult} slots={slotsRef.current} />
         </div>
         <HiddenXs>
-        <div className={styles.wrapper}>
-          <div className={styles.everyday}>
-            <div>lucky spin everyday</div>
+          <div className={styles.wrapper}>
+            <div className={styles.everyday}>
+              <div>lucky spin everyday</div>
+            </div>
           </div>
-        </div>
         </HiddenXs>
         <div className={styles.right}>
           <img src='/img/Fortune/coins1.svg' alt=''/>
@@ -117,6 +117,8 @@ export default function Fortune(props: Props) {
         </div>
       </div>
       <div className={styles.mobile}>
+        <img src='/img/Fortune/mob_coins_top_right.svg' alt='' className={styles.bgMobileCoinsTopRight}/>
+        <img src='/img/Fortune/mob_coins_bottom_left.svg' alt='' className={styles.bgMobileCoinsBottomLeft}/>
         <VisibleXs>
           <div className={styles.wrapperMobile}>
             <div className={styles.everydayMobile}>
