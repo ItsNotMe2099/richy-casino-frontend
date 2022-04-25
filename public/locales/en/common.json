@@ -53,7 +53,7 @@
   "registration_button": "Регистрация",
   "registration_error": "Ошибка Регистрации",
 
-
+  "registration_phone_title": "Подтверждение номера",
   "registration_phone_text_1": "Введите ниже",
   "registration_phone_text_2": "код",
   "registration_phone_text_3": ", отправленный на указанный",
@@ -101,7 +101,7 @@
   "wallet_qr_attention": "ВАЖНО:",
   "wallet_qr_attention_text": "Отправляйте только BTC на этот депозитный адрес. Отправка любой другой валюты на этот адрес может привести к потере вашего депозита.",
   "payment_history_title": "История платежей",
-  "payment_history_deposit": "История платежей",
+  "payment_history_deposit": "Пополнить",
 
   "payment_history_filter_all": "Все",
   "payment_history_filter_deposit": "Пополения",
@@ -206,7 +206,7 @@
   "exchange_button": "Обменять",
 
   "favorite_title": "Избранное",
-  "bets_history": "История ставок",
+  "bets_history_title": "История ставок",
   "buy_crypto_title": "Купить криптовалюту",
   "buy_crypto_buy": "Купить",
   "buy_crypto_pay_in": "Оплатить в",

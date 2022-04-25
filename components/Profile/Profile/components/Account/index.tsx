@@ -45,11 +45,11 @@ export  const Account = (props: Props) => {
         setLoading(false)
         break
       case Action.Deposit:
-        context.showModal(ProfileModalType.wallet)
+        context.showModalProfile(ProfileModalType.wallet)
         break
       case Action.Withdrawal:
 
-        context.showModal(ProfileModalType.withdraw, {account: props.account} as WithdrawModalArguments)
+        context.showModalProfile(ProfileModalType.withdraw, {account: props.account} as WithdrawModalArguments)
         break
     }
   }

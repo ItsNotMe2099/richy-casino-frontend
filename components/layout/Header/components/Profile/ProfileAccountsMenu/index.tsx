@@ -75,7 +75,7 @@ export default function ProfileAccountsMenu(props: Props){
 
   }
   const handleClick= () => {
-    context.showModal(ProfileModalType.profile)
+    context.showModalProfile(ProfileModalType.profile)
   }
   return (
     <div className={styles.root}>

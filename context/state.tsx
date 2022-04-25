@@ -6,7 +6,7 @@ import Cookies from 'js-cookie'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import InfoRepository from 'data/repositories/InfoRepository'
 import IUser from 'data/interfaces/IUser'
-import {IBonusBannerDetails, SnackbarData} from 'types/interfaces'
+import {IBonusBannerDetails, IModalProfileStackItem, SnackbarData} from 'types/interfaces'
 import {CookiesLifeTime, Timers} from 'types/constants'
 import PromoCodeRepository from 'data/repositories/PromoCodeRepository'
 import UserUtils from 'utils/user'
@@ -17,8 +17,14 @@ interface IState {
   auth: boolean
   modalArguments?: any
   modal: ModalType | ProfileModalType | null
+  lastProfileModal?: IModalProfileStackItem
   showModal: (type: ModalType | ProfileModalType, data?: any) => void
+  showModalProfile: (type: ProfileModalType, data?: any) => void
+  goBackModalProfile: () => void
   hideModal: () => void
+  bottomSheet: ModalType | ProfileModalType | null
+  showBottomSheet: (type: ModalType | ProfileModalType, data?: any) => void
+  hideBottomSheet: () => void
   setToken: (token) => void
   logout: () => void
   updateUserFromCookies: () => void
@@ -38,10 +44,16 @@ const defaultValue: IState = {
   isMobile: false,
   isDesktop: true,
   modal: null,
+  bottomSheet: null,
   auth: false,
   user: null,
+  lastProfileModal: null,
   showModal: (type, data) => null,
+  showModalProfile: (type, data?: any) => null,
+  goBackModalProfile: () => null,
   hideModal: () => null,
+  showBottomSheet: (type, data) => null,
+  hideBottomSheet: () => null,
   setToken: (token) => null,
   logout: () => null,
   updateUserFromCookies: () => null,
@@ -54,7 +66,17 @@ const defaultValue: IState = {
   snackbar: null,
   showSnackbar: (text, type) => null,
 }
+const ModalsBottomSheet = [
+  ProfileModalType.withdraw,
+  ProfileModalType.wallet,
+  ModalType.login,
+  ModalType.registration,
+  ModalType.registrationPhone,
+  ModalType.registrationSuccess,
+  ModalType.passwordRecovery,
+  ModalType.passwordReset
 
+]
 const AppContext = createContext<IState>(defaultValue)
 
 interface Props {
@@ -66,6 +88,7 @@ interface Props {
 
 export function AppWrapper(props: Props) {
   const [modal, setModal] = useState<ModalType | ProfileModalType | null>(null)
+  const [bottomSheet, setBottomSheet] = useState<ModalType | ProfileModalType | null>(null)
   const [modalArguments, setModalArguments] = useState<ModalType | ProfileModalType | null>(null)
   const [user, setUser] = useState<IUser | null>(props.initialUser)
   const [auth, setAuth] = useState<boolean>(!!props.initialUser)
@@ -74,13 +97,16 @@ export function AppWrapper(props: Props) {
   const [bonusBannerDetails, setBonusBannerDetails] = useState<IBonusBannerDetails>(null)
   const [currencies, setCurrencies] = useState<ICurrency[]>([])
   const [snackbar, setSnackbar] = useState<SnackbarData | null>(null)
+  const [modalProfileStack, setModalProfileStack] = useState<IModalProfileStackItem[]>([])
   const value: IState = {
     ...defaultValue,
     isMobile: props.isMobile,
     isDesktop: !props.isMobile,
     auth,
     modal,
+    bottomSheet,
     modalArguments,
+    lastProfileModal: modalProfileStack.length > 0 ? modalProfileStack[modalProfileStack.length - 1] : null,
     currencies,
     user,
     snackbar,
@@ -88,8 +114,33 @@ export function AppWrapper(props: Props) {
       showModal(type, props)
 
     },
+    showModalProfile: (type, args: any) => {
+      showModal(type, props)
+
+      if (modal && !(props.isMobile && ModalsBottomSheet.includes(type)) && Object.values(ProfileModalType).includes(modal as ProfileModalType)) {
+        setModalProfileStack(stack => [...stack, {
+          type: modal as ProfileModalType,
+          args
+        } as IModalProfileStackItem])
+      }
+    },
+    goBackModalProfile: () => {
+      if (modalProfileStack.length > 0) {
+        const last = modalProfileStack[modalProfileStack.length - 1]
+        setModalProfileStack([...modalProfileStack].slice(0, modalProfileStack.length - 1))
+        showModal(last.type, last.args)
+      } else {
+        hideModal()
+      }
+    },
     hideModal: () => {
-      setModal(null)
+      hideModal()
+    },
+    showBottomSheet: (type, props: any) => {
+      showBottomSheet(type, props)
+    },
+    hideBottomSheet: () => {
+      hideBottomSheet()
     },
     setToken: (token: string) => {
       Cookies.set(CookiesType.accessToken, token, {expires: CookiesLifeTime.accessToken})
@@ -110,7 +161,6 @@ export function AppWrapper(props: Props) {
     bonusShowMode,
     bonusBannerDetails,
     setBonusShowMode(mode) {
-      console.log('setBonusShowMode', mode)
       setBonusShowMode(mode)
       Cookies.set(CookiesType.bonusDepositShowMode, mode, {expires: CookiesLifeTime.bonusDepositShowMode})
 
@@ -145,10 +195,30 @@ export function AppWrapper(props: Props) {
   useEffect(() => {
     InfoRepository.getCurrencies().then(i => setCurrencies(i))
   }, [])
-  const showModal = (type: ModalType | ProfileModalType, props?: any) => {
+  const showModal = (type: ModalType | ProfileModalType, args?: any) => {
+
+    if (props.isMobile && ModalsBottomSheet.includes(type)) {
+      console.log('ModalsBottomSheet.includes(type)', type)
+      showBottomSheet(type, args)
+      return
+    }
+    ReactModal.setAppElement('body')
+    setModalArguments(args)
+    setModal(type)
+
+  }
+  const hideModal = () => {
+    setModal(null)
+    setModalProfileStack([])
+  }
+  const showBottomSheet = (type: ModalType | ProfileModalType, props?: any) => {
     ReactModal.setAppElement('body')
     setModalArguments(props)
-    setModal(type)
+    console.log('SetBottomSheet', type)
+    setBottomSheet(type)
+  }
+  const hideBottomSheet = () => {
+    setBottomSheet(null)
   }
   const updateUserDetails = async () => {
     const res = await UserRepository.getUser()

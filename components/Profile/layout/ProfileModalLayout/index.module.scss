@@ -1,0 +1,13 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  &.fixed{
+    max-height: 80vh;
+    @media screen and (max-width: 900px){
+      max-height: 100vh;
+    }
+  }
+
+}

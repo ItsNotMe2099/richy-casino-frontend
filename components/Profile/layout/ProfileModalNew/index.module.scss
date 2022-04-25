@@ -1,0 +1,62 @@
+@import "scss/index";
+.root {
+  position: relative;
+  background: linear-gradient(0deg, #1D1E25, #1D1E25);
+  border-radius: 30px;
+  z-index: 5;
+  margin:  auto;
+  display: flex;
+  flex-direction: column;
+  &.fixed{
+
+  }
+ &.sizeNormal{
+    width: 610px;
+  }
+
+  &.sizeSmall{
+    width: 428px;
+  }
+
+  &.sizeLarge{
+    width: 664px;
+  }
+  @media screen and (max-width: $xs-max){
+    width: 100% !important;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+    background: $dark800;
+
+
+  }
+  @media screen and (max-width: $xs-max){
+    border-radius: 0;
+
+
+  }
+}
+
+.frame{
+  overflow-y: scroll;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  z-index: 3;
+  @media screen and (max-width: 430px){
+    padding-bottom: 0;
+  }
+}
+.overlay{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+}

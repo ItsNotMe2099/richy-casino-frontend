@@ -1,0 +1,28 @@
+@import "scss/index";
+.root {
+  cursor: pointer;
+  background: $dark600;
+  border-radius: 6px;
+  padding: 8px;
+  display: flex;
+  svg{
+    path{
+      fill: #6B6C77;
+    }
+  }
+  @media screen and (max-width: $xs-max){
+    background: #1D1E25;
+    svg{
+      path{
+        fill: $white;
+      }
+    }
+  }
+  &:hover{
+    background-color: $dark500;
+    @media screen and (max-width: 430px){
+      background-color: transparent;
+    }
+  }
+}
+

@@ -6,6 +6,9 @@ import classNames from 'classnames'
 import UserUtils from 'utils/user'
 import {useTranslation} from 'next-i18next'
 import {ProfileModalType} from 'types/enums'
+import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
+import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
+import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 
 interface IUser {
   id: string
@@ -32,24 +35,7 @@ export default function ProfileBurger(props: Props) {
   const {t} = useTranslation()
   const {isOpen, onRequestClose} = props
   const appContext = useAppContext()
-  const customStyles = {
-    overlay: {
-      backgroundColor: !props.singlePage ? 'rgba(0, 0, 0, 0.5)' : 'transparent',
-      display: 'flex',
-      zIndex: '11',
-    },
-    content: {
-      width: '34%',
-      borderRadius: '21px',
-      padding: '0',
-      border: '0',
-      margin: 'auto',
-      position: 'static',
-      inset: '0',
-      overflow: 'hidden',
-      background: 'none',
-    },
-  }
+
 
   const bonuses = [
     {icon: '/img/ProfileBurger/gift.svg', label: t('profile_mobile_bonuses_bonus'), key: 'gift'},
@@ -110,8 +96,11 @@ export default function ProfileBurger(props: Props) {
   }
 
   return (
+    <ProfileModalLayout>
+      <ProfileModalHeader/>
+      <ProfileModalBody>
     <div className={styles.container}>
-      <div className={styles.info} onClick={() => appContext.showModal(ProfileModalType.profile)}>
+      <div className={styles.info} onClick={() => appContext.showModalProfile(ProfileModalType.profile)}>
         <div className={styles.user}>
           <Avatar avatar='/img/Avatar/avatar.png' style='circle'/>
           <div className={styles.name}>
@@ -163,5 +152,7 @@ export default function ProfileBurger(props: Props) {
         )}
       </div>
     </div>
+      </ProfileModalBody>
+    </ProfileModalLayout>
   )
 }

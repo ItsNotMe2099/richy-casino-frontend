@@ -150,7 +150,7 @@ export default function ProfileModal(props: Props) {
                 <div className={styles.wrap}
                      onClick={(props.wallet && props.step === 1) ? props.onRequestClose :
                        (props.wallet && props.step > 1) ? () => props.setStep() :
-                         props.style !== 'buyCrypto' ? () => context.showModal(ProfileModalType.profile) : props.onRequestClose}>
+                         props.style !== 'buyCrypto' ? () => context.showModalProfile(ProfileModalType.profile) : props.onRequestClose}>
                   <div className={styles.arrow}>
                     <img src='/img/icons/back-arrow.svg' alt=''/>
                   </div>

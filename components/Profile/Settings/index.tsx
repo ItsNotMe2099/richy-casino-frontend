@@ -20,6 +20,11 @@ import {useTranslation} from 'next-i18next'
 import {ProfileSettingsCitySelectField} from 'components/ui/Inputs/ProfileSettingsCitySelectField'
 import {ProfileModalType} from 'types/enums'
 import Formatter from 'utils/formatter'
+import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
+import ProfileModalFooter from 'components/Profile/layout/ProfileModalFooter'
+import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
+import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
+import Close from 'components/svg/Close'
 
 interface IUser {
   id: string
@@ -34,7 +39,7 @@ interface IUser {
 }
 
 interface Props {
-  user: IUser
+
 }
 
 export default function Settings(props: Props) {
@@ -73,20 +78,20 @@ export default function Settings(props: Props) {
     setSending(true)
     setError(null)
     setError2Fa(null)
-    if(data.password){
+    if (data.password) {
       try {
         await UserRepository.changePassword(data.currentPassword, data.password)
         setSending(false)
-      }catch (e) {
+      } catch (e) {
         setError(e)
         setSending(false)
         return
       }
     }
     try {
-      await UserRepository.updateUser({...data, ...(data.phone ? {phone: Formatter.cleanPhone(data.phone) } : {})})
+      await UserRepository.updateUser({...data, ...(data.phone ? {phone: Formatter.cleanPhone(data.phone)} : {})})
       await context.updateUserFromCookies()
-      context.showModal(ProfileModalType.profile)
+      context.showModalProfile(ProfileModalType.profile)
     } catch (e) {
       setError(e)
     }
@@ -124,7 +129,7 @@ export default function Settings(props: Props) {
   const toggleChangePassword = () => {
     setError(null)
     setError2Fa(null)
-    if(isChange){
+    if (isChange) {
       formik.setFieldValue('currentPassword', '')
       formik.setFieldValue('password', '')
       formik.setFieldValue('passwordConfirm', '')
@@ -134,16 +139,16 @@ export default function Settings(props: Props) {
   const handle2fa = async (enable: boolean) => {
     setError2Fa(null)
     setSending2Fa(true)
-    try{
-      if(enable){
-       const qrUrl = await UserRepository.twoFaEnable()
+    try {
+      if (enable) {
+        const qrUrl = await UserRepository.twoFaEnable()
         console.log('qrUrl', qrUrl)
-        context.showModal(ProfileModalType.FA, {qrUrl} as TwoFaModalArguments)
-      }else{
+        context.showModalProfile(ProfileModalType.FA, {qrUrl} as TwoFaModalArguments)
+      } else {
         await UserRepository.twoFaDisable()
         context.updateUserFromCookies()
       }
-    }catch (e) {
+    } catch (e) {
       setError2Fa(e)
     }
     setSending2Fa(false)
@@ -153,117 +158,131 @@ export default function Settings(props: Props) {
   return (
     <FormikProvider value={formik}>
       <Form className={styles.form}>
-        <InputField name={'id'} disabled={true} className={styles.input} label={t('settings_field_id')}
-                    errorClassName={styles.fieldError}/>
-        <InputField name={'username'} className={styles.input} label={t('settings_field_username')}
-                     disabled={sending} errorClassName={styles.fieldError}/>
-        <InputField name={'surname'} className={styles.input} label={t('settings_field_surname')} disabled={sending}
-                    errorClassName={styles.fieldError}/>
-        <InputField name={'name'} className={styles.input} label={t('settings_field_name')}
-                   disabled={sending} errorClassName={styles.fieldError}/>
-        <InputField name={'birthday_datе'} className={styles.input} label={t('settings_field_birthday')}
-                    disabled={sending} errorClassName={styles.fieldError}/>
-        <ProfileSettingsCountrySelectField name={'country_iso'} label={t('settings_field_country')} disabled={sending}
-                                           validate={Validator.required} />
-        <ProfileSettingsCitySelectField name={'city_id'} label={t('settings_field_city')}
-                                        countryIso={values.country_iso} disabled={sending}/>
-        <ProfileSettingsSelectField name='currency_iso' validate={Validator.required} options={currencies}
-                                    label={t('settings_field_currency')} disabled={sending}/>
-        <InputField name={'phone'} format={'phone'} disabled={true} className={styles.input} label={t('settings_field_phone')}
-                    errorClassName={styles.fieldError}/>
-        <InputField name={'email'} disabled={true} className={styles.input} label={t('settings_field_email')}
-                    errorClassName={styles.fieldError}/>
-        <div className={classNames(styles.change, {[styles.justify]: isChange})}>
-          {isChange ?
+        <ProfileModalLayout fixed>
+        <ProfileModalHeader title={t('settings_title')}/>
+          <ProfileModalBody fixed>
+            <div>
+            <InputField name={'id'} disabled={true} className={styles.input} label={t('settings_field_id')}
+                        errorClassName={styles.fieldError}/>
+            <InputField name={'username'} className={styles.input} label={t('settings_field_username')}
+                        disabled={sending} errorClassName={styles.fieldError}/>
+            <InputField name={'surname'} className={styles.input} label={t('settings_field_surname')} disabled={sending}
+                        errorClassName={styles.fieldError}/>
+            <InputField name={'name'} className={styles.input} label={t('settings_field_name')}
+                        disabled={sending} errorClassName={styles.fieldError}/>
+            <InputField name={'birthday_datе'} className={styles.input} label={t('settings_field_birthday')}
+                        disabled={sending} errorClassName={styles.fieldError}/>
+            <ProfileSettingsCountrySelectField name={'country_iso'} label={t('settings_field_country')}
+                                               disabled={sending}
+                                               validate={Validator.required}/>
+            <ProfileSettingsCitySelectField name={'city_id'} label={t('settings_field_city')}
+                                            countryIso={values.country_iso} disabled={sending}/>
+            <ProfileSettingsSelectField name='currency_iso' validate={Validator.required} options={currencies}
+                                        label={t('settings_field_currency')} disabled={sending}/>
+            <InputField name={'phone'} format={'phone'} disabled={true} className={styles.input}
+                        label={t('settings_field_phone')}
+                        errorClassName={styles.fieldError}/>
+            <InputField name={'email'} disabled={true} className={styles.input} label={t('settings_field_email')}
+                        errorClassName={styles.fieldError}/>
+            <div className={classNames(styles.change, {[styles.justify]: isChange})}>
+              {isChange ?
+                <>
+                  <div className={styles.passwordChangeHeader}>
+                    <div className={styles.line}></div>
+                    <div className={styles.title}>{t('settings_password_change_title')}</div>
+                  </div>
+                  <Button className={classNames(styles.btn, styles.btnPasswordChange)} disabled={sending} size='large' background='blueGradient500'
+                          type='button' onClick={toggleChangePassword}>
+                    <span className={styles.btnText}>{t('settings_password_cancel_button')}</span> <Close/>
+                  </Button>
+                </>
+                :
+                <>
+                  <InputField name={'fakePassword'} disabled={true} className={styles.input}
+                              label={t('settings_field_password')} type={'password'}
+                              errorClassName={styles.fieldError}/>
+                  <Button className={classNames(styles.btn, styles.btnPasswordChange)} disabled={sending} size='large' background='blueGradient500'
+                          type='button'
+                          onClick={toggleChangePassword}>
+                    <span className={styles.btnText}> {t('settings_password_change_button')}</span><img src='/img/icons/edit.svg' alt=''/>
+                  </Button>
+                </>}
+            </div>
+            {isChange &&
             <>
-              <div className={styles.isChange}>
-                <div className={styles.line}></div>
-                <div className={styles.title}>{t('settings_password_change_title')}</div>
-              </div>
-              <Button className={styles.cancel} disabled={sending} size='large' background='blueGradient500'
-                      type='button' onClick={toggleChangePassword}>
-                {t('settings_password_cancel_button')}
-              </Button>
+              <InputField
+                name={'currentPassword'}
+                className={styles.input}
+                placeholder={t('settings_field_current_password')}
+                validate={values.password || values.passwordConfirm ? Validator.required : undefined}
+                disabled={sending}
+                type={'password'}
+                errorClassName={styles.fieldError}
+              />
+              <InputField
+                name={'password'}
+                type={'password'}
+                className={styles.input}
+                disabled={sending}
+                placeholder={t('settings_field_new_password')}
+                validate={values.fakePassword || values.password || values.passwordConfirm ? Validator.required : undefined}
+                errorClassName={styles.fieldError}/>
+              <InputField
+                name={'passwordConfirm'}
+                type={'password'}
+                disabled={sending}
+                className={styles.input}
+                placeholder={t('settings_field_new_password_confirm')}
+                validate={values.fakePassword || values.password || values.passwordConfirm ? Validator.combine([Validator.required, Validator.passwordsMustMatch(values)]) : undefined}
+                errorClassName={styles.fieldError}
+              />
             </>
-            :
-            <>
-              <InputField name={'fakePassword'} disabled={true} className={styles.input}
-                          label={t('settings_field_password')} type={'password'} errorClassName={styles.fieldError}/>
-              <Button className={styles.btn} disabled={sending} size='large' background='blueGradient500' type='button'
-                      onClick={toggleChangePassword}>
-                <span> {t('settings_password_change_button')}</span><img src='/img/icons/edit.svg' alt=''/>
+            }
+            <FormError error={error2Fa}/>
+            <div className={styles.fa}>
+              <div className={styles.faInput}>
+                {enabled2Fa ? <>{t('settings_2fa')} <span
+                    className={styles.blue}>{t('settings_2fa_enabled')}</span></> :
+                  <>{t('settings_2fa')} <span className={styles.red}>{t('settings_2fa_disabled')}</span></>}
+              </div>
+              <Button className={classNames(styles.btn, {[styles.faBtn]: true})}
+                      type={'button'}
+                      spinner={sending2Fa}
+                      background={!enabled2Fa ? 'payGradient500' : 'dark600'}
+                      onClick={() => handle2fa(!enabled2Fa)}>
+                {!enabled2Fa ? t('settings_2fa_enable') : t('settings_2fa_disable')}
               </Button>
-            </>}
-        </div>
-        {isChange &&
-        <>
-          <InputField
-            name={'currentPassword'}
-            className={styles.input}
-            placeholder={t('settings_field_current_password')}
-            validate={values.password || values.passwordConfirm ? Validator.required : undefined}
-            disabled={sending}
-            type={'password'}
-            errorClassName={styles.fieldError}
-          />
-          <InputField
-            name={'password'}
-            type={'password'}
-            className={styles.input}
-            disabled={sending}
-            placeholder={t('settings_field_new_password')} validate={values.fakePassword || values.password || values.passwordConfirm ? Validator.required : undefined}
-            errorClassName={styles.fieldError}/>
-          <InputField
-            name={'passwordConfirm'}
-            type={'password'}
-            disabled={sending}
-            className={styles.input}
-            placeholder={t('settings_field_new_password_confirm')}
-            validate={values.fakePassword || values.password || values.passwordConfirm ? Validator.combine([Validator.required, Validator.passwordsMustMatch(values)]) : undefined}
-            errorClassName={styles.fieldError}
-          />
-        </>
-        }
-        <FormError error={error2Fa}/>
-        <div className={styles.fa}>
-          <div className={styles.faInput}>
-            {enabled2Fa ? <>{t('settings_2fa')} <span className={styles.blue}>{t('settings_2fa_enabled')}</span></> :
-              <>{t('settings_2fa')} <span className={styles.red}>{t('settings_2fa_disabled')}</span></>}
-          </div>
-          <Button className={classNames(styles.btn, {[styles.faBtn]: false})}
-                  type={'button'}
-                  spinner={sending2Fa}
-                  background={!enabled2Fa ? 'payGradient500' : 'dark600'}
-                  onClick={() => handle2fa(!enabled2Fa)}>
-            {!enabled2Fa ? t('settings_2fa_enable') : t('settings_2fa_disable')}
-          </Button>
-        </div>
-        <HiddenXs>
-          <div className={styles.boxes}>
-            <div className={styles.row}>
-              <CheckBox size='large' disabled={sending} name='is_hide_username' label={t('settings_hide_username')}/>
-              <CheckBox size='large' disabled={sending} name='is_hide_from_statistics'
-                        label={t('settings_hide_from_statistics')}/>
             </div>
-            <div className={styles.row}>
-              <CheckBox size='large' disabled={sending} name='is_hide_from_leaderboard'
-                        label={t('settings_hide_from_leaderboard')}/>
-              <CheckBox size='large' disabled={sending} name='is_hide_balance' label={t('settings_hide_balance')}/>
+            <HiddenXs>
+              <div className={styles.boxes}>
+                  <CheckBox className={styles.checkbox} size='large' disabled={sending} name='is_hide_username'
+                            label={t('settings_hide_username')}/>
+                  <CheckBox className={styles.checkbox} size='large' disabled={sending} name='is_hide_from_statistics'
+                            label={t('settings_hide_from_statistics')}/>
+                  <CheckBox className={styles.checkbox} size='large' disabled={sending} name='is_hide_from_leaderboard'
+                            label={t('settings_hide_from_leaderboard')}/>
+                  <CheckBox className={styles.checkbox} size='large' disabled={sending} name='is_hide_balance' label={t('settings_hide_balance')}/>
+
+              </div>
+            </HiddenXs>
+            <VisibleXs>
+              <div className={classNames(styles.boxes, styles.boxesMobile)}>
+                <CheckBox className={styles.checkbox} size='large' name='is_hide_username' label={t('settings_hide_username')}/>
+                <CheckBox className={styles.checkbox} size='large' name='is_hide_from_leaderboard' label={t('settings_hide_from_leaderboard')}/>
+                <CheckBox  className={styles.checkbox} size='large' name='is_hide_from_statistics' label={t('settings_hide_from_statistics')}/>
+                <CheckBox className={styles.checkbox} size='large' name='is_hide_balance' label={t('settings_hide_balance')}/>
+              </div>
+            </VisibleXs>
             </div>
-          </div>
-        </HiddenXs>
-        <VisibleXs>
-          <>
-            <CheckBox size='large' name='is_hide_username' label={t('settings_hide_username')}/>
-            <CheckBox size='large' name='is_hide_from_leaderboard' label={t('settings_hide_from_leaderboard')}/>
-            <CheckBox size='large' name='is_hide_from_statistics' label={t('settings_hide_from_statistics')}/>
-            <CheckBox size='large' name='is_hide_balance' label={t('settings_hide_balance')}/>
-          </>
-        </VisibleXs>
-        <FormError error={error}/>
-        <Button className={styles.save} spinner={sending} size='large' background='blueGradient500' type='submit'>
-          {t('settings_save')}
-        </Button>
+          </ProfileModalBody>
+          <ProfileModalFooter>
+            <FormError error={error}/>
+            <Button className={styles.save} spinner={sending} size='large' background='blueGradient500' type='button'>
+              {t('settings_save')}
+            </Button>
+          </ProfileModalFooter>
+        </ProfileModalLayout>
+
       </Form>
     </FormikProvider>
   )

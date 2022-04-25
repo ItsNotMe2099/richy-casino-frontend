@@ -21,9 +21,7 @@
   color: #717384;
   flex: 1;
   font-weight: 500;
-  @media screen and (max-width: $xs-max) {
-    background-color: $dark700;
-  }
+
   &:-webkit-autofill{
     -webkit-text-fill-color: #717384 !important;
   }

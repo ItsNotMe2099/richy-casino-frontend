@@ -1,10 +1,7 @@
 @import "scss/index";
 
 .form {
-  margin-top: 16px;
-  @media screen and (max-width: $sm-min){
-    margin-top: 0px;
-  }
+
 }
 
 .inputs {
@@ -56,6 +53,7 @@
   font-size: 13px;
   color: $dark200;
   margin-top: 25px;
+  text-align: center;
   span{
     color: #FFD12F;
     cursor: pointer;

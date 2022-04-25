@@ -3,6 +3,8 @@ import styles from './index.module.scss'
 import {useTranslation} from 'next-i18next'
 import { TwoFaModalArguments} from 'types/interfaces'
 import {useAppContext} from 'context/state'
+import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
+import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
 
 interface Props {
 
@@ -14,6 +16,8 @@ export default function FA(props: Props) {
   const args = context.modalArguments as TwoFaModalArguments
 
   return (
+    <ProfileModalLayout>
+      <ProfileModalHeader title={t('2fa_title')}/>
       <div className={styles.root}>
         <div className={styles.scan}>
           {t('2fa_text')}
@@ -32,5 +36,6 @@ export default function FA(props: Props) {
           </div>
           <FAForm/>
       </div>
+    </ProfileModalLayout>
   )
 }

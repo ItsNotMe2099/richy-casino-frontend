@@ -1,10 +1,7 @@
 import {useState} from 'react'
 import styles from './index.module.scss'
 
-import ProfileModal from 'components/ui/ProfileModal'
-import {ProfileModalType} from 'types/enums'
 import {useTranslation} from 'next-i18next'
-import Modal from 'components/ui/Modal'
 import {PaymentMethod, PaymentStep, WithdrawModalArguments} from 'types/interfaces'
 import {useAppContext} from 'context/state'
 import {ICurrency} from 'data/interfaces/ICurrency'
@@ -15,44 +12,20 @@ import StepCrypto from './StepCrypto'
 import {IDepositCryptoResponse, IDepositResponse} from 'data/interfaces/IPaymentDeposit'
 import {IUserBalanceCurrency} from 'data/interfaces/IUser'
 import UserUtils from 'utils/user'
+import BottomSheetLayout from 'components/layout/BottomSheetLayout'
+import BottomSheetHeader from 'components/layout/BottomSheetHeader'
+import BottomSheetBody from 'components/layout/BottomSheetBody'
+import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
+import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
+import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 
 
 
 interface Props {
-  isOpen?: boolean
+  isBottomSheet?: boolean
 }
 
-interface MethodProps {
-  icon: string
-  iconLabel?: string
-  label: string
-  bonus?: boolean
-  iso?: string
-  onClick?: () => void
-  blue?: boolean
-  currency?: boolean
-  mobile?: boolean
-}
-
-interface OptionsProps {
-  method?: string
-  array: MethodProps[]
-}
-
-interface QrCodeProps {
-  iso: string
-  walletNumber: string
-}
-
-interface CryptoIconsProps {
-  mainColor: string
-  iconColor: string
-  lastMainColor: string
-  lastIconMainColor: string
-  style?: 'three' | 'two'
-}
-
-export default function Wallet(props: Props) {
+export default function Widraw(props: Props) {
   const {t} = useTranslation()
   const context = useAppContext()
   const methods = [
@@ -108,21 +81,6 @@ export default function Wallet(props: Props) {
     setStep(PaymentStep.Success)
   }
 
-  const renderBody = () => {
-    return (
-      <div className={styles.root}>
-
-        {step === PaymentStep.Method && <StepMethod account={account} onChange={handlePaymentMethod} onChangeUserAccount={setAccount}/>}
-        {step === PaymentStep.Currency && <StepCurrency method={method} onChange={handleCurrencyMethod} onSetStep={handleSetStep}/>}
-        {step === PaymentStep.Form && <StepForm account={account} currency={currency}  method={method} onSubmit={handleSubmit} onSetStep={handleSetStep}/>}
-        {step === PaymentStep.Success && <StepCrypto currency={currency} method={method} response={depositResponse as IDepositCryptoResponse}/>}
-      </div>
-    )
-  }
-  const commonSettings =
-    {
-      onRequestClose: handleClose,
-    }
   const handleSetStep = (step: PaymentStep) => {
     setStep(step)
   }
@@ -142,27 +100,33 @@ export default function Wallet(props: Props) {
         break
     }
   }
-  if (context.isMobile) {
-    return (<Modal isOpen={context.modal === ProfileModalType.withdraw} {...commonSettings}>
-      <div className={styles.mobileHeader}>{t('withdraw_title')}
-        <div className={styles.userId}>ID {context.user?.id}</div>
-      </div>
 
-      {renderBody()}
-    </Modal>)
+  const result = (
+    <div className={styles.root}>
+
+      {step === PaymentStep.Method && <StepMethod account={account} onChange={handlePaymentMethod} onChangeUserAccount={setAccount}/>}
+      {step === PaymentStep.Currency && <StepCurrency method={method} onChange={handleCurrencyMethod} onSetStep={handleSetStep}/>}
+      {step === PaymentStep.Form && <StepForm account={account} currency={currency}  method={method} onSubmit={handleSubmit} onSetStep={handleSetStep}/>}
+      {step === PaymentStep.Success && <StepCrypto currency={currency} method={method} response={depositResponse as IDepositCryptoResponse}/>}
+    </div>
+  )
+
+  if (props.isBottomSheet) {
+    return (<BottomSheetLayout>
+      <BottomSheetHeader className={styles.sheetHeader} title={t('withdraw_title')}  suffix={ <div className={styles.userId}>ID {context.user?.id}</div>}/>
+      <BottomSheetBody className={styles.sheetBody}>
+        {result}
+      </BottomSheetBody>
+
+    </BottomSheetLayout>)
   } else {
-    return (
-      <ProfileModal size='small'
-                    key={8}
-                    isOpen={context.modal === ProfileModalType.withdraw} {...commonSettings} title={t('withdraw_title')}
-                    wallet noBorder
-                    isBack={true}
-                    step={1}
-                    setStep={handleBack}
-                    style='wallet'
-      >
-        {renderBody()}
-      </ProfileModal>
+    return (<ProfileModalLayout>
+        <ProfileModalHeader title={t('withdraw_title')} showId  showBack={step !== PaymentStep.Method} onBackClick={step !== PaymentStep.Method ? handleBack : null}></ProfileModalHeader>
+        <ProfileModalBody>
+          {result}
+        </ProfileModalBody>
+      </ProfileModalLayout>
     )
   }
+
 }

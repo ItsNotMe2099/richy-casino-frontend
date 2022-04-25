@@ -1,6 +1,6 @@
 import {HTMLInputTypeAttribute, MouseEventHandler, ReactElement} from 'react'
 import { FieldConfig } from 'formik'
-import {FavoriteEntityType, SnackbarType} from 'types/enums'
+import {FavoriteEntityType, ProfileModalType, SnackbarType} from 'types/enums'
 import {IUserBalanceCurrency} from 'data/interfaces/IUser'
 
 export interface IField extends FieldConfig {
@@ -91,6 +91,9 @@ export interface RegistrationSuccessModalArguments {
 export interface PasswordResetModalArguments {
   login: string
 }
+export interface ProfileModalArguments {
+  backTo?: ProfileModalType
+}
 export interface WithdrawModalArguments {
   account: IUserBalanceCurrency
 }
@@ -134,4 +137,9 @@ export interface IBonusBannerDetails{
   lotteryTickets: number
   wheelSpins: number
   validTill: string
+}
+
+export interface IModalProfileStackItem{
+  type: ProfileModalType,
+  args?: any
 }

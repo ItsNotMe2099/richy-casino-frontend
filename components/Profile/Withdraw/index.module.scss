@@ -20,17 +20,19 @@
 .banner{
 
 }
-.mobileHeader{
-  font-size: 22px;
-  font-weight: 500;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  .userId{
-    font-weight: 400;
-    font-size: 14px;
-    color: $dark200;
 
-  }
+.sheetHeader{
+  padding-top: 18px;
+  font-weight: 600;
+  font-size: 22px;
+}
+.userId{
+  font-weight: 400;
+  font-size: 14px;
+  color: $dark200;
+
+}
+
+.sheetBody{
+  padding-top: 0px;
 }

@@ -50,7 +50,7 @@ const handleChange = (item: ILanguage) => {
 }
 
   return (
-    <div  ref={dropdownRef} className={classNames(styles.root, props.className)} onClick={handleClick}>
+    <div  ref={dropdownRef} className={classNames(styles.root, {[styles.footer]: style === 'footer'}, props.className)} onClick={handleClick}>
       <div className={styles.dropDownTrigger}>
         <img src={currentLanguage.icon} alt=''/> {currentLanguage.name}
       </div>

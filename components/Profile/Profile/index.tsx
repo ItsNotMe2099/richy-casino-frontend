@@ -11,6 +11,9 @@ import {Account} from 'components/Profile/Profile/components/Account'
 import {Bonus} from 'components/Profile/Profile/components/Bonus'
 import {MenuItem} from 'components/Profile/Profile/components/MenuItem'
 import classNames from 'classnames'
+import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
+import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
+import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 
 interface Props {
 
@@ -51,7 +54,9 @@ export default function Profile(props: Props) {
   const bonusAccounts = UserUtils.getBonusBalances(context.user)
   const currenciesToAdd = context.currencies.filter(i => !context.user.balance.currencies.totals.find(a => a.currency === i.iso))
   return (
-    <div className={styles.root}>
+    <ProfileModalLayout>
+      <ProfileModalHeader title={context.isMobile ? null : t('profile_title')}/>
+      <ProfileModalBody>
       <div className={styles.top}>
         <div className={styles.avatar}>
           <Avatar avatar={'/img/Avatar/avatar.png'}/>
@@ -88,14 +93,14 @@ export default function Profile(props: Props) {
           }
           <div className={styles.actions}>
             <div className={styles.notGreen}>
-              <Button className={styles.btn} onClick={() => context.showModal(ProfileModalType.withdraw)}>
+              <Button className={styles.btn} onClick={() => context.showModalProfile(ProfileModalType.withdraw)}>
                 {t('profile_withdrawal')}
               </Button>
-              <Button className={styles.btn} onClick={() => context.showModal(ProfileModalType.exchange)}>
+              <Button className={styles.btn} onClick={() => context.showModalProfile(ProfileModalType.withdraw)}>
                 {t('profile_exchange')}
               </Button>
             </div>
-            <Button onClick={() => context.showModal(ProfileModalType.wallet)} size='normal' background='payGradient500'
+            <Button onClick={() => context.showModalProfile(ProfileModalType.wallet)} size='normal' background='payGradient500'
                     className={styles.wallet}><img src='/img/icons/wallet.svg' alt=''/>Пополнить</Button>
           </div>
           {otherAccounts.length > 0 && <div className={classNames(styles.field, styles.additional)}>
@@ -127,17 +132,18 @@ export default function Profile(props: Props) {
         </div>
       </div>
       <div className={styles.menu}>
-        <MenuItem icon='/img/Profile/icons/wallet.svg' label={t('profile_menu_wallet')} isActive/>
+        <MenuItem icon='/img/Profile/icons/wallet.svg' label={t('profile_menu_wallet')} isActive onClick={() => context.showModalProfile(ProfileModalType.wallet)}/>
         <MenuItem icon='/img/Profile/icons/clock.svg' label={t('profile_menu_bets_history')}
-                  onClick={() => context.showModal(ProfileModalType.betsHistory)}/>
+                  onClick={() => context.showModalProfile(ProfileModalType.betsHistory)}/>
         <MenuItem icon='/img/Profile/icons/favorite.svg' label={t('profile_menu_favorite')}
-                  onClick={() => context.showModal(ProfileModalType.favorite)}/>
+                  onClick={() => context.showModalProfile(ProfileModalType.favorite)}/>
         <MenuItem icon='/img/Profile/icons/support.svg' label={t('profile_menu_support')}/>
         <MenuItem icon='/img/Profile/icons/wallet2.svg' label={t('profile_menu_payments_history')}
-                  onClick={() => context.showModal(ProfileModalType.paymentHistory)}/>
+                  onClick={() => context.showModalProfile(ProfileModalType.paymentHistory)}/>
         <MenuItem icon='/img/Profile/icons/settings.svg' label={t('profile_menu_settings')}
-                  onClick={() => context.showModal(ProfileModalType.settings)}/>
+                  onClick={() => context.showModalProfile(ProfileModalType.settings)}/>
       </div>
-    </div>
+      </ProfileModalBody>
+    </ProfileModalLayout>
   )
 }

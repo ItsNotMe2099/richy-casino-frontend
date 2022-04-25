@@ -61,7 +61,7 @@ export default function UserFooter(props: Props) {
         if(!context.user){
           context.showModal(ModalType.login)
         } else{
-          context.showModal(ProfileModalType.profile)
+          context.showModalProfile(ProfileModalType.profile)
         }
         break
       case ActionType.Menu:

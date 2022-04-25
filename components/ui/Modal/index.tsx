@@ -113,10 +113,10 @@ export default function Modal(props: Props) {
     // @ts-ignore
     return (
       <Sheet isOpen={isOpen} onClose={onRequestClose} onOpenStart={openModal} onCloseEnd={hideModal}   snapPoints={[620]}>
-        <Sheet.Container onViewportBoxUpdate>
+        <Sheet.Container >
         <div className={classNames(styles.rootSheet, {[styles.sheet]: props.fortune})}>
 
-            <Sheet.Header onViewportBoxUpdate/>
+            <Sheet.Header />
             <div className={classNames(styles.title, {[styles.mobile]: true})}>
               {props.title}
             </div>
@@ -125,7 +125,7 @@ export default function Modal(props: Props) {
                 <Close/>
               </div>
             )}
-            <Sheet.Content onViewportBoxUpdate>{isOpen &&
+            <Sheet.Content >{isOpen &&
             <div className={classNames(styles.centerSheet, {[styles.centerSheetFortune]: props.fortune})}>
 
               {props.isOpen && props.children}
@@ -133,7 +133,7 @@ export default function Modal(props: Props) {
 
         </div>
         </Sheet.Container>
-        <Sheet.Backdrop onViewportBoxUpdate onTap={props.onRequestClose}/>
+        <Sheet.Backdrop  onTap={props.onRequestClose}/>
       </Sheet>
     )
   }

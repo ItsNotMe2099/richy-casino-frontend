@@ -30,7 +30,7 @@ export default function BonusSlide(props: Props) {
     if (!appContext.auth) {
       appContext.showModal(ModalType.registration)
     } else {
-      appContext.showModal(ProfileModalType.wallet)
+      appContext.showModalProfile(ProfileModalType.wallet)
     }
   }
 

@@ -11,9 +11,15 @@ import AuthRepository from 'data/repositories/AuthRepository'
 import {ModalType} from 'types/enums'
 import FormError from 'components/ui/Form/FormError'
 import {RegistrationPhoneModalArguments, RegistrationSuccessModalArguments} from 'types/interfaces'
+import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
+import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
+import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
+import BottomSheetLayout from 'components/layout/BottomSheetLayout'
+import BottomSheetHeader from 'components/layout/BottomSheetHeader'
+import BottomSheetBody from 'components/layout/BottomSheetBody'
 
 interface Props {
-
+  isBottomSheet?: boolean
 }
 
 export default function ModalRegistrationPhone(props: Props) {
@@ -56,39 +62,53 @@ export default function ModalRegistrationPhone(props: Props) {
 
   const { t } = useTranslation('common')
 
+  const result = (<Formik initialValues={initialValues} onSubmit={handleSubmit}>
+    {({values}) => (
+      <Form className={styles.form}>
+        <div className={styles.description}>
+          {t('registration_phone_text_1')} <span className={styles.code}> {t('registration_phone_text_2')}</span> {t('registration_phone_text_3')}&nbsp;
+          {t('registration_phone_text_4')} <span className={styles.phone}> {Formatter.formatPhone(args.phone)}</span>
+        </div>
+        <div className={styles.inputs}>
+          <InputField
+            name={'code'}
+            disabled={sending}
+            placeholder={t('registration_phone_field_code')} validate={Validator.required}/>
+          <InputField
+            name={'password'}
+            type={'password'}
+            obscure={true}
+            disabled={sending}
+            placeholder={t('registration_phone_field_password')} validate={Validator.required}/>
+          <InputField
+            name={'passwordConfirm'}
+            type={'password'}
+            obscure={true}
+            disabled={sending}
+            placeholder={t('registration_phone_field_password_confirm')}
+            validate={Validator.combine([Validator.required, Validator.passwordsMustMatch(values)])}
+          />
+        </div>
+        <FormError error={error}/>
+        <Button type='submit' fluid spinner={sending} className={styles.button} size='submit' background='blueGradient500' >Продолжить</Button>
 
-  return (
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        {({values}) => (
-        <Form className={styles.form}>
-          <div className={styles.description}>
-            {t('registration_phone_text_1')} <span className={styles.code}>{t('registration_phone_text_2')}</span>{t('registration_phone_text_3')}
-            {t('registration_phone_text_4')} <span className={styles.phone}>{Formatter.formatPhone(args.phone)}</span>
-          </div>
-          <div className={styles.inputs}>
-            <InputField
-              name={'code'}
-              disabled={sending}
-              placeholder={t('registration_phone_field_code')} validate={Validator.required}/>
-            <InputField
-              name={'password'}
-              type={'password'}
-              obscure={true}
-              disabled={sending}
-              placeholder={t('registration_phone_field_password')} validate={Validator.required}/>
-            <InputField
-              name={'passwordConfirm'}
-              type={'password'}
-              obscure={true}
-              disabled={sending}
-              placeholder={t('registration_phone_field_password_confirm')}
-              validate={Validator.combine([Validator.required, Validator.passwordsMustMatch(values)])}
-            />
-          </div>
-          <FormError error={error}/>
-            <Button type='submit' fluid spinner={sending} className={styles.button} size='submit' background='blueGradient500' >Продолжить</Button>
-
-        </Form>)}
-      </Formik>
-  )
+      </Form>)}
+  </Formik>)
+  if(props.isBottomSheet){
+    return <BottomSheetLayout>
+      <BottomSheetHeader title={t('registration_phone_title')}/>
+      <BottomSheetBody>
+        {result}
+      </BottomSheetBody>
+    </BottomSheetLayout>
+  }else {
+    return (
+      <ProfileModalLayout>
+        <ProfileModalHeader title={t('registration_phone_title')}/>
+        <ProfileModalBody>
+          {result}
+        </ProfileModalBody>
+      </ProfileModalLayout>
+    )
+  }
 }

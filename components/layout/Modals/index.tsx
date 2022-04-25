@@ -1,6 +1,6 @@
-import { useAppContext } from 'context/state'
-import { ModalType, ProfileModalType } from 'types/enums'
-import { isServer } from 'utils/media'
+import {useAppContext} from 'context/state'
+import {ModalType, ProfileModalType} from 'types/enums'
+import {isServer} from 'utils/media'
 import Modal from 'components/ui/Modal'
 import ModalLogin from 'components/Auth/ModalLogin'
 import ModalPasswordRecovery from 'components/Auth/ModalPasswordRecovery'
@@ -16,17 +16,19 @@ import BonusModal from 'components/ui/BonusModal'
 import ModalRegistrationPhone from 'components/Auth/ModalRegistrationPhone'
 import ProfileBurger from 'components/ui/ProfileBurger'
 import Favorite from 'components/Profile/Favorite'
-import styles from './index.module.scss'
 import BetsHistory from 'components/Profile/BetsHistory'
 import Wallet from 'components/Profile/Wallet'
 import Exchange from 'components/Profile/Exchange'
 import BuyCrypto from 'components/Profile/BuyCrypto'
 import FA from 'components/Profile/FA'
 import Withdraw from 'components/Profile/Withdraw'
-import { RemoveScroll } from 'react-remove-scroll'
+import {RemoveScroll} from 'react-remove-scroll'
 import Converter from 'utils/converter'
 import {useTranslation} from 'next-i18next'
-interface Props {}
+import ProfileModalNew from 'components/Profile/layout/ProfileModalNew'
+
+interface Props {
+}
 
 export default function ModalContainer(props: Props) {
   const {t} = useTranslation()
@@ -36,89 +38,103 @@ export default function ModalContainer(props: Props) {
   }
 
 
-
-  const user = {id: '6171361', balance: '$275.16', userName: 'Alex', name: 'Ерохин Иван Иванович', dateOfBirth: '15.12.1998',
-  country: '185', currency: Converter.convertCurrencyToOptions(context.currencies), phone: '8 (800) 800 88 88', email: 'pochta@mail.ru', password: 'qwerty123'
-}
-
+  const user = {
+    id: '6171361',
+    balance: '$275.16',
+    userName: 'Alex',
+    name: 'Ерохин Иван Иванович',
+    dateOfBirth: '15.12.1998',
+    country: '185',
+    currency: Converter.convertCurrencyToOptions(context.currencies),
+    phone: '8 (800) 800 88 88',
+    email: 'pochta@mail.ru',
+    password: 'qwerty123'
+  }
 
   return (
     <RemoveScroll enabled={!!context.modal}>
       {!isServer && (
 
-          <div aria-hidden="true">
-          <Modal key={0} isOpen={context.modal === ModalType.login} {...commonSettings} title={t('login_title')}>
-            <ModalLogin/>
-          </Modal>
-          <Modal key={3} isOpen={context.modal === ModalType.passwordRecovery} {...commonSettings} title={t('password_forgot_title')}>
-            <ModalPasswordRecovery/>
-          </Modal>
-          <Modal key={2} isOpen={context.modal === ModalType.passwordReset} {...commonSettings} title={t('password_restore_title')}>
-            <ModalPasswordReset/>
-          </Modal>
-          <Modal key={1} isOpen={context.modal === ModalType.registration} {...commonSettings} title={t('registration_title')}>
-            <ModalRegistration/>
-          </Modal>
-          <Modal key={4} isOpen={context.modal === ModalType.registrationSuccess} {...commonSettings} noBorder>
-            <ModalRegistrationSuccess/>
-          </Modal>
-          <ProfileModal isBack={true} size='large' key={5} isOpen={context.modal === ProfileModalType.paymentHistory} {...commonSettings} title={t('payment_history_title')}  payment>
-            <PaymentHistory/>
-          </ProfileModal>
-          <ProfileModal key={6} isOpen={context.modal === ProfileModalType.profile} {...commonSettings} title={t('profile_title')} profile>
-            <Profile/>
-          </ProfileModal>
-          <ProfileModal isBack={true} size='large' key={7} isOpen={context.modal === ProfileModalType.settings} {...commonSettings} title={t('settings_title')} >
-            <Settings user={user}/>
-          </ProfileModal>
-
-            {context.user && <Wallet/>}
-            {context.user && <Withdraw/>}
-          <Modal fortune key={9} isOpen={context.modal === ModalType.fortune} {...commonSettings} noBorder size='fortune'>
-            <Fortune/>
-          </Modal>
-          <Modal key={12} isOpen={context.modal === ModalType.registrationPhone} {...commonSettings} noBorder>
+        <div aria-hidden="true">
+          <ProfileModalNew key={0} size={'small'} isOpen={context.modal === ModalType.login} {...commonSettings}>
+            {context.modal === ModalType.login && <ModalLogin/>}
+          </ProfileModalNew>
+          <ProfileModalNew key={3}  size={'small'} isOpen={context.modal === ModalType.passwordRecovery} {...commonSettings}>
+            {context.modal === ModalType.passwordRecovery && <ModalPasswordRecovery/>}
+          </ProfileModalNew>
+          <ProfileModalNew key={2}  size={'small'} isOpen={context.modal === ModalType.passwordReset} {...commonSettings}>
+            {context.modal === ModalType.passwordReset && <ModalPasswordReset/>}
+          </ProfileModalNew>
+          <ProfileModalNew key={1}   size={'small'} isOpen={context.modal === ModalType.registration} {...commonSettings}>
+            {context.modal === ModalType.registration && <ModalRegistration/>}
+          </ProfileModalNew>
+          <ProfileModalNew key={12}  size={'small'} isOpen={context.modal === ModalType.registrationPhone} {...commonSettings}>
             <ModalRegistrationPhone/>
+          </ProfileModalNew>
+          <ProfileModalNew key={4}  size={'small'} isOpen={context.modal === ModalType.registrationSuccess} {...commonSettings}>
+            {context.modal === ModalType.registrationSuccess && <ModalRegistrationSuccess/>}
+          </ProfileModalNew>
+          <ProfileModalNew size='large' key={5}
+                           isOpen={context.modal === ProfileModalType.paymentHistory} {...commonSettings}>
+            {context.modal === ProfileModalType.paymentHistory && <PaymentHistory/>}
+          </ProfileModalNew>
+          <ProfileModalNew key={6} isOpen={context.modal === ProfileModalType.profile} {...commonSettings} >
+            {context.modal === ProfileModalType.profile && <Profile/>}
+          </ProfileModalNew>
+          <ProfileModalNew size={'large'} key={6}
+                           isOpen={context.modal === ProfileModalType.settings} {...commonSettings} >
+            {context.modal === ProfileModalType.settings && <Settings/>}
+          </ProfileModalNew>
+
+          <ProfileModalNew size={'small'} key={6}
+                           isOpen={context.modal === ProfileModalType.wallet} {...commonSettings} >
+            {context.modal === ProfileModalType.wallet && <Wallet/>}
+          </ProfileModalNew>
+          <ProfileModalNew size={'small'} key={6}
+                           isOpen={context.modal === ProfileModalType.withdraw} {...commonSettings} >
+            {context.modal === ProfileModalType.withdraw && <Withdraw/>}
+          </ProfileModalNew>
+          <Modal fortune key={9} isOpen={context.modal === ModalType.fortune} {...commonSettings} noBorder
+                 size='fortune'>
+            {context.modal === ModalType.fortune && <Fortune/>}
           </Modal>
+
           <BonusModal isOpen={context.modal === ModalType.bonus} {...commonSettings}/>
 
           <ProfileModal
-          size='small'
-          key={13} isBack={true} isOpen={context.modal === ProfileModalType.exchange} {...commonSettings} title={t('exchange_title')}  payment noBorder>
-            <Exchange user={user}/>
+            size='small'
+            key={13} isBack={true} isOpen={context.modal === ProfileModalType.exchange} {...commonSettings}
+            title={t('exchange_title')} payment noBorder>
+            {context.modal === ProfileModalType.exchange && <Exchange user={user}/>}
           </ProfileModal>
-          <ProfileModal
-          className={styles.favorite}
-           key={14}
-           isOpen={context.modal === ProfileModalType.favorite}
-           size='large' {...commonSettings}
-           title={t('favorite_title')}
-           isBack={true}
-           style='favorite'
-           >
-            <Favorite/>
-          </ProfileModal>
-          <ProfileModal isBack={true} size='large' key={15} isOpen={context.modal === ProfileModalType.betsHistory} {...commonSettings} title={t('bets_history')}  payment>
+          <ProfileModalNew size={'large'} key={6}
+                           isOpen={context.modal === ProfileModalType.favorite} {...commonSettings} >
+            {context.modal === ProfileModalType.favorite && <Favorite/>}
+          </ProfileModalNew>
+          <ProfileModalNew size={'large'} key={6}
+                           isOpen={context.modal === ProfileModalType.betsHistory} {...commonSettings} >
             <BetsHistory/>
-          </ProfileModal>
-          <ProfileModal
-          size='small'
-          style='buyCrypto'
-          key={16} isBack={true} isOpen={context.modal === ProfileModalType.buyCrypto} {...commonSettings} title={t('buy_crypto_title')}  payment noBorder>
-            <BuyCrypto user={user}/>
-          </ProfileModal>
-          <ProfileModal
-          size='small'
-          style='2fa'
-          key={17} isBack={true} isOpen={context.modal === ProfileModalType.FA} {...commonSettings} title={t('2fa_title')} >
-            <FA/>
-          </ProfileModal>
+          </ProfileModalNew>
+          <ProfileModalNew
+            size='small'
+            key={16}  isOpen={context.modal === ProfileModalType.buyCrypto} {...commonSettings}
+            >
+            {context.modal === ProfileModalType.buyCrypto && <BuyCrypto user={user}/>}
+          </ProfileModalNew>
+          <ProfileModalNew
+            size='small'
+            key={17} isOpen={context.modal === ProfileModalType.FA} {...commonSettings}
+        >
+            {context.modal === ProfileModalType.FA && <FA/>}
+          </ProfileModalNew>
 
-
-            <Modal key={19} isOpen={context.modal === ModalType.profileBurger} {...commonSettings} noBorder>
-              <ProfileBurger isOpen={context.modal === ModalType.profileBurger}  user={user}/>
-            </Modal>
-          </div>
+        <ProfileModalNew
+        size='small'
+        key={16}  isOpen={context.modal === ModalType.profileBurger} {...commonSettings}
+        >
+            <ProfileBurger isOpen={context.modal === ModalType.profileBurger} user={user}/>
+        </ProfileModalNew>
+        </div>
       )}
     </RemoveScroll>
   )

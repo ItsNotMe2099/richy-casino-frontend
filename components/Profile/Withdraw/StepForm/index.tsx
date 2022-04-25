@@ -44,7 +44,7 @@ export default function StepForm(props: Props) {
     setSending(true)
     try {
       const res = await PaymentsRepository.withdrawRequest(props.currency.iso, typeof data.amount === 'string' ? parseFloat(data.amount) : data.amount, data.address)
-      context.showModal(ProfileModalType.paymentHistory, {filter: 'applications'})
+      context.showModalProfile(ProfileModalType.paymentHistory, {filter: 'applications'})
     } catch (e) {
       setError(e)
     }

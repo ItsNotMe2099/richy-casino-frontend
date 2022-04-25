@@ -23,6 +23,7 @@ import {FavoriteWrapper} from 'context/favorite_state'
 import nookies from 'nookies'
 import { v4 as uuidv4 } from 'uuid'
 import {CookiesLifeTime} from 'types/constants'
+import BottomSheetContainer from 'components/bottom_sheet/BottomSheetContainer'
 function MyApp({ Component, pageProps }: AppProps) {
   const [clientVisible, setClientVisible] = useState(false)
 
@@ -41,6 +42,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
         </FavoriteWrapper>
         {clientVisible && <ModalContainer/>}
+        {clientVisible && <BottomSheetContainer/>}
         <AuthUserFeatures/>
         <HiddenXs>
           <NotificationBanner/>

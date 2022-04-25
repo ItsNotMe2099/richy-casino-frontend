@@ -1,16 +1,17 @@
 @import "scss/index";
 
 .form {
-  margin-top: 22px;
+
 }
 
-.input{
-  input{
+.input {
+  input {
     color: $white;
     font-weight: 500;
     font-size: 18px;
     height: 70px;
     @media screen and (max-width: $xs-max) {
+      background-color: $dark700;
       font-size: 13px;
       height: 50px;
       padding: 15px 9px;
@@ -18,49 +19,69 @@
   }
 }
 
-.change{
+.change {
   display: flex;
-  .input{
+
+  .input {
     flex: 1;
   }
 }
 
-.justify{
+.justify {
   justify-content: space-between;
 }
 
-.btn{
-  padding: 25px 40px;
+.btn {
+  padding: 0px;
   height: 70px;
   font-weight: 500;
   font-size: 16px;
   margin-left: 10px;
   flex-shrink: 0;
   color: $white;
+
+  .btnText {
+    margin-right: 10px;
+
+  }
+
+  flex-basis: 204px;
   @media screen and (max-width: $xs-max) {
-    padding: 17px 16px 16px 17px;
+    padding: 0px;
     height: 50px;
-    span{
-      display: none;
-    }
+
   }
   @media screen and (min-width: $sm-min) {
-    img{
+    img {
       display: none;
+    }
+  }
+
+  &.btnPasswordChange {
+    flex-basis: 204px;
+    svg{
+      path{
+        fill: $white;
+      }
+    }
+    @media screen and (max-width: $xs-max) {
+      flex-basis: 50px;
+      .btnText {
+        display: none;
+      }
+    }
+  }
+  &.faBtn{
+
+    @media screen and (max-width: $xs-max) {
+      flex-basis: auto;
+        margin-left: 0px;
     }
   }
 }
 
-.cancel{
-  padding: 25px 65px;
-  height: 70px;
-  font-weight: 500;
-  font-size: 16px;
-  margin-left: 10px;
-  flex-shrink: 0;
-}
 
-.save{
+.save {
   padding: 22px 0;
   height: 70px;
   font-weight: 500;
@@ -72,51 +93,72 @@
   }
 }
 
-.line{
-  width: 4px;
-  @include blueGradient500;
-  height: 70px;
-  border-radius: 12px;
-  margin-right: 25px;
-}
 
-.title{
-  font-size: 16px;
-}
 
-.isChange{
+
+
+.passwordChangeHeader {
   display: flex;
   align-items: center;
-  margin-top: 12px;
-}
-
-.boxes{
-  font-size: 16px !important;
-  font-weight: 500;
-  display: flex;
-  justify-content: space-between;
-}
-
-.fa{
-  display: flex;
-  .btn{
-    padding: 25px 50px;
+  margin-bottom: 12px;
+  .title {
+    font-size: 16px;
   }
-  @media screen and (max-width: $xs-max) {
-    flex-direction: column;
-    .btn{
-      margin-left: 0;
-      margin-top: 10px;
+  .line {
+    width: 4px;
+    @include blueGradient500;
+    height: 70px;
+    border-radius: 12px;
+    margin-right: 25px;
+    @media screen and (max-width: $xs-max) {
+      height: 50px;
     }
   }
 }
 
-.faBtn{
-  padding: 25px 45px !important;
+.boxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px 0px;
+  margin-top: 31px;
+  @media screen and (max-width: $xs-max) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  &.boxesMobile{
+    grid-gap: 10px 0px;
+    margin-top: 21px;
+  }
+}
+.checkbox{
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 0px;
+
+  > div{
+    span {
+      color: $dark200;
+    }
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
 }
 
-.faInput{
-  margin-bottom: 10px;
+.fa {
+  display: flex;
+
+
+  @media screen and (max-width: $xs-max) {
+    flex-direction: column;
+
+  }
+}
+
+
+
+.faInput {
+  margin-bottom: 0px;
   padding: 26px 29px;
   border-radius: 12px;
   background-color: $dark600;
@@ -131,22 +173,24 @@
   }
 }
 
-.red{
+.red {
   color: #ed4700;
 }
 
-.blue{
+.blue {
   color: #427bf8;
 }
-.fieldError{
-  > div > div:first-child{
+
+.fieldError {
+  > div > div:first-child {
     border: 1px solid $lose500;
     padding-right: 3px;
     padding-left: 2px;
     border-radius: 12px;
     background: $dark600;
   }
-  input{
+
+  input {
     border: none !important;
     height: 68px;
     @media screen and (max-width: $xs-max) {

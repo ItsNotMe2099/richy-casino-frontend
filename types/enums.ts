@@ -14,16 +14,16 @@ export enum ModalType {
 }
 
 export enum ProfileModalType {
-  paymentHistory = 5,
-  profile = 6,
-  settings = 7,
-  wallet = 8,
-  exchange = 13,
-  favorite = 14,
-  betsHistory = 15,
-  buyCrypto = 16,
-  FA = 17,
-  withdraw = 18
+  paymentHistory = 'paymentHistory',
+  profile = 'profile',
+  settings = 'settings',
+  wallet = 'wallet',
+  exchange = 'exchange',
+  favorite = 'favorite',
+  betsHistory = 'betsHistory',
+  buyCrypto = 'buyCrypto',
+  FA = 'FA',
+  withdraw = 'withdraw'
 }
 
 export enum CookiesType {

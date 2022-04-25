@@ -21,7 +21,7 @@ const Option = (props: {
 }) => {
   return (
     <div className={styles.option} onClick={props.onClick}>
-      <CurrencySvg currencyIso={props.option.value} color/> {props.option.label}
+      <CurrencySvg currencyIso={props.option.value} color className={styles.symbol}/> {props.option.label}
     </div>
   )
 }

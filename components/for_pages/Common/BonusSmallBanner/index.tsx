@@ -32,7 +32,7 @@ export default function BonusSmallBanner(props: Props) {
     if(!appContext.auth){
       appContext.showModal(ModalType.registration)
     }else if(props.style !== 'wallet' && props.style !== 'registration'){
-      appContext.showModal(ProfileModalType.wallet)
+      appContext.showModalProfile(ProfileModalType.wallet)
     }
   }
   return (
