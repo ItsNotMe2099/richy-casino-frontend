@@ -156,6 +156,7 @@
 
   @media screen and (max-width: $xs-max) {
     flex-direction: column;
+    grid-gap: 12px 0px;
 
   }
 }
