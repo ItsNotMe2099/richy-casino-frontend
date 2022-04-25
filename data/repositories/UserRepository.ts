@@ -1,18 +1,30 @@
 import request from 'utils/request'
-import IUser from 'data/interfaces/IUser'
-import {objectKeysToCamelCase} from 'utils/converter'
+import IUser, {IUserBalanceCurrencyRaw} from 'data/interfaces/IUser'
+import Converter from 'utils/converter'
 import {UserFormData} from 'types/form-data'
 
 export default class UserRepository {
-  static async getUser(): Promise<IUser | null> {
+  static async getUser(token?: string): Promise<IUser | null> {
     const res = await request({
       method: 'get',
       url: '/api/user/info',
+      token
     })
     if (res.err) {
       return null
     }
-    return res.data?.data ? {...objectKeysToCamelCase(res.data?.data)} : null
+    const convertCurrencyToArray = (data: IUserBalanceCurrencyRaw, calculated: IUserBalanceCurrencyRaw, mainCurrency: string) => {
+      return Object.keys(data).map(key => ({currency: key?.toUpperCase(), value: data[key], calculated: calculated[key], mainCurrency}))
+    }
+    if(res.data?.data) {
+      const data = {...Converter.objectKeysToCamelCase(res.data?.data)}
+      data.balance.currencies.totals = convertCurrencyToArray(data.balance.currencies.totals, data.balance.calculated.totals, data.currencyIso)
+      data.balance.currencies.bonus = convertCurrencyToArray(data.balance.currencies.bonus, data.balance.calculated.bonus, data.currencyIso)
+      data.balance.currencies.real = convertCurrencyToArray(data.balance.currencies.real, data.balance.calculated.real, data.currencyIso)
+      return data
+    }else{
+      return null
+    }
   }
   static async updateUser(data: UserFormData): Promise<IUser | null> {
     const res = await request({
@@ -21,11 +33,11 @@ export default class UserRepository {
       data
     })
     if (res.err) {
-      return null
+      throw res.err
     }
-    return res.data?.data ? {...objectKeysToCamelCase(res.data?.data)} : null
+    return res.data?.data ? {...Converter.objectKeysToCamelCase(res.data?.data)} : null
   }
-  static async changePassword({currentPassword, newPassword}): Promise<any> {
+  static async changePassword(currentPassword: string, newPassword: string): Promise<any> {
     const res = await request({
       method: 'post',
       url: '/api/user/password/change',
@@ -48,6 +60,27 @@ export default class UserRepository {
       data: {
         currency_iso: currencyIso,
       },
+    })
+    if (res?.err) {
+      throw res.err
+    }
+    return res.data?.data
+  }
+  static async twoFaEnable(): Promise<any> {
+    const res = await request({
+      method: 'put',
+      url: '/api/user/two-factor/activate',
+    })
+    if (res?.err) {
+      throw res.err
+    }
+    console.log('qrUrlD', res.data)
+    return res.data?.qrUrl
+  }
+  static async twoFaDisable(): Promise<string> {
+    const res = await request({
+      method: 'put',
+      url: '/api/user/two-factor/disable',
     })
     if (res?.err) {
       throw res.err

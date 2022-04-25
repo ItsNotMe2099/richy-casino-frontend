@@ -3,13 +3,15 @@ import { runtimeConfig } from 'config/runtimeConfig'
 import Cookies from 'js-cookie'
 import { CookiesType } from 'types/enums'
 import {IApiResponse} from 'types/interfaces'
-import {convertApiResponseError} from 'utils/converter'
+import Converter from 'utils/converter'
 
 interface Options {
   url: string
   method?: 'post' | 'put' | 'get' | 'delete'
   data?: any
   token?: string // needed for requests from server side
+  sessionId?: string // needed for requests from server side
+  language?: string // needed for requests from server side
 }
 
 interface Res {
@@ -20,6 +22,8 @@ interface Res {
 async function request(options: string | Options): Promise<Res> {
   const optionsIsString = typeof options === 'string'
   const accessToken = (!optionsIsString && options.token) ? options.token : Cookies.get(CookiesType.accessToken)
+  const sessionId = (!optionsIsString && options.sessionId) ? options.sessionId : Cookies.get(CookiesType.sessionId)
+  const language = (!optionsIsString && options.language) ? options.language : Cookies.get(CookiesType.language) || (typeof navigator !== 'undefined' ? (navigator as any)?.language || (navigator as any).userLanguage : '')
   let url = ''
   let method = 'GET'
   let data = null
@@ -40,6 +44,8 @@ async function request(options: string | Options): Promise<Res> {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': accessToken ? `Bearer ${accessToken}` : '',
+        'X-Language': language ?? '',
+        'X-UUID': sessionId ?? '',
       },
       body: (method !== 'GET' && data) ? JSON.stringify(data) : null,
     })
@@ -57,7 +63,7 @@ async function request(options: string | Options): Promise<Res> {
     if(!jsonData?.success){
       return {
         data: jsonData,
-        err: convertApiResponseError(jsonData),
+        err: Converter.convertApiResponseError(jsonData),
       }
     }
     if (res.status === 200 || res.status === 201) {

@@ -1,0 +1,31 @@
+@import "../../../../../../scss/index";
+
+
+.root{
+  cursor: pointer;
+  background: $dark500;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 17px 25px;
+  transition: opacity 0.4s ease;
+  color: white;
+  text-align: center;
+  &.active{
+    background: linear-gradient(280.99deg, #5C00F3 18.02%, #905BFF 126.63%);
+  }
+  &.disabled{
+    opacity: 0.3;
+    &:hover{
+      opacity: 0.5;
+    }
+  }
+  opacity: 1;
+  &:hover{
+    opacity: 1;
+  }
+}

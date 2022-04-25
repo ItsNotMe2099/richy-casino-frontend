@@ -3,9 +3,14 @@ import { format } from 'date-fns'
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import HiddenXs from 'components/ui/HiddenXS'
+import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
+import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
+import {useTranslation} from 'next-i18next'
+import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
+import ProfileModalFooter from 'components/Profile/layout/ProfileModalFooter'
 
 interface Props {
-  
+
 }
 
 interface ItemProps {
@@ -18,7 +23,7 @@ interface ItemProps {
 }
 
 export default function BetsHistory(props: Props) {
-
+  const {t} = useTranslation()
   const items = [
     {label: 'Aviator', icon: '/img/BetsHistory/aviator.svg', date: '2021-12-27T12:46:24.007Z', usdt: '+ 0.00000001', btc: '0.00000000 BTC', id: '87345678987654321245'},
     {label: 'Aviator', icon: '/img/BetsHistory/aviator.svg', date: '2021-12-27T12:46:24.007Z', usdt: '+ 0.00000001', btc: '0.00000000 BTC', id: '87345678987654321245'},
@@ -56,13 +61,19 @@ export default function BetsHistory(props: Props) {
 
 
   return (
-      <div className={styles.root}>
-        {items.map((item, index) => 
-          <Item label={item.label} btc={item.btc} date={item.date} usdt={item.usdt} key={index} icon={item.icon} id={item.id}/>
-        )}
+    <ProfileModalLayout fixed>
+      <ProfileModalHeader title={t('bets_history_title')}/>
+        <ProfileModalBody fixed>
+          {items.map((item, index) =>
+            <Item label={item.label} btc={item.btc} date={item.date} usdt={item.usdt} key={index} icon={item.icon} id={item.id}/>
+          )}
+        </ProfileModalBody>
+      <ProfileModalFooter>
         <div className={styles.btn}>
-        <Button size='normal' background='payGradient500'>Пополнить</Button>
+          <Button size='normal' background='payGradient500'>Пополнить</Button>
         </div>
-      </div>
+      </ProfileModalFooter>
+
+    </ProfileModalLayout>
   )
 }

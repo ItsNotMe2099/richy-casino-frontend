@@ -4,6 +4,7 @@ import cx from 'classnames'
 import {IRouletteChip, RouletteBets, RouletteChipList} from 'components/for_pages/games/Roulette/data/enums'
 import {ReactElement} from 'react'
 import {RouletteBet} from 'components/for_pages/games/Roulette/components/RouletteBet'
+import classNames from 'classnames'
 interface Props{
   chip: IRouletteChip
   bets: RouletteBets,
@@ -52,8 +53,8 @@ export default function BetBoard(props: Props) {
   ]
   const renderChip = (className: string | string[], value: string, label?: string | ReactElement) => {
     const isSelected = !!bets[value]
-    const selectChip = isSelected ? RouletteChipList.find(i => i.value === bets[value]) : null
-    return ( <div className={cx(className, {[styles.chip]: true, [styles.active]: isSelected})} onClick={() => props.onBet(value, props.chip)}><span className={styles.text}>{label ?? value}</span> {isSelected && <RouletteBet className={styles.bet} type={selectChip.type} label={selectChip.label}/>}</div>)
+    const selectChips = isSelected ?  bets[value].map( bet => RouletteChipList.find(i =>  i.value === bet))  : []
+    return ( <div className={cx(className, {[styles.chip]: true, [styles.active]: isSelected})} onClick={() => props.onBet(value, props.chip)}><span className={styles.text}>{label ?? value}</span> {isSelected && selectChips.map((chip, index) => <RouletteBet index={index} key={`${index}:${chip.type}`} className={styles.bet} type={chip.type} label={chip.label}/>)}</div>)
   }
 
   return (
@@ -74,24 +75,24 @@ export default function BetBoard(props: Props) {
         </div>
         <div className={styles.bottom}>
           <div className={styles.column}>
-            {renderChip([styles.colspan, styles.grey], '1-12')}
+            {renderChip([styles.colspan, styles.grey], '1-12', '1st 12')}
             <div className={styles.row}>
-              {renderChip(styles.grey, '1-18')}
+              {renderChip(styles.grey, '1-18', '1 to 18')}
               {renderChip(styles.grey, 'even', 'Even')}
             </div>
           </div>
-          <div className={styles.column}>
-            {renderChip([styles.colspan, styles.grey], '13-24')}
+          <div className={classNames(styles.column, styles.columnCenter)}>
+            {renderChip([styles.colspan, styles.grey], '13-24', '2nd 12')}
             <div className={styles.row}>
               {renderChip([styles.chipField, styles.grey],'red', <img src={'/img/Games/roulette/field_red.svg'}/>)}
               {renderChip([styles.chipField, styles.grey],'black', <img src={'/img/Games/roulette/field_black.svg'}/>)}
             </div>
           </div>
           <div className={styles.column}>
-            {renderChip([styles.colspan, styles.grey], '25-36')}
+            {renderChip([styles.colspan, styles.grey], '25-36', '3rd 12')}
             <div className={styles.row}>
-              {renderChip(styles.grey, 'odd', 'Odd')}
-              {renderChip(styles.grey, '19-36')}
+              {renderChip(styles.grey, 'odd', 'ODD')}
+              {renderChip(styles.grey, '19 to 36')}
             </div>
           </div>
         </div>

@@ -1,0 +1,55 @@
+@import "scss/index";
+
+.root{
+ display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex: 1;
+  @media screen and (max-width: $xs-land){
+    padding: 8px 19px;
+  }
+}
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  max-width: 450px;
+  padding: 1.5vh 0px;
+
+  @media screen and (max-width: $xs-land){
+    max-width: unset;
+    padding: 0px;
+  }
+}
+
+.opponentPlayer{
+  display: block;
+  @media screen and (max-width: $xs-land){
+    display: none;
+  }
+}
+.currentPlayer{
+  display: block;
+  @media screen and (max-width: $xs-land){
+    display: none;
+  }
+}
+.currentPlayerMobile{
+  display: none;
+  @media screen and (max-width: $xs-land){
+    display: block;
+  }
+}
+.status{
+  display: block;
+  @media screen and (max-width: $xs-land){
+    display: none;
+  }
+}
+.statusMobile{
+  display: none;
+  @media screen and (max-width: $xs-land){
+    display: block;
+  }
+}

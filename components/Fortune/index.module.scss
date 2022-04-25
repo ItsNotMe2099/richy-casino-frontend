@@ -4,10 +4,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: $xs-max) {
+    padding-top: 40px;
+    overflow: hidden;
+    background: url('/img/Fortune/fortune.svg') center no-repeat;
+    background-size: cover;
+  }
 }
 
 .wheel{
   position: relative;
+}
+
+.board{}
+
+.loader{
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .everyday{
@@ -18,7 +33,7 @@
   padding: 32px 0;
   background: rgba(37, 37, 37, 0.46);
   border: 1px solid rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(32px);
+  backdrop-filter: blur(20px);
   border-radius: 12px;
   display: flex;
   justify-content: center;
@@ -32,19 +47,41 @@
   text-transform: uppercase;
   font-weight: bold;
   font-size: 20px;
+  text-align: center;
 }
 
 .mobile{
   width: 100%;
   @media screen and (max-width: 430px){
-    background: rgba(37, 37, 37, 0.83);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(37, 37, 37, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(32px);
-    padding: 0 19px;
-    padding-bottom: 48px;
-    margin-top: -150px;
-    position: relative;
+    padding: 30px 20px 40px 20px;
     width: 100%;
+  }
+}
+
+.bgMobileCoinsTopRight{
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  @media (max-width: $xs-max) {
+    display: block;
+  }
+}
+
+.bgMobileCoinsBottomLeft{
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  @media (max-width: $xs-max) {
+    display: block;
   }
 }
 
@@ -68,7 +105,6 @@
 
 .spin{
   padding: 27px 0;
-  margin-top: 34px;
   font-weight: bold;
   font-size: 20px;
   color: $white;
@@ -79,6 +115,10 @@
 .btn{
   width: 100%;
   padding: 0 16px;
+  margin-top: 30px;
+  @media (max-width: $xs-max) {
+    padding: 0;
+  }
 }
 
 .wrapper{
@@ -88,9 +128,7 @@
   left: 0;
 }
 
-.wrapperMobile{
-  margin-top: 37px;
-}
+.wrapperMobile{}
 
 .next{
   background: rgba(246, 15, 98, 0.05);
@@ -99,6 +137,7 @@
   border-radius: 12px;
   padding: 12px 0;
   margin-top: 34px;
+  text-align: center;
   @media screen and (max-width: 430px){
     padding: 6px 0;
   }
@@ -117,4 +156,27 @@
   color: #F5075D;
   font-weight: bold;
   font-size: 30px;
+}
+
+.winnerOverlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms, visibility 200ms;
+  &.visible{
+    visibility: visible;
+    opacity: 1;
+  }
+  .winner{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 12px;
+  }
 }

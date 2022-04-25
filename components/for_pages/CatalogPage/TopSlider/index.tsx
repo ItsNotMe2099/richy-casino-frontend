@@ -4,6 +4,9 @@ import Slider from 'react-slick'
 import { Col } from 'react-grid-system'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
+import SlideSlider from 'components/for_pages/MainPage/TopSlider/SlideSlider'
+import classNames from 'classnames'
+import Button from 'components/ui/Button'
 
 interface Props {
   children?: React.ReactNode
@@ -36,27 +39,54 @@ export default function TopSlider(props: Props) {
     ]
   }
 
+  const items =[
+    {child: <BonusSlide/>, image: null},
+    {label: <div>Лучшие игры<br/> от Richy</div>, image: '/img/TopSlider/banner@3x.png'},
+    {label: <div className={styles.itemLabel}>Spin the <span className={styles.spin}>wheel of fortune</span><br/> every day and get a<br/> guaranteed <span className={styles.spin}>prizes</span></div>, image: '/img/TopSlider/wheel@3x.png'},
+    {label: <div className={styles.itemLabel}>Try your luck in the <span className={styles.lottery}>most profitable</span><br/> cryptocurrency lottery<br/> and get bonuses</div>, image: '/img/TopSlider/lottery@3x.png'},
+  ]
+
+
+
 
   return (
     <>
       <HiddenXs>
         <>
-          <Col className={styles.root}>
+          <Col>
+            <div className={styles.wrapper}>
+          <div className={styles.root}>
             <div className={styles.jackpot}>
               <div className={styles.title}>JACKPOT</div>
               <div className={styles.money}>
                 {props.money}
               </div>
             </div>
-          </Col>
-          <Col className={styles.desktop}>
-          <BonusSlide />
+          </div>
+          <div className={styles.desktop}>
+          <SlideSlider items={items} style='catalog'/>
+          </div>
+            </div>
           </Col>
         </>
       </HiddenXs>
       <VisibleXs>
         <Slider {...settings}>
           <BonusSlide className={styles.bonusSlideMobile}/>
+          {items.slice(1).map((item, index) =>
+              <div className={styles.rootSlide} key={index}>
+                <div className={styles.item} style={{backgroundImage: `url(${item.image})`}}>
+                  <div className={styles.left}>
+                    <div className={classNames({[styles.label]: index == 0})}>
+                      {item.label}
+                    </div>
+                    <div className={styles.btn}>
+                      <Button size='normal' background='white'>Начать играть</Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           <div className={styles.jackpot}>
             <div className={styles.title}>JACKPOT</div>
             <div className={styles.money}>

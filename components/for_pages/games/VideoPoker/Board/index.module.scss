@@ -1,0 +1,63 @@
+@import "scss/index";
+.layout{
+  background: #17754F;
+  @media only screen and (max-width: $xs-max) {
+    flex-direction: column;
+    padding-bottom: 16px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+  }
+}
+.bg{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 0;
+  .top{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 45%;
+    background-image: url('/img/Games/blackjack/bg.svg');
+    background-repeat: repeat-x;
+  }
+  .bottom{
+    position: absolute;
+bottom: 0;
+    left: 0px;
+    right: 0px;
+    height: 45%;
+    background-image: url('/img/Games/blackjack/bg.svg');
+    background-repeat: repeat-x;
+  }
+  .bottom{
+
+  }
+}
+.board{
+  flex: 1;
+  position: relative;
+  padding-bottom: 60px;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  @media only screen and (max-width: $xs-max) {
+    padding-bottom: 4px;
+  }
+
+}
+
+.deck {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 0px 26px;
+  @media only screen and (max-width: $xs-max) {
+    grid-gap: 0px 5px;
+  }
+}

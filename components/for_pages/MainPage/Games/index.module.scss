@@ -87,9 +87,31 @@
     transform: rotate(180deg);
   }
 }
+.sliderWrapper{
 
+  position: relative;
+  padding-right: 0px;
+  @media screen and (min-width: 1440px){
+    padding-right: 3px;
+  }
+  @media screen and (min-width: 1280px){
+    padding-right: 2.5px;
+  }
+  @media screen and (min-width: 1024px){
+    padding-right: 2px;
+  }
+}
 .slider{
   margin-top: 28px;
+
+  :global{
+    .slick-list {
+      margin: 0 -11px;
+    }
+    .slick-slide > div {
+      margin: 0px 11px;
+    }
+  }
   @media screen and (max-width: $xs-max){
     margin-top: 15px;
     margin-right: 0px;
@@ -197,8 +219,9 @@
 .overflow{
   display:grid;
   grid-auto-flow: column;
-  grid-auto-columns:calc((100% - (3 - 1)*8px)/3);
-  grid-gap: 8px;
+  grid-auto-columns:calc((100% - (4 - 1)*8px)/4);
+ @include mobileGamesGrid;
+
   padding-top: 14px;
   overflow:auto;
   padding-bottom: 21px;

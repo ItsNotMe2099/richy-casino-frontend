@@ -1,14 +1,19 @@
 .root{
-  font-size: 13px;
-  line-height: 12px;
-  letter-spacing: -0.01em;
-  color: var(--error);
+  color: #ED4700;
+  font-size: 12px;
+  font-weight: 500;
   margin: 15px 0px;
   text-align: center;
-}
-.errorListItem{
-  margin-top: 8px;
-  &:first-of-type{
-    margin-top: 0px;
+    display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  img{
+    margin-right: 6px;
   }
+}
+.list{
+  display: flex;
+  flex-direction: column;
+  grid-gap: 8px 0px;
 }

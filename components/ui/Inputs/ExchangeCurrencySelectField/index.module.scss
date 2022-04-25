@@ -1,0 +1,45 @@
+@import "scss/index";
+
+.root{
+
+}
+
+.option{
+  padding: 7px 19px;
+  display: flex;
+  font-weight: 700;
+  font-size: 16px;
+  align-items: center;
+  &:hover{
+    background: #41424F;
+  }
+}
+
+
+
+.symbol{
+  margin-right: 6px;
+  display: flex;
+}
+
+.separator{
+  background-color: $dark400;
+  height: 24px;
+  width: 1px;
+  margin-right: 13px;
+}
+
+.reverse{
+  transform: rotate(90deg);
+}
+
+.placeholder{
+  display: flex;
+  align-items: center;
+}
+
+.group{
+  display: flex;
+  align-items: center;
+  flex: 1;
+}

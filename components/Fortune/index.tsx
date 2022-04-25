@@ -1,47 +1,113 @@
 import styles from './index.module.scss'
 import Button from 'components/ui/Button'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import {useTimer} from 'react-timer-hook'
-import {addHours} from 'date-fns'
-import {pad} from 'utils/formatters'
+import {pad} from 'utils/formatter'
+import dynamic from 'next/dynamic'
+import { IWheelInfoUser, IWheelPlayResponse, IWheelSlot } from 'data/interfaces/IWheel'
+import WheelRepository from 'data/repositories/WheelRepository'
+import Spinner from 'components/ui/Spinner'
+import { useAppContext } from 'context/state'
+import { isAfter } from 'date-fns'
+import Winner from './Winner'
+import classNames from 'classnames'
+
+const Board = dynamic(() => import('./Board'), { ssr: false })
+
+// const mockRes: IWheelPlayResponse = {
+//   currencyIso: 'BTC',
+//   player: {balanceSpins: 2, balanceSpinsTimeNewFreeAccrual: '2022-04-24T16:00:47+03:00'},
+//   winAmount: 0.005,
+// }
 
 interface Props {
-
+  isBottomSheet?: boolean
 }
 
 export default function Fortune(props: Props) {
+  const totalTime = 5000
+  const appContext = useAppContext()
+  const canvasSize = appContext.isMobile ? 320 : 390
+  const slotsRef = useRef<IWheelSlot[]>([])
+  const [gameResult, setGameResult] = useState<IWheelPlayResponse>(null)
+  const gameResultRef = useRef<IWheelPlayResponse>(null)
+  const [winnerResult, setWinnerResult] = useState<IWheelPlayResponse>(null)
+  const userRef = useRef<IWheelInfoUser>()
+  const [expirationDate, setExpirationDate] = useState<Date>(null)
+  const [loaded, setLoaded] = useState(false)
+  const [available, setAvailable] = useState<boolean>(false)
+  const timer = useTimer({ expiryTimestamp: expirationDate })
 
-  const [currentDate, setCurrentDate] = useState(null)
+  useEffect(() => {
+    init()
+  }, [])
 
-  const {
-    seconds,
-    minutes,
-    hours,
-    days,
-    isRunning,
-    start,
-    pause,
-    resume,
-    restart,
-  } = useTimer({ expiryTimestamp: addHours(new Date(), 1), onExpire: () => null })
+  useEffect(() => {
+    timer.restart(expirationDate)
+  }, [expirationDate])
 
+  useEffect(() => {
+    gameResultRef.current = gameResult
+  }, [gameResult])
 
-  const handleClick = () => {
-    setCurrentDate(Date.now())
+  const init = async () => {
+    slotsRef.current = await WheelRepository.fetchSlots()
+    if (appContext.auth) {
+      userRef.current = await WheelRepository.fetchUserInfo()
+      if (userRef.current) {
+        checkAvailable(userRef.current)
+      }
+    }
+    setLoaded(true)
+  }
+
+  const play = async () => {
+    if (appContext.auth) {
+      const res = await WheelRepository.play()
+      // const res = mockRes
+      userRef.current = res.player
+      setGameResult(res)
+      checkAvailable(userRef.current)
+      setTimeout(clear, totalTime)
+    }
+  }
+
+  const clear = () => {
+    if (gameResultRef.current) {
+      setWinnerResult(gameResultRef.current)
+    }
+  }
+
+  const checkAvailable = (userData: IWheelInfoUser): boolean => {
+    const expirationDate = new Date(userData.balanceSpinsTimeNewFreeAccrual)
+    const isAvailable = userData.balanceSpins > 0 && isAfter(new Date(), expirationDate)
+    setExpirationDate(expirationDate)
+    setAvailable(isAvailable)
+    return isAvailable
+  }
+
+  if (!loaded) {
+    return (
+      <div className={styles.loader}>
+        <Spinner size={32} color="#fff" secondaryColor="rgba(255,255,255,0.4)"/>
+      </div>
+    )
   }
 
   return (
     <div className={styles.root}>
       <div className={styles.wheel}>
-        <img src='/img/Fortune/wheel.svg' alt=''/>
-        <HiddenXs>
-        <div className={styles.wrapper}>
-          <div className={styles.everyday}>
-            <div>lucky spin everyday</div>
-          </div>
+        <div className={styles.board}>
+          <Board canvasSize={canvasSize} gameResult={gameResult} slots={slotsRef.current} />
         </div>
+        <HiddenXs>
+          <div className={styles.wrapper}>
+            <div className={styles.everyday}>
+              <div>lucky spin everyday</div>
+            </div>
+          </div>
         </HiddenXs>
         <div className={styles.right}>
           <img src='/img/Fortune/coins1.svg' alt=''/>
@@ -51,33 +117,60 @@ export default function Fortune(props: Props) {
         </div>
       </div>
       <div className={styles.mobile}>
-      <VisibleXs>
-        <div className={styles.wrapperMobile}>
-          <div className={styles.everydayMobile}>
-            <div>lucky spin everyday</div>
+        <img src='/img/Fortune/mob_coins_top_right.svg' alt='' className={styles.bgMobileCoinsTopRight}/>
+        <img src='/img/Fortune/mob_coins_bottom_left.svg' alt='' className={styles.bgMobileCoinsBottomLeft}/>
+        <VisibleXs>
+          <div className={styles.wrapperMobile}>
+            <div className={styles.everydayMobile}>
+              <div>lucky spin everyday</div>
+            </div>
           </div>
-        </div>
-      </VisibleXs>
-      {!currentDate && <div className={styles.btn}><Button onClick={handleClick} className={styles.spin} background='pink'>Spin the wheel</Button></div>}
-      {currentDate &&
-      <div className={styles.next}>
-        <div className={styles.free}>
-          Next free spin bonus
-        </div>
-        <div className={styles.timer}>
-          <div className={styles.hours}>
-            {pad('00', hours)}
+        </VisibleXs>
+        {available && (
+          <div className={styles.btn}>
+            <Button
+              onClick={play}
+              className={styles.spin}
+              background="pink"
+              disabled={!!gameResult}
+            >
+              Spin the wheel
+            </Button>
           </div>
-          :
-          <div className={styles.hours}>
-            {pad('00', minutes)}
+        )}
+        {!available && appContext.auth && (
+          <div className={styles.next}>
+            <div className={styles.free}>
+              Next free spin bonus
+            </div>
+            <div className={styles.timer}>
+              <div className={styles.hours}>
+                {pad('00', timer.hours)}
+              </div>
+              :
+              <div className={styles.hours}>
+                {pad('00', timer.minutes)}
+              </div>
+              :
+              <div className={styles.hours}>
+                {pad('00', timer.seconds)}
+              </div>
+            </div>
           </div>
-          :
-          <div className={styles.hours}>
-            {pad('00', seconds)}
-          </div>
-        </div>
-      </div>}
+        )}
+      </div>
+      <div className={classNames({
+        [styles.winnerOverlay]: true,
+        [styles.visible]: winnerResult,
+      })}>
+        <Winner
+          data={winnerResult}
+          className={styles.winner}
+          onRequestClose={() => {
+            setWinnerResult(null)
+            setGameResult(null)
+          }}
+        />
       </div>
     </div>
   )

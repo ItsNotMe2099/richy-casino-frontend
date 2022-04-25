@@ -6,7 +6,6 @@ import {GameSound, useGameSound} from 'components/for_pages/games/context/game_s
 import {useGameContext} from 'components/for_pages/games/context/state'
 import {chain} from 'components/for_pages/games/utils/chain'
 import styles from './index.module.scss'
-import classNames from 'classnames'
 interface Props{
   mode: 'double' | 'x50'
 }
@@ -135,7 +134,7 @@ export default function Board(props: Props) {
       <div className={styles.root}>
         <div className={styles.wheel}>
           <div className={styles.radial}>
-            <img src={'/img/Games/wheel/wheel_radius.png'}/>
+            <img src={'/img/Games/wheel/wheel_radius@3x.png'}/>
             <div className={styles.radialOverlay}>
               <div className={styles.wheelWrapper}>
               <Wheel
@@ -158,18 +157,7 @@ export default function Board(props: Props) {
 
           </div>
 
-          <div className={classNames(styles.yellow, styles.deg0)}/>
-          <div className={classNames(styles.yellow, styles.deg30)}/>
-          <div className={classNames(styles.yellow, styles.deg60)}/>
-          <div className={classNames(styles.yellow, styles.deg90)}/>
-          <div className={classNames(styles.yellow, styles.deg120)}/>
-          <div className={classNames(styles.yellow, styles.deg150)}/>
-          <div className={classNames(styles.yellow, styles.deg180)}/>
-          <div className={classNames(styles.yellow, styles.deg210)}/>
-          <div className={classNames(styles.yellow, styles.deg240)}/>
-          <div className={classNames(styles.yellow, styles.deg300)}/>
-          <div className={classNames(styles.yellow, styles.deg330)}/>
-          <div className={classNames(styles.yellow, styles.deg360)}/>
+
         </div>
 
       </div>

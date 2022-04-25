@@ -2,6 +2,7 @@ import styles from './index.module.scss'
 import Link from 'next/link'
 import classNames from 'classnames'
 import { IButton } from 'types/interfaces'
+import Spinner from 'components/ui/Spinner'
 
 interface Props extends IButton {
   children?: React.ReactNode
@@ -12,9 +13,9 @@ interface Props extends IButton {
   href?: string
   target?: string
   className?: string
-  image?: string
   background?: 'dark700' | 'payGradient500' | 'dark500' | 'dark600' | 'blueGradient500' | 'blackTransparent' | 'white' | 'pink'
   disabled?: boolean
+  spinner?: boolean
 }
 
 export default function Button(props: Props) {
@@ -38,7 +39,8 @@ export default function Button(props: Props) {
       [styles.blueGradient500]: props.background === 'blueGradient500',
       [styles.blackTransparent]: props.background === 'blackTransparent',
       [styles.white]: props.background === 'white',
-      [styles.pink]: props.background === 'pink'
+      [styles.pink]: props.background === 'pink',
+      [styles.disabled]: props.disabled
   })
 
   return (
@@ -46,22 +48,31 @@ export default function Button(props: Props) {
   {props.href ? (
     <Link href={props.href}>
       <a
-        onClick={props.onClick}
+        onClick={!props.disabled ? props.onClick : null}
         href={props.href}
         target={props.target}
         className={classNames(styles.link, btnClass, props.className)}
       >
-        {props.image ? <img src={props.image} alt=""/> : props.children}
+        {props.children}
       </a>
     </Link>
   ) : (
     <button
-      disabled={props.disabled}
+      disabled={props.disabled || props.spinner}
       type={props.type}
-      onClick={props.onClick}
+      onClick={!props.disabled ? props.onClick : null}
       className={classNames(styles.btn, btnClass, props.className)}
     >
-      {props.image ? <img src={props.image} alt=""/> : props.children}
+            <span className={classNames({
+              [styles.text]: true,
+              [styles.textHidden]: props.spinner,
+            })}>{props.children}</span>
+      <div className={classNames({
+        [styles.spinner]: true,
+        [styles.spinnerVisible]: props.spinner,
+      })}>
+       <Spinner size={22} color="#fff" secondaryColor="rgba(255,255,255,0.4)"/>
+      </div>
     </button>
 
 )}</>)

@@ -1,12 +1,12 @@
 @import "scss/index";
-
+.wrapper{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0px 20px;
+}
 .root{
+  overflow: hidden;
   margin-top: 20px;
-  padding-right: 0 !important;
-  flex-basis: auto !important;
-  flex-grow: 0 !important;
-  flex-shrink: 0 !important;
-  width: 40% !important;
   @media screen and (max-width: 650px){
     display: none !important;
   }
@@ -79,7 +79,69 @@
 
 .desktop{
   margin-top: 20px;
+  overflow: hidden;
 }
 .bonusSlideMobile{
   margin: 0px 4px;
+}
+
+.btn{
+  margin-top: 23px;
+  button{
+    color: $blue500;
+    @include textStyle14Bold;
+    padding-right: 38px;
+    padding-left: 38px;
+  }
+}
+
+.left{
+  align-self: center;
+  margin-left: 28px;
+}
+
+.item{
+  display: flex !important;
+  border-radius: 18px;
+  padding: 20px 0 13px 0;
+  position: relative;
+  max-height: 18rem;
+  overflow: hidden;
+  min-height: 18rem;
+  background-position: center center;
+  margin: 0 5px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @media screen and (max-width: 1360px){
+    padding-left: 18px;
+  }
+  @media screen and (max-width: 800px){
+    max-height: 14.5rem;
+    min-height: 14.5rem;
+    padding: 20px 0 9px 15px;
+  }
+  @media screen and (max-width: $xs-max){
+    width: auto;
+    max-height: 12rem;
+    min-height: 12rem;
+  }
+  @media screen and (max-width: $mobile-max){
+    max-height: 10rem;
+    min-height: 10rem;
+  }
+}
+
+.itemLabel{
+  @media screen and (max-width: 520px){
+    font-size: calc(14px + 0.5vw);
+    font-weight: 700;
+  }
+}
+
+.spin{
+  color: #fef494;
+}
+
+.lottery{
+  color: #4148e7;
 }

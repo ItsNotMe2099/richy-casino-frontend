@@ -1,12 +1,17 @@
 import styles from './index.module.scss'
 import classNames from 'classnames'
+import Formatter from 'utils/formatter'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
   className?: string
+  yourTicket: number
+  totalTickets: number
+  winChance: number
 }
 
 export default function Statistics(props: Props) {
-
+  const {t} = useTranslation()
   const TopItem = (prop:{title: string, number: string, className: string, classColor: string}) => {
 
     return (
@@ -23,9 +28,9 @@ export default function Statistics(props: Props) {
 
   return (
   <div className={classNames(styles.root, props.className)}>
-    <TopItem title='Your ticket' number='16' className={styles.your} classColor={styles.blue}/>
-    <TopItem title='Total tickets' number='125.261.166' className={styles.total} classColor={styles.green}/>
-    <TopItem title='Win chance' number='125.261.166' className={styles.win} classColor={styles.orange}/>
+    <TopItem title={t('lottery_your_ticket')} number={Formatter.formatNumber(props.yourTicket) ?? '-'} className={styles.your} classColor={styles.blue}/>
+    <TopItem title={t('lottery_total_tickets')} number={Formatter.formatNumber(props.totalTickets, '.') ?? '-'} className={styles.total} classColor={styles.green}/>
+    <TopItem title={t('lottery_win_chance')} number={`${props.winChance ? `${props.winChance}%` : '-'}`} className={styles.win} classColor={styles.orange}/>
   </div>
   )
 }

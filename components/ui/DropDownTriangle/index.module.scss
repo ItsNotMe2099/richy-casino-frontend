@@ -1,0 +1,33 @@
+@import "scss/index";
+
+.root {
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  top: -6px;
+  z-index: 1;
+  @media screen and (max-width: $xs-max) {
+    top: -5px
+  }
+  &.bottom{
+    top: auto;
+    bottom: -6px;
+    @media screen and (max-width: $xs-max) {
+      top: auto;
+      bottom: -5px;
+    }
+  }
+}
+.triangle {
+
+  transform: rotate(-45deg);
+  width: 19.2px;
+  height: 19.2px;
+  background: #2D2E38;
+
+  @media screen and (max-width: $xs-max) {
+    width: 14px;
+    height: 14px;
+    transform: rotate(-45deg);
+  }
+}

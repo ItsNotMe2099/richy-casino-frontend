@@ -1,5 +1,5 @@
 .root{
-  color: #ED4700;;
+  color: #ED4700;
   font-size: 12px;
   font-weight: 500;
   z-index: 1;
@@ -7,6 +7,8 @@
   align-items: center;
   padding-top: 5px;
   img{
+    display: block;
+    margin-top: -3px;
     margin-right: 6px;
   }
 }

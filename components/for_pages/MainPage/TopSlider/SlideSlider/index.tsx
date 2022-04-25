@@ -1,20 +1,21 @@
 import styles from './index.module.scss'
-import { Col } from 'react-grid-system'
 import Button from 'components/ui/Button'
-import { useState } from 'react'
+import { ReactElement, useState } from 'react'
 import Slider from 'react-slick'
 import { useAppContext } from 'context/state'
 import classNames from 'classnames'
 
 interface IItem {
-  label: React.ReactNode
-  image: string
+  label?: React.ReactNode
+  image?: string
+  child?: ReactElement
 }
 
 interface Props {
   className?: string
   slider?: any
   items: IItem[]
+  style?: 'catalog'
 }
 
 const SliderArrow = () => {
@@ -59,19 +60,28 @@ export default function SlideSlider(props: Props) {
     ]
   }
 
+  const colClass = {
+    [styles.colCatalog]: props.style == 'catalog'
+  }
+
+  const rootClass = {
+    [styles.catalog]: props.style === 'catalog' && currentIndex === 0
+  }
+
   return (
-      <Col className={styles.col}>
-      <div className={styles.root} style={{backgroundImage: `url(${props.items[currentIndex].image})`}}>
+      <div className={classNames(styles.root, rootClass)} style={{backgroundImage: `url(${props.items[currentIndex].image})`}}>
       <div className={styles.controls}>
         <div className={styles.prev} onClick={() => slider.slickGoTo(currentIndex - 1)}>
           <SliderArrow/>
         </div>
         <div className={styles.next} onClick={() => slider.slickGoTo(currentIndex + 1)}>
-            <SliderArrow/>
+          <SliderArrow/>
         </div>
       </div>
       <Slider {...settings} ref={slider1 => (slider = slider1)}>
         {props.items.map((item, index) =>
+        <>
+        {item.child}
         <div key={index} className={styles.item}>
         <div className={styles.left}>
           <div className={classNames(styles.label, {[styles.second]: index > 0})}>
@@ -82,10 +92,10 @@ export default function SlideSlider(props: Props) {
           </div>
         </div>
         </div>
+        </>
         )}
       </Slider>
       </div>
-      </Col>
   )
 }
 

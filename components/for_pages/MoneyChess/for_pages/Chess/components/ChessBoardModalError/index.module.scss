@@ -1,0 +1,32 @@
+@import "scss/index";
+.root{
+
+  display: flex;
+  flex-direction: column;
+  grid-gap: 32px 0px;
+  align-items: center;
+  justify-content: center;
+  width: 813px;
+  z-index: 1;
+  img{
+   width: 64px;
+  }
+  @media screen and (max-width: 1023px){
+    grid-gap: 16px 0px;
+    width: 376px;
+  }
+  @media screen and (max-width: $xs-max){
+    width: auto;
+    max-width: 376px;
+  }
+}
+
+.list{
+  display: flex;
+  flex-direction: column;
+  grid-gap: 12px 0px;
+  color: #ED4700;
+  font-size: 24px;
+  font-weight: 500;
+}
+

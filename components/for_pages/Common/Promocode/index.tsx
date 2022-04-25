@@ -1,43 +1,56 @@
 import styles from './index.module.scss'
 import Button from 'components/ui/Button'
 import {useState} from 'react'
-import {Form,FormikProvider, useFormik} from 'formik'
-import ErrorInput from 'components/ui/Inputs/components/ErrorInput'
+import {FormikProvider, useFormik} from 'formik'
 import InputField from 'components/ui/Inputs/InputField'
+import {useTranslation} from 'react-i18next'
+import PromoCodeRepository from 'data/repositories/PromoCodeRepository'
+import Validator from 'utils/validator'
+import FormError from 'components/ui/Form/FormError'
 
-interface Props{
+interface Props {
 
 }
 
 
 export default function PromoCode(props: Props) {
+  const {t} = useTranslation()
+
   const [error, setError] = useState(null)
+  const [success, setSuccess] = useState<string>()
+  const [sending, setSending] = useState(false)
+  const handleSubmit = async (values, {resetForm}) => {
+    setError(null)
+    setSending(true)
+    setSuccess(null)
+    try {
+      const res = await PromoCodeRepository.activate(values.keyword)
+      setSuccess(t('promocode_success_message', {promocode: values.keyword}))
+      resetForm()
+    } catch (e) {
+      setError(e)
+    }
+    setSending(false)
+  }
   const formik = useFormik({
     initialValues: {
-      couponCode: null
+      keyword: null
     },
-    onSubmit: async values => {
-
-    },
+    onSubmit: handleSubmit
   })
-
-  const handleDelete = async () => {
-
-
-  }
-
-  const {values} = formik
 
   return (
     <div className={styles.root}>
       <FormikProvider value={formik}>
-            <Form>
-              <div className={styles.form}>
-                <div className={styles.input}><InputField name='couponCode' placeholder='Введите промокод' /></div>
-                <ErrorInput error={error} touched={true}/>
-                <Button className={styles.button} size='play' background='blueGradient500'>Использовать</Button>
-              </div>
-            </Form>
+
+        <div className={styles.form}>
+          <div className={styles.input}><InputField name='keyword' placeholder={t('promocode_form_field')}
+                                                    disabled={sending} validate={Validator.required}/></div>
+          <Button type={'button'} className={styles.button} onClick={(e) => formik.handleSubmit(e as any)}
+                  spinner={sending} size='play' background='blueGradient500'>{t('promocode_form_use')}</Button>
+        </div>
+        {success && <div className={styles.success}>{success}</div>}
+        <FormError error={error}/>
       </FormikProvider>
     </div>
   )

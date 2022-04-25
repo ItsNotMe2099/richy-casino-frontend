@@ -1,0 +1,9 @@
+.root{
+  padding-left: 6px;
+  img{
+    margin-right: 6px;
+  }
+  &.reverse{
+    transform: rotate(90deg);
+  }
+}

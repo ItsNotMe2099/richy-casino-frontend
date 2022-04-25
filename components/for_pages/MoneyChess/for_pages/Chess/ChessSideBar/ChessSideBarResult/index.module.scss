@@ -1,0 +1,87 @@
+@import "scss/index";
+@import "scss/index";
+.root{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  font-size: 34px;
+  font-weight: 700;
+  @media screen and (max-width: 1023px){
+    font-size: 16px;
+  }
+  @media screen and (max-width: $xs-land){
+    font-size: 16px;
+  }
+  .image{
+    padding: 0px 19%;
+    @media screen and (max-width: 1023px){
+      margin-top: 8px;
+    }
+  }
+  img{
+    width: 100%;
+    margin: -12%;
+    @media screen and (max-width: 1023px){
+      max-width: 17.5vw;
+      margin: -3%;
+    }
+  }
+  &.win{
+    .amount{
+      color: $pay500
+    }
+  }
+  &.lose{
+    .amount{
+      color: $lose500
+    }
+  }
+  &.draw{
+    .amount{
+      color: $grey500
+    }
+  }
+}
+
+.title{
+
+}
+.amount{
+  margin-top: 6px;
+}
+.description{
+  color: $dark100;
+    font-weight: bold;
+  font-size: 16px;
+  @media screen and (max-width: 1023px){
+    font-size: 12px;
+  }
+}
+.btnWrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  grid-gap: 0px 16px;
+  max-width: 436px;
+  @media screen and (max-width: 1023px){
+    justify-content: center;
+    grid-gap: 0px 8px;
+    margin-top: 8px;
+  }
+}
+.button{
+  height: 9vh;
+  max-height: 75px;
+  flex: 1;
+  font-size: 3vh;
+  font-weight: 500;
+  padding: 0px;
+  @media screen and (max-width: 1023px){
+    height: 42px;
+    font-size: 16px;
+    padding: 0px 23px;
+    flex: unset;
+  }
+}

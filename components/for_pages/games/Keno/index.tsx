@@ -27,6 +27,9 @@ export default function GameKeno(props: Props) {
   const [selected, setSelected] = useState([])
   const [isAutoSelect, setSsAutoSelect] = useState(false)
   const handleSubmit = async (data: ICasinoGameDiceDto) => {
+    if(selected.length === 0){
+      return
+    }
     gameSound.play(GameSound.Roll)
     await gameContext.startGame({...data, tiles: selected, gameType: CasinoGameType.Keno} as ICasinoGameDiceDto)
   }
@@ -36,6 +39,9 @@ export default function GameKeno(props: Props) {
     }
     if(selected.length >= 10 && !selected.includes(item)){
       return
+    }
+    if(gameContext.result){
+      gameContext.clear()
     }
     gameSound.play(GameSound.Click)
     if(selected.includes(item)){

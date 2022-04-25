@@ -6,7 +6,7 @@ export enum RouletteBetType{
   Purple,
   Red
 }
-export type RouletteBets = {[key: string | number]: number}
+export type RouletteBets = {[key: string | number]: number[]}
 export interface IRouletteChip{
   value: number
   label: string

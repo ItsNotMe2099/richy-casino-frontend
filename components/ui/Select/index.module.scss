@@ -7,25 +7,22 @@ max-width: 280px;
 @media screen and (max-width: 1360px){
   max-width: 100%;
 }
-.triangle{
-  display: none;
-}
+
 }
 
 .balance{
-  .triangle{   
-    position: absolute;   
-    transform: rotate(-45deg) translateX(-50%);   
-    width: 22px;   
-    height: 22px;   
-    background: #2D2E38;   
-    top: -17px;   
-    right: 50%; 
+  .triangle{
+    position: absolute;
+    transform: rotate(-45deg) translateX(-50%);
+    width: 22px;
+    height: 22px;
+    background: #2D2E38;
+    top: -17px;
+    right: 50%;
     display: block;
   }
   nav{
     min-width: 300px;
-    transform: translateY(50%);
     overflow-y: visible;
   }
 }
@@ -37,9 +34,7 @@ max-width: 280px;
   .dropDownTrigger{
     display: block;
   }
-  nav{
-    right: 0;
-  }
+
 }
 
 .dropDown {
@@ -49,14 +44,13 @@ max-width: 280px;
   visibility: hidden;
   max-height: 200px;
   overflow-y: auto;
-  //transform: translateY(-20px);
-  //transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
   z-index: 5;
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 16px;
+  top: 100%;
   .option:first-child{
     a{
     &:hover{
@@ -105,7 +99,7 @@ max-width: 280px;
 }
 
 .dropDownTrigger {
-  padding: 0 17px;
+  padding: 0px;
   text-decoration: none;
   justify-content: space-between;
   display: flex;
@@ -117,7 +111,9 @@ max-width: 280px;
   justify-content: center;
   cursor: pointer;
 }
-
+.options{
+  z-index: 2;
+}
 .symbol{
   font-weight: 500;
   font-size: 13px;

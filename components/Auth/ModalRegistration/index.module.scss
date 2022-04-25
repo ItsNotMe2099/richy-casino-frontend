@@ -1,13 +1,12 @@
 @import "scss/index";
 
 .form {
-  margin-top: 24px;
+
 }
 
 .variants {
   display: flex;
   align-items: center;
-  margin-top: 24px;
 
   .variant:last-child {
     margin-right: 0;
@@ -89,6 +88,10 @@
 
 .banner{
   margin-top: 16px;
+  margin-bottom: 24px;
+  @media screen and (max-width: $xs-max) {
+    margin-bottom: 12px;
+  }
 }
 
 .plus {
@@ -120,22 +123,9 @@
   color: $white;
 }
 
-.login {
-  font-weight: 500;
-  font-size: 13px;
-  color: $dark200;
-  margin-top: 25px;
-
-  span {
-    color: #FFD12F;
-    cursor: pointer;
-  }
-}
 
 .socials {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+
   margin-bottom: 24px;
   @media screen and (max-width: 430px) {
     justify-content: center;

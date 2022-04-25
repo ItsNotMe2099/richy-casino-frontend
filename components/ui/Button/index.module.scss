@@ -1,7 +1,7 @@
 @import "scss/index";
 
 .link, .btn {
-
+  position: relative;
   cursor: pointer;
   outline: none;
   display: inline-flex;
@@ -17,6 +17,9 @@
     font-weight: 400;
   }
   text-align: center;
+  &.disabled{
+    cursor: inherit;
+  }
 }
 
 .sizeSuperExtraSmall {
@@ -108,4 +111,33 @@
 
 .fluid {
   width: 100%;
+}
+
+
+.text{
+  visibility: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.textHidden{
+  visibility: hidden;
+}
+
+.spinner{
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinnerVisible{
+  visibility: visible;
 }

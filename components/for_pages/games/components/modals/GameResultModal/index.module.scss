@@ -4,9 +4,20 @@
 text-align: center;
   font-size: 22px;
   font-weight: 700;
+  &.win{
+
+  }
+  &.lose{
+    .profit{
+      color: $lose500;
+    }
+  }
 }
 .icon{
   margin-top: -25px;
+  img{
+    max-width: 100%;
+  }
 }
 .profit{
   color: #7BD245;

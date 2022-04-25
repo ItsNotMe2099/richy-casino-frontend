@@ -38,7 +38,7 @@ export default function GameHilo(props: Props) {
   }
   return (
     <GamePageLayout
-      header={<GamePageHeader title={'Keno'} icon={''}/>}
+      header={<GamePageHeader title={'Hilo'} icon={''}/>}
       sideBar={<Sidebar startCard={startCard} onSubmit={handleSubmit} onBet={handleBet} />}
       board={<Board startCard={startCard}/>} history={<GameHistory items={history}/>}/>
   )

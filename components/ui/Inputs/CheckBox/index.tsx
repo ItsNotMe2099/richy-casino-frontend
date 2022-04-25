@@ -8,15 +8,16 @@ interface Props {
   disabled?: boolean
   biggerFont?: boolean
   size?: 'small' | 'normal' | 'large'
+  className?: string
 }
 
 export const CheckBox = (props: Props & FieldConfig) => {
   const [field, meta] = useField(props)
   const { setFieldValue } = useFormikContext()
   const hasError = !!meta.error && meta.touched
-
+  console.log('CheckBoxCheck', props.name, field.value)
   return (
-    <div className={cx(styles.root, {
+    <div className={cx(styles.root, props.className, {
       [styles.large]: props.size === 'large'
     })}>
       <CustomCheckbox

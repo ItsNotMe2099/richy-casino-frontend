@@ -186,10 +186,6 @@ max-width: 280px;
 }
 
 .arrow{
+  display: flex;
   align-self: center;
-  @media screen and (max-width: $xs-max){
-    img{
-
-    }
-  }
 }

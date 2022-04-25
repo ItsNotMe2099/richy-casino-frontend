@@ -2,6 +2,17 @@
 
 .root{
   position: relative;
+
+  &.footer{
+    .dropDownTrigger{
+      height: 41px;
+      padding: 0px 12px;
+      @media only screen and (max-width: $xs-max) {
+        height: 29px;
+        padding: 0px 9px;
+      }
+    }
+  }
 }
 
 .other{
@@ -11,27 +22,27 @@
 }
 
 .dropDownTrigger {
-  padding: 12px 12px 13px 12px;
   height: 41px;
   background: $dark700;
   border-radius: 8px;
   text-decoration: none;
   justify-content: space-between;
   display: flex;
-  color: #000;
-  margin-right: 20px;
+  color: $white;
+
   flex-shrink: 0;
   position: relative;
   width: 100%;
   margin: 0px;
   font-size: 13px;
   align-items: center;
-  padding: 15px 14px;
+  padding: 0px 14px;
   border-radius: 8px;
   cursor: pointer;
-  color: #fff;
+
   img{
     margin-right: 10px;
+    max-width: 17px;
   }
   &:hover{
     background-color: $dark500;
@@ -55,7 +66,7 @@
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
   z-index: 20;
   flex-direction: column;
-  margin-top: 21px;
+  margin-top: 16px;
   left: 50%;
   .option:first-child{
     a{
@@ -82,6 +93,12 @@
       background-color: $dark400;
     }
   }
+  &.footer {
+    bottom: 58px;
+    @media only screen and (max-width: $xs-max) {
+      bottom: 44px;
+    }
+  }
 
 }
 .dropDownActive{
@@ -106,47 +123,29 @@
     }
 }
 
-.footer{
-  bottom: 62px;
-  .triangle{
-    top: auto;
-    bottom: 0;
-  }
-  .option{
-    position: relative;
-    z-index: 11;
-  }
-}
 
-.triangle{
-  position: absolute;
-  transform: rotate(-45deg) translateX(-50%);
-  width: 22px;
-  height: 22px;
-  background: #2D2E38;
-  top: -12px;
-  left: 45%;
-}
 
+.options{
+  z-index: 2;
+}
 .option{
   display: flex;
+  align-items: center;
   cursor: pointer;
   z-index: 1;
-  padding: 18px 14px;
+  padding-left: 14px;
+
+  height: 52px;
   &:hover{
     background: #41424F;
   }
   .image{
     margin-right: 10px;
-  }
-  a{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .image{
-      margin-right: 10px;
+    img{
+      max-width: 17px;
     }
   }
+
 }
 
 .track{
@@ -158,7 +157,4 @@
   border-radius: 3px;
 }
 
-.view{
-  margin-right: -17px !important;
-  margin-bottom: -17px !important;
-}
+

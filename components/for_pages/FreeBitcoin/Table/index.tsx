@@ -2,56 +2,83 @@ import styles from './index.module.scss'
 import classNames from 'classnames'
 import { Col } from 'react-grid-system'
 import {format} from 'date-fns'
-
-interface ILuckyNumber {
-  number: string
-  payout: string
-}
-
-interface ILast {
-  date: string
-  payout: string
-}
+import { Scrollbars } from 'react-custom-scrollbars-2'
+import {IFreeBitcoinSlot} from 'data/interfaces/IFreeBitcoinSlot'
+import {IFreeBitcoinHistory} from 'data/interfaces/IFreeBitcoinHistory'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
-  last?: boolean
-  items: ILuckyNumber[] | ILast[]
+  history?: boolean
+  items: IFreeBitcoinSlot[] | IFreeBitcoinHistory[]
 }
 
 export default function Table(props: Props) {
+  const {t} = useTranslation()
+  const formatHistory = (item: IFreeBitcoinHistory) => {
+    return format(new Date(item.unixtimestamp), 'dd.MM.yyyy hh:mm')
+  }
+  const formatSlot = (item: IFreeBitcoinSlot) => {
+    if(item.maxNumber && item.minNumber){
+      return `${item.minNumber} - ${item.maxNumber}`
+    }else{
+      return item.minNumber || item.maxNumber
+    }
+  }
 
-  const handleDate = (item) => {
-    const date = new Date(item.date)
-    return format(date, 'dd.MM.yyyy hh:mm')
+  const formatHistoryAmount = (item: IFreeBitcoinHistory) => {
+    return item.moneyAmount
+  }
+  const formatHistoryCurrency = (item: IFreeBitcoinHistory) => {
+    return item.moneyCurrency
+  }
+
+  const formatSlotAmount = (item: IFreeBitcoinSlot) => {
+    return item.sumWinning
+  }
+  const formatSlotCurrency = (item: IFreeBitcoinSlot) => {
+    return item.currency
   }
 
   return (
-    <Col className={classNames(styles.col, {[styles.last]: props.last})}>
+    <Col className={classNames(styles.col, {[styles.last]: props.history})}>
     <div className={styles.root}>
-      <div className={styles.table}>
-        <div className={styles.row}>
-          <div className={styles.cell}>
-            {!props.last ? <>LUCKY NUMBER</> : <>ПОСЛЕДНИЕ ВЫИГРЫШИ</>}
-          </div>
-          <div className={styles.cell}>
-            {!props.last ? <div className={classNames(styles.text, styles.payout)}>PAYOUT</div> : null}
-          </div>
-        </div>
+      <table className={styles.table}>
+        <thead>
+          <tr className={styles.row}>
+            <th className={classNames(styles.cell, styles.cellHeader)}>
+              {props.history ? t('freebitcoin_last_wins'): t('freebitcoin_lucky_number')}
+            </th>
+            <th className={classNames(styles.cell, styles.cellHeader)}>
+              {!props.history ? <div className={classNames(styles.payout)}>{t('freebitcoin_payout')}</div> : null}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+        <Scrollbars className={styles.scroll}>
         {props.items.map((item, index) =>
-          <div className={classNames(styles.row, styles.rowInner)} key={index}>
-            <div className={styles.cell}>
-              <div className={classNames(styles.text, {[styles.date]: props.last})}>
-                {props.last ? handleDate(item) : item.number}
+          <tr className={classNames(styles.row, styles.rowInner)} key={index}>
+            {props.history ? <td className={styles.cell}>
+                <div className={classNames(styles.text, {[styles.date]: true})}>
+                  {formatHistory(item)}
+                </div>
+              </td>
+              :
+              <td className={styles.cell}>
+              <div className={classNames(styles.text)}>
+                {formatSlot(item)}
               </div>
-            </div>
-            <div className={classNames(styles.cell, {[styles.cellPayout]: !props.last})}>
+            </td>}
+            <td className={classNames(styles.cell, {[styles.cellPayout]: props.history})}>
               <div className={styles.text}>
-                {item.payout} <span>BTC</span>
+                {props.history ? formatHistoryAmount(item) : formatSlotAmount(item)}
+                <span> {props.history ? formatHistoryCurrency(item)?.toUpperCase() : formatSlotCurrency(item)?.toUpperCase()}</span>
               </div>
-            </div>
-          </div>
+            </td>
+          </tr>
             )}
-      </div>
+          </Scrollbars>
+        </tbody>
+      </table>
     </div>
     </Col>
   )

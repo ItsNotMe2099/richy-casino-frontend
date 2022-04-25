@@ -13,7 +13,7 @@ export default function Mine({status, onClick}: Props) {
       [styles.loading]: status === MineStatus.Loading,
       [styles.mine]: status === MineStatus.Mine,
       [styles.bonus]: status === MineStatus.Bonus
-    })} onClick={onClick}/>
+    })} onClick={status ===MineStatus.Disabled ? onClick : null}/>
   )
 }
 

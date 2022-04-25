@@ -1,28 +1,50 @@
 export interface IUserBalanceCurrency{
   currency: string,
   value: number
+  calculated: number,
+  mainCurrency: string
+}
+export interface IUserBalanceCurrencyRaw{
+  [key: string]: number
 }
 export default interface IUser {
   id: number
   email: string
   phone: string
   currencyIso?: string
+  countryId: number,
+  cityId: number,
+  gender: number
   countryIso: string,
   birthdayDate?: string,
   username?: string
-  fullname?: string,
+  surname?: string,
+  name?: string,
   balance: {
-    total_calculated_amount: number,
+    totalCalculatedAmount: number,
     currencies: {
       totals: IUserBalanceCurrency[],
       real: IUserBalanceCurrency[],
       bonus: IUserBalanceCurrency[],
-    }
+    },
+    calculated: {
+      totals: IUserBalanceCurrency[],
+      real: IUserBalanceCurrency[],
+      bonus: IUserBalanceCurrency[],
+    },
+
   }
+  extraBalances: {
+    wheelSpins: number,
+    lotteryTickets: number,
+    freeBitcoin: number
+    freespinAmount: number
+  },
   flags: {
-    isHideUserName: boolean,
-    iHideFromLeaderboard: boolean,
+    isHideUsername: boolean,
+    isHideFromLeaderboard: boolean,
     isHideFromStatistics: boolean,
     isHideBalance: boolean,
+    is2faEnabled: boolean
   }
 }

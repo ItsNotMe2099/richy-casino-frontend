@@ -16,13 +16,12 @@
   background: $dark600;
   border: 0;
   width: 100%;
-  padding: 18px 20px;
+  padding: 0px 20px;
+  height: 53px;
   color: #717384;
   flex: 1;
   font-weight: 500;
-  @media screen and (max-width: $xs-max) {
-    background-color: $dark700;
-  }
+
   &:-webkit-autofill{
     -webkit-text-fill-color: #717384 !important;
   }
@@ -38,7 +37,12 @@
     color: $white;
     font-weight: 500;
   }
-
+  &.withSuffix{
+    padding-right: 40px;
+  }
+  &.withPrefix{
+    padding-left: 49px;
+  }
   &.inputError{
     color: #ED4700;
     border: 1px solid #ED4700;
@@ -46,12 +50,10 @@
       color:  #ED4700 !important;
     }
   }
-}
-
-.inputAlt{
-  color: $white;
-  font-weight: 500;
-  font-size: 16px;
+  @media only screen and (max-device-width: 900px) {
+      -webkit-appearance: none;
+      font-size: 16px;
+  }
 }
 
 .inputWrapper{
@@ -99,3 +101,4 @@
     }
   }
 }
+

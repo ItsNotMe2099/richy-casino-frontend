@@ -5,15 +5,19 @@
 }
 
 .top{
-  margin-top: 35px;
+  margin-top: 6px;
   display: flex;
   justify-content: space-between;
+  @media screen and (max-width: $xs-max){
+    margin-top: 7px;
+  }
 }
 
 .accounts{
   margin-top: 42px;
   display: flex;
   @media screen and (max-width: 600px){
+    margin-top: 37px;
     flex-direction: column;
   }
 }
@@ -70,6 +74,10 @@
 .icon{
   display: flex;
   margin-right: 6px;
+  img{
+    max-width: 24px;
+    max-height: 24px;
+  }
 }
 
 .currency{
@@ -98,11 +106,13 @@
   font-size: 13px;
   color: #3c3d46;
   margin-top: 5px;
+  text-align: left;
 }
 
 .logout{
   display: flex;
   align-items: center;
+
   button{
     padding-top: 9px;
     padding-bottom: 9px;
@@ -118,21 +128,39 @@
       img{
         margin-right: 0;
       }
-      span{
+      .btnLogoutName{
         display: none;
       }
     }
   }
 }
 
-.main{
-  margin-right: 14px;
+
+.field{
+  width: 100%;
   .title{
     color: #FFC700;
     font-weight: 500;
     font-size: 14px;
     text-align: start;
   }
+  &.additional{
+    .title{
+      color: $white;
+    }
+    @media screen and (max-width: 600px){
+      margin-top: 12px;
+    }
+  }
+
+}
+
+.left{
+  display: flex;
+  flex-direction: column;
+  grid-gap: 16px 0px;
+  margin-right: 14px;
+
   @media screen and (max-width: 600px){
     margin-right: 0;
   }
@@ -153,31 +181,53 @@
   font-size: 14px;
   text-align: start;
   margin-bottom: 12px;
+  @media screen and (max-width: 600px){
+    margin-bottom: 10px;
+  }
 }
 
 .actions{
   display: flex;
   align-items: center;
-  margin-top: 16px;
+  grid-gap: 16px;
+  width: 100%;
   @media screen and (max-width: 600px){
     flex-direction: column-reverse;
+    grid-gap: 0px;
+  }
+}
+.notGreen{
+  display: flex;
+  grid-gap: 0px 7px;
+  @media screen and (max-width: 600px){
+    margin-top: 16px;
+    grid-gap: 0px 14px;
+    width: 100%;
   }
 }
 
+
 .btn{
-  padding: 18px;
+  padding: 0px 18px;
+  height: 56px;
+
   background: #24252E;
   color: $white;
-  margin-right: 7px;
   font-weight: 500;
   font-size: 16px;
   &:hover{
     background-color: $dark500;
   }
+  @media screen and (max-width: 600px){
+    flex: 1;
+  }
 }
 
 .wallet{
-  padding: 18px 19px;
+  flex: 1;
+  height: 56px;
+
+  padding: 0px 21px;
   img{
     width: 16px;
     margin-right: 6px;
@@ -185,77 +235,13 @@
   color: $white;
   font-weight: 500;
   font-size: 16px;
-  width: 100%;
-}
-
-.bonusItem{
-  padding: 11px 12px;
-  background: $dark600;
-  display: flex;
-  align-items: center;
-  border-radius: 8px;
-  justify-content: space-between;
-  margin-top: 8px;
-}
-
-.bonusLeft{
-  display: flex;
-  align-items: center;
-}
-
-.bonusIcon{
-  display: flex;
-  margin-right: 8px;
-}
-
-.number{
-  font-weight: 500;
-  font-size: 12px;
-}
-
-.menuItem{
-  padding: 27px 12px 27px 21px;
-  background: #1D1E25;
-  border-radius: 25px;
-  min-height: 150px;
-  cursor: pointer;
-  border: 1px solid #2C2D38;
   @media screen and (max-width: 600px){
-    border: 0;
-    display: flex;
-    min-height: auto;
-    padding: 15px 18px;
-    align-items: center;
-    border-radius: 9px;
+    flex: unset;
+    width: 100%;
   }
 }
 
-.active{
-  background-color: $dark600;
-}
 
-.menuIcon{
-  display: flex;
-  @media screen and (max-width: 600px){
-    margin-right: 15px;
-    img{
-      width: 20px;
-      height: 18px;
-    }
-  }
-}
-
-.menuLabel{
-  margin-top: 22px;
-  font-weight: 500;
-  font-size: 16px;
-  color: $white;
-  text-align: start;
-  @media screen and (max-width: 600px){
-    margin-top: 0;
-    font-size: 13px;
-  }
-}
 
 .menu{
   display: grid;
@@ -272,41 +258,3 @@
   display: flex;
 }
 
-.new{
-  max-width: 100% !important;
-  margin-top: 16px;
-}
-
-.new > a {
-  height: 38px !important;
-  border-radius: 8px !important;
-  span{
-    color: #737683;
-  }
-}
-
-.newAcc{
-  margin-top: 16px;
-  .title{
-    color: $white;
-  }
-  .account{
-    margin-top: 16px;
-  }
-}
-
-.notGreen{
-  display: flex;
-  width: 100%;
-  @media screen and (max-width: 600px){
-    margin-top: 16px;
-    .btn:first-child{
-      margin-right: 14px;
-      width: 100%;
-    }
-    .btn:last-child{
-      margin-right: 0;
-      width: 100%;
-    }
-  }
-}

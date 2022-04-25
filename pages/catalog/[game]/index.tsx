@@ -3,7 +3,6 @@ import Layout from 'components/layout/Layout'
 import styles from 'pages/catalog/index.module.scss'
 import {Row, Col} from 'react-grid-system'
 import {GetServerSideProps} from 'next'
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import nookies from 'nookies'
 import {useRouter} from 'next/router'
 import GameMines from 'components/for_pages/games/Mines'
@@ -21,9 +20,15 @@ import GameRoulette from 'components/for_pages/games/Roulette'
 import GameDiamonds from 'components/for_pages/games/Diamonds'
 import GameHilo from 'components/for_pages/games/Hilo'
 import GamePlinko from 'components/for_pages/games/Plinko'
+import GameCrash from 'components/for_pages/games/Crash'
 import GameAuthRepository from 'components/for_pages/games/data/reposittories/GameAuthRepository'
 import {runtimeConfig} from 'config/runtimeConfig'
 import GameCoinFlip from 'components/for_pages/games/ConiFlip'
+import HiddenXs from 'components/ui/HiddenXS'
+import {GameCookiesType} from 'components/for_pages/games/data/types'
+import GameBlackJack from 'components/for_pages/games/BlackJack'
+import GameVideoPoker from 'components/for_pages/games/VideoPoker'
+import {getServerSideTranslation} from 'utils/i18'
 interface Props{
   gameToken?: string
 }
@@ -53,8 +58,14 @@ export default function CatalogPage(props: Props) {
         return <GameHilo/>
       case CasinoGameType.Plinko:
         return <GamePlinko/>
+      case CasinoGameType.Aviator:
+        return <GameCrash/>
       case CasinoGameType.Coinflip:
         return <GameCoinFlip/>
+      case CasinoGameType.Blackjack:
+        return <GameBlackJack/>
+      case CasinoGameType.MiniPoker:
+        return <GameVideoPoker/>
       default:
         return <GameMines/>
     }
@@ -62,7 +73,9 @@ export default function CatalogPage(props: Props) {
   return (<AudioPlayerProvider>
       <Layout>
         <Row className={styles.desktop}>
-          <Filter items={[]} mobile/>
+          <HiddenXs>
+            <Filter />
+          </HiddenXs>
           <Col className={styles.content}>
             <GameSoundWrapper>
             <GameWrapper token={props.gameToken} gameType={query.game as CasinoGameType}>{renderGame()}</GameWrapper>
@@ -76,11 +89,10 @@ export default function CatalogPage(props: Props) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const cookies = nookies.get(context)
-  const cookieTokenName = 'gameToken'
-  let gameToken = cookies[cookieTokenName]
+  let gameToken = cookies[GameCookiesType.accessToken]
   if(!gameToken){
     const authRes = await GameAuthRepository.loginGuest(runtimeConfig.GAMES_API_SECRET, 'btc')
-    nookies.set(context, cookieTokenName, authRes.accessToken, {
+    nookies.set(context, GameCookiesType.accessToken, authRes.accessToken, {
       maxAge: 30 * 24 * 60 * 60,
       path: '/',
     })
@@ -88,7 +100,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
   return {
     props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...await getServerSideTranslation(context),
       gameToken
     },
   }

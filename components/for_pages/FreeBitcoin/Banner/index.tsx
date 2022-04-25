@@ -3,16 +3,50 @@ import Button from 'components/ui/Button'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import styles from './index.module.scss'
+import {useTranslation} from 'next-i18next'
+import {IFreeBitcoinUserStatus} from 'data/interfaces/IFreeBitcoinUserStatus'
+import {useEffect, useState} from 'react'
+import FreeBitcoinRepository from 'data/repositories/FreeBitcoinRepository'
+import {useAppContext} from 'context/state'
+import {differenceInSeconds} from 'date-fns'
+import {IFreeBitcoinGame, IFreeBitcoinGameStatus} from 'data/interfaces/IFreeBitcoinGame'
+import Formatter from 'utils/formatter'
 
+enum State{
+  Timer = 'timer',
+  Play = 'play',
+  Win = 'win'
+}
 interface Props {
-  children?: React.ReactNode
-  className?: string
-  state: string
-  coins: string
 }
 
 export default function Banner(props: Props) {
+  const {t} = useTranslation()
+  const context = useAppContext()
+  const [userStatus, setUserStatus] = useState<IFreeBitcoinUserStatus>(null)
+  const [result, setResult] = useState<IFreeBitcoinGame>(null)
 
+  const [state, setState] = useState<State | null>(null)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState(null)
+  useEffect(() => {
+    if(!context.auth){
+      setState(null)
+      setUserStatus(null)
+    }
+    FreeBitcoinRepository.fetchUserStatus().then(i => {
+      setUserStatus(i)
+      console.log('Date111', new Date(i.freebitcoinTimeNewFreeAccrual))
+      const isExpired = differenceInSeconds(new Date(i.freebitcoinTimeNewFreeAccrual), new Date()) <= 0
+      console.log('Date111', new Date(i.freebitcoinTimeNewFreeAccrual), isExpired, state)
+
+      if(isExpired && !state){
+        setState(State.Play)
+      }else if(!state && !isExpired){
+        setState(State.Timer)
+      }
+    })
+  }, [context.auth])
   const Digit = (prop: {digit: string}) => {
     return (
       <div className={styles.digit}>
@@ -21,16 +55,28 @@ export default function Banner(props: Props) {
     )
   }
 
-  const chars = []
-
-  for(let char of props.coins){
-    chars.push(char)
+  const handleExpired = () => {
+    if(!state || state === State.Timer){
+      setState(State.Play)
+    }
   }
-
-  const someDate = '2021-12-27T12:46:24.007Z'
-
-  const expiredAt = new Date(someDate)
-  
+  const handlePlay = async () => {
+    setSending(true)
+    try {
+      const res = await FreeBitcoinRepository.play()
+      setResult(res)
+      if(res){
+        setUserStatus((status) => ({...status, balanceFreebitcoin: res.balanceLeft}))
+      }
+      setState(State.Win)
+    }catch (e){
+      setError(e)
+    }
+    setSending(false)
+  }
+  const getNumber = () => {
+    return Formatter.pad('00000',userStatus?.balanceFreebitcoin ?? 0)
+  }
   return (
     <div className={styles.root}>
       <HiddenXs>
@@ -46,33 +92,33 @@ export default function Banner(props: Props) {
         </>
       </VisibleXs>
       <div className={styles.amount}>
-        {chars.slice((chars.length - 5), chars.length).map((item, index) =>
+        {getNumber().split('').map((item, index) =>
           <Digit digit={item} key={index}/>
         )}
       </div>
-      {props.state === 'play' && 
-        <Button className={styles.btn} size='huge' background='blueGradient500'>PLAY NOW</Button>
+      {state === State.Play &&
+        <Button className={styles.btn} spinner={sending} size='huge' background='blueGradient500' onClick={handlePlay}>   {t('freebitcoin_play_now')}</Button>
       }
-      {props.state === 'win' && 
+      {state === State.Win &&
         <div className={styles.win}>
-          <div className={styles.you}>YOU WIN</div>
+          <div className={styles.you}>{result.status === IFreeBitcoinGameStatus.Win ?  t('freebitcoin_win_title') : 'YOU LOSE'}</div>
           <div className={styles.btns}>
             <div className={styles.coins}>
               <img src='/img/FreeBitcoin/bitcoin.svg' alt=''/>
-              <div>{props.coins}</div>
+              <div>{result.amount}</div>
             </div>
-            <div className={styles.ticket}>
+            <div className={styles.ticket} onClick={handlePlay}>
               <img src='/img/FreeBitcoin/ticket.svg' alt=''/>
-              <div>2 free lottery ticket</div>
+              <div>{result.status} {t('freebitcoin_win_tickets')}</div>
             </div>
           </div>
         </div>
       }
-      {props.state === 'timer' &&
+      {state === State.Timer &&
         <div className={styles.timer}>
-          <Timer expiredAt={expiredAt} style='freebitcoin'/>
+          <Timer expiredAt={new Date(userStatus.freebitcoinTimeNewFreeAccrual)} style='freebitcoin' onExpire={handleExpired}/>
           <div className={styles.again}>
-            Before you can play free again
+            {t('freebitcoin_before_play')}
           </div>
         </div>
       }

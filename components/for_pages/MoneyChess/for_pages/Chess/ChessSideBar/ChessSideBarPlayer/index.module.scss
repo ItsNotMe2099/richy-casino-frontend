@@ -1,0 +1,50 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 24px;
+  grid-gap: 16px;
+  @media screen and (max-width: 1023px){
+    font-size: 14px;
+  }
+}
+.login{
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.timer{
+  background: $dark600;
+  border-radius: 17.3px;
+  padding: 0px 26px;
+  height: 64px;
+  color: $dark200;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &.yellow{
+    background: rgba(255, 209, 47, 0.05);
+    color: $balance600;
+  }
+  &.red{
+    background: rgba(231, 71, 0, 0.05);
+    color: $lose500;
+  }
+  &.hidden{
+    .value {
+      opacity: 0;
+    }
+  }
+  @media screen and (max-width: 1023px){
+    height: 32px;
+    padding: 0px 12px;
+    border-radius: 12px;
+  }
+}
+.value{
+  transition: opacity 0.4s ease;
+  margin-top: 2px;
+}

@@ -8,29 +8,36 @@ import {ModalType} from 'types/enums'
 import {useAppContext} from 'context/state'
 import {useState} from 'react'
 import AuthRepository from 'data/repositories/AuthRepository'
-import {formatPhone} from 'utils/formatters'
+import Formatter from 'utils/formatter'
+import FormError from 'components/ui/Form/FormError'
+import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
+import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
+import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
+import BottomSheetLayout from 'components/layout/BottomSheetLayout'
+import BottomSheetHeader from 'components/layout/BottomSheetHeader'
+import BottomSheetBody from 'components/layout/BottomSheetBody'
+
 
 interface Props {
-  isOpen?: boolean
-  onRequestClose?: () => void
-  singlePage?: boolean
+  isBottomSheet?: boolean
 }
 
 export default function ModalPasswordReset(props: Props) {
   const context = useAppContext()
   const modalArguments = context.modalArguments
-  const login = modalArguments.login
+  const login = modalArguments?.login
   const [error, setError] = useState<string | null>(null)
+  const [sending, setSending] = useState<boolean>(false)
   const handleSubmit = async (data) => {
+    setSending(true)
     try {
       setError(null)
       const res = await AuthRepository.resetPassword({identity: login, token: data.code, password: data.password})
-
       context.showModal(ModalType.login)
-
     } catch (e) {
-      setError(e.message)
+      setError(e)
     }
+    setSending(false)
   }
   const initialValues = {
     code: '',
@@ -42,39 +49,57 @@ export default function ModalPasswordReset(props: Props) {
   const isEmail =  login?.includes('@')
   const { t } = useTranslation('common')
 
+  const result = (<Formik initialValues={initialValues} onSubmit={handleSubmit}>
+    {({values}) => (
+      <Form className={styles.form}>
+        <div className={styles.description}>
+          {t('password_restore_text')}<br/>
+          {t('password_restore_text_you')} {isEmail ? t('password_restore_text_email') : t('password_restore_text_phone')} <span className={styles.login}>{isEmail ? login : Formatter.formatPhone(login)}</span>
+        </div>
+        <div className={styles.inputs}>
+          <InputField
+            name={'code'}
+            disabled={sending}
+            placeholder={isEmail ? t('password_restore_field_code_email') : t('password_restore_field_code_sms')} validate={Validator.required}/>
+          <InputField
+            name={'password'}
+            type={'password'}
+            obscure={true}
+            disabled={sending}
+            placeholder={t('password_restore_field_password')} validate={Validator.required}/>
+          <InputField
+            name={'passwordConfirm'}
+            type={'password'}
+            obscure={true}
+            disabled={sending}
+            placeholder={t('password_restore_field_password_confirm')}
+            validate={Validator.combine([Validator.required, Validator.passwordsMustMatch(values)])}
+          />
+        </div>
+        <FormError error={error}/>
+        <div className={styles.buttons}>
+          <Button type='button' className={styles.button} size='submit' background='dark600' onClick={() => context.showModal(ModalType.passwordRecovery, {login: context.modalArguments.login})}>{t('password_restore_cancel')}</Button>
+          <div className={styles.spacer}/>
+          <Button type='submit' className={styles.button} spinner={sending} size='submit' background='blueGradient500' >{t('password_restore_next')}</Button>
+        </div>
 
-  return (
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        {({values}) => (
-        <Form className={styles.form}>
-          <div className={styles.description}>
-            Введите ниже код, отправленный на указанный<br/>
-            Вами {isEmail ? 'Email' : 'Тел.'} <span className={styles.login}>{isEmail ? login : formatPhone(login)}</span>
-          </div>
-          <div className={styles.inputs}>
-            <InputField
-              name={'code'}
-              placeholder={`Код из ${isEmail ? 'Email' : 'СМС'}`} validate={Validator.required}/>
-            <InputField
-              name={'password'}
-              type={'password'}
-              obscure={true}
-              placeholder={'Пароль'} validate={Validator.required}/>
-            <InputField
-              name={'passwordConfirm'}
-              type={'password'}
-              obscure={true}
-              placeholder={'Повторите пароль'}
-              validate={Validator.combine([Validator.required, Validator.passwordsMustMatch(values)])}
-            />
-          </div>
-          <div className={styles.buttons}>
-            <Button type='button' className={styles.button} size='submit' background='dark600' onClick={() => context.showModal(ModalType.passwordRecovery, {login: context.modalArguments.login})}>Отменить</Button>
-            <div className={styles.spacer}/>
-            <Button type='submit' className={styles.button} size='submit' background='blueGradient500' >Сменить</Button>
-          </div>
-
-        </Form>)}
-      </Formik>
-  )
+      </Form>)}
+  </Formik>)
+  if(props.isBottomSheet){
+    return <BottomSheetLayout>
+      <BottomSheetHeader title={t('password_restore_title')}/>
+      <BottomSheetBody>
+        {result}
+      </BottomSheetBody>
+    </BottomSheetLayout>
+  }else {
+    return (
+      <ProfileModalLayout>
+        <ProfileModalHeader title={t('password_restore_title')}/>
+        <ProfileModalBody>
+          {result}
+        </ProfileModalBody>
+      </ProfileModalLayout>
+    )
+  }
 }

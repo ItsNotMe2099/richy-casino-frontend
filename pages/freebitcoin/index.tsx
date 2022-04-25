@@ -1,59 +1,52 @@
-import Filter from 'components/for_pages/Common/Filter'
 import PageTitle from 'components/for_pages/Common/PageTitle'
 import Banner from 'components/for_pages/FreeBitcoin/Banner'
 import Table from 'components/for_pages/FreeBitcoin/Table'
-import Layout from 'components/layout/Layout'
-import { useState } from 'react'
-import { Row, Col } from 'react-grid-system'
+import {useEffect, useState} from 'react'
+import {Row} from 'react-grid-system'
 import {GetServerSideProps} from 'next'
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
+import FreeBitcoinRepository from 'data/repositories/FreeBitcoinRepository'
+import {IFreeBitcoinSlot} from 'data/interfaces/IFreeBitcoinSlot'
+import {IFreeBitcoinHistory} from 'data/interfaces/IFreeBitcoinHistory'
+import {IFreeBitcoinUserStatus} from 'data/interfaces/IFreeBitcoinUserStatus'
+import {useAppContext} from 'context/state'
+import {useTranslation} from 'next-i18next'
+import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
+import {getServerSideTranslation} from 'utils/i18'
 
 export default function FreeBitcoin() {
-
-  const games = [
-
-  ]
-
-  const luckyNumber = [
-    {number: '0-9885', payout: '0.00000003'},
-    {number: '9886 - 9985', payout: '0.00000003'},
-    {number: '9986 - 9993', payout: '0.00000003'},
-    {number: '9994 - 9997', payout: '0.00000003'},
-    {number: '9998 - 9999', payout: '0.00000003'},
-    {number: '10000', payout: '0.00000003'}
-  ]
-
-  const last = [
-    {date: '2021-12-27T12:46:24.007Z', payout: '0.00000003'},
-    {date: '2021-12-27T12:46:24.007Z', payout: '0.00000003'},
-    {date: '2021-12-27T12:46:24.007Z', payout: '0.00000003'},
-    {date: '2021-12-27T12:46:24.007Z', payout: '0.00000003'},
-    {date: '2021-12-27T12:46:24.007Z', payout: '0.00000003'},
-    {date: '2021-12-27T12:46:24.007Z', payout: '0.00000003'},
-  ]
+  const {t} = useTranslation()
+  const context = useAppContext()
+  const [loading, setLoading] = useState<boolean>(true)
+  const [slots, setSlots] = useState<IFreeBitcoinSlot[]>([])
+  const [history, setHistory] = useState<IFreeBitcoinHistory[]>([])
+  const [userStatus, setUserStatus] = useState<IFreeBitcoinUserStatus>(null)
+  useEffect(() => {
+    console.log('context.auth ', context.user )
+    Promise.all([
+      FreeBitcoinRepository.fetchSlots().then(i => setSlots(i)),
+      FreeBitcoinRepository.fetchHistory().then(i => setHistory(i ?? [])),
+      ...(context.auth ? [FreeBitcoinRepository.fetchUserStatus().then(i => setUserStatus(i))] : []),
+    ]).then(() => setLoading(false))
+  }, [context.auth])
 
   const [isShow, setIsShow] = useState(false)
 
   return (
-    <Layout>
-      <Row>
-      <Filter items={games} state={isShow} onClick={() => setIsShow(false)}/>
-      <Col>
-        <PageTitle icon='/img/Contents/bitcoin.svg' title='Free Bitcoin' onClick={() => isShow ? setIsShow(false) : setIsShow(true)} shadowColor='yellow'/>
-        <Banner coins='0.0000010001' state='timer'/>
-        <Row>
-          <Table items={luckyNumber}/>
-          <Table items={last} last/>
-        </Row>
-      </Col>
-      </Row>
-    </Layout>
+    <WithGameFilterLayout>
+          <PageTitle icon='/img/Contents/bitcoin.svg' title={t('freebitcoin_title')}
+                     onClick={() => isShow ? setIsShow(false) : setIsShow(true)} shadowColor='yellow'/>
+          <Banner/>
+          <Row>
+            <Table items={slots}/>
+            <Table items={history} history/>
+          </Row>
+    </WithGameFilterLayout>
   )
 }
-export const getServerSideProps: GetServerSideProps = async (context ) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...await getServerSideTranslation(context),
     },
   }
 }

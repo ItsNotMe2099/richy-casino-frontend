@@ -6,12 +6,12 @@
   padding-bottom: 103px;
   padding-top: 57px;
   @media only screen and (max-width: $xs-max) {
-    padding-bottom: 24px;
+    padding-bottom: 0px;
     padding-top: 0px;
   }
 }
 .board{
-  background: url('/img/Games/diamonds/lands.png') no-repeat top center;
+  background: url('/img/Games/diamonds/lands@3x.png') no-repeat top center;
   background-size: contain;
   padding-top: 62px;
   max-width: 583px;

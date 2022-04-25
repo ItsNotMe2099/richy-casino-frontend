@@ -1,26 +1,38 @@
-import { ReactElement, useRef } from 'react'
-import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
+import {ReactElement, useEffect, useRef, useState} from 'react'
+import {listenForOutsideClicks} from 'components/hooks/useDetectOutsideClick'
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import { IOption } from 'types/interfaces'
+import DropDownTriangle from 'components/ui/DropDownTriangle'
 
 
 interface Props<T> {
-  options: IOption<T>[],
+  options?: IOption<T>[],
   onChange?: (item: IOption<T>) => void
   onTriggerClick?: () => void
   itemComponent?: (option: IOption<T>, onClick: () => void) => ReactElement
   placeholder?: (isActive?) => ReactElement
-  style?: 'balance' | 'newAccount'
+  style?: 'balance' | 'newAccount',
+  className?: string
+  rootClassName?: string
+  children?: ReactElement | ReactElement[]
 }
 
 export default function Select<T>(props: Props<T>){
   const dropdownRef = useRef(null)
   const {options, onTriggerClick, onChange, style} = props
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
-
+  const [isActive, setIsActive] = useState(false)
+  const [listening, setListening] = useState(false)
+  useEffect(listenForOutsideClicks(
+    listening,
+    setListening,
+    dropdownRef,
+    setIsActive,
+  ))
+  console.log('isActive', isActive)
   const handleClick = (e) => {
-    if(options.length === 0){
+    console.log('handleClick', e)
+    if(options.length === 0 && onTriggerClick){
       onTriggerClick()
     }
     e.preventDefault()
@@ -38,12 +50,15 @@ export default function Select<T>(props: Props<T>){
   }
 
   return (
-    <div className={classNames(styles.root, rootClass)} onClick={handleClick}>
+    <div ref={dropdownRef} className={classNames(styles.root, rootClass, props.rootClassName)} onClick={handleClick}>
        <div onClick={handleClick} className={classNames(styles.dropDownTrigger)}>
           {props.placeholder(isActive)}
-       <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
-        <div className={styles.triangle}></div>
-        {options.map((item, index) => props.itemComponent(item, () => handleChange(item)))}
+       <nav  className={classNames(styles.dropDown,props.className, { [styles.dropDownActive]: isActive })}>
+        <div className={styles.options}>
+          {props.children ? props.children : options.map((item, index) => props.itemComponent(item, () => handleChange(item)))}
+
+        </div>
+         <DropDownTriangle />
        </nav>
        </div>
     </div>

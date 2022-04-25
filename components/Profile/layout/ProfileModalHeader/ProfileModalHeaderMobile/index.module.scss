@@ -1,0 +1,79 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: column;
+  grid-gap: 20px 0px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #272832;
+  margin: 0;
+  padding: 10px $space-modal-mobile;
+  z-index: 30;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  background: $dark800;
+}
+
+.logo{
+  max-width: 59px;
+}
+
+.balance{
+  background: rgba(255, 209, 47, 0.05);
+  border-radius: 6px;
+  padding: 4px 7px;
+  .amount{
+    font-weight: 500;
+    font-size: 12px;
+    margin-top: 3px;
+  }
+  .label{
+    color: #FFD12F;
+    text-transform: uppercase;
+    font-size: 7px;
+  }
+}
+
+
+
+.deposit{
+  padding: 11px 9px;
+  img{
+    margin-right: 6px;
+  }
+  color: $white;
+  font-size: 10px;
+}
+.footer{
+  display: flex;
+  flex-direction: column;
+  grid-gap: 16px 0px;
+  padding: 0px $space-modal-mobile;
+  padding-bottom: 10px;
+}
+.backArea{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  grid-gap: 0px 17px;
+}
+.arrow{
+
+}
+
+.backTitle{
+  font-size: 14px;
+  color: #87888C;
+}
+.title{
+  font-size: 22px;
+  color: $white;
+  font-weight: 600;
+}
+
+
+

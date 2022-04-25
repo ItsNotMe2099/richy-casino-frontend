@@ -12,6 +12,9 @@
   left: 0;
   width: 100%;
   z-index: 20;
+  &.isOverAll {
+    z-index: 99999999 !important;
+  }
   height: auto !important;
   min-height: auto !important;
   .item:nth-child(4){

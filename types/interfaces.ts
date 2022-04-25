@@ -1,11 +1,13 @@
-import { HTMLInputTypeAttribute, MouseEventHandler } from 'react'
+import {HTMLInputTypeAttribute, MouseEventHandler, ReactElement} from 'react'
 import { FieldConfig } from 'formik'
+import {FavoriteEntityType, ProfileModalType, SnackbarType} from 'types/enums'
+import {IUserBalanceCurrency} from 'data/interfaces/IUser'
 
 export interface IField extends FieldConfig {
   label?: string
   placeholder?: string
   type?: HTMLInputTypeAttribute
-  disable?: boolean
+  disabled?: boolean
   onChange?: (val) => void
 }
 
@@ -31,21 +33,18 @@ export interface Country {
   symbol: string
 }
 
-export const CONTACTS = {
-  email: 'support@richy.com',
-  facebook: '#',
-  youtube: '#',
-  twitter: '#',
-  linkedIn: '#'
-}
 
-export const LINKS = {
-
-}
 export interface IOption<T> {
   label: string
   value?: T
-  symbol?: string,
+  symbol?: string | ReactElement,
+  icon?: string
+}
+export interface IOptionUserAccount extends IOption<string> {
+  balance?: number
+  calculatedBalance: number,
+  mainCurrency: string
+  symbol?: string | ReactElement,
   icon?: string
 }
 export interface IPagination<T>{
@@ -59,6 +58,7 @@ export interface IApiResponseErrorDetails{
 export interface IApiResponseError{
   code: number,
   details: IApiResponseErrorDetails[]
+  message?: string
 }
 export interface IApiResponse{
   success: boolean,
@@ -75,8 +75,14 @@ export interface IApiPaginationResponse{
     perPage: number
   }
 }
+export interface ProfileModalArguments {
+  onBack?: () => void
+}
 export interface RegistrationPhoneModalArguments {
   phone: string
+}
+export interface TwoFaModalArguments extends ProfileModalArguments{
+  qrUrl: string
 }
 export interface RegistrationSuccessModalArguments {
   login: string
@@ -84,4 +90,56 @@ export interface RegistrationSuccessModalArguments {
 }
 export interface PasswordResetModalArguments {
   login: string
+}
+export interface ProfileModalArguments {
+  backTo?: ProfileModalType
+}
+export interface WithdrawModalArguments {
+  account: IUserBalanceCurrency
+}
+
+export interface IPosition{
+  x: number
+  y: number
+}
+
+export interface ISize{
+  width: number
+  height: number
+}
+export interface ISwitchFilterItem<T>{
+  label?: string,
+  icon?: string | ReactElement,
+  value: T
+}
+export interface SnackbarData {
+  text: string
+  type: SnackbarType
+}
+export type FavoritesStoreType = {[entityType in FavoriteEntityType]: number[]}
+
+export enum PaymentMethod{
+  Crypto = 'crypto',
+  Card = 'card'
+}
+export enum PaymentStep {
+  Method = 'method',
+  Currency = 'currency',
+  Form = 'form',
+  Success = 'success'
+}
+
+export interface IBonusBannerDetails{
+  amount: number
+  currency: string
+  freeSpins: number
+  freeBitcoin: number
+  lotteryTickets: number
+  wheelSpins: number
+  validTill: string
+}
+
+export interface IModalProfileStackItem{
+  type: ProfileModalType,
+  args?: any
 }

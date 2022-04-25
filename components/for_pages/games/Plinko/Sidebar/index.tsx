@@ -15,6 +15,7 @@ import {useGameContext} from 'components/for_pages/games/context/state'
 import GamePageTakeActionButton from 'components/for_pages/games/components/GamePageFinishButton'
 import {GFieldSelectTabs} from 'components/for_pages/games/components/inputs/GFieldSelectTabs'
 import styles from 'components/for_pages/games/components/inputs/GFieldAutoAction/index.module.scss'
+import GFieldSelectNumber from 'components/for_pages/games/components/inputs/GFieldSelectNumber'
 
 interface Props {
   onSubmit: (data: ICasinoGameDataDto) => void
@@ -67,9 +68,14 @@ export default function Sidebar(props: Props) {
             {label: 'Medium', value: 'medium'},
             {label: 'High', value: 'high'},
           ]} />
-          <GFieldSelectTabs className={styles.tabs}  style={'small'} name={'pins'} onChange={props.onChangePinsCount} label={'Pines'} options={[
-          ...Array.from({length: 9}, (_, i) => i + 8).map(i => ({label: `${i}`, value: i}))
-          ]} />
+
+          <GFieldSelectNumber
+            label="Pines"
+            name="pins"
+            from={8}
+            to={16}
+            afterChange={props.onChangePinsCount}
+          />
 
            {gameMode ===CasinoGameModeType.Auto && <>
             <GFieldBetAmount name={'betAmount'}/>

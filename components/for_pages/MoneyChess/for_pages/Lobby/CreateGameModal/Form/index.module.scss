@@ -1,0 +1,86 @@
+@import "../../../../../../../scss/index";
+
+.form {
+  margin-top: 16px;
+}
+
+.begin{
+  padding: 17px 33px;
+  display: flex;
+}
+
+.cancel{
+  padding: 17px 50px;
+  display: flex;
+  margin-right: 16px;
+  margin-left: 10px;
+  @media screen and (max-width: 480px){
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
+}
+
+.inputs{
+  margin-top: 12px;
+
+}
+
+.input{
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  flex: 1;
+  padding-right: 0px;
+}
+.inputWrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+
+.settings{
+  margin-top: 17px;
+  display: flex;
+  grid-gap: 0px 16px;
+  justify-content: stretch;
+  > div{
+    flex: 1;
+  }
+  @media screen and (max-width: 550px){
+    flex-direction: column;
+    grid-gap: 16px 0px;
+    .option:first-child{
+      margin-right: 0;
+    }
+  }
+}
+
+
+
+
+.time{
+  margin-top: 12px;
+}
+
+.button{
+  padding: 0px;
+  height: 53px;
+  max-width: 160px;
+}
+.btnsWrapper{
+  display: flex;
+  margin-top: 32px;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 0px 16px;
+  @media screen and (max-width: 480px){
+    flex-direction: column;
+    grid-gap: 16px 0px;
+  }
+}
+
+.exchange{
+
+}

@@ -1,29 +1,27 @@
 import styles from './index.module.scss'
 import classNames from 'classnames'
-import { FieldConfig, useField } from 'formik'
+import { useField } from 'formik'
+import {IField} from 'types/interfaces'
 
-interface Props {
-  placeholder?: string
-  onChange?: (value) => void
-  onClick?: () => void
+interface Props extends IField{
   className?: string
 }
 
-export default function InputTicket(props: Props & FieldConfig) {
+export default function InputTicket(props: Props) {
 
   const [field, meta] = useField(props)
   const {value} = field
   const {placeholder} = props
 
   return (
-    <div className={classNames(styles.root, props.className)}>
+    <div className={classNames(styles.root, props.className, {[styles.error]: meta.touched && meta.error, [styles.disabled]: props.disabled})}>
       <input
-        {...field}
         name="ticket"
         type="text"
-        value={value}
         autoComplete={'off'}
         placeholder={placeholder}
+        {...field}
+        disabled={props.disabled}
       />
     </div>
   )

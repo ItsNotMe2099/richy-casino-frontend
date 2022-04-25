@@ -1,0 +1,58 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: column;
+  grid-gap: 16px 0px;
+  @media screen and (max-width: $xs-max) {
+    margin-top: 16px;
+  }
+}
+.form {
+  display: flex;
+  flex-direction: column;
+
+}
+.label{
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 14px;
+  color: $dark200;
+  margin-bottom: 14px;
+  @media screen and (max-width: $xs-max){
+    margin-bottom: 11px;
+  }
+}
+
+.limit{
+  line-height: 16px;
+  color: $dark400;
+}
+.input{
+  height: 46px;
+  margin-bottom: 20px;
+  @media screen and (max-width: $xs-max){
+    margin-bottom: 16px;
+  }
+
+  input{
+    background-color: $dark600;
+    height: 46px;
+    color: $white;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: -0.01em;
+  }
+}
+
+.button{
+  margin-top: 12px;
+  height: 53px;
+  @media screen and (max-width: $xs-max){
+    margin-top: 8px;
+  }
+}

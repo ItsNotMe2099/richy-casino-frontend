@@ -4,14 +4,15 @@ interface IRuntimeConfig {
   HOST: string
   GAMES_HOST: string
   GAMES_API_SECRET: string
+  ROBOTS_FILE: string
   NODE_ENV: 'development' | 'production'
   DEV: boolean
   PROD: boolean
 }
 
 function getRuntimeConfig(): IRuntimeConfig {
-  const { publicRuntimeConfig } = getConfig()
-  return publicRuntimeConfig
+  const { publicRuntimeConfig, serverRuntimeConfig } = getConfig() ?? {}
+  return publicRuntimeConfig ?? serverRuntimeConfig
 }
 
 export const runtimeConfig = getRuntimeConfig()

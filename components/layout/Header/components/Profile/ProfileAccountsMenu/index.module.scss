@@ -1,9 +1,14 @@
 @import "scss/index";
 
 .root{
-  
-}
 
+}
+.select{
+
+  @media screen and (max-width: $xs-max) {
+    margin-top: 12px;
+  }
+}
 .placeholder{
     display: flex;
     background: rgba(255, 209, 47, 0.05);
@@ -13,8 +18,13 @@
     font-weight: 700;
     font-size: 14px;
     height: 41px;
-    min-width: 174px;
     justify-content: space-evenly;
+  .value{
+    line-height: 100%;
+  }
+  .label{
+    line-height: 100%;
+  }
     &:hover{
         background: rgba(255, 209, 47, 0.1);
     }
@@ -28,11 +38,11 @@
     }
     .label{
         color: #8f8e8d;
-        @media screen and (max-width: $mobile-max){
+        @media screen and (max-width: $xs-max){
             font-size: 10px;
          }
     }
-    @media screen and (max-width: $mobile-max){
+    @media screen and (max-width: $xs-max){
         height: 30px;
         justify-content: normal;
         max-width: 112px;
@@ -49,61 +59,103 @@
 .notActive{
     transform: rotate(270deg);
 }
-
+.symbol{
+  margin-right: 6px;
+  img{
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+  }
+  @media screen and (max-width: $xs-max){
+      width: 16px;
+      height: 16px;
+      margin-right: 4px;
+  }
+}
 .option{
-    padding: 10px 21px;
+  height: 52px;
+    padding: 0px 21px;
     display: flex;
     font-weight: 600;
     font-size: 16px;
     align-items: center;
     justify-content: space-between;
+  @media screen and (max-width: $xs-max){
+    font-size: 14px;
+  }
     &:hover{
       background: #41424F;
       z-index: 11;
     }
-  }
 
-  .symbol{
-    display: flex;
-    margin-right: 6px;
-    @media screen and (max-width: $mobile-max){
-       img{
-           width: 16px;
-           height: 16px;
-           margin-right: 4px;
-       }
-     }
+}
+.wrapper{
+  .option {
+    &:first-of-type {
+      &:hover {
+        border-top-right-radius: 12px;
+        border-top-left-radius: 12px;
+      }
+    }
+
+    &:last-of-type {
+      &:hover {
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+      }
+    }
   }
-  
+}
+
   .balance{
     display: flex;
     flex-direction: column;
   }
-  
+
   .balanceOption{
     display: flex;
     font-weight: 600;
     font-size: 14px;
+    @media screen and (max-width: $xs-max){
+      font-size: 12px;
+    }
     span{
       color: #89898e;
     }
   }
-  
+
   .value{
     display: flex;
-    @media screen and (max-width: $mobile-max){
-       font-size: 10px;
-    }
+
   }
-  
+
   .dg{
     font-weight: 600;
     font-size: 12px;
     color: #89898e;
     text-align: right;
+    line-height: 10px;
+    @media screen and (max-width: $xs-max){
+      font-size: 10px;
+    }
   }
 
   .group{
     display: flex;
     align-items: center;
+    line-height: 52px;
   }
+.separator{
+  background-color: #939498;
+  opacity: 0.2;
+  height: 1px;
+}
+.bonusTitle{
+  margin-top: 15px;
+  font-size: 12px;
+  font-weight: 500;
+  color: $white;
+  opacity: 0.5;
+  text-align: center;
+  margin-bottom: 7px;
+}

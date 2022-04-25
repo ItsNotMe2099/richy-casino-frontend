@@ -1,0 +1,48 @@
+@import "scss/index";
+
+
+.root {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  top: 0px;
+  z-index: 5;
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @media screen and (max-width: $xs-max){
+    padding: 0px 16px;
+  }
+  &.fixed{
+    position: fixed;
+
+  }
+
+  &.fade{
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+    &.open{
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+.overlay{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  top: 0px;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.close{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}

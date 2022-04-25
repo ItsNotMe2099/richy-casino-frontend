@@ -1,4 +1,4 @@
-import {createContext, useContext, useEffect, useState} from 'react'
+import {createContext, useContext, useEffect, useRef, useState} from 'react'
 import {Subject} from 'rxjs'
 import io from 'socket.io-client'
 import {
@@ -15,6 +15,8 @@ import {CasinoGameType} from 'components/for_pages/games/data/enums'
 import {IGameUser} from 'components/for_pages/games/data/interfaces/IGameUser'
 import GameUserRepository from 'components/for_pages/games/data/reposittories/GameUserRepository'
 import {runtimeConfig} from 'config/runtimeConfig'
+import {ICasinoGameRound} from 'components/for_pages/games/data/interfaces/ICasinoGameRound'
+import {IAviatorEvent} from 'data/interfaces/IAviatorEvent'
 
 interface IState {
   auth: boolean
@@ -22,6 +24,8 @@ interface IState {
   game?: ICasinoGame | null
   gameState$: Subject<ICasinoGameFinishEvent>
   turnState$: Subject<ICasinoGameTurn>
+  historyState$: Subject<ICasinoGameRound>
+  aviatorState$: Subject<IAviatorEvent>
   newTurn: (data: any, shouldClear?: boolean) => void
   startGame: (data: ICasinoGameDataDto, shouldClear?: boolean) => void
   finish: () => void
@@ -41,12 +45,16 @@ interface IState {
 
 const gameState$ = new Subject<ICasinoGameFinishEvent>()
 const turnState$ = new Subject<ICasinoGameTurn>()
+const historyState$ = new Subject<ICasinoGameRound>()
+const aviatorState$ = new Subject<IAviatorEvent>()
 
 const defaultValue: IState = {
   auth: false,
   user: null,
   gameState$: gameState$,
   turnState$: turnState$,
+  historyState$: historyState$,
+  aviatorState$: aviatorState$,
   roundId: null,
   turn: null,
   result: null,
@@ -77,7 +85,7 @@ export function GameWrapper(props: Props) {
   const [roundId, setRoundId] = useState(null)
   const [error, setError] = useState(null)
   const [gameData, setGameData] = useState<ICasinoGameDataDto>(null)
-  const [auth, setAuth] = useState(false)
+  const [auth, setAuth] = useState<boolean>(!!props.token)
   const [user, setUser] = useState<IGameUser | null>(null)
   const [game, setGame] = useState<ICasinoGame | null>(null)
   const [result, setResult] = useState<ICasinoGameFinishEvent | null>(null)
@@ -86,6 +94,7 @@ export function GameWrapper(props: Props) {
   const [startLoading, setStartLoading] = useState<boolean>(false)
   const [started, setStarted] = useState<boolean>(false)
   const [turnLoading, setTurnLoading] = useState<boolean>(false)
+  const showResultHideRef = useRef(null)
   useEffect(() => {
     const s = io(runtimeConfig.GAMES_HOST, {
       path: '/api/casino-game-ws',
@@ -114,7 +123,8 @@ export function GameWrapper(props: Props) {
     }
     const onConnect = () => {
       // setSocket(socket)
-
+      socket.emit('game:join', {type: props.gameType})
+      socket.emit('game:state', {type: props.gameType})
     }
     const onDisConnect = () => {
       socket.once('reconnect', () => {
@@ -154,18 +164,27 @@ export function GameWrapper(props: Props) {
         setUser((user) => ({...(user as IGameUser), balance}))
       }
     }
+    const onGameHistory = (data: ICasinoGameRound) => {
+      historyState$.next(data)
+    }
+    const onAviatorEvent = (data: IAviatorEvent) => {
+      aviatorState$.next(data)
+    }
     socket.on('connect', onConnect)
     socket.on('reconnect', onConnect)
     socket.on('disconnect', onDisConnect)
     socket.on('game:finish', onGameFinish)
     socket.on('game:turn', onGameTurn)
+    socket.on('aviator', onAviatorEvent)
     socket.on('game:error', onGameError)
+    socket.on('game:history', onGameHistory)
     socket.on('user:balance', onUserBalance)
     return () => {
       socket.off('connect', onConnect)
       socket.off('reconnect', onConnect)
       socket.off('disconnect', onDisConnect)
       socket.off('game:finish', onGameFinish)
+      socket.off('aviator')
       socket.off('game:round')
       socket.off('game:turn')
     }
@@ -207,7 +226,19 @@ export function GameWrapper(props: Props) {
     game,
     clear,
     roundId,
-    setShowResultModal,
+    setShowResultModal: (value: boolean) => {
+      setShowResultModal(value)
+      if(showResultHideRef.current ) {
+        clearTimeout(showResultHideRef.current)
+      }
+      if(value){
+        showResultHideRef.current = setTimeout(() => {
+          setShowResultModal(false)
+        }, 2000)
+      }else{
+
+      }
+    },
     showResultModal,
     turn,
     result,
@@ -231,8 +262,11 @@ export function GameWrapper(props: Props) {
           setRoundId(id)
         })
         setStartLoading(true)
-        socket.emit('game:start', {...data, currency: data.currency || 'BTC'})
+       const dat =  await CasinoGameRepository.startGame({...data, currency: data.currency || 'btc'})
+        setStartLoading(false)
+
       } catch (e) {
+        console.error(e)
         setError(e)
       }
     },

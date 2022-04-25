@@ -1,0 +1,129 @@
+@import "scss/index";
+.layout{
+  background: #17754F;
+
+  display: flex;
+  justify-content: stretch;
+  flex-direction: row;
+  @media only screen and (max-width: $xs-max) {
+    flex-direction: column;
+    padding-bottom: 24px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+  }
+}
+.bg{
+  position: absolute;
+  border-radius: 18px;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  .top{
+    flex: 1;
+    background-image: url('/img/Games/blackjack/bg.svg');
+    background-repeat: repeat-x;
+    background-position: top center;
+    background-size: contain;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+  }
+  .bgText{
+    text-align: center;
+    padding: 15px 0px;
+    color: #0E6944;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    .blackJackText{
+      font-size: 16px;
+      @media only screen and (max-width: $xs-max) {
+        font-size: 15px;
+      }
+    }
+    .insuranceText{
+      margin-top: 4px;
+      font-size: 21px;
+      @media only screen and (max-width: $xs-max) {
+        font-size: 20px;
+      }
+    }
+  }
+  .bottom{
+    flex: 1;
+    background-image: url('/img/Games/blackjack/bg.svg');
+    background-repeat: repeat-x;
+    background-position: bottom center;
+    background-size: contain;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+  }
+
+}
+.board{
+  flex: 1;
+  position: relative;
+  padding-bottom: 60px;
+  padding-top: 8px;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media only screen and (max-width: $xs-max) {
+    padding-bottom: 0px;
+  }
+
+}
+.deck{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  left: 0px;
+  right: 0px;
+
+  &.dealer{
+    flex: 1;
+    top: 0px;
+    @media only screen and (max-width: $xs-max) {
+      position: relative;
+    }
+  }
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  &.visible{
+    opacity: 1;
+  }
+
+}
+.deckSeparator{
+  padding-bottom: 20%;
+  width: 100%;
+}
+.playerDeck{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 17px 0px;
+  margin-top: 68px;
+  @media only screen and (max-width: $xs-max) {
+    position: relative;
+    margin-top: 34px;
+    grid-gap: 16px 0px;
+  }
+}
+.tip{
+  font-weight: 500;
+  color: $dark200;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 16px;
+  text-transform: uppercase;
+}

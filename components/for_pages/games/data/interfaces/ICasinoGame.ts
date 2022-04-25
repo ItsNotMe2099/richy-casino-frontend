@@ -1,5 +1,6 @@
 import {HiloBetType} from 'components/for_pages/games/Hilo/data/enums'
 import {CoinType} from 'components/for_pages/games/ConiFlip/data/enums'
+import {DeckRankType, IBlackjackCard} from 'components/for_pages/games/BlackJack/data/enums'
 
 export interface IMultipliers { [key: number]: number[] }
 export interface ICasinoGame {
@@ -14,10 +15,13 @@ export interface ICasinoGameErrorEvent {
   errorCode: CasinoGameErrorCode
   errorName: any
 }
-export interface ICasinoGameFinishEvent {
+export interface ICasinoInitialGameState {
+
+}
+export interface ICasinoGameFinishEvent<T = any> {
   id: number
   win: boolean
-  data: any
+  data: T
   profit: number
   multiplier: number
   currency: string
@@ -54,7 +58,17 @@ export interface ICasinoGameHiloTurn extends ICasinoGameTurn{
   history: HiloBetType[]
 }
 export interface ICasinoGameBlackjackTurn extends ICasinoGameTurn{
-  action: 'info' | 'split' | 'hit' | 'double' | 'insurance' | 'stand';
+  dealer: IBlackjackCard[]
+  player: IBlackjackCard[]
+  split: IBlackjackCard[]
+  currentHand: number
+  hasDouble: boolean
+}
+
+export interface ICasinoGameVideoPokerTurn extends ICasinoGameTurn{
+  deck: number[]
+  rankType: DeckRankType
+  rankCards: number[]
 }
 
 export interface ICasinoGameCoinFlipTurn extends ICasinoGameTurn{

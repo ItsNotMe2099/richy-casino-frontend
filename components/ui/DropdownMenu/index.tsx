@@ -10,7 +10,7 @@ interface Option {
 interface Props {
   options: Option[],
   label?: string
-  type?: 'category' | 'provider' 
+  type?: 'category' | 'provider'
   onChange?: (item: Option) => void
   onAll?: () => void
   onTriggerClick?: () => void
@@ -41,7 +41,7 @@ export default function DropdownMenu(props: Props){
         {type && <img src={type === 'category' ? '/img/DropdownMenu/arrows.svg' : '/img/DropdownMenu/pacman.svg'} alt=''/>}
         {activeTab ? <span>{activeTab}</span> : <span>{label}</span>}
         </div>
-        <div className={classNames(styles.arrow, {[styles.active]: isActive})}><img 
+        <div className={classNames(styles.arrow, {[styles.active]: isActive})}><img
         src={dots ? '/img/DropdownMenu/dots.svg' : '/img/DropdownMenu/arrow.svg'} alt=''/></div>
       </a>
        <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>

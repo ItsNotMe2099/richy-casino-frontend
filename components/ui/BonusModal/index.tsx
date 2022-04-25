@@ -4,6 +4,7 @@ import Sheet from 'react-modal-sheet'
 import {useAppContext} from 'context/state'
 import classNames from 'classnames'
 import BonusSlide from 'components/for_pages/Common/BonusSlide'
+import {BonusDepositShowMode} from 'types/enums'
 
 interface Props {
   isOpen: boolean
@@ -42,11 +43,15 @@ export default function BonusModal(props: Props) {
       background: 'none',
     },
   }
+  const handleClose = () => {
+    props.onRequestClose()
+    appContext.setBonusShowMode(BonusDepositShowMode.Spoiler)
+  }
 
   if(appContext.isDesktop) {
     return (
-      <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
-        <BonusSlide style='modal' onRequestClose={props.onRequestClose}/>
+      <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={handleClose}>
+        {isOpen && <BonusSlide style='modal' onRequestClose={handleClose}/>}
       </ReactModal>
     )
   }else{
@@ -61,16 +66,16 @@ export default function BonusModal(props: Props) {
     return (
     <Sheet isOpen={isOpen} onClose={onRequestClose}  onOpenStart={openModal} onCloseEnd={hideModal}>
       <div className={styles.sheet}>
-      <Sheet.Container onViewportBoxUpdate>
-        <Sheet.Header onViewportBoxUpdate />
-        <Sheet.Content onViewportBoxUpdate>{isOpen && <div className={classNames(styles.centerSheet, {[styles.centerSheetFortune]: props.fortune})}>
-
-          <BonusSlide style='sheet' onRequestClose={props.onRequestClose}/></div>}
+      <Sheet.Container>
+        <Sheet.Header  />
+        <Sheet.Content >{isOpen && <div className={classNames(styles.centerSheet, {[styles.centerSheetFortune]: props.fortune})}>
+          <BonusSlide style='sheet' onRequestClose={handleClose}/>
+        </div>}
         </Sheet.Content>
       </Sheet.Container>
       </div>
 
-      <Sheet.Backdrop onViewportBoxUpdate/>
+      <Sheet.Backdrop />
     </Sheet>
     )
   }

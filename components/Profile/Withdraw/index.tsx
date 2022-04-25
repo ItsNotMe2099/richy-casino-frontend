@@ -1,73 +1,37 @@
-import { useEffect, useState } from 'react'
+import {useState} from 'react'
 import styles from './index.module.scss'
-import classNames from 'classnames'
-import HiddenXs from 'components/ui/HiddenXS'
-import VisibleXs from 'components/ui/VisibleXS'
-import ProfileModal from 'components/ui/ProfileModal'
-import { useAppContext } from 'context/state'
-import { ProfileModalType } from 'types/enums'
-import WalletCryptoEth from 'components/svg/WalletCryptoEth'
-import WalletCryptoBtc from 'components/svg/WalletCryptoBtc'
-import WalletCryptoTeth from 'components/svg/WalletCryptoTeth'
-import WalletCrypto13 from 'components/svg/WalletCrypto13'
-import WalletVisa from 'components/svg/WalletVisa'
-import WithdrawForm from './Form'
+
+import {useTranslation} from 'next-i18next'
+import {PaymentMethod, PaymentStep, WithdrawModalArguments} from 'types/interfaces'
+import {useAppContext} from 'context/state'
+import {ICurrency} from 'data/interfaces/ICurrency'
+import StepMethod from './StepMethod'
+import StepCurrency from './StepCurrency'
+import StepForm from './StepForm'
+import StepCrypto from './StepCrypto'
+import {IDepositCryptoResponse, IDepositResponse} from 'data/interfaces/IPaymentDeposit'
+import {IUserBalanceCurrency} from 'data/interfaces/IUser'
+import UserUtils from 'utils/user'
+import BottomSheetLayout from 'components/layout/BottomSheetLayout'
+import BottomSheetHeader from 'components/layout/BottomSheetHeader'
+import BottomSheetBody from 'components/layout/BottomSheetBody'
+import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
+import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
+import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
+import ModalFooterTwoFa from 'components/Profile/layout/ModalFooterTwoFa'
+
+
 
 interface Props {
-  isOpen?: boolean
+  isBottomSheet?: boolean
 }
 
-interface MethodProps {
-  icon: string
-  iconLabel?: string
-  label: string
-  bonus?: boolean
-  iso?: string
-  onClick?: () => void
-  blue?: boolean
-  currency?: boolean
-  mobile?: boolean
-}
-
-interface OptionsProps {
-  method?: string
-  array: MethodProps[]
-}
-
-interface QrCodeProps {
-  iso: string
-  walletNumber: string
-}
-
-interface CryptoIconsProps {
-  mainColor: string
-  iconColor: string
-  lastMainColor: string
-  lastIconMainColor: string
-  style?: 'three' | 'two'
-}
-
-export default function Withdraw(props: Props) {
-
-  const CryptoIcons = ({mainColor, iconColor, lastIconMainColor, lastMainColor, style}: CryptoIconsProps) => {
-
-    const classes = {
-      [styles.three]: style === 'three',
-      [styles.two]: style === 'two',
-    }
-    return (
-      <div className={classNames(styles.iconsGroup, classes)}>
-        <WalletCryptoEth mainColor={mainColor} iconColor={iconColor}/>
-        <WalletCryptoBtc mainColor={mainColor} iconColor={iconColor}/>
-        <WalletCryptoTeth mainColor={mainColor} iconColor={iconColor}/>
-        <WalletCrypto13 mainColor={lastMainColor} iconColor={lastIconMainColor}/>
-      </div>
-    )
-  }
-
+export default function Widraw(props: Props) {
+  const {t} = useTranslation()
+  const context = useAppContext()
   const methods = [
-    {iconLabel: 'crypto', label: 'Криптовалюта', bonus: true},
-    {iconLabel: 'visa', label: 'Карты банка'},
+    {label: t('wallet_payment_type_crypto'), bonus: true},
+    {iconLabel: 'visa', label: t('wallet_payment_type_card')},
     {icon: '/img/Wallet/paypal.svg', label: 'PayPal'},
     {icon: '/img/Wallet/yoo.svg', label: 'YooMoney'},
     {icon: '/img/Wallet/web.svg', label: 'WebMoney'},
@@ -94,197 +58,77 @@ export default function Withdraw(props: Props) {
     {icon: '/img/Wallet/bank/master-card.svg', label: 'Master Card'},
     {icon: '/img/Wallet/bank/mir.svg', label: 'МИР'},
   ]
+  const args = context.modalArguments as WithdrawModalArguments
 
-  const [method, setMethod] = useState('')
-  const [currency, setCurrency] = useState('')
-  const [iso, setIso] = useState('')
-
-  const handleCurrencyAndIso = (item: MethodProps) => {
-    setCurrency(item.label)
-    if(item.iso){
-      setIso(item.iso)
-    }
-  }
-
-  const handleChange = () => {
-    setStep(1)
-    setMethod('')
-  }
-
-  // temporary for submit imitation from WalletForm
-  const [isSubmit, setIsSubmit] = useState(false)
-
-  const Method = ({icon, iconLabel, label, iso, bonus, onClick, blue, mobile}: MethodProps) => {
-    return (
-      <div className={classNames(styles.method, {[styles.blue]: blue}, {[styles.iso]: (iso || mobile)})} onClick={onClick}>
-        {bonus && 
-          <div className={styles.bonus}>
-            Bonus
-          </div>
-        }
-        <div className={classNames(styles.icon, {[styles.isoIcon]: iso})}>
-          {iconLabel === 'crypto' && <CryptoIcons 
-          mainColor={blue ? '#628CFF' : '#373945'} 
-          iconColor={blue ? '#fff' : '#cacaca'}
-          lastIconMainColor={blue ? '#A7D5FF': '#959595'}
-          lastMainColor={blue ? '#628CFF' : '#373845'}
-          />}
-          {iconLabel === 'visa' && 
-          <WalletVisa 
-           className={styles.visaHover}
-           color1={blue ? '#fff' : '#FAA61A'} 
-           color2={blue ? '#fff' :'#FF5F00'} 
-           color3={blue ? '#fff' :'#EB001B'} 
-           color4={blue ? '#EDEDED' :'#F79E1B'}/>}
-          {!iconLabel && <img src={icon} alt=''/>}
-        </div>
-        <div className={classNames(styles.label, {[styles.isoLabel]: iso})}>
-          <VisibleXs><>{iso ? iso : !mobile && label}</></VisibleXs>
-          <HiddenXs>
-            <>{label}</>
-          </HiddenXs>
-        </div>
-      </div>
-    )
-  }
-
-  const Options = ({method, array}: OptionsProps) => {
-    return (
-    <div className={styles.options}>
-            {step === 2 &&
-            (array.length && !currency) &&
-              <div className={classNames(styles.methods, {[styles.nextStep]: step > 1})}>
-                {array && array.map((item, index) => 
-                  <Method icon={item.icon} iconLabel={item.iconLabel} label={item.label} key={index} onClick={() => handleCurrencyAndIso(item)}/>
-                )}
-              </div>
-          }
-    </div>
-    )
-  }
-
-  const MobileMethod = ({icon, label, iconLabel}: MethodProps) => {
-    return (
-      <div className={classNames(styles.mobileMethod, {[styles.withCurrency]: currency})}>
-        <div className={styles.iconMobile}>
-          {iconLabel === 'crypto' && <CryptoIcons 
-          mainColor={'#628CFF'} 
-          iconColor={'#fff'}
-          lastIconMainColor={'#A7D5FF'}
-          lastMainColor={'#628CFF'}
-          style={currency ? 'two' : 'three'}
-          />}
-          {iconLabel === 'visa' && <WalletVisa className={styles.visa} color1={'#fff'} color2={'#fff'} color3={'#fff'} color4={'#EDEDED'}/>}
-          {!iconLabel && <img src={icon} alt=''/>}
-        </div>
-        <div className={styles.middle}>
-          <div className={styles.fill}>Способ пополнения</div>
-          <div className={classNames(styles.label, styles.labelMobile)}>{label}</div>
-        </div>
-        {!currency && <div className={styles.change} onClick={handleChange}>Изменить</div>}
-      </div>
-    )
-  }
-
-  const Choice = ({array}: OptionsProps) => {
-    return(
-    <div className={styles.choice}>
-        {methods.map((item, index) =>
-          method === item.label &&
-          <>
-          <HiddenXs>
-            <Method blue icon={item.icon} label={item.label} key={index} bonus={item.bonus} iconLabel={item.iconLabel}/>
-          </HiddenXs>
-          <VisibleXs>
-            <MobileMethod icon={item.icon} label={item.label} key={index} iconLabel={item.iconLabel}/>
-          </VisibleXs>
-          </>
-        )}
-        {array.map((item, index) =>
-          currency === item.label && <Method blue icon={item.icon} label={item.label} key={index} iso={item.iso} mobile iconLabel={item.iconLabel}/>
-        )}
-      </div>
-    )
-  }
-
-  const [step, setStep] = useState(1)
-
-  const context = useAppContext()
+  const [account, setAccount] = useState<IUserBalanceCurrency>(args?.account ?? UserUtils.getMainBalanceReal(context?.user))
+  const [method, setMethod] = useState<PaymentMethod>(null)
+  const [currency, setCurrency] = useState<ICurrency>(null)
+  const [depositResponse, setDepositResponse] = useState<IDepositResponse>(null)
+  const [step, setStep] = useState<PaymentStep>(PaymentStep.Method)
   const handleClose = () => {
-    setStep(1)
-    setCurrency('')
-    setMethod('')
-    setIsSubmit(false)
+
     context.hideModal()
   }
-  const commonSettings = {
-    onRequestClose: handleClose,
+  const handlePaymentMethod = (method: PaymentMethod) => {
+    setMethod(method)
+    setStep(PaymentStep.Currency)
+  }
+  const handleCurrencyMethod = (currency: ICurrency) => {
+    setCurrency(currency)
+    setStep(PaymentStep.Form)
+  }
+  const handleSubmit = (deposit: IDepositResponse) => {
+    setDepositResponse(deposit)
+    setStep(PaymentStep.Success)
   }
 
-  useEffect(() => {
-    if(method){
-      setStep(2)
-    }
-    if(currency){
-      setStep(3)
-    }
-  }, [currency, method])
-
-  const user = {id: '6171361', balance: '$275.16', userName: 'Alex', name: 'Ерохин Иван Иванович', dateOfBirth: '15.12.1998',
-  country: 185, currency: 121, phone: '8 (800) 800 88 88', email: 'pochta@mail.ru', password: 'qwerty123'
-}
-
-const handleBack = () => {
-  if(step === 2){
-    setStep(1)
-    setMethod('')
+  const handleSetStep = (step: PaymentStep) => {
+    setStep(step)
   }
-  if(step === 3){
-    setStep(2)
-    setCurrency('')
-    if(isSubmit){
-      setIsSubmit(false)
+  const handleBack = () => {
+    switch (step) {
+      case PaymentStep.Method:
+        handleClose()
+        break
+      case PaymentStep.Currency:
+        setStep(PaymentStep.Method)
+        break
+      case PaymentStep.Form:
+        setStep(PaymentStep.Currency)
+        break
+      case PaymentStep.Success:
+        handleClose()
+        break
     }
   }
-}
-  
-  return (
-    <ProfileModal size='small'
-          key={18} 
-          isOpen={context.modal === ProfileModalType.withdraw} {...commonSettings} title='Вывод' user={user} wallet noBorder
-          isBack={step > 1 ? true : false}
-          step={step}
-          setStep={() => step === 2  ? handleBack() : step === 3 ? handleBack() : null}
-          style='withdraw'
-          faFooter
-          >
+
+  const result = (
     <div className={styles.root}>
-      {!method &&
-      <>
-      <WithdrawForm onSubmit={() => null} step={1}/>
-      <div className={styles.choose}>
-        Выберите метод вывода
-      </div>
-      </>
-      }
-      {method && 
-        <Choice array={method === 'Криптовалюта' ? crypto : bank}/>
-      }
-      {!method && !isSubmit &&
-      <div className={styles.methods}>
-        {methods.map((item, index) =>
-          <Method iconLabel={item.iconLabel} icon={item.icon} label={item.label} key={index} bonus={item.bonus} onClick={() => setMethod(item.label)}/>
-        )}
-      </div>}
-      {method && !isSubmit &&
-        <>
-        <Options array={method === 'Криптовалюта' ? crypto : method === 'Карты банка' && bank} method={method}/>
-        {currency &&
-          <WithdrawForm onSubmit={() => null} step={3}/>
-        }
-        </>
-      }
+
+      {step === PaymentStep.Method && <StepMethod account={account} onChange={handlePaymentMethod} onChangeUserAccount={setAccount}/>}
+      {step === PaymentStep.Currency && <StepCurrency method={method} onChange={handleCurrencyMethod} onSetStep={handleSetStep}/>}
+      {step === PaymentStep.Form && <StepForm account={account} currency={currency}  method={method} onSubmit={handleSubmit} onSetStep={handleSetStep}/>}
+      {step === PaymentStep.Success && <StepCrypto currency={currency} method={method} response={depositResponse as IDepositCryptoResponse}/>}
     </div>
-    </ProfileModal>
   )
+
+  if (props.isBottomSheet) {
+    return (<BottomSheetLayout>
+      <BottomSheetHeader className={styles.sheetHeader} title={t('withdraw_title')}  suffix={ <div className={styles.userId}>ID {context.user?.id}</div>}/>
+      <BottomSheetBody className={styles.sheetBody}>
+        {result}
+      </BottomSheetBody>
+      <ModalFooterTwoFa/>
+    </BottomSheetLayout>)
+  } else {
+    return (<ProfileModalLayout>
+        <ProfileModalHeader title={t('withdraw_title')} showId  showBack={step !== PaymentStep.Method} onBackClick={step !== PaymentStep.Method ? handleBack : null}></ProfileModalHeader>
+        <ProfileModalBody>
+          {result}
+        </ProfileModalBody>
+        <ModalFooterTwoFa/>
+      </ProfileModalLayout>
+    )
+  }
+
 }

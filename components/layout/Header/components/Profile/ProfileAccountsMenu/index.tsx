@@ -1,79 +1,100 @@
 import styles from './index.module.scss'
-import { IOption } from 'types/interfaces'
+import {IOptionUserAccount} from 'types/interfaces'
 import Select from 'components/ui/Select'
 import classNames from 'classnames'
 import HiddenXs from 'components/ui/HiddenXS'
+import UserUtils from 'utils/user'
+import {useAppContext} from 'context/state'
+import Converter from 'utils/converter'
+import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
+import {ProfileModalType} from 'types/enums'
 
-export interface ICustomSelectViewOption extends IOption<string>{
-  symbol?: string
-  crypto?: boolean
-}
 
-interface Props{
-  options?: IOption<string>[],
-  option?: ICustomSelectViewOption
+interface SelectProps{
+  currentItem?: IOptionUserAccount
+  option?: IOptionUserAccount
   onClick?: () => void
-  currentItem?: ICustomSelectViewOption
   isActive?: boolean
-  onChange?: (item: ICustomSelectViewOption) => void
 }
 
-export default function ProfileAccountsMenu(props: Props){
+const Symbol = (props: SelectProps) => {
+  return (
+   <CurrencySvg currencyIso={props.option?.value} color className={styles.symbol}/>
+  )
+}
 
-  const Symbol = (props: Props) => {
-    return (
-    <div className={styles.symbol}>
-      {props.currentItem ? <img src={props.currentItem.symbol} alt=''/> : <img src={props.option.symbol} alt=''/>}
+const Balance = (props: SelectProps) => {
+  return (
+    <div className={styles.balance}>
+      <div className={styles.value}>
+        {props.option.calculatedBalance}&nbsp;<span>{props.option.mainCurrency}</span>
+      </div>
+      <div className={styles.dg}>
+        {props.option.balance}&nbsp;{props.option.label}
+      </div>
+
     </div>
-    )
-  }
-  
-  const Balance = (props: Props) => {
-    return (
-      <div className={styles.balance}>
-        <div className={styles.value}>
-          {props.option.value}&nbsp;<span>{props.option.label}</span>
-        </div>
-        {props.option.crypto &&
-        <div className={styles.dg}>
-          0.0000004 DG
-        </div>}
-      </div>
-    )
-  }
-  
-  const Option = (props: Props) => {
-      return (
-      <div className={styles.option} onClick={props.onClick}><div className={styles.group}><Symbol option={props.option}/> {props.option.label}</div>
-        <div className={styles.balanceOption}>
-          <Balance option={props.option}/>
-        </div>
-      </div>
-      )
-  }
+  )
+}
 
-  const Placeholder = (props: Props) => {
-    return (
+const Option = (props: SelectProps) => {
+  return (
+    <div className={styles.option} onClick={props.onClick}><div className={styles.group}><Symbol option={props.option}/> {props.option.label}</div>
+      <div className={styles.balanceOption}>
+        <Balance option={props.option}/>
+      </div>
+    </div>
+  )
+}
+
+const Placeholder = (props: SelectProps) => {
+  return (
     <div className={styles.placeholder}>
-      <Symbol currentItem={props.currentItem}/>
-      <div className={styles.value}>{props.currentItem.value}&nbsp;</div>
+      <Symbol option={props.currentItem}/>
+      <div className={styles.value}>{props.currentItem.balance}&nbsp;</div>
       <div className={styles.label}>{props.currentItem.label}</div>
       <HiddenXs>
         <div className={classNames(styles.arrow, {[styles.notActive]: !props.isActive})}><img src='/img/Select/arrow-select-balance.svg' alt=''/></div>
       </HiddenXs>
     </div>
-    )
-  }
+  )
+}
+interface Props{
 
+}
+
+export default function ProfileAccountsMenu(props: Props){
+  const context = useAppContext()
+
+  const mainAccount = UserUtils.getMainBalanceTotals(context.user)
+  const otherAccounts = (UserUtils.getOtherBalancesTotals(context.user))
+  const bonusAccounts = (UserUtils.getBonusBalances(context.user))
+  const accountOptions = Converter.convertUserBalanceCurrencyToOptions([mainAccount, ...otherAccounts])
+  const bonusOptions = Converter.convertUserBalanceCurrencyToOptions(bonusAccounts)
+  const handleChange = () => {
+
+  }
+  const handleClick= () => {
+    context.showModalProfile(ProfileModalType.profile)
+  }
   return (
     <div className={styles.root}>
-      <Select
+      <Select<string>
+      className={styles.select}
       style='balance'
-      placeholder={(isActive) => <Placeholder currentItem={props.currentItem} isActive={isActive}/>}
-      options={props.options} 
-      onChange={props.onChange}
-      itemComponent={(option, onClick) => <Option key={option.value} option={option} onClick={onClick}/>}
-      />
+      placeholder={(isActive) => <Placeholder currentItem={Converter.convertUserBalanceCurrencyToOption(mainAccount)} isActive={isActive}/>}
+      options={Converter.convertUserBalanceCurrencyToOptions([mainAccount, ...otherAccounts])}
+      onChange={handleChange}
+      >
+        <div className={styles.wrapper}>
+        {accountOptions.map(option => <Option key={option.value} option={option as IOptionUserAccount} onClick={handleClick}/>)}
+        {bonusOptions.length > 0 && <>
+        <div className={styles.separator}/>
+          <div className={styles.bonusTitle}>Bonuses</div>
+          {bonusOptions.map(option => <Option key={option.value} option={option as IOptionUserAccount} onClick={handleClick}/>)}
+        </>}
+        </div>
+      </Select>
     </div>
   )
 }

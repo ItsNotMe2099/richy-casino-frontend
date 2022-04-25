@@ -2,19 +2,19 @@ import styles from './index.module.scss'
 import {useState} from 'react'
 import { useTranslation } from 'react-i18next'
 import {Form, Formik} from 'formik'
-import classNames from 'classnames'
-import PromoCode from 'components/for_pages/Common/Promocode'
 import { CheckBox } from 'components/ui/Inputs/CheckBox'
-import Button from 'components/ui/Button'
 import InputField from 'components/ui/Inputs/InputField'
 import Validator from 'utils/validator'
 import {ModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
 import AuthRepository from 'data/repositories/AuthRepository'
 import FormError from 'components/ui/Form/FormError'
-import {convertCurrencyToOptions, currentItem} from 'utils/converter'
+import Converter from 'utils/converter'
 import {RegistrationPhoneModalArguments} from 'types/interfaces'
 import { RegCurrencySelectField } from 'components/ui/Inputs/RegCurrencySelectField'
+import FormFooter from 'components/Auth/ModalRegistration/Forms/FormFooter'
+import FormPromocode from 'components/Auth/ModalRegistration/Forms/FormPromocode'
+import Formatter from 'utils/formatter'
 
 interface Props {
 }
@@ -22,21 +22,24 @@ interface Props {
 export default function PhoneForm(props: Props) {
   const context = useAppContext()
   const [error, setError] = useState<string | null>(null)
+  const [sending, setSending] = useState<boolean>(false)
   const handleSubmit = async (data) => {
+    setSending(true)
     try {
       setError(null)
       await AuthRepository.registerPhoneSendOtp({
-        phone: data.phone,
+        phone: Formatter.cleanPhone(data.phone),
         currency: data.currency
       })
       context.showModal(ModalType.registrationPhone, {phone: data.phone} as RegistrationPhoneModalArguments)
     } catch (e) {
-      setError(e.message)
+      setError(e)
     }
+    setSending(false)
   }
   const initialValues = {
       phone: null,
-      currency: convertCurrencyToOptions(context.currencies)[0].value,
+      currency: Converter.convertCurrencyToOptions(context.currencies)[0].value,
       checkBox: false
     }
 
@@ -52,22 +55,16 @@ export default function PhoneForm(props: Props) {
       }) => (
     <Form className={styles.form}>
       <div className={styles.inputs}>
-        <RegCurrencySelectField name='currency' options={convertCurrencyToOptions(context.currencies)} currentItem={currentItem(values, convertCurrencyToOptions(context.currencies))}/>
-        <InputField format={'phone'} name={'phone'} placeholder={'Номер телефона'} validate={Validator.required} />
-        <div className={styles.promo} onClick={() => promoCode ? setPromoCode(false) : setPromoCode(true)}>
-          <div className={classNames(styles.plus, {[styles.expanded]: promoCode})}>{promoCode ? '-' : '+'}</div>
-           <span>У меня есть промокод</span>
-         </div>
-         {promoCode &&
-          <PromoCode/>
-         }
-         <CheckBox size={'small'} name='checkBox' label='Я согласен с пользовательским соглашением и подтверждаю, что мне исполнилось 18 лет' validate={Validator.required}/>
+        <div className={styles.select}>
+        <RegCurrencySelectField name='currency' disabled={sending}/>
+        </div>
+        <InputField disabled={sending} format={'phone'} name={'phone'} placeholder={t('registration_field_phone')} validate={Validator.required} />
+        <FormPromocode/>
+        <CheckBox size={'small'} name='checkBox' disabled={sending}
+                  label={t('registration_terms')} validate={Validator.required}/>
       </div>
       <FormError error={error}/>
-      <Button type='submit' className={styles.button} size='submit' background='blueGradient500'>Регистрация</Button>
-      <div className={styles.login}>
-        Уже есть аккаунт? <span onClick={() => context.showModal(ModalType.login)}>Войдите</span>
-      </div>
+      <FormFooter sending={sending}/>
     </Form>)}
   </Formik>
   )

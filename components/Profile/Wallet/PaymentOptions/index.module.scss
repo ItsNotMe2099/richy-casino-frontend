@@ -1,0 +1,20 @@
+@import "scss/index";
+.root{
+
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  flex-direction: row;
+  align-items: center;
+  grid-gap: 0px 9px;
+  &.one{
+    @media only screen and (max-width: $xs-land) {
+      grid-template-columns: 1fr;
+    }
+  }
+  &.two{
+    @media only screen and (max-width: $xs-land) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}

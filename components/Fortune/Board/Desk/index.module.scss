@@ -1,0 +1,77 @@
+@import "scss/index";
+
+$firstAnimationDuration: 1700ms;
+$secondAnimationDuration: 300ms;
+
+.root{
+  position: relative;
+  background: $dark700;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 5px #303030;
+  cursor: default;
+  user-select: none;
+  &.inProgress{
+    animation: rotateAnimation $firstAnimationDuration linear infinite;
+  }
+}
+
+.section{
+  position: absolute;
+  transform-origin: bottom center;
+  display: flex;
+  justify-content: center;
+  &.active{
+    transition: transform $secondAnimationDuration ease-in-out;
+  }
+}
+
+.sectionBackground{
+  width: 80%;
+  height: 80%;
+}
+
+.sectionContent{
+  position: absolute;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  top: 5%;
+  left: 0;
+  right: 0;
+  bottom: 20%;
+  writing-mode: vertical-lr;
+}
+
+.sectionText{
+  font-size: 16px;
+  color: #fff;
+  transform: rotate(180deg);
+}
+
+.sectionIcon{
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5%;
+}
+
+.stroke{
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 90%;
+  height: 80%;
+  opacity: 0;
+  transition: opacity $secondAnimationDuration ease-in-out;
+  &.active{
+    opacity: 1;
+  }
+}
+
+@keyframes rotateAnimation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}

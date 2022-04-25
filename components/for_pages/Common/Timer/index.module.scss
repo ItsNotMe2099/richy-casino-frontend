@@ -49,6 +49,31 @@
   }
 }
 
+.tournamentMobile{
+  padding: 4px 7px;
+  .end{
+    display: block;
+    margin-bottom: 4px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .input{
+    width: 28px;
+    height: 22px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .label{
+    font-size: 10px;
+    font-weight: 500;
+    margin-top: 0;
+  }
+  .separator{
+    margin: 0 3px;
+    max-height: 22px;
+  }
+}
+
 .freebitcoin{
   background-color: transparent;
   padding: 0;
@@ -281,6 +306,7 @@
   color: $dark800;
   width: 42px;
   height: 40px;
+  padding-top: 2px;
 }
 
 .circle{

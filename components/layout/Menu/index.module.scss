@@ -1,12 +1,14 @@
 @import "scss/index";
 
 .menu{
-  padding: 13px 29px 10px 29px;
+  padding: 0px 29px;
+  height: 57px;
   border-radius: 10px;
   background: $dark700;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   z-index: 4;
+  position: relative;
 
   @media screen and (max-width: 950px){
     border-radius: 0;
@@ -15,6 +17,7 @@
   }
   @media screen and (max-width: 920px){
     padding: 0 0 0 18px;
+    height: auto;
     border-top: 1px solid #272832;
     border-bottom: 1px solid #272832;
     background: #14151B;
@@ -35,6 +38,8 @@
 }
 
 .logo{
+  display: flex;
+  align-items: center;
   margin-right: 36px;
   @media screen and (max-width: 920px){
     display: none;

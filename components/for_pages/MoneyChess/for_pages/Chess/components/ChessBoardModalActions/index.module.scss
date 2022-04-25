@@ -1,0 +1,28 @@
+@import "scss/index";
+.root{
+
+  display: flex;
+  flex-direction: column;
+  grid-gap: 32px 0px;
+  align-items: center;
+  justify-content: center;
+  min-width: 390px;
+  max-width: 390px;
+  z-index: 1;
+  @media screen and (max-width: 1023px){
+    grid-gap: 16px 0px;
+  }
+}
+.button{
+  height: 9vh;
+  width: 100%;
+  color: white;
+  font-size: 3vh;
+  font-weight: 500;
+  padding: 0px 22px;
+  @media screen and (max-width: 1023px){
+    height: 42px;
+    font-size: 16px;
+    padding: 0px 20px;
+  }
+}

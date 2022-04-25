@@ -2,7 +2,6 @@
 
 .root {
   position: relative;
-  width: 100%;
   @media screen and (max-width: $xs-max) {
     display: flex;
     align-items: center;
@@ -41,7 +40,7 @@
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
   z-index: 30;
   flex-direction: column;
-  margin-top: 21px;
+  margin-top: 16px;
   left: 50%;
 
   a {
@@ -225,24 +224,6 @@
   transform: rotate(360deg);
 }
 
-.triangle {
-  position: absolute;
-  transform: rotate(-45deg) translateX(0%);
-  width: 22px;
-  height: 22px;
-  background: #2D2E38;
-  top: -11px;
-  left: 50%;
-  @media screen and (max-width: $xs-max) {
-    width: 14px;
-    height: 14px;
-    left: auto;
-    transform: rotate(-45deg);
-    right: 10px;
-    top: -5px
-  }
-}
-
 .leftSide {
   display: flex;
   align-items: center;
@@ -287,5 +268,11 @@
         height: 30px;
       }
     }
+  }
+}
+.triangle{
+  @media screen and (max-width: $xs-max) {
+    left: auto !important;
+    right: 3.5px;
   }
 }

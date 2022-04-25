@@ -33,7 +33,7 @@ export default function Modal(props: Props) {
       zIndex: '30',
     },
     content: {
-      width: '100%',
+      //width: '100%',
       borderRadius: '21px',
       padding: '0',
       border: '0',
@@ -59,7 +59,6 @@ export default function Modal(props: Props) {
   if (appContext.isDesktop) {
     return (
       <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
-        <div className={styles.frame}>
           <div
             className={`${!props.fortune && styles.root} ${getSizeClass(props.size)} ${props.className} ${
               props.center && styles.rootFlex} ${props.fortune && styles.fortune}
@@ -98,10 +97,9 @@ export default function Modal(props: Props) {
                   <img src={props.image} alt=''/>
                 </div>
               )}
-              {props.children}
+              {props.isOpen && props.children}
             </div>
           </div>
-        </div>
       </ReactModal>
     )
   } else {
@@ -114,10 +112,11 @@ export default function Modal(props: Props) {
     /* eslint-disable */
     // @ts-ignore
     return (
-      <Sheet isOpen={isOpen} onClose={onRequestClose} onOpenStart={openModal} onCloseEnd={hideModal}>
+      <Sheet isOpen={isOpen} onClose={onRequestClose} onOpenStart={openModal} onCloseEnd={hideModal}   snapPoints={[620]}>
+        <Sheet.Container >
         <div className={classNames(styles.rootSheet, {[styles.sheet]: props.fortune})}>
-          <Sheet.Container onViewportBoxUpdate>
-            <Sheet.Header onViewportBoxUpdate/>
+
+            <Sheet.Header />
             <div className={classNames(styles.title, {[styles.mobile]: true})}>
               {props.title}
             </div>
@@ -126,14 +125,15 @@ export default function Modal(props: Props) {
                 <Close/>
               </div>
             )}
-            <Sheet.Content onViewportBoxUpdate>{isOpen &&
+            <Sheet.Content >{isOpen &&
             <div className={classNames(styles.centerSheet, {[styles.centerSheetFortune]: props.fortune})}>
 
-              {props.children}</div>}</Sheet.Content>
-          </Sheet.Container>
-        </div>
+              {props.isOpen && props.children}
+            </div>}</Sheet.Content>
 
-        <Sheet.Backdrop onViewportBoxUpdate onTap={props.onRequestClose}/>
+        </div>
+        </Sheet.Container>
+        <Sheet.Backdrop  onTap={props.onRequestClose}/>
       </Sheet>
     )
   }

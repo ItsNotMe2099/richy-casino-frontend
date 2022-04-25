@@ -3,25 +3,54 @@ import classNames from 'classnames'
 import Panel from 'components/layout/Panel'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
+import {useTranslation} from 'next-i18next'
+import {useEffect, useState} from 'react'
+import {ILotteryRound} from 'data/interfaces/ILotteryRound'
+import LotteryRepository from 'data/repositories/LotteryRepository'
+import Formatter from 'utils/formatter'
+import Button from 'components/ui/Button'
+import ArrowBackSvg from 'components/svg/ArrowBackSvg'
 
-interface IWinner {
-  number: number
-  id: number
-  amount: number
-  tickets: string
-}
+
 
 interface Props {
-  items: IWinner[]
+  roundId: number
 }
 
 export default function Table(props: Props) {
+  const {t} = useTranslation()
+  const [round, setRound] = useState<ILotteryRound | null>(null)
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    Promise.all([
+      LotteryRepository.fetchRound(props.roundId <= 1 ? 1 : props.roundId -1).then(i => {
+        setLoading(false)
+        setRound(i)
+      }),
+    ]).then(() => setLoading(false))
+  }, [])
+  const handleNext = () => {
 
+  }
+  const handlePrev = () => {
+
+  }
   return (
     <Panel className={styles.panel}>
+      {!loading && round && <>
     <div className={styles.root}>
+      <div className={styles.header}>
       <div className={styles.title}>
-        ТОП 10 ПОБЕДИТЕЛЕЙ 
+        {t('lottery_top_10')}
+      </div>
+        <div className={styles.headerRight}>
+          <div className={styles.nav}>
+            <Button type='button' className={classNames(styles.navButton, styles.prev,{[styles.disabled]: false})} size='submit' background='dark600' onClick={handleNext}>   <ArrowBackSvg/> <span>{t('lottery_top_10_older')}</span></Button>
+            <Button type='button' className={classNames(styles.navButton, styles.next,{[styles.disabled]: true})} size='submit' background='dark600' onClick={handlePrev}>   <span>{t('lottery_top_10_newer')}</span>  <ArrowBackSvg/> </Button>
+
+          </div>
+          <div className={styles.totalTickets}> {t('lottery_top_10_total_tickets')} {round.totalTickets}</div>
+        </div>
       </div>
       <HiddenXs>
       <div className={styles.table}>
@@ -30,20 +59,20 @@ export default function Table(props: Props) {
             №
           </div>
           <div className={styles.cell}>
-            User ID
+            {t('lottery_top_10_user_id')}
           </div>
           <div className={styles.cell}>
-            Amount won
+            {t('lottery_top_10_amount_won')}
           </div>
           <div className={styles.cell}>
-            Tickets
+            {t('lottery_top_10_tickets')}
           </div>
         </div>
-        {props.items.slice(0, 3).map((item, index) =>
+        {round.roundWinners.slice(0, 3).map((item, index) =>
           <div className={classNames(styles.row, styles.rowInner)} key={index}>
             <div className={styles.cell}>
               <div className={styles.text}>
-                #{item.number}
+                #{index}
               </div>
             </div>
             <div className={styles.cell}>
@@ -53,12 +82,12 @@ export default function Table(props: Props) {
             </div>
             <div className={styles.cell}>
               <div className={classNames(styles.text, styles.amountText)}>
-                {item.amount}
+                {item.winAmount}
               </div>
             </div>
             <div className={styles.cell}>
               <div className={styles.text}>
-                {item.tickets}
+                {Formatter.formatNumber(item.ticketsCount, ',')}
               </div>
             </div>
           </div>
@@ -72,20 +101,20 @@ export default function Table(props: Props) {
             №
           </div>
           <div className={styles.cell}>
-            User ID
+            {t('lottery_top_10_user_id')}
           </div>
           <div className={styles.cell}>
-            Amount won
+            {t('lottery_top_10_amount_won')}
           </div>
           <div className={styles.cell}>
-            Tickets
+            {t('lottery_top_10_tickets')}
           </div>
         </div>
-        {props.items.map((item, index) =>
+        {round.roundWinners.map((item, index) =>
           <div className={classNames(styles.row, styles.rowInner)} key={index}>
             <div className={styles.cell}>
               <div className={styles.text}>
-                #{item.number}
+                #{item.id}
               </div>
             </div>
             <div className={styles.cell}>
@@ -95,12 +124,12 @@ export default function Table(props: Props) {
             </div>
             <div className={styles.cell}>
               <div className={classNames(styles.text, styles.amountText)}>
-                {item.amount}
+                {item.winAmount}
               </div>
             </div>
             <div className={styles.cell}>
               <div className={styles.text}>
-                {item.tickets}
+                {Formatter.formatNumber(item.ticketsCount, ',')}
               </div>
             </div>
           </div>
@@ -108,6 +137,7 @@ export default function Table(props: Props) {
       </div>
       </VisibleXs>
     </div>
+      </>}
     </Panel>
   )
 }

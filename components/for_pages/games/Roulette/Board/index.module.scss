@@ -4,8 +4,18 @@
   flex-direction: column;
   position: relative;
   padding-bottom: 103px;
+
   @media only screen and (max-width: $xs-max) {
-    padding-bottom: 24px;
+    padding-bottom: 0px;
+
+  }
+}
+.wheel{
+  padding-left: 27%;
+  padding-right: 27%;
+  @media only screen and (max-width: $xs-max) {
+    padding-left: 22%;
+    padding-right: 22%;
   }
 }
 .totalBet{
@@ -17,5 +27,12 @@
   .bet{
     margin-left: 4px;
     font-weight: 700;
+  }
+}
+.chipFields{
+  margin-bottom: 20px;
+  padding: 0px 26px;
+  > div{
+    justify-content: center;
   }
 }

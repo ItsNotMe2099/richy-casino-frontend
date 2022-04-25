@@ -1,0 +1,40 @@
+@import "scss/index";
+
+$radius-outer: 9px;
+$radius-inner: 6px;
+
+.root{
+  margin-bottom: 15px;
+}
+
+.row{
+  display: flex;
+  height: 42px;
+  width: 100%;
+  border: 1px solid $dark600;
+  border-radius: $radius-outer;
+}
+
+.btn{
+  padding: 3px;
+  margin: 1px;
+  border: none;
+  background: $dark400;
+  opacity: 0.5;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+  &:first-child{
+    border-radius: $radius-inner 0 0 $radius-inner;
+  }
+  &:last-child{
+    border-radius: 0 $radius-inner $radius-inner 0;
+  }
+  &.active{
+    opacity: 1;
+  }
+}

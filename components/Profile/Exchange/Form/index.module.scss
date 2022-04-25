@@ -12,11 +12,13 @@
 .inputs{
   margin-top: 12px;
   display: flex;
+  &:nth-child(2){
+    flex: 1;
+  }
 }
 
 .input{
   margin-bottom: 0;
-  flex: 1;
   input{
     padding: 14px 18px 14px 16px;
     border-top-right-radius: 0;
@@ -78,4 +80,8 @@
 
 .separator{
   margin: 16px 0;
+}
+
+.exchange{
+  flex: 1;
 }

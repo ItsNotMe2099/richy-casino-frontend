@@ -9,21 +9,26 @@ interface Props<T> {
   options: IOption<T>[]
   disabled?: boolean
   className?: string
-  initialStyle?: string
+  currentItemStyle?: string
   itemComponent?: (option: IOption<T> , isActive: boolean, onClick: () => void) => ReactElement
-  activeComponent?: (isActive?: boolean) => ReactElement
+  activeComponent?: (option?: IOption<T>, isActive?: boolean) => ReactElement
 }
 
 export  function SelectField<T>(props: Props<T> & FieldConfig){
-  const {options, disabled, className, initialStyle} = props
+  const {options, disabled, className, currentItemStyle} = props
   const [field, meta] = useField(props)
   const {value} = field
   const { setFieldValue, setFieldTouched } = useFormikContext()
   const dropdownRef = useRef(null)
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
   const handleClick = (e) => {
+    if(props.disabled){
+      return
+    }
     e.preventDefault()
+    e.stopPropagation()
     setIsActive(!isActive)
+    console.log('HandleClick', !isActive)
   }
   const handleChange = (value) => {
     if(disabled){
@@ -37,17 +42,18 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
   const hasError = !!meta.error && meta.touched
 
   return (
-    <div className={classNames(styles.root, {[styles.hasError]: !!meta.error && meta.touched}, className)}>
-      <div onClick={handleClick} className={classNames(styles.dropDownTrigger, initialStyle)}>
-        {props.activeComponent(isActive)}
-      <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
+    <div className={classNames(styles.root, {[styles.hasError]: !!meta.error && meta.touched}, className)} data-field={props.name}>
+      <div onClick={handleClick} className={classNames(styles.dropDownTrigger, currentItemStyle)}>
+        {props.activeComponent ? props.activeComponent(currentItem, isActive) : null}
+      <div ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
        {options.map((item, index) => props.itemComponent ? props.itemComponent(item, currentItem?.value === item.value, () => handleChange(item.value)) :
        <div key={index}
          className={classNames(styles.option, {[styles.optionActive]: currentItem?.value === item.value })} onClick={() => handleChange(item.value)}>
           <div className={styles.name}>{item.label}</div>
        </div>)}
-       </nav>
+       </div>
       </div>
+
     </div>
   )
 }

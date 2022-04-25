@@ -10,7 +10,6 @@ import GamePageBetButton from 'components/for_pages/games/components/GamePageBet
 import GFieldMode from 'components/for_pages/games/components/inputs/GFieldMode'
 import GamePageSidebarLayout from 'components/for_pages/games/components/layout/GamePageSidebarLayout'
 import {CasinoGameModeType} from 'components/ui/Tabs'
-import {LimboGameLevel} from 'components/for_pages/games/Limbo/data/enums'
 import GFieldInfinite from 'components/for_pages/games/components/inputs/GFieldInfinite'
 import {ICasinoGameDataDto} from 'components/for_pages/games/data/interfaces/ICasinoGameData'
 
@@ -39,11 +38,7 @@ export default function Sidebar(props: Props) {
 
   const {values} = formik
   const {gameMode} = values
-  const options = [
-    {label: 'Low', value: LimboGameLevel.Low},
-    {label: 'Medium', value: LimboGameLevel.Medium},
-    {label: 'High', value: LimboGameLevel.High},
-  ]
+
   return (
     <GamePageSidebarLayout>
       <FormikProvider value={formik}>

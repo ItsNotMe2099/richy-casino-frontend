@@ -5,13 +5,14 @@ import HiddenXs from '../HiddenXS'
 import VisibleXs from '../VisibleXS'
 import Logo from 'components/svg/Logo'
 import Button from '../Button'
-import { ProfileModalType } from 'types/enums'
-import { useAppContext } from 'context/state'
+import {ProfileModalType} from 'types/enums'
+import {useAppContext} from 'context/state'
 import classNames from 'classnames'
 import ProfileMenu from 'components/layout/Header/components/Profile/ProfileMenu'
 import FAFooter from './FAFooter'
+import {useTranslation} from 'next-i18next'
 
-interface IUser{
+interface IUser {
   id: string
   balance: string
 }
@@ -27,7 +28,6 @@ interface Props {
   className?: string
   closeClassName?: string
   singlePage?: boolean
-  user: IUser
   payment?: boolean
   wallet?: boolean
   profile?: boolean
@@ -38,12 +38,15 @@ interface Props {
   style?: 'wallet' | 'favorite' | 'buyCrypto' | '2fa' | 'withdraw'
   faFooter?: boolean
   withdraw?: boolean
+  fixed?: boolean
 }
 
 export default function ProfileModal(props: Props) {
+  const {t} = useTranslation()
+  const context = useAppContext()
   const customStyles = {
     overlay: {
-      backgroundColor: !props.singlePage  ? 'rgba(0, 0, 0, 0.5)' : 'transparent',
+      backgroundColor: !props.singlePage ? 'rgba(0, 0, 0, 0.5)' : 'transparent',
       display: 'flex',
       zIndex: '30',
     },
@@ -59,8 +62,6 @@ export default function ProfileModal(props: Props) {
       background: 'none',
     },
   }
-
-  const context = useAppContext()
 
   const getSizeClass = (size) => {
     switch (size) {
@@ -83,21 +84,23 @@ export default function ProfileModal(props: Props) {
   const styleClassMobile = {
     [styles.buyCrypto]: props.style === 'buyCrypto'
   }
+  const showModalMobileHeader = !props.wallet
 
-    return (
-      <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
-        <div className={styles.frame}>
-          <div
-            className={`${styles.root} ${getSizeClass(props.size)} ${props.className}`}
-          >
-            <HiddenXs><>{(props.faFooter && props.step === 1) && <FAFooter className={styles.footer}/>}</></HiddenXs>
-            <HiddenXs>
-              <div className={classNames(styleClass, {[styles.noBorder]: props.noBorder})}>
-                <div className={classNames(styles.mainTop, {[styles.noBorder]: props.noBorder})}>
+  return (
+    <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose}>
+      <div className={styles.frame}>
+        <div
+          className={classNames(styles.root, getSizeClass(props.size),props.className, {[styles.showHeader]: showModalMobileHeader})}
+        >
+          <HiddenXs><>{(props.faFooter && props.step === 1) && <FAFooter className={styles.footer}/>}</>
+          </HiddenXs>
+          <HiddenXs>
+            <div className={classNames(styleClass, {[styles.noBorder]: props.noBorder})}>
+              <div className={classNames(styles.mainTop, {[styles.noBorder]: props.noBorder})}>
                 <div className={styles.left}>
                   {(!props.profile && props.isBack) &&
                   <div className={styles.back}
-                  onClick={() => props.wallet ? props?.setStep() : context.showModal(ProfileModalType.profile)}>
+                       onClick={() => props.wallet ? props?.setStep() : context.showModal(ProfileModalType.profile)}>
                     <img src='/img/icons/back.svg' alt=''/>
                   </div>}
                   <div className={styles.title}>
@@ -105,37 +108,36 @@ export default function ProfileModal(props: Props) {
                   </div>
                 </div>
                 <div className={styles.right}>
-                {(props.payment || props.wallet) &&
-                <div className={styles.id}>
-                  ID {props.user.id}
-                </div>}
-                {props.onRequestClose && (
-                  <div className={styles.close} onClick={props.onRequestClose}>
-                    <Close/>
-                  </div>
-                )}
+                  {(props.payment || props.wallet) && context.user && <div className={styles.id}>
+                    ID {context.user?.id}
+                  </div>}
+                  {props.onRequestClose && (
+                    <div className={styles.close} onClick={props.onRequestClose}>
+                      <Close/>
+                    </div>
+                  )}
                 </div>
-                </div>
-                {props.style === '2fa' && 
-                <div className={styles.faText}>
-                  Загрузите и установите <span>Google Authenticator.</span> Включите двухфакторную аутентификацию, чтобы защитить свою учетную запись от несанкционированного доступа.
-                </div>
-                }
               </div>
-            </HiddenXs>
-            <VisibleXs>
-              <div className={classNames(styles.mobile,  styleClassMobile)}>
-              {!props.wallet && <div className={styles.top}>
+              {props.style === '2fa' &&
+              <div className={styles.faText}>
+                {t('profile_2fa_instruction_gauth')} <span>{t('profile_2fa_instruction_text_1')}</span>{t('profile_2fa_instruction_text_2')}
+              </div>
+              }
+            </div>
+          </HiddenXs>
+          <VisibleXs>
+            <div className={classNames(styles.mobile, styleClassMobile)}>
+              {showModalMobileHeader && <div className={styles.top}>
                 <Logo className={styles.logo}/>
-                <div className={styles.balance}>
+                {context.user && <div className={styles.balance}>
                   <div className={styles.text}>
                     BALANCE
                   </div>
                   <div className={styles.money}>
-                    {props.user.balance}
+                    {context.user.balance.totalCalculatedAmount} {context.user.currencyIso}
                   </div>
-                </div>
-                <Button background='payGradient500' className={styles.btnFill}><img src='/img/icons/wallet.svg' alt=''/>Пополнить</Button>
+                </div>}
+                <Button background='payGradient500' className={styles.btnFill} onClick={() => context.showModal(ProfileModalType.wallet)}><img src='/img/icons/wallet.svg' alt=''/>{t('profile_deposit')}</Button>
                 {props.onRequestClose && (
                   <div className={styles.close} onClick={props.onRequestClose}>
                     <Close/>
@@ -145,37 +147,38 @@ export default function ProfileModal(props: Props) {
               </div>}
               {!props.profile &&
               <div className={styles.mobileBack}>
-                  <div className={styles.wrap}
-                  onClick={(props.wallet && props.step === 1) ? props.onRequestClose :
-                  (props.wallet && props.step > 1) ? () => props.setStep() :
-                  props.style !== 'buyCrypto' ? () => context.showModal(ProfileModalType.profile) : props.onRequestClose}>
+                <div className={styles.wrap}
+                     onClick={(props.wallet && props.step === 1) ? props.onRequestClose :
+                       (props.wallet && props.step > 1) ? () => props.setStep() :
+                         props.style !== 'buyCrypto' ? () => context.showModalProfile(ProfileModalType.profile) : props.onRequestClose}>
                   <div className={styles.arrow}>
                     <img src='/img/icons/back-arrow.svg' alt=''/>
                   </div>
                   <div className={styles.toProfile}>
-                    {(props.wallet || props.style === 'buyCrypto' || props.style === '2fa') ? <>Назад</> : <>Профиль</>}
+                    {(props.wallet || props.style === 'buyCrypto' || props.style === '2fa') ? <>{t('profile_back')}</> : <>{t('profile_title')}</>}
                   </div>
-                  </div>
+                </div>
               </div>}
               <div className={classNames(styles.title, {[styles.walletBackTitle]: props.wallet})}>
                 <div>{props.title}</div>
-                {props.wallet && <div className={styles.id}>ID {props.user.id}</div>}
+                {props.wallet && context.user && <div className={styles.id}>ID {context.user.id}</div>}
               </div>
-              </div>
-            </VisibleXs>
-            <div className={classNames(styles.center, {[styles.walletBackCenter]: props.wallet})}>
-            <VisibleXs><>{(props.faFooter && props.step === 1) && <FAFooter className={styles.footer}/>}</></VisibleXs>
-              {props.image && !props.loading && (
-                <div className={styles.image}>
-                  <img src={props.image} alt=''/>
-                </div>
-              )}
-              {props.children}
             </div>
+          </VisibleXs>
+          <div className={classNames(styles.center, {[styles.walletBackCenter]: props.wallet})}>
+            <VisibleXs><>{(props.faFooter && props.step === 1) && <FAFooter className={styles.footer}/>}</>
+            </VisibleXs>
+            {props.image && !props.loading && (
+              <div className={styles.image}>
+                <img src={props.image} alt=''/>
+              </div>
+            )}
+            {props.isOpen && props.children}
           </div>
         </div>
-      </ReactModal>
-    )
+      </div>
+    </ReactModal>
+  )
 }
 ProfileModal.defaultProps = {
   size: 'normal',

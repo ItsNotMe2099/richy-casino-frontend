@@ -16,12 +16,11 @@ export default class CasinoGameRepository {
     }
     return res.data
   }
-  static async startGame(data: ICasinoGameDataDto, token: string): Promise<any> {
+  static async startGame(data: ICasinoGameDataDto): Promise<any> {
     const res = await request({
       method: 'post',
       url: '/api/casino-game/start',
       data,
-      token,
     })
     if (res?.err) {
       throw res.err

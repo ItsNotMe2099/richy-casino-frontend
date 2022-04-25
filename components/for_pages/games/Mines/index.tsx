@@ -13,7 +13,8 @@ interface Props{
 }
 export default function GameMines(props: Props) {
   const gameContext = useGameContext()
-  const [minesCount, setMinesCount] = useState(3)
+  const initialMinesCount = 3
+  const [minesCount, setMinesCount] = useState(initialMinesCount)
   const history = [
     {user: 'Иван иванов', wins: 1.332, cof: 1.323, id: 23223 },
     {user: 'Иван иванов', wins: 1.332, cof: 1.323, id: 23223 },
@@ -28,7 +29,7 @@ export default function GameMines(props: Props) {
   return (
     <GamePageLayout
       header={<GamePageHeader title={'Mines'} icon={''}/>}
-      sideBar={<Sidebar onChangeMinesCount={(val) => setMinesCount(val)} onSubmit={handleSubmit}/>}
+      sideBar={<Sidebar initialMinesCount={initialMinesCount} onChangeMinesCount={(val) => setMinesCount(val)} onSubmit={handleSubmit}/>}
       board={<Board minesCount={minesCount}/>} history={<GameHistory items={history}/>}/>
   )
 }

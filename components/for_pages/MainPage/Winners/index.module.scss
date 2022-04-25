@@ -98,9 +98,65 @@
 }
 
 .table{
-    display: table;
     width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
     padding-right: 23px;
+    thead{
+        tr{
+            display: flex;
+            justify-content: space-between;
+            th{
+                width: 25%;
+                text-align: left;
+                @media screen and (max-width: 600px){
+                    width: 33%;
+                }
+            }
+            th:first-child{
+                width: 10%;
+            }
+            @media screen and (max-width: 600px){
+                th:nth-child(2){
+                    width: 50%;
+                }
+            }
+        }
+    }
+    tbody{
+      display: block;
+      width: 100%;
+      overflow: auto;
+      tr{
+        display: flex;
+        justify-content: space-between;
+        td{
+            width: 25%;
+            text-align: left;
+            @media screen and (max-width: 600px){
+                width: 33%;
+            }
+        }
+        td:first-child{
+            width: 10%;
+        }
+        td:nth-child(3){
+            display: flex;
+        }
+        td:nth-child(4){
+            display: flex;
+            justify-content: flex-end;
+            @media screen and (max-width: 400px){
+                width: 41%;
+            }
+        }
+         @media screen and (max-width: 600px){
+           td:nth-child(2){
+                width: 50%;
+            }
+        }
+    }
+    }
 }
 
 .row{
@@ -117,8 +173,6 @@
         }
     }
     .cell:first-child{
-        text-align: center;
-        padding-right: 47px;
         @media screen and (max-width: $mobile-max){
             padding-right: 0;
             text-align: left;
@@ -146,9 +200,9 @@
 
 .user{
     display: table-row;
+    border-bottom: 1px solid #272832;
     .cell{
         padding: 20px 0 21px 0;
-        border-bottom: 1px solid #272832;
         @media screen and (max-width: $mobile-max){
           padding: 10px 0;
           .avatar{
@@ -157,7 +211,6 @@
         }
     }
     .cell:first-child{
-        text-align: center;
         padding-right: 47px;
         @media screen and (max-width: $mobile-max){
             padding-right: 0;
@@ -169,7 +222,6 @@
         }
     }
     .cell:nth-child(2){
-        width: 40%;
         @media screen and (max-width: $mobile-max){
           padding-left: 10px;
         }
@@ -265,6 +317,10 @@
 .outerWrapper{
     position: relative;
     width: 100%;
+    padding-right: 28px;
+    @media screen and (max-width: 900px){
+        padding-right: 0;
+     }
 }
 
 .transparent{

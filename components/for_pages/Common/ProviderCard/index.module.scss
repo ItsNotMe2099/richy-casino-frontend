@@ -1,0 +1,44 @@
+@import "scss/index";
+.root{
+  padding-top: 18px;
+  padding-bottom: 9px;
+  border-radius: 8px;
+  background-color: $dark600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+  &:hover, &.active{
+    .icon{
+      color: #fff;
+      svg{
+        fill: #fff;
+      }
+    }
+    .quantity{
+      color: #fff;
+    }
+  }
+
+}
+.icon{
+  display: flex;
+  justify-content: center;
+  color: $dark200;
+  font-weight: 500;
+  img{
+    max-height: 18px;
+  }
+  svg{
+    fill: #6B6C77;
+  }
+}
+.quantity{
+  font-weight: 500;
+  font-size: 13px;
+  color: $dark300;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}

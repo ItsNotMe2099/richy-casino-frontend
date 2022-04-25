@@ -1,13 +1,7 @@
 @import "scss/index";
 
-.root{
-
+.row{
+  flex-wrap: nowrap !important;
+  overflow: hidden;
 }
 
-.content{
-    width: 75% !important;
-}
-
-.desktop{
-
-}

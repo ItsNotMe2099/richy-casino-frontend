@@ -1,0 +1,15 @@
+@import "scss/index";
+.root{
+  padding: 0 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 220px;
+  .wrapper{
+    padding: 21px 0px 16px 0px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+}
+
+

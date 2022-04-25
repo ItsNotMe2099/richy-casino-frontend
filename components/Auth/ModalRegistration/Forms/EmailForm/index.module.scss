@@ -2,6 +2,9 @@
 
 .form {
   margin-top: 24px;
+  @media screen and (max-width: $xs-max) {
+    margin-top: 12px;
+  }
 }
 
 
@@ -38,22 +41,6 @@
   }
 }
 
-.promo {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-
-  &:hover{
-    span{
-      text-decoration: underline;
-    }
-  }
-  span {
-    font-size: 13px;
-    color: #FFD12F;
-  }
-}
-
 .banner{
   margin-top: 16px;
 }
@@ -80,25 +67,6 @@
   }
 }
 
-.button {
-  width: 100%;
-  font-weight: 500;
-  font-size: 16px;
-  color: $white;
-}
-
-.login {
-  font-weight: 500;
-  font-size: 13px;
-  color: $dark200;
-  margin-top: 25px;
-
-  span {
-    color: #FFD12F;
-    cursor: pointer;
-  }
-}
-
 .socials {
   display: flex;
   align-items: center;
@@ -111,4 +79,8 @@
       margin-right: 10px;
     }
   }
+}
+
+.select{
+  margin-bottom: 12px;
 }

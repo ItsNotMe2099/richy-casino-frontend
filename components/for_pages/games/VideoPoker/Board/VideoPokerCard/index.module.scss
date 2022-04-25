@@ -1,0 +1,51 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  cursor: pointer;
+  transition: transform 0.5s;
+  &.disabled{
+    cursor: inherit;
+  }
+  &.active{
+   transform: translateY(-10%);
+    .card{
+      position: relative;
+
+      &:after {
+        content: '';
+        position: absolute;
+        left: -1px;
+        right: -1px;
+        top: -1px;
+        bottom: -1px;
+        box-shadow: inset 0px 0px 0px 3px $blue500;
+        border-radius: 8px;
+      }
+    }
+  }
+}
+.hold{
+  background: $dark600;
+  border-radius: 6px;
+  color: #17754F;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 2px;
+  visibility: hidden;
+  margin-top: 9px;
+  text-align: center;
+
+  &.visible{
+    visibility: visible;
+  }
+}
+.card{
+
+  display: flex;
+  img{
+    display: block;
+    max-width: 100%;
+  }
+}

@@ -1,5 +1,6 @@
 import {createContext, useContext, useEffect, useRef, useState} from 'react'
 import {Howl} from 'howler'
+import {GameStorageType} from 'components/for_pages/games/data/types'
 export enum GameSound {
   Ball1,
   Ball2,
@@ -51,12 +52,16 @@ const GameSoundFiles = {
 interface IState {
   play: (file: GameSound, debounce?: number) => void
   stop: () => void
+  disabled: boolean
+  setDisabled: (disabled?: boolean) => void
 }
 
 
 const defaultValue: IState = {
   play: (file: GameSound, debounce) => null,
-  stop: () => null
+  stop: () => null,
+  setDisabled: (disabled) => null,
+  disabled: false,
 }
 
 const GameSoundContext = createContext<IState>(defaultValue)
@@ -68,9 +73,11 @@ interface Props {
 export function GameSoundWrapper(props: Props) {
   const songs = Object.values(GameSoundFiles).map(file => `/sounds/${file}`)
   const [songIndex, setSongIndex] = useState(0)
+  const [disabled, setDisabled] = useState<boolean>(typeof window !== 'undefined' ? !!localStorage.getItem(GameStorageType.soundDisabled) : false)
   const debounceRef = useRef(null)
   const playersRef = useRef(null)
   const currentPlayer = useRef(null)
+  const enabledRef = useRef(!disabled)
   useEffect(() => {
     playersRef.current = songs.map(file =>  new Howl({
       src: [file],
@@ -79,7 +86,11 @@ export function GameSoundWrapper(props: Props) {
   }, [])
   const value: IState = {
     ...defaultValue,
+    disabled,
     play: (file: GameSound, debounce:number = 0) => {
+      if(!enabledRef.current){
+        return
+      }
       const _play = (file: GameSound) => {
         if(currentPlayer.current){
           currentPlayer.current.stop()
@@ -103,6 +114,15 @@ export function GameSoundWrapper(props: Props) {
         currentPlayer.current.stop()
       }
       currentPlayer.current = null
+    },
+    setDisabled(disabled){
+      setDisabled(disabled)
+      enabledRef.current = !disabled
+      if(!disabled){
+        localStorage.removeItem(GameStorageType.soundDisabled)
+      }else{
+        localStorage.setItem(GameStorageType.soundDisabled, '1')
+      }
     }
 
   }

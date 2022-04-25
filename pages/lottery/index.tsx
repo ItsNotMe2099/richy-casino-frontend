@@ -1,8 +1,5 @@
-import Filter from 'components/for_pages/Common/Filter'
 import PageTitle from 'components/for_pages/Common/PageTitle'
-import Layout from 'components/layout/Layout'
-import { useState } from 'react'
-import { Row, Col } from 'react-grid-system'
+import {useEffect, useState} from 'react'
 import styles from 'pages/lottery/index.module.scss'
 import Timer from 'components/for_pages/Lottery/Timer'
 import Table from 'components/for_pages/Lottery/Table'
@@ -11,57 +8,69 @@ import BuyTickets from 'components/for_pages/Lottery/BuyTickets'
 import Statistics from 'components/for_pages/Lottery/Statistics'
 import VisibleXs from 'components/ui/VisibleXS'
 import {GetServerSideProps} from 'next'
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
+import {ILotteryBuyResponse, ILotteryRoundCurrent} from 'data/interfaces/ILotteryRound'
+import LotteryRepository from 'data/repositories/LotteryRepository'
+import {useTranslation} from 'next-i18next'
+import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
+import {getServerSideTranslation} from 'utils/i18'
+import {useAppContext} from 'context/state'
 
 export default function Lottery() {
-
-  const games = [
-
-  ]
-
+  const {t} = useTranslation()
+ const appContext = useAppContext()
+  const [currentRound, setCurrentRound] = useState<ILotteryRoundCurrent | null>(null)
+  const [loading, setLoading] = useState(true)
   const [isShow, setIsShow] = useState(false)
 
-  const someDate = '2023-12-27T12:46:24.007Z'
-
-  const expiredAt = new Date(someDate)
-
-  const topWinners = [
-    {number: 1, id: 45116113, amount: 0.00051566123, tickets: '21,451'},
-    {number: 2, id: 45116113, amount: 0.00051566123, tickets: '21,451'},
-    {number: 3, id: 45116113, amount: 0.00051566123, tickets: '21,451'},
-    {number: 4, id: 45116113, amount: 0.00051566123, tickets: '21,451'},
-    {number: 5, id: 45116113, amount: 0.00051566123, tickets: '21,451'},
-    {number: 6, id: 45116113, amount: 0.00051566123, tickets: '21,451'},
-    {number: 7, id: 45116113, amount: 0.00051566123, tickets: '21,451'},
-    {number: 8, id: 45116113, amount: 0.00051566123, tickets: '21,451'},
-    {number: 9, id: 45116113, amount: 0.00051566123, tickets: '21,451'},
-    {number: 10, id: 45116113, amount: 0.00051566123, tickets: '21,451'},
-  ]
+  useEffect(() => {
+    Promise.all([
+      LotteryRepository.fetchCurrentActiveRound().then(i => {
+        setCurrentRound(i)
+        setLoading(false)
+      }),
+    ]).then(() => setLoading(false))
+  }, [appContext.auth])
+  const handleBuy = async (data: ILotteryBuyResponse) => {
+    console.log('handleBuy', data)
+    setCurrentRound(round => ({...round,
+      ...(data.roundInfo ? {totalTickets: data.roundInfo.totalTicketsInRound ?? 0} : {}),
+        ...(round.currentUserInfo.ticketsCount ? {currentUserInfo: {...round.currentUserInfo, ticketsCount: round.currentUserInfo.ticketsCount - 1}} : {} )
+    }))
+    LotteryRepository.fetchCurrentActiveRound().then(i => {
+      setCurrentRound(i)
+    })
+  }
 
   return (
-    <Layout>
-      <Row>
-      <Filter items={games} state={isShow} onClick={() => setIsShow(false)}/>
-      <Col className={styles.content}>
-        <PageTitle icon='/img/Lottery/lottery.svg' title='Lottery' onClick={() => isShow ? setIsShow(false) : setIsShow(true)} lottery/>
-        <Timer expiredAt={expiredAt}/>
+    <WithGameFilterLayout>
+        <PageTitle icon='/img/Lottery/lottery.svg' title={t('lottery_title')} onClick={() => isShow ? setIsShow(false) : setIsShow(true)} lottery/>
+      {!loading && currentRound?.roundEndTime && <><Timer roundId={currentRound.roundId} expiredAt={new Date(currentRound?.roundEndTime)}/>
         <VisibleXs>
-          <Statistics className={styles.statistics}/>
+          <Statistics className={styles.statistics}
+                      yourTicket={currentRound?.currentUserInfo?.ticketsCount}
+                      winChance={currentRound?.currentUserInfo?.chancePercent}
+                      totalTickets={currentRound?.totalTickets}
+          />
         </VisibleXs>
-        <Row className={styles.row}>
-          <BuyTickets/>
-          <Prizes/>
-        </Row>
-        <Table items={topWinners}/>
-      </Col>
-      </Row>
-    </Layout>
+        <div className={styles.row}>
+          <BuyTickets  yourTicket={currentRound?.currentUserInfo?.ticketsCount}
+                       winChance={currentRound?.currentUserInfo?.chancePercent}
+                       totalTickets={currentRound?.totalTickets}
+                       pricePerTicket={parseFloat(currentRound?.ticketCost?.amount as string)}
+                       currency={currentRound?.ticketCost?.currencyIso}
+                       onBuy={handleBuy}
+          />
+          <Prizes slots={currentRound?.slots}/>
+        </div>
+      {currentRound && <Table roundId={currentRound.roundId}/>}
+      </>}
+    </WithGameFilterLayout>
   )
 }
 export const getServerSideProps: GetServerSideProps = async (context ) => {
   return {
     props: {
-      ...await serverSideTranslations(context.locale ?? 'en', ['common']),
+      ...await getServerSideTranslation(context),
     },
   }
 }

@@ -1,0 +1,21 @@
+@import "scss/index";
+
+.root{
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.canvasWrapper{
+  canvas{
+    max-width: 100%;
+  }
+}
+
+.ground{
+  display: block;
+  width: 100%;
+  margin-top: 40px;
+  @media (max-width: $xs-max) {
+    display: none;
+  }
+}

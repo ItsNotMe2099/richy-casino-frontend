@@ -1,0 +1,35 @@
+@import "scss/index";
+
+.actions{
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px 0px;
+  @media screen and (max-width: $xs-max){
+
+  }
+
+}
+
+.top{
+  display: flex;
+  grid-gap: 0px 10px;
+
+}
+
+.btn{
+  padding: 11px 0;
+  width: 100%;
+
+  img{
+    margin-right: 10px;
+  }
+  @media screen and (max-width: $xs-max){
+    font-size: 12px;
+    img{
+      margin-right: 6px;
+    }
+  }
+}
+.btnWrap{
+
+}

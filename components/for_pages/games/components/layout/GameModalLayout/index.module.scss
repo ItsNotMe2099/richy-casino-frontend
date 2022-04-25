@@ -15,7 +15,16 @@
     .overlay{
       background-color: rgba(0,0,0,0.5);
     }
+  }
 
+  &.fade{
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+    &.open{
+      visibility: visible;
+      opacity: 1;
+    }
   }
 }
 .overlay{

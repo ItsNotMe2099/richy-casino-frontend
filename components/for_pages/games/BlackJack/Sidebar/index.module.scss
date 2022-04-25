@@ -1,0 +1,11 @@
+@import "scss/index";
+.root{
+  @media only screen and (max-width: $xs-max) {
+    padding: 0px;
+  }
+}
+.buttons{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px 8px;
+}

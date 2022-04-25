@@ -1,211 +1,299 @@
 @import "scss/index";
 
-.root{
+.root {
   background-color: $dark700;
   overflow-y: auto;
   overflow-x: hidden;
-  @media screen and (max-width: 700px){
+  @media screen and (max-width: 700px) {
     padding: 0;
-}
-@media screen and (max-width: $xs-max){
-  max-height: 273px;
-}
+  }
+  @media screen and (max-width: $xs-max) {
+    max-height: 273px;
+  }
 }
 
-.last{
-  @media screen and (max-width: 550px){
+.last {
+  @media screen and (max-width: 550px) {
     margin-top: 16px;
-}
-}
-
-.title{
-  font-weight: 500;
-  font-size: 18px;
-  @media screen and (max-width: 700px){
-    padding-left: 28px;
-  }
-  @media screen and (max-width: $xs-max){
-    font-size: 12px;
-    padding-left: 16px;
   }
 }
+.header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .headerRight{
+    display: flex;
+    flex-direction: row;
+    grid-gap: 0px 16px;
+    .nav{
+      display: flex;
+      flex-direction: row;
+      grid-gap: 0px 9px;
+    }
+    @media screen and (max-width: $xs-max) {
+      display: none;
+    }
+  }
+  .title {
+    flex: 1;
+    font-weight: 500;
+    font-size: 18px;
+    @media screen and (max-width: 700px) {
+      padding-left: 28px;
+    }
+    @media screen and (max-width: $xs-max) {
+      font-size: 12px;
+      padding-left: 16px;
+    }
+  }
 
-.table{
+}
+.nav{
+  .navButton{
+    height: 35px;
+    font-size: 16px;
+    font-weight: 500;
+
+    > span {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      grid-gap: 0px 12px;
+      span{
+          padding-top: 2px;
+      }
+    }
+    &.disabled{
+      color: $dark300;
+      background: $dark600;
+      svg{
+        path{
+          fill: $dark300;
+        }
+      }
+    }
+    svg{
+      max-width: 5.25px;
+    }
+    &.prev{
+      padding: 0px 12px 0px 19px;
+    }
+    &.next{
+      padding: 0px 19px 0px 12px;
+      svg{
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+.totalTickets{
+
+  border: 1px solid $blue500;
+  background: linear-gradient(92.51deg, rgba(66, 123, 248, 0.35) -116.66%, rgba(0, 133, 255, 0) 113.12%);
+  border-radius: 7px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  padding: 2px 18px 0px 18px;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 600;
+  color: $blue500;
+}
+
+
+.table {
   display: table;
   width: 100%;
   border-collapse: separate;
   margin-top: 40px;
-  @media screen and (max-width: 700px){
+  @media screen and (max-width: 700px) {
     border-radius: 18px;
-  .row:last-child{
-    .cell:first-child{
-      border-bottom-left-radius: 18px;
-    }
-    .cell:last-child{
-      border-bottom-right-radius: 18px;
-      text-align: right;
-      padding-right: 28px;
+    .row:last-child {
+      .cell:first-child {
+        border-bottom-left-radius: 18px;
+      }
+
+      .cell:last-child {
+        border-bottom-right-radius: 18px;
+        text-align: right;
+        padding-right: 28px;
+      }
     }
   }
-}
-  .rowInner:nth-child(odd){
-      .cell{
+
+  .rowInner:nth-child(odd) {
+    .cell {
       background-color: transparent;
-      }
+    }
   }
 }
 
-.tableMobile{
+.tableMobile {
   display: table;
   width: 100%;
   border-collapse: separate;
   margin-top: 25px;
-  @media screen and (max-width: 700px){
+  @media screen and (max-width: 700px) {
     border-radius: 18px;
-  .row:last-child{
-    .cell:first-child{
-      border-bottom-left-radius: 18px;
-    }
-    .cell:last-child{
-      border-bottom-right-radius: 18px;
+    .row:last-child {
+      .cell:first-child {
+        border-bottom-left-radius: 18px;
+      }
+
+      .cell:last-child {
+        border-bottom-right-radius: 18px;
+      }
     }
   }
-}
-  .rowInner:nth-child(odd){
-      .cell{
+
+  .rowInner:nth-child(odd) {
+    .cell {
       background-color: transparent;
-      }
+    }
   }
 }
 
-.row{
+.row {
   display: table-row;
-  .cell{
-      padding-bottom: 26px;
-      @media screen and (max-width: 550px){
-          padding-bottom: 11px;
-      }
-      @media screen and (max-width: $xs-max){
-          font-size: 12px;
-      }
-  }
-  .cell:first-child{
-      padding-left: 20px;
-      width: 30%;
-      @media screen and (max-width: $xs-max){
-        padding-left: 16px;
+
+  .cell {
+    padding-bottom: 26px;
+    @media screen and (max-width: 550px) {
+      padding-bottom: 11px;
     }
-      .text{
-        text-align: unset;
-      }
+    @media screen and (max-width: $xs-max) {
+      font-size: 12px;
+    }
   }
-  .cell:nth-child(2){
+
+  .cell:first-child {
+    padding-left: 20px;
+    width: 30%;
+    @media screen and (max-width: $xs-max) {
+      padding-left: 16px;
+    }
+
+    .text {
+      text-align: unset;
+    }
+  }
+
+  .cell:nth-child(2) {
     text-align: left;
     width: 30%;
   }
-  .cell:nth-child(3){
+
+  .cell:nth-child(3) {
     text-align: left;
     width: 10%;
   }
-  .cell:last-child{
+
+  .cell:last-child {
     text-align: right;
     padding-right: 28px;
-    @media screen and (max-width: 700px){
+    @media screen and (max-width: 700px) {
       padding-right: 16px;
-  }
+    }
   }
 }
 
-.rowInner{
-  .cell{
-      background-color: $dark600;
-      padding-top: 20px;
-      padding-bottom: 20px;
-      @media screen and (max-width: 700px){
-        padding-top: 13px;
-        padding-bottom: 13px;
+.rowInner {
+  .cell {
+    background-color: $dark600;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    @media screen and (max-width: 700px) {
+      padding-top: 13px;
+      padding-bottom: 13px;
     }
   }
-  .cell:first-child{
-      border-top-left-radius: 8px;
-      border-bottom-left-radius: 8px;
-      padding-left: 20px;
-      width: 30%;
-      @media screen and (max-width: 700px){
-          border-top-left-radius: 0;
-          border-bottom-left-radius: 0;
-          padding-left: 16px;
-      }
+
+  .cell:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    padding-left: 20px;
+    width: 30%;
+    @media screen and (max-width: 700px) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      padding-left: 16px;
+    }
   }
-  .cell:last-child{
-      border-top-right-radius: 8px;
-      border-bottom-right-radius: 8px;
-      text-align: right;
-      padding-right: 28px;
-      @media screen and (max-width: 700px){
-          border-top-right-radius: 0;
-          border-bottom-right-radius: 0;
-          padding-right: 16px;
-      }
+
+  .cell:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    text-align: right;
+    padding-right: 28px;
+    @media screen and (max-width: 700px) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      padding-right: 16px;
+    }
   }
-  .cell:nth-child(2){
+
+  .cell:nth-child(2) {
     text-align: left;
     width: 30%;
   }
-  .cell:nth-child(3){
+
+  .cell:nth-child(3) {
     text-align: left;
     width: 10%;
-    @media screen and (max-width: 700px){
+    @media screen and (max-width: 700px) {
       width: 30%;
+    }
   }
-  }
-  @media screen and (max-width: $xs-max){
-      margin-left: -10px;
-      margin-right: -16px;
+
+  @media screen and (max-width: $xs-max) {
+    margin-left: -10px;
+    margin-right: -16px;
   }
 }
 
-.cell{
+.cell {
   display: table-cell;
   font-weight: 500;
   font-size: 16px;
   color: $dark200;
-  @media screen and (max-width: 1360px){
+  @media screen and (max-width: 1360px) {
     font-size: 12px;
-}
+  }
 }
 
-.text{
+.text {
   font-weight: 500;
   font-size: 16px;
   color: #FFFFFF;
-  @media screen and (max-width: 1360px){
+  @media screen and (max-width: 1360px) {
     font-size: 12px;
-}
-@media screen and (max-width: 900px){
-  font-size: 11px;
-}
+  }
+  @media screen and (max-width: 900px) {
+    font-size: 11px;
+  }
 }
 
-.amountText{
+.amountText {
   color: $pay500;
 }
 
-.date{
+.date {
   font-size: 16px;
   font-weight: 500;
   color: $dark200;
-  @media screen and (max-width: 1360px){
+  @media screen and (max-width: 1360px) {
     font-size: 12px;
-}
-@media screen and (max-width: 900px){
-  font-size: 11px;
-}
+  }
+  @media screen and (max-width: 900px) {
+    font-size: 11px;
+  }
 }
 
-.payout{
+.payout {
   color: $dark200;
-  @media screen and (max-width: 1360px){
+  @media screen and (max-width: 1360px) {
     font-size: 12px;
+  }
 }
-}
+

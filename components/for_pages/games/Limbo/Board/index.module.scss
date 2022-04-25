@@ -1,15 +1,63 @@
 @import "scss/index";
-.mines{
-  max-width: 380px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 9px;
 
-  @media only screen and (max-width: $xs-max) {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+.root{
+  position: relative;
+  height: 600px;
+  @media (max-width: $xs-max) {
+    height: 400px;
     width: 100%;
-    height: 100%;
-    grid-gap: 7px;
   }
+}
 
+.planetsLayer{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  .planets{
+    width: 80%;
+    height: 80%;
+    margin-right: 20px;
+    @media (max-width: $xs-max) {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.rocketLayer{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .rocket{
+    width: 65%;
+    height: 65%;
+    margin-right: 28px;
+    @media (max-width: $xs-max) {
+      margin-right: 20px;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.messageLayer{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 10%;
 }

@@ -1,0 +1,29 @@
+@import "scss/index";
+
+.root{
+  position: relative;
+  padding: 8px;
+  display: flex;
+  background-color: $dark700;
+  margin-top: 20px;
+  border-radius: 18px;
+
+  flex-direction: row;
+  justify-content: center;
+  grid-gap: 0px 16px;
+  @media screen and (max-width: $mobile-max){
+    padding: 16px 0px;
+  }
+  @media screen and (max-width: $xs-land){
+    flex-direction: column;
+  }
+}
+.mobilePlayer{
+  display: none;
+  @media screen and (max-width: $xs-land){
+    display: block;
+    margin-bottom: 8px;
+    padding: 0px 19px;
+
+  }
+}

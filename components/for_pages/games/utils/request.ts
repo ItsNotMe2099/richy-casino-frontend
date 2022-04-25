@@ -1,7 +1,7 @@
 import fetch from 'cross-fetch'
 import Cookies from 'js-cookie'
-import { CookiesType } from 'types/enums'
 import {runtimeConfig} from 'config/runtimeConfig'
+import {GameCookiesType} from 'components/for_pages/games/data/types'
 
 interface Options {
   url: string
@@ -17,7 +17,7 @@ interface Res {
 
 async function request(options: string | Options): Promise<Res> {
   const optionsIsString = typeof options === 'string'
-  const accessToken = (!optionsIsString && options.token) ? options.token : Cookies.get(CookiesType.accessToken)
+  const accessToken = (!optionsIsString && options.token) ? options.token : Cookies.get(GameCookiesType.accessToken)
   let url = ''
   let method = 'GET'
   let data = null
@@ -55,6 +55,11 @@ async function request(options: string | Options): Promise<Res> {
       return {
         data: jsonData,
         err: null,
+      }
+    }else{
+      return {
+        err: jsonData?.errors ?? jsonData,
+        data: null
       }
     }
   } catch (err) {

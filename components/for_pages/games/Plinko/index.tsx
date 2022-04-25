@@ -6,7 +6,7 @@ import {CasinoGameType} from 'components/for_pages/games/data/enums'
 import {useGameContext} from 'components/for_pages/games/context/state'
 import {useState} from 'react'
 import Sidebar from './Sidebar'
-import Playground from './Playground'
+import Board from './Board'
 
 interface Props{
 
@@ -22,15 +22,16 @@ export default function GamePlinko(props: Props) {
     {user: 'Иван иванов', wins: 1.332, cof: 1.323, id: 23223 },
     {user: 'Иван иванов', wins: 1.332, cof: 1.323, id: 23223 },
   ]
-  const [selected, setSelected] = useState([])
+
   const handleSubmit = async (data: ICasinoGameDiceDto) => {
     await gameContext.startGame({...data, gameType: CasinoGameType.Plinko})
   }
+
   return (
     <GamePageLayout
       header={<GamePageHeader title={'Mines'} icon={''}/>}
       sideBar={<Sidebar onChangePinsCount={(val) => setPinsCount(val)} onChangeDifficulty={(val) => setDifficulty(val)} onSubmit={handleSubmit}/>}
-      board={gameContext.game?.multipliers && <Playground pegsRows={pinsCount} difficulty={difficulty}/>} history={<GameHistory items={history}/>}/>
+      board={gameContext.game?.multipliers && <Board pegsRows={pinsCount} difficulty={difficulty}/>} history={<GameHistory items={history}/>}/>
   )
 }
 

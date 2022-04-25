@@ -1,4 +1,4 @@
-import { CONTACTS } from 'types/interfaces'
+import {CONTACTS} from 'types/constants'
 import styles from './index.module.scss'
 import Button from 'components/ui/Button'
 import Link from 'next/link'
@@ -9,10 +9,13 @@ import LinkedIn from 'components/svg/LinkedIn'
 import Twitter from 'components/svg/Twitter'
 import Logo from 'components/svg/Logo'
 import LangSelect from 'components/for_pages/Common/LangSelect'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
+import {useState} from 'react'
+import {useRouter} from 'next/router'
 import SupportButton from 'components/for_pages/Common/SupportButton'
 import {useAppContext} from 'context/state'
+import {format} from 'date-fns'
+import {useTranslation} from 'next-i18next'
+import {BonusDepositShowMode} from 'types/enums'
 
 interface Props {
   children?: React.ReactNode
@@ -25,6 +28,7 @@ interface Lang {
 }
 
 export default function Footer(props: Props) {
+  const {t} = useTranslation()
   const appContext = useAppContext()
   const options = [
     { label: 'Правила', link: '#' },
@@ -94,7 +98,7 @@ export default function Footer(props: Props) {
 
   return (
     <div className={styles.root} style={{
-      paddingBottom: `${(appContext.auth  ? 81 : 0) + (appContext.showBonusExpanded ? 20 : 0)}px`
+      paddingBottom: `${(appContext.auth  ? 81 : 0) + (appContext.showBonus && appContext.bonusShowMode === BonusDepositShowMode.Spoiler ? 20 : 0)}px`
     }}>
         <div className={styles.wrapper}>
         {currentRoute === '/' || currentPath === '/' ?
@@ -116,7 +120,7 @@ export default function Footer(props: Props) {
             {showAllItems &&
             <>
               <div className={styles.desc}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                {t('footer_text_1')}
               </div>
             <div className={styles.mail}>
               <a href={`mailto:${CONTACTS.email}`}>{CONTACTS.email}</a>
@@ -129,7 +133,7 @@ export default function Footer(props: Props) {
           </div>
           <div className={styles.left}>
             <div className={styles.desc}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              {t('footer_text_1')}
             </div>
             <div className={styles.mail}>
               <a href={`mailto:${CONTACTS.email}`}>{CONTACTS.email}</a>
@@ -231,22 +235,22 @@ export default function Footer(props: Props) {
           <div className={styles.btnsMobile}>
                   <div className={styles.btn}><Button href="#top" size='extraSmall' background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button></div>
                   {/*<div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>*/}
-                  <div className={styles.lang}><LangSelect style='footer' options={langs} activeIcon={activeLangIcon} lang={activeLang} onChange={(item) => handleChangeLang(item)}/></div>
+                  <div className={styles.lang}><LangSelect style='footer' /></div>
                 </div>
           <div className={styles.bottom}>
               <div className={styles.eighteen}>
                 <img src='/img/layout/footer/eighteen.svg' alt=''/>
               </div>
               <div className={styles.desc}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                © {format(new Date(),'y')} {t('footer_text_2')}
               </div>
                 <div className={styles.copyright}>
-                  ©2021 CRYPLL ALL RIGHTS RESERVED
+                  © {format(new Date(),'y')} {t('footer_copyright')}
                 </div>
                 <div className={styles.btns}>
                   <div className={styles.btn}><Button href="#top" size='extraSmall' background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button></div>
                   {/*<div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>*/}
-                  <div className={styles.lang}><LangSelect style='footer' options={langs} activeIcon={activeLangIcon} lang={activeLang} onChange={(item) => handleChangeLang(item)}/></div>
+                  <div className={styles.lang}><LangSelect style='footer'/></div>
                 </div>
           </div>
     </div>

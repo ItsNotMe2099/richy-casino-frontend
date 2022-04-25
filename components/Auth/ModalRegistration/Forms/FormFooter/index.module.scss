@@ -1,0 +1,21 @@
+@import "scss/index";
+
+.button {
+  width: 100%;
+  font-weight: 500;
+  font-size: 16px;
+  color: $white;
+}
+
+.login {
+  font-weight: 500;
+  font-size: 13px;
+  color: $dark200;
+  margin-top: 25px;
+
+  text-align: center;
+  span {
+    color: #FFD12F;
+    cursor: pointer;
+  }
+}

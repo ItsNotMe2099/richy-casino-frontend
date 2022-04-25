@@ -1,11 +1,15 @@
 @import "scss/index";
 
 .root{
-  margin-bottom: 12px;
   color: $white;
   font-size: 14px;
+  height: 48px;
   position: relative;
-
+  display: flex;
+  flex-direction: column;
+  background-color: $dark600;
+  border: 1px solid #272832;
+  border-radius: 8px;
   &.hasError{
     .label {
       color: #F15151;
@@ -17,100 +21,6 @@
       border-color: #F15151;
   }
   }
-}
-
-.settings{
-  margin-bottom: 0;
-  display: flex;
-  position: static;
-  .dropDownTrigger{
-    padding: 0;
-    flex: 1;
-    position: static;
-  }
-}
-
-.exchange{
-  margin-bottom: 0;
-  .dropDownTrigger{
-    padding: 14px 18px 14px 16px;
-    max-height: 100%;
-    min-height: 100%;
-    background: #272832;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    @media screen and (max-width: $mobile-max){
-      background-color: #1D1E25;
-      border: 0;
-    }
-  }
-  .reverse{
-    transform: rotate(90deg);
-  }
-  .placeholder{
-    font-weight: 700;
-    font-size: 16px;
-  }
-}
-
-.createGame{
-  height: 46px;
-  margin-bottom: 0;
-  .dropDownTrigger{
-    border: 0;
-    background-color: $dark600;
-    padding: 11px 19px 11px 16px;
-  }
-  .placeholder{
-    font-weight: 600;
-    font-size: 16px;
-    @media screen and (max-width: 340px){
-      font-size: 12px;
-    }
-  }
-  .reverse{
-    transform: rotate(90deg);
-  }
-}
-
-.balance{
-  margin-bottom: 0;
-  .reverse{
-    transform: rotate(90deg);
-  }
-  .placeholder{
-    font-weight: 600;
-    font-size: 16px;
-  }
-  .dropDownTrigger{
-    border: 0;
-    padding: 10px 8px 10px 21px;
-    background: #2D2E38;
-  }
-  .value{
-    display: flex;
-    font-weight: 600;
-    font-size: 14px;
-    margin-right: 7px;
-    span{
-      color: #89898e;
-    }
-  }
-  .arrow{
-    display: flex;
-
-  }
-  .dropDownActive{
-    margin-top: 0;
-    top: 60px
-  }
-}
-
-.separator{
-  background-color: $dark400;
-  width: 1px;
-  height: 24px !important;
-  margin-right: 13px;
 }
 
 .label{
@@ -189,101 +99,20 @@
         border-bottom-right-radius: 12px;
       }
     }
-    .symbolAndName{
-      padding: 0 14px;
-      &:hover{
-        background-color: $dark400;
-      }
-    }
-}
-
-.reverse{
-  transform: rotate(180deg);
 }
 
 .dropDownTrigger {
-  background-color: $dark700;
-  border: 1px solid #272832;
-  flex-direction: row;
-  align-items: center;
-  padding: 14px 19px;
-  border-radius: 8px;
+  padding: 0px 19px;
   position: relative;
-  justify-content: space-between;
   cursor: pointer;
-  max-height: 53px;
-  .icon{
-    margin-right: 19px;
-  }
 
-  .placeholder{
-    padding-right: 10px;
-    display: flex;
-    align-items: center;
-  }
-
-  img{
-    margin: auto 0;
-  }
-}
-
-.altStyle{
-  background: #272832;
-  border: 0;
-  @media screen and (max-width: $xs-max) {
-    background-color: $dark700;
-  }
-}
-
-.withLabel{
   display: flex;
   align-items: center;
-  background: #272832;
-  border-radius: 12px;
-  height: 70px;
-  @media screen and (max-width: $xs-max) {
-    height: 50px;
-    background-color: $dark700;
-  }
-  .label{
-    margin-bottom: 0;
-    margin-left: 29px;
-    font-weight: 500;
-    font-size: 16px;
-    color: #484B5C;
-    @media screen and (max-width: $xs-max) {
-      font-size: 12px;
-      margin-left: 17px;
-    }
-  }
-  .icon{
-    display: none;
-  }
-  .dropDownTrigger{
-    flex: 1;
-    @media screen and (max-width: $xs-max) {
-      padding: 15px 9px;
-    }
-  }
-  .name{
-    font-weight: 500;
-    font-size: 18px;
-    @media screen and (max-width: $xs-max) {
-      font-size: 13px;
-    }
-  }
-  .dropDown, .dropDownActive{
-    top: 70px;
-  }
+  flex-direction: row;
+  flex: 1;
 }
 
-.icon{
-  display: flex;
-  font-weight: bold;
-  font-size: 20px;
-  color: $dark200;
-  width: 15%;
-}
+
 
 .name{
   font-size: 13px;
@@ -304,55 +133,4 @@
   }
 }
 
-.symbolAndName{
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 130%;
-  img{
-    margin-right: 6px;
-  }
-}
 
-.rate{
-  margin-right: 7px;
-}
-
-.usdt{
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  span{
-    color: #96969b;
-  }
-}
-
-.dg{
-  font-weight: 600;
-  font-size: 12px;
-  color: #96969b;
-  text-align: right;
-  line-height: 14px;
-}
-
-.leftSide{
-  display: flex;
-}
-
-.withdraw{
-  margin-top: 8px;
-  .symbolAndName{
-    padding: 10px 21px;
-    height: 52px;
-  }
-  .rate{
-    margin-right: 0;
-    flex: 1;
-    text-align: right;
-  }
-}
-
-.placeholder{
-  display: flex;
-}

@@ -1,0 +1,56 @@
+@import "scss/index";
+
+
+.root{
+  position: relative;
+  background: #6E7195;
+  svg {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+  }
+
+  @media screen and (max-width: $mobile-md){
+
+  }
+  &.white{
+    background: #9DA0BF;
+  }
+  &.black{
+    background: #6E7195;
+  }
+  &.disabled{
+    svg{
+      opacity: 0.6;
+    }
+  }
+  &.active{
+   background: #7E86C9;
+  }
+  &.canClick{
+    cursor: pointer;
+    &:hover{
+      background: #7E86C9;
+    }
+  }
+  &.hiddenFigure{
+    svg{
+      visibility: hidden;
+    }
+  }
+}
+.indexRow{
+  left: 6.5%;
+  top: 6.5%;
+}
+.indexColumn{
+  right: 6.5%;
+  bottom: 6.5%;
+}
+
+.indexRow, .indexColumn{
+  position: absolute;
+  color: white;
+  opacity: 0.5;
+  font-size: 0.8em;
+}

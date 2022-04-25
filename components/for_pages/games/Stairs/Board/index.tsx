@@ -42,7 +42,9 @@ export default function Board(props: Props) {
   useEffect(() => {
     const subscriptionGame = gameContext.gameState$.subscribe((data: ICasinoGameFinishEvent) => {
       setResult(data)
-      gameContext.setShowResultModal(true)
+      if(data) {
+        gameContext.setShowResultModal(true)
+      }
     })
     const subscriptionRound = gameContext.turnState$.subscribe((data: ICasinoGameTurn) => {
       setTurn(data)
@@ -67,7 +69,7 @@ export default function Board(props: Props) {
     }
   }, [])
   const handleClick = (row, key) => {
-    if ((turn && [CasinoGameRoundTurnType.Finish, CasinoGameRoundTurnType.Lose].includes(turn?.type)) || !gameContext.roundId || (row !== (turn?.turn ?? 0))) {
+    if ((turn && [CasinoGameRoundTurnType.Finish, CasinoGameRoundTurnType.Lose].includes(turn?.type)) || !gameContext.roundId || (row !== (turn?.turn ?? 0))  || !gameContext.started) {
       return
     }
     gameContext.newTurn({cell: key})
@@ -131,7 +133,8 @@ export default function Board(props: Props) {
     </div>)
   }
   return (
-    <GamePageBoardLayout className={styles.root}>
+    <GamePageBoardLayout>
+      <div className={styles.root}>
       <VisibleXs>
         <div className={styles.multipliersMobile}>
         {[...rows].reverse().map((row, index) => renderMultiplier(rows.length - index - 1))}
@@ -140,6 +143,7 @@ export default function Board(props: Props) {
 
       <div className={styles.mines}>
         {[...rows].reverse().map(renderRow)}
+      </div>
       </div>
     </GamePageBoardLayout>
   )

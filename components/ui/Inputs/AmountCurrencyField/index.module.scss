@@ -1,0 +1,77 @@
+@import "scss/index";
+.root{
+  position: relative;
+  margin-bottom: 15px;
+  border-radius: 9px;
+  padding: 0px 21px;
+  background: $dark600;
+  width: 100%;
+  height: 46px;
+  &.inputError{
+      border: 1px solid #ED4700;
+  }
+  @media screen and (max-width: $sm-min) {
+    padding: 0px 21px;
+  }
+}
+.wrapper{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 100%;
+}
+
+.input{
+  max-width: 100%;
+  input {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    background: $dark600;
+    border: 0;
+    color: $dark100;
+    padding: 0px 0px 0px 0px;
+    height: 46px;
+    &:-webkit-autofill {
+      -webkit-text-fill-color: #717384 !important;
+    }
+
+    &:disabled {
+      //color:
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    &::placeholder {
+      font-size: 13px;
+      color: $dark200;
+    }
+  }
+  &.inputFocused{
+    input {
+      color: $white;
+      font-weight: 500;
+    }
+  }
+
+  &.inputError{
+    input {
+      color: #ED4700;
+      &::placeholder {
+        color: #ED4700 !important;
+      }
+    }
+  }
+}
+
+
+
+
+.inputWrapper{
+  position: relative;
+}
+.currency{
+  font-size: 16px;
+  font-weight: 900;
+  color: $blue500;
+}

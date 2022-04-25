@@ -1,0 +1,34 @@
+@import "scss/index";
+
+
+.promo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover{
+    span{
+      text-decoration: underline;
+    }
+  }
+  span {
+    font-size: 13px;
+    color: #FFD12F;
+  }
+}
+
+.plus {
+  width: 12.83px;
+  height: 12.83px;
+  border-radius: 100%;
+  background: #FFD12F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 1.1rem;
+  margin-right: 8px;
+  @media screen and (max-width: $mobile-max){
+    font-size: 0.8rem;
+  }
+}

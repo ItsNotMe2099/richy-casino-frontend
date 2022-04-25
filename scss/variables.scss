@@ -2,6 +2,7 @@
 $mobile-max: 428px;
 $mobile-md: 375px;
 $mobile-min: 335px;
+$xs-land: 599px;
 $xs-max: 768px;
 $sm-min: 769px;
 $sm-max: 1360px;
@@ -11,16 +12,18 @@ $lg-min: 1851px;
 
 // Spacing
 $space-base: 20px;
-
+$space-modal: 28px;
+$space-modal-mobile: 19px;
 // Colors
 $white: #ffffff;
+$dark900: #0F1014;
 $dark800: #14151B;
 $dark700: #1D1E25;
 $dark600: #272832;
 $dark500: #2D2E38;
 $dark400: #41424F;
 $dark300: #484B5C;
-$dark200: #6B6C77;
+$dark200: #6b6c77;
 $dark100: #797C86;
 $grey500: #C4C4C4;
 $blue500: #427BF8;

@@ -1,0 +1,9 @@
+@import "scss/index";
+.root{
+  height: 1px;
+  background: $dark600;
+  margin: 0px -28px 0;
+  @media screen and (max-width: $xs-max){
+    margin: 0px;
+  }
+}
