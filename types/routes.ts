@@ -57,7 +57,7 @@ export class Routes{
     return '/catalog/aviator'
   }
   static get poker(){
-    return '/catalog/game/poker'
+    return '/catalog/game/minipoker'
   }
   static get chess(){
     return '/catalog/game/poker'
