@@ -60,8 +60,7 @@ export default function Filter(props: Props) {
     ...(appContext.user ? [{icon: '/img/Filter/icons/24.svg', label: 'Последние игры', link: Routes.catalogLast, quantity: 0}] : []),
     {icon: '/img/Filter/icons/top.svg', label: 'ТОП игры', link: Routes.catalogTop, quantity: 0},
     ...(appContext.user ? [{icon: '/img/Filter/icons/favorite.svg', label: 'Избранные', link: Routes.catalogFavorite, quantity: favoriteContext.store.games.length}] : []),
-    {icon: '/img/Filter/icons/favorite.svg', label: 'Избранные', link: Routes.catalogFavorite, quantity: favoriteContext.store.games.length},
-  ]
+   ]
 
   const [category, setCategory] = useState('')
   const [provider, setProvider] = useState('')
