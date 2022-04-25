@@ -8,7 +8,6 @@ import SocialButtons from 'components/Auth/SocialButtons'
 import {ModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
 import { LoginFormData } from 'types/interfaces'
-import { useAuthContext } from 'context/auth_state'
 import FormError from 'components/ui/Form/FormError'
 import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
 import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
@@ -16,6 +15,8 @@ import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 import BottomSheetLayout from 'components/layout/BottomSheetLayout'
 import BottomSheetBody from 'components/layout/BottomSheetBody'
 import BottomSheetHeader from 'components/layout/BottomSheetHeader'
+import {useState} from 'react'
+import AuthRepository from 'data/repositories/AuthRepository'
 
 interface Props {
   isBottomSheet?: boolean
@@ -23,15 +24,44 @@ interface Props {
 
 export default function ModalLogin(props: Props) {
   const {t} = useTranslation()
-  const context = useAppContext()
-  const authContext = useAuthContext()
 
+  const appContext = useAppContext()
+  const [loginFormData, setLoginFormData] = useState<LoginFormData | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
+
+  const login = async (values: LoginFormData) => {
+    setLoginFormData(values)
+    setLoading(true)
+    try {
+      setError(null)
+      const res = await AuthRepository.login(values?.authInput, values.password)
+      if (!res) {
+        return
+      }
+      const accessToken = res.token
+
+      if (!accessToken) {
+        setError(t('api_error_unknown'))
+        setLoading(false)
+        return
+      }
+
+      appContext.setToken(accessToken)
+      appContext.updateUserFromCookies()
+      appContext.hideModal()
+    }catch (e){
+
+      setError(e)
+    }
+    setLoading(false)
+  }
 
   const initialValues: LoginFormData = {
     authInput: '',
     password: ''
   }
-  const result = (<Formik initialValues={initialValues} onSubmit={authContext.login}>
+  const result = (<Formik initialValues={initialValues} onSubmit={login}>
     <Form className={styles.form}>
       <div className={styles.label}>{t('login_socials_title')}</div>
       <div className={styles.socials}>
@@ -42,16 +72,16 @@ export default function ModalLogin(props: Props) {
         <InputField
           format={'phoneAndEmail'}
           name={'authInput'}
-          disabled={authContext.loading}
+          disabled={loading}
           placeholder={t('login_field_identity')} validate={Validator.required}/>
-        <InputField name={'password'} placeholder={t('login_field_password')} type={'password'} obscure disabled={authContext.loading}
+        <InputField name={'password'} placeholder={t('login_field_password')} type={'password'} obscure disabled={loading}
                     validate={Validator.required}/>
       </div>
-      <div className={styles.forgot} onClick={() => { context.showModal(ModalType.passwordRecovery) }}>{t('login_forgot')}</div>
-      <FormError error={authContext.error}/>
-      <Button type='submit' size='play' fluid background='blueGradient500' spinner={authContext.loading}>{t('login_button')}</Button>
+      <div className={styles.forgot} onClick={() => { appContext.showModal(ModalType.passwordRecovery) }}>{t('login_forgot')}</div>
+      <FormError error={error}/>
+      <Button type='submit' size='play' fluid background='blueGradient500' spinner={loading}>{t('login_button')}</Button>
       <div className={styles.login}>
-        {t('login_no_account')} <span onClick={() => context.showModal(ModalType.registration)}>{t('login_register')}</span>
+        {t('login_no_account')} <span onClick={() => appContext.showModal(ModalType.registration)}>{t('login_register')}</span>
       </div>
     </Form>
   </Formik>)
