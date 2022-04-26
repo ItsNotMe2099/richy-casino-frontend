@@ -41,7 +41,7 @@ export default function Menu(props: Props) {
     {label: t('menu_richy'), link: Routes.richyGames},
     {label: t('menu_free_bitcoin'), link: Routes.freeBitcoin},
     {label: t('menu_wheel_of_fortune'), link: '/wheel_of_fortune', onClick: () => appContext.showModal(ModalType.fortune)},
-    {label: t('menu_lottery'), link: Routes.catalogLive},
+    {label: t('menu_lottery'), link: Routes.lottery},
     {label: t('menu_live_casino'), link: Routes.catalogLive},
     {label: t('menu_aviator'), link: Routes.aviator},
     {label: t('menu_poker'), link: Routes.poker},
