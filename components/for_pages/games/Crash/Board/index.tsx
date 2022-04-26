@@ -12,8 +12,19 @@ import Game, { GameTickData } from './Game'
 import FloatResult, { FloatResultStyleType } from 'components/ui/FloatResult'
 import { useAppContext } from 'context/state'
 import { isMdMax } from 'utils/media'
+import { AviatorEventType, AviatorRoundStatus, IAviatorEvent, IAviatorRound } from 'data/interfaces/IAviatorEvent'
+import { useTimer } from 'react-timer-hook'
+import { pad } from 'utils/formatter'
 
 interface Props {}
+
+const startEvent: IAviatorRound = {
+  plannedStartAfter: 0,
+  status: AviatorRoundStatus.created,
+  plannedStartAt: '',
+  id: 1,
+  startedDuration: 0,
+}
 
 const CanvasBackground = dynamic(() => import('./CanvasBackground'), { ssr: false })
 
@@ -27,9 +38,13 @@ export default function Board(props: Props) {
   const [tickData, setTickData] = useState<GameTickData>()
   const resultRef = useRef<ICasinoGameFinishEvent>(null)
   const inputPlaneRef = useRef<StateMachineInput>(null)
+  const [roundStatus, setRoundStatus] = useState<IAviatorRound>(startEvent)
+  const roundStatusRef = useRef<IAviatorRound>(null)
+  const timer = useTimer({expiryTimestamp: new Date(), autoStart: false})
   const handleProgress = (data) => {
     setTickData(data)
   }
+  const [startTime, setStartTime] = useState<Date>(null)
   const gameRef = useRef(new Game({
     resultRef,
     inputPlaneRef,
@@ -38,17 +53,37 @@ export default function Board(props: Props) {
   }))
 
   useEffect(() => {
-    const subscription = gameContext.gameState$.subscribe((e) => {
-      gameRef.current.start()
-      // if (e) {
-      //   resultRef.current = e
-      //   gameRef.current.start()
-      // }
-    })
+    const aviatorSubscription = gameContext.aviatorState$.subscribe(handleServerEvent)
     return () => {
-      subscription.unsubscribe()
+      aviatorSubscription.unsubscribe()
     }
   }, [])
+
+  const handleServerEvent = (e: IAviatorEvent) => {
+    if (e.round) {
+      roundStatusRef.current = e.round
+      setRoundStatus(e.round)
+
+      // Timer to start
+      if (e.round.status === AviatorRoundStatus.created && e.round.plannedStartAfter > 0) {
+        if (!timer.isRunning) {
+          timer.restart(new Date(Date.now() + e.round.plannedStartAfter))
+        }
+      } else {
+        if (timer.isRunning) {
+          timer.pause()
+        }
+      }
+    }
+
+    if (e.type === AviatorEventType.started) {
+      setStartTime(new Date())
+    }
+
+    if (e.type === AviatorEventType.finished) {
+      setStartTime(null)
+    }
+  }
 
   const progress = tickData?.progress ?? gameRef.current.progress
 
@@ -68,13 +103,25 @@ export default function Board(props: Props) {
           planePosition={tickData?.planePosition ?? gameRef.current.planePosition}
           inputRef={inputPlaneRef}
         />
-        {tickData && (
-          <div className={styles.messageLayer}>
+        <div className={styles.messageLayer}>
+          {tickData && (
             <FloatResult styleType={FloatResultStyleType.idle}>
               {`${tickData.factor}x`}
             </FloatResult>
-          </div>
-        )}
+          )}
+          {roundStatus.status === AviatorRoundStatus.created && timer.isRunning && (
+            <FloatResult styleType={FloatResultStyleType.idle}>
+              <div className={styles.startMessage}>
+                <div className={styles.startMessageTitle}>
+                  Старт через
+                </div>
+                <div>
+                  {pad('00', timer.minutes)}:{pad('00', timer.seconds)}
+                </div>
+              </div>
+            </FloatResult>
+          )}
+        </div>
       </div>
     </GamePageBoardLayout>
   )

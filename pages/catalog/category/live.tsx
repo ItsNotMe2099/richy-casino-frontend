@@ -2,7 +2,7 @@ import {GetServerSideProps} from 'next'
 import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import {IGameCategory} from 'data/interfaces/IGameCategory'
 import {getServerSideTranslation} from 'utils/i18'
-import GamesListLive from 'components/for_pages/CatalogPage/GamesListAll'
+import GamesListLive from 'components/for_pages/CatalogPage/GamesListLive'
 interface Props{
   category: IGameCategory
 }

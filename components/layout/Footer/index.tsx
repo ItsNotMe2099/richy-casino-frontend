@@ -30,17 +30,20 @@ interface Lang {
 export default function Footer(props: Props) {
   const {t} = useTranslation()
   const appContext = useAppContext()
+
+
   const options = [
-    { label: 'Правила', link: '#' },
-    { label: 'Призы и бонусы', link: '#' },
-    { label: 'О нас', link: '#' },
-    { label: 'Партнерская программа', link: '#' },
+    { label: t('footer_menu_terms_of_service'), link: '/terms_of_service' },
+    { label: t('footer_menu_bonuses'), link: '/bonuses' },
+    { label: t('footer_menu_faq'), link: '/faq' },
+    { label: t('footer_menu_affiliate'), link: 'https://richy.partners', blank: true },
   ]
 
   const items = [
-    { label: 'Осознание азартных игр', link: '#' },
-    { label: 'Пользовательское соглашение', link: '#' },
-    { label: 'Политика конфиденциальности', link: '#' },
+    { label: t('footer_menu_privacy_policy'), link: '/privacy_policy' },
+    { label: t('footer_menu_user_agreements'), link: '/user_agreements' },
+    { label: t('footer_menu_user_gambling_aware'), link: '/gambling_aware' },
+    { label: t('footer_menu_user_kyc_and_aml'), link: '/kyc_and_aml' },
   ]
 
   const allItems = options.concat(items)
@@ -81,17 +84,6 @@ export default function Footer(props: Props) {
     {icon: '/img/layout/top/russia.svg', lang: 'Ru'},
     {icon: '/img/layout/top/russia.svg', lang: 'Ru'},
   ]
-
-  const [activeLangIcon, setActiveLangIcon] = useState(langs[0].icon)
-  const [activeLang, setActiveLang] = useState(langs[0].lang)
-
-  const handleChangeLang = (item: Lang) => {
-    setActiveLangIcon(item.icon)
-    setActiveLang(item.lang)
-  }
-
-
-
   const [showAllItems, setShowAllItems] = useState(false)
 
   const { route: currentRoute, asPath: currentPath } = useRouter()
@@ -147,7 +139,7 @@ export default function Footer(props: Props) {
             <div className={styles.list}>
             {options.map((option, index) =>
               <Link href={option.link} key={index}>
-                <a className={styles.item}>
+                <a className={styles.item} target={option.blank ? '_blank' : null}>
                   {option.label}
                 </a>
               </Link>
@@ -155,7 +147,7 @@ export default function Footer(props: Props) {
             </div>
             <div className={styles.list}>
             {items.map((option, index) =>
-              <Link href={option.link} key={index}>
+              <Link href={option.link} key={index} >
                 <a className={styles.item} >
                   {option.label}
                 </a>

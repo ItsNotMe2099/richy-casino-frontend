@@ -11,7 +11,7 @@ export enum FloatResultStyleType {
 }
 
 interface Props {
-  children: string
+  children: React.ReactNode
   styleType: FloatResultStyleType
   className?: string
 }
