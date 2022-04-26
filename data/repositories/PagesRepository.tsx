@@ -20,7 +20,7 @@ export default class PagesRepository {
     if (res.err) {
       return null
     }
-    return res.data.data
+    return res.data.data ? Converter.objectKeysToCamelCase(res.data.data) : null
   }
   static async fetchList(page: number = 1, limit: number = 30): Promise<IPagination<ITextPage>> {
     const res = await request({

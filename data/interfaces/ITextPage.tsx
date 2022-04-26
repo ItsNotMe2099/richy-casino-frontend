@@ -1,7 +1,7 @@
 export interface ITextPage {
   id: number
   title: string
-  internal_name: number
+  internalName: string
   content: string
-  language_id: string
+  languageId: string
 }
