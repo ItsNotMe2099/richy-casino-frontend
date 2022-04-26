@@ -2,7 +2,6 @@ import styles from './index.module.scss'
 import GamePageBoardLayout from 'components/for_pages/games/components/layout/GamePageBoardLayout'
 import { useGameContext } from 'components/for_pages/games/context/state'
 import { useEffect, useRef, useState } from 'react'
-import { ICasinoGameFinishEvent } from 'components/for_pages/games/data/interfaces/ICasinoGame'
 import dynamic from 'next/dynamic'
 import { CANVAS_ASPECT_RATIO } from './constants'
 import { StateMachineInput } from 'rive-react'
@@ -35,20 +34,19 @@ export default function Board(props: Props) {
     height: appContext.isMobile ? 400 : 800 / CANVAS_ASPECT_RATIO,
   }
   const gameContext = useGameContext()
-  const [tickData, setTickData] = useState<GameTickData>()
-  const resultRef = useRef<ICasinoGameFinishEvent>(null)
+  const [tickData, setTickData] = useState<GameTickData>(null)
   const inputPlaneRef = useRef<StateMachineInput>(null)
   const [roundStatus, setRoundStatus] = useState<IAviatorRound>(startEvent)
   const roundStatusRef = useRef<IAviatorRound>(null)
   const timer = useTimer({expiryTimestamp: new Date(), autoStart: false})
-  const handleProgress = (data) => {
-    setTickData(data)
-  }
-  const [startTime, setStartTime] = useState<Date>(null)
+  const startTimeRef = useRef<Date>(null)
   const gameRef = useRef(new Game({
-    resultRef,
+    startTimeRef,
+    roundStatusRef,
     inputPlaneRef,
-    onProgress: handleProgress,
+    onProgress: (data) => {
+      setTickData(data)
+    },
     size: canvasSize,
   }))
 
@@ -76,16 +74,24 @@ export default function Board(props: Props) {
       }
     }
 
+    if (e.type === AviatorEventType.planned) {
+      gameRef.current.clear()
+      setTickData(null)
+    }
+
     if (e.type === AviatorEventType.started) {
-      setStartTime(new Date())
+      startTimeRef.current = new Date()
+      gameRef.current.start()
     }
 
     if (e.type === AviatorEventType.finished) {
-      setStartTime(null)
+      startTimeRef.current = null
+      gameRef.current.stop()
     }
   }
 
   const progress = tickData?.progress ?? gameRef.current.progress
+  const factor = roundStatus.status === AviatorRoundStatus.finished ? roundStatus.multiplier : tickData?.factor ?? 0
 
   return (
     <GamePageBoardLayout>
@@ -96,7 +102,7 @@ export default function Board(props: Props) {
           planePosition={tickData?.planePosition ?? gameRef.current.planePosition}
           size={canvasSize}
           track={gameRef.current.track}
-          factor={tickData?.factor}
+          factor={factor}
         />
         <Plane
           progress={progress > 1 ? 1 : progress}
@@ -106,7 +112,7 @@ export default function Board(props: Props) {
         <div className={styles.messageLayer}>
           {tickData && (
             <FloatResult styleType={FloatResultStyleType.idle}>
-              {`${tickData.factor}x`}
+              {`${Math.round(factor * 100) / 100}x`}
             </FloatResult>
           )}
           {roundStatus.status === AviatorRoundStatus.created && timer.isRunning && (

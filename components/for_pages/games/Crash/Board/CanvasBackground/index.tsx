@@ -1,10 +1,10 @@
 import styles from './index.module.scss'
 import { Stage, Layer, Rect, Line, Text } from 'react-konva'
 import { colors } from 'scss/variables'
-import { useEffect, useMemo, useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import { IPosition, ISize } from 'types/interfaces'
 import Converter from 'utils/converter'
-import { MAX_FACTOR, ANIMATION_SPEED } from '../constants'
+import { MAX_FACTOR } from '../constants'
 import konva from 'konva'
 
 interface Props {
@@ -22,15 +22,14 @@ interface IFactorPosition{
 }
 
 export default function CanvasBackground(props: Props) {
-  const factorCounts = 100
+  const numberOfMarks = 100
   const parts = 6
   const factorValue = MAX_FACTOR / parts
   const spaceValue = (props.size.height - props.size.height / 15) / parts
   const textLayerRef = useRef<konva.Layer>()
-  const backgroundAnimatedRef = useRef<boolean>(false)
-  const factors: IFactorPosition[] = useMemo(() => {
+  const marks: IFactorPosition[] = useMemo(() => {
     const result: IFactorPosition[] = []
-    for (let i=1; i<factorCounts; i++) {
+    for (let i = 1; i < numberOfMarks; i++) {
       result.push({
         value: factorValue * i,
         dy: props.size.height - spaceValue * i,
@@ -50,20 +49,13 @@ export default function CanvasBackground(props: Props) {
     return gradient
   }, [])
 
-  useEffect(() => {
-    if (props.progress > 1 && !backgroundAnimatedRef.current) {
-      backgroundAnimatedRef.current = true
-      textLayerRef.current.to({
-        y: spaceValue * factorCounts,
-        duration: ANIMATION_SPEED * 300 * factorCounts,
-      })
-    }
-  }, [props.progress])
+  const marksOffsetFactor = (props.factor > MAX_FACTOR ? props.factor - MAX_FACTOR : 0)
+  const marksOffsetY = props.size.height / MAX_FACTOR * marksOffsetFactor
 
   return (
     <Stage width={props.size.width} height={props.size.height} className={styles.root}>
-      <Layer ref={textLayerRef as any}>
-        {factors.map(item => (
+      <Layer ref={textLayerRef as any} x={0} y={marksOffsetY}>
+        {marks.map(item => (
           <Text
             key={item.value}
             x={15}

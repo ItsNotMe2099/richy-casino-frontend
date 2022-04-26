@@ -1,18 +1,19 @@
 import { MutableRefObject } from 'react'
-import { ICasinoGameFinishEvent } from 'components/for_pages/games/data/interfaces/ICasinoGame'
 import { StateMachineInput } from 'rive-react'
-import { EventData } from 'components/for_pages/games/Limbo/Board/Game'
 import { IPosition, ISize } from 'types/interfaces'
-import { MAX_FACTOR, ANIMATION_SPEED } from './constants'
+import { MAX_FACTOR, SPEED_EXP, SPEED_LINEAR, THRESHOLD_TIME } from './constants'
+import { IAviatorRound } from 'data/interfaces/IAviatorEvent'
 
 export interface GameTickData {
   planePosition: IPosition
   progress: number
   factor: number
+  time: number
 }
 
 export interface ISettings{
-  resultRef: MutableRefObject<ICasinoGameFinishEvent<EventData>>
+  roundStatusRef: MutableRefObject<IAviatorRound>
+  startTimeRef: MutableRefObject<Date | null>
   inputPlaneRef: MutableRefObject<StateMachineInput>
   size: ISize
   onProgress: (data: GameTickData) => void
@@ -26,6 +27,10 @@ export default class Game {
   planePosition: IPosition
   progress: number = 0 // from 0 to 1 and more
   factor: number
+  _planeAlive: boolean = true
+  get _progressTime(): number {
+    return Date.now() - this._settings.startTimeRef.current.getTime()
+  }
 
   constructor(settings: ISettings) {
     this._settings = settings
@@ -44,12 +49,30 @@ export default class Game {
 
   stop() {
     cancelAnimationFrame(this._animationId)
-    this._settings.inputPlaneRef.current.fire()
+    this._detonatePlane()
+  }
+
+  clear() {
+    cancelAnimationFrame(this._animationId)
+    this.progress = 0
+    this.track = []
+    this.planePosition = this.startPosition
+    if (!this._planeAlive) {
+      this._settings.inputPlaneRef.current.fire()
+      this._planeAlive = true
+    }
+  }
+
+  _detonatePlane() {
+    if (this._planeAlive) {
+      this._settings.inputPlaneRef.current.fire()
+      this._planeAlive = false
+    }
   }
 
   _animate() {
-    this.progress += ANIMATION_SPEED
-    this.factor = this._progressToFactor(this.progress)
+    this.factor = this._getFactorByTime(this._progressTime)
+    this.progress = this.factor / MAX_FACTOR
     this.planePosition = this._progressToPosition(this.progress > 1 ? 1 : this.progress)
     if (this.progress <= 1) {
       this.track.push(this.planePosition)
@@ -59,6 +82,7 @@ export default class Game {
       planePosition: this.planePosition,
       progress: this.progress,
       factor: this.factor,
+      time: this._progressTime,
     })
   }
 
@@ -71,7 +95,19 @@ export default class Game {
     return {x, y}
   }
 
-  _progressToFactor(progress: number): number {
-    return Math.round(MAX_FACTOR * progress * 100) / 100
+  _getFactorByTime(time: number): number {
+    const threshold = time > THRESHOLD_TIME
+    const expTime = threshold ? THRESHOLD_TIME : time
+    const linearTime = threshold ? (time - THRESHOLD_TIME) / 1000 * SPEED_LINEAR : 0
+    return Math.exp(expTime / 1000 * SPEED_EXP) + linearTime - 1
+  }
+
+  _getTimeByFactor(position: number): number {
+    const thresholdPosition = this._getFactorByTime(THRESHOLD_TIME)
+    if (position > thresholdPosition) {
+      return THRESHOLD_TIME + (position - thresholdPosition) * 1000 / SPEED_LINEAR
+    } else {
+      return Math.log(position + 1) * 1000 / SPEED_EXP
+    }
   }
 }

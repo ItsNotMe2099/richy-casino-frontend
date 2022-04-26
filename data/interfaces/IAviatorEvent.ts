@@ -18,6 +18,7 @@ export interface IAviatorRound {
   plannedStartAfter: number // ms
   plannedStartAt: string
   startedDuration: number // ms
+  multiplier?: number // factor
   status: AviatorRoundStatus
 }
 
