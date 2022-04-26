@@ -17,3 +17,11 @@
   align-items: center;
   padding-top: 10%;
 }
+
+.startMessage{
+  text-align: center;
+  line-height: 1.1;
+  .startMessageTitle{
+    font-size: 14px;
+  }
+}
