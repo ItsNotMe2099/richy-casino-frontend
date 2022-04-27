@@ -1,11 +1,10 @@
 import styles from './index.module.scss'
 import { Stage, Layer, Rect, Line, Text } from 'react-konva'
 import { colors } from 'scss/variables'
-import { useMemo, useRef } from 'react'
+import { useMemo } from 'react'
 import { IPosition, ISize } from 'types/interfaces'
 import Converter from 'utils/converter'
-import { MAX_FACTOR } from '../constants'
-import konva from 'konva'
+import { MAX_FACTOR, MAX_TIME } from '../constants'
 
 interface Props {
   size: ISize
@@ -19,18 +18,36 @@ interface IFactorPosition{
   dy: number
 }
 
+interface ITimePosition{
+  value: number
+  dx: number
+}
+
 export default function CanvasBackground(props: Props) {
   const numberOfMarks = 100
-  const parts = 6
-  const factorValue = MAX_FACTOR / parts
-  const spaceValue = (props.size.height - props.size.height / 15) / parts
-  const textLayerRef = useRef<konva.Layer>()
-  const marks: IFactorPosition[] = useMemo(() => {
+  const numberOfTimes = 100
+  const factorParts = 6
+  const timeParts = 4
+  const factorValue = MAX_FACTOR / factorParts
+  const timeValue = MAX_TIME / timeParts
+  const spaceVertical = (props.size.height - props.size.height / 15) / factorParts
+  const spaceHorizontal = (props.size.width - props.size.width / 15) / timeParts
+  const marksFactors: IFactorPosition[] = useMemo(() => {
     const result: IFactorPosition[] = []
     for (let i = 1; i < numberOfMarks; i++) {
       result.push({
         value: factorValue * i,
-        dy: props.size.height - spaceValue * i,
+        dy: props.size.height - spaceVertical * i,
+      })
+    }
+    return result
+  }, [])
+  const marksTimes: ITimePosition[] = useMemo(() => {
+    const result: ITimePosition[] = []
+    for (let i = 1; i < numberOfTimes; i++) {
+      result.push({
+        value: timeValue * i,
+        dx: spaceHorizontal * i,
       })
     }
     return result
@@ -47,18 +64,34 @@ export default function CanvasBackground(props: Props) {
     return gradient
   }, [])
 
-  const marksOffsetFactor = (props.factor > MAX_FACTOR ? props.factor - MAX_FACTOR : 0)
-  const marksOffsetY = props.size.height / MAX_FACTOR * marksOffsetFactor
+  const offsetFactorValue = props.factor > MAX_FACTOR ? props.factor - MAX_FACTOR : 0
+  const offsetTimeValue = props.time > MAX_TIME ? props.time - MAX_TIME : 0
+  const offsetY = props.size.height / MAX_FACTOR * offsetFactorValue
+  const offsetX = props.size.width / MAX_TIME * offsetTimeValue * -1
 
   return (
     <Stage width={props.size.width} height={props.size.height} className={styles.root}>
-      <Layer ref={textLayerRef as any} x={0} y={marksOffsetY}>
-        {marks.map(item => (
+      <Layer x={0} y={offsetY}>
+        {marksFactors.map(item => (
           <Text
             key={item.value}
             x={15}
             y={item.dy}
             text={`${item.value}x`}
+            fontStyle="bold"
+            fontSize={14}
+            fontFamily="Gilroy"
+            fill={colors.dark200}
+          />
+        ))}
+      </Layer>
+      <Layer x={offsetX} y={0}>
+        {marksTimes.map(item => (
+          <Text
+            key={item.value}
+            x={item.dx}
+            y={props.size.height - 20}
+            text={`${Math.round(item.value / 1000 * 10) / 10}s`}
             fontStyle="bold"
             fontSize={14}
             fontFamily="Gilroy"
