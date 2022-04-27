@@ -1,9 +1,11 @@
 import styles from './index.module.scss'
 import ButtonDotsWithOverflow from 'components/ui/Button/ButtonDotsWithOverflow'
 import MenuItem from 'components/layout/Menu/MenuItem'
+import classNames from 'classnames'
+import {ReactElement} from 'react'
 
 interface IOption{
-  label: string
+  label: string | ReactElement
   link: string
   onClick?: () => void
 }
@@ -14,6 +16,7 @@ interface Props {
   options: IOption[]
   currentRoute: string
   currentPath: string
+  dropDownClassName?: string
 }
 
 export default function Overflow(props: Props) {
@@ -24,63 +27,63 @@ export default function Overflow(props: Props) {
     <>
       <div className={styles.list}>
             {props.options.map((item, index) => (
-              <MenuItem link={item.link} label={item.label} onClick={item.onClick}  key={index}/>
+              <MenuItem link={item.link} label={item.label} onClick={item.onClick} className={styles.menuItem} key={index}/>
             ))
           }
           <div className={styles.transparent}></div>
           </div>
           <div className={styles.listMedium}>
             {props.options.slice(0, length - 1).map((item, index) => (
-              <MenuItem link={item.link} label={item.label} onClick={item.onClick}  key={index}/>
+              <MenuItem link={item.link} label={item.label} onClick={item.onClick}  className={styles.menuItem} key={index}/>
             ))
           }
-          <ButtonDotsWithOverflow>
+          <ButtonDotsWithOverflow dropDownClassName={classNames(styles.dropDown, props.dropDownClassName)}>
           {props.options.slice(length - 1, length).map((item, index) => (
-            <MenuItem link={item.link} label={item.label} onClick={item.onClick}  key={index}/>
+            <MenuItem link={item.link} label={item.label} onClick={item.onClick} className={styles.menuItem}  key={index}/>
           ))}
           </ButtonDotsWithOverflow>
           </div>
           <div className={styles.listSmall}>
             {props.options.slice(0, length - 2).map((item, index) => (
-              <MenuItem link={item.link} label={item.label} onClick={item.onClick}  key={index}/>
+              <MenuItem link={item.link} label={item.label} onClick={item.onClick} className={styles.menuItem}  key={index}/>
             ))
           }
-          <ButtonDotsWithOverflow>
+          <ButtonDotsWithOverflow dropDownClassName={classNames(styles.dropDown, props.dropDownClassName)}>
           {props.options.slice(length - 2, length).map((item, index) => (
-            <MenuItem link={item.link} label={item.label} onClick={item.onClick}  key={index}/>
+            <MenuItem link={item.link} label={item.label} onClick={item.onClick} className={styles.menuItem}  key={index}/>
           ))}
           </ButtonDotsWithOverflow>
           </div>
           <div className={styles.listExtraSmall}>
             {props.options.slice(0, length - 3).map((item, index) => (
-              <MenuItem link={item.link} label={item.label} onClick={item.onClick}  key={index}/>
+              <MenuItem link={item.link} label={item.label} onClick={item.onClick} className={styles.menuItem}  key={index} />
             ))
           }
-          <ButtonDotsWithOverflow>
+          <ButtonDotsWithOverflow dropDownClassName={classNames(styles.dropDown, props.dropDownClassName)}>
           {props.options.slice(length - 3, length).map((item, index) => (
-            <MenuItem link={item.link} label={item.label} onClick={item.onClick}  key={index}/>
+            <MenuItem link={item.link} label={item.label} onClick={item.onClick} className={styles.menuItem}  key={index}/>
           ))}
           </ButtonDotsWithOverflow>
           </div>
           <div className={styles.listSuperSmall}>
             {props.options.slice(0, length - 4).map((item, index) => (
-              <MenuItem link={item.link} label={item.label} onClick={item.onClick}  key={index}/>
+              <MenuItem link={item.link} label={item.label} onClick={item.onClick} className={styles.menuItem}  key={index}/>
             ))
           }
-          <ButtonDotsWithOverflow>
+          <ButtonDotsWithOverflow dropDownClassName={classNames(styles.dropDown, props.dropDownClassName)}>
           {props.options.slice(length - 4, length).map((item, index) => (
-            <MenuItem link={item.link} label={item.label} onClick={item.onClick} key={index}/>
+            <MenuItem link={item.link} label={item.label} onClick={item.onClick} className={styles.menuItem} key={index}/>
           ))}
           </ButtonDotsWithOverflow>
           </div>
           <div className={styles.listTwoItems}>
             {props.options.slice(0, length - 5).map((item, index) => (
-              <MenuItem link={item.link} label={item.label} onClick={item.onClick}  key={index}/>
+              <MenuItem link={item.link} label={item.label} onClick={item.onClick} className={styles.menuItem}  key={index}/>
             ))
           }
-          <ButtonDotsWithOverflow>
+          <ButtonDotsWithOverflow dropDownClassName={classNames(styles.dropDown, props.dropDownClassName)}>
           {props.options.slice(length - 5, length).map((item, index) => (
-            <MenuItem link={item.link} label={item.label} onClick={item.onClick}  key={index}/>
+            <MenuItem link={item.link} label={item.label} onClick={item.onClick} className={styles.menuItem}  key={index}/>
           ))}
           </ButtonDotsWithOverflow>
           </div>

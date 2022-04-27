@@ -4,16 +4,14 @@ import Link from 'next/link'
 import useIsActiveLink from 'hooks/useIsActiveLink'
 import {Routes} from 'types/routes'
 import {useRouter} from 'next/router'
+import {ReactElement} from 'react'
 
-interface IOption{
-  label: string
-  link: string
-}
 
 interface Props {
-  label: string
+  label: string | ReactElement
   link: string
   onClick?: () => void
+  className?: string
 
 }
 
@@ -33,7 +31,7 @@ export default function MenuItem(props: Props) {
     return(
       <Link href={props.link}>
           <a
-            className={classNames(styles.root, {
+            className={classNames(styles.root, props.className, {
             [styles.active]: active,
             })}
             href={props.link}

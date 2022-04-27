@@ -2,7 +2,7 @@ import PageTitle from 'components/for_pages/Common/PageTitle'
 import Layout from 'components/layout/Layout'
 import Bets from 'components/for_pages/MoneyChess/for_pages/Chess/Bets'
 import {GetServerSideProps} from 'next'
-import styles from 'pages/faq/index.module.scss'
+import styles from 'pages/info/index.module.scss'
 import ChessGameStats from 'components/for_pages/MoneyChess/for_pages/Stats'
 import {getServerSideTranslation} from 'utils/i18'
 

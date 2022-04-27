@@ -4,6 +4,7 @@ import {IGameProvider} from 'data/interfaces/IGameProvider'
 import GameListRepository from 'data/repositories/GameListRepository'
 import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import {getServerSideTranslation} from 'utils/i18'
+import {NextSeo} from 'next-seo'
 interface Props{
   provider: IGameProvider
 }
@@ -11,6 +12,7 @@ export default function CatalogPage(props: Props) {
 
   return (
     <WithGameFilterLayout showMobile>
+      <NextSeo title={props.provider?.name}/>
          <GamesListProvider provider={props.provider}/>
     </WithGameFilterLayout>
   )

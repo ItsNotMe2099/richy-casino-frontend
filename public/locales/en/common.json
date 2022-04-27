@@ -270,6 +270,7 @@
   "footer_menu_terms_of_service": "Terms Of Service",
   "footer_menu_bonuses": "Акции и бонусы",
   "footer_menu_faq": "FAQ",
+  "footer_menu_info": "Information",
   "footer_menu_affiliate": "Affiliate Program",
 
   "footer_menu_privacy_policy": "Privacy Policy",
@@ -283,6 +284,16 @@
   "promocode_success_message": "Промокод {{promocode}} применен",
 
   "support_button": "Тех. поддержка",
+
+  "page_information_title": "Information",
+  "page_games_title": "Games",
+  "page_games_live_title": "Live Casino",
+  "page_games_richy_title": "Richy games",
+  "page_games_favorite_title": "Favorite games",
+  "page_games_last_title": "Last Games",
+  "page_games_top_title": "Top Games",
+  "page_games_bonus_title": "Bonuses",
+  "page_index_title": "Richy Casino",
 
   "game_card_play": "Играть",
   "game_card_demo": "Демо",
@@ -305,6 +316,10 @@
   "form_field_validation_password_match": "Пароли не совпадают",
   "form_field_validation_password": "Мин. длина пароля 6 символов",
   "form_field_validation_email": "Неверный формат email",
-  "form_field_validation_otp": "Введите 4-x значный код"
+  "form_field_validation_otp": "Введите 4-x значный код",
+
+  "error_not_found": "Page not found",
+  "error_system": "Error happened",
+  "error_button_to_main": "To main"
 }
 

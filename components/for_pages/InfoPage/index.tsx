@@ -10,12 +10,14 @@ import {IPagination} from 'types/interfaces'
 import {useRouter} from 'next/router'
 import HtmlText from 'components/ui/HtmlText'
 import Link from 'next/link'
+import {useTranslation} from 'next-i18next'
 interface Props {
   pages: IPagination<ITextPage>
   page: ITextPage
 }
 
-export default function FaqPage(props: Props) {
+export default function InfoPage(props: Props) {
+  const {t} = useTranslation()
   const router = useRouter()
   const options = props.pages.data?.map(i => ({label: i.title, text: i.content, url: `/${i.internalName}`})) ?? []
 
@@ -44,7 +46,7 @@ export default function FaqPage(props: Props) {
       <div className={styles.container}>
         <div className={styles.header}>
           <div className={styles.title}>
-            F.A.Q.
+            {t('page_information_title')}
           </div>
           <SupportButton className={styles.support}/>
         </div>

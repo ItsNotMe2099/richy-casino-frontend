@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 
 interface Props {
   children?: React.ReactNode
+  dropDownClassName?: string
 }
 
 export const ButtonDotsWithOverflow = (props: Props, ref) => {
@@ -30,7 +31,7 @@ export const ButtonDotsWithOverflow = (props: Props, ref) => {
         {/*<div className={classNames(styles.triangle, {[styles.none]: !isActive})}></div>*/}
       </div>
 
-      <nav ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
+      <nav ref={dropdownRef} className={classNames(styles.dropDown, props.dropDownClassName, { [styles.dropDownActive]: isActive })}>
         {props.children && props.children}
       </nav>
     </div>

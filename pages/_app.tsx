@@ -3,6 +3,7 @@ import '../scss/globals.scss'
 import type { AppContext, AppProps } from 'next/app'
 import { appWithTranslation } from 'next-i18next'
 import nextI18NextConfig from '../next-i18next.config.js'
+import SEO from '../next-seo.config'
 import { setConfiguration } from 'react-grid-system'
 import { AppWrapper } from 'context/state'
 import { getSelectorsByUserAgent } from 'react-device-detect'
@@ -25,11 +26,12 @@ import { v4 as uuidv4 } from 'uuid'
 import {CookiesLifeTime} from 'types/constants'
 import BottomSheetContainer from 'components/bottom_sheet/BottomSheetContainer'
 import Head from 'next/head'
+import {DefaultSeo} from 'next-seo'
 function MyApp({ Component, pageProps }: AppProps) {
   const [clientVisible, setClientVisible] = useState(false)
-
+  const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
-    setClientVisible(true)
+    setIsLoading(false)
   }, [])
   setConfiguration({
     gutterWidth: 20,
@@ -43,6 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Head>
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
           </Head>
+          <DefaultSeo {...SEO} />
         <Component {...pageProps} />
           {clientVisible && <ModalContainer/>}
           {clientVisible && <BottomSheetContainer/>}

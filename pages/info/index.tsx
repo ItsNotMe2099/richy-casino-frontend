@@ -3,19 +3,26 @@ import {GetServerSideProps} from 'next'
 import PagesRepository from 'data/repositories/PagesRepository'
 import {getServerSideTranslation} from 'utils/i18'
 import {IPagination} from 'types/interfaces'
-import FaqPage from 'components/for_pages/FaqPage'
+import InfoPage from 'components/for_pages/InfoPage'
+import {NextSeo} from 'next-seo'
+import {useTranslation} from 'next-i18next'
+
 interface Props {
   pages: IPagination<ITextPage>
   page: ITextPage
 }
 
 export default function PageItemPage(props: Props) {
-  return (<FaqPage pages={props.pages} page={props.page}/>)
+  const {t} = useTranslation()
+  return (<>
+    <NextSeo title={t('page_information_title')}/>
+    <InfoPage pages={props.pages} page={props.page}/>
+  </>)
 }
 
 
-export const getServerSideProps: GetServerSideProps = async (context ) => {
-  if(context.query.page === 'index'){
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  if (context.query.page === 'index') {
     return {
       notFound: true
     }
