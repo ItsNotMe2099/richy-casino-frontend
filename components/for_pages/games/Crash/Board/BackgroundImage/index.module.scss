@@ -1,0 +1,14 @@
+@import "scss/index";
+
+.root{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/img/Games/aviator/bg.svg');
+  background-repeat: repeat-y;
+  background-size: cover;
+  transition: background-position 100ms;
+}
+

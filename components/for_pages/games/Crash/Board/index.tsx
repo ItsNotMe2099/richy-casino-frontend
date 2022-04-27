@@ -14,6 +14,7 @@ import { isMdMax } from 'utils/media'
 import { AviatorEventType, AviatorRoundStatus, IAviatorEvent, IAviatorRound } from 'data/interfaces/IAviatorEvent'
 import { useTimer } from 'react-timer-hook'
 import { pad } from 'utils/formatter'
+import BackgroundImage from './BackgroundImage'
 
 interface Props {}
 
@@ -95,6 +96,7 @@ export default function Board(props: Props) {
   return (
     <GamePageBoardLayout>
       <div className={styles.root}>
+        <BackgroundImage factor={factor} size={canvasSize} />
         <CanvasBackground
           size={canvasSize}
           track={gameRef.current.track}

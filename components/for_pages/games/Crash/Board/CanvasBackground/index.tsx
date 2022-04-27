@@ -24,7 +24,7 @@ interface ITimePosition{
 }
 
 export default function CanvasBackground(props: Props) {
-  const numberOfMarks = 100
+  const numberOfMarks = 200
   const numberOfTimes = 100
   const factorParts = 6
   const timeParts = 4
