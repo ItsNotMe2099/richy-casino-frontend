@@ -11,7 +11,13 @@ import Game, { GameTickData } from './Game'
 import FloatResult, { FloatResultStyleType } from 'components/ui/FloatResult'
 import { useAppContext } from 'context/state'
 import { isMdMax } from 'utils/media'
-import { AviatorEventType, AviatorRoundStatus, IAviatorEvent, IAviatorRound } from 'data/interfaces/IAviatorEvent'
+import {
+  AviatorEventType,
+  AviatorRoundStatus,
+  IAviatorEvent,
+  IAviatorRound,
+  IBet,
+} from 'data/interfaces/IAviatorEvent'
 import { useTimer } from 'react-timer-hook'
 import { pad } from 'utils/formatter'
 import BackgroundImage from './BackgroundImage'
@@ -35,6 +41,7 @@ export default function Board(props: Props) {
     width: appContext.isMobile ? 330 : isMdMax() ? 600 : 800,
     height: appContext.isMobile ? 400 : 800 / CANVAS_ASPECT_RATIO,
   }
+  const [lastFinishedBet, setLastFinishedBet] = useState<IBet>()
   const gameContext = useGameContext()
   const [tickData, setTickData] = useState<GameTickData>(null)
   const [messageType, setMessageType] = useState<FloatResultStyleType>(FloatResultStyleType.idle)
@@ -102,6 +109,10 @@ export default function Board(props: Props) {
       startTimeRef.current = null
       gameRef.current.stop()
     }
+
+    if (e.type === AviatorEventType.betFinished && e.bet) {
+      setLastFinishedBet(e.bet)
+    }
   }
 
   const factor = roundStatus.status === AviatorRoundStatus.finished ? roundStatus.multiplier : tickData?.factor ?? 0
@@ -111,7 +122,7 @@ export default function Board(props: Props) {
       <div className={styles.root}>
         <BackgroundImage factor={factor} size={canvasSize} />
         <FinishedPlayers
-          user={{name: 'player', value: 1.5}}
+          bet={lastFinishedBet}
           size={canvasSize}
           time={gameRef.current.time}
         />

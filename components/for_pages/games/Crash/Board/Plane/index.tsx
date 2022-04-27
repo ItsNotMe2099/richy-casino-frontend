@@ -16,9 +16,9 @@ export default function Plane(props: Props) {
   const planeSize: number = appContext.isMobile ? 240 : 300
   const left = props.position.x - planeSize / 2 - 10
   const top = props.position.y - planeSize / 2 - 20
-  const startAngle = 5
-  const maxAngle = 75
-  const angle = maxAngle / 2 * props.progress + startAngle
+  const startAngle = appContext.isMobile ? 10 : 7
+  const maxAngle = appContext.isMobile ? 60 : 40
+  const angle = maxAngle * props.progress + startAngle
 
   return (
     <div className={styles.root} style={{left, top, transform: `rotate(-${angle}deg)`}}>

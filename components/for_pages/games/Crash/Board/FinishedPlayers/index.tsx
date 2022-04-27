@@ -1,24 +1,20 @@
 import styles from './index.module.scss'
 import { IPosition, ISize } from 'types/interfaces'
 import { useEffect, useState } from 'react'
+import { IBet } from 'data/interfaces/IAviatorEvent'
 
-interface User {
-  name: string,
-  value: number
-}
-
-interface UserWithTime extends User{
+interface BetWithTime extends IBet{
   time: number
 }
 
 interface Props {
-  user?: User
+  bet?: IBet
   size: ISize
   time: number
 }
 
 export default function FinishedPlayers(props: Props) {
-  const [list, setList] = useState<UserWithTime[]>([])
+  const [list, setList] = useState<BetWithTime[]>([])
   const maxTime = 3000
   const offsetSpeed = 100
   const startPosition: IPosition = {
@@ -27,17 +23,17 @@ export default function FinishedPlayers(props: Props) {
   }
 
   useEffect(() => {
-    if (props.user) {
-      const exists = list.find(item => item.name === props.user.name)
-      const newUser: UserWithTime = {
-        ...props.user,
+    if (props.bet) {
+      const exists = list.find(item => item.id === props.bet.id)
+      const newUser: BetWithTime = {
+        ...props.bet,
         time: props.time,
       }
       if (!exists) {
         setList([...list, newUser])
       }
     }
-  }, [props.user])
+  }, [props.bet])
 
   return (
     <div className={styles.root} style={{ width: props.size.width, height: props.size.height }}>
@@ -56,7 +52,7 @@ export default function FinishedPlayers(props: Props) {
                 transform: `translate(-${offsetSpeed * progress}px, ${offsetSpeed * progress}px)`
               }}
             >
-              {item.name} {item.value}x
+              {item.user.login || `#${item.user.id}`} - {item.betAmount} {item.currency}
             </div>
           )
         } else {
