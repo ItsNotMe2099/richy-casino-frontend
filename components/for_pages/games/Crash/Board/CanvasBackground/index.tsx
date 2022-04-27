@@ -9,11 +9,9 @@ import konva from 'konva'
 
 interface Props {
   size: ISize
-  planePosition: IPosition
-  startPosition: IPosition
   track: IPosition[]
   factor: number
-  progress: number
+  time: number
 }
 
 interface IFactorPosition{

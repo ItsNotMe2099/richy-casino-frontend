@@ -90,23 +90,19 @@ export default function Board(props: Props) {
     }
   }
 
-  const progress = tickData?.progress ?? gameRef.current.progress
   const factor = roundStatus.status === AviatorRoundStatus.finished ? roundStatus.multiplier : tickData?.factor ?? 0
 
   return (
     <GamePageBoardLayout>
       <div className={styles.root}>
         <CanvasBackground
-          startPosition={gameRef.current.startPosition}
-          progress={progress}
-          planePosition={tickData?.planePosition ?? gameRef.current.planePosition}
           size={canvasSize}
           track={gameRef.current.track}
           factor={factor}
+          time={tickData?.time ?? 0}
         />
         <Plane
-          progress={progress > 1 ? 1 : progress}
-          planePosition={tickData?.planePosition ?? gameRef.current.planePosition}
+          position={tickData?.currentPosition || gameRef.current.currentPosition}
           inputRef={inputPlaneRef}
         />
         <div className={styles.messageLayer}>
