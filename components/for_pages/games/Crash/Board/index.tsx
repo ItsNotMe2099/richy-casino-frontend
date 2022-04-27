@@ -3,7 +3,7 @@ import GamePageBoardLayout from 'components/for_pages/games/components/layout/Ga
 import { useGameContext } from 'components/for_pages/games/context/state'
 import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
-import { CANVAS_ASPECT_RATIO } from './constants'
+import { CANVAS_ASPECT_RATIO, MAX_TIME } from './constants'
 import { StateMachineInput } from 'rive-react'
 import Plane from './Plane'
 import { ISize } from 'types/interfaces'
@@ -103,6 +103,7 @@ export default function Board(props: Props) {
         />
         <Plane
           position={tickData?.currentPosition || gameRef.current.currentPosition}
+          progress={gameRef.current.time > MAX_TIME ? 1 : gameRef.current.time / MAX_TIME}
           inputRef={inputPlaneRef}
         />
         <div className={styles.messageLayer}>

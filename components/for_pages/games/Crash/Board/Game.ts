@@ -21,6 +21,9 @@ export interface ISettings{
 export default class Game {
   readonly _settings: ISettings
   _animationId: number
+  _paddingHorizontal: number
+  _paddingVertical: number
+  _innerSize: ISize
   track: IPosition[] = []
   startPosition: IPosition
   currentPosition: IPosition
@@ -30,9 +33,15 @@ export default class Game {
 
   constructor(settings: ISettings) {
     this._settings = settings
+    this._paddingHorizontal = settings.size.width / 10
+    this._paddingVertical = settings.size.height / 10
+    this._innerSize = {
+      width: settings.size.width - this._paddingHorizontal * 2,
+      height: settings.size.height - this._paddingVertical * 2,
+    }
     this.startPosition = {
-      x: 0,
-      y: settings.size.height,
+      x: this._paddingHorizontal,
+      y: settings.size.height - this._paddingVertical,
     }
     this.currentPosition = {...this.startPosition}
   }
@@ -74,12 +83,12 @@ export default class Game {
     this.time = this._getProgressTime()
     this.factor = this._getFactorByTime(this.time)
 
-    if (this.time < MAX_TIME || this.factor < MAX_FACTOR) {
+    if (this.time <= MAX_TIME && this.factor <= MAX_FACTOR) {
       const effectiveTime = this.time > MAX_TIME ? MAX_TIME : this.time
       const effectiveFactor = this.factor > MAX_FACTOR ? MAX_FACTOR : this.factor
       this.currentPosition = {
-        x: this._settings.size.width * (effectiveTime / MAX_TIME),
-        y: this._settings.size.height - this._settings.size.height * (effectiveFactor / MAX_FACTOR),
+        x: this._innerSize.width * (effectiveTime / MAX_TIME) + this._paddingHorizontal,
+        y: this._innerSize.height - this._innerSize.height * (effectiveFactor / MAX_FACTOR) + this._paddingVertical,
       }
       this.track.push({...this.currentPosition})
     }
