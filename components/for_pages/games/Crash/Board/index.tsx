@@ -15,6 +15,7 @@ import { AviatorEventType, AviatorRoundStatus, IAviatorEvent, IAviatorRound } fr
 import { useTimer } from 'react-timer-hook'
 import { pad } from 'utils/formatter'
 import BackgroundImage from './BackgroundImage'
+import FinishedPlayers from './FinishedPlayers'
 
 interface Props {}
 
@@ -36,6 +37,7 @@ export default function Board(props: Props) {
   }
   const gameContext = useGameContext()
   const [tickData, setTickData] = useState<GameTickData>(null)
+  const [messageType, setMessageType] = useState<FloatResultStyleType>(FloatResultStyleType.idle)
   const inputPlaneRef = useRef<StateMachineInput>(null)
   const [roundStatus, setRoundStatus] = useState<IAviatorRound>(startEvent)
   const roundStatusRef = useRef<IAviatorRound>(null)
@@ -53,8 +55,18 @@ export default function Board(props: Props) {
 
   useEffect(() => {
     const aviatorSubscription = gameContext.aviatorState$.subscribe(handleServerEvent)
+    const gameSubscription = gameContext.gameState$.subscribe((e) => {
+      if (e) {
+        if (e.win) {
+          setMessageType(FloatResultStyleType.success)
+        } else {
+          setMessageType(FloatResultStyleType.fail)
+        }
+      }
+    })
     return () => {
       aviatorSubscription.unsubscribe()
+      gameSubscription.unsubscribe()
     }
   }, [])
 
@@ -77,6 +89,7 @@ export default function Board(props: Props) {
 
     if (e.type === AviatorEventType.planned) {
       gameRef.current.clear()
+      setMessageType(FloatResultStyleType.idle)
       setTickData(null)
     }
 
@@ -97,6 +110,11 @@ export default function Board(props: Props) {
     <GamePageBoardLayout>
       <div className={styles.root}>
         <BackgroundImage factor={factor} size={canvasSize} />
+        <FinishedPlayers
+          user={{name: 'player', value: 1.5}}
+          size={canvasSize}
+          time={gameRef.current.time}
+        />
         <CanvasBackground
           size={canvasSize}
           track={gameRef.current.track}
@@ -110,7 +128,7 @@ export default function Board(props: Props) {
         />
         <div className={styles.messageLayer}>
           {tickData && (
-            <FloatResult styleType={FloatResultStyleType.idle}>
+            <FloatResult styleType={messageType}>
               {`${Math.round(factor * 100) / 100}x`}
             </FloatResult>
           )}

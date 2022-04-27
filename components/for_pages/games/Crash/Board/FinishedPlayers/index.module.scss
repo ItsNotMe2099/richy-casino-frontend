@@ -1,0 +1,15 @@
+@import "scss/index";
+
+.root{
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: $dark200;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.player{
+  position: absolute;
+  transition: opacity 100ms, transform 100ms;
+}
