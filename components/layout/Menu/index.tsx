@@ -10,6 +10,7 @@ import {useAppContext} from 'context/state'
 import {useTranslation} from 'next-i18next'
 import {ModalType} from 'types/enums'
 import {Routes} from 'types/routes'
+import AviatorSvg from 'components/svg/AviatorSvg'
 
 interface Props {
   children?: React.ReactNode
@@ -43,7 +44,7 @@ export default function Menu(props: Props) {
     {label: t('menu_wheel_of_fortune'), link: '/wheel_of_fortune', onClick: () => appContext.showModal(ModalType.fortune)},
     {label: t('menu_lottery'), link: Routes.lottery},
     {label: t('menu_live_casino'), link: Routes.catalogLive},
-    {label: t('menu_aviator'), link: Routes.aviator},
+    {label: <AviatorSvg className={styles.aviatorMenuItem}/>, link: Routes.aviator},
     {label: t('menu_poker'), link: Routes.poker},
     {label: t('menu_tournaments'), link: Routes.tournaments},
     {label: t('menu_bonuses'), link: Routes.bonuses},
@@ -62,7 +63,7 @@ export default function Menu(props: Props) {
       <Link href='/'>
         <a className={styles.logo}><Logo/></a>
       </Link>
-      <Overflow currentPath={currentPath} currentRoute={currentRoute} options={options}/>
+      <Overflow currentPath={currentPath} currentRoute={currentRoute} options={options} dropDownClassName={styles.dropDown}/>
     </div>
   }
   return ( appContext.isDesktop ?

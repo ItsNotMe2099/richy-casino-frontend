@@ -175,3 +175,14 @@
     display: none;
   }
 }
+.dropDown{
+  .menuItem{
+    padding: 10px 19px;
+    font-weight: 500;
+    &:hover{
+      &:after{
+        display: none !important;
+      }
+    }
+  }
+}

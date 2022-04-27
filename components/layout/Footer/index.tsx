@@ -35,7 +35,7 @@ export default function Footer(props: Props) {
   const options = [
     { label: t('footer_menu_terms_of_service'), link: '/terms_of_service' },
     { label: t('footer_menu_bonuses'), link: '/bonuses' },
-    { label: t('footer_menu_faq'), link: '/faq' },
+    { label: t('footer_menu_info'), link: '/info' },
     { label: t('footer_menu_affiliate'), link: 'https://richy.partners', blank: true },
   ]
 
@@ -49,6 +49,7 @@ export default function Footer(props: Props) {
   const allItems = options.concat(items)
 
   const slidesTop = [
+    {image: 'https://cdn.freekassa.ru/banners/small-dark-2.png', link: 'https://freekassa.ru'},
     {image: '/img/layout/footer/sliders/top/discover.svg'},
     {image: '/img/layout/footer/sliders/top/jcb.svg'},
     {image: '/img/layout/footer/sliders/top/piastrix.svg'},
@@ -188,10 +189,11 @@ export default function Footer(props: Props) {
         <div className={styles.sliders}>
 
             <div className={styles.sliderTop}>
-              {slidesTop.map((slide, index) =>
-                <div className={styles.slide} key={index}>
+              {slidesTop.map((slide, index) => <Link href={slide.link ?? '#'} key={index} >
+                <a className={styles.slide} target={slide.link ? '_blank' : null}>
                   <img src={slide.image} alt=''/>
-                </div>
+                </a>
+                </Link>
               )}
             </div>
             <div className={styles.sliderBottom}>
@@ -230,9 +232,14 @@ export default function Footer(props: Props) {
                   <div className={styles.lang}><LangSelect style='footer' /></div>
                 </div>
           <div className={styles.bottom}>
-              <div className={styles.eighteen}>
-                <img src='/img/layout/footer/eighteen.svg' alt=''/>
-              </div>
+            <div className={styles.bottomIcons}>
+            <div className={styles.eighteen}>
+              <img src='/img/layout/footer/eighteen.svg' alt=''/>
+            </div>
+            <div className={styles.logoLicense}>
+              <img src='/img/licenses/curocao.png' alt=''/>
+            </div>
+            </div>
               <div className={styles.desc}>
                 © {format(new Date(),'y')} {t('footer_text_2')}
               </div>

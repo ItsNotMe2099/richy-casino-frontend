@@ -34,6 +34,7 @@
     "matter-js": "^0.18.0",
     "next": "12.0.3",
     "next-i18next": "^11.0.0",
+    "next-seo": "^5.4.0",
     "nookies": "^2.5.2",
     "normalize.css": "8.0.1",
     "numeralize-ru": "^1.0.1",
@@ -74,6 +75,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/debounce": "^1.2.1",
     "@types/node": "16.11.7",
     "@types/react": "17.0.34",
     "@types/react-slick": "^0.23.7",

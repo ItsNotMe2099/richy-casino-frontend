@@ -45,3 +45,15 @@
     display: none;
   }
 }
+.aviatorMenuItem{
+  height: 15px;
+  margin-top: -5px;
+  @media screen and (max-width: $mobile-max){
+    height: 14px;
+  }
+}
+.dropDown{
+  .aviatorMenuItem{
+    margin-top: 0px;
+  }
+}

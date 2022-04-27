@@ -13,6 +13,8 @@ import TopSlider from 'components/for_pages/MainPage/TopSlider'
 import BuyCrypto from 'components/for_pages/MainPage/BuyCrypto'
 import VisibleXs from 'components/ui/VisibleXS'
 import {getServerSideTranslation} from 'utils/i18'
+import {NextSeo} from 'next-seo'
+import {useTranslation} from 'next-i18next'
 
 const casinos = [
   {image: '/img/GamesList/hotline.png', label: 'hotline', provider: 'provider1', category: 'category1'},
@@ -41,9 +43,10 @@ const live = [
 ]
 
 export default function IndexPage() {
-
+  const {t} = useTranslation()
   return (
         <Layout>
+          <NextSeo title={t('page_index_title')}/>
           <TopSlider/>
           <Contents/>
           <Games/>
@@ -74,7 +77,6 @@ export default function IndexPage() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context ) => {
-  console.log('ContextLocal', context.locale)
   return {
     props: {
       ...await getServerSideTranslation(context),
