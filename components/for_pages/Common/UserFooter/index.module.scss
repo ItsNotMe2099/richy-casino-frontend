@@ -51,4 +51,24 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  &.active{
+  .label {
+    color: $white;
+  }
+
+
+    .icon{
+      .poker{
+          path{
+            stroke: $white;
+            fill: none;
+        }
+      }
+      svg{
+        path {
+          fill: $white;
+        }
+      }
+    }
+  }
 }

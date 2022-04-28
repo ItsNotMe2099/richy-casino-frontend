@@ -6,15 +6,24 @@ import {Routes} from 'types/routes'
 import {useRouter} from 'next/router'
 import Link from 'next/link'
 import classNames from 'classnames'
+import useIsActiveLink from 'hooks/useIsActiveLink'
+import UserSvg from 'components/svg/UserSvg'
+import PokerSvg from 'components/svg/PokerSvg'
+import CasinoSvg from 'components/svg/CasinoSvg'
+import MenuSvg from 'components/svg/MenuSvg'
+import MenuCloseSvg from 'components/svg/MenuCloseSvg'
+import JoyStickSvg from 'components/svg/JoyStickSvg'
+import {ReactElement} from 'react'
 
 interface Props {
 
 }
 
 interface ItemProps {
-  icon: string
+  icon: ReactElement
   label: string
   onClick: () => void
+  link?: string
 }
 
 enum ActionType{
@@ -23,28 +32,30 @@ enum ActionType{
   Casino = 'casino',
   Menu = 'menu'
 }
+const Item = ({icon, label, onClick, link}: ItemProps) => {
+  const isActive = useIsActiveLink(link ?? '')
+  return (
+    <div className={classNames(styles.item, {[styles.active]: isActive})} onClick={onClick}>
+      <div className={styles.icon}>
+        {icon}
+      </div>
+      <div className={styles.label}>
+        {label}
+      </div>
+    </div>
+  )
+}
 
 export default function UserFooter(props: Props) {
   const router = useRouter()
   const items = [
-    {label: 'Main', icon: '/img/UserFooter/user.svg', key: ActionType.Main},
-    {label: 'Poker', icon: '/img/UserFooter/poker.svg', key: ActionType.Poker},
-    {label: 'Casino', icon: '/img/UserFooter/casino.svg', key: ActionType.Casino},
-    {label: 'Menu', icon: '/img/UserFooter/menu.svg', key: ActionType.Menu},
+    {label: 'Main', icon: <UserSvg/>, key: ActionType.Main, link: '/'},
+    {label: 'Poker', icon: <PokerSvg className={styles.poker}/>, key: ActionType.Poker, link: Routes.poker},
+    {label: 'Casino', icon: <CasinoSvg/>, key: ActionType.Casino, link: Routes.catalog},
+    {label: 'Menu', icon: <MenuSvg/>, key: ActionType.Menu},
   ]
 
-  const Item = ({icon, label, onClick}: ItemProps) => {
-    return (
-      <div className={styles.item} onClick={onClick}>
-        <div className={styles.icon}>
-          <img src={icon} alt=''/>
-        </div>
-        <div className={styles.label}>
-          {label}
-        </div>
-      </div>
-    )
-  }
+
 
   const {showModal} = useAppContext()
   const context = useAppContext()
@@ -75,17 +86,18 @@ export default function UserFooter(props: Props) {
     <VisibleXs>
       <div className={classNames(styles.root, {[styles.isOverAll]: isMenuOpen})}>
         {items.slice(0, 2).map((item, index) =>
-          <Item onClick={() => handleClickItem(item)} icon={item.icon} label={item.label} key={item.key}/>
+          <Item onClick={() => handleClickItem(item)} icon={item.icon} label={item.label} key={item.key}  link={item.link}/>
         )}
         <Link href={Routes.richyGames}>
         <a className={styles.joystick}>
-          <img src='/img/UserFooter/joystick.svg' alt=''/>
+          <JoyStickSvg/>
         </a>
         </Link>
         {items.slice(2, items.length).map((item, index) =>
           <Item
           onClick={() => handleClickItem(item)}
-          icon={item.label === 'Menu' && isMenuOpen ? '/img/UserFooter/close.svg' : item.icon} label={item.label} key={item.key}/>
+          link={item.link}
+          icon={item.label === 'Menu' && isMenuOpen ? <MenuCloseSvg/> : item.icon} label={item.label} key={item.key}/>
         )}
       </div>
     </VisibleXs>
