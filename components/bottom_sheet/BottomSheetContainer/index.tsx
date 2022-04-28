@@ -24,6 +24,7 @@ export default function BottomSheetContainer(props: Props) {
   const handleClose = () => {
     appContext.hideBottomSheet()
   }
+  console.log('appContext.bottomSheet', appContext.bottomSheet)
   return (
     <RemoveScroll enabled={!!appContext.bottomSheet}>
       <div className={styles.root} aria-hidden="true">

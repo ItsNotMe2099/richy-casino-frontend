@@ -15,6 +15,7 @@ export interface ISettings{
   startTimeRef: MutableRefObject<Date | null>
   inputPlaneRef: MutableRefObject<StateMachineInput>
   size: ISize
+  isSmallScreen: boolean
   onProgress: (data: GameTickData) => void
 }
 
@@ -33,7 +34,7 @@ export default class Game {
 
   constructor(settings: ISettings) {
     this._settings = settings
-    this._paddingHorizontal = settings.size.width / 10
+    this._paddingHorizontal = settings.size.width / (settings.isSmallScreen ? 6 : 10)
     this._paddingVertical = settings.size.height / 10
     this._innerSize = {
       width: settings.size.width - this._paddingHorizontal * 2,

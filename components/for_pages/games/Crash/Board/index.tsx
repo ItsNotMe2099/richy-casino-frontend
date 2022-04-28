@@ -41,6 +41,7 @@ export default function Board(props: Props) {
     width: appContext.isMobile ? 330 : isMdMax() ? 600 : 800,
     height: appContext.isMobile ? 400 : 800 / CANVAS_ASPECT_RATIO,
   }
+  const isSmallScreen = canvasSize.width < 500
   const [lastFinishedBet, setLastFinishedBet] = useState<IBet>()
   const gameContext = useGameContext()
   const [tickData, setTickData] = useState<GameTickData>(null)
@@ -54,8 +55,10 @@ export default function Board(props: Props) {
     startTimeRef,
     roundStatusRef,
     inputPlaneRef,
+    isSmallScreen,
     onProgress: (data) => {
       setTickData(data)
+      gameContext.aviatorTick$.next(data)
     },
     size: canvasSize,
   }))
@@ -136,6 +139,7 @@ export default function Board(props: Props) {
           position={tickData?.currentPosition || gameRef.current.currentPosition}
           progress={gameRef.current.time > MAX_TIME ? 1 : gameRef.current.time / MAX_TIME}
           inputRef={inputPlaneRef}
+          isSmallScreen={isSmallScreen}
         />
         <div className={styles.messageLayer}>
           {tickData && (
