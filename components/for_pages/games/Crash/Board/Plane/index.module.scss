@@ -1,11 +1,11 @@
 @import "scss/index";
 
 .root{
-  //transition: top 16ms, left 16ms;
   position: absolute;
   top: 0;
   left: 0;
   transform-origin: 50% 50%;
+  will-change: top, left, transform;
   canvas{
     max-width: 100%;
   }
