@@ -28,7 +28,7 @@ import BottomSheetContainer from 'components/bottom_sheet/BottomSheetContainer'
 import Head from 'next/head'
 import {DefaultSeo} from 'next-seo'
 function MyApp({ Component, pageProps }: AppProps) {
-  const [clientVisible, setClientVisible] = useState(false)
+  const [clientVisible, setClientVisible] = useState(true)
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
     setIsLoading(false)
