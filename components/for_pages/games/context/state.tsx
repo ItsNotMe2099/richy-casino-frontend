@@ -17,6 +17,7 @@ import GameUserRepository from 'components/for_pages/games/data/reposittories/Ga
 import {runtimeConfig} from 'config/runtimeConfig'
 import {ICasinoGameRound} from 'components/for_pages/games/data/interfaces/ICasinoGameRound'
 import {IAviatorEvent} from 'data/interfaces/IAviatorEvent'
+import { GameTickData as AviatorGameTickData } from 'components/for_pages/games/Crash/Board/Game'
 
 interface IState {
   auth: boolean
@@ -26,6 +27,7 @@ interface IState {
   turnState$: Subject<ICasinoGameTurn>
   historyState$: Subject<ICasinoGameRound>
   aviatorState$: Subject<IAviatorEvent>
+  aviatorTick$: Subject<AviatorGameTickData>
   newTurn: (data: any, shouldClear?: boolean) => void
   startGame: (data: ICasinoGameDataDto, shouldClear?: boolean) => void
   finish: () => void
@@ -47,6 +49,7 @@ const gameState$ = new Subject<ICasinoGameFinishEvent>()
 const turnState$ = new Subject<ICasinoGameTurn>()
 const historyState$ = new Subject<ICasinoGameRound>()
 const aviatorState$ = new Subject<IAviatorEvent>()
+const aviatorTick$ = new Subject<AviatorGameTickData>()
 
 const defaultValue: IState = {
   auth: false,
@@ -55,6 +58,7 @@ const defaultValue: IState = {
   turnState$: turnState$,
   historyState$: historyState$,
   aviatorState$: aviatorState$,
+  aviatorTick$: aviatorTick$,
   roundId: null,
   turn: null,
   result: null,

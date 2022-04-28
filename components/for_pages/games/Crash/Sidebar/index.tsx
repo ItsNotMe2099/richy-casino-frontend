@@ -9,9 +9,9 @@ import GField from 'components/for_pages/games/components/inputs/GField'
 import GFieldInfinite from 'components/for_pages/games/components/inputs/GFieldInfinite'
 import GFieldAutoAction from 'components/for_pages/games/components/inputs/GFieldAutoAction'
 import { CheckBox } from 'components/ui/Inputs/CheckBox'
-import GamePageBetButton from 'components/for_pages/games/components/GamePageBetButton'
 import VisibleXs from 'components/ui/VisibleXS'
 import GamePageBetMobileLayout from 'components/for_pages/games/components/layout/GamePageBetMobileLayout'
+import AviatorBetButton from './AviatorBetButton'
 
 interface Props {
   onSubmit: (data: ICasinoGameDataDto) => void
@@ -57,7 +57,7 @@ export default function Sidebar(props: Props) {
           </>}
 
           <HiddenXs>
-            <GamePageBetButton/>
+            <AviatorBetButton />
           </HiddenXs>
 
           <VisibleXs>
@@ -65,7 +65,7 @@ export default function Sidebar(props: Props) {
               <GFieldMode/>
               <GamePageBetMobileLayout>
                 <GFieldBet/>
-                <GamePageBetButton/>
+                <AviatorBetButton/>
               </GamePageBetMobileLayout>
             </>
           </VisibleXs>

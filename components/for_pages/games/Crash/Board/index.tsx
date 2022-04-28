@@ -58,6 +58,7 @@ export default function Board(props: Props) {
     isSmallScreen,
     onProgress: (data) => {
       setTickData(data)
+      gameContext.aviatorTick$.next(data)
     },
     size: canvasSize,
   }))
