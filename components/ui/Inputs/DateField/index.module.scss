@@ -1,0 +1,74 @@
+@import "scss/index";
+.root{
+  position: relative;
+  margin-bottom: 12px;
+  :global .react-calendar{
+    background: white;
+  }
+  .datePicker{
+    display: flex;
+    flex: 1;
+    color: #717384;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    border-radius: 8px;
+    border: none;
+    padding: 0px 20px;
+    background-color: transparent !important;
+    &:-webkit-autofill{
+      -webkit-text-fill-color: #717384 !important;
+    }
+    @media screen and (max-width: $sm-min) {
+      padding: 0px 15px;
+    }
+
+    :global .react-date-picker__calendar{
+      z-index: 3;
+    }
+    :global .react-date-picker__wrapper{
+      color: inherit;
+      border: none;
+      &::placeholder{
+        color: red;
+      }
+
+
+    }
+
+
+  }
+
+}
+
+.wrapper{
+  position: relative;
+  flex-direction: column;
+}
+
+.inputWrapper{
+  position: relative;
+  background: $dark600;
+}
+
+.withLabel{
+  display: flex;
+  align-items: center;
+  background: $dark600;
+  border-radius: 12px;
+  height: 70px;
+  @media screen and (max-width: $xs-max) {
+    height: 50px;
+    background-color: $dark700;
+  }
+}
+.label{
+  margin-left: 29px;
+  font-weight: 500;
+  font-size: 16px;
+  color: $dark200;
+  @media screen and (max-width: $xs-max) {
+    font-size: 12px;
+    margin-left: 17px;
+  }
+}

@@ -16,6 +16,7 @@ import {IPagination} from 'types/interfaces'
 import {IWithdrawHistory} from 'data/interfaces/IWithdrawHistory'
 import classNames from 'classnames'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import ContentLoader from 'components/ui/ContentLoader'
 
 interface Props {
 
@@ -61,23 +62,7 @@ export default function PaymentHistory(props: Props) {
   const [page, setPage] = useState<number>(0)
   const [loading, setLoading] = useState<boolean>(true)
   const limit = 30
-  const items = [
-    {label: 'Qiwi', card: null, date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
-    {label: null, card: '0000000000000001', date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
-    {label: 'Qiwi', card: null, date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
-    {label: null, card: '0000000000000001', date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
-    {label: null, card: '0000000000000001', date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
-    {label: 'Qiwi', card: null, date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
-    {label: null, card: '0000000000000001', date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
-    {label: 'Qiwi', card: null, date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
-    {label: null, card: '0000000000000001', date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
-    {label: null, card: '0000000000000001', date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
-    {label: 'Qiwi', card: null, date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
-    {label: null, card: '0000000000000001', date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
-    {label: 'Qiwi', card: null, date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
-    {label: null, card: '0000000000000001', date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
-    {label: null, card: '0000000000000001', date: '2021-12-27T12:46:24.007Z', amount: '+ 1000 ₽'},
-  ]
+
   const getTypesFilter = (filter: PaymentSwitchFilterKey) => {
     switch (filter){
       case PaymentSwitchFilterKey.All:
@@ -91,9 +76,15 @@ export default function PaymentHistory(props: Props) {
   }
   useEffect(() => {
     if(filter === PaymentSwitchFilterKey.Applications){
-      BalanceTransactionRepository.fetchWithdrawalHistory( 1, limit).then(i => setApplicationsData(i))
+      BalanceTransactionRepository.fetchWithdrawalHistory( 1, limit).then(i => {
+        setApplicationsData(i)
+        setLoading(false)
+      })
     }else {
-      BalanceTransactionRepository.fetchTransactions(getTypesFilter(filter), 1, limit).then(i => setData(i))
+      BalanceTransactionRepository.fetchTransactions(getTypesFilter(filter), 1, limit).then(i => {
+        setData(i)
+        setLoading(false)
+      })
     }
     }, [filter])
   const handleChangeFilter = (item: PaymentSwitchFilterKey) => {
@@ -123,10 +114,11 @@ export default function PaymentHistory(props: Props) {
         <SwitchFilterPayments active={filter} onClick={handleChangeFilter}/>
       </div>
       <ProfileModalBody fixed id={'payment-history-list'} className={styles.body}>
+        {loading && data.total == 0 && <ContentLoader style={'block'} isOpen={true}/>}
         <InfiniteScroll
           dataLength={PaymentSwitchFilterKey.Applications ? applicationsData.data.length : data.data.length}
           next={handleScrollNext}
-          loader={<div></div>}
+          loader={ data.total > 0 ? <ContentLoader style={'infiniteScroll'} isOpen={true}/> : null}
           hasMore={PaymentSwitchFilterKey.Applications ? applicationsData.total > applicationsData.data.length : data.total > data.data.length}
           scrollThreshold={0.6}
           scrollableTarget={'payment-history-list'}

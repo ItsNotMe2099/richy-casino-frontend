@@ -23,7 +23,9 @@ export enum ProfileModalType {
   betsHistory = 'betsHistory',
   buyCrypto = 'buyCrypto',
   FA = 'FA',
-  withdraw = 'withdraw'
+  withdraw = 'withdraw',
+  newPhoneConfirm = 'newPhoneConfirm',
+  oldPhoneConfirm = 'oldPhoneConfirm'
 }
 
 export enum CookiesType {

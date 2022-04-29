@@ -7,6 +7,7 @@ import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
 import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
 import {useTranslation} from 'next-i18next'
 import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
+import ContentLoader from 'components/ui/ContentLoader'
 
 interface Props {
 
@@ -19,9 +20,11 @@ interface ItemProps {
 export default function Favorite(props: Props) {
   const {t} = useTranslation()
   const [data, setData] = useState<IGame[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
   useEffect(() => {
     GameFavoriteRepository.fetchGames().then(i => {
       setData(i)
+      setLoading(false)
     })
   }, [])
   const handleDelete = (game: IGame) => {
@@ -32,11 +35,12 @@ export default function Favorite(props: Props) {
     <ProfileModalLayout fixed>
       <ProfileModalHeader title={t('favorite_title')}/>
       <ProfileModalBody fixed>
-        <div className={styles.root}>
+        {loading && <ContentLoader style={'block'} isOpen={true}/>}
+        {!loading && <div className={styles.root}>
           {data.map((item, index) =>
             <ItemGame item={item} key={item.id} onDeleteFromFavorite={handleDelete}/>
           )}
-        </div>
+        </div>}
       </ProfileModalBody>
     </ProfileModalLayout>
   )

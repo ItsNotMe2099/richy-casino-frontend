@@ -5,8 +5,9 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import ItemGame from 'components/for_pages/Common/ItemGame'
 import {IGame} from 'data/interfaces/IGame'
-import InfiniteScroll from 'react-infinite-scroll-component'
 import Formatter from 'utils/formatter'
+import Spinner from 'components/ui/Spinner'
+import ContentLoader from 'components/ui/ContentLoader'
 interface Item extends IGame{
   link?: string
 }
@@ -38,55 +39,39 @@ export default function GamesList(props: Props) {
   const [isShow, setIsShow] = useState(false)
 
   const handleShowTrigger = () => {
-    if(isShow && props.totalItems > props.items.length && props.items.length <= 30){
-      props.onScrollNext()
-    }
-    setIsShow(!isShow)
+    setIsShow(true)
+    props.onScrollNext()
   }
+
   return (
     <div className={styles.root}>
       <Header icon={props.icon} allLink={props.allLink} label={props.title} length={`${Formatter.formatNumber(props.totalItems)}`} shadowColor={getShadow(props.icon)}/>
       {props.switchFilter && <HiddenXs>
         <div className={styles.wrapper}>{props.switchFilter}</div>
       </HiddenXs>}
-
+      {props.loading && props.totalItems === 0 && <ContentLoader style={'block'} isOpen={true}/>}
         <HiddenXs>
-            <InfiniteScroll
-              dataLength={props.items.length}
-              next={props.onScrollNext}
-              loader={<div></div>}
-              hasMore={isShow && props.totalItems > props.items.length}
-              scrollThreshold={0.6}
-
-            >
               <div className={styles.list}>
                 {props.items && (isShow ? props.items : props.items.slice(0, 10)).map((item, index) =>
                   <ItemGame item={item} key={item.id} link={item.link}/>
                 )}
               </div>
-            </InfiniteScroll>
         </HiddenXs>
         <VisibleXs>
-          <InfiniteScroll
-            dataLength={props.items.length}
-            next={props.onScrollNext}
-            loader={<div></div>}
-            hasMore={isShow && props.totalItems > props.items.length}
-            className={styles.list}
-            scrollThreshold={0.6}
-          >
+          <div className={styles.list}>
             {props.items && (isShow ? props.items : props.items.slice(0, 9)).map((item, index) =>
               <ItemGame  item={item} key={item.id} link={item.link}/>
             )}
-          </InfiniteScroll>
+          </div>
         </VisibleXs>
 
-      {props.totalItems > 10 && <div className={styles.more} onClick={handleShowTrigger}>
+      {props.totalItems > 20 && props.items.length < props.totalItems && !(props.loading && props.items.length === 0) && <div className={styles.more} onClick={props.loading ? null : handleShowTrigger}>
         <div className={styles.icon}>
-          <img src='/img/CatalogPage/more.svg' alt=''/>
+          {props.loading ?   <Spinner size={22} color="#fff" secondaryColor="rgba(255,255,255,0.4)"/>
+            : <img src='/img/CatalogPage/more.svg' alt=''/>}
         </div>
         <div className={styles.text}>
-          {isShow ? <>Меньше игр</> : <>Больше игр</>}
+          Больше игр
         </div>
       </div>}
     </div>

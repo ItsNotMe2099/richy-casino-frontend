@@ -8,6 +8,7 @@ interface Props {
   color?: string
   secondaryColor?: string
   center?: boolean
+  thickness?: number
 }
 
 export default function Spinner(props: Props) {
@@ -20,7 +21,7 @@ export default function Spinner(props: Props) {
         size={props.size}
         color={props.color ?? colors.white}
         secondaryColor={props.secondaryColor ?? colors.dark100}
-        thickness={150}
+        thickness={props.thickness ?? 180}
       />
     </div>
   )

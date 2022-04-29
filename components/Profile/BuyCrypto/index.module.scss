@@ -1,8 +1,99 @@
 @import "scss/index";
 
-.root{
-    margin-top: 9px;
-    @media screen and (max-width: $xs-max){
-        margin-top: 0;
-    }
+.form {
+
+  .send:nth-child(2){
+    margin-top: 16px;
+  }
+  @media screen and (max-width: $xs-max) {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: auto;
+  }
+}
+
+.btn{
+  height: 53px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.inputs{
+  margin-top: 12px;
+  display: flex;
+}
+
+.input{
+  margin-bottom: 0;
+  flex: 1;
+  input{
+    padding: 14px 18px 14px 16px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    font-size: 16px;
+    min-height: 52px;
+    background-color: $dark600;
+  }
+}
+
+.select{
+  padding: 14px 16px 14px 0 !important;
+  background-color: $dark600 !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  background-color: $dark600 !important;
+}
+
+.selectRoot{
+  margin-bottom: 0;
+  width: 39%;
+  div{
+    height: 52px;
+  }
+  @media screen and (max-width: $xs-max){
+    width: 50%;
+  }
+  nav{
+    top: 50px;
+  }
+}
+
+.texts{
+  display: flex;
+  justify-content: space-between;
+}
+
+.youSend{
+  font-weight: 500;
+  font-size: 14px;
+  color: $dark200;
+}
+
+.balance{
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: $dark400;
+}
+
+.equality{
+  font-weight: 600;
+  font-size: 12px;
+  color: $dark400;
+  margin-top: 8px;
+  text-align: left;
+}
+
+.separator{
+  margin: 16px 0;
+}
+
+.disclaimer{
+  margin-top: 16px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14px;
+  color: $dark400;
+  text-align: left;
 }

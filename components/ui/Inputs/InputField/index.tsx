@@ -66,7 +66,7 @@ export default function InputField(props: Props) {
 
   const updateValueFromMask = () => {
     setTimeout(() => {
-      helpers.setValue(maskRef.current.value)
+      helpers.setValue(maskRef.current?.value ?? null)
     }, 50)
   }
 
