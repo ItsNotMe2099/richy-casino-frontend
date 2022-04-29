@@ -19,23 +19,9 @@ interface Props {
 
 export default function ProfileModalNew(props: Props) {
   const {t} = useTranslation()
-  const customStyles = {
-    overlay: {
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      display: 'flex',
-      zIndex: '30',
-    },
-    content: {
-      width: '100%',
-      borderRadius: '21px',
-      padding: '0',
-      border: '0',
-      margin: 'auto',
-      position: 'static',
-      inset: '0',
-      overflow: 'hidden',
-      background: 'none',
-    },
+  const settings = {
+    className: styles.modalContent,
+    overlayClassName: classNames(styles.modalOverlay),
   }
 
   const getSizeClass = (size) => {
@@ -53,12 +39,14 @@ export default function ProfileModalNew(props: Props) {
 
 
   return (
-    <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={props.onRequestClose} shouldCloseOnOverlayClick>
-      <div className={styles.frame}>
+    <ReactModal {...settings} isOpen={props.isOpen} onRequestClose={props.onRequestClose} shouldCloseOnOverlayClick>
+      <div className={classNames(styles.frame)}>
         <div className={classNames(styles.root, getSizeClass(props.size))}>
           {props.children}
         </div>
+        <div className={styles.overlay} onClick={() => props.onRequestClose()}/>
       </div>
+
     </ReactModal>
   )
 }
