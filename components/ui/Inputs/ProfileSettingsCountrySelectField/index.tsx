@@ -3,12 +3,6 @@ import {ProfileSettingsSelectField} from 'components/ui/Inputs/ProfileSettingsSe
 import {useEffect, useState} from 'react'
 import {useField} from 'formik'
 import InfoRepository from 'data/repositories/InfoRepository'
-const countries = require('i18n-iso-countries')
-countries.registerLocale(require('i18n-iso-countries/langs/en.json'))
-countries.registerLocale(require('i18n-iso-countries/langs/ru.json'))
-export interface ICustomSelectViewOption extends IOption<string>{
-
-}
 
 interface Props extends IField{
 
