@@ -63,7 +63,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </HiddenXs>
       </AuthWrapper>
       {clientVisible && <Snackbar/>}
-      {clientVisible  && <ContentLoader style={'fullscreen'} isOpen={true}/>}
+      {clientVisible  && <ContentLoader style={'fullscreen'} isOpen={isLoading}/>}
     </AppWrapper>
   )
 }
