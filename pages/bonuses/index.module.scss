@@ -1,0 +1,92 @@
+@import "scss/index";
+
+.root{
+
+}
+
+.title{
+    margin-top: 30px;
+    margin-bottom: 23px;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.item{
+    display: flex !important;
+    border-radius: 18px;
+    padding: 20px 0 13px 0;
+    position: relative;
+    max-height: 18rem;
+    overflow: hidden;
+    min-height: 18rem;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    @media screen and (max-width: 1360px){
+      padding-left: 18px;
+    }
+    @media screen and (max-width: 800px){
+      max-height: 14.5rem;
+      min-height: 14.5rem;
+      padding: 20px 0 9px 15px;
+    }
+    @media screen and (max-width: $xs-max){
+      width: auto;
+      max-height: 12rem;
+      min-height: 12rem;
+    }
+    @media screen and (max-width: $mobile-max){
+      max-height: 10rem;
+      min-height: 10rem;
+    }
+  }
+
+  .btn{
+    margin-top: 23px;
+    button{
+      color: $blue500;
+      @include textStyle14Bold;
+      padding-right: 38px;
+      padding-left: 38px;
+    }
+  }
+  
+  .left{
+    align-self: center;
+    margin-left: 28px;
+  }
+
+  .label{
+    font-weight: bold;
+    font-size: 36px;
+    color: $white;
+    line-height: 100%;
+    width: 70%;
+    @media screen and (max-width: 520px){
+      font-size: 20px;
+      width: 100%;
+    }
+  }
+
+  .spin{
+    color: #fef494;
+  }
+  
+  .lottery{
+    color: #4148e7;
+  }
+  
+  .itemLabel{
+    font-size: calc(18px + 0.5vw);
+    font-weight: 700;
+    @media screen and (max-width: 520px){
+      font-size: calc(14px + 0.5vw);
+      font-weight: 700;
+    }
+  }
+
+  .grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+  }
