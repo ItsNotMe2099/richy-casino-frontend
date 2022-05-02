@@ -47,7 +47,7 @@ export default function Statistics(props: Props) {
                 Выигрыш
               </div>
             </div>
-            {users.slice(0, 10).map((item, index) =>
+            {users.slice(0, 7).map((item, index) =>
               <div className={classNames(styles.row, styles.rowInner)} key={index}>
                 <div className={styles.cell}>
                   <div className={styles.game}>
