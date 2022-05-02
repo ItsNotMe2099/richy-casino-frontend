@@ -63,7 +63,7 @@ export class Routes{
     return '/catalog/game/poker'
   }
   static get tournaments(){
-    return '/#tournaments'
+    return '/tournaments'
   }
   static get leaderBoard(){
     return '/#leader-board'
