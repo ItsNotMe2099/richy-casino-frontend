@@ -4,6 +4,7 @@ import styles from './index.module.scss'
 import {useAppContext} from 'context/state'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
+import { ModalType } from 'types/enums'
 
 interface Props {
   balance: string
@@ -14,6 +15,12 @@ export default function Tournament(props: Props) {
   const someDate = '2022-05-01T12:46:24.007Z'
 
   const expiredAt = new Date(someDate)
+
+  const handleJoin = () => {
+    if(!appContext.auth){
+      appContext.showModal(ModalType.registration)
+    }
+  }
 
   return (
     <>
@@ -39,7 +46,7 @@ export default function Tournament(props: Props) {
         </div>
         <div className={styles.right}>
             <Timer expiredAt={expiredAt} days style='tournament'/>
-          {appContext.auth && <div className={styles.btnContainer}><Button className={styles.btn} size='normal' background='payGradient500'>Участвовать</Button></div>}
+          <div className={styles.btnContainer}><Button onClick={handleJoin} className={styles.btn} size='normal' background='payGradient500'>Участвовать</Button></div>
         </div>
     </div>
     </HiddenXs>
@@ -77,7 +84,7 @@ export default function Tournament(props: Props) {
             </div>
           </div>
         </div>
-        {appContext.auth && <Button className={styles.btnMobile} size='normal' background='payGradient500'>Участвовать</Button>}
+        <Button onClick={handleJoin} className={styles.btnMobile} size='normal' background='payGradient500'>Участвовать</Button>
         <Timer expiredAt={expiredAt} days style='tournamentMobile'/>
       </div>
       </div>
