@@ -51,7 +51,7 @@ export default function EmailForm(props: Props) {
     email: null,
     password: null,
     currency: Converter.convertCurrencyToOptions(context.currencies)[0]?.value,
-    checkBox: false
+    checkBox: true
   }
 
 
