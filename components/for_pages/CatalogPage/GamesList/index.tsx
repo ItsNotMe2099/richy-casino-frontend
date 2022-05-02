@@ -52,14 +52,14 @@ export default function GamesList(props: Props) {
       {props.loading && props.totalItems === 0 && <ContentLoader style={'block'} isOpen={true}/>}
         <HiddenXs>
               <div className={styles.list}>
-                {props.items && (isShow ? props.items : props.items.slice(0, 10)).map((item, index) =>
+                {props.items && (isShow ? props.items : props.items.slice(0, 20)).map((item, index) =>
                   <ItemGame item={item} key={item.id} link={item.link}/>
                 )}
               </div>
         </HiddenXs>
         <VisibleXs>
           <div className={styles.list}>
-            {props.items && (isShow ? props.items : props.items.slice(0, 9)).map((item, index) =>
+            {props.items && (isShow ? props.items : props.items.slice(0, 20)).map((item, index) =>
               <ItemGame  item={item} key={item.id} link={item.link}/>
             )}
           </div>
