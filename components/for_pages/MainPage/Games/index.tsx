@@ -108,7 +108,7 @@ export default function Games(props: Props) {
         <div className={styles.sliderWrapper}>
         <Slider {...settings} ref={slider1 => (slider = slider1)}>
           {richyGames.map((item, index) =>
-            <ItemGame slider item={{imageIconPreviewUrl: item.image, name: item.label}} link={item.link} key={index}/>
+            <ItemGame slider item={{imageIconPreviewUrl: item.image, name: item.label}} link={item.link} key={index} richy/>
           )}
         </Slider>
         </div>
