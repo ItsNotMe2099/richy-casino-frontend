@@ -119,12 +119,12 @@ export default function Header(props: Props) {
               </>
               :
               <div className={styles.userBtns}>
-                {context.user.extraBalances && <HiddenXs>
+                {context.user.extraBalances &&
                  <div className={styles.userBonuses} onClick={() => context.showModal(ProfileModalType.profile)}>
                     <UserBonus icon='/img/icons/ticket.svg' amount={context.user.extraBalances.lotteryTickets ?? 0} color='#427BF8'/>
                     <UserBonus icon='/img/icons/spin.svg' amount={context.user.extraBalances.freespinAmount ?? 0} color='#F81AAC'/>
                   </div>
-                </HiddenXs>}
+                }
                 {!user.flags.isHideBalance && <ProfileAccountsMenu/>}
                 <HiddenXs>
                   <ProfileMenu/>
