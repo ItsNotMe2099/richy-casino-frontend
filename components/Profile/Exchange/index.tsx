@@ -71,7 +71,7 @@ export default function Exchange(props: Props) {
               </div>
               <div className={styles.inputs}>
                 <InputField name={'amountSent'} className={styles.input} validate={Validator.required}/>
-                <div className={styles.exchange}><ExchangeCurrencySelectField name='currencySent' options={currencies}
+                <div className={styles.exchange}><ExchangeCurrencySelectField className={styles.select} name='currencySent' options={currencies}
                                                                               currentItem={currentSent[0]}/></div>
               </div>
             </div>
@@ -87,7 +87,7 @@ export default function Exchange(props: Props) {
               </div>
               <div className={styles.inputs}>
                 <InputField name={'amountGet'} className={styles.input} validate={Validator.required} disabled/>
-                <div className={styles.exchange}><ExchangeCurrencySelectField
+                <div className={styles.exchange}><ExchangeCurrencySelectField className={styles.select}
                   name='currencyGet' options={Converter.convertCurrencyToOptionsExchange(context.currencies)} currentItem={currentGet[0]}/>
                 </div>
               </div>
