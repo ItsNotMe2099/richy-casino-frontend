@@ -20,6 +20,7 @@
 
 .logo{
   max-width: 59px;
+  margin-right: 22px;
 }
 
 .balance{
@@ -42,6 +43,7 @@
 
 .deposit{
   padding: 11px 9px;
+  margin-right: 9px;
   img{
     margin-right: 6px;
   }
@@ -75,5 +77,10 @@
   font-weight: 600;
 }
 
+.left{
+  display: flex;
+}
 
-
+.right{
+  display: flex;
+}
