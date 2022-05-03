@@ -305,6 +305,9 @@
     @media screen and (max-width: $mobile-max){
       height: 200px !important;
     }
+    .user:last-child{
+        border-bottom: 0;
+    }
 }
 
 .scroll > div:first-child{
