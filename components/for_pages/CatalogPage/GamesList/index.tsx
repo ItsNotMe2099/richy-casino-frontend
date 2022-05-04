@@ -36,10 +36,11 @@ export default function GamesList(props: Props) {
     }
   }
 
-  const [isShow, setIsShow] = useState(false)
+  const [toShow, setToShow] = useState(10)
+
 
   const handleShowTrigger = () => {
-    setIsShow(true)
+    setToShow(toShow => toShow + 20)
     props.onScrollNext()
   }
 
@@ -52,15 +53,15 @@ export default function GamesList(props: Props) {
       {props.loading && props.totalItems === 0 && <ContentLoader style={'block'} isOpen={true}/>}
         <HiddenXs>
               <div className={styles.list}>
-                {props.items && (isShow ? props.items : props.items.slice(0, 20)).map((item, index) =>
+                {props.items && props.items.slice(0, toShow).map((item, index) =>
                   <ItemGame item={item} key={item.id} link={item.link}/>
                 )}
               </div>
         </HiddenXs>
         <VisibleXs>
           <div className={styles.list}>
-            {props.items && (isShow ? props.items : props.items.slice(0, 20)).map((item, index) =>
-              <ItemGame  item={item} key={item.id} link={item.link}/>
+            {props.items && props.items.slice(0, toShow).map((item, index) =>
+              <ItemGame item={item} key={item.id} link={item.link}/>
             )}
           </div>
         </VisibleXs>
