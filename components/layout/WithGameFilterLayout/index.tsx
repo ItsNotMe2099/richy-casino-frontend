@@ -18,13 +18,14 @@ const [searchGames, setSearchGames] = useState({data: [], total: 0})
   const [isSearchLoading, setIsSearchLoading] = useState<boolean>(false)
   const [searchPage, setSearchPage] = useState<number>(0)
   const [searchValue, setSearchValue] = useState<string | null>(null)
-  const searchLimit = 30
+  const searchLimit = 20
   const handleSearch =  debounce(async (value: string) => {
     if(!value?.length){
       setIsSearch(false)
      setSearchValue(null)
       return
     }
+    setSearchGames({data: [], total: 0})
     setSearchValue(value)
     setIsSearch(true)
     setIsSearchLoading(true)

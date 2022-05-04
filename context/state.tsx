@@ -19,7 +19,7 @@ interface IState {
   modal: ModalType | ProfileModalType | null
   lastProfileModal?: IModalProfileStackItem
   showModal: (type: ModalType | ProfileModalType, data?: any) => void
-  showModalProfile: (type: ProfileModalType, data?: any) => void
+  showModalProfile: (type: ProfileModalType, data?: any, skipStack?: boolean) => void
   goBackModalProfile: () => void
   hideModal: () => void
   bottomSheet: ModalType | ProfileModalType | null
@@ -49,7 +49,7 @@ const defaultValue: IState = {
   user: null,
   lastProfileModal: null,
   showModal: (type, data) => null,
-  showModalProfile: (type, data?: any) => null,
+  showModalProfile: (type, data, skipStack) => null,
   goBackModalProfile: () => null,
   hideModal: () => null,
   showBottomSheet: (type, data) => null,
@@ -115,10 +115,10 @@ export function AppWrapper(props: Props) {
       showModal(type, props)
 
     },
-    showModalProfile: (type, args: any) => {
-      showModal(type, props)
+    showModalProfile: (type, args: any, skipStack?: boolean) => {
+      showModal(type, args)
 
-      if (modal && !(props.isMobile && ModalsBottomSheet.includes(type)) && Object.values(ProfileModalType).includes(modal as ProfileModalType)) {
+      if (modal && !(props.isMobile && ModalsBottomSheet.includes(type)) && Object.values(ProfileModalType).includes(modal as ProfileModalType) && !skipStack) {
         setModalProfileStack(stack => [...stack, {
           type: modal as ProfileModalType,
           args

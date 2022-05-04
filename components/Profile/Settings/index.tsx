@@ -10,7 +10,12 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import {ProfileSettingsSelectField} from 'components/ui/Inputs/ProfileSettingsSelectField'
 import {useAppContext} from 'context/state'
-import {IOption, TwoFaModalArguments} from 'types/interfaces'
+import {
+  ConfirmNewPhoneModalArguments,
+  ConfirmOldPhoneModalArguments,
+  IOption,
+  TwoFaModalArguments
+} from 'types/interfaces'
 import Converter from 'utils/converter'
 import FormError from 'components/ui/Form/FormError'
 import UserRepository from 'data/repositories/UserRepository'
@@ -25,6 +30,7 @@ import ProfileModalFooter from 'components/Profile/layout/ProfileModalFooter'
 import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
 import Close from 'components/svg/Close'
+import {DateField} from 'components/ui/Inputs/DateField'
 
 interface IUser {
   id: string
@@ -90,9 +96,20 @@ export default function Settings(props: Props) {
       }
     }
     try {
-      await UserRepository.updateUser({...data, ...(data.phone ? {phone: Formatter.cleanPhone(data.phone)} : {})})
+      const res = await UserRepository.updateUser({...data, ...(data.phone ? {phone: Formatter.cleanPhone(data.phone)} : {})})
+      const oldPhone = context.user.phone
       await context.updateUserFromCookies()
-      context.showModalProfile(ProfileModalType.profile)
+      console.log('UpdateRes', res)
+      if(res.shouldConfirmOldPhone){
+        console.log('UpdateRes2', res.shouldConfirmOldPhone)
+        context.goBackModalProfile()
+        context.showModalProfile(ProfileModalType.oldPhoneConfirm, {phone: oldPhone, shouldConfirmNewPhone: res.shouldConfirmNewPhone} as ConfirmOldPhoneModalArguments)
+      }else if(res.shouldConfirmNewPhone){
+        context.goBackModalProfile()
+        context.showModalProfile(ProfileModalType.newPhoneConfirm, {phone: data.phone} as ConfirmNewPhoneModalArguments)
+      }else {
+        context.showModalProfile(ProfileModalType.profile)
+      }
     } catch (e) {
       setError(e)
     }
@@ -171,7 +188,7 @@ export default function Settings(props: Props) {
                         errorClassName={styles.fieldError}/>
             <InputField name={'name'} className={styles.input} label={t('settings_field_name')}
                         disabled={sending} errorClassName={styles.fieldError}/>
-            <InputField name={'birthday_datе'} className={styles.input} label={t('settings_field_birthday')}
+            <DateField name={'birthday_datе'} className={styles.input} label={t('settings_field_birthday')}
                         disabled={sending} errorClassName={styles.fieldError}/>
             <ProfileSettingsCountrySelectField name={'country_iso'} label={t('settings_field_country')}
                                                disabled={sending}
@@ -180,7 +197,7 @@ export default function Settings(props: Props) {
                                             countryIso={values.country_iso} disabled={sending}/>
             <ProfileSettingsSelectField name='currency_iso' validate={Validator.required} options={currencies}
                                         label={t('settings_field_currency')} disabled={sending}/>
-            <InputField name={'phone'} format={'phone'} disabled={true} className={styles.input}
+            <InputField name={'phone'} format={'phone'} disabled={sending} className={styles.input}
                         label={t('settings_field_phone')}
                         errorClassName={styles.fieldError}/>
             <InputField name={'email'} disabled={true} className={styles.input} label={t('settings_field_email')}
@@ -278,7 +295,7 @@ export default function Settings(props: Props) {
           </ProfileModalBody>
           <ProfileModalFooter>
             <FormError error={error}/>
-            <Button className={styles.save} spinner={sending} size='large' background='blueGradient500' type='button'>
+            <Button className={styles.save} spinner={sending} size='large' background='blueGradient500' type='submit'>
               {t('settings_save')}
             </Button>
           </ProfileModalFooter>

@@ -66,7 +66,7 @@ export default function Winners(props: Props) {
         </thead>
         <tbody>
         <Scrollbars className={styles.scroll}>
-        {users.map((item, index) =>
+        {users.slice(0, 10).map((item, index) =>
                   <tr className={styles.user} key={index}>
                     <td className={styles.cell}>
                       <img

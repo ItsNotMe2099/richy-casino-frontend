@@ -40,6 +40,7 @@ const Placeholder = (props: PropsOption) => {
 export const ProfileSettingsSelectField = (props: Props) => {
   const [field, meta] = useField(props)
   const hasError = !!meta.error && meta.touched
+  console.log('hasError', props.name, meta.error)
   return (
     <div>
   <div className={classNames(styles.root, {[styles.error]: hasError})}>

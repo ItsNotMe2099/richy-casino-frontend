@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import { useTranslation } from 'react-i18next'
+import {useTranslation} from 'react-i18next'
 import {Form, Formik} from 'formik'
 import Button from 'components/ui/Button'
 import InputField from 'components/ui/Inputs/InputField'
@@ -8,9 +8,9 @@ import {useAppContext} from 'context/state'
 import Formatter from 'utils/formatter'
 import {useState} from 'react'
 import AuthRepository from 'data/repositories/AuthRepository'
-import {ModalType} from 'types/enums'
+import {ProfileModalType} from 'types/enums'
 import FormError from 'components/ui/Form/FormError'
-import {RegistrationPhoneModalArguments, RegistrationSuccessModalArguments} from 'types/interfaces'
+import {RegistrationPhoneModalArguments} from 'types/interfaces'
 import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
 import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
 import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
@@ -47,7 +47,7 @@ export default function ModalRegistrationPhone(props: Props) {
       setSending(false)
       context.setToken(accessToken)
       context.updateUserFromCookies()
-      context.showModal(ModalType.registrationSuccess, {login: args.phone, password: data.password} as RegistrationSuccessModalArguments)
+      context.showModal(ProfileModalType.wallet)
     } catch (e) {
       setError(e)
     }
@@ -90,7 +90,7 @@ export default function ModalRegistrationPhone(props: Props) {
           />
         </div>
         <FormError error={error}/>
-        <Button type='submit' fluid spinner={sending} className={styles.button} size='submit' background='blueGradient500' >Продолжить</Button>
+        <Button type='submit' fluid spinner={sending} className={styles.button} size='submit' background='blueGradient500' >{t('registration_phone_button')}</Button>
 
       </Form>)}
   </Formik>)

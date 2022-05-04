@@ -15,6 +15,8 @@ import AuthUserFeatures from 'components/layout/AuthUserFeatures'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import 'react-input-range/lib/css/index.css'
+import 'react-date-picker/dist/DatePicker.css'
+import 'react-calendar/dist/Calendar.css'
 import NotificationBanner from 'components/for_pages/Common/NotificationBanner'
 import HiddenXs from 'components/ui/HiddenXS'
 import UserRepository from 'data/repositories/UserRepository'
@@ -27,11 +29,15 @@ import {CookiesLifeTime} from 'types/constants'
 import BottomSheetContainer from 'components/bottom_sheet/BottomSheetContainer'
 import Head from 'next/head'
 import {DefaultSeo} from 'next-seo'
+import ContentLoader from 'components/ui/ContentLoader'
 function MyApp({ Component, pageProps }: AppProps) {
   const [clientVisible, setClientVisible] = useState(true)
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
-    setIsLoading(false)
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+
   }, [])
   setConfiguration({
     gutterWidth: 20,
@@ -57,6 +63,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </HiddenXs>
       </AuthWrapper>
       {clientVisible && <Snackbar/>}
+      {clientVisible  && <ContentLoader style={'fullscreen'} isOpen={isLoading}/>}
     </AppWrapper>
   )
 }

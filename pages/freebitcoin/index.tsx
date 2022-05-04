@@ -13,6 +13,7 @@ import {useTranslation} from 'next-i18next'
 import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import {getServerSideTranslation} from 'utils/i18'
 import {NextSeo} from 'next-seo'
+import ContentLoader from 'components/ui/ContentLoader'
 
 export default function FreeBitcoin() {
   const {t} = useTranslation()
@@ -37,11 +38,13 @@ export default function FreeBitcoin() {
       <NextSeo title={t('freebitcoin_title')}/>
           <PageTitle icon='/img/Contents/bitcoin.svg' title={t('freebitcoin_title')}
                      onClick={() => isShow ? setIsShow(false) : setIsShow(true)} shadowColor='yellow'/>
-          <Banner/>
+      {loading && <ContentLoader style={'block'} isOpen={true}/>}
+      {!loading &&   <><Banner/>
           <Row>
             <Table items={slots}/>
             <Table items={history} history/>
           </Row>
+            </>}
     </WithGameFilterLayout>
   )
 }

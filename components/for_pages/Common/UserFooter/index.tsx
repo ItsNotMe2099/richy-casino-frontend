@@ -54,9 +54,6 @@ export default function UserFooter(props: Props) {
     {label: 'Casino', icon: <CasinoSvg/>, key: ActionType.Casino, link: Routes.catalog},
     {label: 'Menu', icon: <MenuSvg/>, key: ActionType.Menu},
   ]
-
-
-
   const {showModal} = useAppContext()
   const context = useAppContext()
   const isMenuOpen = context.modal === ModalType.profileBurger || context.bottomSheet === ModalType.profileBurger

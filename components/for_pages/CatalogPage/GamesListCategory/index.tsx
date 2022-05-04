@@ -13,7 +13,7 @@ export default function GamesListCategory(props: Props) {
   const [data, setData] = useState<IPagination<IGame>>({data: [], total: 0})
   const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(true)
-  const limit = 30
+  const limit = 20
 
   useEffect(() => {
     GameListRepository.fetchGames({categoryId: props.category.id}, 1, limit).then(i => {

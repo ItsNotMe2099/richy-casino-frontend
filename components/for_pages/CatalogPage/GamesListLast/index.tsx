@@ -12,7 +12,7 @@ export default function GamesListLast(props: Props) {
   const [data, setData] = useState<IPagination<IGame>>({data: [], total: 0})
   const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(true)
-  const limit = 30
+  const limit = 20
 
   useEffect(() => {
     GameListRepository.fetchGames({}, 1, limit).then(i => {

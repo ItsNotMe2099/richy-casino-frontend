@@ -61,6 +61,7 @@
   "registration_phone_field_code": "Код из СМС",
   "registration_phone_field_password": "Создайте пароль",
   "registration_phone_field_password_confirm": "Повторите пароль",
+  "registration_phone_button": "Продолжить",
 
   "registration_completed_title": "Регистрация завершена",
   "registration_completed_text": "Не забудьте сохранить логин и пароль:",
@@ -140,8 +141,8 @@
   "profile_accounts_bonus_free_spin": "Free spin",
 
   "profile_logout": "Выйти",
-  "profile_exchange": "Вывод",
-  "profile_withdrawal": "Обмен",
+  "profile_exchange": "Обмен",
+  "profile_withdrawal": "Вывод",
 
   "profile_mobile_bonuses_bonus": "Бонусы и призы",
   "profile_mobile_bonuses_free_bitcoin": "Free Bitcoin",
@@ -186,6 +187,22 @@
   "settings_hide_from_leaderboard": "Скрыть из лидерборд",
   "settings_hide_balance": "Скрыть баланс из шапки сайта",
   "settings_save": "Сохранить",
+
+  "phone_new_confirm_title": "Подтверждение номера",
+  "phone_new_confirm_text_1": "Введите ниже",
+  "phone_new_confirm_text_2": "код",
+  "phone_new_confirm_text_3": ", отправленный на указанный",
+  "phone_new_confirm_text_4": "Вами номер тел.",
+  "phone_new_confirm_field_code": "Код из СМС",
+  "phone_new_confirm_button": "Продолжить",
+
+  "phone_old_confirm_title": "Подтверждение номера",
+  "phone_old_confirm_text_1": "Введите ниже",
+  "phone_old_confirm_text_2": "код",
+  "phone_old_confirm_text_3": ", отправленный на указанный",
+  "phone_old_confirm_text_4": "Вами номер тел.",
+  "phone_old_confirm_field_code": "Код из СМС",
+  "phone_old_confirm_button": "Продолжить",
 
   "withdraw_title": "Вывод",
   "withdraw_form_account_main": "Основной счёт",

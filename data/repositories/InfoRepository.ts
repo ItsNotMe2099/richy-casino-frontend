@@ -8,7 +8,7 @@ export default class InfoRepository {
   static async getCountries(): Promise<any | null> {
     const res = await request({
       method: 'get',
-      url: '/api/user/info/countries',
+      url: '/api/content/geo/country',
     })
     if (res.err) {
       return []
@@ -28,8 +28,8 @@ export default class InfoRepository {
 
   static async getCities(countryIso: string): Promise<ICity[]> {
     const res = await request({
-      method: 'post',
-      url: '/api/user/info/city?country_iso=RU',
+      method: 'get',
+      url: '/api/content/geo/city',
       data: {
         country_iso: countryIso
       }

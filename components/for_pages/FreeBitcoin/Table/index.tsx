@@ -2,7 +2,6 @@ import styles from './index.module.scss'
 import classNames from 'classnames'
 import { Col } from 'react-grid-system'
 import {format} from 'date-fns'
-import { Scrollbars } from 'react-custom-scrollbars-2'
 import {IFreeBitcoinSlot} from 'data/interfaces/IFreeBitcoinSlot'
 import {IFreeBitcoinHistory} from 'data/interfaces/IFreeBitcoinHistory'
 import {useTranslation} from 'next-i18next'
@@ -54,7 +53,6 @@ export default function Table(props: Props) {
           </tr>
         </thead>
         <tbody>
-        <Scrollbars className={styles.scroll}>
         {props.items.map((item, index) =>
           <tr className={classNames(styles.row, styles.rowInner)} key={index}>
             {props.history ? <td className={styles.cell}>
@@ -76,7 +74,6 @@ export default function Table(props: Props) {
             </td>
           </tr>
             )}
-          </Scrollbars>
         </tbody>
       </table>
     </div>

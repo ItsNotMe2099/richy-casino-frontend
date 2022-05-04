@@ -8,11 +8,11 @@ import {pad} from 'utils/formatter'
 import dynamic from 'next/dynamic'
 import { IWheelInfoUser, IWheelPlayResponse, IWheelSlot } from 'data/interfaces/IWheel'
 import WheelRepository from 'data/repositories/WheelRepository'
-import Spinner from 'components/ui/Spinner'
 import { useAppContext } from 'context/state'
 import { isAfter } from 'date-fns'
 import Winner from './Winner'
 import classNames from 'classnames'
+import RichyLoader from 'components/ui/RichyLoader'
 
 const Board = dynamic(() => import('./Board'), { ssr: false })
 
@@ -91,7 +91,7 @@ export default function Fortune(props: Props) {
   if (!loaded) {
     return (
       <div className={styles.loader}>
-        <Spinner size={32} color="#fff" secondaryColor="rgba(255,255,255,0.4)"/>
+        <RichyLoader/>
       </div>
     )
   }

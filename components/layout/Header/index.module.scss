@@ -234,17 +234,23 @@
   grid-gap: 3px 0px;
   padding: 5px 12px;
   cursor: pointer;
-  @media screen and (max-width: 1023px){
-    display: none;
-  }
   &:hover{
     background-color: $dark500;
+  }
+  margin-left: 5px;
+  @media screen and (max-width: $xs-max){
+    padding: 2px 12px;
   }
 }
 
 .userBonus{
   display: flex;
   align-items: center;
+  @media screen and (max-width: $xs-max){
+    img{
+      height: 8px;
+    }
+  }
 }
 
 .icon{
@@ -255,6 +261,9 @@
 .amount{
   font-weight: 500;
   font-size: 12px;
+  @media screen and (max-width: $xs-max){
+    font-size: 8px;
+  }
 }
 
 .wallet{

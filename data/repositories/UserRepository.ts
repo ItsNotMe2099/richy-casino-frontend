@@ -2,6 +2,8 @@ import request from 'utils/request'
 import IUser, {IUserBalanceCurrencyRaw} from 'data/interfaces/IUser'
 import Converter from 'utils/converter'
 import {UserFormData} from 'types/form-data'
+import {IPhoneNewConfirm, IPhoneOldConfirm} from 'data/interfaces/IPhoneConfirm'
+import IUserUpdateResponse from 'data/interfaces/IUserUpdateResponse'
 
 export default class UserRepository {
   static async getUser(token?: string): Promise<IUser | null> {
@@ -26,7 +28,7 @@ export default class UserRepository {
       return null
     }
   }
-  static async updateUser(data: UserFormData): Promise<IUser | null> {
+  static async updateUser(data: UserFormData): Promise<IUserUpdateResponse> {
     const res = await request({
       method: 'post',
       url: '/api/user/info/update',
@@ -81,6 +83,28 @@ export default class UserRepository {
     const res = await request({
       method: 'put',
       url: '/api/user/two-factor/disable',
+    })
+    if (res?.err) {
+      throw res.err
+    }
+    return res.data?.data
+  }
+  static async confirmOldPhone(data: {phone: string, code: string}): Promise<IPhoneOldConfirm> {
+    const res = await request({
+      method: 'post',
+      url: '/api/user/info/confirm-old-phone',
+      data,
+    })
+    if (res?.err) {
+      throw res.err
+    }
+    return res.data?.data
+  }
+  static async confirmNewPhone(data: {phone: string, code: string}): Promise<IPhoneNewConfirm> {
+    const res = await request({
+      method: 'post',
+      url: '/api/user/info/confirm-new-phone',
+      data,
     })
     if (res?.err) {
       throw res.err

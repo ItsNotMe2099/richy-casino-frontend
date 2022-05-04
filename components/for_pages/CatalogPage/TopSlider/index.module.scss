@@ -96,8 +96,7 @@
 }
 
 .left{
-  align-self: center;
-  margin-left: 28px;
+
 }
 
 .item{
@@ -131,7 +130,7 @@
   }
 }
 
-.itemLabel{
+.itemLabel, .best{
   @media screen and (max-width: 520px){
     font-size: calc(14px + 0.5vw);
     font-weight: 700;

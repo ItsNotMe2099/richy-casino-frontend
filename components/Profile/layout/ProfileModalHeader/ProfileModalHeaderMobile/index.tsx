@@ -46,6 +46,7 @@ export default function ProfileModalHeaderMobile(props: Props) {
   return (
     <div className={styles.root}>
       <div className={styles.header}>
+      <div className={styles.left}>
         <Logo className={styles.logo}/>
         {context.user && <div className={styles.balance}>
           <div className={styles.label}>
@@ -55,10 +56,13 @@ export default function ProfileModalHeaderMobile(props: Props) {
             {context.user.balance.totalCalculatedAmount} {context.user.currencyIso}
           </div>
         </div>}
+        </div>
+        <div className={styles.right}>
         <Button background='payGradient500' className={styles.deposit}
                 onClick={() => context.showModalProfile(ProfileModalType.wallet, props.title)}><img
           src='/img/icons/wallet.svg' alt=''/>{t('profile_deposit')}</Button>
         <ModalClose onClick={props.onClose}/>
+        </div>
       </div>
       {(context.lastProfileModal?.type || props.title) && <div className={styles.footer}>
         {!!context.lastProfileModal?.type && <div className={styles.backArea}>

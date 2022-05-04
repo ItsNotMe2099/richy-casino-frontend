@@ -127,9 +127,9 @@ export default function Wallet(props: Props) {
 
     </BottomSheetLayout>)
   } else {
-    return (<ProfileModalLayout>
+    return (<ProfileModalLayout fixed>
         <ProfileModalHeader title={t('wallet_title')} showId  showBack={step !== PaymentStep.Method} onBackClick={step !== PaymentStep.Method ? handleBack : null}></ProfileModalHeader>
-        <ProfileModalBody>
+        <ProfileModalBody fixed>
           {result}
         </ProfileModalBody>
       </ProfileModalLayout>
