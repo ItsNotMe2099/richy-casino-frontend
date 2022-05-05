@@ -40,8 +40,8 @@ export default function GamesList(props: Props) {
 
 
   const handleShowTrigger = () => {
-    setToShow(toShow => toShow + 20)
-    props.onScrollNext()
+    setToShow(toShow => props.items.length > 10 ? toShow + 20 : toShow + 5)
+    props.onScrollNext && props.onScrollNext()
   }
 
   return (
@@ -66,7 +66,7 @@ export default function GamesList(props: Props) {
           </div>
         </VisibleXs>
 
-      {props.totalItems > 20 && props.items.length < props.totalItems && !(props.loading && props.items.length === 0) && <div className={styles.more} onClick={props.loading ? null : handleShowTrigger}>
+      {(props.totalItems > 20 && props.items.length < props.totalItems && !(props.loading && props.items.length === 0) || props.title === 'Richy Games' && props.items.length > 10 && toShow < props.items.length) && <div className={styles.more} onClick={props.loading ? null : handleShowTrigger}>
         <div className={styles.icon}>
           {props.loading ?   <Spinner size={22} color="#fff" secondaryColor="rgba(255,255,255,0.4)"/>
             : <img src='/img/CatalogPage/more.svg' alt=''/>}
