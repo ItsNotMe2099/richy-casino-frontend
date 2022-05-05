@@ -25,7 +25,7 @@
     font-size: 13px;
     color: $white;
     @media screen and (max-width: $xs-max){
-      font-weight: 400;
+      font-weight: 500;
     }
   }
 
@@ -38,7 +38,7 @@
   line-height: 18px;
   max-width: 260px;
   @media screen and (max-width: $xs-max){
-    font-weight: 400;
+    font-weight: 500;
   }
 }
 
@@ -143,7 +143,7 @@
     color: $white;
   }
   @media screen and (max-width: $xs-max){
-      font-weight: 400;
+      font-weight: 500;
   }
 }
 
@@ -237,7 +237,7 @@
     @media screen and (max-width: $xs-max){
       max-width: 100%;
       flex: 1;
-      font-weight: 400;
+      font-weight: 500;
     }
   }
   .btns{
