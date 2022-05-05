@@ -32,9 +32,12 @@
 
 .btn{
   position: absolute;
-  top: 10px;
+  top: 13px;
   left: 12px;
   button{
     background-color: transparent;
+  }
+  @media screen and (max-width: $mobile-max){
+    top: 8px;
   }
 }
