@@ -4,7 +4,7 @@ import classNames from 'classnames'
 interface Props {
   children?: React.ReactNode
   className?: string
-  icon: string
+  icon?: string
   title: string
   onClick?: () => void
   lottery?: boolean
@@ -38,7 +38,7 @@ export default function PageTitle(props: Props) {
         </div>
         <div className={classNames(styles.icon, {[styles.lottery]: props.lottery})}>
           {props.shadowColor && <div className={styles.shadow}><img src={getShadow(props.shadowColor)} alt=''/></div>}
-          <img src={props.icon} alt=''/>
+          {props.icon && <img src={props.icon} alt=''/>}
         </div>
         <div className={styles.title}>
           {props.title}
