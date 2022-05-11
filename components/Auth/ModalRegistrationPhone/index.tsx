@@ -44,9 +44,9 @@ export default function ModalRegistrationPhone(props: Props) {
         setError(t('registration_error'))
       }
 
-      setSending(false)
       context.setToken(accessToken)
-      context.updateUserFromCookies()
+      await context.updateUserFromCookies()
+      setSending(false)
       context.showModal(ProfileModalType.wallet)
     } catch (e) {
       setError(e)
