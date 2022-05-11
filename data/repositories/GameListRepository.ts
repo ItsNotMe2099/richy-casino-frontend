@@ -6,6 +6,7 @@ import {IGameCategory} from 'data/interfaces/IGameCategory'
 import {IGame} from 'data/interfaces/IGame'
 import {IGameWin} from 'data/interfaces/IGameWin'
 import {IGameSession} from 'data/interfaces/IGameSession'
+import {RICHY_CATEGORY_ID} from 'types/constants'
 
 export default class GameListRepository {
   static async fetchProviders(name: string = null, page: number = 1, limit: number = 1000): Promise<IPagination<IGameProvider>> {
@@ -134,6 +135,9 @@ export default class GameListRepository {
     return res.data.data ?  Converter.objectKeysToCamelCase(res.data.data) : null
   }
 
+  static async fetchRichy(page: number = 1, limit: number = 1000): Promise<IPagination<IGame>> {
+    return this.fetchGames({categoryId: RICHY_CATEGORY_ID}, page, limit)
+  }
 
   static async createGameDemo(gameId: number, clientType: string, token?: string): Promise<IGameSession> {
     const res = await request({
