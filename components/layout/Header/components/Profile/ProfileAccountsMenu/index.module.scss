@@ -4,7 +4,7 @@
 
 }
 .select{
-
+  max-height: unset !important;
   @media screen and (max-width: $xs-max) {
     margin-top: 12px;
   }
