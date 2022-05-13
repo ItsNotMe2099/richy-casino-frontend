@@ -237,7 +237,7 @@ export default function Footer(props: Props) {
               <img src='/img/layout/footer/eighteen.svg' alt=''/>
             </div>
             <div className={styles.logoLicense}>
-              <img src='/img/licenses/curocao.png' alt=''/>
+              <img src='/img/licenses/richycuracaointeractivelicenlogo.png' alt=''/>
             </div>
             </div>
               <div className={styles.desc}>
