@@ -39,7 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       setIsLoading(false)
     }, 1000)
     if (typeof  navigator !== 'undefined' && 'serviceWorker' in navigator) {
-      navigator.serviceWorker.register('pwabuilder-sw.js', {scope: './'})
+      navigator.serviceWorker.register('/pwabuilder-sw.js', {scope: './'})
     }
   }, [])
   setConfiguration({

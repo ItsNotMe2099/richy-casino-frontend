@@ -1,11 +1,11 @@
 import request from 'utils/request'
-import {IFaqItem} from 'data/interfaces/IFaqItem'
+import {IBanner} from 'data/interfaces/IBanner'
 
-export default class FaqRepository {
-  static async fetchList(lang?: string): Promise<IFaqItem[] | null> {
+export default class BannerRepository {
+  static async fetchBanners(): Promise<IBanner[] | null> {
 
       const res = await request({
-        url: '/api/content/faq/index',
+        url: '/api/games/category/banners',
         method: 'get',
         data: {
         },

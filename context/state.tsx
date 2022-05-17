@@ -10,6 +10,8 @@ import {IBonusBannerDetails, IModalProfileStackItem, SnackbarData} from 'types/i
 import {CookiesLifeTime, Timers} from 'types/constants'
 import PromoCodeRepository from 'data/repositories/PromoCodeRepository'
 import UserUtils from 'utils/user'
+import {IBanner} from 'data/interfaces/IBanner'
+import BannerRepository from 'data/repositories/BannerRepository'
 
 interface IState {
   isMobile: boolean
@@ -36,6 +38,7 @@ interface IState {
   bonusBannerDetails: IBonusBannerDetails | null
   updatePromoCodes: () => void
   currencies: ICurrency[]
+  banners: IBanner[]
   snackbar: SnackbarData | null,
   showSnackbar: (text: string, type: SnackbarType) => void
 }
@@ -50,6 +53,7 @@ const defaultValue: IState = {
   user: null,
   lastProfileModal: null,
   token: null,
+  banners: [],
   showModal: (type, data) => null,
   showModalProfile: (type, data, skipStack) => null,
   goBackModalProfile: () => null,
@@ -100,6 +104,7 @@ export function AppWrapper(props: Props) {
   const [bonusShowMode, setBonusShowMode] = useState<BonusDepositShowMode | null>(null)
   const [bonusBannerDetails, setBonusBannerDetails] = useState<IBonusBannerDetails>(null)
   const [currencies, setCurrencies] = useState<ICurrency[]>([])
+  const [banners, setBanners] = useState<IBanner[]>([])
   const [snackbar, setSnackbar] = useState<SnackbarData | null>(null)
   const [modalProfileStack, setModalProfileStack] = useState<IModalProfileStackItem[]>([])
   const value: IState = {
@@ -115,6 +120,7 @@ export function AppWrapper(props: Props) {
     user,
     snackbar,
     token: props.token,
+    banners,
     showModal: (type, props: any) => {
       showModal(type, props)
 
@@ -186,6 +192,7 @@ export function AppWrapper(props: Props) {
       setAuth(true)
       updateUserDetails()
     }
+    BannerRepository.fetchBanners().then(i => setBanners(i))
 
   }, [props.token])
   useEffect(() => {
