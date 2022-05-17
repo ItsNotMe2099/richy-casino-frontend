@@ -27,7 +27,7 @@ export default interface IUser {
       real: IUserBalanceCurrency[],
       bonus: IUserBalanceCurrency[],
     },
-    calculated: {
+    calculatedToUserCurrency: {
       totals: IUserBalanceCurrency[],
       real: IUserBalanceCurrency[],
       bonus: IUserBalanceCurrency[],
