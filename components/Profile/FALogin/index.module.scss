@@ -1,0 +1,82 @@
+@import "scss/index";
+
+.root {
+
+}
+
+.scan{
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 130%;
+  text-align: left;
+  margin-top: 16px;
+}
+
+.qr{
+  display: flex;
+  margin-top: 25px;
+  justify-content: center;
+}
+
+.your{
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #696A78;
+  text-align: left;
+  margin-top: 32px;
+}
+
+.key{
+  padding: 14px 0;
+  padding-left: 21px;
+  padding-right: 21px;
+  border-radius: 9px;
+  background-color: $dark600;
+  margin-top: 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.important{
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 130%;
+  letter-spacing: -0.01em;
+  margin-top: 14px;
+  text-align: left;
+  span{
+    color: #4179f8;
+  }
+}
+
+
+
+.form {
+  margin-top: 35px;
+}
+
+.confirm{
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #696A78;
+  text-align: left;
+  margin-bottom: 12px;
+}
+
+.password, .btn{
+  margin-top: 32px;
+  margin-bottom: 0;
+}
+
+.btn{
+  margin-top: 32px;
+  font-weight: 600;
+  font-size: 16px;
+  height: 53px;
+}

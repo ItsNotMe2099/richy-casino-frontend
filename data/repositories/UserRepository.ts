@@ -78,6 +78,18 @@ export default class UserRepository {
       throw res.err
     }
     console.log('qrUrlD', res.data)
+    return res.data?.data?.qrUrl
+  }
+  static async twoFaConfirm({code}): Promise<any> {
+    const res = await request({
+      method: 'put',
+      url: '/api/user/two-factor/confirm',
+      data: {code}
+    })
+    if (res?.err) {
+      throw res.err
+    }
+    console.log('qrUrlD', res.data)
     return res.data?.qrUrl
   }
   static async twoFaDisable(): Promise<string> {

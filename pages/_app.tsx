@@ -30,6 +30,7 @@ import BottomSheetContainer from 'components/bottom_sheet/BottomSheetContainer'
 import Head from 'next/head'
 import {DefaultSeo} from 'next-seo'
 import ContentLoader from 'components/ui/ContentLoader'
+import ReactPWAInstallProvider from 'context/pwa_state'
 function MyApp({ Component, pageProps }: AppProps) {
   const [clientVisible, setClientVisible] = useState(true)
   const [isLoading, setIsLoading] = useState(true)
@@ -37,7 +38,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     setTimeout(() => {
       setIsLoading(false)
     }, 1000)
-
+    if (typeof  navigator !== 'undefined' && 'serviceWorker' in navigator) {
+      navigator.serviceWorker.register('pwabuilder-sw.js', {scope: './'})
+    }
   }, [])
   setConfiguration({
     gutterWidth: 20,
@@ -48,6 +51,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AppWrapper isMobile={pageProps.isMobile} token={pageProps.token} initialUser={pageProps.initialUser}>
       <AuthWrapper>
         <FavoriteWrapper>
+          <ReactPWAInstallProvider>
           <Head>
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
           </Head>
@@ -55,6 +59,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
           {clientVisible && <ModalContainer/>}
           {clientVisible && <BottomSheetContainer/>}
+          </ReactPWAInstallProvider>
         </FavoriteWrapper>
 
         <AuthUserFeatures/>

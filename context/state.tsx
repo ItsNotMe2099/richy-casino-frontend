@@ -15,6 +15,7 @@ interface IState {
   isMobile: boolean
   isDesktop: boolean
   auth: boolean
+  token: string
   modalArguments?: any
   modal: ModalType | ProfileModalType | null
   lastProfileModal?: IModalProfileStackItem
@@ -48,6 +49,7 @@ const defaultValue: IState = {
   auth: false,
   user: null,
   lastProfileModal: null,
+  token: null,
   showModal: (type, data) => null,
   showModalProfile: (type, data, skipStack) => null,
   goBackModalProfile: () => null,
@@ -75,6 +77,7 @@ const ModalsBottomSheet = [
   ModalType.registrationSuccess,
   ModalType.passwordRecovery,
   ModalType.passwordReset,
+  ModalType.faLogin,
   ModalType.fortune,
   ModalType.profileBurger
 ]
@@ -111,6 +114,7 @@ export function AppWrapper(props: Props) {
     currencies,
     user,
     snackbar,
+    token: props.token,
     showModal: (type, props: any) => {
       showModal(type, props)
 

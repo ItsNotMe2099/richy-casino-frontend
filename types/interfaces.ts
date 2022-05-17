@@ -91,6 +91,10 @@ export interface ConfirmOldPhoneModalArguments {
 export interface TwoFaModalArguments extends ProfileModalArguments{
   qrUrl: string
 }
+export interface TwoFaLoginModalArguments extends ProfileModalArguments{
+  identity: string
+  password: string
+}
 export interface RegistrationSuccessModalArguments {
   login: string
   password: string

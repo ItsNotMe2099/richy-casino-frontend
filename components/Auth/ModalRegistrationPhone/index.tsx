@@ -67,7 +67,7 @@ export default function ModalRegistrationPhone(props: Props) {
       <Form className={styles.form}>
         <div className={styles.description}>
           {t('registration_phone_text_1')} <span className={styles.code}> {t('registration_phone_text_2')}</span> {t('registration_phone_text_3')}&nbsp;
-          {t('registration_phone_text_4')} <span className={styles.phone}> {Formatter.formatPhone(args.phone)}</span>
+          {t('registration_phone_text_4')} <span className={styles.phone}> {Formatter.formatPhone(args?.phone)}</span>
         </div>
         <div className={styles.inputs}>
           <InputField

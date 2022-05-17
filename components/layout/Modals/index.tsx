@@ -26,6 +26,7 @@ import {useTranslation} from 'next-i18next'
 import ProfileModalNew from 'components/Profile/layout/ProfileModalNew'
 import ModalConfirmOldPhone from 'components/Profile/ModalConfirmOldPhone'
 import ModalConfirmNewPhone from 'components/Profile/ModalConfirmNewPhone'
+import FALogin from 'components/Profile/FALogin'
 
 interface Props {
 }
@@ -130,6 +131,12 @@ export default function ModalContainer(props: Props) {
             key={18}  isOpen={context.modal === ProfileModalType.newPhoneConfirm} {...commonSettings}
           >
             {context.modal === ProfileModalType.newPhoneConfirm && <ModalConfirmNewPhone/>}
+          </ProfileModalNew>
+          <ProfileModalNew
+            size='small'
+            key={19}  isOpen={context.modal === ModalType.faLogin} {...commonSettings}
+          >
+            {context.modal === ModalType.faLogin && <FALogin/>}
           </ProfileModalNew>
         </div>
       )}

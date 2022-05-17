@@ -16,6 +16,7 @@ import {useAppContext} from 'context/state'
 import {format} from 'date-fns'
 import {useTranslation} from 'next-i18next'
 import {BonusDepositShowMode} from 'types/enums'
+import {usePwaContext} from 'context/pwa_state'
 
 interface Props {
   children?: React.ReactNode
@@ -30,7 +31,7 @@ interface Lang {
 export default function Footer(props: Props) {
   const {t} = useTranslation()
   const appContext = useAppContext()
-
+  const pwaContext = usePwaContext()
 
   const options = [
     { label: t('footer_menu_terms_of_service'), link: '/terms_of_service' },
@@ -182,8 +183,8 @@ export default function Footer(props: Props) {
               <div style={{flex: 1}}>
               <SupportButton className={styles.support}/>
               </div>
-              <div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/apple.svg' alt=''/></Button></div>
-              <Button size='extraSmall' background='dark700'><img src='/img/layout/top/android.svg' alt=''/></Button>
+              <div className={styles.btn}><Button size='extraSmall' background='dark700' onClick={() => pwaContext.install()}><img src='/img/layout/top/apple.svg' alt=''/></Button></div>
+              <Button size='extraSmall' background='dark700' onClick={() => pwaContext.install()}><img src='/img/layout/top/android.svg' alt=''/></Button>
             </div>
         </div>
         <div className={styles.sliders}>

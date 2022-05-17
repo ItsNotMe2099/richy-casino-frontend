@@ -11,6 +11,7 @@ export enum ModalType {
   profileBurger = 'profileBurger',
   createGame = 'createGame',
   opponents = 'opponents',
+  faLogin = 'faLogin'
 }
 
 export enum ProfileModalType {
@@ -87,4 +88,11 @@ export enum UserBalanceType{
   Totals = 'totals',
   Real = 'real',
   Bonus = 'bonus'
+}
+
+export enum PwaState{
+  NotInstalled = 'notInstalled',
+  Downloading = 'downloading',
+  Installing = 'installing',
+  Installed = 'installed'
 }
