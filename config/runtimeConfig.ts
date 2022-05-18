@@ -8,6 +8,7 @@ interface IRuntimeConfig {
   NODE_ENV: 'development' | 'production'
   DEV: boolean
   PROD: boolean
+  FAKE_BONUS: boolean
 }
 
 function getRuntimeConfig(): IRuntimeConfig {
