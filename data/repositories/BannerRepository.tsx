@@ -1,11 +1,12 @@
 import request from 'utils/request'
 import {IBanner} from 'data/interfaces/IBanner'
+import Converter from 'utils/converter'
 
 export default class BannerRepository {
   static async fetchBanners(): Promise<IBanner[] | null> {
 
       const res = await request({
-        url: '/api/games/category/banners',
+        url: '/api/banners/banner',
         method: 'get',
         data: {
         },
@@ -13,6 +14,6 @@ export default class BannerRepository {
       if (res.err) {
         return null
       }
-      return res.data.data
+      return  res.data.data?.map(i => Converter.objectKeysToCamelCase(i))
   }
 }

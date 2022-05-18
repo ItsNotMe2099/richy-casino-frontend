@@ -104,17 +104,9 @@
 .slide{
   max-height: unset;
   min-height: unset;
-  padding: 0px 0px 42% 0px;
-
+  padding-bottom: 42%;
   .downBanner{
     position: absolute;
-    top: 0px;
-    left: 13px;
-    bottom: 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
   }
 }
 .sheet{

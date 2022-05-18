@@ -1,20 +1,17 @@
 import styles from './index.module.scss'
 import Button from 'components/ui/Button'
-import { ReactElement, useState } from 'react'
+import {  useState } from 'react'
 import Slider from 'react-slick'
 import { useAppContext } from 'context/state'
 import classNames from 'classnames'
+import {IBanner} from 'data/interfaces/IBanner'
+import Image from 'next/image'
 
-interface IItem {
-  label?: React.ReactNode
-  image?: string
-  child?: ReactElement
-}
 
 interface Props {
   className?: string
   slider?: any
-  items: IItem[]
+  items: IBanner[]
   style?: 'catalog'
 }
 
@@ -48,7 +45,7 @@ export default function SlideSlider(props: Props) {
     arrows: false,
     dotsClass: `${styles.dots}`,
     beforeChange: (current: number, next: number) => setCurrentIndex(next),
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 5000,
     responsive: [
       {
@@ -69,7 +66,7 @@ export default function SlideSlider(props: Props) {
   }
 
   return (
-      <div className={classNames(styles.root, rootClass)} style={{backgroundImage: `url(${props.items[currentIndex].image})`}}>
+      <div className={classNames(styles.root, rootClass)}>
       <div className={styles.controls}>
         <div className={styles.prev} onClick={() => slider.slickGoTo(currentIndex - 1)}>
           <SliderArrow/>
@@ -80,19 +77,20 @@ export default function SlideSlider(props: Props) {
       </div>
       <Slider {...settings} ref={slider1 => (slider = slider1)}>
         {props.items.map((item, index) =>
-        <>
-        {item.child}
+
         <div key={index} className={styles.item}>
-        <div className={styles.left}>
+          {(item.imageDesktopUrl || item.imageMobileUrl) && <Image src={item.imageDesktopUrl || item.imageMobileUrl} layout={'fill'}/>}
+
+          <div className={styles.left}>
           <div className={classNames(styles.label, {[styles.second]: index > 0})}>
-            {item.label}
+            {item.title}
           </div>
           <div className={classNames(styles.btn, {[styles.alt]: index === 1})}>
-            <Button background={index === 1 ? 'blueGradient500' : 'white'}>Начать играть</Button>
+            <Button background={index === 1 ? 'blueGradient500' : 'white'} href={item.redirectUrl}>{item.textButton}</Button>
           </div>
         </div>
         </div>
-        </>
+
         )}
       </Slider>
       </div>

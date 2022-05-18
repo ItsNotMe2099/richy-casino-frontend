@@ -7,6 +7,7 @@ import VisibleXs from 'components/ui/VisibleXS'
 import SlideSlider from 'components/for_pages/MainPage/TopSlider/SlideSlider'
 import classNames from 'classnames'
 import Button from 'components/ui/Button'
+import {useAppContext} from 'context/state'
 
 interface Props {
   children?: React.ReactNode
@@ -15,7 +16,7 @@ interface Props {
 }
 
 export default function TopSlider(props: Props) {
-
+  const appContext = useAppContext()
   const settings = {
     className: `${styles.slider}`,
     dots: false,
@@ -39,13 +40,6 @@ export default function TopSlider(props: Props) {
     ]
   }
 
-  const items =[
-    {child: <BonusSlide/>, image: null},
-    {label: <div className={styles.best}>Лучшие игры<br/> от Richy</div>, image: '/img/TopSlider/banner@3x.png'},
-    {label: <div className={styles.itemLabel}>Spin the <span className={styles.spin}>wheel of fortune</span><br/> every day and get a<br/> guaranteed <span className={styles.spin}>prizes</span></div>, image: '/img/TopSlider/wheel@3x.png'},
-    {label: <div className={styles.itemLabel}>Try your luck in the <span className={styles.lottery}>most profitable</span><br/> cryptocurrency lottery<br/> and get bonuses</div>, image: '/img/TopSlider/lottery@3x.png'},
-  ]
-
 
 
 
@@ -64,7 +58,7 @@ export default function TopSlider(props: Props) {
             </div>
           </div>
           <div className={styles.desktop}>
-          <SlideSlider items={items} style='catalog'/>
+          <SlideSlider items={appContext.banners} style='catalog'/>
           </div>
             </div>
           </Col>

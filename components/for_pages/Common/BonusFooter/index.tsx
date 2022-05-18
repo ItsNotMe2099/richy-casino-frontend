@@ -17,7 +17,7 @@ interface Props {
   style?: 'sheet' | 'modal' | 'footer' | 'slide'
 }
 
-export default function BonusSlide(props: Props) {
+export default function BonusFooter(props: Props) {
   const appContext = useAppContext()
   const details = appContext.bonusBannerDetails
   const expiredAt = new Date(details?.validTill)
@@ -74,23 +74,22 @@ export default function BonusSlide(props: Props) {
       </>
       }
       {appContext.showBonus && <div className={styles.downBanner}>
-        <div className={styles.title} style={{fontSize: `${width /24}px` }}>
+        <div className={styles.title}>
           Бонус на депозит
         </div>
-        <div className={styles.bonus} style={{fontSize: `${width /13}px` }}>
+        <div className={styles.bonus}>
           {Formatter.formatNumber(details?.amount)} {details?.currency?.toUpperCase()}
         </div>
-        <div className={styles.fs} style={{fontSize: `${width /29}px` }}>
+        <div className={styles.fs}>
           {Formatter.formatNumber(details?.freeSpins)} FS
         </div>
-
         <div className={styles.footerGroup}>
           <div className={styles.btnWrapper}>
             <Button size='normal' background='payGradient500' className={styles.btn} onClick={handleClick}>Получить</Button>
             {appContext.showBonus &&
             <div className={styles.timer}>
               <Timer minutes style={props.style === 'footer' ? 'footer' : props.style === 'sheet' ? 'sheet' : 'bonus'}
-                     expiredAt={expiredAt} fontSize={`${width /22.8}px`} />
+                     expiredAt={expiredAt}/>
             </div>
             }
           </div>

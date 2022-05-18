@@ -11,6 +11,7 @@ module.exports = {
     NODE_ENV: process.env.NODE_ENV || 'development',
     DEV: process.env.NODE_ENV === 'development',
     PROD: process.env.NODE_ENV !== 'development',
+    FAKE_BONUS: process.env.FAKE_BONUS,
   },
   serverRuntimeConfig: {
     HOST: process.env.HOST,
@@ -19,6 +20,10 @@ module.exports = {
     NODE_ENV: process.env.NODE_ENV || 'development',
     DEV: process.env.NODE_ENV === 'development',
     PROD: process.env.NODE_ENV !== 'development',
+  },
+  images: {
+    domains: ['stage-backend.richy.casino', 'backend.richy.casino'],
+    formats: ['image/webp'],
   },
   async rewrites() {
     return [

@@ -10,7 +10,7 @@ import Gift from 'components/for_pages/Common/Gift'
 import classNames from 'classnames'
 import {Col, Row} from 'react-grid-system'
 import {BonusDepositShowMode} from 'types/enums'
-
+import Image from 'next/image'
 interface Props {
   children?: React.ReactNode
   className?: string
@@ -45,12 +45,7 @@ export default function TopSlider(props: Props) {
     ]
   }
 
-  const items =[
-    {label: <div>Лучшие игры<br/> от Richy</div>, image: '/img/TopSlider/banner@3x.png'},
-    {label: <div className={styles.itemLabel}>Spin the <span className={styles.spin}>wheel of fortune</span><br/> every day and get a<br/> guaranteed <span className={styles.spin}>prizes</span></div>, image: '/img/TopSlider/wheel@3x.png'},
-    {label: <div className={styles.itemLabel}>Try your luck in the <span className={styles.lottery}>most profitable</span><br/> cryptocurrency lottery<br/> and get bonuses</div>, image: '/img/TopSlider/lottery@3x.png'},
-  ]
-
+  console.log('Banners', context.banners)
 
   return (
     <div className={styles.root}>
@@ -60,10 +55,10 @@ export default function TopSlider(props: Props) {
           <Col>
         <div className={styles.desktop}>
           <div className={styles.col}>
-          <BonusSlide/>
+          <BonusSlide style={'slide'}/>
           </div>
           <div className={styles.col}>
-          <SlideSlider items={items}/>
+          <SlideSlider items={context.banners}/>
           </div>
         </div>
           </Col>
@@ -73,15 +68,16 @@ export default function TopSlider(props: Props) {
         <>
           <Slider {...settings}>
             <BonusSlide className={styles.bonusSlideMobile}/>
-            {items.map((item, index) =>
-              <div className={styles.rootSlide} key={index}>
-                <div className={styles.item} style={{backgroundImage: `url(${item.image})`}}>
-                  <div className={styles.left}>
+            {context.banners.map((item, index) => <div className={styles.rootSlide}>
+                 <div className={styles.item} key={item.id}>
+                   {(item.imageMobileUrl || item.imageDesktopUrl) && <Image src={item.imageMobileUrl || item.imageDesktopUrl} layout={'fill'}/>}
+
+                   <div className={styles.left}>
                     <div className={classNames({[styles.label]: index == 0})}>
-                      {item.label}
+                      {item.title}
                     </div>
                     <div className={styles.btn}>
-                      <Button size='normal' background='white'>Начать играть</Button>
+                      <Button size='normal' background='white'  href={item.redirectUrl}>{item.textButton}</Button>
                     </div>
                   </div>
                 </div>

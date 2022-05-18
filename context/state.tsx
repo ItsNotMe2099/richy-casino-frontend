@@ -12,6 +12,7 @@ import PromoCodeRepository from 'data/repositories/PromoCodeRepository'
 import UserUtils from 'utils/user'
 import {IBanner} from 'data/interfaces/IBanner'
 import BannerRepository from 'data/repositories/BannerRepository'
+import {addHours} from 'date-fns'
 
 interface IState {
   isMobile: boolean
@@ -247,7 +248,17 @@ export function AppWrapper(props: Props) {
       const isEnabled = UserUtils.isBonusEnabled(promoCodes)
       const details = UserUtils.getBonusBannerDetails(promoCodes)
       setBonusBannerDetails(details)
-      setShowBonus(isEnabled)
+      setBonusBannerDetails({
+        amount: 10,
+        currency: 'USD',
+        freeSpins: 10,
+        freeBitcoin: 10,
+        lotteryTickets: 10,
+        wheelSpins: 10,
+        validTill: addHours(new Date(), 1).toISOString()
+      })
+      setShowBonus(true)
+     // setShowBonus(isEnabled)
       if (isEnabled && !auth && !Cookies.get(CookiesType.bonusDepositShowMode)) {
         setTimeout(() => {
           showModal(ModalType.bonus)
