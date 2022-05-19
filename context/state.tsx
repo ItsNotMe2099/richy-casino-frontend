@@ -261,7 +261,7 @@ export function AppWrapper(props: Props) {
           validTill: addHours(new Date(), 1).toISOString()
         })
         setShowBonus(true)
-      }
+    }
 
       if (isEnabled && !auth && !Cookies.get(CookiesType.bonusDepositShowMode)) {
         setTimeout(() => {

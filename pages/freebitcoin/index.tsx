@@ -2,7 +2,6 @@ import PageTitle from 'components/for_pages/Common/PageTitle'
 import Banner from 'components/for_pages/FreeBitcoin/Banner'
 import Table from 'components/for_pages/FreeBitcoin/Table'
 import {useEffect, useState} from 'react'
-import {Row} from 'react-grid-system'
 import {GetServerSideProps} from 'next'
 import FreeBitcoinRepository from 'data/repositories/FreeBitcoinRepository'
 import {IFreeBitcoinSlot} from 'data/interfaces/IFreeBitcoinSlot'
@@ -40,10 +39,10 @@ export default function FreeBitcoin() {
                      onClick={() => isShow ? setIsShow(false) : setIsShow(true)} shadowColor='yellow'/>
       {loading && <ContentLoader style={'block'} isOpen={true}/>}
       {!loading &&   <><Banner/>
-          <Row>
+          <div>
             <Table items={slots}/>
             <Table items={history} history/>
-          </Row>
+          </div>
             </>}
     </WithGameFilterLayout>
   )

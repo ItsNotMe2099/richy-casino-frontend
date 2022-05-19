@@ -1,7 +1,6 @@
 import Filter from 'components/for_pages/Common/Filter'
 import Layout from 'components/layout/Layout'
 import styles from './index.module.scss'
-import {Row, Col} from 'react-grid-system'
 import {ReactElement, useState} from 'react'
 import GameListRepository from 'data/repositories/GameListRepository'
 import classNames from 'classnames'
@@ -43,15 +42,11 @@ const [searchGames, setSearchGames] = useState({data: [], total: 0})
   return (
     <Layout>
       {props.top}
-      <Row className={styles.desktop}>
         <Filter showMobile={props.showMobile} onSearch={handleSearch}/>
-        <Col className={styles.content}>
           <div className={classNames(styles.children, {[styles.hidden]: isSearch})}>{props.children}</div>
           <div className={classNames(styles.search, {[styles.hidden]: !isSearch})}>
             <GamesListSearch data={searchGames} loading={isSearchLoading} onScrollNext={handleScrollNext}/>
           </div>
-        </Col>
-      </Row>
     </Layout>
   )
 }

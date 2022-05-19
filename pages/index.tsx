@@ -1,6 +1,5 @@
 import {GetServerSideProps} from 'next'
 import styles from 'pages/index.module.scss'
-import {Col, Row} from 'react-grid-system'
 import Layout from 'components/layout/Layout'
 import Contents from 'components/for_pages/MainPage/Contents'
 import Games from 'components/for_pages/MainPage/Games'
@@ -50,25 +49,15 @@ export default function IndexPage() {
           <TopSlider/>
           <Contents/>
           <Games/>
-          <Row className={styles.gamesLists}>
-            <Col>
             <GamesList type={MainGameListType.All} label='Казино' icon='/img/Contents/casino.svg' items={casinos} shadowColor='red'/>
-            </Col>
-            <Col>
             <GamesList type={MainGameListType.Live} label='Live Casino' icon='/img/Contents/live.svg' items={live} shadowColor='blue'/>
-            </Col>
-          </Row>
           <VisibleXs>
             <BuyCrypto/>
           </VisibleXs>
-          <Row className={styles.gameCards}>
-            <Col className={styles.gameCard}>
-              <GameCard poker/>
-            </Col>
-            <Col>
-              <GameCard/>
-            </Col>
-          </Row>
+              <div className={styles.cards}>
+                <GameCard poker/>
+                <GameCard/>
+              </div>
           <Tournament balance='0,00000001 BTC'/>
           <Winners/>
           <Statistics/>

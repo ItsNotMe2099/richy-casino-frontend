@@ -4,7 +4,6 @@ import classNames from 'classnames'
 import Timer from 'components/for_pages/Common/Timer'
 import {useAppContext} from 'context/state'
 import {ModalType, ProfileModalType} from 'types/enums'
-import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import Formatter from 'utils/formatter'
 import {Routes} from 'types/routes'
@@ -46,10 +45,7 @@ export default function BonusSlide(props: Props) {
       }}>
         <img src='/img/icons/close-bonus.svg' alt=''/>
       </div>}
-      <div className={styles.hero}><img src='/img/TopSlider/hero2.svg' alt=''/></div>
-      <HiddenXs>
-        <div className={styles.money}><img src='/img/TopSlider/money.svg' alt=''/></div>
-      </HiddenXs>
+      <div className={styles.hero}><img src='/img/BonusSlide/Hero.png' alt=''/></div>
       <VisibleXs>
         <div className={styles.money}><img src='/img/TopSlider/money-mobile.svg' alt=''/></div>
       </VisibleXs>
@@ -73,11 +69,13 @@ export default function BonusSlide(props: Props) {
 
       </>
       }
-      {appContext.showBonus && <div className={styles.downBanner}>
+      {appContext.showBonus &&
+      <>
+      <div className={styles.downBanner} style={{marginTop: `${width /30}px`}}>
         <div className={styles.title} style={{fontSize: `${width /24}px` }}>
           Бонус на депозит
         </div>
-        <div className={styles.bonus} style={{fontSize: `${width /13}px` }}>
+        <div className={styles.bonus} style={{fontSize: `${width /13}px`, marginTop: `${width /50}px` }}>
           {Formatter.formatNumber(details?.amount)} {details?.currency?.toUpperCase()}
         </div>
         <div className={styles.fs} style={{fontSize: `${width /29}px` }}>
@@ -85,32 +83,34 @@ export default function BonusSlide(props: Props) {
         </div>
 
         <div className={styles.footerGroup}>
-          <div className={styles.btnWrapper}>
+          <div className={styles.btnWrapper} style={{fontSize: `${width / 24}px`, marginTop: `${width /60}px`}}>
             <Button size='normal' background='payGradient500' className={styles.btn} onClick={handleClick}>Получить</Button>
             {appContext.showBonus &&
             <div className={styles.timer}>
               <Timer minutes style={props.style === 'footer' ? 'footer' : props.style === 'sheet' ? 'sheet' : 'bonus'}
-                     expiredAt={expiredAt} fontSize={`${width /22.8}px`} />
+                     expiredAt={expiredAt} fontSize={`${width /25}px`}  rootPadding={`${width /45}px`}
+                     inputHeight={`${width /15}px`}
+                     inputWidth={`${width /15}px`}/>
             </div>
             }
           </div>
-          <div>
-            <div className={styles.bottom}>
-              <div className={styles.satoshi}>
-                {Formatter.formatNumber(details?.freeBitcoin)} Satoshi
-              </div>
-              <div className={styles.satoshi}>
-                {Formatter.formatNumber(details?.lotteryTickets)} Лотерейных билетов
-              </div>
-            </div>
-          </div>
         </div>
-      </div>}
+      </div>
+      <div className={styles.bottom} style={{bottom: `${width /60}px`}}>
+      <div className={styles.satoshi} style={{fontSize: `${width / 42}px`}}>
+        {Formatter.formatNumber(details?.freeBitcoin)} Satoshi
+      </div>
+      <div className={styles.satoshi} style={{fontSize: `${width / 42}px`}}>
+        {Formatter.formatNumber(details?.lotteryTickets)} Лотерейных билетов
+      </div>
+    </div>
+    </>
+      }
       {!appContext.showBonus && <div className={styles.stub}>
         <div className={styles.stubWrapper}>
-        <div className={styles.stubTitle}>The Best Provably Fair Casino
+        <div className={styles.stubTitle} style={{fontSize: `${width / 24}px`}}>The Best Provably Fair Casino
         </div>
-        <div className={styles.btnWrapper}>
+        <div className={styles.btnWrapper} style={{fontSize: `${width / 24}px`}}>
         <Button href={Routes.catalog} className={styles.btn} size='normal' background='payGradient500'>Играть</Button>
         </div>
         </div>

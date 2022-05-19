@@ -3,67 +3,28 @@
 .root{
   background: linear-gradient(46.89deg, #4A16E4 2.09%, #933288 11.47%, #C1444E 32.44%, #FF5C00 108.03%);
   border-radius: 18px;
-  padding: 20px 0 13px 28px;
-
+  padding-bottom: 42%;
   position: relative;
   overflow: hidden;
   max-height: 250px;
   height: 100%;
-
-  @media screen and (max-width: 1360px){
-    padding-left: 18px;
-  }
-  @media screen and (max-width: 800px){
-    padding: 15px 0 9px 15px;
-  }
-  @media screen and (max-width: 800px){
-    max-height: 14.5rem;
-    min-height: 14.5rem;
-    padding: 20px 0 9px 15px;
-  }
-  @media screen and (max-width: $xs-max){
-    max-height: 12rem;
-    min-height: 12rem;
-  }
-  @media screen and (max-width: $mobile-max){
-    max-height: 10rem;
-    min-height: 10rem;
-  }
-  @media screen and (max-width: $xs-max){
-    padding: 15px 0 9px 15px;
-    margin: 0px 4px;
-  }
+  width: 100%;
   @media screen and (max-width: $mobile-max){
     .timer{
       display: none;
     }
   }
-  @media screen and (max-width: $xs-max){
-    width: auto;
-  }
 
  overflow: hidden;
   .hero{
     position: absolute;
-    top: -10%;
-    right: 10%;
+    right: 0;
     z-index: 1;
+    width: 60%;
+    height: 100%;
     img{
       width: 100%;
-      max-width: 200px;
-      @media screen and (max-width: 800px){
-        width: 80%;
-      }
-      @media screen and (max-width: $xs-max){
-        width: 60%;
-      }
-    }
-    @media screen and (max-width: 1360px){
-      right: -0.5%;
-    }
-    @media screen and (max-width: $xs-max){
-      right: -93px;
-      top: 0%;
+      height: 100%;
     }
   }
   .btnWrapper{
@@ -71,7 +32,7 @@
     z-index: 3;
     display: flex;
     align-items: center;
-
+    margin-top: 6px;
     @media screen and (max-width: 800px){
       margin-top: 8px;
     }
@@ -82,39 +43,40 @@
 }
 .btn{
     margin-right: 11px;
-    @include textStyle14Bold;
+    font-weight: bold;
     color: $white;
     padding-right: 55px;
     padding-left: 55px;
-    height: 46px;
-    font-size: 18px;
+    height: 100%;
     @media screen and (max-width: $xs-max){
       padding-right: 35px;
       padding-left: 35px;
       border-radius: 4px;
-      height: 32px;
-      font-size: 11px;
+      height: 100%;
     }
-    @media screen and (max-width: $mobile-max){
-      font-size: 1rem;
-      height: 2.2rem;
+    @media screen and (max-width: 700px){
+      padding: 5px 35px;
+    }
+    @media screen and (max-width: 600px){
+      padding: 5px 20px;
     }
 
 }
 .slide{
   max-height: unset;
   min-height: unset;
-  padding: 0px 0px 42% 0px;
 
   .downBanner{
     position: absolute;
     top: 0px;
-    left: 13px;
-    bottom: 0px;
+    left: 0px;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    margin-left: 28px;
+    width: 100%;
   }
 }
 .sheet{
@@ -274,7 +236,9 @@
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(9.04865px);
   border-radius: 4px;
-  position: relative;
+  position: absolute;
+  margin-left: 20px;
+  bottom: 17px;
   z-index: 3;
   float: left;
   &:after {
@@ -292,11 +256,7 @@
 
 .satoshi{
   padding: 3px 12px;
-  font-size: 14px;
   font-weight: 500;
-  @media screen and (max-width: 800px){
-    font-size: 11px;
-  }
 }
 
 .money{
@@ -346,11 +306,16 @@
   right: 17%;
 }
 .stub{
-  position: relative;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
-  height: 100%;
+  margin-left: 28px;
+  width: 100%;
 }
 .stubTitle{
   color: $white;

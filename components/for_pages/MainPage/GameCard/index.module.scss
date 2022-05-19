@@ -9,10 +9,16 @@
   padding-left: 42px;
   display: flex;
   position: relative;
+  margin-right: 21px;
+  width: 100%;
   @media screen and (max-width: 1360px){
     overflow: hidden;
   }
 
+  @media screen and (max-width: 1000px){
+    margin-bottom: 12px;
+    margin-right: 0;
+  }
   @media screen and (max-width: $xs-max){
     padding: 20px 21px 68px 16px;
     .bg{
@@ -23,8 +29,11 @@
     padding: 27px 21px 100px 16px;
   }
   &.chess{
+    margin-right: 0;
+    @media screen and (max-width: 1000px){
+      margin-bottom: 0;
+    }
     @media screen and (max-width: $xs-max){
-      margin-top: 12px;
       .bg{
         bottom: -24px;
       }

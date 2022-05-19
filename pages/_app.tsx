@@ -4,7 +4,6 @@ import type { AppContext, AppProps } from 'next/app'
 import { appWithTranslation } from 'next-i18next'
 import nextI18NextConfig from '../next-i18next.config.js'
 import SEO from '../next-seo.config'
-import { setConfiguration } from 'react-grid-system'
 import { AppWrapper } from 'context/state'
 import { getSelectorsByUserAgent } from 'react-device-detect'
 import App from 'next/app'
@@ -42,11 +41,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       navigator.serviceWorker.register('/pwabuilder-sw.js', {scope: './'})
     }
   }, [])
-  setConfiguration({
-    gutterWidth: 20,
-    //breakpoints: [700, 950, 1360],
-    //containerWidths: [950, 960, 1320],
-  })
+
   return (
     <AppWrapper isMobile={pageProps.isMobile} token={pageProps.token} initialUser={pageProps.initialUser}>
       <AuthWrapper>

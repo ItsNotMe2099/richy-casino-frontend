@@ -1,6 +1,5 @@
 import InputSearch from 'components/ui/Inputs/InputSearch'
 import styles from './index.module.scss'
-import { Col } from 'react-grid-system'
 import classNames from 'classnames'
 import {useEffect, useState} from 'react'
 import {IGameProvider} from 'data/interfaces/IGameProvider'
@@ -90,7 +89,6 @@ export default function Filter(props: Props) {
 
   return (
     <>
-    <Col className={classNames(styles.col, {[styles.none]: true})}>
       <div className={classNames(styles.root, props.className)}>
 
          <InputSearch placeholder='Поиск' onChange={props.onSearch}/>
@@ -113,7 +111,6 @@ export default function Filter(props: Props) {
          {providers.map((item, index) => <ProviderCard key={item.id} item={item}/>)}
          </div>
       </div>
-    </Col>
     <div className={classNames(styles.mobile, {[styles.none]: !props.showMobile})}>
         <div className={styles.search}>
           <InputSearch placeholder='Поиск' onChange={props.onSearch}/>

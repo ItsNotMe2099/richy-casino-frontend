@@ -1,12 +1,9 @@
 import styles from './index.module.scss'
 import BonusSlide from 'components/for_pages/Common/BonusSlide'
 import Slider from 'react-slick'
-import { Col } from 'react-grid-system'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import SlideSlider from 'components/for_pages/MainPage/TopSlider/SlideSlider'
-import classNames from 'classnames'
-import Button from 'components/ui/Button'
 import {useAppContext} from 'context/state'
 
 interface Props {
@@ -47,7 +44,6 @@ export default function TopSlider(props: Props) {
     <>
       <HiddenXs>
         <>
-          <Col>
             <div className={styles.wrapper}>
           <div className={styles.root}>
             <div className={styles.jackpot}>
@@ -61,7 +57,6 @@ export default function TopSlider(props: Props) {
           <SlideSlider items={appContext.banners} style='catalog'/>
           </div>
             </div>
-          </Col>
         </>
       </HiddenXs>
       <VisibleXs>
@@ -73,7 +68,7 @@ export default function TopSlider(props: Props) {
             </div>
           </div>
           <BonusSlide className={styles.bonusSlideMobile}/>
-          {items.slice(1).map((item, index) =>
+          {/*items.slice(1).map((item, index) =>
               <div className={styles.rootSlide} key={index}>
                 <div className={styles.item} style={{backgroundImage: `url(${item.image})`}}>
                   <div className={styles.left}>
@@ -86,7 +81,7 @@ export default function TopSlider(props: Props) {
                   </div>
                 </div>
               </div>
-            )}
+            )*/}
         </Slider>
       </VisibleXs>
     </>

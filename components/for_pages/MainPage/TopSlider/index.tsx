@@ -8,7 +8,6 @@ import VisibleXs from 'components/ui/VisibleXS'
 import { useAppContext } from 'context/state'
 import Gift from 'components/for_pages/Common/Gift'
 import classNames from 'classnames'
-import {Col, Row} from 'react-grid-system'
 import {BonusDepositShowMode} from 'types/enums'
 import Image from 'next/image'
 interface Props {
@@ -51,24 +50,16 @@ export default function TopSlider(props: Props) {
     <div className={styles.root}>
       {(context.showBonus && context.bonusShowMode === BonusDepositShowMode.Gift) && <div className={styles.bonus}><Gift timer/></div>}
       <HiddenXs>
-        <Row>
-          <Col>
         <div className={styles.desktop}>
-          <div className={styles.col}>
           <BonusSlide style={'slide'}/>
-          </div>
-          <div className={styles.col}>
           <SlideSlider items={context.banners}/>
-          </div>
         </div>
-          </Col>
-        </Row>
       </HiddenXs>
       <VisibleXs>
         <>
           <Slider {...settings}>
             <BonusSlide className={styles.bonusSlideMobile}/>
-            {context.banners.map((item, index) => <div className={styles.rootSlide}>
+            {context.banners.map((item, index) => <div className={styles.rootSlide} key={index}>
                  <div className={styles.item} key={item.id}>
                    {(item.imageMobileUrl || item.imageDesktopUrl) && <Image src={item.imageMobileUrl || item.imageDesktopUrl} layout={'fill'}/>}
 

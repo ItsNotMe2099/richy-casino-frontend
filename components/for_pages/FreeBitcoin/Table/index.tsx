@@ -1,6 +1,5 @@
 import styles from './index.module.scss'
 import classNames from 'classnames'
-import { Col } from 'react-grid-system'
 import {format} from 'date-fns'
 import {IFreeBitcoinSlot} from 'data/interfaces/IFreeBitcoinSlot'
 import {IFreeBitcoinHistory} from 'data/interfaces/IFreeBitcoinHistory'
@@ -39,7 +38,7 @@ export default function Table(props: Props) {
   }
 
   return (
-    <Col className={classNames(styles.col, {[styles.last]: props.history})}>
+    <div className={classNames(styles.col, {[styles.last]: props.history})}>
     <div className={styles.root}>
       <table className={styles.table}>
         <thead>
@@ -77,7 +76,7 @@ export default function Table(props: Props) {
         </tbody>
       </table>
     </div>
-    </Col>
+    </div>
   )
 }
 
