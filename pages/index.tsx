@@ -49,8 +49,10 @@ export default function IndexPage() {
           <TopSlider/>
           <Contents/>
           <Games/>
+          <div className={styles.lists}>
             <GamesList type={MainGameListType.All} label='Казино' icon='/img/Contents/casino.svg' items={casinos} shadowColor='red'/>
             <GamesList type={MainGameListType.Live} label='Live Casino' icon='/img/Contents/live.svg' items={live} shadowColor='blue'/>
+          </div>
           <VisibleXs>
             <BuyCrypto/>
           </VisibleXs>
