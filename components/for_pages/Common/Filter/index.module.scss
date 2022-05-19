@@ -6,9 +6,11 @@
   border-radius: 18px;
   margin-top: 20px;
   overflow-y: hidden;
+  margin-right: 20px;
   @media screen and (max-width: 1024px){
   overflow-y: auto;
   overflow-x: hidden;
+  margin-right: 20px;
   }
 }
 

@@ -5,14 +5,15 @@
 }
 
 .content{
-  width: 75% !important;
+  width: 100%;
   @media screen and (max-width: $xs-max) {
     padding: 0px 18px !important;
   }
 }
 
 .desktop{
-
+  display: flex;
+  width: 100%;
 }
 
 .row{
