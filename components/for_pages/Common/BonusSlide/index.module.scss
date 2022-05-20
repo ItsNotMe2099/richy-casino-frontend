@@ -10,6 +10,7 @@
   height: 100%;
   width: 100%;
   @media screen and (max-width: $mobile-max){
+    padding-bottom: 57%;
     .timer{
       display: none;
     }
@@ -60,7 +61,35 @@
     @media screen and (max-width: 600px){
       padding: 5px 20px;
     }
+    @media screen and (max-width: $mobile-max){
+      padding: 11px 38px;
+    }
+    @media screen and (max-width: $mobile-large){
+      padding: 10px 36px;
+    }
+    @media screen and (max-width: $mobile-md2){
+      padding: 10px 34px;
+    }
+    @media screen and (max-width: $mobile-md){
+      padding: 10px 33px;
+    }
 
+}
+
+.downBanner{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-left: 28px;
+  width: 100%;
+  @media screen and (max-width: $mobile-max){
+    margin-left: 20px;
+  }
 }
 .slide{
   max-height: unset;

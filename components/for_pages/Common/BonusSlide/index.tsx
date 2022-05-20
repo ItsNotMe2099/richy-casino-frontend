@@ -4,7 +4,6 @@ import classNames from 'classnames'
 import Timer from 'components/for_pages/Common/Timer'
 import {useAppContext} from 'context/state'
 import {ModalType, ProfileModalType} from 'types/enums'
-import VisibleXs from 'components/ui/VisibleXS'
 import Formatter from 'utils/formatter'
 import {Routes} from 'types/routes'
 import {useMeasure} from 'react-use'
@@ -20,6 +19,7 @@ export default function BonusSlide(props: Props) {
   const appContext = useAppContext()
   const details = appContext.bonusBannerDetails
   const expiredAt = new Date(details?.validTill)
+  const isMobile = appContext.isMobile
   const [ref, { width }] = useMeasure()
   const slideClass = classNames({
     [styles.sheet]: props.style === 'sheet',
@@ -45,45 +45,22 @@ export default function BonusSlide(props: Props) {
       }}>
         <img src='/img/icons/close-bonus.svg' alt=''/>
       </div>}
-      <div className={styles.hero}><img src='/img/BonusSlide/Hero.png' alt=''/></div>
-      <VisibleXs>
-        <div className={styles.money}><img src='/img/TopSlider/money-mobile.svg' alt=''/></div>
-      </VisibleXs>
-      {props.style === 'footer' &&
-      <>
-        <div className={styles.moneyBlur}>
-          <img src='/img/TopSlider/footer-banner.svg' alt=''/>
-        </div>
-        <div className={styles.moneyLeft}>
-          <img src='/img/UserFooter/money-left-down-banner.svg' alt=''/>
-        </div>
-        <div className={styles.moneyRight}>
-          <img src='/img/UserFooter/money-right-down-banner.svg' alt=''/>
-        </div>
-        <div className={styles.coinUp}>
-          <img src='/img/UserFooter/coin-up.svg' alt=''/>
-        </div>
-        <div className={styles.coinDown}>
-          <img src='/img/UserFooter/coin-down.svg' alt=''/>
-        </div>
-
-      </>
-      }
+      <div className={styles.hero}><img src={isMobile ? '/img/BonusSlide/hero-mobile.png' : '/img/BonusSlide/Hero.png'} alt=''/></div>
       {appContext.showBonus &&
       <>
-      <div className={styles.downBanner} style={{marginTop: `${width /30}px`}}>
-        <div className={styles.title} style={{fontSize: `${width /24}px` }}>
+      <div className={styles.downBanner} style={{marginTop: isMobile ? `${width /15}px` : `${width /30}px`}}>
+        <div className={styles.title} style={{fontSize: isMobile ? `${width /16}px` : `${width /24}px` }}>
           Бонус на депозит
         </div>
-        <div className={styles.bonus} style={{fontSize: `${width /13}px`, marginTop: `${width /50}px` }}>
+        <div className={styles.bonus} style={{fontSize: isMobile ? `${width /10.5}px` : `${width /13}px`, marginTop: isMobile ? `${width /39}px` : `${width /50}px` }}>
           {Formatter.formatNumber(details?.amount)} {details?.currency?.toUpperCase()}
         </div>
-        <div className={styles.fs} style={{fontSize: `${width /29}px` }}>
+        <div className={styles.fs} style={{fontSize: isMobile ? `${width /22}px` : `${width /29}px` }}>
           {Formatter.formatNumber(details?.freeSpins)} FS
         </div>
 
         <div className={styles.footerGroup}>
-          <div className={styles.btnWrapper} style={{fontSize: `${width / 24}px`, marginTop: `${width /60}px`}}>
+          <div className={styles.btnWrapper} style={{fontSize: isMobile ? `${width / 22}px` : `${width / 24}px`, marginTop: isMobile ? `${width /35}px` : `${width /60}px`}}>
             <Button size='normal' background='payGradient500' className={styles.btn} onClick={handleClick}>Получить</Button>
             {appContext.showBonus &&
             <div className={styles.timer}>
@@ -97,10 +74,10 @@ export default function BonusSlide(props: Props) {
         </div>
       </div>
       <div className={styles.bottom} style={{bottom: `${width /60}px`}}>
-      <div className={styles.satoshi} style={{fontSize: `${width / 42}px`}}>
+      <div className={styles.satoshi} style={{fontSize: isMobile ? `${width / 24}px` : `${width / 42}px`}}>
         {Formatter.formatNumber(details?.freeBitcoin)} Satoshi
       </div>
-      <div className={styles.satoshi} style={{fontSize: `${width / 42}px`}}>
+      <div className={styles.satoshi} style={{fontSize: isMobile ? `${width / 24}px` : `${width / 42}px`}}>
         {Formatter.formatNumber(details?.lotteryTickets)} Лотерейных билетов
       </div>
     </div>

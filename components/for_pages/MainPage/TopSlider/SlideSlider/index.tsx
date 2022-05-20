@@ -69,10 +69,10 @@ export default function SlideSlider(props: Props) {
   return (
       <div ref={ref} className={classNames(styles.root, rootClass)}>
       <div className={styles.controls}>
-        <div className={styles.prev} onClick={() => slider.slickGoTo(currentIndex - 1)} style={{width: `${width / 10}px`, height: `${height / 4}px`}}>
+        <div className={styles.prev} onClick={() => slider.slickGoTo(currentIndex - 1)} style={{width: `${width / 16.5}px`, height: `${height / 7}px`}}>
           <SliderArrow/>
         </div>
-        <div className={styles.next} onClick={() => slider.slickGoTo(currentIndex + 1)} style={{width: `${width / 10}px`, height: `${height / 4}px`}}>
+        <div className={styles.next} onClick={() => slider.slickGoTo(currentIndex + 1)} style={{width: `${width / 16.5}px`, height: `${height / 7}px`}}>
           <SliderArrow/>
         </div>
       </div>
