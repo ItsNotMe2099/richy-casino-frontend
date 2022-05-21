@@ -89,6 +89,7 @@ export default function Filter(props: Props) {
 
   return (
     <>
+      <div className={classNames(styles.col, {[styles.none]: true})}>
       <div className={classNames(styles.root, props.className)}>
 
          <InputSearch placeholder='Поиск' onChange={props.onSearch}/>
@@ -111,6 +112,7 @@ export default function Filter(props: Props) {
          {providers.map((item, index) => <ProviderCard key={item.id} item={item}/>)}
          </div>
       </div>
+    </div>
     <div className={classNames(styles.mobile, {[styles.none]: !props.showMobile})}>
         <div className={styles.search}>
           <InputSearch placeholder='Поиск' onChange={props.onSearch}/>
