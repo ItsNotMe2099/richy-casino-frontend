@@ -1,68 +1,50 @@
 @import "scss/index";
 .wrapper{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.5fr;
   grid-gap: 0px 20px;
 }
-.root{
+.rootJack{
   overflow: hidden;
   margin-top: 20px;
-  @media screen and (max-width: 650px){
-    display: none !important;
+  @media screen and (max-width: $mobile-max){
+    padding: 0 5px;
+    margin-top: 0;
   }
+}
+
+.rootSlide{
+  padding: 0px 5px;
 }
 
 .jackpot{
   background-image: url('../../../../public/img/TopSlider/bg.svg');
   background-repeat: no-repeat;
-  min-height: 250px;
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   border-radius: 18px;
   background-size: cover;
-  padding: 0 33px;
-  width: auto !important;
-  @media screen and (max-width: 800px){
-    max-height: 14.5rem;
-    min-height: 14.5rem;
-    padding: 15px 0 9px 15px;
-  }
-  @media screen and (max-width: $xs-max){
-    max-height: 12rem;
-    min-height: 12rem;
-    padding: 15px 0 9px 15px;
-    margin: 0px 4px;
-  }
+  position: relative;
+  padding-bottom: 42%;
+  height: 100%;
   @media screen and (max-width: $mobile-max){
-    max-height: 10rem;
-    min-height: 10rem;
-    .timer{
-      display: none;
-    }
+    padding-bottom: 59.04%;
   }
 }
 
 .title{
   font-weight: bold;
-  font-size: 41px;
   background: linear-gradient(#fff 0%, #3EAEDF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #FFF7F7;
+  display: flex;
+  justify-content: center;
 }
 
 .money{
   font-weight: 800;
-  font-size: 60px;
-  @media screen and (max-width: 1360px){
-    font-size: 40px;
-  }
-  @media screen and (max-width: $xs-max){
-    font-size: 30px;
-  }
+  display: flex;
+  justify-content: center;
 }
 
 
@@ -82,51 +64,72 @@
   overflow: hidden;
 }
 .bonusSlideMobile{
-  margin: 0px 4px;
+  
 }
 
 .btn{
   margin-top: 23px;
-  button{
+  button, a{
     color: $blue500;
-    @include textStyle14Bold;
     padding-right: 38px;
     padding-left: 38px;
+    font-weight: bold;
+    @media screen and (max-width: $xs-max){
+      padding-right: 35px;
+      padding-left: 35px;
+      border-radius: 4px;
+      height: 100%;
+    }
+    @media screen and (max-width: 700px){
+      padding: 5px 35px;
+    }
+    @media screen and (max-width: 600px){
+      padding: 5px 20px;
+    }
+    @media screen and (max-width: $mobile-max){
+      padding: 11px 38px;
+    }
+    @media screen and (max-width: $mobile-large){
+      padding: 10px 36px;
+    }
+    @media screen and (max-width: $mobile-md2){
+      padding: 10px 34px;
+    }
+    @media screen and (max-width: $mobile-md){
+      padding: 10px 33px;
+    }
+  }
+}
+
+.alt{
+  button{
+    color: $white;
   }
 }
 
 .left{
-
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  padding-left: 15px;
+  padding-right: 15px;
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .item{
   display: flex !important;
   border-radius: 18px;
-  padding: 20px 0 13px 0;
+  max-width: 100%;
   position: relative;
-  max-height: 18rem;
+  max-height: 100%;
+  padding-bottom: 52%;
   overflow: hidden;
-  min-height: 18rem;
-  background-position: center center;
-  margin: 0 5px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  @media screen and (max-width: 1360px){
-    padding-left: 18px;
-  }
-  @media screen and (max-width: 800px){
-    max-height: 14.5rem;
-    min-height: 14.5rem;
-    padding: 20px 0 9px 15px;
-  }
-  @media screen and (max-width: $xs-max){
-    width: auto;
-    max-height: 12rem;
-    min-height: 12rem;
-  }
   @media screen and (max-width: $mobile-max){
-    max-height: 10rem;
-    min-height: 10rem;
+    padding-bottom: 59.04%;
   }
 }
 
@@ -137,10 +140,27 @@
   }
 }
 
+.label{
+  font-weight: bold;
+  color: $white;
+  line-height: 100%;
+  width: 70%;
+}
+
 .spin{
   color: #fef494;
 }
 
 .lottery{
   color: #4148e7;
+}
+
+.content{
+  position: absolute;
+  top: 30%;
+  right: 0;
+  left: 0;
+  @media screen and (max-width: $mobile-max){
+    top: 25%;
+  }
 }

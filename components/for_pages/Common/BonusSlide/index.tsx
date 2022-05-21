@@ -36,6 +36,7 @@ export default function BonusSlide(props: Props) {
   }
 
   return (
+    <div className={styles.wrapper}>
     <div ref={ref} className={classNames(styles.root, props.className, slideClass)} >
       {(props.style === 'modal' || props.style === 'sheet' || props.style === 'footer') &&
       <div className={styles.close} onClick={(e) => {
@@ -92,6 +93,7 @@ export default function BonusSlide(props: Props) {
         </div>
         </div>
       </div>}
+    </div>
     </div>
   )
 }

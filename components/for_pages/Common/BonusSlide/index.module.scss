@@ -10,7 +10,7 @@
   height: 100%;
   width: 100%;
   @media screen and (max-width: $mobile-max){
-    padding-bottom: 57%;
+    padding-bottom: 59.04%;
     .timer{
       display: none;
     }
@@ -40,6 +40,11 @@
   }
   .moneyBlur{
     display: none;
+  }
+}
+.wrapper{
+  @media screen and (max-width: $mobile-max){
+    padding: 0 5px;
   }
 }
 .btn{
