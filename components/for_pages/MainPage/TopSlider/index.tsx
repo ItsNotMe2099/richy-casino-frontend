@@ -10,6 +10,7 @@ import Gift from 'components/for_pages/Common/Gift'
 import classNames from 'classnames'
 import {BonusDepositShowMode} from 'types/enums'
 import Image from 'next/image'
+import { useMeasure } from 'react-use'
 interface Props {
   children?: React.ReactNode
   className?: string
@@ -20,6 +21,8 @@ export default function TopSlider(props: Props) {
   const context = useAppContext()
 
   const user = context.auth
+
+  const [ref, { width, height }] = useMeasure()
 
   const settings = {
     className: `${styles.slider}`,
@@ -47,7 +50,7 @@ export default function TopSlider(props: Props) {
   console.log('Banners', context.banners)
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} ref={ref}>
       {(context.showBonus && context.bonusShowMode === BonusDepositShowMode.Gift) && <div className={styles.bonus}><Gift timer/></div>}
       <HiddenXs>
         <div className={styles.desktop}>
@@ -64,11 +67,11 @@ export default function TopSlider(props: Props) {
                    {(item.imageMobileUrl || item.imageDesktopUrl) && <Image src={item.imageMobileUrl || item.imageDesktopUrl} layout={'fill'}/>}
 
                    <div className={styles.left}>
-                    <div className={classNames({[styles.label]: index == 0})}>
+                    <div className={styles.label} style={{fontSize: `${width / 24}px`}}>
                       {item.title}
                     </div>
-                    <div className={styles.btn}>
-                      <Button size='normal' background='white'  href={item.redirectUrl}>{item.textButton}</Button>
+                    <div className={classNames(styles.btn, {[styles.alt]: index === 1})} style={{fontSize: `${width / 25}px`}}>
+                      <Button size='normal' background={index === 1 ? 'blueGradient500' : 'white'}  href={item.redirectUrl}>{item.textButton}</Button>
                     </div>
                   </div>
                 </div>

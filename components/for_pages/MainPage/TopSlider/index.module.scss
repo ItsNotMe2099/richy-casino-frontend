@@ -42,14 +42,9 @@ overflow: hidden;
 
 .label{
   font-weight: bold;
-  font-size: 36px;
   color: $white;
   line-height: 100%;
   width: 70%;
-  @media screen and (max-width: 520px){
-    font-size: 20px;
-    width: 100%;
-  }
 }
 
 .otherLabel{
@@ -59,11 +54,41 @@ overflow: hidden;
 
 .btn{
   margin-top: 23px;
-  button{
+  button, a{
     color: $blue500;
-    @include textStyle14Bold;
     padding-right: 38px;
     padding-left: 38px;
+    font-weight: bold;
+    @media screen and (max-width: $xs-max){
+      padding-right: 35px;
+      padding-left: 35px;
+      border-radius: 4px;
+      height: 100%;
+    }
+    @media screen and (max-width: 700px){
+      padding: 5px 35px;
+    }
+    @media screen and (max-width: 600px){
+      padding: 5px 20px;
+    }
+    @media screen and (max-width: $mobile-max){
+      padding: 11px 38px;
+    }
+    @media screen and (max-width: $mobile-large){
+      padding: 10px 36px;
+    }
+    @media screen and (max-width: $mobile-md2){
+      padding: 10px 34px;
+    }
+    @media screen and (max-width: $mobile-md){
+      padding: 10px 33px;
+    }
+  }
+}
+
+.alt{
+  button{
+    color: $white;
   }
 }
 
