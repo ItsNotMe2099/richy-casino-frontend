@@ -13,6 +13,7 @@ import { isAfter } from 'date-fns'
 import Winner from './Winner'
 import classNames from 'classnames'
 import RichyLoader from 'components/ui/RichyLoader'
+import { ModalType } from 'types/enums'
 
 const Board = dynamic(() => import('./Board'), { ssr: false })
 
@@ -102,13 +103,6 @@ export default function Fortune(props: Props) {
         <div className={styles.board}>
           <Board canvasSize={canvasSize} gameResult={gameResult} slots={slotsRef.current} />
         </div>
-        <HiddenXs>
-          <div className={styles.wrapper}>
-            <div className={styles.everyday}>
-              <div>lucky spin everyday</div>
-            </div>
-          </div>
-        </HiddenXs>
         <div className={styles.right}>
           <img src='/img/Fortune/coins1.svg' alt=''/>
         </div>
@@ -116,6 +110,13 @@ export default function Fortune(props: Props) {
           <img src='/img/Fortune/coins2.svg' alt=''/>
         </div>
       </div>
+      <HiddenXs>
+          <div className={styles.wrapper}>
+            <div className={styles.everyday}>
+              <div>lucky spin everyday</div>
+            </div>
+          </div>
+        </HiddenXs>
       <div className={styles.mobile}>
         <img src='/img/Fortune/mob_coins_top_right.svg' alt='' className={styles.bgMobileCoinsTopRight}/>
         <img src='/img/Fortune/mob_coins_bottom_left.svg' alt='' className={styles.bgMobileCoinsBottomLeft}/>
@@ -126,10 +127,10 @@ export default function Fortune(props: Props) {
             </div>
           </div>
         </VisibleXs>
-        {available && (
+        {/*available && (*/}
           <div className={styles.btn}>
             <Button
-              onClick={play}
+              onClick={() => appContext.auth ? play : appContext.showModal(ModalType.registration)}
               className={styles.spin}
               background="pink"
               disabled={!!gameResult}
@@ -137,7 +138,7 @@ export default function Fortune(props: Props) {
               Spin the wheel
             </Button>
           </div>
-        )}
+        {/*})*/}
         {!available && appContext.auth && (
           <div className={styles.next}>
             <div className={styles.free}>
