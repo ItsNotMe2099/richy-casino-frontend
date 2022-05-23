@@ -40,8 +40,6 @@ export default function Contents(props: Props) {
   return (
     <div className={styles.wrapper}>
     <div className={styles.root}>
-    <div className={styles.transparent}></div>
-    <div className={styles.transparentLeft}></div>
       {items.map((item, index) =>
          <Link href={item.link}  key={item.link}>
           <a className={styles.item}>
