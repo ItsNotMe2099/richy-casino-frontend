@@ -17,6 +17,7 @@
 .col{
   width: 25% !important;
   max-width: 25% !important;
+  min-width: 370px;
   @media screen and (max-width: 1024px){
     position: absolute !important;
     z-index: 1;
