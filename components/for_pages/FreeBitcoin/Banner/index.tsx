@@ -11,6 +11,7 @@ import {useAppContext} from 'context/state'
 import {differenceInSeconds} from 'date-fns'
 import {IFreeBitcoinGame, IFreeBitcoinGameStatus} from 'data/interfaces/IFreeBitcoinGame'
 import Formatter from 'utils/formatter'
+import { ModalType } from 'types/enums'
 
 enum State{
   Timer = 'timer',
@@ -26,12 +27,12 @@ export default function Banner(props: Props) {
   const [userStatus, setUserStatus] = useState<IFreeBitcoinUserStatus>(null)
   const [result, setResult] = useState<IFreeBitcoinGame>(null)
 
-  const [state, setState] = useState<State | null>(null)
+  const [state, setState] = useState<State | null>(State.Play)
   const [sending, setSending] = useState(false)
   const [error, setError] = useState(null)
   useEffect(() => {
     if(!context.auth){
-      setState(null)
+      //setState(null)
       setUserStatus(null)
     }
     FreeBitcoinRepository.fetchUserStatus().then(i => {
@@ -74,8 +75,15 @@ export default function Banner(props: Props) {
     }
     setSending(false)
   }
+
+  const handlePlayGuest = () => {
+    if(!context.auth){
+      context.showModal(ModalType.registration)
+    }
+  }
+
   const getNumber = () => {
-    return Formatter.pad('00000',userStatus?.balanceFreebitcoin ?? 0)
+    return Formatter.pad('00000', /*userStatus?.balanceFreebitcoin*/10000 ?? 0)
   }
   return (
     <div className={styles.root}>
@@ -97,7 +105,7 @@ export default function Banner(props: Props) {
         )}
       </div>
       {state === State.Play &&
-        <Button className={styles.btn} spinner={sending} size='huge' background='blueGradient500' onClick={handlePlay}>   {t('freebitcoin_play_now')}</Button>
+        <Button className={styles.btn} spinner={sending} size='huge' background='blueGradient500' onClick={context.auth ? handlePlay : handlePlayGuest}>   {t('freebitcoin_play_now')}</Button>
       }
       {state === State.Win &&
         <div className={styles.win}>

@@ -13,6 +13,7 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import {useTranslation} from 'next-i18next'
 import {Routes} from 'types/routes'
+import {usePwaContext} from 'context/pwa_state'
 
 interface Props {
   children?: React.ReactNode
@@ -34,6 +35,7 @@ export default function Header(props: Props) {
   const {t} = useTranslation()
   const {route: currentRoute, asPath: currentPath} = useRouter()
   const context = useAppContext()
+  const pwaContext = usePwaContext()
 
   const user = context.user
   const UserBonus = ({icon, amount, color}: UserBonusProps) => {
@@ -70,9 +72,9 @@ export default function Header(props: Props) {
           <div className={styles.left}>
             <div className={styles.apps}>
               {/*<div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>*/}
-              <div className={styles.btn}><Button size='extraSmall' background='dark700'><img
+              <div className={styles.btn}><Button size='extraSmall' background='dark700' onClick={() => pwaContext.install()}><img
                 src='/img/layout/top/android.svg' alt=''/></Button></div>
-              <Button size='extraSmall' background='dark700'><img src='/img/layout/top/apple.svg' alt=''/></Button>
+              <Button size='extraSmall' background='dark700' onClick={() => pwaContext.install()}><img src='/img/layout/top/apple.svg' alt=''/></Button>
             </div>
             <div className={styles.bonuses}>
               <Link href={Routes.bonuses}>
@@ -119,12 +121,12 @@ export default function Header(props: Props) {
               </>
               :
               <div className={styles.userBtns}>
-                {context.user.extraBalances && <HiddenXs>
+                {context.user.extraBalances &&
                  <div className={styles.userBonuses} onClick={() => context.showModal(ProfileModalType.profile)}>
                     <UserBonus icon='/img/icons/ticket.svg' amount={context.user.extraBalances.lotteryTickets ?? 0} color='#427BF8'/>
                     <UserBonus icon='/img/icons/spin.svg' amount={context.user.extraBalances.freespinAmount ?? 0} color='#F81AAC'/>
                   </div>
-                </HiddenXs>}
+                }
                 {!user.flags.isHideBalance && <ProfileAccountsMenu/>}
                 <HiddenXs>
                   <ProfileMenu/>

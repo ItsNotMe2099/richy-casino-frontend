@@ -2,7 +2,6 @@ import PageTitle from 'components/for_pages/Common/PageTitle'
 import Banner from 'components/for_pages/FreeBitcoin/Banner'
 import Table from 'components/for_pages/FreeBitcoin/Table'
 import {useEffect, useState} from 'react'
-import {Row} from 'react-grid-system'
 import {GetServerSideProps} from 'next'
 import FreeBitcoinRepository from 'data/repositories/FreeBitcoinRepository'
 import {IFreeBitcoinSlot} from 'data/interfaces/IFreeBitcoinSlot'
@@ -13,6 +12,7 @@ import {useTranslation} from 'next-i18next'
 import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import {getServerSideTranslation} from 'utils/i18'
 import {NextSeo} from 'next-seo'
+import ContentLoader from 'components/ui/ContentLoader'
 
 export default function FreeBitcoin() {
   const {t} = useTranslation()
@@ -37,11 +37,13 @@ export default function FreeBitcoin() {
       <NextSeo title={t('freebitcoin_title')}/>
           <PageTitle icon='/img/Contents/bitcoin.svg' title={t('freebitcoin_title')}
                      onClick={() => isShow ? setIsShow(false) : setIsShow(true)} shadowColor='yellow'/>
-          <Banner/>
-          <Row>
+      {loading && <ContentLoader style={'block'} isOpen={true}/>}
+      {!loading &&   <><Banner/>
+          <div>
             <Table items={slots}/>
             <Table items={history} history/>
-          </Row>
+          </div>
+            </>}
     </WithGameFilterLayout>
   )
 }

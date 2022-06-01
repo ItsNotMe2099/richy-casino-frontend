@@ -1,7 +1,10 @@
 import GamesList from 'components/for_pages/CatalogPage/GamesList'
-import {richyGames} from 'components/for_pages/Common/GameTypes/game-types'
 import {Routes} from 'types/routes'
 import useIsActiveLink from 'hooks/useIsActiveLink'
+import {useEffect, useState} from 'react'
+import {IPagination} from 'types/interfaces'
+import {IGame} from 'data/interfaces/IGame'
+import GameListRepository from 'data/repositories/GameListRepository'
 
 
 interface Props {
@@ -9,9 +12,24 @@ interface Props {
 }
 
 export default function GamesListRichy(props: Props) {
-  const allLink = Routes.catalogLive
+  const [data, setData] = useState<IPagination<IGame>>({data: [], total: 0})
+  const [loading, setLoading] = useState<boolean>(true)
+  const limit = 20
+  const allLink = Routes.richyGames
   const currentPage = useIsActiveLink(allLink)
+  useEffect(() => {
+    GameListRepository.fetchRichy( 1, limit).then(i => {
+      setData(i)
+      setLoading(false)
+    })
+  }, [])
+
   return (
-    <GamesList title={'Richy Games'}    allLink={!currentPage? allLink : null} icon={'/img/Contents/gamepad.svg'} totalItems={richyGames.length} items={richyGames.map(i => ({imageIconPreviewUrl: i.image, name: i.label, link: i.link}))} loading={false}/>
+    <GamesList title={'Richy Games'} showAll allLink={!currentPage? allLink : null}
+               icon={'/img/Contents/gamepad.svg'}
+               totalItems={data?.total}
+               items={data?.data ?? []}
+               loading={loading}
+               />
   )
 }

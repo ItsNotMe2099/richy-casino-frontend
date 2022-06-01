@@ -28,8 +28,20 @@
 
 .label{
   font-weight: 500;
-  font-size: 13px;
+  font-size: 14px;
   color: $dark100;
+  @media screen and (max-width: 414px){
+    font-weight: 500;
+    font-size: 18px;
+  }
+  @media screen and (max-width: 390px){
+    font-weight: 500;
+    font-size: 17px;
+  }
+  @media screen and (max-width: 375px){
+    font-weight: 500;
+    font-size: 16px;
+  }
 }
 
 .active{

@@ -10,16 +10,21 @@ import {IBonusBannerDetails, IModalProfileStackItem, SnackbarData} from 'types/i
 import {CookiesLifeTime, Timers} from 'types/constants'
 import PromoCodeRepository from 'data/repositories/PromoCodeRepository'
 import UserUtils from 'utils/user'
+import {IBanner} from 'data/interfaces/IBanner'
+import BannerRepository from 'data/repositories/BannerRepository'
+import {addHours} from 'date-fns'
+import {runtimeConfig} from 'config/runtimeConfig'
 
 interface IState {
   isMobile: boolean
   isDesktop: boolean
   auth: boolean
+  token: string
   modalArguments?: any
   modal: ModalType | ProfileModalType | null
   lastProfileModal?: IModalProfileStackItem
   showModal: (type: ModalType | ProfileModalType, data?: any) => void
-  showModalProfile: (type: ProfileModalType, data?: any) => void
+  showModalProfile: (type: ProfileModalType, data?: any, skipStack?: boolean) => void
   goBackModalProfile: () => void
   hideModal: () => void
   bottomSheet: ModalType | ProfileModalType | null
@@ -35,6 +40,7 @@ interface IState {
   bonusBannerDetails: IBonusBannerDetails | null
   updatePromoCodes: () => void
   currencies: ICurrency[]
+  banners: IBanner[]
   snackbar: SnackbarData | null,
   showSnackbar: (text: string, type: SnackbarType) => void
 }
@@ -48,8 +54,10 @@ const defaultValue: IState = {
   auth: false,
   user: null,
   lastProfileModal: null,
+  token: null,
+  banners: [],
   showModal: (type, data) => null,
-  showModalProfile: (type, data?: any) => null,
+  showModalProfile: (type, data, skipStack) => null,
   goBackModalProfile: () => null,
   hideModal: () => null,
   showBottomSheet: (type, data) => null,
@@ -75,6 +83,7 @@ const ModalsBottomSheet = [
   ModalType.registrationSuccess,
   ModalType.passwordRecovery,
   ModalType.passwordReset,
+  ModalType.faLogin,
   ModalType.fortune,
   ModalType.profileBurger
 ]
@@ -97,6 +106,7 @@ export function AppWrapper(props: Props) {
   const [bonusShowMode, setBonusShowMode] = useState<BonusDepositShowMode | null>(null)
   const [bonusBannerDetails, setBonusBannerDetails] = useState<IBonusBannerDetails>(null)
   const [currencies, setCurrencies] = useState<ICurrency[]>([])
+  const [banners, setBanners] = useState<IBanner[]>([])
   const [snackbar, setSnackbar] = useState<SnackbarData | null>(null)
   const [modalProfileStack, setModalProfileStack] = useState<IModalProfileStackItem[]>([])
   const value: IState = {
@@ -111,14 +121,16 @@ export function AppWrapper(props: Props) {
     currencies,
     user,
     snackbar,
+    token: props.token,
+    banners,
     showModal: (type, props: any) => {
       showModal(type, props)
 
     },
-    showModalProfile: (type, args: any) => {
-      showModal(type, props)
+    showModalProfile: (type, args: any, skipStack?: boolean) => {
+      showModal(type, args)
 
-      if (modal && !(props.isMobile && ModalsBottomSheet.includes(type)) && Object.values(ProfileModalType).includes(modal as ProfileModalType)) {
+      if (modal && !(props.isMobile && ModalsBottomSheet.includes(type)) && Object.values(ProfileModalType).includes(modal as ProfileModalType) && !skipStack) {
         setModalProfileStack(stack => [...stack, {
           type: modal as ProfileModalType,
           args
@@ -182,6 +194,7 @@ export function AppWrapper(props: Props) {
       setAuth(true)
       updateUserDetails()
     }
+    BannerRepository.fetchBanners().then(i => setBanners(i))
 
   }, [props.token])
   useEffect(() => {
@@ -237,6 +250,19 @@ export function AppWrapper(props: Props) {
       const details = UserUtils.getBonusBannerDetails(promoCodes)
       setBonusBannerDetails(details)
       setShowBonus(isEnabled)
+      if(runtimeConfig.FAKE_BONUS) {
+        setBonusBannerDetails({
+          amount: 10,
+          currency: 'USD',
+          freeSpins: 10,
+          freeBitcoin: 10,
+          lotteryTickets: 10,
+          wheelSpins: 10,
+          validTill: addHours(new Date(), 1).toISOString()
+        })
+        setShowBonus(true)
+    }
+
       if (isEnabled && !auth && !Cookies.get(CookiesType.bonusDepositShowMode)) {
         setTimeout(() => {
           showModal(ModalType.bonus)

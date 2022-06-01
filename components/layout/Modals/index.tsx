@@ -8,7 +8,6 @@ import ModalPasswordReset from 'components/Auth/ModalPasswordReset'
 import ModalRegistration from 'components/Auth/ModalRegistration'
 import ModalRegistrationSuccess from 'components/Auth/ModalRegistrationSuccess'
 import PaymentHistory from 'components/Profile/PaymentHistory'
-import ProfileModal from 'components/ui/ProfileModal'
 import Profile from 'components/Profile/Profile'
 import Settings from 'components/Profile/Settings'
 import Fortune from 'components/Fortune'
@@ -23,9 +22,11 @@ import BuyCrypto from 'components/Profile/BuyCrypto'
 import FA from 'components/Profile/FA'
 import Withdraw from 'components/Profile/Withdraw'
 import {RemoveScroll} from 'react-remove-scroll'
-import Converter from 'utils/converter'
 import {useTranslation} from 'next-i18next'
 import ProfileModalNew from 'components/Profile/layout/ProfileModalNew'
+import ModalConfirmOldPhone from 'components/Profile/ModalConfirmOldPhone'
+import ModalConfirmNewPhone from 'components/Profile/ModalConfirmNewPhone'
+import FALogin from 'components/Profile/FALogin'
 
 interface Props {
 }
@@ -35,20 +36,6 @@ export default function ModalContainer(props: Props) {
   const context = useAppContext()
   const commonSettings = {
     onRequestClose: context.hideModal,
-  }
-
-
-  const user = {
-    id: '6171361',
-    balance: '$275.16',
-    userName: 'Alex',
-    name: 'Ерохин Иван Иванович',
-    dateOfBirth: '15.12.1998',
-    country: '185',
-    currency: Converter.convertCurrencyToOptions(context.currencies),
-    phone: '8 (800) 800 88 88',
-    email: 'pochta@mail.ru',
-    password: 'qwerty123'
   }
 
   return (
@@ -101,12 +88,11 @@ export default function ModalContainer(props: Props) {
 
           <BonusModal isOpen={context.modal === ModalType.bonus} {...commonSettings}/>
 
-          <ProfileModal
+          <ProfileModalNew
             size='small'
-            key={13} isBack={true} isOpen={context.modal === ProfileModalType.exchange} {...commonSettings}
-            title={t('exchange_title')} payment noBorder>
-            {context.modal === ProfileModalType.exchange && <Exchange user={user}/>}
-          </ProfileModal>
+            key={13}  isOpen={context.modal === ProfileModalType.exchange}>
+            {context.modal === ProfileModalType.exchange && <Exchange/>}
+          </ProfileModalNew>
           <ProfileModalNew size={'large'} key={6}
                            isOpen={context.modal === ProfileModalType.favorite} {...commonSettings} >
             {context.modal === ProfileModalType.favorite && <Favorite/>}
@@ -119,7 +105,7 @@ export default function ModalContainer(props: Props) {
             size='small'
             key={16}  isOpen={context.modal === ProfileModalType.buyCrypto} {...commonSettings}
             >
-            {context.modal === ProfileModalType.buyCrypto && <BuyCrypto user={user}/>}
+            {context.modal === ProfileModalType.buyCrypto && <BuyCrypto/>}
           </ProfileModalNew>
           <ProfileModalNew
             size='small'
@@ -128,12 +114,30 @@ export default function ModalContainer(props: Props) {
             {context.modal === ProfileModalType.FA && <FA/>}
           </ProfileModalNew>
 
-        <ProfileModalNew
-        size='small'
-        key={16}  isOpen={context.modal === ModalType.profileBurger} {...commonSettings}
-        >
+          <ProfileModalNew
+            size='small'
+            key={16}  isOpen={context.modal === ModalType.profileBurger} {...commonSettings}
+          >
             <ProfileBurger onRequestClose={() => context.hideModal()}/>
-        </ProfileModalNew>
+          </ProfileModalNew>
+          <ProfileModalNew
+            size='small'
+            key={17}  isOpen={context.modal === ProfileModalType.oldPhoneConfirm} {...commonSettings}
+          >
+            {context.modal === ProfileModalType.oldPhoneConfirm && <ModalConfirmOldPhone/>}
+          </ProfileModalNew>
+          <ProfileModalNew
+            size='small'
+            key={18}  isOpen={context.modal === ProfileModalType.newPhoneConfirm} {...commonSettings}
+          >
+            {context.modal === ProfileModalType.newPhoneConfirm && <ModalConfirmNewPhone/>}
+          </ProfileModalNew>
+          <ProfileModalNew
+            size='small'
+            key={19}  isOpen={context.modal === ModalType.faLogin} {...commonSettings}
+          >
+            {context.modal === ModalType.faLogin && <FALogin/>}
+          </ProfileModalNew>
         </div>
       )}
     </RemoveScroll>

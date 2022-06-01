@@ -1,6 +1,4 @@
 import TopSlider from 'components/for_pages/CatalogPage/TopSlider'
-import styles from 'pages/catalog/index.module.scss'
-import {Row} from 'react-grid-system'
 import GamesListTop from 'components/for_pages/CatalogPage/GamesListTop'
 import {GetServerSideProps} from 'next'
 import VisibleXs from 'components/ui/VisibleXS'
@@ -21,9 +19,7 @@ export default function CatalogPage() {
   return (
     <WithGameFilterLayout showMobile top={<VisibleXs><TopSlider money={money}/></VisibleXs>}>
       <NextSeo title={t('page_index_title')}/>
-       <Row className={styles.row}>
             <HiddenXs><TopSlider money={money}/></HiddenXs>
-          </Row>
           <GamesListTop />
           <VisibleXs><BuyCrypto/></VisibleXs>
           <GamesListAll />

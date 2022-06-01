@@ -40,7 +40,7 @@ export default function PhoneForm(props: Props) {
   const initialValues = {
       phone: null,
       currency: Converter.convertCurrencyToOptions(context.currencies)[0].value,
-      checkBox: false
+      checkBox: true
     }
 
   const { t } = useTranslation('common')

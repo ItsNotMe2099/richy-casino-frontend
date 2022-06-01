@@ -6,8 +6,8 @@ import InputField from 'components/ui/Inputs/InputField'
 import Validator from 'utils/validator'
 import SocialButtons from 'components/Auth/SocialButtons'
 import {ModalType} from 'types/enums'
-import { useAppContext } from 'context/state'
-import { LoginFormData } from 'types/interfaces'
+import {useAppContext} from 'context/state'
+import {LoginFormData} from 'types/interfaces'
 import FormError from 'components/ui/Form/FormError'
 import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
 import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
@@ -39,8 +39,11 @@ export default function ModalLogin(props: Props) {
       if (!res) {
         return
       }
+      if(res.is2faRequired){
+        appContext.showModal(ModalType.faLogin)
+        return
+      }
       const accessToken = res.token
-      console.log('AccessToken', accessToken)
       if (!accessToken) {
         setError(t('api_error_unknown'))
         setLoading(false)

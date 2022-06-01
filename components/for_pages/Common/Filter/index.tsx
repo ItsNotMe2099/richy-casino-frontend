@@ -1,6 +1,5 @@
 import InputSearch from 'components/ui/Inputs/InputSearch'
 import styles from './index.module.scss'
-import { Col } from 'react-grid-system'
 import classNames from 'classnames'
 import {useEffect, useState} from 'react'
 import {IGameProvider} from 'data/interfaces/IGameProvider'
@@ -65,9 +64,32 @@ export default function Filter(props: Props) {
   const [category, setCategory] = useState('')
   const [provider, setProvider] = useState('')
 
+  const [showCategory, setShowCategory] = useState(false)
+  const [showProviders, setShowProviders] = useState(false)
+
+  const handleShowCategory = () => {
+    if(showCategory){
+      setShowCategory(false)
+    }
+    else{
+      setShowCategory(true)
+      setShowProviders(false)
+    }
+  }
+
+  const handleShowProviders = () => {
+    if(showProviders){
+      setShowProviders(false)
+    }
+    else{
+      setShowProviders(true)
+      setShowCategory(false)
+    }
+  }
+
   return (
     <>
-    <Col className={classNames(styles.col, {[styles.none]: true})}>
+      <div className={classNames(styles.col, {[styles.none]: true})}>
       <div className={classNames(styles.root, props.className)}>
 
          <InputSearch placeholder='Поиск' onChange={props.onSearch}/>
@@ -90,17 +112,41 @@ export default function Filter(props: Props) {
          {providers.map((item, index) => <ProviderCard key={item.id} item={item}/>)}
          </div>
       </div>
-    </Col>
+    </div>
     <div className={classNames(styles.mobile, {[styles.none]: !props.showMobile})}>
         <div className={styles.search}>
           <InputSearch placeholder='Поиск' onChange={props.onSearch}/>
           <div className={styles.filters}>
-          <DropdownFilter options={categories.map(i => ({label: i.name, link: Routes.catalogCategory(i.id) }))} label='Категория' allOption
+          <DropdownFilter  label='Категория' onClick={handleShowCategory}
+          notActive
            onAll={() => setCategory('')} onChange={(item) => setCategory(item.label)} activeTab={category} type='category'/>
-          <DropdownFilter options={providers.map(i => ({label: i.name, link: Routes.catalogProvider(i.id) }))} label='Провайдеры' allOption
-            onAll={() => setProvider('')}
+          <DropdownFilter label='Провайдеры'
+            notActive
+            onAll={() => setProvider('')} onClick={handleShowProviders}
            onChange={(item) => setProvider(item.label)} activeTab={provider} type='provider'/>
         </div>
+        {showCategory &&
+          <>
+          <div className={styles.categoriesLbl}>
+          КАТЕГОРИИ
+         </div>
+         <div className={styles.categories}>
+         {categories.map((item, index) =>
+           <GameCategoryCard key={item.id} item={item}/>
+         )}
+         </div>
+          </>
+        }
+        {showProviders &&
+        <>
+        <div className={styles.categoriesLbl}>
+          ПРОВАЙДЕРЫ
+         </div>
+         <div className={styles.providers}>
+         {providers.map((item, index) => <ProviderCard key={item.id} item={item}/>)}
+         </div>
+        </>
+        }
         </div>
         {games.map((item, index) =>
           <GameCategoryStaticCard key={index} icon={item.icon} label={item.label} link={item.link} quantity={item.quantity}/>

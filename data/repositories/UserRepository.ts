@@ -2,6 +2,8 @@ import request from 'utils/request'
 import IUser, {IUserBalanceCurrencyRaw} from 'data/interfaces/IUser'
 import Converter from 'utils/converter'
 import {UserFormData} from 'types/form-data'
+import {IPhoneNewConfirm, IPhoneOldConfirm} from 'data/interfaces/IPhoneConfirm'
+import IUserUpdateResponse from 'data/interfaces/IUserUpdateResponse'
 
 export default class UserRepository {
   static async getUser(token?: string): Promise<IUser | null> {
@@ -18,15 +20,16 @@ export default class UserRepository {
     }
     if(res.data?.data) {
       const data = {...Converter.objectKeysToCamelCase(res.data?.data)}
-      data.balance.currencies.totals = convertCurrencyToArray(data.balance.currencies.totals, data.balance.calculated.totals, data.currencyIso)
-      data.balance.currencies.bonus = convertCurrencyToArray(data.balance.currencies.bonus, data.balance.calculated.bonus, data.currencyIso)
-      data.balance.currencies.real = convertCurrencyToArray(data.balance.currencies.real, data.balance.calculated.real, data.currencyIso)
+      console.log("Data", res.data?.data)
+      data.balance.currencies.totals = convertCurrencyToArray(data.balance.currencies.totals, data.balance.calculatedToUserCurrency.totals, data.currencyIso)
+      data.balance.currencies.bonus = convertCurrencyToArray(data.balance.currencies.bonus, data.balance.calculatedToUserCurrency.bonus, data.currencyIso)
+      data.balance.currencies.real = convertCurrencyToArray(data.balance.currencies.real, data.balance.calculatedToUserCurrency.real, data.currencyIso)
       return data
     }else{
       return null
     }
   }
-  static async updateUser(data: UserFormData): Promise<IUser | null> {
+  static async updateUser(data: UserFormData): Promise<IUserUpdateResponse> {
     const res = await request({
       method: 'post',
       url: '/api/user/info/update',
@@ -75,12 +78,46 @@ export default class UserRepository {
       throw res.err
     }
     console.log('qrUrlD', res.data)
+    return res.data?.data?.qrUrl
+  }
+  static async twoFaConfirm({code}): Promise<any> {
+    const res = await request({
+      method: 'put',
+      url: '/api/user/two-factor/confirm',
+      data: {code}
+    })
+    if (res?.err) {
+      throw res.err
+    }
+    console.log('qrUrlD', res.data)
     return res.data?.qrUrl
   }
   static async twoFaDisable(): Promise<string> {
     const res = await request({
       method: 'put',
       url: '/api/user/two-factor/disable',
+    })
+    if (res?.err) {
+      throw res.err
+    }
+    return res.data?.data
+  }
+  static async confirmOldPhone(data: {phone: string, code: string}): Promise<IPhoneOldConfirm> {
+    const res = await request({
+      method: 'post',
+      url: '/api/user/info/confirm-old-phone',
+      data,
+    })
+    if (res?.err) {
+      throw res.err
+    }
+    return res.data?.data
+  }
+  static async confirmNewPhone(data: {phone: string, code: string}): Promise<IPhoneNewConfirm> {
+    const res = await request({
+      method: 'post',
+      url: '/api/user/info/confirm-new-phone',
+      data,
     })
     if (res?.err) {
       throw res.err

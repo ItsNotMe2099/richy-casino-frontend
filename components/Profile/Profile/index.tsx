@@ -54,9 +54,9 @@ export default function Profile(props: Props) {
   const bonusAccounts = UserUtils.getBonusBalances(context.user)
   const currenciesToAdd = context.currencies.filter(i => !context.user.balance.currencies.totals.find(a => a.currency === i.iso))
   return (
-    <ProfileModalLayout>
+    <ProfileModalLayout fixed>
       <ProfileModalHeader title={context.isMobile ? null : t('profile_title')}/>
-      <ProfileModalBody>
+      <ProfileModalBody fixed>
       <div className={styles.top}>
         <div className={styles.avatar}>
           <Avatar avatar={'/img/Avatar/avatar.png'}/>
@@ -93,11 +93,11 @@ export default function Profile(props: Props) {
           }
           <div className={styles.actions}>
             <div className={styles.notGreen}>
-              <Button className={styles.btn} onClick={() => context.showModalProfile(ProfileModalType.withdraw)}>
-                {t('profile_withdrawal')}
+              <Button className={styles.btn} onClick={() => context.showModalProfile(ProfileModalType.exchange)}>
+                {t('profile_exchange')}
               </Button>
               <Button className={styles.btn} onClick={() => context.showModalProfile(ProfileModalType.withdraw)}>
-                {t('profile_exchange')}
+                {t('profile_withdrawal')}
               </Button>
             </div>
             <Button onClick={() => context.showModalProfile(ProfileModalType.wallet)} size='normal' background='payGradient500'
@@ -107,7 +107,9 @@ export default function Profile(props: Props) {
               <div className={styles.title}>
                 {t('profile_accounts_additional_title')}
               </div>
+              <div className={styles.accountList}>
               {otherAccounts.map((account, index) => <Account key={account.currency} hasActions account={account}/>)}
+              </div>
             </div>}
           {otherAccounts.length > 0  && currenciesToAdd.length > 0 && <AddNewAccount
               options={Converter.convertCurrencyToOptions(currenciesToAdd)}
@@ -117,7 +119,9 @@ export default function Profile(props: Props) {
             <div className={styles.title}>
               {t('profile_accounts_bonus_title')}
             </div>
+            <div className={styles.accountList}>
             {bonusAccounts.map((account, index) => <Account key={account.currency} account={account}/>)}
+            </div>
           </div>}
 
         </div>

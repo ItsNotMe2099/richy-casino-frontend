@@ -8,9 +8,9 @@ import VisibleXs from 'components/ui/VisibleXS'
 import { useAppContext } from 'context/state'
 import Gift from 'components/for_pages/Common/Gift'
 import classNames from 'classnames'
-import {Col, Row} from 'react-grid-system'
 import {BonusDepositShowMode} from 'types/enums'
-
+import Image from 'next/image'
+import { useMeasure } from 'react-use'
 interface Props {
   children?: React.ReactNode
   className?: string
@@ -21,6 +21,8 @@ export default function TopSlider(props: Props) {
   const context = useAppContext()
 
   const user = context.auth
+
+  const [ref, { width, height }] = useMeasure()
 
   const settings = {
     className: `${styles.slider}`,
@@ -45,43 +47,31 @@ export default function TopSlider(props: Props) {
     ]
   }
 
-  const items =[
-    {label: <div>Лучшие игры<br/> от Richy</div>, image: '/img/TopSlider/banner@3x.png'},
-    {label: <div className={styles.itemLabel}>Spin the <span className={styles.spin}>wheel of fortune</span><br/> every day and get a<br/> guaranteed <span className={styles.spin}>prizes</span></div>, image: '/img/TopSlider/wheel@3x.png'},
-    {label: <div className={styles.itemLabel}>Try your luck in the <span className={styles.lottery}>most profitable</span><br/> cryptocurrency lottery<br/> and get bonuses</div>, image: '/img/TopSlider/lottery@3x.png'},
-  ]
-
+  console.log('Banners', context.banners)
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} ref={ref}>
       {(context.showBonus && context.bonusShowMode === BonusDepositShowMode.Gift) && <div className={styles.bonus}><Gift timer/></div>}
       <HiddenXs>
-        <Row>
-          <Col>
         <div className={styles.desktop}>
-          <div className={styles.col}>
-          <BonusSlide/>
-          </div>
-          <div className={styles.col}>
-          <SlideSlider items={items}/>
-          </div>
+          <BonusSlide style={'slide'}/>
+          <SlideSlider items={context.banners}/>
         </div>
-          </Col>
-        </Row>
       </HiddenXs>
       <VisibleXs>
         <>
           <Slider {...settings}>
             <BonusSlide className={styles.bonusSlideMobile}/>
-            {items.map((item, index) =>
-              <div className={styles.rootSlide} key={index}>
-                <div className={styles.item} style={{backgroundImage: `url(${item.image})`}}>
-                  <div className={styles.left}>
-                    <div className={classNames({[styles.label]: index == 0})}>
-                      {item.label}
+            {context.banners.map((item, index) => <div className={styles.rootSlide} key={index}>
+                 <div className={styles.item} key={item.id}>
+                   {(item.imageMobileUrl || item.imageDesktopUrl) && <Image src={item.imageMobileUrl || item.imageDesktopUrl} layout={'fill'}/>}
+
+                   <div className={styles.left}>
+                    <div className={styles.label} style={{fontSize: `${width / 24}px`}}>
+                      {item.title}
                     </div>
-                    <div className={styles.btn}>
-                      <Button size='normal' background='white'>Начать играть</Button>
+                    <div className={classNames(styles.btn, {[styles.alt]: index === 1})} style={{fontSize: `${width / 25}px`}}>
+                      <Button size='normal' background={index === 1 ? 'blueGradient500' : 'white'}  href={item.redirectUrl}>{item.textButton}</Button>
                     </div>
                   </div>
                 </div>

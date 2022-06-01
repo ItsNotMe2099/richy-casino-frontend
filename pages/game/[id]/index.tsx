@@ -4,8 +4,9 @@ import GameListRepository from 'data/repositories/GameListRepository'
 import {GameSessionStrategy, IGameSession} from 'data/interfaces/IGameSession'
 import {CookiesType} from 'types/enums'
 import {getSelectorsByUserAgent} from 'react-device-detect'
-import GameIframe from 'components/for_pages/CatalogPage/GameIframe'
 import {getServerSideTranslation} from 'utils/i18'
+import GameIframeRichy from 'components/for_pages/CatalogPage/GameIframeRichy'
+import GameIframe from 'components/for_pages/CatalogPage/GameIframe'
 
 interface Props {
   session?: IGameSession
@@ -15,7 +16,7 @@ export default function CatalogPage(props: Props) {
 
   return (<AudioPlayerProvider>
       <WithGameFilterLayout>
-        <GameIframe session={props.session}/>
+        {props.session?.gameUrl?.includes('richy') ? <GameIframeRichy session={props.session}/> : <GameIframe session={props.session}/> }
       </WithGameFilterLayout>
     </AudioPlayerProvider>
   )
@@ -36,7 +37,7 @@ export const getServerSideProps = async (context) => {
     case GameSessionStrategy.Iframe:
       break
   }
-  console.log('session', session)
+
   return {
     props: {
       ...await getServerSideTranslation(context),

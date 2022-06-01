@@ -1,7 +1,6 @@
 import Filter from 'components/for_pages/Common/Filter'
 import Layout from 'components/layout/Layout'
 import styles from 'pages/catalog/index.module.scss'
-import {Row, Col} from 'react-grid-system'
 import {GetServerSideProps} from 'next'
 import nookies from 'nookies'
 import {useRouter} from 'next/router'
@@ -72,16 +71,16 @@ export default function CatalogPage(props: Props) {
   }
   return (<AudioPlayerProvider>
       <Layout>
-        <Row className={styles.desktop}>
+        <div className={styles.desktop}>
           <HiddenXs>
             <Filter />
           </HiddenXs>
-          <Col className={styles.content}>
+          <div className={styles.content}>
             <GameSoundWrapper>
             <GameWrapper token={props.gameToken} gameType={query.game as CasinoGameType}>{renderGame()}</GameWrapper>
             </GameSoundWrapper>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </Layout>
     </AudioPlayerProvider>
   )

@@ -11,7 +11,7 @@ export default class Formatter {
   }
   static  cleanPhone = (phone: string) => {
     if (phone) {
-      let phoneCleaned = phone.replace(/[^\+0-9]/g, '')
+      let phoneCleaned = `${phone}`.replace(/[^\+0-9]/g, '')
       if (!phoneCleaned.startsWith('+')) {
         phoneCleaned = '+' + phoneCleaned
       }
@@ -38,7 +38,7 @@ export default class Formatter {
 
   static formatPhone(phone){
     try {
-      const number = phoneUtil.parseAndKeepRawInput(phone, 'RU')
+      const number = phoneUtil.parseAndKeepRawInput(this.cleanPhone(`${phone}`), 'RU')
       return phoneUtil.format(number, PNF.INTERNATIONAL)
     } catch (e) {
       return phone

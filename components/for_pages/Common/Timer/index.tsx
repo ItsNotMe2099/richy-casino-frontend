@@ -10,6 +10,10 @@ interface Props {
   minutes?: boolean
   style?: 'bonus' | 'freebitcoin' | 'tournament' | 'gift' | 'footer' | 'sheet' | 'wallet' | 'footerSmall' | 'tournamentMobile'
   onExpire?: () => void
+  fontSize?: string
+  rootPadding?: string
+  inputWidth?: string
+  inputHeight?: string
 }
 
 export default function Timer(props: Props) {
@@ -41,13 +45,13 @@ export default function Timer(props: Props) {
 
 
   return (
-    <div className={classNames(styles.root, timerClass)}>
+    <div className={classNames(styles.root, timerClass)} style={{...(props.rootPadding ? {padding: props.rootPadding}: {})}}>
       <div className={styles.end}>
           До окончания
       </div>
       <div className={styles.timer}>
       <div className={styles.hours}>
-        <div className={styles.input}>
+        <div className={styles.input} style={{...(props.fontSize ? {fontSize: props.fontSize, width: props.inputWidth ? props.inputWidth : null, height: props.inputHeight ? props.inputHeight : null} : {})}}>
           { pad('00', props.days ?
            days
             : props.minutes ? minutes : hours
@@ -62,7 +66,7 @@ export default function Timer(props: Props) {
         <div className={styles.circle}></div>
       </div>
       <div className={styles.minutes}>
-        <div className={styles.input}>
+        <div className={styles.input} style={{...(props.fontSize ? {fontSize: props.fontSize, width: props.inputWidth ? props.inputWidth : null, height: props.inputHeight ? props.inputHeight : null} : {})}}>
         {pad('00', props.days ?
             hours
             :
@@ -78,7 +82,7 @@ export default function Timer(props: Props) {
         <div className={styles.circle}></div>
       </div>
       <div className={styles.seconds}>
-        <div className={styles.input}>
+        <div className={styles.input} style={{...(props.fontSize ? {fontSize: props.fontSize}: {})}}>
         {pad('00', props.days ?
             minutes
             :

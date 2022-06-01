@@ -108,11 +108,11 @@ flex: 1;
   display: flex;
   align-items: center;
   text-align: left;
-    font-size: 13px;
+    font-size: 14px;
     color: #FFFFFF;
 
   @media screen and (max-width: $xs-max){
-    font-weight: 400;
+    font-weight: 500;
       font-size: 11px;
   }
 }

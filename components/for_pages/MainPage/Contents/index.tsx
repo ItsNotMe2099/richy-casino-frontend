@@ -1,6 +1,5 @@
 import styles from './index.module.scss'
 import Link from 'next/link'
-import { Row } from 'react-grid-system'
 import {Routes} from 'types/routes'
 
 
@@ -40,10 +39,7 @@ export default function Contents(props: Props) {
 
   return (
     <div className={styles.wrapper}>
-    <Row className={styles.row}>
     <div className={styles.root}>
-    <div className={styles.transparent}></div>
-    <div className={styles.transparentLeft}></div>
       {items.map((item, index) =>
          <Link href={item.link}  key={item.link}>
           <a className={styles.item}>
@@ -67,7 +63,6 @@ export default function Contents(props: Props) {
           </Link>
       )}
     </div>
-    </Row>
     </div>
   )
 }

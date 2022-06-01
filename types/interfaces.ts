@@ -81,8 +81,19 @@ export interface ProfileModalArguments {
 export interface RegistrationPhoneModalArguments {
   phone: string
 }
+export interface ConfirmNewPhoneModalArguments {
+  phone: string
+}
+export interface ConfirmOldPhoneModalArguments {
+  phone: string
+  shouldConfirmNewPhone?: boolean
+}
 export interface TwoFaModalArguments extends ProfileModalArguments{
   qrUrl: string
+}
+export interface TwoFaLoginModalArguments extends ProfileModalArguments{
+  identity: string
+  password: string
 }
 export interface RegistrationSuccessModalArguments {
   login: string

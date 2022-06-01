@@ -10,6 +10,9 @@
     background: url('/img/Fortune/fortune.svg') center no-repeat;
     background-size: cover;
   }
+  @media (max-width: $mobile-max) {
+    overflow: auto;
+  }
 }
 
 .wheel{
@@ -62,6 +65,9 @@
     backdrop-filter: blur(32px);
     padding: 30px 20px 40px 20px;
     width: 100%;
+  }
+  @media (max-width: $mobile-max) {
+    position: relative;
   }
 }
 
@@ -122,10 +128,7 @@
 }
 
 .wrapper{
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  margin-top: 10px;
 }
 
 .wrapperMobile{}

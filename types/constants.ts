@@ -11,6 +11,8 @@ export const LINKS = {
   RICHY_GAMES: '/catalog/category/richy'
 }
 
+export const RICHY_CATEGORY_ID = 21
+
 export const CookiesLifeTime: {
   accessToken: number,
   sessionId: number,

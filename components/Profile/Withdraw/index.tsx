@@ -121,9 +121,9 @@ export default function Widraw(props: Props) {
       <ModalFooterTwoFa/>
     </BottomSheetLayout>)
   } else {
-    return (<ProfileModalLayout>
+    return (<ProfileModalLayout fixed>
         <ProfileModalHeader title={t('withdraw_title')} showId  showBack={step !== PaymentStep.Method} onBackClick={step !== PaymentStep.Method ? handleBack : null}></ProfileModalHeader>
-        <ProfileModalBody>
+        <ProfileModalBody fixed>
           {result}
         </ProfileModalBody>
         <ModalFooterTwoFa/>

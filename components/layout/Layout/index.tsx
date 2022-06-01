@@ -1,4 +1,3 @@
-import { Container } from 'react-grid-system'
 import Footer from '../Footer'
 import Header from '../Header'
 import styles from './index.module.scss'
@@ -21,13 +20,11 @@ export default function Layout({children}: Props){
       </>
   }
    return (
-    <Container fluid style={{height: '100%', minHeight: '100%'}}>
     <div className={styles.root}>
         <Header/>
       {appContext.isDesktop ? <StickyContainer>
         {renderMainContent()}
       </StickyContainer> : renderMainContent()}
     </div>
-    </Container>
   )
 }

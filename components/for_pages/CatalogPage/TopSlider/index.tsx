@@ -1,12 +1,14 @@
 import styles from './index.module.scss'
 import BonusSlide from 'components/for_pages/Common/BonusSlide'
 import Slider from 'react-slick'
-import { Col } from 'react-grid-system'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import SlideSlider from 'components/for_pages/MainPage/TopSlider/SlideSlider'
-import classNames from 'classnames'
+import {useAppContext} from 'context/state'
+import { useMeasure } from 'react-use'
 import Button from 'components/ui/Button'
+import classNames from 'classnames'
+import Image from 'next/image'
 
 interface Props {
   children?: React.ReactNode
@@ -15,7 +17,8 @@ interface Props {
 }
 
 export default function TopSlider(props: Props) {
-
+  const appContext = useAppContext()
+  const [ref, { width, height }] = useMeasure()
   const settings = {
     className: `${styles.slider}`,
     dots: false,
@@ -39,63 +42,61 @@ export default function TopSlider(props: Props) {
     ]
   }
 
-  const items =[
-    {child: <BonusSlide/>, image: null},
-    {label: <div>Лучшие игры<br/> от Richy</div>, image: '/img/TopSlider/banner@3x.png'},
-    {label: <div className={styles.itemLabel}>Spin the <span className={styles.spin}>wheel of fortune</span><br/> every day and get a<br/> guaranteed <span className={styles.spin}>prizes</span></div>, image: '/img/TopSlider/wheel@3x.png'},
-    {label: <div className={styles.itemLabel}>Try your luck in the <span className={styles.lottery}>most profitable</span><br/> cryptocurrency lottery<br/> and get bonuses</div>, image: '/img/TopSlider/lottery@3x.png'},
-  ]
-
 
 
 
   return (
-    <>
+    <div className={styles.root} ref={ref}>
       <HiddenXs>
         <>
-          <Col>
             <div className={styles.wrapper}>
-          <div className={styles.root}>
+          <div className={styles.rootJack}>
             <div className={styles.jackpot}>
-              <div className={styles.title}>JACKPOT</div>
-              <div className={styles.money}>
+              <div className={styles.content}>
+              <div className={styles.title} style={{fontSize: `${width / 27}px`}}>JACKPOT</div>
+              <div className={styles.money} style={{fontSize: `${width / 18.5}px`}}>
                 {props.money}
               </div>
             </div>
+            </div>
           </div>
           <div className={styles.desktop}>
-          <SlideSlider items={items} style='catalog'/>
+          <SlideSlider items={appContext.banners} style='catalog'/>
           </div>
             </div>
-          </Col>
         </>
       </HiddenXs>
       <VisibleXs>
         <Slider {...settings}>
+        <div className={styles.rootJack}>
+            <div className={styles.jackpot}>
+              <div className={styles.content}>
+              <div className={styles.title} style={{fontSize: `${width / 10}px`}}>JACKPOT</div>
+              <div className={styles.money} style={{fontSize: `${width / 8.5}px`}}>
+                {props.money}
+              </div>
+            </div>
+            </div>
+          </div>
           <BonusSlide className={styles.bonusSlideMobile}/>
-          {items.slice(1).map((item, index) =>
-              <div className={styles.rootSlide} key={index}>
-                <div className={styles.item} style={{backgroundImage: `url(${item.image})`}}>
-                  <div className={styles.left}>
-                    <div className={classNames({[styles.label]: index == 0})}>
-                      {item.label}
+            {appContext.banners.map((item, index) => <div className={styles.rootSlide} key={index}>
+                 <div className={styles.item} key={item.id}>
+                   {(item.imageMobileUrl || item.imageDesktopUrl) && <Image src={item.imageMobileUrl || item.imageDesktopUrl} layout={'fill'}/>}
+
+                   <div className={styles.left}>
+                    <div className={styles.label} style={{fontSize: `${width / 24}px`}}>
+                      {item.title}
                     </div>
-                    <div className={styles.btn}>
-                      <Button size='normal' background='white'>Начать играть</Button>
+                    <div className={classNames(styles.btn, {[styles.alt]: index === 1})} style={{fontSize: `${width / 25}px`}}>
+                      <Button size='normal' background={index === 1 ? 'blueGradient500' : 'white'}  href={item.redirectUrl}>{item.textButton}</Button>
                     </div>
                   </div>
                 </div>
               </div>
             )}
-          <div className={styles.jackpot}>
-            <div className={styles.title}>JACKPOT</div>
-            <div className={styles.money}>
-              {props.money}
-            </div>
-          </div>
         </Slider>
       </VisibleXs>
-    </>
+    </div>
   )
 }
 

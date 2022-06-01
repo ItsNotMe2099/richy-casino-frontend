@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import { useTranslation } from 'react-i18next'
+import {useTranslation} from 'react-i18next'
 import {Form, Formik} from 'formik'
 import Button from 'components/ui/Button'
 import InputField from 'components/ui/Inputs/InputField'
@@ -8,9 +8,9 @@ import {useAppContext} from 'context/state'
 import Formatter from 'utils/formatter'
 import {useState} from 'react'
 import AuthRepository from 'data/repositories/AuthRepository'
-import {ModalType} from 'types/enums'
+import {ProfileModalType} from 'types/enums'
 import FormError from 'components/ui/Form/FormError'
-import {RegistrationPhoneModalArguments, RegistrationSuccessModalArguments} from 'types/interfaces'
+import {RegistrationPhoneModalArguments} from 'types/interfaces'
 import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
 import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
 import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
@@ -44,10 +44,10 @@ export default function ModalRegistrationPhone(props: Props) {
         setError(t('registration_error'))
       }
 
-      setSending(false)
       context.setToken(accessToken)
-      context.updateUserFromCookies()
-      context.showModal(ModalType.registrationSuccess, {login: args.phone, password: data.password} as RegistrationSuccessModalArguments)
+      await context.updateUserFromCookies()
+      setSending(false)
+      context.showModal(ProfileModalType.wallet)
     } catch (e) {
       setError(e)
     }
@@ -67,7 +67,7 @@ export default function ModalRegistrationPhone(props: Props) {
       <Form className={styles.form}>
         <div className={styles.description}>
           {t('registration_phone_text_1')} <span className={styles.code}> {t('registration_phone_text_2')}</span> {t('registration_phone_text_3')}&nbsp;
-          {t('registration_phone_text_4')} <span className={styles.phone}> {Formatter.formatPhone(args.phone)}</span>
+          {t('registration_phone_text_4')} <span className={styles.phone}> {Formatter.formatPhone(args?.phone)}</span>
         </div>
         <div className={styles.inputs}>
           <InputField
@@ -90,7 +90,7 @@ export default function ModalRegistrationPhone(props: Props) {
           />
         </div>
         <FormError error={error}/>
-        <Button type='submit' fluid spinner={sending} className={styles.button} size='submit' background='blueGradient500' >Продолжить</Button>
+        <Button type='submit' fluid spinner={sending} className={styles.button} size='submit' background='blueGradient500' >{t('registration_phone_button')}</Button>
 
       </Form>)}
   </Formik>)

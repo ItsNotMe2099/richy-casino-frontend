@@ -9,13 +9,12 @@
 
 .desktop{
   display: grid;
-  grid-gap: 0px 20px;
   grid-template-columns: 1fr 1fr;
-
+  gap: 0 21px;
 }
 
 .slider{
-
+  
   @media screen and (max-width: $sm-min){
     height: 167px;
   }
@@ -43,14 +42,9 @@ overflow: hidden;
 
 .label{
   font-weight: bold;
-  font-size: 36px;
   color: $white;
   line-height: 100%;
   width: 70%;
-  @media screen and (max-width: 520px){
-    font-size: 20px;
-    width: 100%;
-  }
 }
 
 .otherLabel{
@@ -60,47 +54,69 @@ overflow: hidden;
 
 .btn{
   margin-top: 23px;
-  button{
+  button, a{
     color: $blue500;
-    @include textStyle14Bold;
     padding-right: 38px;
     padding-left: 38px;
+    font-weight: bold;
+    @media screen and (max-width: $xs-max){
+      padding-right: 35px;
+      padding-left: 35px;
+      border-radius: 4px;
+      height: 100%;
+    }
+    @media screen and (max-width: 700px){
+      padding: 5px 35px;
+    }
+    @media screen and (max-width: 600px){
+      padding: 5px 20px;
+    }
+    @media screen and (max-width: $mobile-max){
+      padding: 11px 38px;
+    }
+    @media screen and (max-width: $mobile-large){
+      padding: 10px 36px;
+    }
+    @media screen and (max-width: $mobile-md2){
+      padding: 10px 34px;
+    }
+    @media screen and (max-width: $mobile-md){
+      padding: 10px 33px;
+    }
+  }
+}
+
+.alt{
+  button{
+    color: $white;
   }
 }
 
 .left{
-  align-self: center;
-  margin-left: 28px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  padding-left: 15px;
+  padding-right: 15px;
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
 }
-
+.rootSlide{
+  padding: 0px 5px;
+}
 .item{
   display: flex !important;
   border-radius: 18px;
-  padding: 20px 0 13px 0;
+  max-width: 100%;
   position: relative;
-  max-height: 18rem;
+  max-height: 100%;
+  padding-bottom: 52%;
   overflow: hidden;
-  min-height: 18rem;
-  background-position: center center;
-  margin: 0 5px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  @media screen and (max-width: 1360px){
-    padding-left: 18px;
-  }
-  @media screen and (max-width: 800px){
-    max-height: 14.5rem;
-    min-height: 14.5rem;
-    padding: 20px 0 9px 15px;
-  }
-  @media screen and (max-width: $xs-max){
-    width: auto;
-    max-height: 12rem;
-    min-height: 12rem;
-  }
   @media screen and (max-width: $mobile-max){
-    max-height: 10rem;
-    min-height: 10rem;
+    padding-bottom: 59.04%;
   }
 }
 
@@ -169,7 +185,7 @@ overflow: hidden;
   }
 }
 .bonusSlideMobile{
-  margin: 0px 4px;
+  
 }
 
 .spin{

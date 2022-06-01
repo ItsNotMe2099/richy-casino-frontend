@@ -11,6 +11,7 @@ export enum ModalType {
   profileBurger = 'profileBurger',
   createGame = 'createGame',
   opponents = 'opponents',
+  faLogin = 'faLogin'
 }
 
 export enum ProfileModalType {
@@ -23,7 +24,9 @@ export enum ProfileModalType {
   betsHistory = 'betsHistory',
   buyCrypto = 'buyCrypto',
   FA = 'FA',
-  withdraw = 'withdraw'
+  withdraw = 'withdraw',
+  newPhoneConfirm = 'newPhoneConfirm',
+  oldPhoneConfirm = 'oldPhoneConfirm'
 }
 
 export enum CookiesType {
@@ -85,4 +88,11 @@ export enum UserBalanceType{
   Totals = 'totals',
   Real = 'real',
   Bonus = 'bonus'
+}
+
+export enum PwaState{
+  NotInstalled = 'notInstalled',
+  Downloading = 'downloading',
+  Installing = 'installing',
+  Installed = 'installed'
 }

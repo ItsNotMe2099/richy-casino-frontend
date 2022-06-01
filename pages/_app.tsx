@@ -4,7 +4,6 @@ import type { AppContext, AppProps } from 'next/app'
 import { appWithTranslation } from 'next-i18next'
 import nextI18NextConfig from '../next-i18next.config.js'
 import SEO from '../next-seo.config'
-import { setConfiguration } from 'react-grid-system'
 import { AppWrapper } from 'context/state'
 import { getSelectorsByUserAgent } from 'react-device-detect'
 import App from 'next/app'
@@ -15,6 +14,8 @@ import AuthUserFeatures from 'components/layout/AuthUserFeatures'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import 'react-input-range/lib/css/index.css'
+import 'react-date-picker/dist/DatePicker.css'
+import 'react-calendar/dist/Calendar.css'
 import NotificationBanner from 'components/for_pages/Common/NotificationBanner'
 import HiddenXs from 'components/ui/HiddenXS'
 import UserRepository from 'data/repositories/UserRepository'
@@ -27,21 +28,25 @@ import {CookiesLifeTime} from 'types/constants'
 import BottomSheetContainer from 'components/bottom_sheet/BottomSheetContainer'
 import Head from 'next/head'
 import {DefaultSeo} from 'next-seo'
+import ContentLoader from 'components/ui/ContentLoader'
+import ReactPWAInstallProvider from 'context/pwa_state'
 function MyApp({ Component, pageProps }: AppProps) {
   const [clientVisible, setClientVisible] = useState(true)
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
-    setIsLoading(false)
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+    if (typeof  navigator !== 'undefined' && 'serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/pwabuilder-sw.js', {scope: './'})
+    }
   }, [])
-  setConfiguration({
-    gutterWidth: 20,
-    //breakpoints: [700, 950, 1360],
-    //containerWidths: [950, 960, 1320],
-  })
+
   return (
     <AppWrapper isMobile={pageProps.isMobile} token={pageProps.token} initialUser={pageProps.initialUser}>
       <AuthWrapper>
         <FavoriteWrapper>
+          <ReactPWAInstallProvider>
           <Head>
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
           </Head>
@@ -49,6 +54,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
           {clientVisible && <ModalContainer/>}
           {clientVisible && <BottomSheetContainer/>}
+          </ReactPWAInstallProvider>
         </FavoriteWrapper>
 
         <AuthUserFeatures/>
@@ -57,6 +63,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </HiddenXs>
       </AuthWrapper>
       {clientVisible && <Snackbar/>}
+      {clientVisible  && <ContentLoader style={'fullscreen'} isOpen={isLoading}/>}
     </AppWrapper>
   )
 }
@@ -81,6 +88,7 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     }
     props.pageProps.token = (appContext.ctx as any).req.cookies[CookiesType.accessToken]
     props.pageProps.initialUser = await UserRepository.getUser(props.pageProps.token)
+
     if( props.pageProps.initialUser === null){
       props.pageProps.token = null
       nookies.destroy(appContext.ctx, CookiesType.accessToken)

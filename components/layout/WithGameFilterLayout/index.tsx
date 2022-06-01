@@ -1,7 +1,6 @@
 import Filter from 'components/for_pages/Common/Filter'
 import Layout from 'components/layout/Layout'
 import styles from './index.module.scss'
-import {Row, Col} from 'react-grid-system'
 import {ReactElement, useState} from 'react'
 import GameListRepository from 'data/repositories/GameListRepository'
 import classNames from 'classnames'
@@ -18,13 +17,14 @@ const [searchGames, setSearchGames] = useState({data: [], total: 0})
   const [isSearchLoading, setIsSearchLoading] = useState<boolean>(false)
   const [searchPage, setSearchPage] = useState<number>(0)
   const [searchValue, setSearchValue] = useState<string | null>(null)
-  const searchLimit = 30
+  const searchLimit = 20
   const handleSearch =  debounce(async (value: string) => {
     if(!value?.length){
       setIsSearch(false)
      setSearchValue(null)
       return
     }
+    setSearchGames({data: [], total: 0})
     setSearchValue(value)
     setIsSearch(true)
     setIsSearchLoading(true)
@@ -42,15 +42,15 @@ const [searchGames, setSearchGames] = useState({data: [], total: 0})
   return (
     <Layout>
       {props.top}
-      <Row className={styles.desktop}>
+      <div className={styles.desktop}>
         <Filter showMobile={props.showMobile} onSearch={handleSearch}/>
-        <Col className={styles.content}>
+        <div className={styles.content}>
           <div className={classNames(styles.children, {[styles.hidden]: isSearch})}>{props.children}</div>
           <div className={classNames(styles.search, {[styles.hidden]: !isSearch})}>
             <GamesListSearch data={searchGames} loading={isSearchLoading} onScrollNext={handleScrollNext}/>
           </div>
-        </Col>
-      </Row>
+          </div>
+        </div>
     </Layout>
   )
 }

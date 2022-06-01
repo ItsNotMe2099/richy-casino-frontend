@@ -4,19 +4,20 @@
   padding: 13px 14px 30px 14px;
   background: #1D1E25;
   border-radius: 18px;
-  max-height: 1313px;
   margin-top: 20px;
   overflow-y: hidden;
+  margin-right: 20px;
   @media screen and (max-width: 1024px){
-  max-height: 800px;
   overflow-y: auto;
   overflow-x: hidden;
+  margin-right: 20px;
   }
 }
 
 .col{
   width: 25% !important;
   max-width: 25% !important;
+  min-width: 370px;
   @media screen and (max-width: 1024px){
     position: absolute !important;
     z-index: 1;
@@ -27,15 +28,9 @@
 
 .mobile{
   width: 100%;
-  margin-right: 10px;
-  margin-left: 10px;
   margin-top: 19px;
   @media screen and (min-width: 1025px){
     display: none;
-  }
-  @media screen and (max-width: $xs-max) {
-    margin-right: 18px;
-    margin-left: 18px;
   }
 }
 
@@ -97,9 +92,21 @@
   .label{
     font-weight: normal;
     font-size: 1rem;
-    @media screen and (max-width: $xs-max){
-      font-weight: 400;
-      font-size: 13px;
+    @media screen and (max-width: 428px){
+      font-weight: 500;
+      font-size: 16px;
+    }
+    @media screen and (max-width: 390px){
+      font-weight: 500;
+      font-size: 15px;
+    }
+    @media screen and (max-width: 375px){
+      font-weight: 500;
+      font-size: 14px;
+    }
+    @media screen and (max-width: 320px){
+      font-weight: 500;
+      font-size: 12px;
     }
   }
 

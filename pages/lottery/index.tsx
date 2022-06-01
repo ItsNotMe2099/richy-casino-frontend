@@ -15,6 +15,7 @@ import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import {getServerSideTranslation} from 'utils/i18'
 import {useAppContext} from 'context/state'
 import {NextSeo} from 'next-seo'
+import ContentLoader from 'components/ui/ContentLoader'
 
 export default function Lottery() {
   const {t} = useTranslation()
@@ -46,6 +47,7 @@ export default function Lottery() {
     <WithGameFilterLayout>
         <NextSeo title={t('lottery_title')}/>
         <PageTitle icon='/img/Lottery/lottery.svg' title={t('lottery_title')} onClick={() => isShow ? setIsShow(false) : setIsShow(true)} lottery/>
+      {loading && <ContentLoader style={'block'} isOpen={true}/>}
       {!loading && currentRound?.roundEndTime && <><Timer roundId={currentRound.roundId} expiredAt={new Date(currentRound?.roundEndTime)}/>
         <VisibleXs>
           <Statistics className={styles.statistics}

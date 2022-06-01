@@ -1,5 +1,10 @@
 import request from 'utils/request'
-import {IAuthEmailResponse, IAuthLoginResponse, IAuthPhoneResponse} from 'data/interfaces/IAuthResponse'
+import {
+  IAuthEmailResponse,
+  IAuthFaLoginResponse,
+  IAuthLoginResponse,
+  IAuthPhoneResponse
+} from 'data/interfaces/IAuthResponse'
 
 export default class AuthRepository {
   static async login(login: string, password: string): Promise<IAuthLoginResponse> {
@@ -9,6 +14,22 @@ export default class AuthRepository {
       data: {
         identity: login,
         password: password,
+      },
+    })
+    if (res?.err) {
+      throw res.err
+    }
+    return res.data?.data
+  }
+
+  static async faLogin(login: string, password: string, code: string): Promise<IAuthFaLoginResponse> {
+    const res = await request({
+      method: 'post',
+      url: '/api/user/two-factor/login',
+      data: {
+        identity: login,
+        password,
+        code,
       },
     })
     if (res?.err) {

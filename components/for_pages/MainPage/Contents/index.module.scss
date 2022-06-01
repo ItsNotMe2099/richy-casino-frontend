@@ -24,7 +24,7 @@
     }
   }
   @media screen and (max-width: $mobile-max){
-    margin-top: 40px;
+    padding-top: 55px;
   }
 }
 
@@ -115,7 +115,6 @@
   margin-top: 10px;
   margin-bottom: 5px;
   @media screen and (max-width: $xs-max){
-    font-weight: 500;
     margin-top: 6px;
   }
   @media screen and (max-width: $mobile-max){
@@ -124,7 +123,7 @@
 }
 
 .desc{
-  font-weight: 400;
+  font-weight: 500;
   font-size: calc(12px + 0.1vw);
   color: $dark100;
   text-align: center;

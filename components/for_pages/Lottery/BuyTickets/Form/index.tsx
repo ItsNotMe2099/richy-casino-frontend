@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import { Form, Formik } from 'formik'
+import {Form, Formik} from 'formik'
 import InputTicket from 'components/ui/Inputs/InputTicket'
 import Button from 'components/ui/Button'
 import cx from 'classnames'
@@ -9,6 +9,9 @@ import LotteryRepository from 'data/repositories/LotteryRepository'
 import {ILotteryBuyResponse} from 'data/interfaces/ILotteryRound'
 import {useState} from 'react'
 import FormError from 'components/ui/Form/FormError'
+import {useAppContext} from 'context/state'
+import {ModalType} from 'types/enums'
+
 interface Props {
   pricePerTicket: number,
   currency?: string
@@ -17,9 +20,14 @@ interface Props {
 
 export default function BuyTicketsForm(props: Props) {
   const {t} = useTranslation()
+  const appContext = useAppContext()
   const [sending, setSending] = useState(false)
   const [error, setError] = useState(null)
   const handleBuy = async (data) => {
+    if(!appContext.auth){
+      appContext.showModal(ModalType.registration)
+      return
+    }
     setSending(true)
     setError(null)
     try {

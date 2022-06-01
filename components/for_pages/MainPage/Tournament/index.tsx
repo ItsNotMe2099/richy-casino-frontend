@@ -4,6 +4,8 @@ import styles from './index.module.scss'
 import {useAppContext} from 'context/state'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
+import { ModalType } from 'types/enums'
+import { useMeasure } from 'react-use'
 
 interface Props {
   balance: string
@@ -13,7 +15,16 @@ export default function Tournament(props: Props) {
     const appContext = useAppContext()
   const someDate = '2022-05-01T12:46:24.007Z'
 
+  const [ref, { width }] = useMeasure()
+  const isMobile = appContext.isMobile
+
   const expiredAt = new Date(someDate)
+
+  const handleJoin = () => {
+    if(!appContext.auth){
+      appContext.showModal(ModalType.registration)
+    }
+  }
 
   return (
     <>
@@ -39,45 +50,32 @@ export default function Tournament(props: Props) {
         </div>
         <div className={styles.right}>
             <Timer expiredAt={expiredAt} days style='tournament'/>
-          {appContext.auth && <div className={styles.btnContainer}><Button className={styles.btn} size='normal' background='payGradient500'>Участвовать</Button></div>}
+          <div className={styles.btnContainer}><Button onClick={handleJoin} className={styles.btn} size='normal' background='payGradient500'>Участвовать</Button></div>
         </div>
     </div>
     </HiddenXs>
     <VisibleXs>
-      <div className={styles.mobile}>
+      <div className={styles.mobile} ref={ref}>
       <div className={styles.leftMobile}>
-        <div className={styles.coins}>
-          <img src='/img/Tournament/coins-blur-mobile.png' alt=''/>
-        </div>
-        <div className={styles.moneyMobile}>
-          <img src='/img/Tournament/money-mobile.svg' alt=''/>
-        </div>
         <div className={styles.heroMobile}>
           <img src='/img/Tournament/hero-mobile.png' alt=''/>
-          <div className={styles.cash}>
-          <img src='/img/Tournament/cash.svg' alt=''/>
-        </div>
-        <div className={styles.coins2}>
-          <img src='/img/Tournament/coins-blur-mobile.png' alt=''/>
-        </div>
-        </div>
-        <div className={styles.coin}>
-          <img src='/img/Tournament/coin.svg' alt=''/>
         </div>
       </div>
         <div className={styles.rightMobile}>
-        <div className={styles.title}>
+        <div className={styles.title} style={{fontSize: isMobile && `${width /12.5}px`}}>
           ТУРНИР
         </div>
         <div className={styles.fund}>
           <div className={styles.prize}>
-            <span>Призовой фонд</span>
-            <div className={styles.balance}>
+            <span style={{fontSize: isMobile && `${width /29}px`}}>Призовой фонд</span>
+            <div className={styles.balance} style={{fontSize: isMobile && `${width /33}px`}}>
               {props.balance}
             </div>
           </div>
         </div>
-        {appContext.auth && <Button className={styles.btnMobile} size='normal' background='payGradient500'>Участвовать</Button>}
+        <Button onClick={handleJoin} className={styles.btnMobile} size='normal' background='payGradient500'>
+          <span style={{fontSize: isMobile && `${width /24}px`}}>Участвовать</span>
+        </Button>
         <Timer expiredAt={expiredAt} days style='tournamentMobile'/>
       </div>
       </div>
