@@ -237,9 +237,9 @@ export default function Footer(props: Props) {
             <div className={styles.eighteen}>
               <img src='/img/layout/footer/eighteen.svg' alt=''/>
             </div>
-            <div className={styles.logoLicense}>
+            <a href={'https://gateway.pinata.cloud/ipfs/QmREPXquK2dmUBSNx3e9H32YTgNTXT5W17vZk4sJaQevvM'} target={'_blank'} className={styles.logoLicense} rel="noreferrer">
               <img src='/img/licenses/richycuracaointeractivelicenlogo.png' alt=''/>
-            </div>
+            </a>
             </div>
               <div className={styles.desc}>
                 © {format(new Date(),'y')} {t('footer_text_2')}
