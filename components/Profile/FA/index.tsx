@@ -86,15 +86,7 @@ export default function FA(props: Props) {
           </div>
 
           </div>
-          <div className={styles.your}>
-            {t('2fa_secret_key')}
-          </div>
-          <div className={styles.key}>
-            18e6Ktb8GuyhfEq7r9mRfvk9xyJLzUN7XD
-          </div>
-          <div className={styles.important}>
-            <span>{t('2fa_attention')}&nbsp;</span> {t('2fa_text_2')}
-          </div>
+
 
               <div className={styles.confirm}>
                 Код подтверждения из Google Authenticator

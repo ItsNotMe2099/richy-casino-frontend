@@ -82,7 +82,12 @@
   justify-content: center;
   margin-top: 32px;
   .qrCode{
-    max-width: 164px;
+    svg{
+      display: block;
+    }
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
   }
 
   @media screen and (max-width: $xs-max){
