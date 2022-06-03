@@ -45,6 +45,6 @@ export default interface IUser {
     isHideFromLeaderboard: boolean,
     isHideFromStatistics: boolean,
     isHideBalance: boolean,
-    is2faEnabled: boolean
+    is2FaEnabled: boolean
   }
 }

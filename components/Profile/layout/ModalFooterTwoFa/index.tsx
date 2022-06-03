@@ -11,7 +11,7 @@ interface Props {
 
 export default function ModalFooterTwoFa(props: Props) {
   const context = useAppContext()
-  if(context.user.flags.is2faEnabled){
+  if(context.user.flags.is2FaEnabled){
     return  null
   }
     return (

@@ -5,6 +5,7 @@ import {
   IAuthLoginResponse,
   IAuthPhoneResponse
 } from 'data/interfaces/IAuthResponse'
+import Converter from 'utils/converter'
 
 export default class AuthRepository {
   static async login(login: string, password: string): Promise<IAuthLoginResponse> {
@@ -19,7 +20,7 @@ export default class AuthRepository {
     if (res?.err) {
       throw res.err
     }
-    return res.data?.data
+    return Converter.objectKeysToCamelCase(res.data?.data)
   }
 
   static async faLogin(login: string, password: string, code: string): Promise<IAuthFaLoginResponse> {
@@ -35,7 +36,7 @@ export default class AuthRepository {
     if (res?.err) {
       throw res.err
     }
-    return res.data?.data
+    return Converter.objectKeysToCamelCase(res.data?.data)
   }
   static async logout(): Promise<any> {
     const res = await request({
@@ -45,7 +46,7 @@ export default class AuthRepository {
     if (res?.err) {
       throw res.err
     }
-    return res.data?.data
+    return Converter.objectKeysToCamelCase(res.data?.data)
   }
   static async registerEmail({email, password, currency}): Promise<IAuthEmailResponse> {
     const res = await request({
@@ -61,7 +62,7 @@ export default class AuthRepository {
     if (res?.err) {
       throw res.err
     }
-    return res.data?.data
+    return Converter.objectKeysToCamelCase(res.data?.data)
   }
 
   static async registerPhoneSendOtp({phone, currency}): Promise<{ id: string, phone: string, currency_iso: string }> {
@@ -76,7 +77,7 @@ export default class AuthRepository {
     if (res?.err) {
       throw res.err
     }
-    return res.data?.data
+    return Converter.objectKeysToCamelCase(res.data?.data)
   }
 
   static async registerPhone({code, phone, password}): Promise<IAuthPhoneResponse> {
@@ -93,7 +94,7 @@ export default class AuthRepository {
     if (res?.err) {
       throw res.err
     }
-    return res.data?.data
+    return Converter.objectKeysToCamelCase(res.data?.data)
   }
 
   static async forgotPassword(login): Promise<{identity: string}> {
@@ -107,7 +108,7 @@ export default class AuthRepository {
     if (res?.err) {
       throw res.err
     }
-    return res.data?.data
+    return Converter.objectKeysToCamelCase(res.data?.data)
   }
 
   static async resetPassword({identity, token, password}): Promise<{ id: string }> {
@@ -124,7 +125,7 @@ export default class AuthRepository {
     if (res?.err) {
       throw res.err
     }
-    return res.data?.data
+    return Converter.objectKeysToCamelCase(res.data?.data)
   }
 
 }

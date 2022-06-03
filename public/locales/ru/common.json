@@ -39,6 +39,11 @@
   "login_no_account": "Еще нет аккаунт?",
   "login_register": "Зарегистрируйтесь",
 
+  "2fa_login_title": "2FA аутентификация",
+  "2fa_login_text": "Введите 6-значный код из приложения \nGoogle Authenticator",
+  "2fa_login_field_code": "Код подтверждения из Google Authenticator",
+  "2fa_login_button": "Авторизация",
+
   "registration_title": "Регистрация",
   "registration_tab_fast": "Быстрая",
   "registration_tab_phone": "Телефон",
