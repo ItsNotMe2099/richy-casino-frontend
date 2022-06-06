@@ -38,8 +38,10 @@ interface IState {
   bonusShowMode: BonusDepositShowMode | null
   setBonusShowMode: (show: BonusDepositShowMode) => void,
   bonusBannerDetails: IBonusBannerDetails | null
+  fetchDefaultCurrency: () => Promise<ICurrency>,
   updatePromoCodes: () => void
   currencies: ICurrency[]
+  defaultCurrency: ICurrency | null
   banners: IBanner[]
   snackbar: SnackbarData | null,
   showSnackbar: (text: string, type: SnackbarType) => void
@@ -66,11 +68,13 @@ const defaultValue: IState = {
   logout: () => null,
   updateUserFromCookies: () => null,
   updatePromoCodes: () => null,
+  fetchDefaultCurrency: async () => null,
   showBonus: false,
   bonusShowMode: null,
   setBonusShowMode: (show) => null,
   bonusBannerDetails: null,
   currencies: [],
+  defaultCurrency: null,
   snackbar: null,
   showSnackbar: (text, type) => null,
 }
@@ -106,6 +110,7 @@ export function AppWrapper(props: Props) {
   const [bonusShowMode, setBonusShowMode] = useState<BonusDepositShowMode | null>(null)
   const [bonusBannerDetails, setBonusBannerDetails] = useState<IBonusBannerDetails>(null)
   const [currencies, setCurrencies] = useState<ICurrency[]>([])
+  const [defaultCurrency, setDefaultCurrency] = useState<ICurrency | null>(null)
   const [banners, setBanners] = useState<IBanner[]>([])
   const [snackbar, setSnackbar] = useState<SnackbarData | null>(null)
   const [modalProfileStack, setModalProfileStack] = useState<IModalProfileStackItem[]>([])
@@ -123,6 +128,7 @@ export function AppWrapper(props: Props) {
     snackbar,
     token: props.token,
     banners,
+    defaultCurrency,
     showModal: (type, props: any) => {
       showModal(type, props)
 
@@ -185,7 +191,14 @@ export function AppWrapper(props: Props) {
         setSnackbar(null)
       }, 2000)
     },
-
+    fetchDefaultCurrency: async (): Promise<ICurrency> => {
+      if(defaultCurrency){
+        return defaultCurrency
+      }
+      const res =  await InfoRepository.getCurrencyByCountry()
+      setDefaultCurrency(res)
+      return res
+    }
 
   }
 
@@ -207,6 +220,7 @@ export function AppWrapper(props: Props) {
     }
   }, [])
   useEffect(() => {
+
     InfoRepository.getCurrencies().then(i => setCurrencies(i))
   }, [])
   const showModal = (type: ModalType | ProfileModalType, args?: any) => {

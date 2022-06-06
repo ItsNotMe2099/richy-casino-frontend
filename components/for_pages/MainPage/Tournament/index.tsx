@@ -6,6 +6,8 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import { ModalType } from 'types/enums'
 import { useMeasure } from 'react-use'
+import {useEffect} from 'react'
+import TournamentRepository from 'data/repositories/TournamentRepository'
 
 interface Props {
   balance: string
@@ -14,6 +16,11 @@ interface Props {
 export default function Tournament(props: Props) {
     const appContext = useAppContext()
   const someDate = '2022-05-01T12:46:24.007Z'
+  useEffect(() => {
+    TournamentRepository.fetchRichyTournaments().then(i => {
+
+    })
+  }, [])
 
   const [ref, { width }] = useMeasure()
   const isMobile = appContext.isMobile

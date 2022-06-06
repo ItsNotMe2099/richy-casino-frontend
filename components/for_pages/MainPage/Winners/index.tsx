@@ -3,6 +3,9 @@ import Header from 'components/for_pages/Common/Header'
 import { useAppContext } from 'context/state'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 import classNames from 'classnames'
+import {useEffect, useState} from 'react'
+import {ITournamentTop10} from 'data/interfaces/ITournamentTop10'
+import TournamentRepository from 'data/repositories/TournamentRepository'
 
 interface IUser {
   nickname: string
@@ -19,7 +22,17 @@ interface Props {
 export default function Winners(props: Props) {
 
   const context = useAppContext()
+  const [winners, setWinners] = useState<ITournamentTop10[]>([])
+  useEffect(() => {
+    TournamentRepository.fetchHistory(1, 1).then(i => {
 
+    })
+    TournamentRepository.fetchTop10().then(i => {
+      if(i?.length > 0) {
+        setWinners(i[0].top10)
+      }
+    })
+  }, [])
   const user = context.auth
 
   const users = [

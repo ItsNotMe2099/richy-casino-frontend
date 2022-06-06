@@ -7,6 +7,7 @@ import {IGame} from 'data/interfaces/IGame'
 import {IGameWin} from 'data/interfaces/IGameWin'
 import {IGameSession} from 'data/interfaces/IGameSession'
 import {RICHY_CATEGORY_ID} from 'types/constants'
+import {IGameHistory} from 'data/interfaces/IGameHistory'
 
 export default class GameListRepository {
   static async fetchProviders(name: string = null, page: number = 1, limit: number = 1000): Promise<IPagination<IGameProvider>> {
@@ -118,6 +119,21 @@ export default class GameListRepository {
       return null
     }
     return res.data.data?.map(i => Converter.objectKeysToCamelCase(i)) ?? []
+  }
+
+  static async fetchGameSessionHistory(page: number = 1, limit: number = 1000): Promise<IPagination<IGameHistory>> {
+    const res = await request({
+      method: 'get',
+      url: '/api/games/session/history',
+      data:{
+        page,
+        'per-page': limit
+      }
+    })
+    if (res.err) {
+      return null
+    }
+    return Converter.convertApiPaginationResponse(res.data)
   }
 
   static async createGame(gameId: number, clientType: string, token?: string): Promise<IGameSession> {
