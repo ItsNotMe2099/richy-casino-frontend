@@ -117,7 +117,6 @@
       .cell:last-child {
         border-bottom-right-radius: 18px;
         text-align: right;
-        padding-right: 28px;
       }
     }
   }
@@ -294,3 +293,9 @@
   }
 }
 
+.loader{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
