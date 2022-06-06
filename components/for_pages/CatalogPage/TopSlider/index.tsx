@@ -9,15 +9,21 @@ import { useMeasure } from 'react-use'
 import Button from 'components/ui/Button'
 import classNames from 'classnames'
 import Image from 'next/image'
+import {useEffect, useState} from 'react'
+import JackPotRepository from 'data/repositories/JackPotRepository'
+import {IJackpotNearest} from 'data/interfaces/IJackpotNearest'
 
 interface Props {
   children?: React.ReactNode
   className?: string
-  money: string
 }
 
 export default function TopSlider(props: Props) {
   const appContext = useAppContext()
+  const [jackpot, setJackpot] = useState<IJackpotNearest | null>()
+  useEffect(() => {
+    JackPotRepository.fetchNearest().then(i => setJackpot(i))
+  }, [])
   const [ref, { width, height }] = useMeasure()
   const settings = {
     className: `${styles.slider}`,
@@ -52,12 +58,12 @@ export default function TopSlider(props: Props) {
             <div className={styles.wrapper}>
           <div className={styles.rootJack}>
             <div className={styles.jackpot}>
-              <div className={styles.content}>
+              {jackpot && <div className={styles.content}>
               <div className={styles.title} style={{fontSize: `${width / 27}px`}}>JACKPOT</div>
               <div className={styles.money} style={{fontSize: `${width / 18.5}px`}}>
-                {props.money}
+                {jackpot.sum} {jackpot.currency}
               </div>
-            </div>
+            </div>}
             </div>
           </div>
           <div className={styles.desktop}>

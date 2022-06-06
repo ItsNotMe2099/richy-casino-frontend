@@ -36,14 +36,10 @@ export default class TournamentRepository {
     return Converter.convertApiPaginationResponse(res.data)
   }
 
-  static async fetchNearest(page: number = 1, limit: number = 1000): Promise<ITournamentNearest> {
+  static async fetchNearest(): Promise<ITournamentNearest> {
     const res = await request({
       method: 'get',
       url: '/api/tournament/round/nearest',
-      data:{
-        page,
-        'per-page': limit
-      }
     })
     if (res.err) {
       return null

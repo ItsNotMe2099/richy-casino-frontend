@@ -14,12 +14,11 @@ import {useTranslation} from 'next-i18next'
 
 export default function CatalogPage() {
   const {t} = useTranslation()
-  const money = '25 572 257 ₽'
 
   return (
-    <WithGameFilterLayout showMobile top={<VisibleXs><TopSlider money={money}/></VisibleXs>}>
+    <WithGameFilterLayout showMobile top={<VisibleXs><TopSlider/></VisibleXs>}>
       <NextSeo title={t('page_index_title')}/>
-            <HiddenXs><TopSlider money={money}/></HiddenXs>
+            <HiddenXs><TopSlider/></HiddenXs>
           <GamesListTop />
           <VisibleXs><BuyCrypto/></VisibleXs>
           <GamesListAll />
