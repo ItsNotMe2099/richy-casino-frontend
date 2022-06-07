@@ -18,6 +18,7 @@ import {PaymentMethodSelected} from 'components/Profile/Wallet/PaymentMethodSele
 import {PaymentSeparator} from 'components/Profile/Wallet/PaymentSeparator'
 import {useAppContext} from 'context/state'
 import {PaymentDepositAmountField} from 'components/Profile/Wallet/PaymentDepositAmountField'
+import {useTranslation} from 'next-i18next'
 
 
 interface Props {
@@ -28,6 +29,7 @@ interface Props {
 }
 
 export default function StepForm(props: Props) {
+  const {t} = useTranslation()
   const context = useAppContext()
   const [sending, setSending] = useState(false)
   const [error, setError] = useState(null)
@@ -72,7 +74,7 @@ export default function StepForm(props: Props) {
               {!promoCode &&
               <div className={styles.promo} onClick={() => setPromoCode(true)}>
                 <div className={styles.plus}>+</div>
-                <span>Промокод</span>
+                <span>{t('wallet_form_promocode')}</span>
               </div>}
               <div className={styles.rate}>
                 <div>20 USDT ≈ 0,000020 DG</div>
@@ -84,7 +86,7 @@ export default function StepForm(props: Props) {
             }
             <FormError error={error}/>
             <Button type='submit' size='normal' spinner={sending} background='payGradient500' className={styles.wallet}><img
-              src='/img/icons/wallet.svg' alt=''/>Пополнить</Button>
+              src='/img/icons/wallet.svg' alt=''/>{t('wallet_form_button_deposit')}</Button>
           </Form>
         )}
       </Formik>
