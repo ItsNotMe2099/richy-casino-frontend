@@ -1,6 +1,7 @@
 import styles from './index.module.scss'
 import Link from 'next/link'
 import {Routes} from 'types/routes'
+import {useTranslation} from 'next-i18next'
 
 
 
@@ -10,14 +11,14 @@ interface Props {
 }
 
 export default function Contents(props: Props) {
-
+  const {t} = useTranslation()
   const items = [
-    {image: '/img/Contents/bitcoin.svg', label: 'Free Bitcoin', desc: 'Win satoshi every hour', link: Routes.freeBitcoin, value: 'bitcoin'},
-    {image: '/img/Contents/gamepad.svg', label: 'Richy Games', desc: 'Our best crypto games', link: Routes.richyGames, value: 'richy'},
-    {image: '/img/Contents/casino.svg', label: 'Casino', desc: 'Over 5000 games', link: Routes.catalog, value: 'casino'},
-    {image: '/img/Contents/poker.png', label: 'Poker', desc: 'Top tournaments', link: Routes.poker, value: 'poker'},
-    {image: '/img/Contents/cup.svg', label: 'Tournaments', desc: 'Top tournaments', link: Routes.tournaments, value: 'tournaments'},
-    {image: '/img/Contents/live.svg', label: 'Live Casino', desc: 'Our best crypto games', link: Routes.catalogLive, value: 'live'},
+    {image: '/img/Contents/bitcoin.svg', label: t('main_card_free_bitcoin_title'), desc: t('main_card_free_bitcoin_desc'), link: Routes.freeBitcoin, value: 'bitcoin'},
+    {image: '/img/Contents/gamepad.svg', label: t('main_card_richy_games_title'), desc: t('main_card_richy_games_desc'), link: Routes.richyGames, value: 'richy'},
+    {image: '/img/Contents/casino.svg', label: t('main_card_casino_title'), desc: t('main_card_casino_desc'), link: Routes.catalog, value: 'casino'},
+    {image: '/img/Contents/poker.png', label: t('main_card_poker_title'), desc: t('main_card_poker_desc'), link: Routes.poker, value: 'poker'},
+    {image: '/img/Contents/cup.svg', label: t('main_card_tournaments_title'), desc: t('main_card_tournaments_desc'), link: Routes.tournaments, value: 'tournaments'},
+    {image: '/img/Contents/live.svg', label: t('main_card_live_casino_title'), desc: t('main_card_live_casino_desc'), link: Routes.catalogLive, value: 'live'},
   ]
 
   const getShadow = (item) => {

@@ -2,6 +2,7 @@ import styles from './index.module.scss'
 import {IGame} from 'data/interfaces/IGame'
 import {IGameSession} from 'data/interfaces/IGameSession'
 import GameIFrameHeader from 'components/for_pages/CatalogPage/GameIframe/GameIFrameHeader'
+import {useTranslation} from 'next-i18next'
 
 interface Item extends IGame{
   link?: string
@@ -11,7 +12,7 @@ interface Props {
 }
 
 export default function GameIframe(props: Props) {
-  console.log('props.session.gameUrl', props.session?.gameUrl)
+  const {t} = useTranslation()
   return (
     <div className={styles.root}>
       <GameIFrameHeader icon={''} title={'Игра'}/>
@@ -22,7 +23,7 @@ export default function GameIframe(props: Props) {
             src={props.session.gameUrl}
 
           />}
-          {!props.session && <div className={styles.error}>Игра временно не доступна</div>}
+          {!props.session && <div className={styles.error}>{t('game_error_unavailable')}</div>}
         </div>
       </div>
 

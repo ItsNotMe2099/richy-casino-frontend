@@ -3,6 +3,8 @@ import classNames from 'classnames'
 import HiddenXs from 'components/ui/HiddenXS'
 import QuestionPopover from 'components/ui/QuestionPopover'
 import Link from 'next/link'
+import VisibleXs from 'components/ui/VisibleXS'
+import {useTranslation} from 'next-i18next'
 interface Props {
   length?: number | string
   icon: string
@@ -17,7 +19,7 @@ interface Props {
 }
 
 export default function Header(props: Props) {
-
+  const {t} = useTranslation()
   const SliderArrow = () => {
     return (
       <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,7 +66,8 @@ export default function Header(props: Props) {
           </div>
           {props.allLink && <Link href={props.allLink}>
             <a className={styles.all}>
-              Все <HiddenXs><>игры</></HiddenXs>
+              <VisibleXs><>{t('catalog_header_all')}</></VisibleXs>
+               <HiddenXs><>{t('catalog_header_all_games')}</></HiddenXs>
             </a>
           </Link>}
 

@@ -10,7 +10,7 @@ import Converter from 'utils/converter'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import Button from 'components/ui/Button'
 import ProfileModalFooter from 'components/Profile/layout/ProfileModalFooter'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'next-i18next'
 import {useEffect} from 'react'
 
 

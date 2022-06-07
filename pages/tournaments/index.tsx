@@ -16,7 +16,7 @@ export default function Tournaments(){
     <Layout>
       <NextSeo title={t('page_index_title')}/>
         <div className={styles.root}>
-          <PageTitle title='Турниры'/>
+          <PageTitle title={t('page_tournament_title')}/>
           <Tournament balance='0,00000001 BTC'/>
           <Winners/>
         </div>

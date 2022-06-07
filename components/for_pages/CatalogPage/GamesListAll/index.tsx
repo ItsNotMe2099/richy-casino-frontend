@@ -10,6 +10,7 @@ import New from 'components/svg/New'
 import {Routes} from 'types/routes'
 import useIsActiveLink from 'hooks/useIsActiveLink'
 import {IGameCategory} from 'data/interfaces/IGameCategory'
+import {useTranslation} from 'next-i18next'
 
 enum GameSwitchFilterKey{
   All = 'all',
@@ -22,6 +23,7 @@ interface Props {
 }
 
 export default function GamesListAll(props: Props) {
+  const {t} = useTranslation()
   const [data, setData] = useState<IPagination<IGame>>({data: [], total: 0})
   const [categories, setCategories] = useState<IGameCategory[]>([])
   const [page, setPage] = useState<number>(1)
@@ -32,9 +34,9 @@ export default function GamesListAll(props: Props) {
   const allLink = Routes.catalogAll
   const currentPage = useIsActiveLink(allLink)
   const filters: ISwitchFilterItem<GameSwitchFilterKey | number>[] = [
-    {label: 'Все', value: GameSwitchFilterKey.All, icon: <Dice/>},
-    {label: 'Популярные', value: GameSwitchFilterKey.Popular, icon: <Favorite/>},
-    {label: 'Новинки', value: GameSwitchFilterKey.New, icon: <New/>},
+    {label: t('catalog_list_all_tab_all'), value: GameSwitchFilterKey.All, icon: <Dice/>},
+    {label: t('catalog_list_all_tab_popular'), value: GameSwitchFilterKey.Popular, icon: <Favorite/>},
+    {label: t('catalog_list_all_tab_new'), value: GameSwitchFilterKey.New, icon: <New/>},
     ...categories.map(i => ({label: i.name, value: i.id, icon: <img src={i.imageIconUrl}/>})),
 
   ]
@@ -102,7 +104,7 @@ export default function GamesListAll(props: Props) {
     setLoading(false)
   }
   return (
-    <GamesList title={'Игры'}
+    <GamesList title={t('catalog_list_all')}
                icon={'/img/Contents/all-games.svg'}
                allLink={!currentPage? allLink : null}
                totalItems={data?.total}

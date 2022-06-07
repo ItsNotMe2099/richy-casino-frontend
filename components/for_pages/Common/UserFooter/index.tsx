@@ -14,6 +14,7 @@ import MenuSvg from 'components/svg/MenuSvg'
 import MenuCloseSvg from 'components/svg/MenuCloseSvg'
 import JoyStickSvg from 'components/svg/JoyStickSvg'
 import {ReactElement} from 'react'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
 
@@ -47,12 +48,13 @@ const Item = ({icon, label, onClick, link}: ItemProps) => {
 }
 
 export default function UserFooter(props: Props) {
+  const {t} = useTranslation()
   const router = useRouter()
   const items = [
-    {label: 'Main', icon: <UserSvg/>, key: ActionType.Main, link: '/'},
-    {label: 'Poker', icon: <PokerSvg className={styles.poker}/>, key: ActionType.Poker, link: Routes.poker},
-    {label: 'Casino', icon: <CasinoSvg/>, key: ActionType.Casino, link: Routes.catalog},
-    {label: 'Menu', icon: <MenuSvg/>, key: ActionType.Menu},
+    {label: t('tabbar_main'), icon: <UserSvg/>, key: ActionType.Main, link: '/'},
+    {label: t('tabbar_poker'), icon: <PokerSvg className={styles.poker}/>, key: ActionType.Poker, link: Routes.poker},
+    {label: t('tabbar_casino'), icon: <CasinoSvg/>, key: ActionType.Casino, link: Routes.catalog},
+    {label: t('tabbar_menu'), icon: <MenuSvg/>, key: ActionType.Menu},
   ]
   const {showModal} = useAppContext()
   const context = useAppContext()
@@ -94,7 +96,7 @@ export default function UserFooter(props: Props) {
           <Item
           onClick={() => handleClickItem(item)}
           link={item.link}
-          icon={item.label === 'Menu' && isMenuOpen ? <MenuCloseSvg/> : item.icon} label={item.label} key={item.key}/>
+          icon={(item.label === t('tabbar_menu') && isMenuOpen) ? <MenuCloseSvg/> : item.icon} label={item.label} key={item.key}/>
         )}
       </div>
     </VisibleXs>

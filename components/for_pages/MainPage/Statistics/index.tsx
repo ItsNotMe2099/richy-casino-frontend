@@ -6,12 +6,14 @@ import {IPagination} from 'types/interfaces'
 import {IGameHistory} from 'data/interfaces/IGameHistory'
 import GameListRepository from 'data/repositories/GameListRepository'
 import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
 
 }
 
 export default function Statistics(props: Props) {
+  const {t} = useTranslation()
   const [data, setData] = useState<IPagination<IGameHistory>>({total: 0, data: []})
   const [loading, setLoading] = useState(true)
   useEffect(() => {
@@ -25,25 +27,25 @@ export default function Statistics(props: Props) {
   return (
       <div className={styles.root}>
           <div className={styles.header}>
-            <Header icon='/img/Statistics/stats.svg' label='Статистика' style='labelOnly' shadowColor='violet'/>
+            <Header icon='/img/Statistics/stats.svg' label={t('stats_title')} style='labelOnly' shadowColor='violet'/>
           </div>
           <div className={styles.container}>
           <div className={styles.table}>
             <div className={styles.row}>
               <div className={styles.cell}>
-                Игра
+                {t('stats_header_game')}
               </div>
               <div className={styles.cell}>
-                Игрок
+                {t('stats_header_player')}
               </div>
               <div className={styles.cell}>
-                ID ставки
+                {t('stats_header_bet')}
               </div>
               <div className={styles.cell}>
-                Коэффициент
+                {t('stats_header_multiplier')}
               </div>
               <div className={styles.cell}>
-                Выигрыш
+                {t('stats_header_win')}
               </div>
             </div>
             {data.data.map((item, index) =>

@@ -14,6 +14,7 @@ import {Routes} from 'types/routes'
 import {useFavoriteContext} from 'context/favorite_state'
 import {useAppContext} from 'context/state'
 import Formatter from 'utils/formatter'
+import {useTranslation} from 'next-i18next'
 interface IGame{
   label: string
   image: string
@@ -48,6 +49,7 @@ const GameCategoryStaticCard = (props: {icon: string, label: string, link: strin
 export default function Filter(props: Props) {
   const favoriteContext = useFavoriteContext()
   const appContext = useAppContext()
+  const {t} = useTranslation()
   const [providers, setProviders] = useState<IGameProvider[]>([])
   const [categories, setCategories] = useState<IGameCategory[]>([])
   const [categoryNewTotal, setCategoryNewTotal] = useState(0)
@@ -65,9 +67,9 @@ export default function Filter(props: Props) {
   }, [appContext.auth])
 
   const games = [
-    ...(appContext.user ? [{icon: '/img/Filter/icons/24.svg', label: 'Последние игры', link: Routes.catalogLast, quantity: categoryNewTotal ?? -1}] : []),
-    {icon: '/img/Filter/icons/top.svg', label: 'ТОП игры', link: Routes.catalogTop, quantity: categoryTopTotal ?? -1},
-    ...(appContext.user ? [{icon: '/img/Filter/icons/favorite.svg', label: 'Избранные', link: Routes.catalogFavorite, quantity: favoriteContext.store.games.length}] : []),
+    ...(appContext.user ? [{icon: '/img/Filter/icons/24.svg', label: t('catalog_filter_category_latest'), link: Routes.catalogLast, quantity: categoryNewTotal ?? -1}] : []),
+    {icon: '/img/Filter/icons/top.svg', label: t('catalog_filter_category_top'), link: Routes.catalogTop, quantity: categoryTopTotal ?? -1},
+    ...(appContext.user ? [{icon: '/img/Filter/icons/favorite.svg', label: t('catalog_filter_category_favorite'), link: Routes.catalogFavorite, quantity: favoriteContext.store.games.length}] : []),
    ]
 
   const [category, setCategory] = useState('')
@@ -101,13 +103,13 @@ export default function Filter(props: Props) {
       <div className={classNames(styles.col, {[styles.none]: true})}>
       <div className={classNames(styles.root, props.className)}>
 
-         <InputSearch placeholder='Поиск' onChange={props.onSearch}/>
+         <InputSearch placeholder={t('catalog_filter_search_field')} onChange={props.onSearch}/>
          {games.map((item, index) =>
           <GameCategoryStaticCard key={index} icon={item.icon} label={item.label} link={item.link} quantity={item.quantity}/>
          )
          }
          <div className={styles.categoriesLbl}>
-          КАТЕГОРИИ
+           {t('catalog_filter_categories')}
          </div>
          <div className={styles.categories}>
          {categories.map((item, index) =>
@@ -115,7 +117,7 @@ export default function Filter(props: Props) {
          )}
          </div>
          <div className={styles.categoriesLbl}>
-          ПРОВАЙДЕРЫ
+           {t('catalog_filter_providers')}
          </div>
          <div className={styles.providers}>
          {providers.map((item, index) => <ProviderCard key={item.id} item={item}/>)}
@@ -124,12 +126,12 @@ export default function Filter(props: Props) {
     </div>
     <div className={classNames(styles.mobile, {[styles.none]: !props.showMobile})}>
         <div className={styles.search}>
-          <InputSearch placeholder='Поиск' onChange={props.onSearch}/>
+          <InputSearch placeholder={t('catalog_filter_search_field')} onChange={props.onSearch}/>
           <div className={styles.filters}>
-          <DropdownFilter  label='Категория' onClick={handleShowCategory}
+          <DropdownFilter  label={t('catalog_filter_categories_dropdown')} onClick={handleShowCategory}
           notActive
            onAll={() => setCategory('')} onChange={(item) => setCategory(item.label)} activeTab={category} type='category'/>
-          <DropdownFilter label='Провайдеры'
+          <DropdownFilter label={t('catalog_filter_providers_dropdown')}
             notActive
             onAll={() => setProvider('')} onClick={handleShowProviders}
            onChange={(item) => setProvider(item.label)} activeTab={provider} type='provider'/>
@@ -137,7 +139,7 @@ export default function Filter(props: Props) {
         {showCategory &&
           <>
           <div className={styles.categoriesLbl}>
-          КАТЕГОРИИ
+            {t('catalog_filter_categories')}
          </div>
          <div className={styles.categories}>
          {categories.map((item, index) =>
@@ -149,7 +151,7 @@ export default function Filter(props: Props) {
         {showProviders &&
         <>
         <div className={styles.categoriesLbl}>
-          ПРОВАЙДЕРЫ
+          {t('catalog_filter_providers_dropdown')}
          </div>
          <div className={styles.providers}>
          {providers.map((item, index) => <ProviderCard key={item.id} item={item}/>)}

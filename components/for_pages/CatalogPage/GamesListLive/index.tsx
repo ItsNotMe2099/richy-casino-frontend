@@ -9,6 +9,7 @@ import Favorite from 'components/svg/Favorite'
 import New from 'components/svg/New'
 import useIsActiveLink from 'hooks/useIsActiveLink'
 import {Routes} from 'types/routes'
+import {useTranslation} from 'next-i18next'
 
 
 enum GameSwitchFilterKey{
@@ -22,7 +23,7 @@ interface Props {
 }
 
 export default function GamesListLive(props: Props) {
-
+  const {t} = useTranslation()
   const [data, setData] = useState<IPagination<IGame>>({data: [], total: 0})
   const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(true)
@@ -31,9 +32,9 @@ export default function GamesListLive(props: Props) {
   const allLink = Routes.catalogLive
   const currentPage = useIsActiveLink(allLink)
   const filters: ISwitchFilterItem<GameSwitchFilterKey>[] = [
-    {label: 'Все', value: GameSwitchFilterKey.All, icon: <Dice/>},
-    {label: 'Популярные', value: GameSwitchFilterKey.Popular, icon: <Favorite/>},
-    {label: 'Новинки', value: GameSwitchFilterKey.New, icon: <New/>},
+    {label: t('catalog_list_live_tab_all'), value: GameSwitchFilterKey.All, icon: <Dice/>},
+    {label: t('catalog_list_live_tab_popular'), value: GameSwitchFilterKey.Popular, icon: <Favorite/>},
+    {label: t('catalog_list_live_tab_new'), value: GameSwitchFilterKey.New, icon: <New/>},
   ]
   useEffect(() => {
     setLoading(true)
@@ -86,7 +87,7 @@ export default function GamesListLive(props: Props) {
     setLoading(false)
   }
   return (
-    <GamesList title={'Live Casino'} icon={'/img/Contents/live.svg'}
+    <GamesList title={t('catalog_list_live')} icon={'/img/Contents/live.svg'}
                totalItems={data?.total ?? 0}
                items={data?.data ?? []}
                loading={loading}

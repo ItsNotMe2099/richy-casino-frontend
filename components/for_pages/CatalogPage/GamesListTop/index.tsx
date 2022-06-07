@@ -15,6 +15,7 @@ import {Routes} from 'types/routes'
 import useIsActiveLink from 'hooks/useIsActiveLink'
 import {IGame} from 'data/interfaces/IGame'
 import GamesList from 'components/for_pages/CatalogPage/GamesList'
+import {useTranslation} from 'next-i18next'
 enum GameSwitchFilterKey{
 
   WinNow = 'winNow',
@@ -27,8 +28,7 @@ interface Props {
 }
 
 export default function GamesListTop(props: Props) {
-
-
+  const {t} = useTranslation()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [latestWin, setLatestWin] = useState<IGameWin[]>([])
   const [top, setTop] = useState<IPagination<IGame>>({data: [], total: 0})
@@ -39,9 +39,9 @@ export default function GamesListTop(props: Props) {
   const currentPage = useIsActiveLink(allLink)
   const limit = 20
   const filters: ISwitchFilterItem<GameSwitchFilterKey>[] = [
-    {label: 'Выигрывают сейчас', value: GameSwitchFilterKey.WinNow, icon: <New/>},
-    {label: 'Топ игр за неделю', value: GameSwitchFilterKey.TopWeek, icon: <Top/>},
-    {label: 'Топ игр месяца', value: GameSwitchFilterKey.TopMonth, icon: <Calendar/>},
+    {label: t('catalog_list_top_tab_win_now'), value: GameSwitchFilterKey.WinNow, icon: <New/>},
+    {label: t('catalog_list_top_tab_week'), value: GameSwitchFilterKey.TopWeek, icon: <Top/>},
+    {label: t('catalog_list_top_tab_month'), value: GameSwitchFilterKey.TopMonth, icon: <Calendar/>},
   ]
   const sliderRef = useRef<Slider>(null)
 
@@ -129,7 +129,7 @@ export default function GamesListTop(props: Props) {
       <div className={styles.root}>
         <Header
           icon='/img/Contents/money.svg'
-          label='ТОП игры'
+          label={t('catalog_list_top')}
           allLink={!currentPage ? allLink : null}
           shadowColor='red'
           style='fullOnlyOnMobile'
@@ -158,7 +158,7 @@ export default function GamesListTop(props: Props) {
     )
   }
 
-  return  (<GamesList title={'ТОП игры'}
+  return  (<GamesList title={t('catalog_list_top')}
                       icon='/img/Contents/money.svg'
                      allLink={!currentPage? allLink : null}
                      totalItems={top?.total}

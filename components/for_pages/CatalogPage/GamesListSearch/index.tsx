@@ -1,15 +1,7 @@
 import GamesList from 'components/for_pages/CatalogPage/GamesList'
 import {IPagination} from 'types/interfaces'
 import {IGame} from 'data/interfaces/IGame'
-
-enum GameSwitchFilterKey{
-  All = 'all',
-  Popular = 'Popular',
-  New = 'new',
-  Roulette = 'Roulette',
-  Slots = 'slots',
-  Blackjack = 'blackjack',
-}
+import {useTranslation} from 'next-i18next'
 
 interface Props {
   data: IPagination<IGame>
@@ -18,9 +10,9 @@ interface Props {
 }
 
 export default function GamesListSearch({data, loading, onScrollNext}: Props) {
-
+  const {t} = useTranslation()
   return (
-    <GamesList title={'Поиск'}
+    <GamesList title={t('catalog_list_search')}
                icon={'/img/Contents/all-games.svg'}
                totalItems={data?.total ?? 0}
                items={data?.data ?? []}

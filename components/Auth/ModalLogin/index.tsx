@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'next-i18next'
 import {Form, Formik} from 'formik'
 import Button from 'components/ui/Button'
 import InputField from 'components/ui/Inputs/InputField'

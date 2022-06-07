@@ -4,12 +4,14 @@ import {IPagination} from 'types/interfaces'
 import {IGame} from 'data/interfaces/IGame'
 import GameListRepository from 'data/repositories/GameListRepository'
 import {IGameProvider} from 'data/interfaces/IGameProvider'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
   provider: IGameProvider
 }
 
 export default function GamesListProvider(props: Props) {
+  const {t} = useTranslation()
   const [data, setData] = useState<IPagination<IGame>>({data: [], total: 0})
   const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(true)

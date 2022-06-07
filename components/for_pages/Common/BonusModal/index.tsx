@@ -9,6 +9,8 @@ import VisibleXs from 'components/ui/VisibleXS'
 import Formatter from 'utils/formatter'
 import {Routes} from 'types/routes'
 import {useMeasure} from 'react-use'
+import {useTranslation} from 'next-i18next'
+import {pluralize} from 'numeralize-ru'
 
 interface Props {
   children?: React.ReactNode
@@ -18,6 +20,7 @@ interface Props {
 }
 
 export default function BonusModal(props: Props) {
+  const {t} = useTranslation()
   const appContext = useAppContext()
   const details = appContext.bonusBannerDetails
   const expiredAt = new Date(details?.validTill)
@@ -75,17 +78,17 @@ export default function BonusModal(props: Props) {
       }
       {appContext.showBonus && <div className={styles.downBanner}>
         <div className={styles.title}>
-          Бонус на депозит
+          {t('bonus_title')}
         </div>
         <div className={styles.bonus}>
           {Formatter.formatNumber(details?.amount)} {details?.currency?.toUpperCase()}
         </div>
-        <div className={styles.fs}>
-          {Formatter.formatNumber(details?.freeSpins)} FS
-        </div>
+        {details?.freeSpins > 0 && <div className={styles.fs}>
+          {Formatter.formatNumber(details?.freeSpins)} {t('bonus_fs')}
+        </div>}
         <div className={styles.footerGroup}>
           <div className={styles.btnWrapper}>
-            <Button size='normal' background='payGradient500' className={styles.btn} onClick={handleClick}>Получить</Button>
+            <Button size='normal' background='payGradient500' className={styles.btn} onClick={handleClick}>{t('bonus_button_get')}</Button>
             {appContext.showBonus &&
             <div className={styles.timer}>
               <Timer minutes style={props.style === 'footer' ? 'footer' : props.style === 'sheet' ? 'sheet' : 'bonus'}
@@ -96,10 +99,10 @@ export default function BonusModal(props: Props) {
           <div>
             <div className={styles.bottom}>
               <div className={styles.satoshi}>
-                {Formatter.formatNumber(details?.freeBitcoin)} Satoshi
+                {Formatter.formatNumber(details?.freeBitcoin)} {t('bonus_satoshi')}
               </div>
               <div className={styles.satoshi}>
-                {Formatter.formatNumber(details?.lotteryTickets)} Лотерейных билетов
+                {Formatter.formatNumber(details?.lotteryTickets)} {pluralize(details?.lotteryTickets, t('bonus_lottery_1'), t('bonus_lottery_2'), t('bonus_lottery_5'))}
               </div>
             </div>
           </div>
@@ -107,10 +110,10 @@ export default function BonusModal(props: Props) {
       </div>}
       {!appContext.showBonus && <div className={styles.stub}>
         <div className={styles.stubWrapper}>
-        <div className={styles.stubTitle}>The Best Provably Fair Casino
+        <div className={styles.stubTitle}>{t('bonus_stub_title')}
         </div>
         <div className={styles.btnWrapper}>
-        <Button href={Routes.catalog} className={styles.btn} size='normal' background='payGradient500'>Играть</Button>
+        <Button href={Routes.catalog} className={styles.btn} size='normal' background='payGradient500'>{t('bonus_stub_button_play')}</Button>
         </div>
         </div>
       </div>}

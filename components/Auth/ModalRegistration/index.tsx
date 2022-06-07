@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import { useState} from 'react'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import BonusSmallBanner from 'components/for_pages/Common/BonusSmallBanner'
 import PhoneForm from './Forms/PhoneForm'
 import EmailForm from './Forms/EmailForm'
