@@ -76,12 +76,12 @@ export default function TopSlider(props: Props) {
         <Slider {...settings}>
         <div className={styles.rootJack}>
             <div className={styles.jackpot}>
-              <div className={styles.content}>
+              {jackpot &&  <div className={styles.content}>
               <div className={styles.title} style={{fontSize: `${width / 10}px`}}>JACKPOT</div>
               <div className={styles.money} style={{fontSize: `${width / 8.5}px`}}>
-                {props.money}
+                {jackpot.sum} {jackpot.currency}
               </div>
-            </div>
+            </div>}
             </div>
           </div>
           <BonusSlide className={styles.bonusSlideMobile}/>

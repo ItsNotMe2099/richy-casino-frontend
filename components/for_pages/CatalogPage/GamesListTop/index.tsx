@@ -5,7 +5,7 @@ import Slider from 'react-slick'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import {useEffect, useRef, useState} from 'react'
-import { ISwitchFilterItem} from 'types/interfaces'
+import {IPagination, ISwitchFilterItem} from 'types/interfaces'
 import GameListRepository from 'data/repositories/GameListRepository'
 import {IGameWin} from 'data/interfaces/IGameWin'
 import New from 'components/svg/New'
@@ -13,6 +13,8 @@ import Calendar from 'components/svg/Calendar'
 import Top from 'components/svg/Top'
 import {Routes} from 'types/routes'
 import useIsActiveLink from 'hooks/useIsActiveLink'
+import {IGame} from 'data/interfaces/IGame'
+import GamesList from 'components/for_pages/CatalogPage/GamesList'
 enum GameSwitchFilterKey{
 
   WinNow = 'winNow',
@@ -28,26 +30,65 @@ export default function GamesListTop(props: Props) {
 
 
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [data, setData] = useState<IGameWin[]>([])
+  const [latestWin, setLatestWin] = useState<IGameWin[]>([])
+  const [top, setTop] = useState<IPagination<IGame>>({data: [], total: 0})
+  const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(true)
   const [filter, setFilter] = useState<GameSwitchFilterKey>(GameSwitchFilterKey.WinNow)
   const allLink = Routes.catalogTop
   const currentPage = useIsActiveLink(allLink)
-
+  const limit = 20
   const filters: ISwitchFilterItem<GameSwitchFilterKey>[] = [
     {label: 'Выигрывают сейчас', value: GameSwitchFilterKey.WinNow, icon: <New/>},
     {label: 'Топ игр за неделю', value: GameSwitchFilterKey.TopWeek, icon: <Top/>},
     {label: 'Топ игр месяца', value: GameSwitchFilterKey.TopMonth, icon: <Calendar/>},
   ]
   const sliderRef = useRef<Slider>(null)
+
   useEffect(() => {
-    GameListRepository.fetchLatestWinGames().then(i => {
-      setData(i)
-      setLoading(false)
-    })
-  }, [])
+    setLoading(true)
+    switch (filter){
+      case GameSwitchFilterKey.TopMonth:
+        GameListRepository.fetchTopMonth(1, limit).then(i => {
+          setTop(i)
+          setLoading(false)
+        })
+        break
+      case GameSwitchFilterKey.TopWeek:
+        GameListRepository.fetchTopWeek(1, limit).then(i => {
+          setTop(i)
+          setLoading(false)
+        })
+        break
+      case GameSwitchFilterKey.WinNow:
+        GameListRepository.fetchLatestWinGames().then(i => {
+          setLatestWin(i)
+          setLoading(false)
+        })
+        break
+    }
+
+  }, [filter])
   const handleChangeFilter = (item: GameSwitchFilterKey) => {
+    setTop({data: [], total: 0})
     setFilter(item)
+  }
+  const handleScrollNext = async () => {
+    const newPage = page + 1
+    setPage(newPage)
+    setLoading(true)
+    let res: IPagination<IGame>  = {data: [], total: 0}
+    switch (filter){
+      case GameSwitchFilterKey.TopMonth:
+        res = await GameListRepository.fetchTopMonth(newPage, limit)
+        break
+      case GameSwitchFilterKey.TopWeek:
+        res = await GameListRepository.fetchTopWeek(newPage, limit)
+        break
+    }
+
+    setTop(data => ({data: [...data.data, ...res.data], total: res.total}))
+    setLoading(false)
   }
   const Item = (prop:{item: IGameWin}) => {
 
@@ -81,32 +122,49 @@ export default function GamesListTop(props: Props) {
 
   }
 
-  return (
-    <div className={styles.root}>
-      <Header
-        icon='/img/Contents/money.svg'
-        label='ТОП игры'
-        allLink={!currentPage? allLink : null}
-        shadowColor='red'
-        style='fullOnlyOnMobile'
-        onPrev={() => sliderRef.current?.slickGoTo(currentIndex - 1)}
-        onNext={() => sliderRef.current?.slickGoTo(currentIndex + 1)}
-  slider />
-      <div className={styles.wrapper}><SwitchFilter<GameSwitchFilterKey> items={filters} onClick={handleChangeFilter} active={filter}/></div>
-      <HiddenXs>
-        <Slider {...settings} ref={sliderRef}>
-          {data.map((item, index) =>
-            <Item item={item} key={index}/>
-          )}
-        </Slider>
-      </HiddenXs>
-      <VisibleXs>
-        <div className={styles.overflow}>
-          {data.map((item, index) =>
-            <Item item={item} key={index}/>
-          )}
-        </div>
-      </VisibleXs>
-    </div>
-  )
+
+  if(filter === GameSwitchFilterKey.WinNow) {
+
+    return (
+      <div className={styles.root}>
+        <Header
+          icon='/img/Contents/money.svg'
+          label='ТОП игры'
+          allLink={!currentPage ? allLink : null}
+          shadowColor='red'
+          style='fullOnlyOnMobile'
+          onPrev={() => sliderRef.current?.slickGoTo(currentIndex - 1)}
+          onNext={() => sliderRef.current?.slickGoTo(currentIndex + 1)}
+          slider/>
+        <div className={styles.wrapper}><SwitchFilter<GameSwitchFilterKey> items={filters} onClick={handleChangeFilter}
+                                                                           active={filter}/></div>
+        <>
+          <HiddenXs>
+            <Slider {...settings} ref={sliderRef}>
+              {latestWin.map((item, index) =>
+                <Item item={item} key={index}/>
+              )}
+            </Slider>
+          </HiddenXs>
+          <VisibleXs>
+            <div className={styles.overflow}>
+              {latestWin.map((item, index) =>
+                <Item item={item} key={index}/>
+              )}
+            </div>
+          </VisibleXs>
+        </>
+      </div>
+    )
+  }
+
+  return  (<GamesList title={'ТОП игры'}
+                      icon='/img/Contents/money.svg'
+                     allLink={!currentPage? allLink : null}
+                     totalItems={top?.total}
+                     items={top?.data ?? []}
+                     loading={loading}
+                     onScrollNext={handleScrollNext}
+                     switchFilter={<SwitchFilter<GameSwitchFilterKey> items={filters} onClick={handleChangeFilter} active={filter}/> }
+  />)
 }

@@ -36,20 +36,52 @@ export default function GamesListLive(props: Props) {
     {label: 'Новинки', value: GameSwitchFilterKey.New, icon: <New/>},
   ]
   useEffect(() => {
-    GameListRepository.fetchLiveGames({}, 1, limit).then(i => {
-      setData(i)
-      setLoading(false)
-    })
-  }, [])
+    setLoading(true)
+
+    switch (filter) {
+      case GameSwitchFilterKey.All:
+        GameListRepository.fetchLiveGames({}, 1, limit).then(i => {
+          setData(i)
+          setLoading(false)
+        })
+        break
+      case GameSwitchFilterKey.New:
+        GameListRepository.fetchLatestGames({isLive: true}, 1, limit).then(i => {
+          setData(i)
+          setLoading(false)
+        })
+        break
+      case GameSwitchFilterKey.Popular:
+        GameListRepository.fetchPopularGames( 1, limit, true).then(i => {
+          setData(i)
+          setLoading(false)
+        })
+        break
+    }
+
+  }, [filter])
 
   const handleChangeFilter = (item: GameSwitchFilterKey) => {
+    setData({data: [], total: 0})
     setFilter(item)
   }
   const handleScrollNext = async () => {
     const newPage = page + 1
     setPage(newPage)
     setLoading(true)
-    const res = await GameListRepository.fetchLiveGames({}, newPage, limit)
+    let res: IPagination<IGame>  = {data: [], total: 0}
+    switch (filter){
+      case GameSwitchFilterKey.All:
+        res = await GameListRepository.fetchLiveGames({}, newPage, limit)
+        break
+      case GameSwitchFilterKey.New:
+        res = await GameListRepository.fetchLatestGames({isLive: true}, 1, limit)
+        break
+      case GameSwitchFilterKey.Popular:
+        res = await GameListRepository.fetchPopularGames( newPage, limit, true)
+        break
+
+    }
     setData(data => ({data: [...data.data, ...res.data], total: res.total}))
     setLoading(false)
   }
