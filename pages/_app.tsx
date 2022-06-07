@@ -52,7 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AppWrapper isMobile={pageProps.isMobile} token={pageProps.token} initialUser={pageProps.initialUser}>
       <AuthWrapper>
         <FavoriteWrapper>
-          <ReactPWAInstallProvider>
+          <ReactPWAInstallProvider enableLogging>
           <Head>
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
           </Head>
