@@ -13,6 +13,7 @@ import DropdownFilter from 'components/for_pages/Common/Filter/DropdownFilter'
 import {Routes} from 'types/routes'
 import {useFavoriteContext} from 'context/favorite_state'
 import {useAppContext} from 'context/state'
+import Formatter from 'utils/formatter'
 interface IGame{
   label: string
   image: string
@@ -38,7 +39,7 @@ const GameCategoryStaticCard = (props: {icon: string, label: string, link: strin
         <div className={styles.label}>{props.label}</div>
       </div>
       <div className={styles.quantity}>
-        {props.quantity}
+        {props.quantity > -1 ? Formatter.formatNumber(props.quantity) : ''}
       </div>
     </a>
     </Link>
@@ -49,15 +50,23 @@ export default function Filter(props: Props) {
   const appContext = useAppContext()
   const [providers, setProviders] = useState<IGameProvider[]>([])
   const [categories, setCategories] = useState<IGameCategory[]>([])
+  const [categoryNewTotal, setCategoryNewTotal] = useState(0)
+  const [categoryTopTotal, setCategoryTopTotal] = useState(0)
   useEffect(() => {
     GameListRepository.fetchProviders().then(i => setProviders(i.data ?? []))
     GameListRepository.fetchCategories().then(i => setCategories(i.data ?? []))
+    GameListRepository.fetchTop().then(i => setCategoryTopTotal(i?.total ?? 0))
   }, [])
 
+  useEffect(() => {
+    if(appContext.auth){
+      GameListRepository.fetchLatestGames().then(i => setCategoryNewTotal(i?.total ?? 0))
+    }
+  }, [appContext.auth])
 
   const games = [
-    ...(appContext.user ? [{icon: '/img/Filter/icons/24.svg', label: 'Последние игры', link: Routes.catalogLast, quantity: 0}] : []),
-    {icon: '/img/Filter/icons/top.svg', label: 'ТОП игры', link: Routes.catalogTop, quantity: 0},
+    ...(appContext.user ? [{icon: '/img/Filter/icons/24.svg', label: 'Последние игры', link: Routes.catalogLast, quantity: categoryNewTotal ?? -1}] : []),
+    {icon: '/img/Filter/icons/top.svg', label: 'ТОП игры', link: Routes.catalogTop, quantity: categoryTopTotal ?? -1},
     ...(appContext.user ? [{icon: '/img/Filter/icons/favorite.svg', label: 'Избранные', link: Routes.catalogFavorite, quantity: favoriteContext.store.games.length}] : []),
    ]
 
