@@ -18,7 +18,7 @@ module.exports = {
     locales: ['en', 'ru', 'ru-RU'],
     localeDetection: false,
   },
-...(process.env.NODE_ENV !== 'production' ? {
+...(process.env.NODE_ENV === 'production'  || process.env.NODE_ENV === 'development' ? {
 
   backend: {
   ...locizeOptions,
