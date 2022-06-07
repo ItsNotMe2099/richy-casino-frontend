@@ -7,6 +7,7 @@ const locizeOptions = {
   ...(process.env.NODE_ENV === 'development' ? { apiKey: '85e9e05e-08e7-49d0-8593-84624f4e42b2'} : {}),
   version: 'latest'
 }
+
 module.exports = {
   debug: true,
   i18n: {
@@ -17,7 +18,7 @@ module.exports = {
     locales: ['en', 'ru', 'ru-RU'],
     localeDetection: false,
   },
-...(process.env.NODE_ENV === 'development' ? {
+...(process.env.NODE_ENV !== 'production' ? {
 
   backend: {
   ...locizeOptions,
