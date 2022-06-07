@@ -69,7 +69,7 @@ export default function IndexPage() {
 export const getServerSideProps: GetServerSideProps = async (context ) => {
   return {
     props: {
-      //...await getServerSideTranslation(context),
+
     },
   }
 }
