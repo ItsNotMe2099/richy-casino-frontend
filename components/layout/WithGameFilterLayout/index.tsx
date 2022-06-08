@@ -12,7 +12,7 @@ interface Props{
   showMobile?: boolean
 }
 export default function WithGameFilterLayout(props: Props) {
-const [searchGames, setSearchGames] = useState({data: [], total: 0})
+  const [searchGames, setSearchGames] = useState({data: [], total: 0})
   const [isSearch, setIsSearch] = useState<boolean>(false)
   const [isSearchLoading, setIsSearchLoading] = useState<boolean>(false)
   const [searchPage, setSearchPage] = useState<number>(0)

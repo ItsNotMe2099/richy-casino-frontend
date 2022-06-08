@@ -8,18 +8,16 @@ import GamesListRichy from 'components/for_pages/CatalogPage/GamesListRichy'
 import GamesListLive from 'components/for_pages/CatalogPage/GamesListLive'
 import GamesListAll from 'components/for_pages/CatalogPage/GamesListAll'
 import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
-import {getServerSideTranslation} from 'utils/i18'
 import {NextSeo} from 'next-seo'
 import {useTranslation} from 'next-i18next'
 
 export default function CatalogPage() {
   const {t} = useTranslation()
-  const money = '25 572 257 ₽'
 
   return (
-    <WithGameFilterLayout showMobile top={<VisibleXs><TopSlider money={money}/></VisibleXs>}>
+    <WithGameFilterLayout showMobile top={<VisibleXs><TopSlider/></VisibleXs>}>
       <NextSeo title={t('page_index_title')}/>
-            <HiddenXs><TopSlider money={money}/></HiddenXs>
+            <HiddenXs><TopSlider/></HiddenXs>
           <GamesListTop />
           <VisibleXs><BuyCrypto/></VisibleXs>
           <GamesListAll />
@@ -32,7 +30,7 @@ export default function CatalogPage() {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
-      ...await getServerSideTranslation(context),
+
     },
   }
 }

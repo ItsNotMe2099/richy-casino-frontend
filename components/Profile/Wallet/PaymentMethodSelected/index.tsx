@@ -14,6 +14,6 @@ export const PaymentMethodSelected = (props: Props) => {
   const context = useAppContext()
   const isMobile = context.isMobile
   const {t} = useTranslation()
-  return isMobile ? <PaymentMethodSelectedMobile icon={<CryptoCurrencyIcons selected/>} label={'Криптовалюта'} onClick={props.onClick}/> : <PaymentMethodCryptoCard selected onClick={props.onClick}/>
+  return isMobile ? <PaymentMethodSelectedMobile icon={<CryptoCurrencyIcons selected/>} label={t('wallet_payment_type_crypto')} onClick={props.onClick}/> : <PaymentMethodCryptoCard selected onClick={props.onClick}/>
 }
 

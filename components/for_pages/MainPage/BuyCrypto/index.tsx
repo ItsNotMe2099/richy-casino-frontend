@@ -1,5 +1,6 @@
 import Button from 'components/ui/Button'
 import styles from './index.module.scss'
+import {useTranslation} from 'next-i18next'
 
 
 
@@ -9,7 +10,7 @@ interface Props {
 }
 
 export default function BuyCrypto(props: Props) {
-
+  const {t} = useTranslation()
   return (
     <div className={styles.root}>
       <div className={styles.no}>

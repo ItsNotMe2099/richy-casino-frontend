@@ -27,7 +27,6 @@ import HiddenXs from 'components/ui/HiddenXS'
 import {GameCookiesType} from 'components/for_pages/games/data/types'
 import GameBlackJack from 'components/for_pages/games/BlackJack'
 import GameVideoPoker from 'components/for_pages/games/VideoPoker'
-import {getServerSideTranslation} from 'utils/i18'
 interface Props{
   gameToken?: string
 }
@@ -99,7 +98,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
   return {
     props: {
-      ...await getServerSideTranslation(context),
+
       gameToken
     },
   }

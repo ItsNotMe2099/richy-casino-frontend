@@ -2,13 +2,14 @@ import styles from './index.module.scss'
 import Button from 'components/ui/Button'
 import classNames from 'classnames'
 import { useAppContext } from 'context/state'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
   poker?: boolean
 }
 
 export default function GameCard(props: Props) {
-
+  const {t} = useTranslation()
   const context = useAppContext()
 
   const getShadow = (shadowColor) => {
@@ -41,13 +42,13 @@ export default function GameCard(props: Props) {
         </div>
         <div className={styles.text}>
           <div className={styles.label}>
-            {props.poker ? <>Poker</> : <>Chess</>}
+            {props.poker ? t('main_game_card_poker_title') : t('main_game_card_chess_title')}
           </div>
           <div className={styles.desc}>
-            Покори своей игрой уже сейчас!
+            {t('main_game_card_desc')}
           </div>
         </div>
-        <div className={styles.btn}><Button href='#' size='play' background='blueGradient500'>Играть</Button></div>
+        <div className={styles.btn}><Button href='#' size='play' background='blueGradient500'>{t('main_game_card_button')}</Button></div>
         <div className={styles.btnMobile}><Button href='#'><img src='/img/GameCard/arrow.svg' alt=''/></Button></div>
       </div>
   )

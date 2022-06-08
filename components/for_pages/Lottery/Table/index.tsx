@@ -10,6 +10,7 @@ import LotteryRepository from 'data/repositories/LotteryRepository'
 import Formatter from 'utils/formatter'
 import Button from 'components/ui/Button'
 import ArrowBackSvg from 'components/svg/ArrowBackSvg'
+import ContentLoader from 'components/ui/ContentLoader'
 
 
 
@@ -21,6 +22,7 @@ export default function Table(props: Props) {
   const {t} = useTranslation()
   const [round, setRound] = useState<ILotteryRound | null>(null)
   const [loading, setLoading] = useState(true)
+  const [changing, setChanging] = useState(false)
   useEffect(() => {
     Promise.all([
       LotteryRepository.fetchRound(props.roundId <= 1 ? 1 : props.roundId -1).then(i => {
@@ -30,10 +32,24 @@ export default function Table(props: Props) {
     ]).then(() => setLoading(false))
   }, [])
   const handleNext = () => {
-
+    if(round.roundId >= props.roundId - 1){
+      return
+    }
+    setChanging(true)
+    LotteryRepository.fetchRound(round.roundId + 1).then(i => {
+     setChanging(false)
+      setRound(i)
+    })
   }
   const handlePrev = () => {
-
+    setChanging(true)
+    if(round.roundId <= 1){
+      return
+    }
+    LotteryRepository.fetchRound(round.roundId - 1).then(i => {
+      setChanging(false)
+      setRound(i)
+    })
   }
   return (
     <Panel className={styles.panel}>
@@ -45,13 +61,15 @@ export default function Table(props: Props) {
       </div>
         <div className={styles.headerRight}>
           <div className={styles.nav}>
-            <Button type='button' className={classNames(styles.navButton, styles.prev,{[styles.disabled]: false})} size='submit' background='dark600' onClick={handleNext}>   <ArrowBackSvg/> <span>{t('lottery_top_10_older')}</span></Button>
-            <Button type='button' className={classNames(styles.navButton, styles.next,{[styles.disabled]: true})} size='submit' background='dark600' onClick={handlePrev}>   <span>{t('lottery_top_10_newer')}</span>  <ArrowBackSvg/> </Button>
+            <Button type='button' disabled={changing} className={classNames(styles.navButton, styles.prev,{[styles.disabled]: round.roundId <= 1})} size='submit' background='dark600' onClick={handlePrev}>   <ArrowBackSvg/> <span>{t('lottery_top_10_older')}</span></Button>
+            <Button type='button'  disabled={changing} className={classNames(styles.navButton, styles.next,{[styles.disabled]: round.roundId >= props.roundId - 1})} size='submit' background='dark600' onClick={handleNext}>   <span>{t('lottery_top_10_newer')}</span>  <ArrowBackSvg/> </Button>
 
           </div>
           <div className={styles.totalTickets}> {t('lottery_top_10_total_tickets')} {round.totalTickets}</div>
         </div>
       </div>
+
+      {changing ? <div className={styles.loader}><ContentLoader isOpen style={'block'}/></div> : <>
       <HiddenXs>
       <div className={styles.table}>
         <div className={styles.row}>
@@ -72,7 +90,7 @@ export default function Table(props: Props) {
           <div className={classNames(styles.row, styles.rowInner)} key={index}>
             <div className={styles.cell}>
               <div className={styles.text}>
-                #{index}
+                #{index + 1}
               </div>
             </div>
             <div className={styles.cell}>
@@ -136,6 +154,7 @@ export default function Table(props: Props) {
             )}
       </div>
       </VisibleXs>
+      </>}
     </div>
       </>}
     </Panel>

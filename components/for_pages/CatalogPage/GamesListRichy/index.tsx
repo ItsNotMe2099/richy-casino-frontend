@@ -5,6 +5,7 @@ import {useEffect, useState} from 'react'
 import {IPagination} from 'types/interfaces'
 import {IGame} from 'data/interfaces/IGame'
 import GameListRepository from 'data/repositories/GameListRepository'
+import {useTranslation} from 'next-i18next'
 
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export default function GamesListRichy(props: Props) {
+  const {t} = useTranslation()
   const [data, setData] = useState<IPagination<IGame>>({data: [], total: 0})
   const [loading, setLoading] = useState<boolean>(true)
   const limit = 20
@@ -25,7 +27,7 @@ export default function GamesListRichy(props: Props) {
   }, [])
 
   return (
-    <GamesList title={'Richy Games'} showAll allLink={!currentPage? allLink : null}
+    <GamesList title={t('catalog_list_richy')} showAll allLink={!currentPage? allLink : null}
                icon={'/img/Contents/gamepad.svg'}
                totalItems={data?.total}
                items={data?.data ?? []}

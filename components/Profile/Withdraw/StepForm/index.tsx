@@ -77,7 +77,7 @@ export default function StepForm(props: Props) {
             </div>
             <InputField name={'address'} className={styles.input} validate={Validator.required}/>
             <FormError error={error}/>
-            <Button type='submit' size='normal' spinner={sending} background='blueGradient500' className={styles.button}>Продолжить</Button>
+            <Button type='submit' size='normal' spinner={sending} background='blueGradient500' className={styles.button}>{t('withdraw_form_button_continue')}</Button>
           </Form>
         )}
       </Formik>

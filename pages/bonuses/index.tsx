@@ -1,5 +1,4 @@
 import {GetServerSideProps} from 'next'
-import {getServerSideTranslation} from 'utils/i18'
 import styles from 'pages/bonuses/index.module.scss'
 import Layout from 'components/layout/Layout'
 import {NextSeo} from 'next-seo'
@@ -23,9 +22,9 @@ export default function Bonuses(){
 
   return (
     <Layout>
-      <NextSeo title={t('page_index_title')}/>
+      <NextSeo title={t('page_games_bonus_title')}/>
         <div className={styles.root} ref={ref}>
-          <div className={styles.title}>Бонусы</div>
+          <div className={styles.title}>{t('page_games_bonus_title')}</div>
           <div className={styles.grid}>
             <BonusSlide/>
             {context.banners.map((item, index) => <div className={styles.rootSlide} key={index}>
@@ -51,7 +50,7 @@ export default function Bonuses(){
 export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
-      ...await getServerSideTranslation(context),
+
     },
   }
 }

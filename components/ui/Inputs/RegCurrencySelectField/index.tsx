@@ -4,9 +4,10 @@ import { SelectField } from 'components/ui/Inputs/SelectField'
 import classNames from 'classnames'
 import {useAppContext} from 'context/state'
 import Converter from 'utils/converter'
-import {useMemo} from 'react'
+import {useEffect, useMemo} from 'react'
 import UserUtils from 'utils/user'
 import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
+import {useField} from 'formik'
 
 export interface ICustomSelectViewOption extends IOption<string>{
 
@@ -47,6 +48,15 @@ const Placeholder = (props: PropsOption) => {
 
 export const RegCurrencySelectField = (props: Props) => {
   const context = useAppContext()
+  const [field, meta, helpers] = useField(props)
+  useEffect(() => {
+    context.fetchDefaultCurrency().then(i =>{
+      if(i) {
+        console.log('SetDefaultCurrency', i)
+        helpers.setValue(i.iso)
+      }
+    })
+  }, [])
   const data = useMemo( () => Converter.convertCurrencyToOptions(context.currencies).map(i => ({...i, symbol: <img src={UserUtils.getCurrencyIcon(i.value)}/> })), [context.currencies])
   return (
   <SelectField<string> disabled={props.disabled} options={data} name={props.name} currentItemStyle={styles.current} className={styles.select}

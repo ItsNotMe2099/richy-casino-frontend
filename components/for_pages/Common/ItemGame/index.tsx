@@ -7,6 +7,7 @@ import FavoriteBtn from 'components/ui/FavoriteBtn'
 import {useMeasure} from 'react-use'
 import {useAppContext} from 'context/state'
 import {ModalType} from 'types/enums'
+import {useTranslation} from 'next-i18next'
 
 interface IItem {
   image: string
@@ -26,6 +27,7 @@ interface Props {
 }
 
 export default function ItemGame(props: Props) {
+  const {t} = useTranslation()
   const [ref, { width }] = useMeasure()
   const context = useAppContext()
   const link = props.link || Routes.catalogGame(props.item.id)
@@ -45,8 +47,8 @@ export default function ItemGame(props: Props) {
       <div className={styles.top}><FavoriteBtn id={props.item.id} inActiveClassName={styles.favoriteInActive} className={styles.favorite} onChange={(val) => !val &&  props.onDeleteFromFavorite ? props.onDeleteFromFavorite(props.item) : null}/></div>
       <div className={styles.btns}>
         <div className={styles.btnsWrapper}>
-          <Button className={classNames(styles.btn)} href={link} onClick={handlePlayClick} size='small' background='blueGradient500'>Играть</Button>
-          <Button className={classNames(styles.btn, styles.demo)} href={`${link}?demo=1`} size='small' background='blackTransparent'>Демо</Button>
+          <Button className={classNames(styles.btn)} href={link} onClick={handlePlayClick} size='small' background='blueGradient500'>{t('game_card_play')}</Button>
+          <Button className={classNames(styles.btn, styles.demo)} href={`${link}?demo=1`} size='small' background='blackTransparent'>{t('game_card_demo')}</Button>
         </div>
         </div>
       <div className={classNames(styles.top, styles.bottom)}><FavoriteBtn id={props.item.id} inActiveClassName={styles.favoriteInActive} className={styles.favorite} /></div>

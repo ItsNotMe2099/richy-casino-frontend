@@ -2,7 +2,6 @@ import {GetServerSideProps} from 'next'
 import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import {IGameCategory} from 'data/interfaces/IGameCategory'
 import GamesListFavorite from 'components/for_pages/CatalogPage/GamesListFavorite'
-import {getServerSideTranslation} from 'utils/i18'
 import {NextSeo} from 'next-seo'
 import {useTranslation} from 'next-i18next'
 interface Props{
@@ -22,7 +21,7 @@ export default function CatalogPage(props: Props) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
-      ...await getServerSideTranslation(context),
+
     },
   }
 }

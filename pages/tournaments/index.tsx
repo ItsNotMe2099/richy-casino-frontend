@@ -1,5 +1,4 @@
 import {GetServerSideProps} from 'next'
-import {getServerSideTranslation} from 'utils/i18'
 import Tournament from 'components/for_pages/MainPage/Tournament'
 import Winners from 'components/for_pages/MainPage/Winners'
 import styles from 'pages/tournaments/index.module.scss'
@@ -16,7 +15,7 @@ export default function Tournaments(){
     <Layout>
       <NextSeo title={t('page_index_title')}/>
         <div className={styles.root}>
-          <PageTitle title='Турниры'/>
+          <PageTitle title={t('page_tournament_title')}/>
           <Tournament balance='0,00000001 BTC'/>
           <Winners/>
         </div>
@@ -26,7 +25,7 @@ export default function Tournaments(){
 export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
-      ...await getServerSideTranslation(context),
+
     },
   }
 }

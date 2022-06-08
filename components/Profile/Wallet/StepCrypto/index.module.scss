@@ -1,6 +1,5 @@
 @import "scss/index";
 .root{
-  margin-top: 16px;
   .choose:nth-child(2){
     margin-top: 20px;
   }
@@ -82,7 +81,12 @@
   justify-content: center;
   margin-top: 32px;
   .qrCode{
-    max-width: 164px;
+    svg{
+      display: block;
+    }
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
   }
 
   @media screen and (max-width: $xs-max){

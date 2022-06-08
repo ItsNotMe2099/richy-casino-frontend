@@ -4,9 +4,6 @@ import {useEffect, useState} from 'react'
 import Header from 'components/for_pages/Common/Header'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
-import Link from 'next/link'
-import Button from 'components/ui/Button'
-import classNames from 'classnames'
 import ItemGame from 'components/for_pages/Common/ItemGame'
 import {Routes} from 'types/routes'
 import {useAppContext} from 'context/state'
@@ -14,6 +11,7 @@ import {IPagination} from 'types/interfaces'
 import {IGame} from 'data/interfaces/IGame'
 import GameListRepository from 'data/repositories/GameListRepository'
 import ContentLoader from 'components/ui/ContentLoader'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
   slider?: any
@@ -25,11 +23,9 @@ interface IItem {
   link: string
 }
 
-interface OverflowSlideProps {
-  item: IItem
-}
 
 export default function Games(props: Props) {
+  const {t} = useTranslation()
   const context = useAppContext()
   let { slider } = props
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -69,43 +65,13 @@ export default function Games(props: Props) {
     ]
   }
 
-  const OverflowSlide = ({item}: OverflowSlideProps) => {
-
-    const [inFavorite, setInFavorite] = useState(false)
-    return (
-      <Link key={item.link} href={item.link}>
-        <a className={styles.slide} ><div><img src={item.image}/></div>
-        <div className={styles.shade}>
-        <Button
-          onClick={() => inFavorite ? setInFavorite(false) : setInFavorite(true)}
-          className={classNames(styles.favorite, {[styles.active]: inFavorite})}
-          size='superExtraSmall'
-          background='blackTransparent'>
-          {inFavorite ?
-            <img src='/img/GamesList/star-fill.svg' alt=''/>
-            :
-            <img src='/img/GamesList/star-stroke.svg' alt=''/>}
-        </Button>
-        <div className={styles.container}>
-        <div className={styles.btns}>
-          <Button className={styles.btn} size='small' background='blueGradient500'>Играть</Button>
-          <Button className={styles.demo} size='small' background='blackTransparent'>Демо</Button>
-        </div>
-        </div>
-        </div>
-          <img src={item.image}/>
-          <div className={styles.label}>{item.label}</div>
-        </a>
-      </Link>
-    )
-  }
 
   return (
     <div className={styles.root}>
       <div className={styles.header}>
         <Header
           icon='/img/Contents/gamepad.svg'
-          label='Richy Games'
+          label={t('main_slider_richy_games')}
           shadowColor='blue'
           length={data.total}
           allLink={Routes.richyGames}

@@ -20,7 +20,7 @@ export default class UserRepository {
     }
     if(res.data?.data) {
       const data = {...Converter.objectKeysToCamelCase(res.data?.data)}
-      console.log("Data", res.data?.data)
+      console.log('Data', res.data?.data)
       data.balance.currencies.totals = convertCurrencyToArray(data.balance.currencies.totals, data.balance.calculatedToUserCurrency.totals, data.currencyIso)
       data.balance.currencies.bonus = convertCurrencyToArray(data.balance.currencies.bonus, data.balance.calculatedToUserCurrency.bonus, data.currencyIso)
       data.balance.currencies.real = convertCurrencyToArray(data.balance.currencies.real, data.balance.calculatedToUserCurrency.real, data.currencyIso)
@@ -71,7 +71,7 @@ export default class UserRepository {
   }
   static async twoFaEnable(): Promise<any> {
     const res = await request({
-      method: 'put',
+      method: 'post',
       url: '/api/user/two-factor/activate',
     })
     if (res?.err) {
@@ -80,11 +80,11 @@ export default class UserRepository {
     console.log('qrUrlD', res.data)
     return res.data?.data?.qrUrl
   }
-  static async twoFaConfirm({code}): Promise<any> {
+  static async twoFaConfirm({code, password}): Promise<any> {
     const res = await request({
-      method: 'put',
+      method: 'post',
       url: '/api/user/two-factor/confirm',
-      data: {code}
+      data: {code, password}
     })
     if (res?.err) {
       throw res.err
@@ -102,6 +102,7 @@ export default class UserRepository {
     }
     return res.data?.data
   }
+
   static async confirmOldPhone(data: {phone: string, code: string}): Promise<IPhoneOldConfirm> {
     const res = await request({
       method: 'post',

@@ -3,4 +3,5 @@ export interface IGameCategory {
   name: string
   imageIconUrl: string
   gamesAmount: number,
+  isFeatured?: boolean
 }

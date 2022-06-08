@@ -10,7 +10,6 @@ import {IFreeBitcoinUserStatus} from 'data/interfaces/IFreeBitcoinUserStatus'
 import {useAppContext} from 'context/state'
 import {useTranslation} from 'next-i18next'
 import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
-import {getServerSideTranslation} from 'utils/i18'
 import {NextSeo} from 'next-seo'
 import ContentLoader from 'components/ui/ContentLoader'
 
@@ -50,7 +49,7 @@ export default function FreeBitcoin() {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
-      ...await getServerSideTranslation(context),
+
     },
   }
 }

@@ -23,7 +23,18 @@ export default class InfoRepository {
     if (res.err) {
       return []
     }
-    return res.data.data?.map(i => Converter.objectKeysToCamelCase(i)) ?? []
+    return res.data.data?.map(i => ({...Converter.objectKeysToCamelCase(i), rateCurrencies: i.rate_currencies})) ?? []
+  }
+
+  static async getCurrencyByCountry(): Promise<ICurrency> {
+    const res = await request({
+      method: 'get',
+      url: '/api/finance/currency/by-country',
+    })
+    if (res.err) {
+      return null
+    }
+    return Converter.objectKeysToCamelCase(res?.data?.data)
   }
 
   static async getCities(countryIso: string): Promise<ICity[]> {

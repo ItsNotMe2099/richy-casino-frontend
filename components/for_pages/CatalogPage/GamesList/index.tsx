@@ -8,6 +8,7 @@ import {IGame} from 'data/interfaces/IGame'
 import Formatter from 'utils/formatter'
 import Spinner from 'components/ui/Spinner'
 import ContentLoader from 'components/ui/ContentLoader'
+import {useTranslation} from 'next-i18next'
 interface Item extends IGame{
   link?: string
 }
@@ -24,8 +25,7 @@ interface Props {
 }
 
 export default function GamesList(props: Props) {
-
-
+  const {t} = useTranslation()
   const getShadow = (icon) => {
     switch (icon){
       case '/img/Contents/live.svg':
@@ -72,7 +72,7 @@ export default function GamesList(props: Props) {
             : <img src='/img/CatalogPage/more.svg' alt=''/>}
         </div>
         <div className={styles.text}>
-          Больше игр
+          {t('catalog_list_more')}
         </div>
       </div>}
     </div>

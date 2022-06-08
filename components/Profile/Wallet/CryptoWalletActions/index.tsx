@@ -28,7 +28,7 @@ export const CryptoWalletActions = (props: Props) => {
           onClick={() => handleClick(ProfileModalType.exchange)}
         >
           <img src='/img/Wallet/exchange.svg' alt=''/>
-          Обменять
+          {t('wallet_exchange_crypto')}
         </Button>
       </div>
       <div className={styles.btnWrap}>

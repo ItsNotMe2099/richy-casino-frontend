@@ -3,6 +3,10 @@ import Header from 'components/for_pages/Common/Header'
 import { useAppContext } from 'context/state'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 import classNames from 'classnames'
+import {useEffect, useState} from 'react'
+import {ITournamentTop10} from 'data/interfaces/ITournamentTop10'
+import TournamentRepository from 'data/repositories/TournamentRepository'
+import {useTranslation} from 'next-i18next'
 
 interface IUser {
   nickname: string
@@ -17,9 +21,19 @@ interface Props {
 }
 
 export default function Winners(props: Props) {
-
+  const {t} = useTranslation()
   const context = useAppContext()
+  const [winners, setWinners] = useState<ITournamentTop10[]>([])
+  useEffect(() => {
+    TournamentRepository.fetchHistory(1, 1).then(i => {
 
+    })
+    TournamentRepository.fetchTop10().then(i => {
+      if(i?.length > 0) {
+        setWinners(i[0].top10)
+      }
+    })
+  }, [])
   const user = context.auth
 
   const users = [
@@ -39,7 +53,7 @@ export default function Winners(props: Props) {
   return (
       <div className={styles.root} id={'leader-board'}>
           <div className={styles.header}>
-            <Header icon='/img/Winners/icon.svg' label='ТОП 10 победителей за сегодня' style='popover' shadowColor='violet'/>
+            <Header icon='/img/Winners/icon.svg' label={t('tournament_top10_title')} style='popover' shadowColor='violet'/>
           </div>
           <div className={styles.content}>
             <div className={styles.illustration}>
@@ -54,13 +68,13 @@ export default function Winners(props: Props) {
             #
           </th>
           <th className={styles.cell}>
-            Игрок
+            {t('tournament_top10_header_player')}
           </th>
           <th className={styles.cell}>
-            Пари сделано
+            {t('tournament_top10_header_pari')}
           </th>
           <th className={styles.cell}>
-            Приз
+            {t('tournament_top10_header_prize')}
           </th>
         </tr>
         </thead>
@@ -159,7 +173,7 @@ export default function Winners(props: Props) {
               </div>
               <div className={styles.element}>
                 <div className={styles.title}>
-                  Моя позиция
+                  {t('tournament_top10_user_position')}
                 </div>
                 <div className={styles.value}>
                   {userTemp.position}
@@ -167,7 +181,7 @@ export default function Winners(props: Props) {
               </div>
               <div className={styles.element}>
                 <div className={styles.title}>
-                  Пари сделано
+                  {t('tournament_top10_user_pari')}
                 </div>
                 <div className={styles.value}>
                   <div className={styles.group}>
@@ -177,7 +191,7 @@ export default function Winners(props: Props) {
               </div>
               <div className={styles.element}>
                 <div className={styles.title}>
-                  Что бы достичь <span>топ 10</span>
+                  {t('tournament_top10_user_label_1')} <span>{t('tournament_top10_user_label_1_top')}</span>
                 </div>
                 <div className={styles.value}>
                   <div className={styles.group}>
@@ -187,7 +201,7 @@ export default function Winners(props: Props) {
               </div>
               <div className={styles.element}>
                 <div className={styles.title}>
-                  Приз
+                  {t('tournament_top10_user_prize')}
                 </div>
                 <div className={styles.value}>
                   <div className={styles.group}>

@@ -1,7 +1,7 @@
 import 'normalize.css'
 import '../scss/globals.scss'
 import type { AppContext, AppProps } from 'next/app'
-import { appWithTranslation } from 'next-i18next'
+import {appWithTranslation, useTranslation} from 'next-i18next'
 import nextI18NextConfig from '../next-i18next.config.js'
 import SEO from '../next-seo.config'
 import { AppWrapper } from 'context/state'
@@ -33,11 +33,17 @@ import ReactPWAInstallProvider from 'context/pwa_state'
 function MyApp({ Component, pageProps }: AppProps) {
   const [clientVisible, setClientVisible] = useState(true)
   const [isLoading, setIsLoading] = useState(true)
+  const {t, i18n} = useTranslation()
+
   useEffect(() => {
+    if(pageProps.language !== i18n.language){
+      i18n.changeLanguage(pageProps.language)
+    }
     setTimeout(() => {
       setIsLoading(false)
     }, 1000)
     if (typeof  navigator !== 'undefined' && 'serviceWorker' in navigator) {
+      console.log('registerServiceWorker')
       navigator.serviceWorker.register('/pwabuilder-sw.js', {scope: './'})
     }
   }, [])
@@ -46,7 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AppWrapper isMobile={pageProps.isMobile} token={pageProps.token} initialUser={pageProps.initialUser}>
       <AuthWrapper>
         <FavoriteWrapper>
-          <ReactPWAInstallProvider>
+          <ReactPWAInstallProvider enableLogging>
           <Head>
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
           </Head>
@@ -86,6 +92,7 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
         path: '/',
       })
     }
+    props.pageProps.language =  (appContext.ctx as any).req.cookies[CookiesType.language]
     props.pageProps.token = (appContext.ctx as any).req.cookies[CookiesType.accessToken]
     props.pageProps.initialUser = await UserRepository.getUser(props.pageProps.token)
 

@@ -23,7 +23,7 @@ export const PaymentMethodCryptoCard = (props: Props) => {
       <div className={styles.icons}>
       <CryptoCurrencyIcons selected={hover || props.selected}/>
       </div>
-      <div className={styles.label}>Криптовалюта</div>
+      <div className={styles.label}>{t('wallet_payment_type_crypto')}</div>
     </PaymentMethodCard>
   )
 }

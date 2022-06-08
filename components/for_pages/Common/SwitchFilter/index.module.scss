@@ -20,6 +20,10 @@
   align-items: center;
   margin-right: 13px;
   cursor: pointer;
+  img{
+    max-width: 14px;
+    margin-right: 8px;
+  }
   svg{
     fill: #797C86;
     margin-right: 8px;
@@ -30,6 +34,7 @@
   font-weight: 500;
   font-size: 14px;
   color: $dark100;
+  white-space: nowrap;
   @media screen and (max-width: 414px){
     font-weight: 500;
     font-size: 18px;

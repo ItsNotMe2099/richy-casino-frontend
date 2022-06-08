@@ -5,6 +5,7 @@ import GameListRepository from 'data/repositories/GameListRepository'
 import DropdownMenu from 'components/for_pages/MainPage/GamesList/DropdownMenu'
 import styles from './index.module.scss'
 import ProviderCard from 'components/for_pages/Common/ProviderCard'
+import {useTranslation} from 'next-i18next'
 
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export default function ProviderFilter(props: Props){
+  const {t} = useTranslation()
   const [providers, setProviders] = useState<IGameProvider[]>([])
   const [activeToggle, setActiveToggle] = useState<boolean>(false)
   const [provider, setProvider] = useState<IGameProvider | null>(null)
@@ -26,7 +28,7 @@ export default function ProviderFilter(props: Props){
   }
 
   return (
-    <DropdownMenu activeToggle={activeToggle} placeholder={provider ? provider.name : 'Провайдер'} icon={'/img/DropdownMenu/pacman.svg'}>
+    <DropdownMenu activeToggle={activeToggle} placeholder={provider ? provider.name : t('main_game_list_filter_provider')} icon={'/img/DropdownMenu/pacman.svg'}>
       <div className={styles.root}>
         <div className={styles.wrapper}>
       {providers.map(i => <ProviderCard key={i.id} item={i} onClick={() => handleClick(i)}/>)}

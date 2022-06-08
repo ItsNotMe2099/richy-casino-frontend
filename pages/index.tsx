@@ -11,7 +11,6 @@ import Tournament from 'components/for_pages/MainPage/Tournament'
 import TopSlider from 'components/for_pages/MainPage/TopSlider'
 import BuyCrypto from 'components/for_pages/MainPage/BuyCrypto'
 import VisibleXs from 'components/ui/VisibleXS'
-import {getServerSideTranslation} from 'utils/i18'
 import {NextSeo} from 'next-seo'
 import {useTranslation} from 'next-i18next'
 
@@ -70,7 +69,7 @@ export default function IndexPage() {
 export const getServerSideProps: GetServerSideProps = async (context ) => {
   return {
     props: {
-      ...await getServerSideTranslation(context),
+
     },
   }
 }

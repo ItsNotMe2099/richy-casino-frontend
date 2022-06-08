@@ -6,14 +6,23 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import { ModalType } from 'types/enums'
 import { useMeasure } from 'react-use'
+import {useEffect} from 'react'
+import TournamentRepository from 'data/repositories/TournamentRepository'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
   balance: string
 }
 
 export default function Tournament(props: Props) {
+  const {t} = useTranslation()
     const appContext = useAppContext()
   const someDate = '2022-05-01T12:46:24.007Z'
+  useEffect(() => {
+    TournamentRepository.fetchRichyTournaments().then(i => {
+
+    })
+  }, [])
 
   const [ref, { width }] = useMeasure()
   const isMobile = appContext.isMobile
@@ -37,11 +46,11 @@ export default function Tournament(props: Props) {
         <div className={styles.moneyRight}><img src='/img/Tournament/right.svg' alt=''/></div>
         <div className={styles.left}>
         <div className={styles.title}>
-          ТУРНИР
+          {t('tournament_banner_title')}
         </div>
         <div className={styles.fund}>
           <div className={styles.prize}>
-            Призовой фонд
+            {t('tournament_banner_prize')}
           </div>
           <div className={styles.balance}>
             {props.balance}
@@ -50,7 +59,7 @@ export default function Tournament(props: Props) {
         </div>
         <div className={styles.right}>
             <Timer expiredAt={expiredAt} days style='tournament'/>
-          <div className={styles.btnContainer}><Button onClick={handleJoin} className={styles.btn} size='normal' background='payGradient500'>Участвовать</Button></div>
+          <div className={styles.btnContainer}><Button onClick={handleJoin} className={styles.btn} size='normal' background='payGradient500'>{t('tournament_banner_button')}</Button></div>
         </div>
     </div>
     </HiddenXs>
@@ -63,18 +72,18 @@ export default function Tournament(props: Props) {
       </div>
         <div className={styles.rightMobile}>
         <div className={styles.title} style={{fontSize: isMobile && `${width /12.5}px`}}>
-          ТУРНИР
+          {t('tournament_banner_title')}
         </div>
         <div className={styles.fund}>
           <div className={styles.prize}>
-            <span style={{fontSize: isMobile && `${width /29}px`}}>Призовой фонд</span>
+            <span style={{fontSize: isMobile && `${width /29}px`}}>{t('tournament_banner_prize')}</span>
             <div className={styles.balance} style={{fontSize: isMobile && `${width /33}px`}}>
               {props.balance}
             </div>
           </div>
         </div>
         <Button onClick={handleJoin} className={styles.btnMobile} size='normal' background='payGradient500'>
-          <span style={{fontSize: isMobile && `${width /24}px`}}>Участвовать</span>
+          <span style={{fontSize: isMobile && `${width /24}px`}}>{t('tournament_banner_button')}</span>
         </Button>
         <Timer expiredAt={expiredAt} days style='tournamentMobile'/>
       </div>

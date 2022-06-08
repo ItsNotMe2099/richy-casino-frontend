@@ -1,7 +1,6 @@
 import {ITextPage} from 'data/interfaces/ITextPage'
 import {GetServerSideProps} from 'next'
 import PagesRepository from 'data/repositories/PagesRepository'
-import {getServerSideTranslation} from 'utils/i18'
 import {IPagination} from 'types/interfaces'
 import InfoPage from 'components/for_pages/InfoPage'
 import {NextSeo} from 'next-seo'
@@ -31,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const page = await PagesRepository.fetchBySlug(pages.data[0].internalName, context.locale ?? 'en')
   return {
     props: {
-      ...await getServerSideTranslation(context),
+
       pages,
       page
     }

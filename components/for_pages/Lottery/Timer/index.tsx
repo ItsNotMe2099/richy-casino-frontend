@@ -59,7 +59,7 @@ export default function Timer(props: Props) {
           )}
         </div>
         <div className={styles.label}>
-          {pluralize(hours, t('timer_mins_1'), t('timer_mins_2'), t('timer_mins_5'))}
+          {pluralize(minutes, t('timer_mins_1'), t('timer_mins_2'), t('timer_mins_5'))}
         </div>
       </div>
       <div className={styles.days}>
@@ -69,7 +69,7 @@ export default function Timer(props: Props) {
           )}
         </div>
         <div className={styles.label}>
-          {pluralize(hours, t('timer_secs_1'), t('timer_secs_2'), t('timer_secs_5'))}
+          {pluralize(seconds, t('timer_secs_1'), t('timer_secs_2'), t('timer_secs_5'))}
         </div>
       </div>
       </div>

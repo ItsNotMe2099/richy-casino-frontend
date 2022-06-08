@@ -1,7 +1,7 @@
 @import "scss/index";
 
 .root {
-  
+
 }
 
 .scan{
@@ -9,13 +9,19 @@
   font-size: 14px;
   line-height: 130%;
   text-align: left;
-  margin-top: 16px;
 }
 
 .qr{
   display: flex;
   margin-top: 25px;
   justify-content: center;
+}
+.qrWrapper{
+  background: white;
+  border-radius: 8px;
+  img{
+    display: block;
+  }
 }
 
 .your{
@@ -52,4 +58,35 @@
   span{
     color: #4179f8;
   }
+}
+
+
+.form {
+  @media screen and (max-width: $xs-max) {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: auto;
+  }
+}
+
+.confirm{
+  margin-top: 35px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #696A78;
+  text-align: left;
+  margin-bottom: 12px;
+}
+
+.password{
+  margin-top: 32px;
+  margin-bottom: 0;
+}
+
+.btn{
+  font-weight: 600;
+  font-size: 16px;
+  height: 53px;
 }

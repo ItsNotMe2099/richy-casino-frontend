@@ -3,6 +3,8 @@ import classNames from 'classnames'
 import {useTimer} from 'react-timer-hook'
 import {pad} from 'utils/formatter'
 import {useEffect} from 'react'
+import {useTranslation} from 'next-i18next'
+import {pluralize} from 'numeralize-ru'
 
 interface Props {
   expiredAt: Date
@@ -17,6 +19,7 @@ interface Props {
 }
 
 export default function Timer(props: Props) {
+  const {t} = useTranslation()
   const {
     seconds,
     minutes,
@@ -43,11 +46,14 @@ export default function Timer(props: Props) {
     [styles.wallet]: props.style === 'wallet',
   })
 
-
+  const daysLabel = pluralize(days, t('timer_days_1'), t('timer_days_2'), t('timer_days_5'))
+  const hoursLabel = pluralize(hours, t('timer_hours_1'), t('timer_hours_2'), t('timer_hours_5'))
+  const minsLabel = pluralize(minutes, t('timer_mins_1'), t('timer_mins_2'), t('timer_mins_5'))
+  const secsLabel = pluralize(seconds, t('timer_secs_1'), t('timer_secs_2'), t('timer_secs_5'))
   return (
     <div className={classNames(styles.root, timerClass)} style={{...(props.rootPadding ? {padding: props.rootPadding}: {})}}>
       <div className={styles.end}>
-          До окончания
+        {t('timer_before_end')}
       </div>
       <div className={styles.timer}>
       <div className={styles.hours}>
@@ -58,7 +64,7 @@ export default function Timer(props: Props) {
           )}
         </div>
         <div className={styles.label}>
-          {props.days? 'дней' : props.minutes ? 'минут': 'часов'}
+          {props.days ? daysLabel : props.minutes ? minsLabel : hoursLabel}
         </div>
       </div>
       <div className={styles.separator}>
@@ -74,7 +80,7 @@ export default function Timer(props: Props) {
           )}
         </div>
         <div className={styles.label}>
-        {props.days? <>часов</> : <>минут</>}
+        {props.days ? hoursLabel : minsLabel}
         </div>
       </div>
       <div className={styles.separator}>
@@ -90,7 +96,7 @@ export default function Timer(props: Props) {
           )}
         </div>
         <div className={styles.label}>
-        {props.days? <>минут</> : <>секунд</>}
+        {props.days ? minsLabel : secsLabel}
         </div>
       </div>
       </div>

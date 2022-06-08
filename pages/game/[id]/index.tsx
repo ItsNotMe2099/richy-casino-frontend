@@ -4,7 +4,6 @@ import GameListRepository from 'data/repositories/GameListRepository'
 import {GameSessionStrategy, IGameSession} from 'data/interfaces/IGameSession'
 import {CookiesType} from 'types/enums'
 import {getSelectorsByUserAgent} from 'react-device-detect'
-import {getServerSideTranslation} from 'utils/i18'
 import GameIframeRichy from 'components/for_pages/CatalogPage/GameIframeRichy'
 import GameIframe from 'components/for_pages/CatalogPage/GameIframe'
 
@@ -40,7 +39,7 @@ export const getServerSideProps = async (context) => {
 
   return {
     props: {
-      ...await getServerSideTranslation(context),
+
       session
     },
   }

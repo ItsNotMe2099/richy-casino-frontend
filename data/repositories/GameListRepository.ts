@@ -7,6 +7,8 @@ import {IGame} from 'data/interfaces/IGame'
 import {IGameWin} from 'data/interfaces/IGameWin'
 import {IGameSession} from 'data/interfaces/IGameSession'
 import {RICHY_CATEGORY_ID} from 'types/constants'
+import {IGameHistory} from 'data/interfaces/IGameHistory'
+import {format, subDays} from 'date-fns'
 
 export default class GameListRepository {
   static async fetchProviders(name: string = null, page: number = 1, limit: number = 1000): Promise<IPagination<IGameProvider>> {
@@ -25,7 +27,7 @@ export default class GameListRepository {
     return Converter.convertApiPaginationResponse(res.data)
   }
 
-  static async fetchCategories(name: string  = null, bannerSlogan: string  = null, page: number = 1, limit: number = 1000): Promise<IPagination<IGameCategory>> {
+  static async fetchCategories(name: string  = null, bannerSlogan: string  = null, page: number = 1, limit: number = 1000, isFeatured?: boolean): Promise<IPagination<IGameCategory>> {
     const res = await request({
       method: 'get',
       url: '/api/games/category',
@@ -33,7 +35,8 @@ export default class GameListRepository {
         ...(name ? {name} : {}),
         ...(bannerSlogan ? {banner_slogan: bannerSlogan} : {}),
         page,
-        'per-page': limit
+        'per-page': limit,
+      ...(typeof isFeatured !== 'undefined' ? {is_featured: isFeatured} : {})
       }
     })
     if (res.err) {
@@ -54,7 +57,7 @@ export default class GameListRepository {
       }
     })
     if (res.err) {
-      return null
+      return {data: [], total: 0}
     }
     return Converter.convertApiPaginationResponse(res.data)
   }
@@ -71,12 +74,12 @@ export default class GameListRepository {
       }
     })
     if (res.err) {
-      return null
+      return {data: [], total: 0}
     }
     return Converter.convertApiPaginationResponse(res.data)
   }
 
-  static async fetchLatestGames({name, providerId, categoryId}: {name?: string, providerId?: number, categoryId?: number} = {}, page: number = 1, limit: number = 1000): Promise<IPagination<IGame>> {
+  static async fetchLatestGames({name, providerId, categoryId, isLive}: {name?: string, providerId?: number, categoryId?: number, isLive?: boolean} = {}, page: number = 1, limit: number = 1000): Promise<IPagination<IGame>> {
     const res = await request({
       method: 'get',
       url: '/api/games/game/latest',
@@ -84,20 +87,78 @@ export default class GameListRepository {
         ...(name ? {name} : {}),
         ...(providerId ? {provider_id: providerId} : {}),
         ...(categoryId ? {category_id: categoryId} : {}),
+        ...(typeof isLive !== 'undefined' ? {is_live: isLive} : {}),
         page,
         'per-page': limit
       }
     })
     if (res.err) {
-      return null
+      return {data: [], total: 0}
     }
     return Converter.convertApiPaginationResponse(res.data)
   }
 
-  static async fetchPopularGames(page: number = 1, limit: number = 1000): Promise<IPagination<IGame>> {
+  static async fetchPopularGames(page: number = 1, limit: number = 1000, isLive?: boolean): Promise<IPagination<IGame>> {
     const res = await request({
       method: 'get',
       url: '/api/games/game/popular',
+      data:{
+        page,
+        'per-page': limit,
+        ...(typeof isLive !== 'undefined' ? {is_live: isLive} : {}),
+      }
+    })
+    if (res.err) {
+      return {data: [], total: 0}
+    }
+    return Converter.convertApiPaginationResponse(res.data)
+  }
+
+
+
+  static async fetchLatestWinGames(): Promise<IGameWin[]> {
+    const res = await request({
+      method: 'get',
+      url: '/api/games/game/latest-win'
+    })
+    if (res.err) {
+      return []
+    }
+    return res.data.data?.map(i => Converter.objectKeysToCamelCase(i)) ?? []
+  }
+
+  static async fetchTop(page: number = 1, limit: number = 1000, {dateFrom, dateTo}: {dateFrom?: string, dateTo?: string} = {}): Promise<IPagination<IGame>> {
+    const res = await request({
+      method: 'get',
+      url: '/api/games/game/top',
+      data: {
+        ...(dateFrom ? {date_from: dateFrom} : {}),
+        ...(dateTo ? {date_to: dateTo} : {}),
+      }
+    })
+    if (res.err) {
+      return {data: [], total: 0}
+    }
+    return Converter.convertApiPaginationResponse(res.data)
+  }
+
+  static async fetchTopWeek(page: number = 1, limit: number = 1000): Promise<IPagination<IGame>> {
+    return this.fetchTop(1, limit, {
+      dateFrom: format(subDays(new Date(), 7), 'yyyy-MM-dd'),
+      dateTo: format(new Date(), 'yyyy-MM-dd')
+    })
+  }
+  static async fetchTopMonth(page: number = 1, limit: number = 1000): Promise<IPagination<IGame>> {
+    return this.fetchTop(1, limit, {
+      dateFrom: format(subDays(new Date(), 30), 'yyyy-MM-dd'),
+      dateTo: format(new Date(), 'yyyy-MM-dd')
+    })
+  }
+
+  static async fetchGameSessionHistory(page: number = 1, limit: number = 1000): Promise<IPagination<IGameHistory>> {
+    const res = await request({
+      method: 'get',
+      url: '/api/games/session/history',
       data:{
         page,
         'per-page': limit
@@ -107,17 +168,6 @@ export default class GameListRepository {
       return null
     }
     return Converter.convertApiPaginationResponse(res.data)
-  }
-
-  static async fetchLatestWinGames(): Promise<IGameWin[]> {
-    const res = await request({
-      method: 'get',
-      url: '/api/games/game/latest-win',
-    })
-    if (res.err) {
-      return null
-    }
-    return res.data.data?.map(i => Converter.objectKeysToCamelCase(i)) ?? []
   }
 
   static async createGame(gameId: number, clientType: string, token?: string): Promise<IGameSession> {

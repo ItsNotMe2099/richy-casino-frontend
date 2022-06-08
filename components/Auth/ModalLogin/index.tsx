@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'next-i18next'
 import {Form, Formik} from 'formik'
 import Button from 'components/ui/Button'
 import InputField from 'components/ui/Inputs/InputField'
@@ -7,7 +7,7 @@ import Validator from 'utils/validator'
 import SocialButtons from 'components/Auth/SocialButtons'
 import {ModalType} from 'types/enums'
 import {useAppContext} from 'context/state'
-import {LoginFormData} from 'types/interfaces'
+import {LoginFormData, TwoFaLoginModalArguments} from 'types/interfaces'
 import FormError from 'components/ui/Form/FormError'
 import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
 import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
@@ -39,8 +39,10 @@ export default function ModalLogin(props: Props) {
       if (!res) {
         return
       }
-      if(res.is2faRequired){
-        appContext.showModal(ModalType.faLogin)
+      console.log('LoginRes', res)
+
+      if(res.is2FaRequired){
+        appContext.showModal(ModalType.faLogin, {identity: values.authInput, password: values.password} as TwoFaLoginModalArguments)
         return
       }
       const accessToken = res.token

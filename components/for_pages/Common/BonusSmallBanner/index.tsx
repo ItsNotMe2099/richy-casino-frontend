@@ -6,6 +6,8 @@ import {useAppContext} from 'context/state'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import Formatter from 'utils/formatter'
+import {useTranslation} from 'next-i18next'
+import {pluralize} from 'numeralize-ru'
 
 interface Props {
   children?: React.ReactNode
@@ -15,6 +17,7 @@ interface Props {
 }
 
 export default function BonusSmallBanner(props: Props) {
+  const {t} = useTranslation()
   const appContext = useAppContext()
   const details = appContext.bonusBannerDetails
   const expiredAt = new Date(details?.validTill)
@@ -90,16 +93,16 @@ export default function BonusSmallBanner(props: Props) {
       </VisibleXs>
       <div className={styles.content}>
         <div className={classNames(styles.left, {[styles.noMargin]: !user})}>
-          <span className={styles.title}>Бонус</span>
+          <span className={styles.title}>   {t('bonus_banner_small_title')}</span>
           <div className={styles.fs}>
-            {Formatter.formatNumber(details?.amount)} {details?.currency.toUpperCase()} + {Formatter.formatNumber(details?.freeSpins)} FS
+            {Formatter.formatNumber(details?.amount)} {details?.currency.toUpperCase()}{details?.freeSpins ? ` + ${Formatter.formatNumber(details?.freeSpins)} ${t('bonus_fs')}` : ''}
           </div>
           <div className={styles.bottom}>
           <div className={styles.satoshi}>
-            {Formatter.formatNumber(details?.lotteryTickets)} Лотерейных билетов
+            {Formatter.formatNumber(details?.lotteryTickets)} {pluralize(details?.lotteryTickets, t('bonus_lottery_1'), t('bonus_lottery_2'), t('bonus_lottery_5'))}
             </div>
             <div className={styles.satoshi}>
-              {Formatter.formatNumber(details?.freeBitcoin)} Satoshi
+              {Formatter.formatNumber(details?.freeBitcoin)} {t('bonus_satoshi')}
             </div>
           </div>
         </div>

@@ -3,12 +3,14 @@ import {useEffect, useState} from 'react'
 import {IPagination} from 'types/interfaces'
 import {IGame} from 'data/interfaces/IGame'
 import GameListRepository from 'data/repositories/GameListRepository'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
 
 }
 
 export default function GamesListLast(props: Props) {
+  const {t} = useTranslation()
   const [data, setData] = useState<IPagination<IGame>>({data: [], total: 0})
   const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(true)
@@ -31,7 +33,7 @@ export default function GamesListLast(props: Props) {
     setLoading(false)
   }
   return (
-    <GamesList title={'Последние игры'}
+    <GamesList title={t('catalog_list_last')}
                icon={'/img/Contents/all-games.svg'}
                totalItems={data?.total ?? 0}
                items={data?.data ?? []}

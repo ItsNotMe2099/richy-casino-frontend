@@ -190,6 +190,9 @@
 .gameImg{
     position: absolute;
     display: flex;
+  img{
+    width: 28px;
+  }
     @media screen and (max-width: $xs-max){
         img{
             width: 16px;
@@ -276,6 +279,7 @@
     display: flex;
     justify-content: center;
     width: 3rem;
+  white-space: nowrap;
     @media screen and (max-width: $xs-max){
         font-size: calc(10px + 0.5vw);
     }
@@ -332,4 +336,9 @@
     @media screen and (max-width: 350px){
         font-size: 0.65rem;
     }
+}
+
+.currencyIcon{
+  width: 16px;
+  height: 16px;
 }

@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'next-i18next'
 import {Form, Formik} from 'formik'
 import {CheckBox} from 'components/ui/Inputs/CheckBox'
 import {useAppContext} from 'context/state'

@@ -31,8 +31,10 @@ export default function FALogin(props: Props) {
   }
 
   const handleSubmit = async (data) => {
+    setLoading(true)
+    setError(null)
     try{
-    const res = await AuthRepository.faLogin(args.identity, args.identity, data.code)
+    const res = await AuthRepository.faLogin(args.identity, args.password, data.code)
     if (!res) {
       return
     }
@@ -65,11 +67,11 @@ export default function FALogin(props: Props) {
     <FormikProvider value={formik}>
       <Form className={styles.form}>
         <div className={styles.confirm}>
-          Код подтверждения из Google Authenticator
+          {t('2fa_login_field_code')}
         </div>
-        <InputOtpCode name={'code'} length={6} validate={Validator.required}/>
+        <InputOtpCode name={'code'} length={6} onComplete={() =>  setTimeout(() => formik.submitForm(), 400)} validate={Validator.required}/>
         <FormError error={error}/>
-        <Button type='submit' size='play' fluid background='blueGradient500' spinner={loading} className={styles.btn}>Авторизация</Button>
+        <Button type='submit' size='play' fluid background='blueGradient500' spinner={loading} className={styles.btn}>{t('2fa_login_button')}</Button>
       </Form>
     </FormikProvider>
   </div>)

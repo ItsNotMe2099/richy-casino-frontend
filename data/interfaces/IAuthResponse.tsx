@@ -5,7 +5,7 @@ interface IAuthResponse {
 }
 export  interface IAuthLoginResponse extends IAuthResponse {
   identity?: string
-  is2faRequired: boolean
+  is2FaRequired: boolean
 }
 export  interface IAuthFaLoginResponse extends IAuthResponse {
   identity?: string

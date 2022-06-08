@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import {useTranslation} from 'react-i18next'
 import {Form, Formik} from 'formik'
 import Button from 'components/ui/Button'
 import InputField from 'components/ui/Inputs/InputField'
@@ -17,6 +16,7 @@ import BottomSheetLayout from 'components/layout/BottomSheetLayout'
 import BottomSheetHeader from 'components/layout/BottomSheetHeader'
 import BottomSheetBody from 'components/layout/BottomSheetBody'
 import UserRepository from 'data/repositories/UserRepository'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
   isBottomSheet?: boolean
@@ -57,7 +57,7 @@ export default function ModalConfirmOldPhone(props: Props) {
   }
 
 
-  const { t } = useTranslation('common')
+  const { t } = useTranslation()
 
   const result = (<Formik initialValues={initialValues} onSubmit={handleSubmit}>
     {({values}) => (

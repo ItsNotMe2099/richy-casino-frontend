@@ -7,6 +7,8 @@ import {ModalType, ProfileModalType} from 'types/enums'
 import Formatter from 'utils/formatter'
 import {Routes} from 'types/routes'
 import {useMeasure} from 'react-use'
+import {useTranslation} from 'next-i18next'
+import {pluralize} from 'numeralize-ru'
 
 interface Props {
   children?: React.ReactNode
@@ -16,6 +18,7 @@ interface Props {
 }
 
 export default function BonusSlide(props: Props) {
+  const {t} = useTranslation()
   const appContext = useAppContext()
   const details = appContext.bonusBannerDetails
   const expiredAt = new Date(details?.validTill)
@@ -51,18 +54,18 @@ export default function BonusSlide(props: Props) {
       <>
       <div className={styles.downBanner} style={{marginTop: isMobile ? `${width /15}px` : `${width /30}px`}}>
         <div className={styles.title} style={{fontSize: isMobile ? `${width /16}px` : `${width /24}px` }}>
-          Бонус на депозит
+          {t('bonus_title')}
         </div>
         <div className={styles.bonus} style={{fontSize: isMobile ? `${width /10.5}px` : `${width /13}px`, marginTop: isMobile ? `${width /39}px` : `${width /50}px` }}>
           {Formatter.formatNumber(details?.amount)} {details?.currency?.toUpperCase()}
         </div>
-        <div className={styles.fs} style={{fontSize: isMobile ? `${width /22}px` : `${width /29}px` }}>
-          {Formatter.formatNumber(details?.freeSpins)} FS
-        </div>
+        {details?.freeSpins >0 && <div className={styles.fs} style={{fontSize: isMobile ? `${width /22}px` : `${width /29}px` }}>
+          {Formatter.formatNumber(details?.freeSpins)} {t('bonus_fs')}
+        </div>}
 
         <div className={styles.footerGroup}>
           <div className={styles.btnWrapper} style={{fontSize: isMobile ? `${width / 22}px` : `${width / 24}px`, marginTop: isMobile ? `${width /35}px` : `${width /60}px`}}>
-            <Button size='normal' background='payGradient500' className={styles.btn} onClick={handleClick}>Получить</Button>
+            <Button size='normal' background='payGradient500' className={styles.btn} onClick={handleClick}>{t('bonus_button_get')}</Button>
             {appContext.showBonus &&
             <div className={styles.timer}>
               <Timer minutes style={props.style === 'footer' ? 'footer' : props.style === 'sheet' ? 'sheet' : 'bonus'}
@@ -76,20 +79,20 @@ export default function BonusSlide(props: Props) {
       </div>
       <div className={styles.bottom} style={{bottom: `${width /60}px`}}>
       <div className={styles.satoshi} style={{fontSize: isMobile ? `${width / 24}px` : `${width / 42}px`}}>
-        {Formatter.formatNumber(details?.freeBitcoin)} Satoshi
+        {Formatter.formatNumber(details?.freeBitcoin)} {t('bonus_satoshi')}
       </div>
       <div className={styles.satoshi} style={{fontSize: isMobile ? `${width / 24}px` : `${width / 42}px`}}>
-        {Formatter.formatNumber(details?.lotteryTickets)} Лотерейных билетов
+        {Formatter.formatNumber(details?.lotteryTickets)} {pluralize(details?.lotteryTickets, t('bonus_lottery_1'), t('bonus_lottery_2'), t('bonus_lottery_5'))}
       </div>
     </div>
     </>
       }
       {!appContext.showBonus && <div className={styles.stub}>
         <div className={styles.stubWrapper}>
-        <div className={styles.stubTitle} style={{fontSize: `${width / 24}px`}}>The Best Provably Fair Casino
+        <div className={styles.stubTitle} style={{fontSize: `${width / 24}px`}}>{t('bonus_stub_title')}
         </div>
         <div className={styles.btnWrapper} style={{fontSize: `${width / 24}px`}}>
-        <Button href={Routes.catalog} className={styles.btn} size='normal' background='payGradient500'>Играть</Button>
+        <Button href={Routes.catalog} className={styles.btn} size='normal' background='payGradient500'>{t('bonus_stub_button_play')}</Button>
         </div>
         </div>
       </div>}

@@ -7,4 +7,9 @@ export interface ICurrency {
     isDepositAllowed: boolean
     isWithdrawalAllowed: boolean
   }
+  rateCurrencies?: {
+    [key: string]: {
+      [key: string]: number
+    }
+  }
 }

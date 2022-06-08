@@ -55,10 +55,10 @@ export default function Settings(props: Props) {
   const [isChange, setIsChange] = useState<boolean>(false)
   const [sending, setSending] = useState<boolean>(false)
   const [sending2Fa, setSending2Fa] = useState<boolean>(false)
-  const [enabled2Fa, setEnabled2Fa] = useState<boolean>(context.user.flags.is2faEnabled)
   const [error, setError] = useState(null)
   const [error2Fa, setError2Fa] = useState(null)
-
+  const enabled2Fa = context.user.flags.is2FaEnabled
+  console.log('userFlags', context.user.flags)
   const initialValues: UserFormData = {
     id: context.user.id,
     username: context.user.username,
@@ -165,12 +165,13 @@ export default function Settings(props: Props) {
       } else {
         await UserRepository.twoFaDisable()
         context.updateUserFromCookies()
+
       }
     } catch (e) {
       setError2Fa(e)
     }
     setSending2Fa(false)
-    setEnabled2Fa(enable)
+
   }
 
   return (
