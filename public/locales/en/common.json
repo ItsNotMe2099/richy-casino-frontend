@@ -1,4 +1,12 @@
 {
   "menu_bonuses": "Bonuses2",
-  "menu_casino": "Casino1"
+  "menu_casino": "Casino1",
+  "mobile_app_desktop_text": "Установи мобильное приложение и получи 10 лотерейных билетов и 1000 Satoshi.",
+  "pwa-instruction_title_ios": "iOS instruction",
+  "pwa-instruction_label_step_1": "Open in Safari",
+  "pwa-instruction_label_step_2": "Click \"Share\"",
+  "pwa-instruction_label_step_3": "Click \"Go to Home Screen\"",
+  "pwa-instruction_desc_step_1": "If you are in any other browser, open this page in the Safari browser",
+  "pwa-instruction_desc_step_2": "Tap on the \"Share\" icon in the menu at the bottom of the screen. A dialog box will open.",
+  "pwa-instruction_desc_step_3": "Tap on the item \"On the Home screen\", and click \"Finish\""
 }

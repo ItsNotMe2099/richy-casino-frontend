@@ -1,0 +1,158 @@
+@import "scss/index";
+
+.text {
+  text-align: center;
+}
+
+@import "scss/index";
+
+.root{
+
+}
+
+.header{
+  position: sticky;
+}
+
+.menu{
+  display: flex;
+  height: 54px;
+  padding: 12px 18px;
+}
+
+.logoMobile{
+  svg{
+    width: 60px;
+    height: 30px;
+  }
+}
+
+.auth{
+  display: flex;
+  padding: 0 18px;
+}
+
+.login{
+  margin-right: 6px;
+  width: 100%;
+  button{
+  width: 100%;
+  font-weight: 500;
+  font-size: 16px;
+  color: #FFFFFF;
+  }
+  @media screen and (max-width: $xs-max){
+    button{
+      font-size: 11px;
+      padding: 9px 12px;
+    }
+  }
+}
+
+.reg{
+  margin-right: 11px;
+  width: 100%;
+  button{
+    width: 100%;
+    font-weight: 500;
+    font-size: 16px;
+    color: #FFFFFF;
+    img{
+      margin-right: 14px;
+      @media screen and (max-width: $xs-max){
+        width: 16px;
+        margin-right: 5px;
+      }
+    }
+    }
+    @media screen and (max-width: $xs-max){
+      margin-right: 0;
+      button{
+        font-size: 11px;
+        padding: 9px 7px 7px 8px;
+      }
+    }
+}
+
+.back{
+  align-items: center;
+  color: #fff;
+  display: flex;
+  height: 35px;
+  margin: 5px 0;
+  padding: 0 15px;
+  user-select: none;
+}
+
+.backPage{
+  font-size: 13px;
+}
+
+.backIcon{
+  font-size: 13px;
+  width: 1em;
+  height: 1em;
+  fill: #fff;
+  margin-right: .5em;
+}
+
+.instruction{
+  padding: 0 15px;
+  color: #fff;
+}
+
+.instructionTitle{
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.04;
+  margin-bottom: 21px;
+}
+
+.steps{
+  counter-reset: steps;
+}
+
+.step{
+  margin-bottom: 15px;
+  display: flex;
+  counter-increment: steps;
+}
+
+.count{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 23px;
+  height: 23px;
+  background-image: linear-gradient(270deg, #82D54F -6.01%, #A4FE6B 114.87%);;
+  margin-right: 10px;
+  flex-shrink: 0;
+  &::before{
+    content: counters(steps,".");
+  }
+}
+
+.stepTitle{
+  font-size: 14px;
+  font-weight: 600;
+  position: relative;
+  margin: 4px 0 8px;
+  min-height: 20px;
+}
+
+.stepText{
+  font-size: 13px;
+  line-height: 1.31;
+  color: #fff;
+}
+
+.video{
+  margin-top: 15px;
+  border-radius: 12px;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}

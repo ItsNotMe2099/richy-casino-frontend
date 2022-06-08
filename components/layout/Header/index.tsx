@@ -62,6 +62,10 @@ export default function Header(props: Props) {
     setCurrent(item)
   }
 
+  const handleAppClick = () => {
+      context.showModal(ModalType.mobileApp)
+  }
+
 
 
 
@@ -74,7 +78,7 @@ export default function Header(props: Props) {
               {/*<div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>*/}
               <div className={styles.btn}><Button size='extraSmall' background='dark700' onClick={() => pwaContext.install()}><img
                 src='/img/layout/top/android.svg' alt=''/></Button></div>
-              <Button size='extraSmall' background='dark700' onClick={() => pwaContext.install()}><img src='/img/layout/top/apple.svg' alt=''/></Button>
+              <Button size='extraSmall' background='dark700' onClick={handleAppClick}><img src='/img/layout/top/apple.svg' alt=''/></Button>
             </div>
             <div className={styles.bonuses}>
               <Link href={Routes.bonuses}>

@@ -27,6 +27,7 @@ import ProfileModalNew from 'components/Profile/layout/ProfileModalNew'
 import ModalConfirmOldPhone from 'components/Profile/ModalConfirmOldPhone'
 import ModalConfirmNewPhone from 'components/Profile/ModalConfirmNewPhone'
 import FALogin from 'components/Profile/FALogin'
+import MobileAppModal from 'components/ui/MobileAppModal'
 
 interface Props {
 }
@@ -137,6 +138,9 @@ export default function ModalContainer(props: Props) {
             key={19}  isOpen={context.modal === ModalType.faLogin} {...commonSettings}
           >
             {context.modal === ModalType.faLogin && <FALogin/>}
+          </ProfileModalNew>
+          <ProfileModalNew key={13} size={'small'} isOpen={context.modal === ModalType.mobileApp} {...commonSettings}>
+            {context.modal === ModalType.mobileApp && <MobileAppModal/>}
           </ProfileModalNew>
         </div>
       )}

@@ -374,5 +374,13 @@
   "withdraw_type_change": "Изменить",
   "withdraw_type_choose": "Выберите метод вывода",
   "withdraw_type_crypto": "Криптовалюта",
-  "withdraw_type_title": "Способ пополнения"
+  "withdraw_type_title": "Способ пополнения",
+  "mobile_app_desktop_text": "Установи мобильное приложение и получи 10 лотерейных билетов и 1000 Satoshi.",
+  "pwa-instruction_title_ios": "Инструкция для IOS",
+  "pwa-instruction_label_step_1": "Откройте в Safari",
+  "pwa-instruction_label_step_2": "Нажмите «Поделиться»",
+  "pwa-instruction_label_step_3": "Нажмите «На экран Домой»",
+  "pwa-instruction_desc_step_1": "Если вы находитесь в каком либо другом браузере, откройте данную страницу в браузере Safari",
+  "pwa-instruction_desc_step_2": "Тапните на иконку «Поделиться» в меню в нижней части экрана. Откроется диалоговое окно.",
+  "pwa-instruction_desc_step_3": "Тапните на пункт «На экран Домой», и нажмите «Готово»"
 }

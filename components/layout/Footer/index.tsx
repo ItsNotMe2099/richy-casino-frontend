@@ -15,8 +15,10 @@ import SupportButton from 'components/for_pages/Common/SupportButton'
 import {useAppContext} from 'context/state'
 import {format} from 'date-fns'
 import {useTranslation} from 'next-i18next'
-import {BonusDepositShowMode} from 'types/enums'
+import {BonusDepositShowMode, ModalType} from 'types/enums'
 import {usePwaContext} from 'context/pwa_state'
+import { isDesktop } from 'react-device-detect'
+import { isMobile } from 'mobile-device-detect'
 
 interface Props {
   children?: React.ReactNode
@@ -90,6 +92,15 @@ export default function Footer(props: Props) {
 
   const { route: currentRoute, asPath: currentPath } = useRouter()
 
+  const handleAppClick = () => {
+    if(isDesktop){
+      appContext.showModal(ModalType.mobileApp)
+    }
+    else if(isMobile){
+      appContext.showBottomSheet(ModalType.mobileApp)
+    }
+  }
+
   return (
     <div className={styles.root} style={{
       paddingBottom: `${(appContext.auth  ? 81 : 0) + (appContext.showBonus && appContext.bonusShowMode === BonusDepositShowMode.Spoiler ? 20 : 0)}px`
@@ -134,7 +145,7 @@ export default function Footer(props: Props) {
             </div>
             <div className={styles.btns}>
               <SupportButton className={styles.support}/>
-              <div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/apple.svg' alt=''/></Button></div>
+              <div className={styles.btn}><Button size='extraSmall' background='dark700' onClick={handleAppClick}><img src='/img/layout/top/apple.svg' alt=''/></Button></div>
               <Button size='extraSmall' background='dark700' onClick={() => pwaContext.install()}><img src='/img/layout/top/android.svg' alt=''/></Button>
             </div>
             </div>
@@ -183,7 +194,7 @@ export default function Footer(props: Props) {
               <div style={{flex: 1}}>
               <SupportButton className={styles.support}/>
               </div>
-              <div className={styles.btn}><Button size='extraSmall' background='dark700' onClick={() => pwaContext.install()}><img src='/img/layout/top/apple.svg' alt=''/></Button></div>
+              <div className={styles.btn}><Button size='extraSmall' background='dark700' onClick={handleAppClick}><img src='/img/layout/top/apple.svg' alt=''/></Button></div>
               <Button size='extraSmall' background='dark700' onClick={() => pwaContext.install()}><img src='/img/layout/top/android.svg' alt=''/></Button>
             </div>
         </div>
