@@ -10,6 +10,7 @@ import UserUtils from 'utils/user'
 import {PaymentSeparator} from 'components/Profile/Wallet/PaymentSeparator'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import {useAppContext} from 'context/state'
+import Formatter from 'utils/formatter'
 interface Props {
   response:  IDepositCryptoResponse
   method: PaymentMethod
@@ -31,7 +32,7 @@ export default function StepCrypto(props: Props) {
         </div>
         <div className={styles.choose}>{t('wallet_qr_sum')}</div>
         <div className={styles.input}>
-          {props.response.amount} <span>{props.response.currencyIso?.toUpperCase()}</span>
+          {Formatter.formatAmount(props.response.amount, props.currency?.iso)} <span>{props.response.currencyIso?.toUpperCase()}</span>
         </div>
         <div className={styles.choose2}><span>{props.response.currencyIso?.toUpperCase()}</span>{props.currency?.iso?.toUpperCase()} {t('wallet_qr_wallet')}</div>
         <div className={styles.input2}>

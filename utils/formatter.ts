@@ -58,5 +58,44 @@ export default class Formatter {
     return num?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
   }
 
+  static formatAmount(amount: number, currency: string){
+    const convertFiat = (amount) => {
+      if(amount < 0.0000001){
+        return amount.toFixed(8)
+      }else if(amount < 0.000001){
+        return amount.toFixed(7)
+      }else if(amount < 0.00001){
+        return amount.toFixed(6)
+      }else if(amount < 0.0001){
+        return amount.toFixed(5)
+      }else if(amount < 0.001){
+        return amount.toFixed(4)
+      }else if(amount < 0.01){
+        return amount.toFixed(3)
+      }else{
+        return amount.toFixed(2)
+      }
+    }
+    const isCrypto = ['ADA',
+      'BCH',
+      'BNB',
+      'BSV',
+      'BTC',
+      'XBT',
+      'DASH',
+      'DOGE',
+      'EOS',
+      'ETH',
+      'LTC',
+      'VTC',
+      'XLM',
+      'XMR',
+      'XNO',
+      'XRP',
+      'XTZ',
+      'ZEC'].includes(currency.toUpperCase())
+    return isCrypto ? amount.toFixed(8).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1') : convertFiat(amount).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')
+  }
+
 }
 export const pad = Formatter.pad

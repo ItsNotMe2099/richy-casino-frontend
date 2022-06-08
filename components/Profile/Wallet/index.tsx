@@ -12,11 +12,12 @@ import BonusSmallBanner from 'components/for_pages/Common/BonusSmallBanner'
 import StepCrypto from 'components/Profile/Wallet/StepCrypto'
 import {IDepositCryptoResponse, IDepositResponse} from 'data/interfaces/IPaymentDeposit'
 import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
-import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
 import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 import BottomSheetLayout from 'components/layout/BottomSheetLayout'
 import BottomSheetBody from 'components/layout/BottomSheetBody'
 import BottomSheetHeader from 'components/layout/BottomSheetHeader'
+import {WalletHeader} from 'components/Profile/Wallet/WalletHeader'
+import ModalFooterTwoFa from 'components/Profile/layout/ModalFooterTwoFa'
 
 
 enum PaymentStep {
@@ -114,24 +115,28 @@ export default function Wallet(props: Props) {
 
       {step === PaymentStep.Method && <StepMethod onChange={handlePaymentMethod}/>}
       {step === PaymentStep.Currency && <StepCurrency method={method} onChange={handleCurrencyMethod} onSetStep={handleSetStep}/>}
-      {step === PaymentStep.Form && <StepForm currency={currency} method={method} onSubmit={handleSubmit} onSetStep={handleSetStep}/>}
       {step === PaymentStep.Success && <StepCrypto currency={currency} method={method} response={depositResponse as IDepositCryptoResponse}/>}
     </div>
   )
+  if(step === PaymentStep.Form){
+    return <StepForm isBottomSheet={props.isBottomSheet} currency={currency} method={method} onSubmit={handleSubmit} onSetStep={handleSetStep} onBackClick={handleBack}/>
+  }
   if (props.isBottomSheet) {
     return (<BottomSheetLayout>
+      <WalletHeader isBottomSheet/>
       <BottomSheetHeader className={styles.mobileHeader} title={t('wallet_title')}  suffix={ <div className={styles.userId}>ID {context.user?.id}</div>}/>
       <BottomSheetBody className={styles.sheetBody}>
         {result}
       </BottomSheetBody>
-
+      {step === PaymentStep.Success && <ModalFooterTwoFa/>}
     </BottomSheetLayout>)
   } else {
     return (<ProfileModalLayout fixed>
-        <ProfileModalHeader title={t('wallet_title')} showId  showBack={step !== PaymentStep.Method} onBackClick={step !== PaymentStep.Method ? handleBack : null}></ProfileModalHeader>
+        <WalletHeader showBack={step !== PaymentStep.Method} onBackClick={step !== PaymentStep.Method ? handleBack : null}/>
         <ProfileModalBody fixed>
           {result}
         </ProfileModalBody>
+        {step === PaymentStep.Success && <ModalFooterTwoFa/>}
       </ProfileModalLayout>
     )
   }

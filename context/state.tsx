@@ -39,6 +39,7 @@ interface IState {
   setBonusShowMode: (show: BonusDepositShowMode) => void,
   bonusBannerDetails: IBonusBannerDetails | null
   fetchDefaultCurrency: () => Promise<ICurrency>,
+  updateCurrencies: () => void
   updatePromoCodes: () => void
   currencies: ICurrency[]
   defaultCurrency: ICurrency | null
@@ -67,6 +68,7 @@ const defaultValue: IState = {
   setToken: (token) => null,
   logout: () => null,
   updateUserFromCookies: () => null,
+  updateCurrencies: () => null,
   updatePromoCodes: () => null,
   fetchDefaultCurrency: async () => null,
   showBonus: false,
@@ -198,6 +200,9 @@ export function AppWrapper(props: Props) {
       const res =  await InfoRepository.getCurrencyByCountry()
       setDefaultCurrency(res)
       return res
+    },
+    updateCurrencies: () => {
+      InfoRepository.getCurrencies().then(i => setCurrencies(i))
     }
 
   }

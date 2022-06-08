@@ -4,6 +4,7 @@
 }
 .input{
   margin-bottom: 10px;
+
   @media screen and (max-width: $xs-max){
     margin-bottom: 8px;
   }
@@ -12,6 +13,7 @@
     font-weight: 500;
     font-size: 16px;
     background-color: $dark600;
+    padding-left: 27px !important;
   }
 }
 .options{
@@ -45,3 +47,16 @@
 
 }
 
+.prefix{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: $white;
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: -1px;
+}
