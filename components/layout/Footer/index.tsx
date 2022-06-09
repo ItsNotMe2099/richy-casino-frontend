@@ -92,12 +92,15 @@ export default function Footer(props: Props) {
 
   const { route: currentRoute, asPath: currentPath } = useRouter()
 
-  const handleAppClick = () => {
+  const handleAppClick = (apple: boolean = false) => {
     if(isDesktop){
       appContext.showModal(ModalType.mobileApp)
     }
-    else if(isMobile){
+    else if(isMobile && apple){
       appContext.showBottomSheet(ModalType.mobileApp)
+    }
+    else if(isMobile && !apple){
+      pwaContext.install()
     }
   }
 
@@ -145,8 +148,8 @@ export default function Footer(props: Props) {
             </div>
             <div className={styles.btns}>
               <SupportButton className={styles.support}/>
-              <div className={styles.btn}><Button size='extraSmall' background='dark700' onClick={handleAppClick}><img src='/img/layout/top/apple.svg' alt=''/></Button></div>
-              <Button size='extraSmall' background='dark700' onClick={() => pwaContext.install()}><img src='/img/layout/top/android.svg' alt=''/></Button>
+              <div className={styles.btn}><Button size='extraSmall' background='dark700' onClick={() => handleAppClick(true)}><img src='/img/layout/top/apple.svg' alt=''/></Button></div>
+              <Button size='extraSmall' background='dark700' onClick={() => handleAppClick()}><img src='/img/layout/top/android.svg' alt=''/></Button>
             </div>
             </div>
             <div className={styles.list}>
@@ -194,8 +197,8 @@ export default function Footer(props: Props) {
               <div style={{flex: 1}}>
               <SupportButton className={styles.support}/>
               </div>
-              <div className={styles.btn}><Button size='extraSmall' background='dark700' onClick={handleAppClick}><img src='/img/layout/top/apple.svg' alt=''/></Button></div>
-              <Button size='extraSmall' background='dark700' onClick={() => pwaContext.install()}><img src='/img/layout/top/android.svg' alt=''/></Button>
+              <div className={styles.btn}><Button size='extraSmall' background='dark700' onClick={() => handleAppClick(true)}><img src='/img/layout/top/apple.svg' alt=''/></Button></div>
+              <Button size='extraSmall' background='dark700' onClick={() => handleAppClick()}><img src='/img/layout/top/android.svg' alt=''/></Button>
             </div>
         </div>
         <div className={styles.sliders}>
