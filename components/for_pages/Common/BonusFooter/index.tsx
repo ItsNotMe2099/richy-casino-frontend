@@ -77,13 +77,13 @@ export default function BonusFooter(props: Props) {
       </>
       }
       {appContext.showBonus && <div className={styles.downBanner}>
-        <div className={styles.title}>
+        <div className={styles.title} style={{fontSize: `${width / 41}px`}}>
           {t('bonus_title')}
         </div>
-        <div className={styles.bonus}>
+        <div className={styles.bonus} style={{fontSize: `${width / 22}px`}}>
           {Formatter.formatNumber(details?.amount)} {details?.currency?.toUpperCase()}
         </div>
-        {details?.freeSpins > 0 && <div className={styles.fs}>
+        {details?.freeSpins > 0 && <div className={styles.fs} style={{fontSize: `${width / 51}px`}}>
           {Formatter.formatNumber(details?.freeSpins)} {t('bonus_fs')}
         </div>}
         <div className={styles.footerGroup}>
@@ -91,17 +91,21 @@ export default function BonusFooter(props: Props) {
             <Button size='normal' background='payGradient500' className={styles.btn} onClick={handleClick}>{t('bonus_button_get')}</Button>
             {appContext.showBonus &&
             <div className={styles.timer}>
-              <Timer minutes style={props.style === 'footer' ? 'footer' : props.style === 'sheet' ? 'sheet' : 'bonus'}
+              <Timer minutes style={'footer'}
+              fontSize={`${width /54}px`}  rootPadding={`${width /108}px`}
+              inputHeight={`${width /35}px`}
+              inputWidth={`${width /35}px`}
+              circle={`${width /250}px`}
                      expiredAt={expiredAt}/>
             </div>
             }
           </div>
           <div>
             <div className={styles.bottom}>
-              <div className={styles.satoshi}>
+              <div className={styles.satoshi} style={{fontSize: `${width / 75}px`}}>
                 {Formatter.formatNumber(details?.freeBitcoin)} {t('bonus_satoshi')}
               </div>
-              <div className={styles.satoshi}>
+              <div className={styles.satoshi} style={{fontSize: `${width / 75}px`}}>
                 {Formatter.formatNumber(details?.lotteryTickets)} {pluralize(details?.lotteryTickets, t('bonus_lottery_1'), t('bonus_lottery_2'), t('bonus_lottery_5'))}
 
               </div>

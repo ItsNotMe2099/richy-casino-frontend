@@ -34,7 +34,7 @@ export default function StepCrypto(props: Props) {
         <div className={styles.input}>
           {Formatter.formatAmount(props.response.amount, props.currency?.iso)} <span>{props.response.currencyIso?.toUpperCase()}</span>
         </div>
-        <div className={styles.choose2}><span>{props.response.currencyIso?.toUpperCase()}</span>{props.currency?.iso?.toUpperCase()} {t('wallet_qr_wallet')}</div>
+        <div className={styles.choose2}><span>{props.response.currencyIso?.toUpperCase()}</span> {t('wallet_qr_wallet')}</div>
         <div className={styles.input2}>
           <div className={styles.forFill}>{props.response.wallet}</div>
           <div className={styles.copy} onClick={() => {navigator.clipboard.writeText(props.response.wallet)}}>
