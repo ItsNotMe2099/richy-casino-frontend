@@ -46,10 +46,16 @@ export default function Games(props: Props) {
     slidesToScroll: 1,
     variableWidth: false,
     adaptiveHeight: false,
-    slidesToShow: 6,
+    slidesToShow: 8,
     arrows: false,
     beforeChange: (current: number, next: number) => setCurrentIndex(next),
     responsive: [
+      {
+        breakpoint: 1360,
+        settings: {
+          slidesToShow: 6,
+        }
+      },
       {
         breakpoint: 570,
         settings: {
