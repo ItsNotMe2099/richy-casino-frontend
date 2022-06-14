@@ -178,6 +178,9 @@
     display: none;
   }
   .timer{
+    .separator{
+      margin: 6px;
+    }
     .separator:nth-child(4){
       display: none;
     }

@@ -16,6 +16,7 @@ interface Props {
   rootPadding?: string
   inputWidth?: string
   inputHeight?: string
+  circle?: string
 }
 
 export default function Timer(props: Props) {
@@ -68,8 +69,8 @@ export default function Timer(props: Props) {
         </div>
       </div>
       <div className={styles.separator}>
-        <div className={styles.circle}></div>
-        <div className={styles.circle}></div>
+        <div className={styles.circle} style={{...(props.circle ?  {width: props.circle, height: props.circle} : {})}}></div>
+        <div className={styles.circle} style={{...(props.circle ?  {width: props.circle, height: props.circle} : {})}}></div>
       </div>
       <div className={styles.minutes}>
         <div className={styles.input} style={{...(props.fontSize ? {fontSize: props.fontSize, width: props.inputWidth ? props.inputWidth : null, height: props.inputHeight ? props.inputHeight : null} : {})}}>
