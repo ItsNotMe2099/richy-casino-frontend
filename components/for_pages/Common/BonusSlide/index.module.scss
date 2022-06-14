@@ -44,6 +44,7 @@
 }
 .wrapper{
   @media screen and (max-width: $mobile-max){
+    height: 100%;
     padding: 0 5px;
   }
 }

@@ -168,11 +168,12 @@
   flex-direction: column;
   text-align: center;
   padding: 0;
+  height: 100%;
 }
 
 .sheet{
   :global .react-modal-sheet-container {
-    height: 190px !important;
+    height: 55vw !important;
     background: linear-gradient(46.89deg, #4A16E4 2.09%, #933288 11.47%, #C1444E 32.44%, #FF5C00 108.03%);
     border-top-right-radius: 18px !important;
     border-top-left-radius: 18px !important;
