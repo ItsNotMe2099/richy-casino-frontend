@@ -15,6 +15,7 @@ import Fortune from 'components/Fortune'
 import BottomSheetLayout from 'components/layout/BottomSheetLayout'
 import ProfileBurger from 'components/ui/ProfileBurger'
 import FALogin from 'components/Profile/FALogin'
+import MobileAppModal from 'components/ui/MobileAppModal'
 
 
 interface Props {}
@@ -118,7 +119,13 @@ export default function BottomSheetContainer(props: Props) {
             </BottomSheetLayout>
           )}
         </Sheet>
-
+        <Sheet
+          isOpen={appContext.bottomSheet == ModalType.mobileApp}
+          onClose={appContext.hideBottomSheet}
+          snapPoints={[720]}
+        >
+          {appContext.bottomSheet == ModalType.mobileApp && <MobileAppModal isBottomSheet={true} />}
+        </Sheet>
 
       </div>
     </RemoveScroll>

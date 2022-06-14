@@ -11,7 +11,8 @@ export enum ModalType {
   profileBurger = 'profileBurger',
   createGame = 'createGame',
   opponents = 'opponents',
-  faLogin = 'faLogin'
+  faLogin = 'faLogin',
+  mobileApp = 'mobileApp'
 }
 
 export enum ProfileModalType {
