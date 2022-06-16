@@ -89,7 +89,7 @@ export default function TopSlider(props: Props) {
           <BonusSlide className={styles.bonusSlideMobile}/>
             {appContext.banners.map((item, index) => <div className={styles.rootSlide} key={index}>
                  <div className={styles.item} key={item.id}>
-                   {(item.imageMobileUrl || item.imageDesktopUrl) && <Image src={item.imageMobileUrl || item.imageDesktopUrl} layout={'fill'}/>}
+                   {(item.imageDesktopUrl || item.imageMobileUrl) && <Image src={appContext.isMobile ? item.imageMobileUrl || item.imageDesktopUrl : item.imageDesktopUrl || item.imageMobileUrl}  layout={'fill'}/>}
 
                    <div className={styles.left}>
                     <div className={styles.label} style={{fontSize: `${width / 24}px`}}>

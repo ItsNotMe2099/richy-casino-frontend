@@ -29,7 +29,7 @@ export default function Bonuses(){
             <BonusSlide/>
             {context.banners.map((item, index) => <div className={styles.rootSlide} key={index}>
             <div className={styles.item}>
-          {(item.imageDesktopUrl || item.imageMobileUrl) && <Image src={item.imageDesktopUrl || item.imageMobileUrl} layout={'fill'}/>}
+          {(item.imageDesktopUrl || item.imageMobileUrl) && <Image src={isMobile ? item.imageMobileUrl || item.imageDesktopUrl : item.imageDesktopUrl || item.imageMobileUrl}  layout={'fill'}/>}
 
           <div className={styles.left}>
           <div className={classNames(styles.label, {[styles.second]: index > 0})} style={{fontSize: isMobile ? `${width / 24}px` : `${width / 54}px`}}>

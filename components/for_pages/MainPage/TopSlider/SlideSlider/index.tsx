@@ -80,7 +80,7 @@ export default function SlideSlider(props: Props) {
         {props.items.map((item, index) =>
 
         <div key={index} className={styles.item}>
-          {(item.imageDesktopUrl || item.imageMobileUrl) && <Image src={item.imageDesktopUrl || item.imageMobileUrl} layout={'fill'}/>}
+          {(item.imageDesktopUrl || item.imageMobileUrl) && <Image src={context.isMobile ? item.imageMobileUrl || item.imageDesktopUrl : item.imageDesktopUrl || item.imageMobileUrl}  layout={'fill'}/>}
 
           <div className={styles.left}>
           <div className={classNames(styles.label, {[styles.second]: index > 0})} style={{fontSize: `${width / 24}px`}}>
