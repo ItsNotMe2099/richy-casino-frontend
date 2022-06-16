@@ -45,7 +45,7 @@
 .wrapper{
   @media screen and (max-width: $mobile-max){
     height: 100%;
-    padding: 0px;
+    padding: 0px 5px;
   }
 }
 .btn{
@@ -114,12 +114,19 @@
     width: 100%;
   }
 }
+.modal{
+  .close{
+    top: 12px;
+    right: 15px;
+  }
+}
 .sheet{
   background: transparent;
   border-radius: 0;
   padding: 12px 0 10px 17px;
   max-height: none;
   min-height: auto;
+  margin: 0px -5px;
   @media screen and (max-width: $xs-max){
     width: auto;
     .timer{
