@@ -14,10 +14,6 @@
 }
 
 .slider{
-  
-  @media screen and (max-width: $sm-min){
-    height: 167px;
-  }
   position: relative;
 }
 
@@ -30,8 +26,9 @@
 
   @media screen and (max-width: $sm-min){
     position: absolute;
-    right: -5px;
+    right: 0px;
     z-index: 1;
+    overflow: hidden;
   }
 
 }
@@ -185,7 +182,7 @@ overflow: hidden;
   }
 }
 .bonusSlideMobile{
-  
+
 }
 
 .spin{

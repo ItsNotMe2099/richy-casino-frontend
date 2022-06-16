@@ -1,5 +1,7 @@
 FROM node:lts-alpine
 
+RUN npm install -g npm@8.4.0
+
 # Setting working directory. All the path will be relative to WORKDIR
 WORKDIR /usr/src/app
 

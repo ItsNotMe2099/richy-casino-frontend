@@ -66,8 +66,8 @@ export default function Header(props: Props) {
           </div>
           {props.allLink && <Link href={props.allLink}>
             <a className={styles.all}>
-              <VisibleXs><>{t('catalog_header_all')}</></VisibleXs>
-               <HiddenXs><>{t('catalog_header_all_games')}</></HiddenXs>
+              <VisibleXs>{t('catalog_header_all')}</VisibleXs>
+               <HiddenXs>{t('catalog_header_all_games')}</HiddenXs>
             </a>
           </Link>}
 
