@@ -15,7 +15,6 @@ import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
 import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 import BottomSheetLayout from 'components/layout/BottomSheetLayout'
 import BottomSheetBody from 'components/layout/BottomSheetBody'
-import BottomSheetHeader from 'components/layout/BottomSheetHeader'
 import {WalletHeader} from 'components/Profile/Wallet/WalletHeader'
 import ModalFooterTwoFa from 'components/Profile/layout/ModalFooterTwoFa'
 
@@ -124,7 +123,6 @@ export default function Wallet(props: Props) {
   if (props.isBottomSheet) {
     return (<BottomSheetLayout>
       <WalletHeader isBottomSheet/>
-      <BottomSheetHeader className={styles.mobileHeader} title={t('wallet_title')}  suffix={ <div className={styles.userId}>ID {context.user?.id}</div>}/>
       <BottomSheetBody className={styles.sheetBody}>
         {result}
       </BottomSheetBody>
