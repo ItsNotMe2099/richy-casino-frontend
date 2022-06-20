@@ -2,6 +2,7 @@ import {IField, IOption} from 'types/interfaces'
 import styles from './index.module.scss'
 import { SelectField } from 'components/ui/Inputs/SelectField'
 import classNames from 'classnames'
+import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
 
 export interface ICustomSelectViewOption extends IOption<string>{
 
@@ -24,9 +25,8 @@ const Symbol = (props: PropsOption) => {
   return (
   <>
   {props.separator && <div className={styles.separator}/>}
-  <div className={styles.symbol}>
-    <img src={props.option?.symbol as string} alt=''/>
-  </div>
+
+    <CurrencySvg className={styles.symbol} currencyIso={props.option.value}/>
   </>
   )
 }
@@ -57,7 +57,7 @@ const Placeholder = (props: PropsOption) => {
 export const ExchangeCurrencySelectField = (props: Props) => {
 
   return (
-  <SelectField className={props.className} options={props.options}  name={props.name} currentItemStyle={styles.current}
+  <SelectField className={styles.root} options={props.options}  name={props.name} currentItemStyle={styles.current}
     itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
     activeComponent={(option ,isActive) => <Placeholder option={option} isActive={isActive}/>}
   />

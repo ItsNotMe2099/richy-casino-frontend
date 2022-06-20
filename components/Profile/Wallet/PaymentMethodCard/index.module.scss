@@ -54,11 +54,12 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    grid-gap: 0px 7px;
+    grid-gap: 0px 0px;
     height: 43px;
     .label{
       color: $white;
       font-size: 14px;
+      margin-left: 5px;
     }
   }
 

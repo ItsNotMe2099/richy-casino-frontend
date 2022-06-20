@@ -1,8 +1,16 @@
 @import "scss/index";
 
 .root{
-
+  padding: 0px 16px 0px 0 !important;
+  background-color: $dark600 !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  @media screen and (max-width: $xs-max){
+    background-color: $dark700 !important;
+  }
+  height: 53px;
 }
+
 
 .option{
   padding: 7px 19px;
@@ -36,6 +44,8 @@
 .placeholder{
   display: flex;
   align-items: center;
+  flex: 1
+
 }
 
 .group{

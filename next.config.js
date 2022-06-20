@@ -28,7 +28,7 @@ module.exports = {
     PROD: process.env.NODE_ENV !== 'development',
   },
   images: {
-    domains: ['stage-backend.richy.casino', 'backend.richy.casino'],
+    domains: ['stage-backend.richy.casino', 'api.richy-trk.com'],
     formats: ['image/webp'],
   },
   async rewrites() {

@@ -6,11 +6,10 @@ import {PaymentOptions} from 'components/Profile/Wallet/PaymentOptions'
 import {PaymentMethodSelected} from 'components/Profile/Wallet/PaymentMethodSelected'
 import {PaymentMethod} from 'types/interfaces'
 import {PaymentMethodCard} from 'components/Profile/Wallet/PaymentMethodCard'
-import UserUtils from 'utils/user'
 import {PaymentSeparator} from 'components/Profile/Wallet/PaymentSeparator'
 import {ICurrency} from 'data/interfaces/ICurrency'
-import {useAppContext} from 'context/state'
 import Formatter from 'utils/formatter'
+import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
 interface Props {
   response:  IDepositCryptoResponse
   method: PaymentMethod
@@ -20,12 +19,12 @@ interface Props {
 
 export default function StepCrypto(props: Props) {
   const {t} = useTranslation()
-  const context = useAppContext()
+  console.log('Iso111', props.currency.iso)
  return (
       <div className={styles.root}>
         <PaymentOptions>
           <PaymentMethodSelected method={props.method}/>
-          <PaymentMethodCard icon={UserUtils.getCurrencyIcon(props.currency.iso)} label={props.currency.name} selected/>
+          <PaymentMethodCard icon={<CurrencySvg currencyIso={props.currency.iso} color/>} label={props.currency.name} selected/>
         </PaymentOptions>
         <div className={styles.separator}>
         <PaymentSeparator/>

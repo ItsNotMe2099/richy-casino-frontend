@@ -9,7 +9,6 @@ import {PaymentMethod, PaymentStep} from 'types/interfaces'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import {PaymentOptions} from 'components/Profile/Wallet/PaymentOptions'
 import {PaymentMethodCard} from 'components/Profile/Wallet/PaymentMethodCard'
-import UserUtils from 'utils/user'
 import PaymentsRepository from 'data/repositories/PaymentsRepository'
 import FormError from 'components/ui/Form/FormError'
 import {IDepositResponse} from 'data/interfaces/IPaymentDeposit'
@@ -27,6 +26,7 @@ import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 import ProfileModalFooter from 'components/Profile/layout/ProfileModalFooter'
 import {WalletHeader} from 'components/Profile/Wallet/WalletHeader'
 import BonusSmallBanner from 'components/for_pages/Common/BonusSmallBanner'
+import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
 
 
 interface Props {
@@ -74,7 +74,7 @@ export default function StepForm(props: Props) {
       {context.showBonus && <BonusSmallBanner style='wallet'/>}
       <PaymentOptions>
         <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>
-        <PaymentMethodCard icon={UserUtils.getCurrencyIcon(props.currency.iso)} label={props.currency.name} selected
+        <PaymentMethodCard icon={<CurrencySvg currencyIso={props.currency.iso} color/>} label={props.currency.name} selected
                            onClick={() => props.onSetStep(PaymentStep.Currency)}/>
       </PaymentOptions>
       {!context.isMobile && <PaymentSeparator/>}

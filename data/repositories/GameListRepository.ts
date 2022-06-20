@@ -6,7 +6,7 @@ import {IGameCategory} from 'data/interfaces/IGameCategory'
 import {IGame} from 'data/interfaces/IGame'
 import {IGameWin} from 'data/interfaces/IGameWin'
 import {IGameSession} from 'data/interfaces/IGameSession'
-import {RICHY_CATEGORY_ID} from 'types/constants'
+import {RICHY_CATEGORY_NAME} from 'types/constants'
 import {IGameHistory} from 'data/interfaces/IGameHistory'
 import {format, subDays} from 'date-fns'
 
@@ -44,7 +44,7 @@ export default class GameListRepository {
     }
     return Converter.convertApiPaginationResponse(res.data)
   }
-  static async fetchGames({name, providerId, categoryId}: {name?: string, providerId?: number, categoryId?: number} = {}, page: number = 1, limit: number = 1000): Promise<IPagination<IGame>> {
+  static async fetchGames({name, providerId, categoryId, providerInternalName}: {name?: string, providerId?: number, categoryId?: number, providerInternalName?: string} = {}, page: number = 1, limit: number = 1000): Promise<IPagination<IGame>> {
     const res = await request({
       method: 'get',
       url: '/api/games/game',
@@ -52,6 +52,8 @@ export default class GameListRepository {
         ...(name ? {name} : {}),
         ...(providerId ? {provider_id: providerId} : {}),
         ...(categoryId ? {category_id: categoryId} : {}),
+        ...(providerInternalName ? {providerInternalName} : {}),
+
         page,
         'per-page': limit
       }
@@ -186,7 +188,7 @@ export default class GameListRepository {
   }
 
   static async fetchRichy(page: number = 1, limit: number = 1000): Promise<IPagination<IGame>> {
-    return this.fetchGames({categoryId: RICHY_CATEGORY_ID}, page, limit)
+    return this.fetchGames({providerInternalName: RICHY_CATEGORY_NAME}, page, limit)
   }
 
   static async createGameDemo(gameId: number, clientType: string, token?: string): Promise<IGameSession> {
