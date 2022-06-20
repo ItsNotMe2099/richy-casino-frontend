@@ -103,7 +103,10 @@
 
 .fund{
   display: flex;
-  margin-top: 30px;
+  margin-top: 45px;
+  @media screen and (max-width: 350px){
+    margin-top: 30px;
+  }
 }
 
 .prize{
@@ -262,13 +265,16 @@
 
 .btnMobile{
   margin-top: 6px;
-  height: 30px;
+  height: 45px;
   width: 100%;
   color: $white;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 12px;
   margin-bottom: 4px;
   border-radius: 3px;
+  @media screen and (max-width: 350px){
+    height: 30px;
+  }
 }
 
 .leftMobile{
@@ -285,6 +291,7 @@
   flex-direction: column;
   justify-content: center;
   padding-right: 9px;
+  width: 45%;
 }
 
 .coins{
