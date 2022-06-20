@@ -23,7 +23,6 @@ export default function CatalogPage(props: Props) {
 
 export const getServerSideProps = async (context) => {
   const gameId = parseInt(context.query.id as string, 10)
-  console.log('Demo', context.query)
   const ua = context.req ? context.req?.headers['user-agent'] : navigator.userAgent
   const {isMobile} = ua ? getSelectorsByUserAgent(ua) : {isMobile: false}
   const token = context.req.cookies[CookiesType.accessToken]

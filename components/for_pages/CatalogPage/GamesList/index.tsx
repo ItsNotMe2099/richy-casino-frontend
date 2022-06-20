@@ -22,6 +22,7 @@ interface Props {
   onScrollNext?: () => void
   allLink?: string
   showAll?: boolean
+  onSelect: () => void
 }
 
 export default function GamesList(props: Props) {
@@ -54,14 +55,14 @@ export default function GamesList(props: Props) {
         <HiddenXs>
               <div className={styles.list}>
                 {props.items && (isShow ? props.items : props.items.slice(0, 10)).map((item, index) =>
-                  <ItemGame item={item} key={item.id} link={item.link}/>
+                  <ItemGame item={item} key={item.id} link={item.link} onClickDemo={props.onSelect} onClickPlay={props.onSelect}/>
                 )}
               </div>
         </HiddenXs>
         <VisibleXs>
           <div className={styles.list}>
             {props.items && (isShow ? props.items : props.items.slice(0, 9)).map((item, index) =>
-              <ItemGame  item={item} key={item.id} link={item.link}/>
+              <ItemGame  item={item} key={item.id} link={item.link} onClickDemo={props.onSelect} onClickPlay={props.onSelect}/>
             )}
           </div>
         </VisibleXs>
