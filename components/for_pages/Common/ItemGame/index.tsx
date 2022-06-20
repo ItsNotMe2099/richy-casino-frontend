@@ -8,7 +8,7 @@ import {useMeasure} from 'react-use'
 import {useAppContext} from 'context/state'
 import {ModalType} from 'types/enums'
 import {useTranslation} from 'next-i18next'
-import {useRouter} from "next/router";
+import {useRouter} from 'next/router'
 
 interface IItem {
   image: string
