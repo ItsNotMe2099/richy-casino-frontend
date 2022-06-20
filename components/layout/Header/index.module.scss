@@ -12,6 +12,9 @@
   @media screen and (max-width: 920px){
     padding: 12px 18px;
   }
+  @media screen and (max-width: 380px){
+    padding: 12px 10px;
+  }
   @media screen and (max-width: $xs-max){
     margin: 0 -10px;
     height: 54px;

@@ -38,9 +38,9 @@ export default function Statistics(props: Props) {
               <div className={styles.cell}>
                 {t('stats_header_player')}
               </div>
-              <div className={styles.cell}>
+              {/*<div className={styles.cell}>
                 {t('stats_header_bet')}
-              </div>
+              </div>*/}
               <div className={styles.cell}>
                 {t('stats_header_multiplier')}
               </div>
@@ -48,7 +48,7 @@ export default function Statistics(props: Props) {
                 {t('stats_header_win')}
               </div>
             </div>
-            {data.data.map((item, index) =>
+            {data.data.slice(0, 7).map((item, index) =>
               <div className={classNames(styles.row, styles.rowInner)} key={index}>
                 <div className={styles.cell}>
                   <div className={styles.game}>
@@ -65,11 +65,11 @@ export default function Statistics(props: Props) {
                     #{item.userId}
                   </div>
                 </div>
-                <div className={styles.cell}>
+                {/*<div className={styles.cell}>
                   <div className={styles.id}>
 
                   </div>
-                </div>
+            </div>*/}
                 <div className={styles.cell}>
                   <div className={styles.multWrapper}>
                     <div className={classNames(styles.mult, {[styles.zero]:  item.amountWin <= 0})}>
