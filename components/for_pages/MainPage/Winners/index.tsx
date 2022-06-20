@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import {useEffect, useState} from 'react'
 import {ITournamentTop10} from 'data/interfaces/ITournamentTop10'
 import TournamentRepository from 'data/repositories/TournamentRepository'
-import {useTranslation} from 'next-i18next'
+import {useTranslation} from 'next-i18next' 
 
 interface IUser {
   nickname: string
@@ -40,9 +40,9 @@ export default function Winners(props: Props) {
     {nickname: 'Erohin', sort: 1, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/folder.jpg'},
     {nickname: 'Enotova', sort: 2, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarF.svg'},
     {nickname: 'Sychev', sort: 3, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarM.svg'},
-    {nickname: 'Sychev', sort: 3, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarM.svg'},
-    {nickname: 'Sychev', sort: 3, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarM.svg'},
-    {nickname: 'Sychev', sort: 3, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarM.svg'},
+    {nickname: 'Sychev', sort: 4, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarM.svg'},
+    {nickname: 'Sychev', sort: 5, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarM.svg'},
+    {nickname: 'Sychev', sort: 6, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarM.svg'},
   ]
 
   //temporary
@@ -82,9 +82,10 @@ export default function Winners(props: Props) {
         <Scrollbars className={styles.scroll}>
         {users.slice(0, 10).map((item, index) =>
                   <tr className={styles.user} key={index}>
-                    <td className={styles.cell}>
+                    <td className={classNames(styles.cell, {[styles.cellSort]: item.sort < 4})}>
+                      <div className={styles.nick}>{index + 1}</div>
                       <img
-                      src={item.sort === 1 ? '/img/Winners/award1.svg' : item.sort === 2 ? '/img/Winners/award2.svg' : '/img/Winners/award3.svg'}
+                      src={item.sort === 1 ? '/img/Winners/award1.svg' : item.sort === 2 ? '/img/Winners/award2.svg' : item.sort === 3 ? '/img/Winners/award3.svg' : null}
                       alt=''/>
                     </td>
                     <td className={styles.cell}>

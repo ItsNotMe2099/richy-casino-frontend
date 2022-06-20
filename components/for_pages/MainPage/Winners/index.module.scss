@@ -422,3 +422,12 @@
         font-size: 0.8rem;
       }
 }
+
+.cellSort{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media screen and (max-width: $mobile-max){
+        width: 10% !important;
+    }
+}
