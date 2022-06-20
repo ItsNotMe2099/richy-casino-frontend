@@ -103,6 +103,7 @@
 
 .fund{
   display: flex;
+  margin-top: 30px;
 }
 
 .prize{
@@ -321,4 +322,18 @@
   position: absolute;
   top: 50%;
   right: 20%;
+}
+
+.titleWrapper{
+  position: relative;
+  .title{
+    font-weight: 700;
+    font-size: 4.7vw;
+    letter-spacing: 0.2em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    position: absolute;
+    top: -1px;
+    right: 0;
+  }
 }
