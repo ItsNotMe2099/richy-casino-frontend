@@ -313,7 +313,7 @@
 .scroll > div:first-child{
     padding-bottom: 56px;
     @media screen and (max-width: $mobile-max){
-      padding-bottom: 81px;
+      padding-bottom: 15px;
     }
 }
 
@@ -334,7 +334,7 @@
     bottom: 0;
     z-index: 1;
     @media screen and (max-width: $mobile-max){
-        height: 81px;
+        height: 15px;
     }
 }
 
