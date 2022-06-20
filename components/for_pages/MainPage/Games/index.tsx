@@ -44,28 +44,31 @@ export default function Games(props: Props) {
     infinite: false,
     speed: 500,
     slidesToScroll: 1,
+    initialSlide: 0,
     variableWidth: false,
     adaptiveHeight: false,
     slidesToShow: 8,
     arrows: false,
-    beforeChange: (current: number, next: number) => setCurrentIndex(next),
     responsive: [
       {
         breakpoint: 1360,
         settings: {
           slidesToShow: 6,
+          initialSlide: 0,
         }
       },
       {
         breakpoint: 570,
         settings: {
           slidesToShow: 4,
+          initialSlide: 0,
         }
       },
       {
         breakpoint: 400,
         settings: {
           slidesToShow: 3,
+          initialSlide: 0,
         },
       }
     ]
@@ -87,7 +90,7 @@ export default function Games(props: Props) {
           slider={!context.isMobile} />
       </div>
       {loading && data.total === 0 && <ContentLoader style={'block'} isOpen={true}/>}
-      <HiddenXs>
+      {!loading && data.total >0 && <HiddenXs>
         <div className={styles.sliderWrapper}>
         <Slider {...settings} ref={slider1 => (slider = slider1)}>
           {data.data.map((item, index) =>
@@ -95,7 +98,7 @@ export default function Games(props: Props) {
           )}
         </Slider>
         </div>
-      </HiddenXs>
+      </HiddenXs>}
       <VisibleXs>
         <div className={styles.overflow}>
           {data.data.map((item, index) =>

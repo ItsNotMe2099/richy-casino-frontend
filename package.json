@@ -66,7 +66,7 @@
     "react-modal-sheet": "^1.4.2",
     "react-qr-code": "^2.0.5",
     "react-remove-scroll": "^2.4.4",
-    "react-slick": "^0.28.1",
+    "react-slick": "^0.29.0",
     "react-sticky": "^6.0.3",
     "react-timer-hook": "^3.0.5",
     "react-tiny-popover": "^7.0.1",
