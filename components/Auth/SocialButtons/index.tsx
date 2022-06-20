@@ -44,7 +44,7 @@ export default function SocialButtons(props: Props) {
         return `${basePath}/instragram.svg`
     }
   }
-  const socials = services.map(i => ({icon: getIcon(i.id), link: `${i.url}${props.currency ? `&currency=${props.currency}` : ''}`})).filter(i => i.icon)
+  const socials = services.map(i => ({icon: getIcon(i.id), link: `${i.url}${props.currency ? `&currency_iso=${props.currency}` : ''}`})).filter(i => i.icon)
 
 
   const {t} = useTranslation('common')

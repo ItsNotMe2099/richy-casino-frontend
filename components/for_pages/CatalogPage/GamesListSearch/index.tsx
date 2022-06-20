@@ -7,9 +7,10 @@ interface Props {
   data: IPagination<IGame>
   loading: boolean
   onScrollNext: () => void
+  onSelect: () => void
 }
 
-export default function GamesListSearch({data, loading, onScrollNext}: Props) {
+export default function GamesListSearch({data, loading, onScrollNext, onSelect}: Props) {
   const {t} = useTranslation()
   return (
     <GamesList title={t('catalog_list_search')}
@@ -17,6 +18,7 @@ export default function GamesListSearch({data, loading, onScrollNext}: Props) {
                totalItems={data?.total ?? 0}
                items={data?.data ?? []}
                loading={loading}
+               onSelect={onSelect}
                onScrollNext={onScrollNext}
     />
   )

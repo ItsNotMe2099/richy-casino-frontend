@@ -8,6 +8,7 @@ import {useMeasure} from 'react-use'
 import {useAppContext} from 'context/state'
 import {ModalType} from 'types/enums'
 import {useTranslation} from 'next-i18next'
+import {useRouter} from 'next/router'
 
 interface IItem {
   image: string
@@ -28,6 +29,7 @@ interface Props {
 
 export default function ItemGame(props: Props) {
   const {t} = useTranslation()
+  const router = useRouter()
   const [ref, { width }] = useMeasure()
   const context = useAppContext()
   const link = props.link || Routes.catalogGame(props.item.id)
@@ -36,6 +38,14 @@ export default function ItemGame(props: Props) {
       e.preventDefault()
       context.showModal(ModalType.login)
       return
+    }
+    if(props.onClickPlay){
+      props.onClickPlay()
+    }
+  }
+  const handleDemoClick = (e) => {
+    if(props.onClickDemo){
+      props.onClickDemo()
     }
   }
   return (
@@ -48,7 +58,7 @@ export default function ItemGame(props: Props) {
       <div className={styles.btns}>
         <div className={styles.btnsWrapper}>
           <Button className={classNames(styles.btn)} href={link} onClick={handlePlayClick} size='small' background='blueGradient500'>{t('game_card_play')}</Button>
-          <Button className={classNames(styles.btn, styles.demo)} href={`${link}?demo=1`} size='small' background='blackTransparent'>{t('game_card_demo')}</Button>
+          <Button className={classNames(styles.btn, styles.demo)} href={`${link}?demo=1`} onClick={handleDemoClick} size='small' background='blackTransparent'>{t('game_card_demo')}</Button>
         </div>
         </div>
       <div className={classNames(styles.top, styles.bottom)}><FavoriteBtn id={props.item.id} inActiveClassName={styles.favoriteInActive} className={styles.favorite} /></div>

@@ -12,6 +12,7 @@ import {useTranslation} from 'next-i18next'
 import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import {NextSeo} from 'next-seo'
 import ContentLoader from 'components/ui/ContentLoader'
+import styles from 'pages/freebitcoin/index.module.scss'
 
 export default function FreeBitcoin() {
   const {t} = useTranslation()
@@ -38,8 +39,8 @@ export default function FreeBitcoin() {
                      onClick={() => isShow ? setIsShow(false) : setIsShow(true)} shadowColor='yellow'/>
       {loading && <ContentLoader style={'block'} isOpen={true}/>}
       {!loading &&   <><Banner/>
-          <div>
-            <Table items={slots}/>
+          <div className={styles.tables}>
+            <div className={styles.table}><Table items={slots}/></div>
             <Table items={history} history/>
           </div>
             </>}

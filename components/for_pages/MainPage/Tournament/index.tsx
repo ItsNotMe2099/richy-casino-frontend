@@ -71,8 +71,10 @@ export default function Tournament(props: Props) {
         </div>
       </div>
         <div className={styles.rightMobile}>
+        <div className={styles.titleWrapper}>
         <div className={styles.title} style={{fontSize: isMobile && `${width /12.5}px`}}>
           {t('tournament_banner_title')}
+        </div>
         </div>
         <div className={styles.fund}>
           <div className={styles.prize}>
@@ -82,10 +84,12 @@ export default function Tournament(props: Props) {
             </div>
           </div>
         </div>
+        <div className={styles.timerMobile}>
+          <Timer expiredAt={expiredAt} days style='tournamentMobile'/>
+        </div>
         <Button onClick={handleJoin} className={styles.btnMobile} size='normal' background='payGradient500'>
           <span style={{fontSize: isMobile && `${width /24}px`}}>{t('tournament_banner_button')}</span>
         </Button>
-        <Timer expiredAt={expiredAt} days style='tournamentMobile'/>
       </div>
       </div>
     </VisibleXs>

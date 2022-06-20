@@ -3,3 +3,17 @@
 .root{
 
 }
+
+.tables{
+    display: flex;
+    @media screen and (max-width: $mobile-max){
+        flex-direction: column;
+        .table{
+            margin-right: 0;
+        }
+      }
+}
+
+.table{
+    margin-right: 26px;
+}

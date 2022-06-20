@@ -24,7 +24,7 @@ export default function InputSearch(props: Props) {
     }
   }
   return (
-    <form className={styles.root} action="/search">
+    <div className={styles.root}>
       <input
         name="query"
         type="text"
@@ -38,6 +38,6 @@ export default function InputSearch(props: Props) {
           <img src="/img/Filter/icons/search.svg" alt="" />
         </Button>
       </div>
-    </form>
+    </div>
   )
 }

@@ -22,6 +22,7 @@ interface Props {
   onScrollNext?: () => void
   allLink?: string
   showAll?: boolean
+  onSelect?: () => void
 }
 
 export default function GamesList(props: Props) {
@@ -47,21 +48,19 @@ export default function GamesList(props: Props) {
   return (
     <div className={styles.root}>
       <Header icon={props.icon} allLink={props.allLink} label={props.title} length={`${Formatter.formatNumber(props.totalItems)}`} shadowColor={getShadow(props.icon)}/>
-      {props.switchFilter && <HiddenXs>
-        <div className={styles.wrapper}>{props.switchFilter}</div>
-      </HiddenXs>}
+      {props.switchFilter && <div className={styles.wrapper}>{props.switchFilter}</div>}
       {props.loading && props.totalItems === 0 && <ContentLoader style={'block'} isOpen={true}/>}
         <HiddenXs>
               <div className={styles.list}>
                 {props.items && (isShow ? props.items : props.items.slice(0, 10)).map((item, index) =>
-                  <ItemGame item={item} key={item.id} link={item.link}/>
+                  <ItemGame item={item} key={item.id} link={item.link} onClickDemo={props.onSelect} onClickPlay={props.onSelect}/>
                 )}
               </div>
         </HiddenXs>
         <VisibleXs>
           <div className={styles.list}>
             {props.items && (isShow ? props.items : props.items.slice(0, 9)).map((item, index) =>
-              <ItemGame  item={item} key={item.id} link={item.link}/>
+              <ItemGame  item={item} key={item.id} link={item.link} onClickDemo={props.onSelect} onClickPlay={props.onSelect}/>
             )}
           </div>
         </VisibleXs>

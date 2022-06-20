@@ -64,7 +64,7 @@ export default function BonusSlide(props: Props) {
         </div>}
 
         <div className={styles.footerGroup}>
-          <div className={styles.btnWrapper} style={{fontSize: isMobile ? `${width / 22}px` : `${width / 24}px`, marginTop: isMobile ? `${width /35}px` : `${width /60}px`}}>
+          <div className={styles.btnWrapper} style={{fontSize: isMobile ? `${width / 22}px` : `${width / 38 > 18 ? 18 : width / 38}px`, marginTop: isMobile ? `${width /35}px` : `${width /60}px`}}>
             <Button size='normal' background='payGradient500' className={styles.btn} onClick={handleClick}>{t('bonus_button_get')}</Button>
             {appContext.showBonus &&
             <div className={styles.timer}>

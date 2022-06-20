@@ -47,7 +47,7 @@ export default function WithGameFilterLayout(props: Props) {
         <div className={styles.content}>
           <div className={classNames(styles.children, {[styles.hidden]: isSearch})}>{props.children}</div>
           <div className={classNames(styles.search, {[styles.hidden]: !isSearch})}>
-            <GamesListSearch data={searchGames} loading={isSearchLoading} onScrollNext={handleScrollNext}/>
+            <GamesListSearch data={searchGames} onSelect={() => setIsSearch(false)} loading={isSearchLoading} onScrollNext={handleScrollNext}/>
           </div>
           </div>
         </div>

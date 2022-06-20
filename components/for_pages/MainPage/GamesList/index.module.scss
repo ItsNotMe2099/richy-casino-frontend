@@ -219,7 +219,11 @@
   grid-template-rows: repeat(2, auto);
   padding-top: 14px;
   overflow:auto;
-  padding-bottom: 21px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;  /* IE и Edge */
+  scrollbar-width: none;  /* Firefox */
   .item{
     display: flex;
     img{

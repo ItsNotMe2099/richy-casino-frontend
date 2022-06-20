@@ -103,6 +103,10 @@
 
 .fund{
   display: flex;
+  margin-top: 45px;
+  @media screen and (max-width: 350px){
+    margin-top: 30px;
+  }
 }
 
 .prize{
@@ -155,7 +159,7 @@
   height: 46px;
   width: 100%;
   color: $white;
-  font-weight: bold;
+  font-weight: 500;
   @media screen and (max-width: 950px){
     margin-top: 0;
   }
@@ -261,13 +265,16 @@
 
 .btnMobile{
   margin-top: 6px;
-  height: 30px;
+  height: 45px;
   width: 100%;
   color: $white;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 12px;
   margin-bottom: 4px;
   border-radius: 3px;
+  @media screen and (max-width: 350px){
+    height: 30px;
+  }
 }
 
 .leftMobile{
@@ -284,6 +291,7 @@
   flex-direction: column;
   justify-content: center;
   padding-right: 9px;
+  width: 45%;
 }
 
 .coins{
@@ -321,4 +329,22 @@
   position: absolute;
   top: 50%;
   right: 20%;
+}
+
+.titleWrapper{
+  position: relative;
+  .title{
+    font-weight: 700;
+    font-size: 4.7vw;
+    letter-spacing: 0.2em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    position: absolute;
+    top: -1px;
+    right: 0;
+  }
+}
+
+.timerMobile{
+  margin-top: 6px;
 }
