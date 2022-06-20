@@ -24,7 +24,7 @@ export default function QuestionPopover(props: Props) {
         content={<div className={styles.info}>{props.info}</div>}
       >
       
-      <div onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
+      <div className={styles.inner} onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
         <img src='/img/icons/question.svg' alt=''/>
       </div>
     </Popover>
