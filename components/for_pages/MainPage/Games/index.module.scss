@@ -222,9 +222,15 @@
   grid-auto-columns:calc((100% - (4 - 1)*8px)/4);
  @include mobileGamesGrid;
 
+ &::-webkit-scrollbar{
+  display: none;
+ }
+
+ -ms-overflow-style: none;  /* IE и Edge */
+  scrollbar-width: none;
+
   padding-top: 14px;
   overflow:auto;
-  padding-bottom: 21px;
   .slide{
     position: relative;
     display: flex;
