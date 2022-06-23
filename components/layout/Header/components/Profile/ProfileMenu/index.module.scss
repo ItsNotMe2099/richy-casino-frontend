@@ -5,7 +5,7 @@
   @media screen and (max-width: $xs-max) {
     display: flex;
     align-items: center;
-    width: 30px;
+    width: 40px;
   }
 }
 
@@ -129,7 +129,7 @@
   @media screen and (max-width: $xs-max) {
     padding: 0;
     background-color: transparent;
-    height: 30px;
+    height: 40px;
   }
 }
 
@@ -254,8 +254,8 @@
   height: 26px;
   margin-right: 7px;
   @media screen and (max-width: $xs-max) {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
   }
 
   div {
@@ -264,8 +264,8 @@
       height: 26px;
       border-radius: 100%;
       @media screen and (max-width: $xs-max) {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
       }
     }
   }

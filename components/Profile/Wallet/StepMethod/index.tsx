@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-
 import {PaymentMethodList} from 'components/Profile/Wallet/PaymentMethodList'
 import {PaymentMethod} from 'types/interfaces'
 import {PaymentMethodCryptoCard} from 'components/Profile/Wallet/PaymentMethodCryptoCard'
