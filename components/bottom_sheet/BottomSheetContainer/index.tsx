@@ -102,7 +102,7 @@ export default function BottomSheetContainer(props: Props) {
           snapPoints={[450]}
         >
           {appContext.bottomSheet == ModalType.fortune && (
-            <BottomSheetLayout lineOver>
+            <BottomSheetLayout lineOver style='fortune'>
               <Fortune isBottomSheet />
             </BottomSheetLayout>
           )}
