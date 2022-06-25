@@ -82,11 +82,11 @@ export default function Winners(props: Props) {
         <Scrollbars className={styles.scroll}>
         {users.slice(0, 10).map((item, index) =>
                   <tr className={styles.user} key={index}>
-                    <td className={classNames(styles.cell, {[styles.cellSort]: item.sort < 4})}>
+                    <td className={classNames(styles.cell, styles.cellSort)}>
                       <div className={styles.nick}>{index + 1}</div>
-                      {item.sort < 4 && <img
+                      <img className={classNames({[styles.none]: item.sort > 3})}
                       src={item.sort === 1 ? '/img/Winners/award1.svg' : item.sort === 2 ? '/img/Winners/award2.svg' : item.sort === 3 ? '/img/Winners/award3.svg' : null}
-                      alt=''/>}
+                      alt=''/>
                     </td>
                     <td className={styles.cell}>
                     <div className={styles.group}>
