@@ -35,7 +35,7 @@ export default function Bonuses(){
           <div className={classNames(styles.label, {[styles.second]: index > 0})} style={{fontSize: isMobile ? `${width / 24}px` : `${width / 54}px`}}>
             {item.title}
           </div>
-          <div className={classNames(styles.btn, {[styles.alt]: index === 1})} style={{fontSize: isMobile ? `${width / 25}px` : `${width / 77}px`}}>
+          <div className={classNames(styles.btn, {[styles.alt]: index === 1})} style={{fontSize: `${width / 38 > 18 ? 18 : width / 38}px`}}>
             <Button size='normal' background={index === 1 ? 'blueGradient500' : 'white'} href={item.redirectUrl}>{item.textButton}</Button>
           </div>
         </div>
