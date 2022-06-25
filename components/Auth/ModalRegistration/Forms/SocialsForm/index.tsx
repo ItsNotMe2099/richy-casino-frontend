@@ -22,7 +22,7 @@ export default function SocialsForm(props: Props) {
 
   const initialValues = {
     currency: Converter.convertCurrencyToOptions(context.currencies)[0].value,
-    checkBox: false
+    checkBox: true
   }
 
 
