@@ -6,8 +6,8 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import { ModalType } from 'types/enums'
 import { useMeasure } from 'react-use'
-import {useEffect} from 'react'
-import TournamentRepository from 'data/repositories/TournamentRepository'
+//import {useEffect} from 'react'
+//import TournamentRepository from 'data/repositories/TournamentRepository'
 import {useTranslation} from 'next-i18next'
 
 interface Props {
@@ -18,11 +18,11 @@ export default function Tournament(props: Props) {
   const {t} = useTranslation()
     const appContext = useAppContext()
   const someDate = '2022-05-01T12:46:24.007Z'
-  useEffect(() => {
+  /*useEffect(() => {
     TournamentRepository.fetchRichyTournaments().then(i => {
 
     })
-  }, [])
+  }, [])*/
 
   const [ref, { width }] = useMeasure()
   const isMobile = appContext.isMobile
