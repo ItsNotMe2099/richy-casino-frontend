@@ -18,8 +18,8 @@ interface Props {
 export default function ProfileModalBody(props: Props) {
   const context = useAppContext()
   return (
-    <div className={classNames(styles.root, {[styles.fixed]: props.fixed || context.isMobile}, props.className)} id={props.id}>
-      {props.children}
-    </div>
+      <div className={classNames(styles.root, {[styles.fixed]: props.fixed || context.isMobile}, props.className)} id={props.id}>
+        {props.children}
+      </div>
     )
 }

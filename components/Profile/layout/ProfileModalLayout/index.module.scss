@@ -4,7 +4,7 @@
   flex-direction: column;
   flex: 1;
   &.fixed{
-    max-height: 80vh;
+    max-height: 96vh;
     @media screen and (max-width: 900px){
       min-height: 100vh;
       height:100%;

@@ -66,7 +66,7 @@ export default function ModalContainer(props: Props) {
                            isOpen={context.modal === ProfileModalType.paymentHistory} {...commonSettings}>
             {context.modal === ProfileModalType.paymentHistory && <PaymentHistory/>}
           </ProfileModalNew>
-          <ProfileModalNew key={6} isOpen={context.modal === ProfileModalType.profile} {...commonSettings} >
+          <ProfileModalNew key={6} isOpen={context.modal === ProfileModalType.profile} style='profile' size='profile' {...commonSettings} >
             {context.modal === ProfileModalType.profile && <Profile/>}
           </ProfileModalNew>
           <ProfileModalNew size={'large'} key={6}

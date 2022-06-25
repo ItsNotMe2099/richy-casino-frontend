@@ -39,6 +39,11 @@
 
   }
 }
+
+.sizeProfile{
+  margin: 2vh auto;
+}
+
 .modalOverlay{
   position: fixed;
   inset: 0px;
@@ -77,6 +82,11 @@
     padding-bottom: 0px;
     min-height: -webkit-fill-available;
   }
+}
+
+.profile{
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .overlay{

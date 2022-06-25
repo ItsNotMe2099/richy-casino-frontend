@@ -13,8 +13,9 @@ interface Props {
   isOpen: boolean
   onRequestClose?: () => void
   fixed?: boolean
-  size?: 'normal' | 'large' | 'small'
+  size?: 'normal' | 'large' | 'small' | 'profile'
   children?: ReactElement
+  style?: 'profile'
 }
 
 export default function ProfileModalNew(props: Props) {
@@ -30,9 +31,15 @@ export default function ProfileModalNew(props: Props) {
         return styles.sizeLarge
       case 'small':
         return styles.sizeSmall
+      case 'profile':
+        return styles.sizeProfile
       default:
         return styles.sizeNormal
     }
+  }
+
+  const customStyles = {
+    [styles.profile]: props.style === 'profile'
   }
 
 
@@ -40,7 +47,7 @@ export default function ProfileModalNew(props: Props) {
 
   return (
     <ReactModal {...settings} isOpen={props.isOpen} onRequestClose={props.onRequestClose} shouldCloseOnOverlayClick>
-      <div className={classNames(styles.frame)}>
+      <div className={classNames(styles.frame, customStyles)}>
         <div className={classNames(styles.root, getSizeClass(props.size))}>
           {props.children}
         </div>
