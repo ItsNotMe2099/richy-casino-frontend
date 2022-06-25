@@ -91,7 +91,7 @@ export default function BonusSlide(props: Props) {
         <div className={styles.stubWrapper}>
         <div className={styles.stubTitle} style={{fontSize: `${width / 24}px`}}>{t('bonus_stub_title')}
         </div>
-        <div className={styles.btnWrapper} style={{fontSize: `${width / 24}px`}}>
+        <div className={styles.btnWrapper} style={{fontSize: isMobile ? `${width / 22}px` : `${width / 38 > 18 ? 18 : width / 38}px`}}>
         <Button href={Routes.catalog} className={styles.btn} size='normal' background='payGradient500'>{t('bonus_stub_button_play')}</Button>
         </div>
         </div>
