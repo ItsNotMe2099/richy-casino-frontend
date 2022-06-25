@@ -12,9 +12,7 @@
 .wrapper{
   display: flex;
   margin-top: 18px;
-  @media screen and (max-width: $xs-max){
-    display: none;
-  }
+
 }
 
 .list{
