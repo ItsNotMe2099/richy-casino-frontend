@@ -282,7 +282,7 @@ export function AppWrapper(props: Props) {
         setShowBonus(true)
     }
 
-      if (isEnabled && !auth && !Cookies.get(CookiesType.bonusDepositShowMode)) {
+      if ((runtimeConfig.FAKE_BONUS || isEnabled) && !auth && !Cookies.get(CookiesType.bonusDepositShowMode)) {
         setTimeout(() => {
           showModal(ModalType.bonus)
         }, Timers.showBonusesBanner)

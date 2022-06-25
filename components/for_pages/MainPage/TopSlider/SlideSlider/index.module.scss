@@ -11,6 +11,20 @@
 
 .catalog{
   padding: 0;
+  .item{
+    span{
+    img{
+      height: auto !important;
+      min-height: auto !important;
+    }
+  }
+  }
+  .dots{
+    bottom: 10% !important;
+  }
+  .controls{
+    bottom: 21px;
+  }
 }
 
 .col{

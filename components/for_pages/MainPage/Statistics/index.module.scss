@@ -125,9 +125,8 @@
         padding-left: 20px;
     }
     .cell:nth-child(3){
-        @media screen and (max-width: $xs-max){
-            display: none;
-        }
+        text-align: center;
+        
     }
     .cell:nth-child(4){
         text-align: center;
@@ -313,7 +312,6 @@
     }
     @media screen and (max-width: $mobile-max){
         font-size: 0.7rem;
-        width: 6rem;
     }
 }
 

@@ -245,7 +245,7 @@
                 font-size: calc(10px + 0.5vw);
             }
             @media screen and (max-width: $mobile-max){
-                font-size: 0.7rem;
+                font-size: 0.65rem;
             }
         }
     }
@@ -265,8 +265,8 @@
     @media screen and (max-width: $mobile-max){
         img{
             margin-right: 4px;
-            width: 8px;
-            height: 8px;
+            width: 12px;
+            height: 12px;
         }
         .avatar{
             img{
@@ -430,4 +430,8 @@
     @media screen and (max-width: $mobile-max){
         width: 10% !important;
     }
+}
+
+.none{
+    display: none;
 }
