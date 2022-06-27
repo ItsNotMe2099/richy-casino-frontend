@@ -61,7 +61,7 @@
 }
 
 .alt{
-  button{
+  a, button{
     color: $white;
   }
 }
@@ -118,6 +118,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 22px;
+      overflow: hidden;
       @media screen and (max-width: 550px){
         gap: 12px;
       }
