@@ -304,7 +304,7 @@
     color: $pay500;
     display: flex;
     justify-content: center;
-    img{
+    svg, img{
         margin-right: 10px;
     }
     @media screen and (max-width: $xs-max){
@@ -312,6 +312,13 @@
     }
     @media screen and (max-width: $mobile-max){
         font-size: 0.7rem;
+    }
+}
+
+.amountText{
+    width: 10%;
+    @media screen and (max-width: $mobile-max){
+        width: 45%;
     }
 }
 
