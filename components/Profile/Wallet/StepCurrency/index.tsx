@@ -17,7 +17,7 @@ interface Props {
 }
 export default function StepCurrency(props: Props) {
   const context = useAppContext()
-  const currencies = context.currencies.filter(i => i.flags.isCrypto && i.flags.isDepositAllowed)
+  const currencies = context.currencies.filter(i => i.flags?.isCrypto && i.flags?.isDepositAllowed)
 
   return (
     <div className={styles.root}>
