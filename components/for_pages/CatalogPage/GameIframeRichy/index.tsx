@@ -19,7 +19,7 @@ export default function GameIframeRichy(props: Props) {
   const {t} = useTranslation()
   return (
     <div className={classNames(styles.root, {[styles.mobile]: appContext.isMobile})}>
-     <GameIFrameHeader title={props.game.name}/>
+     {!appContext.isMobile && <GameIFrameHeader title={props.game.name}/>}
       <div className={styles.board}>
      
           {props.session && (appContext.isMobile ? <iframe
