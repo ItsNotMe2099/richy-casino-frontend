@@ -7,7 +7,7 @@ import BonusSlide from 'components/for_pages/Common/BonusSlide'
 import {BonusDepositShowMode} from 'types/enums'
 
 interface Props {
-  isOpen: boolean
+  isOpen?: boolean
   onRequestClose?: () => void
   size?: 'normal' | 'large' | 'fortune'
   title?: string
@@ -75,7 +75,7 @@ export default function BonusModal(props: Props) {
       </Sheet.Container>
       </div>
 
-      <Sheet.Backdrop />
+      <Sheet.Backdrop onTap={handleClose}/>
     </Sheet>
     )
   }

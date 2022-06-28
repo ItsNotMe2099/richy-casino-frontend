@@ -134,12 +134,15 @@
     }
   }
   .close{
-    top: 10px;
-    right: 13px;
+    top: -1px;
+    right: 9px;
   }
   .hero{
     top: 0;
-    right: -50px;
+    right: -14px;
+    img{
+      width: auto;
+    }
   }
   .downBanner{
     .title, .bonus, .fs{
@@ -168,6 +171,7 @@
   }
   .bottom{
     margin-top: 3px;
+    margin-left: 0;
   }
 }
 
