@@ -17,7 +17,8 @@ export default function BottomSheetLayout(props: Props) {
   return (
     <>
     <Sheet.Container style={{ background: '#1A1C23', borderRadius: '36px 36px 0 0', 
-    height: props.style === 'fortune' ? 'min(120%, calc(100% - env(safe-area-inset-top) - 34px))' : 'min(80%, calc(100% - env(safe-area-inset-top) - 34px))'}}>
+   // height: props.style === 'fortune' ? 'min(120%, calc(100% - env(safe-area-inset-top) - 34px))' : 'min(80%, calc(100% - env(safe-area-inset-top) - 34px))'
+    }}>
       <Sheet.Content dragListener={!!props.dragListener} >
         <div className={styles.root}>
           <Sheet.Header style={{ position: props.lineOver ? 'absolute' : 'static', zIndex: 1 }} />

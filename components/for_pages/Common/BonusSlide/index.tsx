@@ -31,6 +31,9 @@ export default function BonusSlide(props: Props) {
     [styles.slide]: props.style === 'slide',
   })
   const handleClick = () => {
+    if(props.onRequestClose){
+      props.onRequestClose()
+    }
     if (!appContext.auth) {
       appContext.showModal(ModalType.registration)
     } else {

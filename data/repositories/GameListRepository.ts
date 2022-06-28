@@ -198,10 +198,11 @@ export default class GameListRepository {
       token,
       data: {game_id: gameId, client_type: clientType}
     })
+    console.log("ResErr", res.err)
     if (res.err) {
       return null
     }
-    console.log('ResData', res.data)
+      
     return res.data.data ?  Converter.objectKeysToCamelCase(res.data.data) : null
   }
 

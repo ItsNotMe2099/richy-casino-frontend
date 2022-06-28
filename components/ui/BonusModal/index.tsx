@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import ReactModal from 'react-modal'
 import Sheet from 'react-modal-sheet'
 import {useAppContext} from 'context/state'
 import classNames from 'classnames'
@@ -20,39 +19,21 @@ interface Props {
   singlePage?: boolean
   noBorder?: boolean
   fortune?: boolean
+  isBottomSheet?: boolean
 }
 
 export default function BonusModal(props: Props) {
   const {isOpen, onRequestClose} = props
   const appContext = useAppContext()
-  const customStyles = {
-    overlay: {
-      backgroundColor: !props.singlePage  ? 'rgba(0, 0, 0, 0.5)' : 'transparent',
-      display: 'flex',
-      zIndex: '20',
-    },
-    content: {
-      width: '45rem',
-      borderRadius: '21px',
-      padding: '0',
-      border: '0',
-      margin: 'auto',
-      position: 'static',
-      inset: '0',
-      overflow: 'hidden',
-      background: 'none',
-    },
-  }
+ 
   const handleClose = () => {
     props.onRequestClose()
     appContext.setBonusShowMode(BonusDepositShowMode.Spoiler)
   }
 
-  if(appContext.isDesktop) {
+  if(!props.isBottomSheet) {
     return (
-      <ReactModal style={customStyles} isOpen={props.isOpen} onRequestClose={handleClose}>
-        {isOpen && <BonusSlide style='modal' onRequestClose={handleClose}/>}
-      </ReactModal>
+      <BonusSlide style='modal' onRequestClose={handleClose}/>
     )
   }else{
     const openModal = () => {

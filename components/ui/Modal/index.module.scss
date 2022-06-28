@@ -109,7 +109,21 @@
     width: 100%;
   }
 }
-
+.rootBonus{
+  width: 45rem;
+  border-radius: 21px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  background: none;
+  .close{
+    display: none;
+  }
+  
+  .top{
+    display: none;
+  }
+}
 
 .rootLarge{
   width: 664px;

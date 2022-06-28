@@ -18,8 +18,9 @@
 }
 
 .variant {
-  padding: 16px;
+  padding: 0px 16px;
   flex: 1;
+  height: 47px;
   cursor: pointer;
   max-width: 118px;
   display: flex;
@@ -28,6 +29,7 @@
   background-color: $dark600;
   border-radius: 6px;
   margin-right: 6px;
+  line-height: 15px;
   @media screen and (max-width: $xs-max){
     padding: 13px 0;
   }

@@ -1,0 +1,45 @@
+@import "scss/index";
+.root{
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  grid-gap: 0px 12px;
+  padding: 0px 20px 0px 0px;
+  background: $dark800;
+}
+.arrow{
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+}
+.left{
+  flex: 1;
+}
+.balance{
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: 3px;
+    color: $white;
+    .currency{
+      color: $dark100;
+    }
+}
+
+
+.deposit{
+  height: 24px;
+  margin-right: 9px;
+  color: $white;
+  font-size: 10px;
+}
+.menu{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  background-color: $dark600;
+}

@@ -63,7 +63,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </ReactPWAInstallProvider>
         </FavoriteWrapper>
 
-        <AuthUserFeatures/>
+        {clientVisible && <AuthUserFeatures/>}
         <HiddenXs>
           <NotificationBanner/>
         </HiddenXs>
