@@ -36,11 +36,9 @@ export default function ProfileModalNew(props: Props) {
   }
 
 
-
-
   return (
     <ReactModal {...settings} isOpen={props.isOpen} onRequestClose={props.onRequestClose} shouldCloseOnOverlayClick>
-      <div className={classNames(styles.frame)}>
+      <div className={styles.frame}>
         <div className={classNames(styles.root, getSizeClass(props.size))}>
           {props.children}
         </div>

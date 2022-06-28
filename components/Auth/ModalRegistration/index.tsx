@@ -56,10 +56,12 @@ export default function ModalRegistration(props: Props) {
     {appContext.showBonus && <div className={styles.banner}>
       <BonusSmallBanner style='registration'/>
     </div>}
+    <div className={styles.wrapper}>
     <div className={styles.variants}>
       {variants.map((item, index) =>
         <Tab label={item.label} logo={item.logo} key={index} tab={item.tab} isActive={variant === item.tab} onSelect={() => setVariant(item.tab)}/>
       )}
+    </div>
     </div>
     {variant === TabType.Phone && <PhoneForm/>}
     {variant === TabType.Email && <EmailForm/>}

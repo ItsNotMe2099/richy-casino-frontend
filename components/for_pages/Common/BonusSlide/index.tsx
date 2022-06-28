@@ -77,7 +77,7 @@ export default function BonusSlide(props: Props) {
           </div>
         </div>
       </div>
-      <div className={styles.bottom} style={{bottom: `${width /40}px`}}>
+      <div className={styles.bottom} style={{bottom: `${width /55}px`}}>
       <div className={styles.satoshi} style={{fontSize: isMobile ? `${width / 24}px` : `${width / 42}px`}}>
         {Formatter.formatNumber(details?.freeBitcoin)} {t('bonus_satoshi')}
       </div>

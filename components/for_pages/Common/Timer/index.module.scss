@@ -20,9 +20,6 @@
   }
   .end{
     display: block;
-    @media screen and (max-width: 950px){
-      display: none;
-    }
   }
   @media screen and (max-width: 685px){
     .input{
