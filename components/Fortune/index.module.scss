@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
   @media (max-width: $xs-max) {
     padding-top: 40px;
     overflow: hidden;
@@ -11,7 +12,7 @@
     background-size: cover;
   }
   @media (max-width: $mobile-max) {
-    overflow: auto;
+
   }
 }
 
@@ -119,6 +120,7 @@
 }
 
 .btn{
+  z-index: 1;
   width: 100%;
   padding: 0 16px;
   margin-top: 30px;
@@ -174,6 +176,7 @@
   &.visible{
     visibility: visible;
     opacity: 1;
+    z-index: 2;
   }
   .winner{
     position: absolute;

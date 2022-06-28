@@ -16,6 +16,7 @@ import BottomSheetLayout from 'components/layout/BottomSheetLayout'
 import ProfileBurger from 'components/ui/ProfileBurger'
 import FALogin from 'components/Profile/FALogin'
 import MobileAppModal from 'components/ui/MobileAppModal'
+import BonusModal from 'components/ui/BonusModal'
 
 
 interface Props {}
@@ -40,7 +41,7 @@ export default function BottomSheetContainer(props: Props) {
         <Sheet
           isOpen={appContext.bottomSheet == ModalType.registration}
           onClose={appContext.hideBottomSheet}
-          snapPoints={[570]}
+          snapPoints={[620]}
         >
           {appContext.bottomSheet == ModalType.registration && <ModalRegistration isBottomSheet={true} />}
         </Sheet>
@@ -99,14 +100,20 @@ export default function BottomSheetContainer(props: Props) {
         <Sheet
           isOpen={appContext.bottomSheet === ModalType.fortune}
           onClose={appContext.hideBottomSheet}
-          snapPoints={[450]}
+          snapPoints={[560]}
         >
           {appContext.bottomSheet == ModalType.fortune && (
-            <BottomSheetLayout lineOver style='fortune'>
+            <BottomSheetLayout lineOver >
               <Fortune isBottomSheet />
             </BottomSheetLayout>
           )}
         </Sheet>
+
+        {appContext.bottomSheet == ModalType.bonus && (
+          
+          <BonusModal isBottomSheet isOpen onRequestClose={() => appContext.hideModal()}/>
+      
+      )}
 
         <Sheet
           isOpen={appContext.bottomSheet === ModalType.faLogin}

@@ -64,10 +64,10 @@ export default function Wallet(props: Props) {
     {icon: '/img/Wallet/bank/mir.svg', label: 'МИР'},
   ]
 
-  const [method, setMethod] = useState<PaymentMethod>(null)
+  const [method, setMethod] = useState<PaymentMethod>(PaymentMethod.Crypto)
   const [currency, setCurrency] = useState<ICurrency>(null)
   const [depositResponse, setDepositResponse] = useState<IDepositResponse>(null)
-  const [step, setStep] = useState<PaymentStep>(PaymentStep.Method)
+  const [step, setStep] = useState<PaymentStep>(PaymentStep.Currency)
   const handleClose = () => {
 
     context.hideModal()

@@ -2,7 +2,7 @@ import styles from './index.module.scss'
 import ArrowBackSvg from 'components/svg/ArrowBackSvg'
 import {useRouter} from 'next/router'
 interface Props {
-  icon: string,
+  icon?: string,
   title: string
 }
 export default function GameIFrameHeader(props: Props) {

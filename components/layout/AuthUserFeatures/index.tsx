@@ -6,15 +6,17 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import {BonusDepositShowMode} from 'types/enums'
 import BonusFooter from 'components/for_pages/Common/BonusFooter'
+import { useRouter } from 'next/router'
 
 interface Props {}
 
 export default function AuthUserFeatures(props: Props) {
-
   const context = useAppContext()
-
+  const router = useRouter()
   const user = context.auth
-
+  if(router.pathname === '/game/[id]'){
+    return null
+  }
   return (
     <>
     {( context.showBonus && context.bonusShowMode === BonusDepositShowMode.Spoiler) &&

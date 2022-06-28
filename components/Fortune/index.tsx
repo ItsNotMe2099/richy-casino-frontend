@@ -14,6 +14,7 @@ import Winner from './Winner'
 import classNames from 'classnames'
 import RichyLoader from 'components/ui/RichyLoader'
 import { ModalType } from 'types/enums'
+import { useMeasure } from 'react-use'
 
 const Board = dynamic(() => import('./Board'), { ssr: false })
 
@@ -30,7 +31,8 @@ interface Props {
 export default function Fortune(props: Props) {
   const totalTime = 5000
   const appContext = useAppContext()
-  const canvasSize = appContext.isMobile ? 320 : 390
+  const [ref, { width, height }] = useMeasure()
+  const canvasSize = appContext.isMobile ? width + width * 0.1 : 390
   const slotsRef = useRef<IWheelSlot[]>([])
   const [gameResult, setGameResult] = useState<IWheelPlayResponse>(null)
   const gameResultRef = useRef<IWheelPlayResponse>(null)
@@ -65,6 +67,7 @@ export default function Fortune(props: Props) {
   }
 
   const play = async () => {
+    console.log('Plsy')
     if (appContext.auth) {
       const res = await WheelRepository.play()
       // const res = mockRes
@@ -72,6 +75,8 @@ export default function Fortune(props: Props) {
       setGameResult(res)
       checkAvailable(userRef.current)
       setTimeout(clear, totalTime)
+    }else{
+      appContext.showModal(ModalType.registration)
     }
   }
 
@@ -98,7 +103,7 @@ export default function Fortune(props: Props) {
   }
 
   return (
-    <div className={styles.root}>
+    <div ref={ref} className={styles.root}>
       <div className={styles.wheel}>
         <div className={styles.board}>
           <Board canvasSize={canvasSize} gameResult={gameResult} slots={slotsRef.current} />
@@ -130,7 +135,7 @@ export default function Fortune(props: Props) {
         {/*available && (*/}
           <div className={styles.btn}>
             <Button
-              onClick={() => appContext.auth ? play : appContext.showModal(ModalType.registration)}
+              onClick={play}
               className={styles.spin}
               background="pink"
               disabled={!!gameResult}

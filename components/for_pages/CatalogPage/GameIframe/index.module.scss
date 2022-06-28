@@ -7,13 +7,29 @@
   justify-content: stretch;
   align-items: stretch;
   // @include componentRoot;
-
+  flex: 1;
+  &.mobile{
+    .board{
+      display: flex;
+      flex-direction: column;
+    }
+    .iframeWrapper{
+      flex: 1
+    }
+  }
 
 }
 
 .board {
   flex: 1;
-  @include componentRoot();
+  margin-top: 20px;
+  
+    border-radius: 18px;
+   
+    @media screen and (max-width: $xs-max){
+   
+      margin-top: 0px;
+    }
 }
 
 .iframeWrapper {
