@@ -12,7 +12,10 @@
 .wrapper{
   display: flex;
   margin-top: 18px;
-
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .list{
