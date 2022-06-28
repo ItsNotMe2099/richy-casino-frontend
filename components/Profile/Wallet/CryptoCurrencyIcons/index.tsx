@@ -10,7 +10,7 @@ interface Props {
 }
 export const CryptoCurrencyIcons = (props: Props) => {
   const context = useAppContext()
-  const currencies = context.currencies.filter(i => i.flags.isCrypto)
+  const currencies = context.currencies.filter(i => i.flags?.isCrypto)
   const limit = props.limit ?? 3
   const mainColor = props.selected ? '#628CFF' : '#373945'
   const iconColor = props.selected ? '#fff' : '#cacaca'
