@@ -61,10 +61,10 @@ export default function Widraw(props: Props) {
   const args = context.modalArguments as WithdrawModalArguments
 
   const [account, setAccount] = useState<IUserBalanceCurrency>(args?.account ?? UserUtils.getMainBalanceReal(context?.user))
-  const [method, setMethod] = useState<PaymentMethod>(null)
+  const [method, setMethod] = useState<PaymentMethod>(PaymentMethod.Crypto)
   const [currency, setCurrency] = useState<ICurrency>(null)
   const [depositResponse, setDepositResponse] = useState<IDepositResponse>(null)
-  const [step, setStep] = useState<PaymentStep>(PaymentStep.Method)
+  const [step, setStep] = useState<PaymentStep>(PaymentStep.Currency)
   const handleClose = () => {
 
     context.hideModal()
