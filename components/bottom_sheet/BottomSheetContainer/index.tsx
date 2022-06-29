@@ -111,7 +111,7 @@ export default function BottomSheetContainer(props: Props) {
 
         {appContext.bottomSheet == ModalType.bonus && (
           
-          <BonusModal isBottomSheet isOpen onRequestClose={() => appContext.hideModal()}/>
+          <BonusModal isBottomSheet isOpen onRequestClose={() => appContext.hideBottomSheet()}/>
       
       )}
 
