@@ -1,5 +1,7 @@
 @import "scss/index";
-
+:root {
+  --app-height: 100%;
+ }
 html, body {
   font-family: 'Gilroy', sans-serif;
   font-size: 14px;
