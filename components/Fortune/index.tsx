@@ -108,17 +108,17 @@ export default function Fortune(props: Props) {
         <div className={styles.board}>
           <Board canvasSize={canvasSize} gameResult={gameResult} slots={slotsRef.current} />
         </div>
-        <div className={styles.right}>
-          <img src='/img/Fortune/coins1.svg' alt=''/>
-        </div>
-        <div className={styles.left}>
-          <img src='/img/Fortune/coins2.svg' alt=''/>
-        </div>
       </div>
       <HiddenXs>
-          <div className={styles.wrapper}>
+          <div className={classNames(styles.wrapper, {[styles.withTimer]: !available && appContext.auth })}>
             <div className={styles.everyday}>
               <div>lucky spin everyday</div>
+              <div className={styles.right}>
+                <img src='/img/Fortune/coins1.svg' alt=''/>
+              </div>
+              <div className={styles.left}>
+                <img src='/img/Fortune/coins2.svg' alt=''/>
+              </div>
             </div>
           </div>
         </HiddenXs>
