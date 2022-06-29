@@ -25,7 +25,7 @@ export const CryptoWalletActions = (props: Props) => {
         <Button
           className={styles.btn}
           background='dark600'
-          onClick={() => handleClick(ProfileModalType.exchange)}
+          onClick={() => context.showModalProfile(ProfileModalType.exchange)}
         >
           <img src='/img/Wallet/exchange.svg' alt=''/>
           {t('wallet_exchange_crypto')}
@@ -33,7 +33,7 @@ export const CryptoWalletActions = (props: Props) => {
       </div>
       <div className={styles.btnWrap}>
         <Button
-          onClick={() => handleClick(ProfileModalType.buyCrypto)}
+          onClick={() => context.showModalProfile(ProfileModalType.buyCrypto)}
           className={styles.btn} background='dark600'><img src='/img/Wallet/buy.svg' alt=''/>{t('wallet_buy_crypto')}
         </Button>
       </div>

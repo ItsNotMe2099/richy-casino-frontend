@@ -84,6 +84,7 @@ const ModalsBottomSheet = [
   ProfileModalType.withdraw,
   ProfileModalType.wallet,
   ProfileModalType.exchange,
+  ProfileModalType.buyCrypto,
   ModalType.login,
   ModalType.registration,
   ModalType.registrationPhone,

@@ -12,10 +12,13 @@ import Button from 'components/ui/Button'
 import ProfileModalFooter from 'components/Profile/layout/ProfileModalFooter'
 import {useTranslation} from 'next-i18next'
 import {useEffect} from 'react'
+import BottomSheetLayout from 'components/layout/BottomSheetLayout'
+import BottomSheetHeader from 'components/layout/BottomSheetHeader'
+import BottomSheetBody from 'components/layout/BottomSheetBody'
 
 
 interface Props {
-
+  isBottomSheet?: boolean
 }
 
 export default function BuyCrypto(props: Props) {
@@ -46,14 +49,9 @@ export default function BuyCrypto(props: Props) {
   useEffect(() => {
     setFieldValue('amountGet', (values.amountSent * 2))
   }, [values.amountSent])
-  return (
-    <FormikProvider value={formik}>
 
-      <Form className={styles.form}>
-        <ProfileModalLayout fixed>
-          <ProfileModalHeader title={t('buy_crypto_title')}/>
-          <ProfileModalBody fixed>
-            <div className={styles.send}>
+  const result = (<>
+    <div className={styles.send}>
               <div className={styles.texts}>
                 <div className={styles.youSend}>
                   {t('buy_crypto_buy')}
@@ -80,6 +78,39 @@ export default function BuyCrypto(props: Props) {
             <div className={styles.disclaimer}>
               {t('buy_crypto_disclaimer')} {t('buy_crypto_disclaimer_text')}
             </div>
+  </>)
+
+  if(props.isBottomSheet){
+    return(
+    <FormikProvider value={formik}>
+
+      <Form className={styles.form}>
+        <BottomSheetLayout>
+          <BottomSheetHeader title={t('buy_crypto_title')}/>
+          <BottomSheetBody>
+            {result}
+          </BottomSheetBody>
+          <ProfileModalFooter>
+            <Button type='submit' size='play' fluid background='blueGradient500'
+                    className={styles.btn}>{t('buy_crypto_but_button')}</Button>
+          </ProfileModalFooter>
+        </BottomSheetLayout>
+
+
+
+      </Form>
+    </FormikProvider>
+    )
+  }
+  else{
+  return (
+    <FormikProvider value={formik}>
+
+      <Form className={styles.form}>
+        <ProfileModalLayout fixed>
+          <ProfileModalHeader title={t('buy_crypto_title')}/>
+          <ProfileModalBody fixed>
+            {result}
           </ProfileModalBody>
           <ProfileModalFooter>
             <Button type='submit' size='play' fluid background='blueGradient500'
@@ -94,4 +125,5 @@ export default function BuyCrypto(props: Props) {
 
 
   )
+  }
 }
