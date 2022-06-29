@@ -65,12 +65,26 @@
   margin-right: 7px;
   min-width: 79px;
   padding: 10px 0;
+  position: relative;
   @media screen and (max-width: $xs-max){
     min-width: 40px;
     max-width: 40px;
     font-size: 20px;
     min-height: 50px;
     border-radius: 9px;
+  }
+  :global .react-reel__number{
+    height: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  :global .react-reel__reel{
+    height: 1em;
+    display: flex;
+    align-items: flex-end;
+    overflow-y: hidden;
+    max-height: 58px;
   }
 }
 
