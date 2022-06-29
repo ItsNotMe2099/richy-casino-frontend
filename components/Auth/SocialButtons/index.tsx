@@ -5,19 +5,27 @@ import Link from 'next/link'
 import {runtimeConfig} from 'config/runtimeConfig'
 import SocialServiceRepository from 'data/repositories/SocialServiceRepository'
 import {ISocialService} from 'data/interfaces/ISocialService'
+import Google from 'components/svg/Google'
+import FacebookL from 'components/svg/FacebookL'
+import OK from 'components/svg/OK'
+import Yandex from 'components/svg/Yandex'
+import VK from 'components/svg/VK'
+import MailRu from 'components/svg/MailRu'
+import Steam from 'components/svg/Steam'
+import Instagram from 'components/svg/Instagram'
 
 interface Props{
   currency?: string
 }
 const SocialItem = ({link, icon}) => <Link href={link || '#'}>
   <a className={styles.btn}>
-    <img src={icon} alt=''/>
+    {icon}
   </a>
 </Link>
 
 export default function SocialButtons(props: Props) {
   const [services, setServices] = useState<ISocialService[]>([])
-  useEffect(() => {
+  useEffect( () => {
     SocialServiceRepository.fetchServices().then(i => setServices(i ?? []))
   }, [])
   const host = runtimeConfig.HOST
@@ -25,23 +33,23 @@ export default function SocialButtons(props: Props) {
     const basePath = '/img/Auth/'
     switch (icon){
       case 'google':
-        return `${basePath}/google.svg`
+        return <Google/>
       case 'facebook':
-        return `${basePath}/facebook.svg`
+        return <FacebookL/>
       case 'twitter':
         return `${basePath}/twitter.svg`
       case 'ok':
-        return `${basePath}/google.svg`
+        return <OK/>
       case 'yandex':
-        return `${basePath}/yandex.svg`
+        return <Yandex/>
       case 'vkontakte':
-        return `${basePath}/vk.svg`
+        return <VK/>
       case 'mail':
-        return `${basePath}/mailRu.svg`
+        return <MailRu/>
       case 'steam':
-        return `${basePath}/steam.svg`
+        return <Steam/>
       case 'instragram':
-        return `${basePath}/instragram.svg`
+        return <Instagram/>
     }
   }
   const socials = services.map(i => ({icon: getIcon(i.id), link: `${i.url}${props.currency ? `&currency_iso=${props.currency}` : ''}`})).filter(i => i.icon)

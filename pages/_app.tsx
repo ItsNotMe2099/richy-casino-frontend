@@ -87,10 +87,12 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   }
   if ((appContext.ctx.req as any)?.cookies) {
     if(!(appContext.ctx.req as any).cookies[CookiesType.sessionId]){
-      nookies.set(appContext.ctx, CookiesType.sessionId, uuidv4(), {
+      const sessionId =  uuidv4()
+      nookies.set(appContext.ctx, CookiesType.sessionId, sessionId, {
         maxAge: CookiesLifeTime.sessionId * 60 * 60 * 24 ,
         path: '/',
       })
+      (appContext.ctx.req as any).cookies[CookiesType.sessionId] = sessionId
     }
     props.pageProps.language =  (appContext.ctx as any).req.cookies[CookiesType.language]
     props.pageProps.token = (appContext.ctx as any).req.cookies[CookiesType.accessToken]
