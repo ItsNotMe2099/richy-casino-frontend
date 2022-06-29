@@ -1,4 +1,5 @@
 import Document, {Html, Head, Main, NextScript} from 'next/document'
+import { colors } from 'scss/variables'
 
 class MyDocument extends Document {
   render() {
@@ -11,7 +12,7 @@ class MyDocument extends Document {
           <link rel="manifest" href="/manifest.json"/>
           <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"/>
           <meta name="msapplication-TileColor" content="#da532c"/>
-          <meta name="theme-color" content="#ffffff"/>
+          <meta name="theme-color" content={colors.dark800}/>
         </Head>
         <body>
         <Main/>

@@ -22,11 +22,12 @@ export default function GameIframeRichy(props: Props) {
      {!appContext.isMobile && <GameIFrameHeader title={props.game.name}/>}
       <div className={styles.board}>
      
-          {props.session && (appContext.isMobile ? <iframe
+          {props.session && (appContext.isMobile ? 
+            <iframe
            src={props.session.gameUrl}
            className={styles.iframe}
            style={{ width: '100%', minWidth: '100%'}}
-          /> : <IframeResizer
+          />: <IframeResizer
             log
             autoResize={!appContext.isMobile}
             className={styles.iframe}
