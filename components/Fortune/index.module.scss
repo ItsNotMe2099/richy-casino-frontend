@@ -42,6 +42,7 @@
   display: flex;
   justify-content: center;
   min-width: 391px;
+  position: relative;
   div{
     flex-shrink: 0;
   }
@@ -94,8 +95,8 @@
 
 .right{
   position: absolute;
-  bottom: 20px;
-  right: 0;
+  bottom: 10px;
+  right: -5%;
   @media screen and (max-width: 430px){
     display: none;
   }
@@ -103,7 +104,7 @@
 
 .left{
   position: absolute;
-  bottom: 50px;
+  bottom: 36px;
   left: 0;
   @media screen and (max-width: 430px){
     display: none;
@@ -134,6 +135,12 @@
   @media (min-width: 429px) {
     position: absolute;
     bottom: 25%;
+  }
+}
+
+.withTimer{
+  @media (min-width: 429px) {
+    bottom: 37%;
   }
 }
 

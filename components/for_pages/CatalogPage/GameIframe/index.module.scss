@@ -12,6 +12,11 @@
     .board{
       display: flex;
       flex-direction: column;
+      > div{
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
     }
     .iframeWrapper{
       flex: 1

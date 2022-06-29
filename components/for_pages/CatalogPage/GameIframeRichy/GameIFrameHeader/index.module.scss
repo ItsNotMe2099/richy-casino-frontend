@@ -2,7 +2,6 @@
 
 .root{
   @include componentRoot();
-
   display: flex;
   align-items: center;
   padding: 15px 24px;

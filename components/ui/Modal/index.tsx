@@ -107,10 +107,8 @@ export default function Modal(props: Props) {
     )
   } else {
     const openModal = () => {
-      document.body.classList.add('modal-open')
     }
     const hideModal = () => {
-      document.body.classList.remove('modal-open')
     }
     /* eslint-disable */
     // @ts-ignore

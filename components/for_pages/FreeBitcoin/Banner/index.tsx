@@ -12,6 +12,7 @@ import {differenceInSeconds} from 'date-fns'
 import {IFreeBitcoinGame, IFreeBitcoinGameStatus} from 'data/interfaces/IFreeBitcoinGame'
 import Formatter from 'utils/formatter'
 import { ModalType } from 'types/enums'
+import Reel from 'react-reel'
 
 enum State{
   Timer = 'timer',
@@ -51,7 +52,7 @@ export default function Banner(props: Props) {
   const Digit = (prop: {digit: string}) => {
     return (
       <div className={styles.digit}>
-        {prop.digit}
+        <Reel text={prop.digit}/>
       </div>
     )
   }

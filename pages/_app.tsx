@@ -36,6 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const {t, i18n} = useTranslation()
 
   useEffect(() => {
+    
     if(pageProps.language !== i18n.language){
       i18n.changeLanguage(pageProps.language)
     }
@@ -45,6 +46,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     if (typeof  navigator !== 'undefined' && 'serviceWorker' in navigator) {
       console.log('registerServiceWorker')
       navigator.serviceWorker.register('/pwabuilder-sw.js', {scope: './'})
+    }
+    if(typeof window !== 'undefined'){
+      const appHeight = () => {
+        const doc = document.documentElement
+        doc.style.setProperty('--app-height', `${window.innerHeight}px`)
+       }
+       appHeight()
+       window.addEventListener('resize', appHeight)
     }
   }, [])
 

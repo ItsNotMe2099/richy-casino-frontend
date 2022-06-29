@@ -17,6 +17,8 @@ import ProfileBurger from 'components/ui/ProfileBurger'
 import FALogin from 'components/Profile/FALogin'
 import MobileAppModal from 'components/ui/MobileAppModal'
 import BonusModal from 'components/ui/BonusModal'
+import Exchange from 'components/Profile/Exchange'
+import BuyCrypto from 'components/Profile/BuyCrypto'
 
 
 interface Props {}
@@ -82,6 +84,22 @@ export default function BottomSheetContainer(props: Props) {
         </Sheet>
 
         <Sheet
+          isOpen={appContext.bottomSheet == ProfileModalType.exchange}
+          onClose={appContext.hideBottomSheet}
+          snapPoints={[620]}
+        >
+          {appContext.bottomSheet == ProfileModalType.exchange && <Exchange isBottomSheet={true} />}
+        </Sheet>
+
+        <Sheet
+          isOpen={appContext.bottomSheet == ProfileModalType.buyCrypto}
+          onClose={appContext.hideBottomSheet}
+          snapPoints={[620]}
+        >
+          {appContext.bottomSheet == ProfileModalType.buyCrypto && <BuyCrypto isBottomSheet={true} />}
+        </Sheet>
+
+        <Sheet
           isOpen={appContext.bottomSheet == ProfileModalType.withdraw}
           onClose={appContext.hideBottomSheet}
           snapPoints={[620]}
@@ -111,7 +129,7 @@ export default function BottomSheetContainer(props: Props) {
 
         {appContext.bottomSheet == ModalType.bonus && (
           
-          <BonusModal isBottomSheet isOpen onRequestClose={() => appContext.hideModal()}/>
+          <BonusModal isBottomSheet isOpen onRequestClose={() => appContext.hideBottomSheet()}/>
       
       )}
 

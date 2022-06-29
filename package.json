@@ -65,6 +65,7 @@
     "react-modal": "^3.14.4",
     "react-modal-sheet": "^1.4.2",
     "react-qr-code": "^2.0.5",
+    "react-reel": "^1.2.3",
     "react-remove-scroll": "^2.4.4",
     "react-slick": "^0.29.0",
     "react-sticky": "^6.0.3",

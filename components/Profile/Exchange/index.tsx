@@ -12,9 +12,12 @@ import Validator from 'utils/validator'
 import {ExchangeCurrencySelectField} from 'components/ui/Inputs/ExchangeCurrencySelectField'
 import ProfileModalFooter from 'components/Profile/layout/ProfileModalFooter'
 import Button from 'components/ui/Button'
+import BottomSheetLayout from 'components/layout/BottomSheetLayout'
+import BottomSheetHeader from 'components/layout/BottomSheetHeader'
+import BottomSheetBody from 'components/layout/BottomSheetBody'
 
 interface Props {
-
+  isBottomSheet?: boolean
 }
 
 export default function Exchange(props: Props) {
@@ -53,14 +56,8 @@ export default function Exchange(props: Props) {
     setCurrentGet(array2)
   }, [values.amountSent, values.currencySent, values.currencyGet])
 
-  return (
-    <FormikProvider value={formik}>
-
-      <Form className={styles.form}>
-        <ProfileModalLayout fixed>
-          <ProfileModalHeader title={t('exchange_title')}/>
-          <ProfileModalBody fixed>
-            <div className={styles.send}>
+  const result = (<>
+    <div className={styles.send}>
               <div className={styles.texts}>
                 <div className={styles.youSend}>
                   {t('exchange_you_send')}
@@ -92,6 +89,33 @@ export default function Exchange(props: Props) {
                 </div>
               </div>
             </div>
+  </>)
+
+if(props.isBottomSheet){
+  return (
+    <FormikProvider value={formik}>
+      <Form className={styles.form}>
+      <BottomSheetLayout>
+      <BottomSheetHeader title={t('exchange_title')}/>
+      <BottomSheetBody>
+            {result}
+      </BottomSheetBody>
+      <ProfileModalFooter>
+            <Button type='submit' size='play' fluid background='blueGradient500' className={styles.btn}>{t('exchange_button')}</Button>
+      </ProfileModalFooter>
+        </BottomSheetLayout>
+      </Form>
+    </FormikProvider>
+  )
+}
+else{
+  return (
+    <FormikProvider value={formik}>
+      <Form className={styles.form}>
+        <ProfileModalLayout fixed>
+          <ProfileModalHeader title={t('exchange_title')}/>
+          <ProfileModalBody fixed>
+            {result}
           </ProfileModalBody>
           <ProfileModalFooter>
             <Button type='submit' size='play' fluid background='blueGradient500' className={styles.btn}>{t('exchange_button')}</Button>
@@ -100,4 +124,5 @@ export default function Exchange(props: Props) {
       </Form>
     </FormikProvider>
   )
+}
 }
