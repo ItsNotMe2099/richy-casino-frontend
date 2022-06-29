@@ -17,6 +17,7 @@ import ProfileBurger from 'components/ui/ProfileBurger'
 import FALogin from 'components/Profile/FALogin'
 import MobileAppModal from 'components/ui/MobileAppModal'
 import BonusModal from 'components/ui/BonusModal'
+import Exchange from 'components/Profile/Exchange'
 
 
 interface Props {}
@@ -79,6 +80,14 @@ export default function BottomSheetContainer(props: Props) {
           snapPoints={[620]}
         >
           {appContext.bottomSheet == ProfileModalType.wallet && <Wallet isBottomSheet={true} />}
+        </Sheet>
+
+        <Sheet
+          isOpen={appContext.bottomSheet == ProfileModalType.exchange}
+          onClose={appContext.hideBottomSheet}
+          snapPoints={[620]}
+        >
+          {appContext.bottomSheet == ProfileModalType.exchange && <Exchange isBottomSheet={true} />}
         </Sheet>
 
         <Sheet

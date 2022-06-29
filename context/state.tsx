@@ -83,6 +83,7 @@ const defaultValue: IState = {
 const ModalsBottomSheet = [
   ProfileModalType.withdraw,
   ProfileModalType.wallet,
+  ProfileModalType.exchange,
   ModalType.login,
   ModalType.registration,
   ModalType.registrationPhone,
