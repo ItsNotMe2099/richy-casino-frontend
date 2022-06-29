@@ -93,10 +93,10 @@ export default function Profile(props: Props) {
           }
           <div className={styles.actions}>
             <div className={styles.notGreen}>
-              <Button className={styles.btn} onClick={() => context.showModalProfile(ProfileModalType.exchange)}>
+              <Button className={styles.btn} onClick={() => context.showModalProfile(ProfileModalType.withdraw)}>
                 {t('profile_exchange')}
               </Button>
-              <Button className={styles.btn} onClick={() => context.showModalProfile(ProfileModalType.withdraw)}>
+              <Button className={styles.btn} onClick={() => context.showModalProfile(ProfileModalType.exchange)}>
                 {t('profile_withdrawal')}
               </Button>
             </div>
