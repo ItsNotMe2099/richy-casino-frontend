@@ -38,8 +38,11 @@ export const getServerSideProps = async (context) => {
   const ua = context.req ? context.req?.headers['user-agent'] : navigator.userAgent
   const {isMobile} = ua ? getSelectorsByUserAgent(ua) : {isMobile: false}
   const token = context.req.cookies[CookiesType.accessToken]
+  const lang = context.req.cookies[CookiesType.language] || context.locale || 'en'
+  const sessionId = context.req.cookies[CookiesType.sessionId]
   const gamesRichy = await GameListRepository.fetchGames({providerInternalName: RICHY_CATEGORY_NAME})
-  const session = context.query.demo ? await GameListRepository.createGameDemo(gameId, isMobile ? 'mobile' : 'desktop', token) : await GameListRepository.createGame(gameId, isMobile ? 'mobile' : 'desktop', token)
+
+  const session = context.query.demo ? await GameListRepository.createGameDemo(gameId, isMobile ? 'mobile' : 'desktop', token, sessionId, lang) : await GameListRepository.createGame(gameId, isMobile ? 'mobile' : 'desktop', token, sessionId, lang)
   
   switch (session?.strategy){
     case GameSessionStrategy.Detect:

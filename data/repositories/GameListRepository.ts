@@ -172,11 +172,13 @@ export default class GameListRepository {
     return Converter.convertApiPaginationResponse(res.data)
   }
 
-  static async createGame(gameId: number, clientType: string, token?: string): Promise<IGameSession> {
+  static async createGame(gameId: number, clientType: string, token?: string, sessionId?: string, language?: string): Promise<IGameSession> {
     const res = await request({
       method: 'post',
       url: '/api/games/session/start',
       token,
+      language,
+      sessionId,
       data: {game_id: gameId, client_type: clientType}
     })
     console.log('gameId', gameId)
@@ -191,14 +193,16 @@ export default class GameListRepository {
     return this.fetchGames({providerInternalName: RICHY_CATEGORY_NAME}, page, limit)
   }
 
-  static async createGameDemo(gameId: number, clientType: string, token?: string): Promise<IGameSession> {
+  static async createGameDemo(gameId: number, clientType: string, token?: string, sessionId?: string, language?: string): Promise<IGameSession> {
     const res = await request({
       method: 'post',
       url: '/api/games/session/demo',
       token,
+      language,
+      sessionId,
       data: {game_id: gameId, client_type: clientType}
     })
-    console.log("ResErr", res.err)
+    console.log('ResErr', res.err)
     if (res.err) {
       return null
     }
