@@ -28,12 +28,12 @@
 .close{
   position: absolute;
   cursor: pointer;
-  right: 15px;
+  right: 0px;
+  top: 0px;
   display: flex;
   z-index: 11;
   justify-content: center;
-  width: 50px;
-  height: 29px;
+    padding: 12px 10px 20px 30px;
   align-items: center;
   img{
     width: 14px;
@@ -151,10 +151,7 @@
     }
   }
 
-  .close{
-    right: -2px;
-    top: -3px;
-  }
+
 
   @media screen and (max-width: $mobile-max){
     max-height: initial;
