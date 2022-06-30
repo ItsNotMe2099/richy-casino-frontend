@@ -30,6 +30,7 @@ export default function WithGameFilterLayout(props: Props) {
     setIsSearchLoading(true)
     const res = await GameListRepository.fetchGames({name: value}, 1, searchLimit)
     setSearchGames(res)
+    setIsSearchLoading(false)
   }, 300)
   const handleScrollNext = async () => {
     const newPage = searchPage + 1
