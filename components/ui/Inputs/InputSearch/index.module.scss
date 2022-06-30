@@ -25,8 +25,11 @@ $heightMobile: 38px;
     }
     @media screen and (max-width: $xs-max){
       height: $heightMobile;
-      line-height: $heightMobile;
+      line-height: 41px;
       padding-left: 43px;
+      &::placeholder{
+        line-height: 41px;
+      }
     }
     @media screen and (max-width: $xs-max){
       background: #16171E;
