@@ -28,13 +28,13 @@
 .close{
   position: absolute;
   cursor: pointer;
-  right: 15px;
+  right: 0px;
+  top: 0px;
   display: flex;
   z-index: 11;
-  justify-content: flex-end;
-  height: 100%;
-  width: 100%;
-  transform: rotate(90deg);
+  justify-content: center;
+    padding: 12px 10px 20px 30px;
+  align-items: center;
   img{
     width: 14px;
   }
@@ -151,10 +151,7 @@
     }
   }
 
-  .close{
-    right: -141px;
-    top: -195px;
-  }
+
 
   @media screen and (max-width: $mobile-max){
     max-height: initial;

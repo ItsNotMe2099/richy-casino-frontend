@@ -31,7 +31,7 @@ export default function GameIframeRichy(props: Props) {
             log
             autoResize={!appContext.isMobile}
             className={styles.iframe}
-            heightCalculationMethod="bodyScroll"
+            heightCalculationMethod="taggedElement"
             src={props.session.gameUrl}
             style={{ width: '1px', minWidth: '100%'}}
           />)}
