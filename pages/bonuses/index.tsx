@@ -32,11 +32,11 @@ export default function Bonuses(){
           {(item.imageDesktopUrl || item.imageMobileUrl) && <Image src={isMobile ? item.imageMobileUrl || item.imageDesktopUrl : item.imageDesktopUrl || item.imageMobileUrl}  layout={'fill'}/>}
 
           <div className={styles.left}>
-          <div className={classNames(styles.label, {[styles.second]: index > 0})} style={{fontSize: isMobile ? `${width / 24}px` : `${width / 54}px`}}>
+          <div className={classNames(styles.label, {[styles.second]: index > 0})} style={{fontSize: `${width / 24}px`}}>
             {item.title}
           </div>
-          <div className={classNames(styles.btn, {[styles.alt]: item.id === 3})} style={{fontSize: isMobile ? `${width / 22}px` : `${width / 38 > 18 ? 18 : width / 38}px`}}>
-            <Button size='normal' background={index === 1 ? 'blueGradient500' : 'white'} href={item.redirectUrl}>{item.textButton}</Button>
+          <div className={classNames(styles.btn)} style={{fontSize: isMobile ? `${width / 22}px` : `${width / 38 > 18 ? 18 : width / 38}px`}}>
+            <Button size='normal' background={'white'} href={item.redirectUrl}>{item.textButton}</Button>
           </div>
         </div>
         </div>
