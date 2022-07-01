@@ -2,6 +2,8 @@ import styles from './index.module.scss'
 import Link from 'next/link'
 import {Routes} from 'types/routes'
 import {useTranslation} from 'next-i18next'
+import Image from 'next/image'
+import { useAppContext } from 'context/state'
 
 
 
@@ -12,6 +14,8 @@ interface Props {
 
 export default function Contents(props: Props) {
   const {t} = useTranslation()
+  const contex = useAppContext()
+  const isMobile = contex.isMobile
   const items = [
     {image: '/img/Contents/bitcoin.svg', label: t('main_card_free_bitcoin_title'), desc: t('main_card_free_bitcoin_desc'), link: Routes.freeBitcoin, value: 'bitcoin'},
     {image: '/img/Contents/gamepad.svg', label: t('main_card_richy_games_title'), desc: t('main_card_richy_games_desc'), link: Routes.richyGames, value: 'richy'},
@@ -45,8 +49,8 @@ export default function Contents(props: Props) {
          <Link href={item.link}  key={item.link}>
           <a className={styles.item}>
             <div className={styles.image}>
-              <div className={styles.shadow}><img src={getShadow(item)} alt=''/></div>
-              <div className={styles.icon}><img src={item.image} alt=''/></div>
+              <div className={styles.shadow}><Image src={getShadow(item)} width={92} height={92}/></div>
+              <div className={styles.icon}><Image src={item.image} width={isMobile ? 42 : 56} height={isMobile ? 42 : 56}/></div>
             </div>
             <div className={styles.label}>
               {item.label}

@@ -7,6 +7,7 @@ import {useEffect, useState} from 'react'
 import {ITournamentTop10} from 'data/interfaces/ITournamentTop10'
 import TournamentRepository from 'data/repositories/TournamentRepository'
 import {useTranslation} from 'next-i18next' 
+import Image from 'next/image'
 
 interface IUser {
   nickname: string
@@ -24,6 +25,7 @@ export default function Winners(props: Props) {
   const {t} = useTranslation()
   const context = useAppContext()
   const [winners, setWinners] = useState<ITournamentTop10[]>([])
+  const isMobile = context.isMobile
   useEffect(() => {
     TournamentRepository.fetchHistory(1, 1).then(i => {
 
@@ -57,7 +59,7 @@ export default function Winners(props: Props) {
           </div>
           <div className={styles.content}>
             <div className={styles.illustration}>
-              <img src='/img/Winners/illustration.svg' alt=''/>
+              <Image src='/img/Winners/illustration.svg' width={392} height={218}/>
             </div>
             <div className={styles.outerWrapper}>
             <div className={styles.transparent}></div>
@@ -91,7 +93,7 @@ export default function Winners(props: Props) {
                     <td className={styles.cell}>
                     <div className={styles.group}>
                       <div className={styles.avatar}>
-                        <img src={item.avatar} alt=''/>
+                        <Image src={item.avatar} width={isMobile ? 16 : 32} height={isMobile ? 16 : 32}/>
                       </div>
                       <div className={styles.nick}>
                         {item.nickname}

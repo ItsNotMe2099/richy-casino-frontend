@@ -9,6 +9,7 @@ import { useMeasure } from 'react-use'
 //import {useEffect} from 'react'
 //import TournamentRepository from 'data/repositories/TournamentRepository'
 import {useTranslation} from 'next-i18next'
+import Image from 'next/image'
 
 interface Props {
   balance: string
@@ -67,7 +68,7 @@ export default function Tournament(props: Props) {
       <div className={styles.mobile} ref={ref}>
       <div className={styles.leftMobile}>
         <div className={styles.heroMobile}>
-          <img src='/img/Tournament/hero-mobile.png' alt=''/>
+          <Image src='/img/Tournament/hero-mobile.png' layout='fill'/>
         </div>
       </div>
         <div className={styles.rightMobile}>

@@ -5,6 +5,9 @@ import QuestionPopover from 'components/ui/QuestionPopover'
 import Link from 'next/link'
 import VisibleXs from 'components/ui/VisibleXS'
 import {useTranslation} from 'next-i18next'
+import Image from 'next/image'
+import { useAppContext } from 'context/state'
+
 interface Props {
   length?: number | string
   icon: string
@@ -20,6 +23,8 @@ interface Props {
 
 export default function Header(props: Props) {
   const {t} = useTranslation()
+  const context = useAppContext()
+  const isMobile = context.isMobile
   const SliderArrow = () => {
     return (
       <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +57,9 @@ export default function Header(props: Props) {
         <div className={classNames(styles.root, rootClasses, props.className)}>
           <div className={styles.block}>
             {props.icon && <div className={styles.icon}>
-            {props.shadowColor && <div className={styles.shadow}><img src={getShadow(props.shadowColor)} alt=''/></div>}
+            {props.shadowColor && <div className={styles.shadow}>
+              <Image src={getShadow(props.shadowColor)} width={isMobile ? 30 : 84} height={isMobile ? 30 : 84}/>
+              </div>}
             <div className={styles.image}><img src={props.icon} alt=''/></div>
           </div>}
           <div className={styles.label}>

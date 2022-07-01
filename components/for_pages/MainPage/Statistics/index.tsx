@@ -7,6 +7,8 @@ import {IGameHistory} from 'data/interfaces/IGameHistory'
 import GameListRepository from 'data/repositories/GameListRepository'
 import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
 import {useTranslation} from 'next-i18next'
+import Image from 'next/image'
+import { useAppContext } from 'context/state'
 
 interface Props {
 
@@ -16,6 +18,9 @@ export default function Statistics(props: Props) {
   const {t} = useTranslation()
   const [data, setData] = useState<IPagination<IGameHistory>>({total: 0, data: []})
   const [loading, setLoading] = useState(true)
+  const context = useAppContext()
+
+  const isMobile = context.isMobile
   useEffect(() => {
     GameListRepository.fetchGameSessionHistory(1, 10).then(i => {
       setData(i)
@@ -53,7 +58,8 @@ export default function Statistics(props: Props) {
                 <div className={styles.cell}>
                   <div className={styles.game}>
                     <div className={styles.gameImg}>
-                      <img src={item.imageIconPreviewUrl} alt=''/>
+                      {/*<img src={item.imageIconPreviewUrl} alt=''/>*/}
+                      <Image src={item.imageIconPreviewUrl} width={isMobile ? 16 : 28} height={isMobile ? 16 : 28}/>
                     </div>
                     <div className={styles.gameLbl}>
                       {item.gameId}
