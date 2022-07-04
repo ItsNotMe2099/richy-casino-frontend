@@ -15,6 +15,7 @@ import classNames from 'classnames'
 import RichyLoader from 'components/ui/RichyLoader'
 import { ModalType } from 'types/enums'
 import { useMeasure } from 'react-use'
+import { useTranslation } from 'next-i18next'
 
 const Board = dynamic(() => import('./Board'), { ssr: false })
 
@@ -30,6 +31,7 @@ interface Props {
 
 export default function Fortune(props: Props) {
   const totalTime = 5000
+  const {t} = useTranslation()
   const appContext = useAppContext()
   const [ref, { width, height }] = useMeasure()
   const canvasSize = appContext.isMobile ? width + width * 0.1 : 390
@@ -112,7 +114,7 @@ export default function Fortune(props: Props) {
       <HiddenXs>
           <div className={classNames(styles.wrapper, {[styles.withTimer]: !available && appContext.auth })}>
             <div className={styles.everyday}>
-              <div>lucky spin everyday</div>
+              <div>{t('fortune_lucky_spin_title')}</div>
               <div className={styles.right}>
                 <img src='/img/Fortune/coins1.svg' alt=''/>
               </div>
@@ -128,7 +130,7 @@ export default function Fortune(props: Props) {
         <VisibleXs>
           <div className={styles.wrapperMobile}>
             <div className={styles.everydayMobile}>
-              <div>lucky spin everyday</div>
+              <div>{t('fortune_lucky_spin_title')}</div>
             </div>
           </div>
         </VisibleXs>
@@ -139,15 +141,14 @@ export default function Fortune(props: Props) {
               className={styles.spin}
               background="pink"
               disabled={!!gameResult}
-            >
-              Spin the wheel
+            >{t('fortune_spin_button')}
             </Button>
           </div>
         {/*})*/}
         {!available && appContext.auth && (
           <div className={styles.next}>
             <div className={styles.free}>
-              Next free spin bonus
+            {t('fortune_spin_next')}
             </div>
             <div className={styles.timer}>
               <div className={styles.hours}>

@@ -15,6 +15,7 @@ interface Props {
   onPrev?: () => void
   onNext?: () => void
   slider?: boolean
+  popoverText?: string
   style?: 'labelOnly' | 'withoutLength' | 'fullOnlyOnMobile' | 'popover' | null
   shadowColor?: 'red' | 'blue' | 'yellow' | 'violet'
   className?: string
@@ -67,7 +68,7 @@ export default function Header(props: Props) {
           </div>
         </div>
         <div className={styles.right}>
-          <QuestionPopover info='info' className={styles.question}/>
+          <QuestionPopover info={props.popoverText} className={styles.question}/>
           <div className={styles.length}>
             {props.length}
           </div>

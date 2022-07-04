@@ -165,6 +165,7 @@
 
 .row{
     display: table-row;
+
     .cell{
         font-weight: 600;
         font-size: 1.1rem;
@@ -260,7 +261,9 @@
     align-items: center;
     font-weight: 600;
     font-size: 14px;
-    img{
+    .currency{
+        width: 16px;
+        height: 16px;
         margin-right: 8px;
     }
     @media screen and (max-width: $xs-max){

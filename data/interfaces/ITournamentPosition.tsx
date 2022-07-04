@@ -2,6 +2,7 @@ export interface ITournamentPosition {
   id?: number
   tournamentId?: number
   username?: string
+  nickname?: string
   userPosition: number
   userAvatar: string
   userCurrencyIso: string

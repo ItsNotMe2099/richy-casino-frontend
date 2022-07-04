@@ -40,7 +40,7 @@ export default function Tournament(props: Props) {
     }else{
       setSending(true)
       try{
-      const res = await TournamentRepository.participate()
+      const res = await TournamentRepository.participate(tournament.tournamentId)
       TournamentRepository.fetchRichyTournament().then(i => {
         setTournament(i)
      })

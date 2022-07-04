@@ -27,10 +27,11 @@ export default class TournamentRepository {
     return Converter.objectKeysToCamelCase(res.data?.data)
   }
 
-  static async participate(): Promise<ITournamentParticipateResponse> {
+  static async participate(tournamentId: number): Promise<ITournamentParticipateResponse> {
     const res = await request({
       method: 'get',
       url: '/api/tournament/round/participate',
+      data: {tournament_id: tournamentId}
     })
     if (res.err) {
       return null
@@ -64,7 +65,7 @@ export default class TournamentRepository {
     return Converter.objectKeysToCamelCase(res.data?.data)
   }
 
-  static async fetchPositions(): Promise<IPagination<ITournamentPosition[]>> {
+  static async fetchPositions(): Promise<ITournamentPosition[]> {
     const res = await request({
       method: 'get',
       url: '/api/tournament/round/position',
@@ -90,7 +91,7 @@ export default class TournamentRepository {
     return  res.data.data?.map(i => Converter.objectKeysToCamelCase(i))
   }
 
-  static async fetchWinners(): Promise<ITournamentWinner[]> {
+  static async fetchLastWinners(): Promise<ITournamentWinner[]> {
     const res = await request({
       method: 'get',
       url: '/api/tournament/round/last-winner',
