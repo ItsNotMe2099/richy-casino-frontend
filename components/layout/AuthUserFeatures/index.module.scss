@@ -21,3 +21,19 @@
       width: 100%;
   }
 }
+
+.bonus{
+  position: absolute;
+  top: 300px;
+  right: 10px;
+  z-index: 10;
+  cursor: pointer;
+
+  @media screen and (max-width: $sm-min){
+    position: absolute;
+    right: 0px;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+}

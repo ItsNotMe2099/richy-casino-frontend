@@ -7,6 +7,7 @@ import VisibleXs from 'components/ui/VisibleXS'
 import {BonusDepositShowMode} from 'types/enums'
 import BonusFooter from 'components/for_pages/Common/BonusFooter'
 import { useRouter } from 'next/router'
+import Gift from 'components/for_pages/Common/Gift'
 
 interface Props {}
 
@@ -31,6 +32,7 @@ export default function AuthUserFeatures(props: Props) {
         </div>
       </>
     }
+    {(context.showBonus && context.bonusShowMode === BonusDepositShowMode.Gift) && <div className={styles.bonus}><Gift timer/></div>}
      <VisibleXs>
       <UserFooter/>
     </VisibleXs>
