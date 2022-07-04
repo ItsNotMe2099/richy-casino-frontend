@@ -55,7 +55,7 @@ export default function ModalRegistration(props: Props) {
 
   const result = (<>
     {appContext.showBonus && <div className={styles.banner}>
-      <BonusSmallBanner style='registration'/>
+      <BonusSmallBanner style='wallet'/>
     </div>}
     <div className={styles.wrapper}>
     <div className={styles.variants}>

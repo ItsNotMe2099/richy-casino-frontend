@@ -75,7 +75,7 @@
 
 .wallet{
   padding-left: 85px;
-  padding-top: 17px;
+  padding-top: 7px;
   @media screen and (max-width: $mobile-max){
     padding-left: 25px;
     padding-right: 10px;
@@ -181,12 +181,12 @@
   z-index: 2;
   color: #AAFF55;
   text-align: left;
+  text-transform: uppercase;
 }
 
 .fs{
   color: #AAFF55;
   font-weight: 700;
-  margin-top: -5px;
   font-size: 16px;
 }
 
