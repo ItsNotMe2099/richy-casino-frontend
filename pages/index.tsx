@@ -59,7 +59,7 @@ export default function IndexPage() {
                 <GameCard poker/>
                 <GameCard/>
               </div>
-          <Tournament balance='0,00000001 BTC'/>
+          <Tournament/>
           <Winners/>
           <Statistics/>
         </Layout>

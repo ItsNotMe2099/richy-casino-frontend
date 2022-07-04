@@ -3,7 +3,7 @@ export interface ITournamentRichy {
   providerId?: number
   providerName?: string
   totalBankMoneyAmount: number
-  currencyIso: string
+  currency: string
   timeEnd: string
   games: {id: number, name: string}[]
 }
