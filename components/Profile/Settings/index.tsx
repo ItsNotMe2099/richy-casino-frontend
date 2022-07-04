@@ -64,7 +64,7 @@ export default function Settings(props: Props) {
     username: context.user.username,
     surname: context.user.surname,
     name: context.user.name,
-    birthday_datе: context.user.birthdayDate,
+    birthday_date: context.user.birthdayDate,
     country_iso: context.user.countryIso,
     currency_iso: context.user.currencyIso,
     phone: context.user.phone,
@@ -189,7 +189,7 @@ export default function Settings(props: Props) {
                         errorClassName={styles.fieldError}/>
             <InputField name={'name'} className={styles.input} label={t('settings_field_name')}
                         disabled={sending} errorClassName={styles.fieldError}/>
-            <DateField name={'birthday_datе'} className={styles.input} label={t('settings_field_birthday')}
+            <DateField name={'birthday_date'} className={styles.input} label={t('settings_field_birthday')}
                         disabled={sending} errorClassName={styles.fieldError}/>
             <ProfileSettingsCountrySelectField name={'country_iso'} label={t('settings_field_country')}
                                                disabled={sending}
