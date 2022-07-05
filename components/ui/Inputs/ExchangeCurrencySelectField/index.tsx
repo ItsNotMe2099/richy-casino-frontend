@@ -57,7 +57,7 @@ const Placeholder = (props: PropsOption) => {
 export const ExchangeCurrencySelectField = (props: Props) => {
 
   return (
-  <SelectField className={styles.root} options={props.options}  name={props.name} currentItemStyle={styles.current}
+  <SelectField className={classNames(styles.root, props.className)} options={props.options}  name={props.name} currentItemStyle={styles.current}
     itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
     activeComponent={(option ,isActive) => <Placeholder option={option} isActive={isActive}/>}
   />

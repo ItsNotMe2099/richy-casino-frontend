@@ -56,6 +56,8 @@ export default function Exchange(props: Props) {
     setCurrentGet(array2)
   }, [values.amountSent, values.currencySent, values.currencyGet])
 
+  
+
   const result = (<>
     <div className={styles.send}>
               <div className={styles.texts}>
