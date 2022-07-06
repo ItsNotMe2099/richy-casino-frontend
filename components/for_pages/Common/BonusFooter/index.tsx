@@ -40,7 +40,7 @@ export default function BonusFooter(props: Props) {
   }
 
   return (
-    <div ref={ref} className={classNames(styles.root, props.className, slideClass)} >
+    <div ref={ref} className={classNames(styles.root, props.className, slideClass)} onClick={handleClick}>
       {(props.style === 'modal' || props.style === 'sheet' || props.style === 'footer') &&
       <div className={styles.close} onClick={(e) => {
         e.stopPropagation()

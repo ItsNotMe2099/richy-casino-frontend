@@ -7,10 +7,16 @@ import {ITournamentPosition} from 'data/interfaces/ITournamentPosition'
 import {ITournamentNearest} from 'data/interfaces/ITournamentNearest'
 import {ITournamentWinner} from 'data/interfaces/ITournamentWinner'
 import {ITournamentTop10List} from 'data/interfaces/ITournamentTop10'
-
+interface ITournamentParticipateResponse{
+  userId: number
+  nickname: string
+  tournamentId: number
+  place: number
+  currency: string
+}
 export default class TournamentRepository {
 
-  static async fetchRichyTournaments(): Promise<IPagination<ITournamentRichy[]>> {
+  static async fetchRichyTournament(): Promise<ITournamentRichy> {
     const res = await request({
       method: 'get',
       url: '/api/tournament/round/richy',
@@ -18,7 +24,19 @@ export default class TournamentRepository {
     if (res.err) {
       return null
     }
-    return  res.data.data?.map(i => Converter.objectKeysToCamelCase(i))
+    return Converter.objectKeysToCamelCase(res.data?.data)
+  }
+
+  static async participate(tournamentId: number): Promise<ITournamentParticipateResponse> {
+    const res = await request({
+      method: 'get',
+      url: '/api/tournament/round/participate',
+      data: {tournament_id: tournamentId}
+    })
+    if (res.err) {
+      return null
+    }
+    return Converter.objectKeysToCamelCase(res.data?.data)
   }
 
   static async fetchHistory(page: number = 1, limit: number = 1000): Promise<IPagination<ITournamentHistory>> {
@@ -47,7 +65,7 @@ export default class TournamentRepository {
     return Converter.objectKeysToCamelCase(res.data?.data)
   }
 
-  static async fetchPositions(): Promise<IPagination<ITournamentPosition[]>> {
+  static async fetchPositions(): Promise<ITournamentPosition[]> {
     const res = await request({
       method: 'get',
       url: '/api/tournament/round/position',
@@ -73,7 +91,7 @@ export default class TournamentRepository {
     return  res.data.data?.map(i => Converter.objectKeysToCamelCase(i))
   }
 
-  static async fetchWinners(): Promise<ITournamentWinner[]> {
+  static async fetchLastWinners(): Promise<ITournamentWinner[]> {
     const res = await request({
       method: 'get',
       url: '/api/tournament/round/last-winner',

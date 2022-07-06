@@ -6,9 +6,9 @@ import Slider from 'react-slick'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import { useAppContext } from 'context/state'
-import Gift from 'components/for_pages/Common/Gift'
+//import Gift from 'components/for_pages/Common/Gift'
 import classNames from 'classnames'
-import {BonusDepositShowMode} from 'types/enums'
+//import {BonusDepositShowMode} from 'types/enums'
 import Image from 'next/image'
 import { useMeasure } from 'react-use'
 interface Props {
@@ -50,8 +50,9 @@ export default function TopSlider(props: Props) {
   console.log('Banners', context.banners)
 
   return (
+
     <div className={styles.root} ref={ref}>
-      {(context.showBonus && context.bonusShowMode === BonusDepositShowMode.Gift) && <div className={styles.bonus}><Gift timer/></div>}
+      {/*(context.showBonus && context.bonusShowMode === BonusDepositShowMode.Gift) && <div className={styles.bonus}><Gift timer/></div>*/}
       <HiddenXs>
         <div className={styles.desktop}>
           <BonusSlide style={'slide'}/>

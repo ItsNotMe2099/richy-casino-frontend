@@ -4,7 +4,7 @@ export interface UserFormData{
   username: string
   surname: string
   name: string
-  birthday_datе: string
+  birthday_date: string
   fakePassword?: string
   currentPassword?: string
   password?: string

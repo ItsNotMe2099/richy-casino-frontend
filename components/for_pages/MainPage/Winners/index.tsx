@@ -4,9 +4,13 @@ import { useAppContext } from 'context/state'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 import classNames from 'classnames'
 import {useEffect, useState} from 'react'
-import {ITournamentTop10} from 'data/interfaces/ITournamentTop10'
 import TournamentRepository from 'data/repositories/TournamentRepository'
 import {useTranslation} from 'next-i18next' 
+import Image from 'next/image'
+import { ITournamentWinner } from 'data/interfaces/ITournamentWinner'
+import Formatter from 'utils/formatter'
+import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
+import { ITournamentPosition } from 'data/interfaces/ITournamentPosition'
 
 interface IUser {
   nickname: string
@@ -23,41 +27,39 @@ interface Props {
 export default function Winners(props: Props) {
   const {t} = useTranslation()
   const context = useAppContext()
-  const [winners, setWinners] = useState<ITournamentTop10[]>([])
+  const [winners, setWinners] = useState<ITournamentWinner[]>([])
+  const [userPosition, setUserPosition] = useState<ITournamentPosition | null>()
+  const isMobile = context.isMobile
   useEffect(() => {
-    TournamentRepository.fetchHistory(1, 1).then(i => {
-
+    TournamentRepository.fetchLastWinners().then(i => {
+      setWinners(i)
     })
-    TournamentRepository.fetchTop10().then(i => {
-      if(i?.length > 0) {
-        setWinners(i[0].top10)
+   
+  
+  }, [])
+  useEffect(() => {
+    if(!context.auth){
+      setUserPosition(null)
+      return
+    }
+    TournamentRepository.fetchPositions().then(i => {
+      if(i.length > 0){
+        setUserPosition(i[0])
       }
     })
-  }, [])
+  }, [context.auth])
   const user = context.auth
 
-  const users = [
-    {nickname: 'Erohin', sort: 1, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/folder.jpg'},
-    {nickname: 'Enotova', sort: 2, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarF.svg'},
-    {nickname: 'Sychev', sort: 3, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarM.svg'},
-    {nickname: 'Sychev', sort: 4, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarM.svg'},
-    {nickname: 'Sychev', sort: 5, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarM.svg'},
-    {nickname: 'Sychev', sort: 6, usdt: '45.1056915',  amount: '+ 0.02120625 BTC', avatar: '/img/Winners/avatarM.svg'},
-  ]
 
-  //temporary
-  const userTemp = {avatar: '/img/Winners/avatarM.svg', nickname: 'Blackjack 777', position: '50th+',
-  done: '45.1056915 USDT', top10: '33.1056915 USDT', prize: '+ 00.2120625 BTC · '
-}
 
   return (
       <div className={styles.root} id={'leader-board'}>
           <div className={styles.header}>
-            <Header icon='/img/Winners/icon.svg' label={t('tournament_top10_title')} style='popover' shadowColor='violet'/>
+            <Header icon='/img/Winners/icon.svg' label={t('tournament_top10_title')} style='popover' shadowColor='violet' popoverText={t('tournament_info_popover')}/>
           </div>
           <div className={styles.content}>
             <div className={styles.illustration}>
-              <img src='/img/Winners/illustration.svg' alt=''/>
+              <Image src='/img/Winners/illustration.svg' width={392} height={218}/>
             </div>
             <div className={styles.outerWrapper}>
             <div className={styles.transparent}></div>
@@ -80,18 +82,18 @@ export default function Winners(props: Props) {
         </thead>
         <tbody>
         <Scrollbars className={styles.scroll}>
-        {users.slice(0, 10).map((item, index) =>
+        {winners.slice(0, 10).map((item, index) =>
                   <tr className={styles.user} key={index}>
                     <td className={classNames(styles.cell, styles.cellSort)}>
                       <div className={styles.nick}>{index + 1}</div>
-                      <img className={classNames({[styles.none]: item.sort > 3})}
-                      src={item.sort === 1 ? '/img/Winners/award1.svg' : item.sort === 2 ? '/img/Winners/award2.svg' : item.sort === 3 ? '/img/Winners/award3.svg' : null}
+                      <img className={classNames({[styles.none]: index + 1 > 3})}
+                      src={index + 1 === 1 ? '/img/Winners/award1.svg' : index + 1=== 2 ? '/img/Winners/award2.svg' : index + 1=== 3 ? '/img/Winners/award3.svg' : null}
                       alt=''/>
                     </td>
                     <td className={styles.cell}>
                     <div className={styles.group}>
                       <div className={styles.avatar}>
-                        <img src={item.avatar} alt=''/>
+                        <Image src={'/img/Winners/avatarM.svg'} width={isMobile ? 16 : 32} height={isMobile ? 16 : 32}/>
                       </div>
                       <div className={styles.nick}>
                         {item.nickname}
@@ -100,12 +102,14 @@ export default function Winners(props: Props) {
                     </td>
                     <td className={styles.cell}>
                       <div className={styles.group}>
-                        <img src='/img/Winners/t.png' alt=''/>{item.usdt} USDT
+                      <CurrencySvg className={styles.currency} currencyIso={item.userCurrencyIso}/>
+                   {Formatter.formatAmount(item.spentMoneyAmount, item.userCurrencyIso)} {item.userCurrencyIso}
                       </div>
                     </td>
                     <td className={styles.cell}>
                     <div className={styles.group}>
-                        <img src='/img/Winners/BTC.png' alt=''/>{item.amount}
+                      <CurrencySvg className={styles.currency} currencyIso={item.tournamentCurrencyIso}/>
+                        {Formatter.formatAmount(parseFloat(item.bankWinAmount), item.tournamentCurrencyIso)} {item.tournamentCurrencyIso}
                       </div>
                     </td>
                   </tr>
@@ -162,14 +166,14 @@ export default function Winners(props: Props) {
                 </Scrollbars>*/}
             </div>
           </div>
-          {user &&
+          {userPosition &&
             <div className={styles.bottom}>
               <div className={styles.group}>
                 <div className={styles.avatar}>
-                  <img src={userTemp.avatar} alt=''/>
+                  <img src={'/img/Winners/avatarM.svg'} alt=''/>
                 </div>
                 <div className={styles.nick}>
-                  {userTemp.nickname}
+                  {userPosition.nickname}
                 </div>
               </div>
               <div className={styles.element}>
@@ -177,7 +181,7 @@ export default function Winners(props: Props) {
                   {t('tournament_top10_user_position')}
                 </div>
                 <div className={styles.value}>
-                  {userTemp.position}
+                  {userPosition.userPosition}
                 </div>
               </div>
               <div className={styles.element}>
@@ -186,7 +190,9 @@ export default function Winners(props: Props) {
                 </div>
                 <div className={styles.value}>
                   <div className={styles.group}>
-                    <img src='/img/Winners/t.png' alt=''/>{userTemp.done}
+                    <CurrencySvg className={styles.currency} currencyIso={userPosition.userCurrencyIso}/>
+                    {Formatter.formatAmount(userPosition.spentMoneyAmount, userPosition.userCurrencyIso)} {userPosition.userCurrencyIso}
+                
                   </div>
                 </div>
               </div>
@@ -196,7 +202,9 @@ export default function Winners(props: Props) {
                 </div>
                 <div className={styles.value}>
                   <div className={styles.group}>
-                    <img src='/img/Winners/t.png' alt=''/>{userTemp.top10}
+                  <CurrencySvg className={styles.currency} currencyIso={userPosition.userCurrencyIso}/>
+                   {Formatter.formatAmount(userPosition.sumToReachTop10, userPosition.userCurrencyIso)} {userPosition.userCurrencyIso}
+                
                   </div>
                 </div>
               </div>
@@ -206,7 +214,10 @@ export default function Winners(props: Props) {
                 </div>
                 <div className={styles.value}>
                   <div className={styles.group}>
-                    <img src='/img/Winners/BTC.png' alt=''/>{userTemp.prize}<span> &nbsp;50%</span>
+                  <CurrencySvg className={styles.currency} currencyIso={userPosition.tournamentCurrencyIso}/>
+                    
+                     {Formatter.formatAmount(userPosition.totalBankMoneyAmount, userPosition.tournamentCurrencyIso)} {userPosition.tournamentCurrencyIso}
+                    {/*<span> &nbsp;50%</span>*/}
                   </div>
                 </div>
               </div>

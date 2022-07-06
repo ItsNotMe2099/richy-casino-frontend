@@ -362,12 +362,11 @@ a{
   }
 }
 .logoLicense{
+  position: relative;
   display: block;
-  img {
-    max-width: 100px;
-    @media screen and (max-width: 620px){
-      max-width: 50px;
-    }
+  width: 100px;
+  @media screen and (max-width: 620px){
+    max-width: 50px;
   }
 }
 

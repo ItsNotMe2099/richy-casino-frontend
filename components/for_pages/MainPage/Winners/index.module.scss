@@ -52,6 +52,7 @@
 
 
 .avatar{
+    margin-right: 8px;
     img{
         width: 32px;
         height: 32px;
@@ -81,9 +82,12 @@
 .illustration{
     margin-right: 70px;
     width: 50%;
+    span{
+    width: 100% !important;
     img{
-        width: 100%;
+        width: 100% !important;
     }
+}
     @media screen and (max-width: 950px){
         display: flex;
         margin-right: 0;
@@ -161,6 +165,7 @@
 
 .row{
     display: table-row;
+
     .cell{
         font-weight: 600;
         font-size: 1.1rem;
@@ -256,7 +261,9 @@
     align-items: center;
     font-weight: 600;
     font-size: 14px;
-    img{
+    .currency{
+        width: 16px;
+        height: 16px;
         margin-right: 8px;
     }
     @media screen and (max-width: $xs-max){

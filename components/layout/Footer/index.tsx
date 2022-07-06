@@ -19,6 +19,7 @@ import {BonusDepositShowMode, ModalType} from 'types/enums'
 import {usePwaContext} from 'context/pwa_state'
 import { isDesktop } from 'react-device-detect'
 import { isMobile } from 'mobile-device-detect'
+import Image from 'next/image'
 
 interface Props {
   children?: React.ReactNode
@@ -249,10 +250,10 @@ export default function Footer(props: Props) {
           <div className={styles.bottom}>
             <div className={styles.bottomIcons}>
             <div className={styles.eighteen}>
-              <img src='/img/layout/footer/eighteen.svg' alt=''/>
+              <img src='/img/layout/footer/eighteen.svg' alt='' />
             </div>
             <a href={'https://gateway.pinata.cloud/ipfs/QmREPXquK2dmUBSNx3e9H32YTgNTXT5W17vZk4sJaQevvM'} target={'_blank'} className={styles.logoLicense} rel="noreferrer">
-              <img src='/img/licenses/richycuracaointeractivelicenlogo.png' alt=''/>
+              <Image src='/img/licenses/richycuracaointeractivelicenlogo.png' alt='Richy License' width={120} height={120} layout={'responsive'}  objectFit='contain'/>
             </a>
             </div>
               <div className={styles.desc}>

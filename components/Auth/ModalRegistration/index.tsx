@@ -13,6 +13,7 @@ import classNames from 'classnames'
 import BottomSheetLayout from 'components/layout/BottomSheetLayout'
 import BottomSheetHeader from 'components/layout/BottomSheetHeader'
 import BottomSheetBody from 'components/layout/BottomSheetBody'
+import Image from 'next/image'
 
 
 enum TabType{
@@ -34,7 +35,7 @@ const Tab = ({logo, label, tab, isActive, onSelect}: TabProps) => {
 
   return(
     <div className={classNames(styles.variant, {[styles.active]: isActive })} onClick={onSelect}>
-      <img src={logo} alt=''/>
+      <Image src={logo} width={17} height={17}/>
       <div className={classNames(styles.label, {[styles.mobile]: isActive })}>
         {label}
       </div>
@@ -54,7 +55,7 @@ export default function ModalRegistration(props: Props) {
 
   const result = (<>
     {appContext.showBonus && <div className={styles.banner}>
-      <BonusSmallBanner style='registration'/>
+      <BonusSmallBanner style='wallet'/>
     </div>}
     <div className={styles.wrapper}>
     <div className={styles.variants}>

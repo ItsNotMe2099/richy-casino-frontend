@@ -8,7 +8,7 @@
     "lint": "next lint",
     "ts": "tsc --noEmit",
     "locales:sync": " locize sync --path ./public/locales/ --api-key 85e9e05e-08e7-49d0-8593-84624f4e42b2 --project-id e49d82a2-9ff5-4788-8767-e0fb830c4fcc\n",
-    "locales:download": " locize sync --path ./public/locales/ --api-key 85e9e05e-08e7-49d0-8593-84624f4e42b2 --project-id e49d82a2-9ff5-4788-8767-e0fb830c4fcc\n"
+    "locales:download": "locize sync --path ./public/locales/ --api-key 85e9e05e-08e7-49d0-8593-84624f4e42b2 --project-id e49d82a2-9ff5-4788-8767-e0fb830c4fcc\n"
   },
   "pre-commit": [
     "lint"

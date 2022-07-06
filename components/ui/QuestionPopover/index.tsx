@@ -2,6 +2,7 @@ import styles from './index.module.scss'
 import { Popover } from 'react-tiny-popover'
 import { useState } from 'react'
 import classNames from 'classnames'
+import Image from 'next/image'
 
 interface Props {
   info: string
@@ -25,7 +26,7 @@ export default function QuestionPopover(props: Props) {
       >
       
       <div className={styles.inner} onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
-        <img src='/img/icons/question.svg' alt=''/>
+        <Image src='/img/icons/question.svg' width={20} height={20}/>
       </div>
     </Popover>
     </div>

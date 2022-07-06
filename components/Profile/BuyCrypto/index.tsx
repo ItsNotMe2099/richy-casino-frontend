@@ -5,16 +5,16 @@ import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
 import {Form, FormikProvider, useFormik} from 'formik'
 import InputField from 'components/ui/Inputs/InputField'
 import Validator from 'utils/validator'
-import {SelectField} from 'components/ui/Inputs/SelectField'
 import Converter from 'utils/converter'
-import {ICurrency} from 'data/interfaces/ICurrency'
 import Button from 'components/ui/Button'
 import ProfileModalFooter from 'components/Profile/layout/ProfileModalFooter'
 import {useTranslation} from 'next-i18next'
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import BottomSheetLayout from 'components/layout/BottomSheetLayout'
 import BottomSheetHeader from 'components/layout/BottomSheetHeader'
 import BottomSheetBody from 'components/layout/BottomSheetBody'
+import { useAppContext } from 'context/state'
+import { ExchangeCurrencySelectField } from 'components/ui/Inputs/ExchangeCurrencySelectField'
 
 
 interface Props {
@@ -23,16 +23,19 @@ interface Props {
 
 export default function BuyCrypto(props: Props) {
   const {t} = useTranslation()
+  const context = useAppContext()
   const initialValues = {
-    currencySent: 1,
+    currencySent: Converter.convertCurrencyToOptionsExchange(context.currencies)[0].value,
     amountSent: 0,
-    currencyGet: 2,
+    currencyGet: Converter.convertCurrencyToOptionsExchange(context.currencies)[1].value,
     amountGet: 0
   }
 
   const handleSubmit = /*async*/ () => {
 
   }
+
+
 
   const array = [
     {iso: 'btc', name: 'BTC', rate: 0, /*symbol: '/img/Exchange/bitcoin.png'*/},
@@ -45,6 +48,11 @@ export default function BuyCrypto(props: Props) {
   })
 
   const {values, setFieldValue, handleChange} = formik
+
+  const currencies = Converter.convertCurrencyToOptionsExchange(context.currencies)
+
+  const [currentSent, setCurrentSent] = useState(currencies.filter(item => item.value === values.currencySent))
+  const [currentGet, setCurrentGet] = useState(currencies.filter(item => item.value === values.currencyGet))
 
   useEffect(() => {
     setFieldValue('amountGet', (values.amountSent * 2))
@@ -59,8 +67,8 @@ export default function BuyCrypto(props: Props) {
               </div>
               <div className={styles.inputs}>
                 <InputField name={'amountSent'} className={styles.input} validate={Validator.required}/>
-                <SelectField name='currencySent' options={Converter.convertCurrencyToOptions(array as ICurrency[])}
-                             className={styles.select}/>
+                <ExchangeCurrencySelectField className={styles.select} name='currencySent' options={currencies}
+                                                                              currentItem={currentSent[0]}/>
               </div>
             </div>
             <div className={styles.send}>
@@ -71,8 +79,8 @@ export default function BuyCrypto(props: Props) {
               </div>
               <div className={styles.inputs}>
                 <InputField name={'amountGet'} className={styles.input} validate={Validator.required} disabled/>
-                <SelectField name='currencyGet' options={Converter.convertCurrencyToOptions(array as ICurrency[])}
-                             className={styles.select}/>
+                <ExchangeCurrencySelectField className={styles.select}
+                  name='currencyGet' options={Converter.convertCurrencyToOptionsExchange(context.currencies)} currentItem={currentGet[0]}/>
               </div>
             </div>
             <div className={styles.disclaimer}>

@@ -3,6 +3,7 @@ import Button from 'components/ui/Button'
 import classNames from 'classnames'
 import { useAppContext } from 'context/state'
 import {useTranslation} from 'next-i18next'
+import Image from 'next/image'
 
 interface Props {
   poker?: boolean
@@ -11,6 +12,7 @@ interface Props {
 export default function GameCard(props: Props) {
   const {t} = useTranslation()
   const context = useAppContext()
+  const isMobile = context.isMobile
 
   const getShadow = (shadowColor) => {
     switch (shadowColor){
@@ -34,11 +36,11 @@ export default function GameCard(props: Props) {
   return (
       <div className={classNames(styles.root, {[styles.chess]: !props.poker})}>
         <div className={styles.bg}>
-          <img src={props.poker ? '/img/GameCard/poker.svg' : '/img/GameCard/chess.svg'} alt=''/>
+          <Image src={props.poker ? '/img/GameCard/poker.svg' : '/img/GameCard/chess.svg'} width={584} height={253}/>
         </div>
         <div className={styles.image}>
-          <div className={styles.shadow}><img src={getShadow(props.poker ? 'red' : 'blue')} alt=''/></div>
-          <img src={props.poker ? '/img/GameCard/poker-small.png' : '/img/GameCard/chess-small.svg'} alt=''/>
+          <div className={styles.shadow}><Image src={getShadow(props.poker ? 'red' : 'blue')} width={isMobile ? 70 : 134} height={isMobile ? 70 : 134}/></div>
+          <Image src={props.poker ? '/img/GameCard/poker-small.png' : '/img/GameCard/chess-small.svg'} width={isMobile ? 40 : 82} height={isMobile ? 40 : 82}/>
         </div>
         <div className={styles.text}>
           <div className={styles.label}>

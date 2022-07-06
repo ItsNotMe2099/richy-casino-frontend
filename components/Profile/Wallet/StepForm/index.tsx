@@ -87,12 +87,11 @@ export default function StepForm(props: Props) {
             <PaymentDepositAmountField name={'amount'} disabled={sending} validate={Validator.required}
                                        placeholder='0'/>
 
-            <div className={classNames(styles.bottom, {[styles.code]: promoCode})}>
-              {!promoCode &&
-              <div className={styles.promo} onClick={() => setPromoCode(true)}>
-                <div className={styles.plus}>+</div>
+            <div className={classNames(styles.bottom)}>
+              <div className={styles.promo} onClick={() =>  setPromoCode(!promoCode ? true : false)}>
+                <div className={styles.plus}>{promoCode ? '-' : '+'}</div>
                 <span>{t('wallet_form_promocode')}</span>
-              </div>}
+              </div>
               {rate && <div className={styles.rate}>
                 <div>20 USDT ≈ {Formatter.formatAmount(rate * 20, props.currency?.iso)} {props.currency?.iso}</div>
                 <div>1 USDT ≈ {Formatter.formatAmount(rate, props.currency?.iso)} {props.currency?.iso}</div>

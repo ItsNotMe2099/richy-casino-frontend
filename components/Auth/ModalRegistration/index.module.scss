@@ -33,9 +33,11 @@
   @media screen and (max-width: $xs-max){
     padding: 13px 0;
   }
-  img {
-    margin-right: 8px;
-  }
+  span{
+    span{
+    margin-right: 8px !important;
+    }
+}
 }
 
 .active {

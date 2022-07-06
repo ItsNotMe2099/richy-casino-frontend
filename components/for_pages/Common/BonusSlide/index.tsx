@@ -9,6 +9,7 @@ import {Routes} from 'types/routes'
 import {useMeasure} from 'react-use'
 import {useTranslation} from 'next-i18next'
 import {pluralize} from 'numeralize-ru'
+import Image from 'next/image'
 
 interface Props {
   children?: React.ReactNode
@@ -52,7 +53,8 @@ export default function BonusSlide(props: Props) {
       }}>
         <img src='/img/icons/close-bonus.svg' alt=''/>
       </div>}
-      <div className={styles.hero}><img src={isMobile ? '/img/BonusSlide/hero-mobile.png' : '/img/BonusSlide/Hero.png'} alt=''/></div>
+      <div className={styles.hero}><Image src={isMobile ? '/img/BonusSlide/hero-mobile.png' : '/img/BonusSlide/Hero.png'} layout='fill'/>
+      </div>
       {appContext.showBonus &&
       <>
       <div className={styles.downBanner} style={{marginTop: isMobile ? `${width /15}px` : `${width /30}px`}}>
