@@ -5,6 +5,9 @@ import Logo from 'components/svg/Logo'
 import Button from 'components/ui/Button'
 import {ProfileModalType} from 'types/enums'
 import ModalClose from 'components/Profile/layout/ProfileModalHeader/ModalClose'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+import ProfileAccountsMenu from 'components/layout/Header/components/Profile/ProfileAccountsMenu'
 
 interface Props {
   onClose?: () => void
@@ -16,6 +19,8 @@ interface Props {
 export default function ProfileModalHeaderMobile(props: Props) {
   const {t} = useTranslation()
   const context = useAppContext()
+  const {route: currentRoute, asPath: currentPath} = useRouter()
+  const user = context.user
 
   const getBackTitle = (type: ProfileModalType) => {
     switch (type) {
@@ -47,20 +52,39 @@ export default function ProfileModalHeaderMobile(props: Props) {
     <div className={styles.root}>
       <div className={styles.header}>
       <div className={styles.left}>
-        <Logo className={styles.logo}/>
-        {context.user && <div className={styles.balance}>
+      {currentRoute === '/' || currentPath === '/' ?
+            <div className={styles.logoMobile}><Logo/></div>
+            :
+            <Link href='/'>
+              <a className={styles.logoMobile}><Logo/></a>
+            </Link>
+          }
+
+        {/*context.user && <div className={styles.balance}>
           <div className={styles.label}>
             BALANCE
           </div>
           <div className={styles.amount}>
             {context.user.balance.totalCalculatedAmount} {context.user.currencyIso}
           </div>
-        </div>}
+        </div>*/}
         </div>
         <div className={styles.right}>
-        <Button background='payGradient500' className={styles.deposit}
+        {/*<Button background='payGradient500' className={styles.deposit}
                 onClick={() => context.showModalProfile(ProfileModalType.wallet, props.title)}><img
-          src='/img/icons/wallet.svg' alt=''/>{t('profile_deposit')}</Button>
+        src='/img/icons/wallet.svg' alt=''/>{t('profile_deposit')}</Button>*/}
+        <div className={styles.userBtns}>
+                {/*context.user.extraBalances &&
+                 <div className={styles.userBonuses} onClick={() => context.showModal(ProfileModalType.profile)}>
+                    <UserBonus icon='/img/icons/ticket.svg' amount={context.user.extraBalances.lotteryTickets ?? 0} color='#427BF8'/>
+                    <UserBonus icon='/img/icons/spin.svg' amount={context.user.extraBalances.freespinAmount ?? 0} color='#F81AAC'/>
+                  </div>
+            */}
+                {!user.flags.isHideBalance && <ProfileAccountsMenu/>}
+                <Button onClick={() => context.showModal(ProfileModalType.wallet)} size='normal'
+                        background='payGradient500' className={styles.wallet}>
+                    {t('header_deposit')}</Button>
+              </div>
         <ModalClose onClick={props.onClose}/>
         </div>
       </div>

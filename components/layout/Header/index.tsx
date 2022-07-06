@@ -34,6 +34,7 @@ interface Lang {
 export default function Header(props: Props) {
   const {t} = useTranslation()
   const {route: currentRoute, asPath: currentPath} = useRouter()
+  
   const context = useAppContext()
   const pwaContext = usePwaContext()
 
