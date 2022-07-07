@@ -9,7 +9,9 @@
     display: none;
   }
 }
-
+.input{
+  @include vertical-align(middle)
+}
 .tournament{
   @media screen and (max-width: 950px){
     border-radius: 6px;

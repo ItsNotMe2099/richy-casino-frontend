@@ -44,7 +44,7 @@ export default function WithGameFilterLayout(props: Props) {
     <Layout>
       {props.top}
       <div className={styles.desktop}>
-        <Filter showMobile={props.showMobile} onSearch={handleSearch}/>
+        <Filter isSearch={isSearch} showMobile={props.showMobile} onSearch={handleSearch}/>
         <div className={styles.content}>
           <div className={classNames(styles.children, {[styles.hidden]: isSearch})}>{props.children}</div>
           <div className={classNames(styles.search, {[styles.hidden]: !isSearch})}>

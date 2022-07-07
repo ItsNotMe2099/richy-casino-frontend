@@ -8,6 +8,7 @@ import {useAppContext} from 'context/state'
 import Converter from 'utils/converter'
 import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
 import {ProfileModalType} from 'types/enums'
+import { useTranslation } from 'next-i18next'
 
 
 interface SelectProps{
@@ -46,6 +47,18 @@ const Option = (props: SelectProps) => {
     </div>
   )
 }
+const OptionBonus = (props: {onClick: () => void, color?: string, icon: string, label: string, value: number}) => {
+  return (
+    <div className={classNames(styles.option, styles.bonus)} onClick={props.onClick}>
+      <div className={styles.group} style={{color: props.color}}>
+       <div className={styles.imageWrapper}> <img src={props.icon}/></div>
+        {props.label}</div>
+      <div className={styles.balanceOption}style={{color: props.color}} >
+       {props.value}
+      </div>
+    </div>
+  )
+}
 
 const Placeholder = (props: SelectProps) => {
   return (
@@ -65,7 +78,7 @@ interface Props{
 
 export default function ProfileAccountsMenu(props: Props){
   const context = useAppContext()
-
+  const {t} = useTranslation()
   const mainAccount = UserUtils.getMainBalanceTotals(context.user)
   const otherAccounts = (UserUtils.getOtherBalancesTotals(context.user))
   const bonusAccounts = (UserUtils.getBonusBalances(context.user))
@@ -92,6 +105,12 @@ export default function ProfileAccountsMenu(props: Props){
         <div className={styles.separator}/>
           <div className={styles.bonusTitle}>Bonuses</div>
           {bonusOptions.map(option => <Option key={option.value} option={option as IOptionUserAccount} onClick={handleClick}/>)}
+          
+          <OptionBonus color='#587DFF' label={t('profile_accounts_bonus_lottery')}
+                 value={context.user.extraBalances.lotteryTickets ?? 0} icon='/img/Profile/icons/ticket.svg' onClick={handleClick}/>
+          <OptionBonus color='#F81AAC' label={t('profile_accounts_bonus_free_spin')}
+                 value={context.user.extraBalances.freespinAmount ?? 0} icon='/img/Profile/icons/spin.svg' onClick={handleClick}/>
+     
         </>}
         </div>
       </Select>

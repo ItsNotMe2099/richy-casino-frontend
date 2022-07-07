@@ -217,7 +217,6 @@ export default function Winners(props: Props) {
                   <CurrencySvg className={styles.currency} currencyIso={userPosition.tournamentCurrencyIso}/>
                     
                      {Formatter.formatAmount(userPosition.totalBankMoneyAmount, userPosition.tournamentCurrencyIso)} {userPosition.tournamentCurrencyIso}
-                    {/*<span> &nbsp;50%</span>*/}
                   </div>
                 </div>
               </div>

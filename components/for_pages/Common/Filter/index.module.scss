@@ -144,8 +144,8 @@
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 385px;
-  @media screen and (max-width: 428px){
-    max-height: 300px;
+  @media screen and (max-width: $xs-max){
+    max-height: 267px;
   }
 }
 
@@ -153,8 +153,8 @@
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 724px;
-  @media screen and (max-width: 428px){
-    max-height: 300px;
+  @media screen and (max-width: $xs-max){
+    max-height: 320px;
   }
 }
 

@@ -84,3 +84,53 @@
 .right{
   display: flex;
 }
+
+.logoMobile{
+  align-self: center;
+  @media screen and (min-width: 921px){
+    display: none;
+  }
+  @media screen and (max-width: $xs-max){
+    display: flex;
+    align-self: center;
+    svg{
+      width: 80px;
+    }
+  }
+  @media screen and (max-width: $mobile-max){
+    svg{
+      height: 30px;
+    }
+  }
+}
+
+.userBtns{
+  display: flex;
+  height: 41px;
+  margin-right: 8px;
+  grid-gap: 8px;
+  @media screen and (max-width: $xs-max){
+    height: 40px;
+    grid-gap: 6px;
+    margin-right: 0;
+    align-items: center;
+  }
+}
+
+.wallet{
+  padding: 12px 15px;
+  @media screen and (max-width: $mobile-max){
+    padding: 9px 4px;
+    font-weight: 700;
+    font-size: 0.7rem;
+    height: 40px;
+  }
+  img{
+    width: 16px;
+    margin-right: 12px;
+  }
+  color: $white;
+  font-weight: 700;
+  font-size: 13px;
+  width: 100%;
+}

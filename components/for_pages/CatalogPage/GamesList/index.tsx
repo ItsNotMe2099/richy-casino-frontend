@@ -59,7 +59,7 @@ export default function GamesList(props: Props) {
         </HiddenXs>
         <VisibleXs>
           <div className={styles.list}>
-            {props.items && (isShow ? props.items : props.items.slice(0, 9)).map((item, index) =>
+            {props.items && (isShow ? props.items : props.items.slice(0, 12)).map((item, index) =>
               <ItemGame  item={item} key={item.id} link={item.link} onClickDemo={props.onSelect} onClickPlay={props.onSelect}/>
             )}
           </div>

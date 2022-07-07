@@ -25,23 +25,25 @@
     }
   }
   span {
+    line-height: 100%;
     font-size: 13px;
     color: $white;
   }
 }
 
 .plus {
-  width: 12.83px;
-  height: 12.83px;
+  width: 13px;
+  height: 13px;
   border-radius: 100%;
   background: $white;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #000;
-  font-size: 1.1rem;
+  font-size: 14px;
   margin-right: 8px;
-  line-height: 12.83px;
+  line-height: 100%;
+  padding-top: 1px;
 }
 
 .bottom{
