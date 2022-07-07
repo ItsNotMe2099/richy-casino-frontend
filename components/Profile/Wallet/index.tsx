@@ -1,6 +1,5 @@
 import {useState} from 'react'
 import styles from './index.module.scss'
-
 import {useTranslation} from 'next-i18next'
 import {PaymentMethod} from 'types/interfaces'
 import {useAppContext} from 'context/state'
