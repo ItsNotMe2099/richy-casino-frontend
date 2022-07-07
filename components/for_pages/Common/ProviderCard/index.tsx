@@ -4,6 +4,7 @@ import Link from 'next/link'
 import {Routes} from 'types/routes'
 import useIsActiveLink from 'hooks/useIsActiveLink'
 import classNames from 'classnames'
+import { useAppContext } from 'context/state'
 
 interface Props {
   item: IGameProvider
@@ -12,10 +13,11 @@ interface Props {
 }
 
 export default function ProviderCard(props: Props) {
+  const appContext = useAppContext()
   const link = Routes.catalogProvider(props.item.id)
   const active = useIsActiveLink(link)
   return (
-    <Link href={link}>
+    <Link href={link} scroll={!appContext.isMobile}>
     <a className={classNames(styles.root, {[styles.active]: active})} onClick={props.onClick}>
       <div className={styles.icon}>
         {props.item.imagePreviewUrl ? <img src={props.item.imagePreviewUrl}/> : props.item.name}

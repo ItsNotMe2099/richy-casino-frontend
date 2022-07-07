@@ -15,6 +15,7 @@ import { useFavoriteContext } from 'context/favorite_state'
 import { useAppContext } from 'context/state'
 import Formatter from 'utils/formatter'
 import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 interface IGame {
   label: string
   image: string
@@ -32,9 +33,10 @@ interface Props {
   onSearch?: (value: string) => void
 }
 const GameCategoryStaticCard = (props: { icon: string, label: string, link: string, quantity: number }) => {
+  const appContext = useAppContext()
   const active = useIsActiveLink(props.link)
   return (
-    <Link href={props.link}>
+    <Link href={props.link} scroll={appContext.isMobile}>
       <a className={classNames(styles.staticCard, { [styles.active]: active })}>
         <div className={styles.left}>
           <div className={styles.icon}><img src={props.icon} alt='' /></div>
@@ -51,6 +53,7 @@ export default function Filter(props: Props) {
   const favoriteContext = useFavoriteContext()
   const appContext = useAppContext()
   const { t } = useTranslation()
+  const router = useRouter()
   const [providers, setProviders] = useState<IGameProvider[]>([])
   const [categories, setCategories] = useState<IGameCategory[]>([])
   const [categoryNewTotal, setCategoryNewTotal] = useState(0)
@@ -79,7 +82,11 @@ export default function Filter(props: Props) {
   const [showCategory, setShowCategory] = useState(false)
   const [showProviders, setShowProviders] = useState(false)
 
-  const handleShowCategory = () => {
+  const handleShowCategory = (item?: {  label: string,
+    link?: string}) => {
+      if(item){
+     //   router.push('/catalog/category/[id]',`${item.link}`, {})
+      }
     if (showCategory) {
       setShowCategory(false)
     }
@@ -144,7 +151,7 @@ export default function Filter(props: Props) {
               </div>
               <div className={styles.categories}>
                 {categories.map((item, index) =>
-                  <GameCategoryCard key={item.id} item={item} />
+                  <GameCategoryCard key={item.id} item={item} onClick={() => setShowCategory(false)}/>
                 )}
               </div>
             </>
@@ -155,7 +162,7 @@ export default function Filter(props: Props) {
                 {t('catalog_filter_providers_dropdown')}
               </div>
               <div className={styles.providers}>
-                {providers.map((item, index) => <ProviderCard key={item.id} item={item} />)}
+                {providers.map((item, index) => <ProviderCard key={item.id} item={item} onClick={() => setShowProviders(false)}/>)}
               </div>
             </>
           }
