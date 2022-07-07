@@ -32,7 +32,7 @@ import ContentLoader from 'components/ui/ContentLoader'
 import ReactPWAInstallProvider from 'context/pwa_state'
 function MyApp({ Component, pageProps }: AppProps) {
   const [clientVisible, setClientVisible] = useState(true)
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const {t, i18n} = useTranslation()
 
   useEffect(() => {
@@ -41,7 +41,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       i18n.changeLanguage(pageProps.language)
     }
     setTimeout(() => {
-      setIsLoading(false)
+    //  setIsLoading(false)
     }, 1000)
     if (typeof  navigator !== 'undefined' && 'serviceWorker' in navigator) {
       console.log('registerServiceWorker')
