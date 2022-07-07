@@ -156,7 +156,6 @@
   }
   & > * {
     vertical-align: $align;
-    // although you need to know the font-size, because "inherit" is 0
-    font-size: 14px;
+
   }
 }
