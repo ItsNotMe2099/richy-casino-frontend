@@ -107,9 +107,9 @@ export default function ProfileAccountsMenu(props: Props){
           {bonusOptions.map(option => <Option key={option.value} option={option as IOptionUserAccount} onClick={handleClick}/>)}
           
           <OptionBonus color='#587DFF' label={t('profile_accounts_bonus_lottery')}
-                 value={context.user.extraBalances.lotteryTickets ?? 0} icon='/img/Profile/icons/ticket.svg'/>
+                 value={context.user.extraBalances.lotteryTickets ?? 0} icon='/img/Profile/icons/ticket.svg' onClick={handleClick}/>
           <OptionBonus color='#F81AAC' label={t('profile_accounts_bonus_free_spin')}
-                 value={context.user.extraBalances.freespinAmount ?? 0} icon='/img/Profile/icons/spin.svg'/>
+                 value={context.user.extraBalances.freespinAmount ?? 0} icon='/img/Profile/icons/spin.svg' onClick={handleClick}/>
      
         </>}
         </div>
