@@ -18,8 +18,8 @@
 }
 
 .plus {
-  width: 12.83px;
-  height: 12.83px;
+  width: 13px;
+  height: 13px;
   border-radius: 100%;
   background: #FFD12F;
   display: flex;
@@ -28,7 +28,6 @@
   color: #000;
   font-size: 14px;
   margin-right: 8px;
-  @media screen and (max-width: $mobile-max){
-    font-size: 0.8rem;
-  }
+  line-height: 100%;
+  padding-top: 1px;
 }
