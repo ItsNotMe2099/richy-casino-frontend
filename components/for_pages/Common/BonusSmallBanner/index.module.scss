@@ -17,7 +17,6 @@
     padding-left: 25px;
     .title{
       font-size: 12px;
-      margin-bottom: 5px;
       span{
         font-size: 12px;
       }
@@ -42,6 +41,13 @@
 
 .profileBurger{
   padding-left: 70px;
+  @media screen and (max-width: $mobile-max){
+    padding-left: 25%;
+    max-height: 93px;
+    .title{
+      margin-bottom: 0;
+    }
+  }
   @media screen and (min-width: 501px){
     display: flex;
     justify-content: center;
@@ -77,13 +83,12 @@
   padding-left: 85px;
   padding-top: 7px;
   @media screen and (max-width: $mobile-max){
-    padding-left: 25px;
+    padding-left: 25%;
     padding-right: 10px;
     padding-top: 4px;
-  }
-  .money, .money2, .hero{
-    @media screen and (max-width: $mobile-max){
-      display: none;
+    max-height: 93px;
+    .title{
+      margin-bottom: 0;
     }
   }
   .moneyWallet{
@@ -134,6 +139,9 @@
   }
   .hero {
     left: 0px;
+    @media screen and (max-width: 340px){
+      top: 6%;
+    }
   }
   .bottom{
   }
@@ -228,7 +236,7 @@
   @media screen and (max-width: $mobile-max){
     left: 0;
     right: auto;
-    bottom: 0;
+    bottom: -5px;
   }
 }
 
