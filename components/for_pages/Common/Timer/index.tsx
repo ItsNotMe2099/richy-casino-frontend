@@ -59,10 +59,10 @@ export default function Timer(props: Props) {
       <div className={styles.timer}>
       <div className={styles.hours}>
         <div className={styles.input} style={{...(props.fontSize ? {fontSize: props.fontSize, width: props.inputWidth ? props.inputWidth : null, height: props.inputHeight ? props.inputHeight : null} : {})}}>
-          { pad('00', props.days ?
+        <span>{ pad('00', props.days ?
            days
             : props.minutes ? minutes : hours
-          )}
+          )}</span>
         </div>
         <div className={styles.label}>
           {props.days ? daysLabel : props.minutes ? minsLabel : hoursLabel}
@@ -74,11 +74,11 @@ export default function Timer(props: Props) {
       </div>
       <div className={styles.minutes}>
         <div className={styles.input} style={{...(props.fontSize ? {fontSize: props.fontSize, width: props.inputWidth ? props.inputWidth : null, height: props.inputHeight ? props.inputHeight : null} : {})}}>
-        {pad('00', props.days ?
+        <span>{pad('00', props.days ?
             hours
             :
           props.minutes ? seconds :  minutes
-          )}
+          )}</span>
         </div>
         <div className={styles.label}>
         {props.days ? hoursLabel : minsLabel}
@@ -90,11 +90,11 @@ export default function Timer(props: Props) {
       </div>
       <div className={styles.seconds}>
         <div className={styles.input} style={{...(props.fontSize ? {fontSize: props.fontSize}: {})}}>
-        {pad('00', props.days ?
+       <span>{pad('00', props.days ?
             minutes
             :
             seconds
-          )}
+          )}</span>
         </div>
         <div className={styles.label}>
         {props.days ? minsLabel : secsLabel}
