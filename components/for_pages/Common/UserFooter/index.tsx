@@ -37,7 +37,7 @@ const Item = ({icon, label, onClick, link}: ItemProps) => {
   const isActive = useIsActiveLink(link ?? '')
   return (
     <div className={classNames(styles.item, {[styles.active]: isActive})} onClick={onClick}>
-      <div className={styles.icon}>
+      <div className={classNames(styles.icon, {[styles.active]: isActive})}>
         {icon}
       </div>
       <div className={styles.label}>
