@@ -23,6 +23,7 @@ export default function Statistics(props: Props) {
   const isMobile = context.isMobile
   useEffect(() => {
     GameListRepository.fetchGameSessionHistory(1, 10).then(i => {
+      
       setData(i)
       setLoading(false)
     })
@@ -59,7 +60,7 @@ export default function Statistics(props: Props) {
                   <div className={styles.game}>
                     <div className={styles.gameImg}>
                       {/*<img src={item.imageIconPreviewUrl} alt=''/>*/}
-                      <Image src={item.imageIconPreviewUrl} width={isMobile ? 16 : 28} height={isMobile ? 16 : 28}/>
+                      {item.imageIconPreviewUrl && <Image src={item.imageIconPreviewUrl} width={isMobile ? 16 : 28} height={isMobile ? 16 : 28}/>}
                     </div>
                     <div className={styles.gameLbl}>
                       {item.gameId}
