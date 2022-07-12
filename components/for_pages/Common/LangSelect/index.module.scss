@@ -128,25 +128,6 @@
 .options{
   z-index: 2;
 }
-.option{
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  z-index: 1;
-  padding-left: 14px;
-
-  height: 52px;
-  &:hover{
-    background: #41424F;
-  }
-  .image{
-    margin-right: 10px;
-    img{
-      max-width: 17px;
-    }
-  }
-
-}
 
 .track{
   display: block !important;
@@ -157,4 +138,41 @@
   border-radius: 3px;
 }
 
+.imageLng{
+  display: flex;
+  img{
+    border-radius: 50%;
+  }
+}
+
+.scroll{
+  
+}
+
+.option{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+  padding-left: 14px;
+  height: 52px;
+  &:hover{
+    background: #41424F;
+  }
+  .image{
+    margin-right: 10px;
+    display: flex;
+    img{
+      max-width: 17px;
+      border-radius: 50%;
+    }
+  }
+
+}
+
+.view{
+  margin-right: -17px !important;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+}
 

@@ -21,7 +21,7 @@ export const PaymentMethodSelectedMobile = ({ onClick, icon, label}: Props) => {
         </div>
       </div>
 
-      <div className={styles.change}>Изменить</div>
+      {/*<div className={styles.change}>Изменить</div>*/}
     </PaymentMethodCard>
   )
 }
