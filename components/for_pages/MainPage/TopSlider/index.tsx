@@ -11,8 +11,6 @@ import classNames from 'classnames'
 //import {BonusDepositShowMode} from 'types/enums'
 import Image from 'next/image'
 import { useMeasure } from 'react-use'
-import {BonusDepositShowMode} from 'types/enums'
-import Gift from 'components/for_pages/Common/Gift'
 interface Props {
   children?: React.ReactNode
   className?: string
@@ -54,7 +52,7 @@ export default function TopSlider(props: Props) {
   return (
 
     <div className={styles.root} ref={ref}>
-     {(context.showBonus && context.bonusShowMode === BonusDepositShowMode.Gift) && <div className={styles.bonus}><Gift timer/></div>}
+     {/*(context.showBonus && context.bonusShowMode === BonusDepositShowMode.Gift) && <div className={styles.bonus}><Gift timer/></div>*/}
      <HiddenXs>
         <div className={styles.desktop}>
           <BonusSlide style={'slide'}/>
