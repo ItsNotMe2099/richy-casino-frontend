@@ -10,6 +10,11 @@
 }
 
 .input {
+  &.inputPhone{
+    :global .PhoneInput{
+    background-color: $dark700;
+    }
+  }
   input {
     color: $white;
     font-weight: 500;

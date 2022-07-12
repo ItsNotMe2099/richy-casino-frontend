@@ -7,7 +7,7 @@ interface Props {
 }
 
 interface Props {
-  children?: ReactElement | ReactElement[]
+  children?: ReactElement | ReactElement[] | any[]
 }
 
 export const PaymentMethodList = (props: Props) => {

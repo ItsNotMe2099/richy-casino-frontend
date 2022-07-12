@@ -13,6 +13,7 @@ import BottomSheetLayout from 'components/layout/BottomSheetLayout'
 import BottomSheetBody from 'components/layout/BottomSheetBody'
 import {Routes} from 'types/routes'
 import Link from 'next/link'
+import LangSelect from 'components/for_pages/Common/LangSelect'
 
 enum LinkKey{
   FreeBitCoin,
@@ -159,6 +160,9 @@ export default function ProfileBurger(props: Props) {
         <Option icon={item.icon} label={item.label}   link={item.link}
                 onClick={() => handleClick(item.key)} key={item.key}/>
       )}
+    </div>
+    <div className={styles.lang}>
+      <LangSelect/>
     </div>
     <div className={styles.chat}>
       <div className={styles.name}>

@@ -8,12 +8,10 @@ import PromoCode from 'components/for_pages/Common/Promocode'
 import {PaymentMethod, PaymentStep} from 'types/interfaces'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import {PaymentOptions} from 'components/Profile/Wallet/PaymentOptions'
-import {PaymentMethodCard} from 'components/Profile/Wallet/PaymentMethodCard'
 import PaymentsRepository from 'data/repositories/PaymentsRepository'
 import FormError from 'components/ui/Form/FormError'
 import {IDepositResponse} from 'data/interfaces/IPaymentDeposit'
 import {CryptoWalletActions} from 'components/Profile/Wallet/CryptoWalletActions'
-import {PaymentMethodSelected} from 'components/Profile/Wallet/PaymentMethodSelected'
 import {PaymentSeparator} from 'components/Profile/Wallet/PaymentSeparator'
 import {useAppContext} from 'context/state'
 import {PaymentDepositAmountField} from 'components/Profile/Wallet/PaymentDepositAmountField'
@@ -26,7 +24,6 @@ import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 import ProfileModalFooter from 'components/Profile/layout/ProfileModalFooter'
 import {WalletHeader} from 'components/Profile/Wallet/WalletHeader'
 import BonusSmallBanner from 'components/for_pages/Common/BonusSmallBanner'
-import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
 
 
 interface Props {
@@ -73,9 +70,9 @@ export default function StepForm(props: Props) {
     <div className={styles.root}>
       {context.showBonus && <BonusSmallBanner style='wallet'/>}
       <PaymentOptions>
-        <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>
-        <PaymentMethodCard icon={<CurrencySvg currencyIso={props.currency.iso} color/>} label={props.currency.name} selected
-                           onClick={() => props.onSetStep(PaymentStep.Currency)}/>
+        {/*<PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>*/}
+       {/* <PaymentMethodCard icon={<CurrencySvg currencyIso={props.currency.iso} color/>} label={props.currency.name} selected
+                           onClick={() => props.onSetStep(PaymentStep.Currency)}/>*/}
       </PaymentOptions>
       {!context.isMobile && <PaymentSeparator/>}
       <div className={styles.cryptoActions}>

@@ -12,7 +12,8 @@ interface Props {
   children?: ReactElement | ReactElement[]
 }
 
- const PaymentMethodCardInner = ({ icon, label, className, children, onClick, selected}: Props, ref) => {
+ export const PaymentMethodCard =  forwardRef<HTMLDivElement, Props>((props, ref) => {
+  const { icon, label, className, children, onClick, selected} = props
   const {t} = useTranslation()
   return (
     <div ref={ref} className={classNames(styles.root, {[styles.selected]: selected}, className)} onClick={onClick}>
@@ -26,5 +27,5 @@ interface Props {
 
     </div>
   )
-}
-export const PaymentMethodCard = forwardRef(PaymentMethodCardInner)
+})
+PaymentMethodCard.displayName = 'PaymentMethodCard'

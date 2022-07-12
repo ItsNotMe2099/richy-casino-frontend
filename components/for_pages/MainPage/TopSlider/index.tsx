@@ -52,8 +52,8 @@ export default function TopSlider(props: Props) {
   return (
 
     <div className={styles.root} ref={ref}>
-      {/*(context.showBonus && context.bonusShowMode === BonusDepositShowMode.Gift) && <div className={styles.bonus}><Gift timer/></div>*/}
-      <HiddenXs>
+     {/*(context.showBonus && context.bonusShowMode === BonusDepositShowMode.Gift) && <div className={styles.bonus}><Gift timer/></div>*/}
+     <HiddenXs>
         <div className={styles.desktop}>
           <BonusSlide style={'slide'}/>
           <SlideSlider items={context.banners}/>

@@ -5,6 +5,7 @@
   @media screen and (max-width: $xs-max){
     margin: 24px -10px 0;
   }
+  position: relative;
 }
 
 .desktop{
@@ -18,9 +19,10 @@
 }
 
 .bonus{
-  position: fixed;
-  top: 170px;
-  right: 10px;
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  transform: translateY(-50%);
   z-index: 10;
   cursor: pointer;
 

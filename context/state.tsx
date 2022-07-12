@@ -1,19 +1,22 @@
-import {createContext, useContext, useEffect, useState} from 'react'
-import {BonusDepositShowMode, CookiesType, ModalType, ProfileModalType, SnackbarType} from 'types/enums'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { BonusDepositShowMode, CookiesType, ModalType, ProfileModalType, SnackbarType } from 'types/enums'
 import ReactModal from 'react-modal'
 import UserRepository from 'data/repositories/UserRepository'
 import Cookies from 'js-cookie'
-import {ICurrency} from 'data/interfaces/ICurrency'
+import { ICurrency } from 'data/interfaces/ICurrency'
 import InfoRepository from 'data/repositories/InfoRepository'
 import IUser from 'data/interfaces/IUser'
-import {IBonusBannerDetails, IModalProfileStackItem, SnackbarData} from 'types/interfaces'
-import {CookiesLifeTime, Timers} from 'types/constants'
+import { IBonusBannerDetails, IModalProfileStackItem, SnackbarData } from 'types/interfaces'
+import { CookiesLifeTime, Timers } from 'types/constants'
 import PromoCodeRepository from 'data/repositories/PromoCodeRepository'
 import UserUtils from 'utils/user'
-import {IBanner} from 'data/interfaces/IBanner'
+import { IBanner } from 'data/interfaces/IBanner'
 import BannerRepository from 'data/repositories/BannerRepository'
-import {addHours} from 'date-fns'
-import {runtimeConfig} from 'config/runtimeConfig'
+import { addHours } from 'date-fns'
+import { runtimeConfig } from 'config/runtimeConfig'
+import { IPaymentMethod } from 'data/interfaces/IPaymentMethod'
+import PaymentMethodRepository from 'data/repositories/PaymentMethodRepository'
+import { ICountry } from 'data/interfaces/ICountry'
 
 interface IState {
   isMobile: boolean
@@ -21,6 +24,7 @@ interface IState {
   auth: boolean
   token: string
   modalArguments?: any
+  countryByIp: ICountry,
   modal: ModalType | ProfileModalType | null
   lastProfileModal?: IModalProfileStackItem
   showModal: (type: ModalType | ProfileModalType, data?: any) => void
@@ -43,12 +47,15 @@ interface IState {
   updatePromoCodes: () => void
   currencies: ICurrency[]
   defaultCurrency: ICurrency | null
+  paymentMethodsDeposit: IPaymentMethod[]
+  paymentMethodsWithdraw: IPaymentMethod[]
   banners: IBanner[]
   snackbar: SnackbarData | null,
   showSnackbar: (text: string, type: SnackbarType) => void
 }
 
 const defaultValue: IState = {
+  countryByIp: null,
   modalArguments: null,
   isMobile: false,
   isDesktop: true,
@@ -77,6 +84,8 @@ const defaultValue: IState = {
   bonusBannerDetails: null,
   currencies: [],
   defaultCurrency: null,
+  paymentMethodsDeposit: [],
+  paymentMethodsWithdraw: [],
   snackbar: null,
   showSnackbar: (text, type) => null,
 }
@@ -116,9 +125,12 @@ export function AppWrapper(props: Props) {
   const [bonusBannerDetails, setBonusBannerDetails] = useState<IBonusBannerDetails>(null)
   const [currencies, setCurrencies] = useState<ICurrency[]>([])
   const [defaultCurrency, setDefaultCurrency] = useState<ICurrency | null>(null)
+  const [paymentMethodsDeposit, setPaymentMethodsDeposit] = useState<IPaymentMethod[]>([])
+  const [paymentMethodsWithdraw, setPaymentMethodsWithdraw] = useState<IPaymentMethod[]>([])
   const [banners, setBanners] = useState<IBanner[]>([])
   const [snackbar, setSnackbar] = useState<SnackbarData | null>(null)
   const [modalProfileStack, setModalProfileStack] = useState<IModalProfileStackItem[]>([])
+  const [countryByIp, setCountryByIp] = useState<ICountry | null>(null)
   const value: IState = {
     ...defaultValue,
     isMobile: props.isMobile,
@@ -134,6 +146,9 @@ export function AppWrapper(props: Props) {
     token: props.token,
     banners,
     defaultCurrency,
+    paymentMethodsDeposit,
+    paymentMethodsWithdraw,
+    countryByIp,
     showModal: (type, props: any) => {
       showModal(type, props)
 
@@ -167,7 +182,7 @@ export function AppWrapper(props: Props) {
       hideBottomSheet()
     },
     setToken: (token: string) => {
-      Cookies.set(CookiesType.accessToken, token, {expires: CookiesLifeTime.accessToken})
+      Cookies.set(CookiesType.accessToken, token, { expires: CookiesLifeTime.accessToken })
       setAuth(true)
     },
     logout: () => {
@@ -186,21 +201,21 @@ export function AppWrapper(props: Props) {
     bonusBannerDetails,
     setBonusShowMode(mode) {
       setBonusShowMode(mode)
-      Cookies.set(CookiesType.bonusDepositShowMode, mode, {expires: CookiesLifeTime.bonusDepositShowMode})
+      Cookies.set(CookiesType.bonusDepositShowMode, mode, { expires: CookiesLifeTime.bonusDepositShowMode })
 
     },
 
     showSnackbar: (text, type: SnackbarType) => {
-      setSnackbar({text, type})
+      setSnackbar({ text, type })
       setTimeout(() => {
         setSnackbar(null)
       }, 2000)
     },
     fetchDefaultCurrency: async (): Promise<ICurrency> => {
-      if(defaultCurrency){
+      if (defaultCurrency) {
         return defaultCurrency
       }
-      const res =  await InfoRepository.getCurrencyByCountry()
+      const res = await InfoRepository.getCurrencyByCountry()
       setDefaultCurrency(res)
       return res
     },
@@ -221,7 +236,7 @@ export function AppWrapper(props: Props) {
   useEffect(() => {
     updatePromoCodes()
     if (!Cookies.get(CookiesType.firstVisitAt)) {
-      Cookies.set(CookiesType.firstVisitAt, (new Date()).toISOString(), {expires: CookiesLifeTime.firstVisitAt})
+      Cookies.set(CookiesType.firstVisitAt, (new Date()).toISOString(), { expires: CookiesLifeTime.firstVisitAt })
     }
     if (Cookies.get(CookiesType.bonusDepositShowMode)) {
       setBonusShowMode(Cookies.get(CookiesType.bonusDepositShowMode) as BonusDepositShowMode)
@@ -230,7 +245,15 @@ export function AppWrapper(props: Props) {
   useEffect(() => {
 
     InfoRepository.getCurrencies().then(i => setCurrencies(i))
+    InfoRepository.getCountryByIp().then(i => setCountryByIp(i))
   }, [])
+  useEffect(() => {
+    if (!auth) {
+      return
+    }
+    PaymentMethodRepository.fetchDeposit().then(i => setPaymentMethodsDeposit(i))
+    PaymentMethodRepository.fetchWithdraw().then(i => setPaymentMethodsWithdraw(i))
+  }, [auth])
   const showModal = (type: ModalType | ProfileModalType, args?: any) => {
 
     if (props.isMobile && ModalsBottomSheet.includes(type)) {
@@ -245,7 +268,7 @@ export function AppWrapper(props: Props) {
   }
   const hideModal = () => {
     console.log('hideModal', bottomSheet)
-    if(bottomSheet){
+    if (bottomSheet) {
       hideBottomSheet()
       return
     }
@@ -272,7 +295,7 @@ export function AppWrapper(props: Props) {
       const details = UserUtils.getBonusBannerDetails(promoCodes)
       setBonusBannerDetails(details)
       setShowBonus(isEnabled)
-      if(runtimeConfig.FAKE_BONUS) {
+      if (runtimeConfig.FAKE_BONUS) {
         setBonusBannerDetails({
           amount: 10,
           currency: 'USD',
@@ -283,7 +306,7 @@ export function AppWrapper(props: Props) {
           validTill: addHours(new Date(), 1).toISOString()
         })
         setShowBonus(true)
-    }
+      }
 
       if ((runtimeConfig.FAKE_BONUS || isEnabled) && !auth && !Cookies.get(CookiesType.bonusDepositShowMode)) {
         setTimeout(() => {

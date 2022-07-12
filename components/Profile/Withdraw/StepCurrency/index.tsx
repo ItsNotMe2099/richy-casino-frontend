@@ -5,7 +5,6 @@ import {useAppContext} from 'context/state'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import {PaymentMethod, PaymentStep} from 'types/interfaces'
 import {PaymentOptions} from 'components/Profile/Wallet/PaymentOptions'
-import {PaymentMethodSelected} from 'components/Profile/Wallet/PaymentMethodSelected'
 import {PaymentSeparator} from 'components/Profile/Wallet/PaymentSeparator'
 import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
 
@@ -21,7 +20,7 @@ export default function StepCurrency(props: Props) {
   return (
     <div className={styles.root}>
       <PaymentOptions>
-        <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>
+        {/*<PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>*/}
       </PaymentOptions>
 
       <PaymentSeparator/>

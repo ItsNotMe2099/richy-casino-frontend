@@ -4,6 +4,9 @@ import classNames from 'classnames'
 import { useAppContext } from 'context/state'
 import {useTranslation} from 'next-i18next'
 import Image from 'next/image'
+import { ModalType } from 'types/enums'
+import { useRouter } from 'next/router'
+import { Routes } from 'types/routes'
 
 interface Props {
   poker?: boolean
@@ -11,9 +14,20 @@ interface Props {
 
 export default function GameCard(props: Props) {
   const {t} = useTranslation()
+  const router = useRouter()
   const context = useAppContext()
   const isMobile = context.isMobile
-
+  const handleClick = () => {
+    if(!context.auth){
+        context.showModal(ModalType.registration)
+    }else{
+      if(props.poker){
+        router.push(Routes.poker)
+      }else{
+        router.push(Routes.chess)
+      }
+    }
+  }
   const getShadow = (shadowColor) => {
     switch (shadowColor){
       case 'blue':
@@ -34,7 +48,7 @@ export default function GameCard(props: Props) {
   }
 
   return (
-      <div className={classNames(styles.root, {[styles.chess]: !props.poker})}>
+      <div className={classNames(styles.root, {[styles.chess]: !props.poker})} onClick={handleClick}>
         <div className={styles.bg}>
           <Image src={props.poker ? '/img/GameCard/poker.svg' : '/img/GameCard/chess.svg'} width={584} height={253}/>
         </div>

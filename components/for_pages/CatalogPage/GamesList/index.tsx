@@ -65,7 +65,7 @@ export default function GamesList(props: Props) {
           </div>
         </VisibleXs>
 
-      {props.totalItems > 20 && props.items.length < props.totalItems && !(props.loading && props.items.length === 0) && <div className={styles.more} onClick={props.loading ? null : handleShowTrigger}>
+      {props.items.length < props.totalItems && !(props.loading && props.items.length === 0) && <div className={styles.more} onClick={props.loading ? null : handleShowTrigger}>
         <div className={styles.icon}>
           {props.loading ?   <Spinner size={22} color="#fff" secondaryColor="rgba(255,255,255,0.4)"/>
             : <img src='/img/CatalogPage/more.svg' alt=''/>}

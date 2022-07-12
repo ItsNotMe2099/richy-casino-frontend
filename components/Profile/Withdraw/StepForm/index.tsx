@@ -11,7 +11,6 @@ import UserUtils from 'utils/user'
 import PaymentsRepository from 'data/repositories/PaymentsRepository'
 import FormError from 'components/ui/Form/FormError'
 import {IDepositResponse} from 'data/interfaces/IPaymentDeposit'
-import {PaymentMethodSelected} from 'components/Profile/Wallet/PaymentMethodSelected'
 import {PaymentSeparator} from 'components/Profile/Wallet/PaymentSeparator'
 import {useAppContext} from 'context/state'
 import AmountCurrencyField from 'components/ui/Inputs/AmountCurrencyField'
@@ -57,7 +56,7 @@ export default function StepForm(props: Props) {
   return (
     <div className={styles.root}>
       <PaymentOptions>
-        <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>
+       {/*<PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>*/}
         <PaymentMethodCard icon={UserUtils.getCurrencyIcon(props.currency.iso)} label={props.currency.name} selected
                            onClick={() => props.onSetStep(PaymentStep.Currency)}/>
       </PaymentOptions>

@@ -6,6 +6,7 @@ import useIsActiveLink from 'hooks/useIsActiveLink'
 import classNames from 'classnames'
 import Formatter from 'utils/formatter'
 import { useAppContext } from 'context/state'
+import {RICHY_CATEGORY_NAME} from '../../../../types/constants'
 
 interface Props {
   item: IGameCategory
@@ -14,7 +15,8 @@ interface Props {
 
 export default function GameCategoryCard(props: Props) {
   const appContext = useAppContext()
-  const link = Routes.catalogCategory(props.item.id)
+  console.log('CategoryCardItem', props.item.internalName)
+  const link = props.item.internalName.toLowerCase() === RICHY_CATEGORY_NAME ? Routes.richyGames : Routes.catalogCategory(props.item.id)
   const active = useIsActiveLink(link)
   return (
     <Link href={link} scroll={!appContext.isMobile}>

@@ -35,9 +35,16 @@ enum ActionType{
 }
 const Item = ({icon, label, onClick, link}: ItemProps) => {
   const isActive = useIsActiveLink(link ?? '')
+  const router = useRouter()
+  const isActiveDisabled = function () {
+      return link === Routes.catalog && router.asPath !== Routes.catalog
+  }()
+  if(link === Routes.catalog){
+
+  }
   return (
-    <div className={classNames(styles.item, {[styles.active]: isActive})} onClick={onClick}>
-      <div className={styles.icon}>
+    <div className={classNames(styles.item, {[styles.active]: isActive && !isActiveDisabled})} onClick={onClick}>
+      <div className={classNames(styles.icon, {[styles.active]: isActive && !isActiveDisabled})}>
         {icon}
       </div>
       <div className={styles.label}>
