@@ -1,3 +1,4 @@
+import { ICountry } from './../interfaces/ICountry'
 import request from 'utils/request'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import {ICity} from 'data/interfaces/ICity'
@@ -35,6 +36,17 @@ export default class InfoRepository {
       return null
     }
     return Converter.objectKeysToCamelCase(res?.data?.data)
+  }
+
+  static async getCountryByIp(): Promise<ICountry> {
+    const res = await request({
+      method: 'get',
+      url: '/api/content/geo/country-by-ip',
+    })
+    if (res.err) {
+      return null
+    }
+    return  res?.data?.data
   }
 
   static async getCities(countryIso: string): Promise<ICity[]> {

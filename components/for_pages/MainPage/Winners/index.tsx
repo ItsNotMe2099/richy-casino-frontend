@@ -10,7 +10,7 @@ import Image from 'next/image'
 import { ITournamentWinner } from 'data/interfaces/ITournamentWinner'
 import Formatter from 'utils/formatter'
 import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
-import { ITournamentPosition } from 'data/interfaces/ITournamentPosition'
+import { useTournamentContext } from 'context/tournament_state'
 
 interface IUser {
   nickname: string
@@ -27,8 +27,9 @@ interface Props {
 export default function Winners(props: Props) {
   const {t} = useTranslation()
   const context = useAppContext()
+  const tournamentContext = useTournamentContext()
   const [winners, setWinners] = useState<ITournamentWinner[]>([])
-  const [userPosition, setUserPosition] = useState<ITournamentPosition | null>()
+
   const isMobile = context.isMobile
   useEffect(() => {
     TournamentRepository.fetchLastWinners().then(i => {
@@ -37,17 +38,7 @@ export default function Winners(props: Props) {
    
   
   }, [])
-  useEffect(() => {
-    if(!context.auth){
-      setUserPosition(null)
-      return
-    }
-    TournamentRepository.fetchPositions().then(i => {
-      if(i.length > 0){
-        setUserPosition(i[0])
-      }
-    })
-  }, [context.auth])
+ 
   const user = context.auth
 
 
@@ -166,14 +157,14 @@ export default function Winners(props: Props) {
                 </Scrollbars>*/}
             </div>
           </div>
-          {userPosition &&
-            <div className={styles.bottom}>
+          {tournamentContext.userPosition &&
+            <div className={styles.bottom} id={'tournament-user-position'}>
               <div className={styles.group}>
                 <div className={styles.avatar}>
                   <img src={'/img/Winners/avatarM.svg'} alt=''/>
                 </div>
                 <div className={styles.nick}>
-                  {userPosition.nickname}
+                  {tournamentContext.userPosition.nickname}
                 </div>
               </div>
               <div className={styles.element}>
@@ -181,7 +172,7 @@ export default function Winners(props: Props) {
                   {t('tournament_top10_user_position')}
                 </div>
                 <div className={styles.value}>
-                  {userPosition.userPosition}
+                  {tournamentContext.userPosition.userPosition}
                 </div>
               </div>
               <div className={styles.element}>
@@ -190,8 +181,8 @@ export default function Winners(props: Props) {
                 </div>
                 <div className={styles.value}>
                   <div className={styles.group}>
-                    <CurrencySvg className={styles.currency} currencyIso={userPosition.userCurrencyIso}/>
-                    {Formatter.formatAmount(userPosition.spentMoneyAmount, userPosition.userCurrencyIso)} {userPosition.userCurrencyIso}
+                    <CurrencySvg className={styles.currency} currencyIso={tournamentContext.userPosition.userCurrencyIso}/>
+                    {Formatter.formatAmount(tournamentContext.userPosition.spentMoneyAmount, tournamentContext.userPosition.userCurrencyIso)} {tournamentContext.userPosition.userCurrencyIso}
                 
                   </div>
                 </div>
@@ -202,8 +193,8 @@ export default function Winners(props: Props) {
                 </div>
                 <div className={styles.value}>
                   <div className={styles.group}>
-                  <CurrencySvg className={styles.currency} currencyIso={userPosition.userCurrencyIso}/>
-                   {Formatter.formatAmount(userPosition.sumToReachTop10, userPosition.userCurrencyIso)} {userPosition.userCurrencyIso}
+                  <CurrencySvg className={styles.currency} currencyIso={tournamentContext.userPosition.userCurrencyIso}/>
+                   {Formatter.formatAmount(tournamentContext.userPosition.sumToReachTop10, tournamentContext.userPosition.userCurrencyIso)} {tournamentContext.userPosition.userCurrencyIso}
                 
                   </div>
                 </div>
@@ -214,9 +205,9 @@ export default function Winners(props: Props) {
                 </div>
                 <div className={styles.value}>
                   <div className={styles.group}>
-                  <CurrencySvg className={styles.currency} currencyIso={userPosition.tournamentCurrencyIso}/>
+                  <CurrencySvg className={styles.currency} currencyIso={tournamentContext.userPosition.tournamentCurrencyIso}/>
                     
-                     {Formatter.formatAmount(userPosition.totalBankMoneyAmount, userPosition.tournamentCurrencyIso)} {userPosition.tournamentCurrencyIso}
+                     {Formatter.formatAmount(tournamentContext.userPosition.totalBankMoneyAmount, tournamentContext.userPosition.tournamentCurrencyIso)} {tournamentContext.userPosition.tournamentCurrencyIso}
                   </div>
                 </div>
               </div>

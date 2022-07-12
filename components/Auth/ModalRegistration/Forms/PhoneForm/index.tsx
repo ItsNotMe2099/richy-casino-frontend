@@ -3,7 +3,6 @@ import {useState} from 'react'
 import { useTranslation } from 'next-i18next'
 import {Form, Formik} from 'formik'
 import { CheckBox } from 'components/ui/Inputs/CheckBox'
-import InputField from 'components/ui/Inputs/InputField'
 import Validator from 'utils/validator'
 import {ModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
@@ -15,6 +14,7 @@ import { RegCurrencySelectField } from 'components/ui/Inputs/RegCurrencySelectFi
 import FormFooter from 'components/Auth/ModalRegistration/Forms/FormFooter'
 import FormPromocode from 'components/Auth/ModalRegistration/Forms/FormPromocode'
 import Formatter from 'utils/formatter'
+import PhoneField from 'components/ui/Inputs/PhoneField'
 
 interface Props {
 }
@@ -37,9 +37,10 @@ export default function PhoneForm(props: Props) {
     }
     setSending(false)
   }
+  const converted = Converter.convertCurrencyToOptions(context.currencies)
   const initialValues = {
       phone: null,
-      currency: Converter.convertCurrencyToOptions(context.currencies)[0].value,
+      currency: converted.length > 0 ? converted[0].value:  null,
       checkBox: true
     }
 
@@ -58,7 +59,7 @@ export default function PhoneForm(props: Props) {
         <div className={styles.select}>
         <RegCurrencySelectField name='currency' disabled={sending}/>
         </div>
-        <InputField disabled={sending} format={'phone'} name={'phone'} placeholder={t('registration_field_phone')} validate={Validator.required} />
+        <PhoneField defaultCountry={context.countryByIp?.iso} disabled={sending} name={'phone'} placeholder={t('registration_field_phone')} validate={Validator.required} />
         <FormPromocode/>
         <CheckBox size={'small'} name='checkBox' disabled={sending}
                   label={t('registration_terms')} validate={Validator.required}/>

@@ -5,7 +5,7 @@ import {ReactElement} from 'react'
 
 interface Props {
   onClick?: () => void
-  icon?: ReactElement
+  icon?: ReactElement | string
   label?: string
 }
 

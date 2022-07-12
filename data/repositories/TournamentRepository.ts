@@ -7,6 +7,7 @@ import {ITournamentPosition} from 'data/interfaces/ITournamentPosition'
 import {ITournamentNearest} from 'data/interfaces/ITournamentNearest'
 import {ITournamentWinner} from 'data/interfaces/ITournamentWinner'
 import {ITournamentTop10List} from 'data/interfaces/ITournamentTop10'
+import {ITournamentUserRoundActive} from '../interfaces/ITournamentUserActive'
 interface ITournamentParticipateResponse{
   userId: number
   nickname: string
@@ -26,6 +27,16 @@ export default class TournamentRepository {
     }
     return Converter.objectKeysToCamelCase(res.data?.data)
   }
+  static async fetchUserActiveRounds(): Promise<ITournamentUserRoundActive[]> {
+    const res = await request({
+      method: 'get',
+      url: '/api/tournament/round/active',
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data?.data.map(i => Converter.objectKeysToCamelCase(i))
+  }
 
   static async participate(tournamentId: number): Promise<ITournamentParticipateResponse> {
     const res = await request({
@@ -34,7 +45,7 @@ export default class TournamentRepository {
       data: {tournament_id: tournamentId}
     })
     if (res.err) {
-      return null
+      throw res.err
     }
     return Converter.objectKeysToCamelCase(res.data?.data)
   }

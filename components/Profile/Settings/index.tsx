@@ -31,6 +31,7 @@ import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
 import Close from 'components/svg/Close'
 import {DateField} from 'components/ui/Inputs/DateField'
+import PhoneField from 'components/ui/Inputs/PhoneField'
 
 interface IUser {
   id: string
@@ -67,7 +68,7 @@ export default function Settings(props: Props) {
     birthday_date: context.user.birthdayDate,
     country_iso: context.user.countryIso,
     currency_iso: context.user.currencyIso,
-    phone: context.user.phone,
+    phone: `+${context.user.phone}`,
     email: context.user.email,
     city_id: context.user.cityId,
     gender: context.user.gender,
@@ -198,9 +199,8 @@ export default function Settings(props: Props) {
                                             countryIso={values.country_iso} disabled={sending}/>
             <ProfileSettingsSelectField name='currency_iso' validate={Validator.required} options={currencies}
                                         label={t('settings_field_currency')} disabled={sending}/>
-            <InputField name={'phone'} format={'phone'} disabled={sending} className={styles.input}
-                        label={t('settings_field_phone')}
-                        errorClassName={styles.fieldError}/>
+          <PhoneField defaultCountry={context.countryByIp?.iso}   label={t('settings_field_phone')} disabled={sending} name={'phone'}  className={classNames(styles.input, styles.inputPhone)} errorClassName={styles.fieldError} placeholder={t('registration_field_phone')} validate={Validator.required} />
+      
             <InputField name={'email'} disabled={true} className={styles.input} label={t('settings_field_email')}
                         errorClassName={styles.fieldError}/>
             <div className={classNames(styles.change, {[styles.justify]: isChange})}>

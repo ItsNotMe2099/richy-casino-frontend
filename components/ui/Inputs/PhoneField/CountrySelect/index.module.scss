@@ -1,0 +1,164 @@
+@import "scss/index";
+
+.root{
+
+}
+
+.other{
+  background-color: $dark700;
+  padding: 12px 14px;
+
+}
+.icon{
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  overflow: hidden;
+svg{
+  width: 28px;
+  margin-top: -0px;
+  margin-left: -6px;
+}
+}
+.dropDownTrigger {
+  .icon{
+    margin-right: 7px;
+  }
+  border-radius: 8px;
+  text-decoration: none;
+  justify-content: space-between;
+  display: flex;
+  color: $white;
+
+  flex-shrink: 0;
+  position: relative;
+  width: 100%;
+  margin: 0px;
+  font-size: 13px;
+  align-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+  padding-right: 13px;
+  &:hover{
+  
+  }
+  &:after{
+    content: "";
+    position: absolute;
+    right: 0px;
+    height: 15px;
+    width: 1px;
+    background: #474959;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.dropdownTriggerActive{
+  position: relative;
+  font-size: 13px;
+  color: #000000;
+  padding-bottom: 6px;
+}
+
+.dropDown {
+  position: absolute;
+  background: #ffffff;
+  opacity: 0;
+  display: none;
+  //transform: translateY(-20px);
+  //transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+  flex-direction: column;
+  margin-top: 16px;
+  width: 100%;
+  .option:first-child{
+    a{
+    &:hover{
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+    }
+  }
+  }
+  .option:last-child{
+    a{
+    &:hover{
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
+  }
+  }
+  .option{
+    .icon{
+    margin-right: 12px;
+    }
+  }
+  a{
+    padding: 10px 21px;
+    font-size: 13px;
+    font-weight: 500;
+    color: $white;
+    &:hover{
+      background-color: $dark400;
+    }
+  }
+
+}
+.dropDownActive{
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+    left: 0px;
+    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.25));
+    background: $dark500;
+    border-radius: 12px;
+    .option:first-child{
+      &:hover{
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+      }
+    }
+    .option:last-child{
+      &:hover{
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+      }
+    }
+}
+
+
+
+.options{
+  z-index: 2;
+}
+.option{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+  padding-left: 14px;
+
+  height: 38px;
+  &:hover{
+    background: #41424F;
+  }
+  .image{
+    margin-right: 10px;
+    img{
+      max-width: 17px;
+    }
+  }
+
+}
+
+.track{
+  display: block !important;
+  width: 6px;
+  right: 2px;
+  bottom: 2px;
+  top: 2px;
+  border-radius: 3px;
+}
+
+

@@ -1,21 +1,19 @@
 import {useState} from 'react'
 import styles from './index.module.scss'
 import {useTranslation} from 'next-i18next'
-import {PaymentMethod} from 'types/interfaces'
 import {useAppContext} from 'context/state'
-import {ICurrency} from 'data/interfaces/ICurrency'
 import StepMethod from 'components/Profile/Wallet/StepMethod'
 import StepCurrency from 'components/Profile/Wallet/StepCurrency'
-import StepForm from 'components/Profile/Wallet/StepForm'
 import BonusSmallBanner from 'components/for_pages/Common/BonusSmallBanner'
-import StepCrypto from 'components/Profile/Wallet/StepCrypto'
-import {IDepositCryptoResponse, IDepositResponse} from 'data/interfaces/IPaymentDeposit'
+import { IDepositResponse} from 'data/interfaces/IPaymentDeposit'
 import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
 import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 import BottomSheetLayout from 'components/layout/BottomSheetLayout'
 import BottomSheetBody from 'components/layout/BottomSheetBody'
 import {WalletHeader} from 'components/Profile/Wallet/WalletHeader'
 import ModalFooterTwoFa from 'components/Profile/layout/ModalFooterTwoFa'
+import { IPaymentMethod } from 'data/interfaces/IPaymentMethod'
+import { IPaymentSystem } from 'data/interfaces/IPaymentSystem'
 
 
 enum PaymentStep {
@@ -33,6 +31,7 @@ interface Props {
 export default function Wallet(props: Props) {
   const {t} = useTranslation()
   const context = useAppContext()
+  const paymentMethods = context.paymentMethodsDeposit
   const methods = [
     {label: t('wallet_payment_type_crypto'), bonus: true},
     {iconLabel: 'visa', label: t('wallet_payment_type_card')},
@@ -63,20 +62,20 @@ export default function Wallet(props: Props) {
     {icon: '/img/Wallet/bank/mir.svg', label: 'МИР'},
   ]
 
-  const [method, setMethod] = useState<PaymentMethod>(PaymentMethod.Crypto)
-  const [currency, setCurrency] = useState<ICurrency>(null)
+  const [method, setMethod] = useState<IPaymentMethod | null>(null)
+  const [paymentSystem, setPaymentSystem] = useState<IPaymentSystem | null>(null)
   const [depositResponse, setDepositResponse] = useState<IDepositResponse>(null)
-  const [step, setStep] = useState<PaymentStep>(PaymentStep.Currency)
+  const [step, setStep] = useState<PaymentStep>(PaymentStep.Method)
   const handleClose = () => {
 
     context.hideModal()
   }
-  const handlePaymentMethod = (method: PaymentMethod) => {
+  const handlePaymentMethod = (method: IPaymentMethod) => {
     setMethod(method)
     setStep(PaymentStep.Currency)
   }
-  const handleCurrencyMethod = (currency: ICurrency) => {
-    setCurrency(currency)
+  const handlePaymentSystemMethod = (paymentSystem: IPaymentSystem) => {
+    setPaymentSystem(paymentSystem)
     setStep(PaymentStep.Form)
   }
   const handleSubmit = (deposit: IDepositResponse) => {
@@ -111,13 +110,14 @@ export default function Wallet(props: Props) {
         <BonusSmallBanner style='wallet'/>
       </div>}
 
-      {step === PaymentStep.Method && <StepMethod onChange={handlePaymentMethod}/>}
-      {step === PaymentStep.Currency && <StepCurrency method={method} onChange={handleCurrencyMethod} onSetStep={handleSetStep}/>}
-      {step === PaymentStep.Success && <StepCrypto currency={currency} method={method} response={depositResponse as IDepositCryptoResponse}/>}
+      {step === PaymentStep.Method && <StepMethod paymentMethods={paymentMethods} onChange={handlePaymentMethod}/>}
+      {step === PaymentStep.Currency && <StepCurrency method={method} onChange={handlePaymentSystemMethod} onSetStep={handleSetStep}/>}
+      {/*step === PaymentStep.Success && <StepCrypto  paymentSystem={paymentSystem} method={method} response={depositResponse as IDepositCryptoResponse}/>*/}
     </div>
   )
   if(step === PaymentStep.Form){
-    return <StepForm isBottomSheet={props.isBottomSheet} currency={currency} method={method} onSubmit={handleSubmit} onSetStep={handleSetStep} onBackClick={handleBack}/>
+   return null
+    //return <StepForm isBottomSheet={props.isBottomSheet} currency={currency} method={method} onSubmit={handleSubmit} onSetStep={handleSetStep} onBackClick={handleBack}/>
   }
   if (props.isBottomSheet) {
     return (<BottomSheetLayout>

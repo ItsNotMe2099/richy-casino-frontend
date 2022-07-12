@@ -3,7 +3,6 @@ import {useTranslation} from 'next-i18next'
 import {IDepositCryptoResponse} from 'data/interfaces/IPaymentDeposit'
 import QRCode from 'react-qr-code'
 import {PaymentOptions} from 'components/Profile/Wallet/PaymentOptions'
-import {PaymentMethodSelected} from 'components/Profile/Wallet/PaymentMethodSelected'
 import {PaymentMethod} from 'types/interfaces'
 import {PaymentMethodCard} from 'components/Profile/Wallet/PaymentMethodCard'
 import {PaymentSeparator} from 'components/Profile/Wallet/PaymentSeparator'
@@ -23,7 +22,7 @@ export default function StepCrypto(props: Props) {
  return (
       <div className={styles.root}>
         <PaymentOptions>
-          <PaymentMethodSelected method={props.method}/>
+          {/*<PaymentMethodSelected method={props.method}/>*/}
           <PaymentMethodCard icon={<CurrencySvg currencyIso={props.currency.iso} color/>} label={props.currency.name} selected/>
         </PaymentOptions>
         <div className={styles.separator}>

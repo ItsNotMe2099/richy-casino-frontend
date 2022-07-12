@@ -9,10 +9,13 @@
     display: none;
   }
 }
-.input{
-  @include vertical-align(middle)
-}
+
 .tournament{
+  .input{
+    span{
+      padding-top: 5px;
+    }
+  }
   @media screen and (max-width: 950px){
     border-radius: 6px;
     padding: 4px;
@@ -61,6 +64,10 @@
     height: 22px;
     font-size: 16px;
     font-weight: 700;
+      span{
+        padding-top: 3px;
+      }
+    
   }
   .label{
     font-size: 10px;
@@ -113,6 +120,11 @@
       display: none;
     }
   }
+  .input{
+    span{
+      padding-top: 5.5px;
+    }
+  }
   @media screen and (max-width: $xs-max) {
   border-radius: 6px;
   padding: 4px;
@@ -129,6 +141,7 @@
     width: 24px;
     height: 22px;
     font-size: 16px;
+ 
   }
   .separator{
     margin: 0 2px;
@@ -157,6 +170,9 @@
     width: 34px;
     height: 31px;
     font-size: 22px;
+    span{
+      padding-top: 3px;
+    }
   }
   .separator{
     margin: 0 2px;
@@ -184,6 +200,11 @@
       display: none;
     }
   }
+  .input{
+    span{
+      padding-top: 4px;
+    }
+  }
 }
 
 .gift{
@@ -205,6 +226,9 @@
     height: 26px;
     font-size: 20px;
     border-radius: 3px;
+    span{
+      padding-top: 2px;
+    }
     @media screen and (max-width: $xs-max){
       width: 24px;
       height: 22px;
@@ -243,6 +267,9 @@
     height: 22px;
     font-size: 16px;
     border-radius: 3px;
+    span{
+      padding-top: 3.5px;
+    }
   }
   .separator{
     margin: 0 2px;
@@ -271,6 +298,10 @@
     width: 24px;
     height: 22px;
     font-size: 16px;
+      span{
+        padding-top: 2px;
+      }
+    
   }
   .separator{
     margin: 0 2px;
