@@ -50,14 +50,7 @@ export default function Menu(props: Props) {
     {label: t('menu_bonuses'), link: Routes.bonuses},
     {label: t('menu_chess'), link: Routes.chess},
   ]
-  const renderMobile = () => {
-    return  <div className={classNames(styles.menu, )} >
-      <Link href='/'>
-        <a className={styles.logo}><Logo/></a>
-      </Link>
-      <Overflow currentPath={currentPath} currentRoute={currentRoute} options={options}/>
-    </div>
-  }
+
   const renderMenu = (className, style) => {
     return  <div className={className} style={style}>
       <Link href='/'>

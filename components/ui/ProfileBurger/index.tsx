@@ -14,6 +14,7 @@ import BottomSheetBody from 'components/layout/BottomSheetBody'
 import {Routes} from 'types/routes'
 import Link from 'next/link'
 import LangSelect from 'components/for_pages/Common/LangSelect'
+import { useRouter } from 'next/router'
 
 enum LinkKey{
   FreeBitCoin,
@@ -91,7 +92,7 @@ export default function ProfileBurger(props: Props) {
   const {t} = useTranslation()
   const { onRequestClose} = props
   const appContext = useAppContext()
-
+  const router = useRouter()
 
   const bonuses = [
     {icon: '/img/ProfileBurger/gift.svg', label: t('profile_mobile_bonuses_bonus'), key: LinkKey.Bonuses, link: Routes.bonuses},
@@ -104,8 +105,8 @@ export default function ProfileBurger(props: Props) {
     {icon: '/img/ProfileBurger/ticket.svg', label: t('profile_mobile_menu_richy_lottery'), key: LinkKey.Lottery, link: Routes.lottery},
     {icon: '/img/ProfileBurger/youtube.svg', label: t('profile_mobile_menu_live_casino'), key: LinkKey.LiveCasino, link: Routes.catalogLive},
     {icon: '/img/ProfileBurger/rocket.svg', label: t('profile_mobile_menu_aviator'), key: LinkKey.Aviator, link: Routes.aviator},
-    {icon: '/img/ProfileBurger/poker.svg', label: t('profile_mobile_menu_poker'), key: LinkKey.Poker, link: Routes.poker},
-    {icon: '/img/ProfileBurger/chess.svg', label: t('profile_mobile_menu_chess'), key: LinkKey.Chess, link: Routes.chess},
+    {icon: '/img/ProfileBurger/poker.svg', label: t('profile_mobile_menu_poker'), key: LinkKey.Poker, link: null},
+    {icon: '/img/ProfileBurger/chess.svg', label: t('profile_mobile_menu_chess'), key: LinkKey.Chess, link: null},
     {icon: '/img/ProfileBurger/cup.svg', label: t('profile_mobile_menu_leaderboard'), key: LinkKey.LeaderBoard, link: Routes.leaderBoard},
     {icon: '/img/ProfileBurger/referral.svg', label: t('profile_mobile_menu_referral'), key: LinkKey.Referral, link: Routes.referral},
     {icon: '/img/ProfileBurger/like.svg', label: t('profile_mobile_menu_favorite'), key: LinkKey.Favorite, link: Routes.catalogFavorite},
@@ -116,6 +117,20 @@ export default function ProfileBurger(props: Props) {
       case LinkKey.WheelOfFortune:
         appContext.showModal(ModalType.fortune)
         break
+        case LinkKey.Poker:
+          if (appContext.auth) {
+            router.push(Routes.poker)
+          } else {
+            appContext.showModal(ModalType.registration)
+          }
+          break
+          case LinkKey.Chess:
+          if (appContext.auth) {
+            router.push(Routes.poker)
+          } else {
+            appContext.showModal(ModalType.registration)
+          }
+          break
       default:
         appContext.hideModal()
     }
