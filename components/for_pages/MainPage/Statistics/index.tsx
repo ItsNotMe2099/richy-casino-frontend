@@ -60,7 +60,7 @@ export default function Statistics(props: Props) {
                   <div className={styles.game}>
                     <div className={styles.gameImg}>
                       {/*<img src={item.imageIconPreviewUrl} alt=''/>*/}
-                      {item.imageIconPreviewUrl && <Image src={item.imageIconPreviewUrl} width={isMobile ? 16 : 28} height={isMobile ? 16 : 28}/>}
+                      {item.imageIconPreviewUrl && <Image src={item.imageIconSmallUrl || item.imageIconPreviewUrl} width={isMobile ? 16 : 28} height={isMobile ? 16 : 28}/>}
                     </div>
                     <div className={styles.gameLbl}>
                       {item.gameId}

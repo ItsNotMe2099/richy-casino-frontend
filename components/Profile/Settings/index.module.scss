@@ -12,7 +12,9 @@
 .input {
   &.inputPhone{
     :global .PhoneInput{
+      @media screen and (max-width: $xs-max) {
     background-color: $dark700;
+      }
     }
   }
   input {

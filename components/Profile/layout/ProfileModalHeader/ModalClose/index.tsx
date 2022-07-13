@@ -1,8 +1,10 @@
 import styles from './index.module.scss'
 import Close from 'components/svg/Close'
 import {useAppContext} from 'context/state'
+import classNames from 'classnames'
 
 interface Props {
+  className?: string
   onClick?: () => void
 }
 
@@ -16,7 +18,7 @@ export default function ModalClose(props: Props) {
     }
   }
   return (
-    <div className={styles.root} onClick={handleClose}>
+    <div className={classNames(styles.root, props.className)} onClick={handleClose}>
       <Close/>
     </div>
   )

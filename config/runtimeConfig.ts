@@ -9,6 +9,8 @@ interface IRuntimeConfig {
   DEV: boolean
   PROD: boolean
   FAKE_BONUS: boolean
+  GAME_CHESS_ID: string,
+  GAME_POKER_ID: string,
 }
 
 function getRuntimeConfig(): IRuntimeConfig {

@@ -96,7 +96,7 @@ export default function TopSlider(props: Props) {
                       {item.title}
                     </div>
                     <div className={classNames(styles.btn, {[styles.alt]: index === 1})} style={{fontSize: `${width / 25}px`}}>
-                      <Button size='normal' background={index === 1 ? 'blueGradient500' : 'white'}  href={item.redirectUrl}>{item.textButton}</Button>
+                      <Button size='normal' background={'white'}  href={item.redirectUrl}>{item.textButton}</Button>
                     </div>
                   </div>
                 </div>
