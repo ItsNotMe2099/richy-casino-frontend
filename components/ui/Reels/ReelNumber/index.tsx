@@ -5,6 +5,7 @@ interface Props {
     values?: number[],
     number?: number,
     duration?: number,
+    height: number,
 
 }
 export default function ReelsNumbers(props: Props) {
@@ -24,7 +25,7 @@ export default function ReelsNumbers(props: Props) {
     const style = {
         transitionDuration: `${duration}ms`,
         transitionDelay: `${delay}ms`,
-        transform: `translate(0, ${display}em)`,
+        transform: `translate(0, ${display * props.height}px)`,
     }
 
     return (

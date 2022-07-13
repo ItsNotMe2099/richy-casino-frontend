@@ -1,11 +1,13 @@
 @import "scss/index";
 .root{
-  
+
 }
 .reel {
-  height: 1em;
   display: flex;
   align-items: flex-end;
   overflow-y: hidden;
   height: 78px;
+  @media screen and (max-width: $xs-max) {
+    height: 50px;
+  }
 }
