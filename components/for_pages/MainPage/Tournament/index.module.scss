@@ -266,6 +266,10 @@
   @media screen and (max-width: 350px){
     height: 30px;
   }
+  &.hidden{
+    visibility: hidden;
+    opacity: 0px;
+  }
 }
 
 .leftMobile{

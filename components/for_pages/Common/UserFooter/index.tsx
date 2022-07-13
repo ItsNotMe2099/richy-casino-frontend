@@ -1,9 +1,9 @@
 import styles from './index.module.scss'
 import VisibleXs from 'components/ui/VisibleXS'
-import {useAppContext} from 'context/state'
-import {ModalType} from 'types/enums'
-import {Routes} from 'types/routes'
-import {useRouter} from 'next/router'
+import { useAppContext } from 'context/state'
+import { ModalType } from 'types/enums'
+import { Routes } from 'types/routes'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import classNames from 'classnames'
 import useIsActiveLink from 'hooks/useIsActiveLink'
@@ -13,8 +13,8 @@ import CasinoSvg from 'components/svg/CasinoSvg'
 import MenuSvg from 'components/svg/MenuSvg'
 import MenuCloseSvg from 'components/svg/MenuCloseSvg'
 import JoyStickSvg from 'components/svg/JoyStickSvg'
-import {ReactElement} from 'react'
-import {useTranslation} from 'next-i18next'
+import { ReactElement } from 'react'
+import { useTranslation } from 'next-i18next'
 
 interface Props {
 
@@ -27,24 +27,24 @@ interface ItemProps {
   link?: string
 }
 
-enum ActionType{
+enum ActionType {
   Main = 'main',
   Poker = 'poker',
   Casino = 'casino',
   Menu = 'menu'
 }
-const Item = ({icon, label, onClick, link}: ItemProps) => {
+const Item = ({ icon, label, onClick, link }: ItemProps) => {
   const isActive = useIsActiveLink(link ?? '')
   const router = useRouter()
   const isActiveDisabled = function () {
-      return link === Routes.catalog && router.asPath !== Routes.catalog
+    return link === Routes.catalog && router.asPath !== Routes.catalog
   }()
-  if(link === Routes.catalog){
+  if (link === Routes.catalog) {
 
   }
   return (
-    <div className={classNames(styles.item, {[styles.active]: isActive && !isActiveDisabled})} onClick={onClick}>
-      <div className={classNames(styles.icon, {[styles.active]: isActive && !isActiveDisabled})}>
+    <div className={classNames(styles.item, { [styles.active]: isActive && !isActiveDisabled })} onClick={onClick}>
+      <div className={classNames(styles.icon, { [styles.active]: isActive && !isActiveDisabled })}>
         {icon}
       </div>
       <div className={styles.label}>
@@ -55,21 +55,25 @@ const Item = ({icon, label, onClick, link}: ItemProps) => {
 }
 
 export default function UserFooter(props: Props) {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const router = useRouter()
   const items = [
-    {label: t('tabbar_main'), icon: <UserSvg/>, key: ActionType.Main, link: '/'},
-    {label: t('tabbar_poker'), icon: <PokerSvg className={styles.poker}/>, key: ActionType.Poker, link: Routes.poker},
-    {label: t('tabbar_casino'), icon: <CasinoSvg/>, key: ActionType.Casino, link: Routes.catalog},
-    {label: t('tabbar_menu'), icon: <MenuSvg/>, key: ActionType.Menu},
+    { label: t('tabbar_main'), icon: <UserSvg />, key: ActionType.Main, link: '/' },
+    { label: t('tabbar_poker'), icon: <PokerSvg className={styles.poker} />, key: ActionType.Poker, link: Routes.poker },
+    { label: t('tabbar_casino'), icon: <CasinoSvg />, key: ActionType.Casino, link: Routes.catalog },
+    { label: t('tabbar_menu'), icon: <MenuSvg />, key: ActionType.Menu },
   ]
-  const {showModal} = useAppContext()
+  const { showModal } = useAppContext()
   const context = useAppContext()
   const isMenuOpen = context.modal === ModalType.profileBurger || context.bottomSheet === ModalType.profileBurger
   const handleClickItem = (item) => {
     switch (item.key) {
       case ActionType.Poker:
-        router.push(Routes.poker)
+        if (context.auth) {
+          router.push(Routes.poker)
+        } else {
+          context.showModal(ModalType.registration)
+        }
         break
       case ActionType.Casino:
         router.push(Routes.catalog)
@@ -78,9 +82,9 @@ export default function UserFooter(props: Props) {
         router.push('/')
         break
       case ActionType.Menu:
-       if(isMenuOpen){
+        if (isMenuOpen) {
           context.hideModal()
-        } else{
+        } else {
           showModal(ModalType.profileBurger)
         }
         break
@@ -90,20 +94,20 @@ export default function UserFooter(props: Props) {
 
   return (
     <VisibleXs>
-      <div className={classNames(styles.root, {[styles.isOverAll]: isMenuOpen})}>
+      <div className={classNames(styles.root, { [styles.isOverAll]: isMenuOpen })}>
         {items.slice(0, 2).map((item, index) =>
-          <Item onClick={() => handleClickItem(item)} icon={item.icon} label={item.label} key={item.key}  link={item.link}/>
+          <Item onClick={() => handleClickItem(item)} icon={item.icon} label={item.label} key={item.key} link={item.link} />
         )}
         <Link href={Routes.richyGames}>
-        <a className={styles.joystick}>
-          <JoyStickSvg/>
-        </a>
+          <a className={styles.joystick}>
+            <JoyStickSvg />
+          </a>
         </Link>
         {items.slice(2, items.length).map((item, index) =>
           <Item
-          onClick={() => handleClickItem(item)}
-          link={item.link}
-          icon={(item.label === t('tabbar_menu') && isMenuOpen) ? <MenuCloseSvg/> : item.icon} label={item.label} key={item.key}/>
+            onClick={() => handleClickItem(item)}
+            link={item.link}
+            icon={(item.label === t('tabbar_menu') && isMenuOpen) ? <MenuCloseSvg /> : item.icon} label={item.label} key={item.key} />
         )}
       </div>
     </VisibleXs>

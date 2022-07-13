@@ -52,7 +52,7 @@ export default function Banner(props: Props) {
   const Digit = (prop: {digit: string}) => {
     return (
       <div className={styles.digit}>
-        <Reels text={prop.digit}/>
+        <Reels text={prop.digit} height={context.isMobile ? 50 : 78}/>
       </div>
     )
   }

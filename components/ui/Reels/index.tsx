@@ -39,6 +39,7 @@ interface Props {
     text: string
     duration?: number,
     delay?: number,
+    height: number
 
 }
 export default function Reels(props: Props) {
@@ -82,7 +83,7 @@ export default function Reels(props: Props) {
                                 getNumbers(value).map((number) => {
                                     const output = (
                                         <ReelsNumbers
-
+height={props.height}
                                             duration={props.duration}
                                             key={type + ind}
                                             delay={delay(ind, delayArray, props.delay)}
@@ -100,7 +101,7 @@ export default function Reels(props: Props) {
                     )
                 // for any other segment we want a static reel with one value in it's array
                 default:
-                    const output = <ReelsNumbers key={type + strInd} values={[value]} />
+                    const output = <ReelsNumbers height={props.height} key={type + strInd} values={[value]} />
 
                     strInd++
 

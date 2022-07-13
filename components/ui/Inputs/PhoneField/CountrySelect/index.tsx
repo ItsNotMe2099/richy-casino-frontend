@@ -1,11 +1,12 @@
 import { FieldConfig } from 'formik'
-import styles from './index.module.scss'
 import classNames from 'classnames'
 import { useState, useEffect, useMemo, useRef } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 import { useTranslation } from 'next-i18next'
 import { listenForOutsideClicks } from 'components/hooks/useDetectOutsideClick'
 import flags from 'country-flag-icons/react/3x2'
+import { usePopper } from 'react-popper'
+import styles from './index.module.scss'
 interface IOption {
   value: string
   label: string
@@ -32,7 +33,20 @@ const FlagComponent = ({
 export default function CountrySelect(props: Props & FieldConfig) {
   const { t, i18n } = useTranslation()
   const dropdownRef = useRef(null)
-
+  const [referenceElement, setReferenceElement] = useState(null)
+  const [popperElement, setPopperElement] = useState(null)
+  const { styles: popperStyles, attributes } = usePopper(referenceElement, popperElement, {
+    strategy: 'fixed',
+    placement: 'bottom-start',
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 10],
+        },
+      },
+    ]
+  })
   const currentOption = useMemo<IOption>(() => props.options.find(i => i.value === props.value), [props.value])
   const [listening, setListening] = useState(false)
   const [isActive, setIsActive] = useState(false)
@@ -53,7 +67,10 @@ export default function CountrySelect(props: Props & FieldConfig) {
   }
 
   return (
-    <div ref={dropdownRef} className={classNames(styles.root)} onClick={handleClick}>
+    <div ref={(ref) => {
+      setReferenceElement(ref)
+      dropdownRef.current= ref
+    }} className={classNames(styles.root)} onClick={handleClick}>
       <div className={styles.dropDownTrigger}>
         <div className={styles.icon}>
           <FlagComponent countryName={currentOption?.label} country={props.value}></FlagComponent>
@@ -62,7 +79,7 @@ export default function CountrySelect(props: Props & FieldConfig) {
         <img className={classNames({ [styles.reverse]: isActive })}
           src='/img/Select/arrow.svg' alt='' />
       </div>
-      <nav className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
+      {<div ref={setPopperElement} style={popperStyles.popper} className={styles.dropDown} {...attributes.popper}>
         {/*style !== 'footer' && <div className={styles.triangle}></div>*/}
         <div className={styles.options}>
           <Scrollbars style={{ height: 200}}
@@ -77,6 +94,6 @@ export default function CountrySelect(props: Props & FieldConfig) {
             )}
           </Scrollbars>
         </div>
-      </nav>
+      </div>}
     </div>)
 }

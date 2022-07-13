@@ -20,6 +20,15 @@
   @media screen and (max-width: $sm-max){
     padding: 0px 18px 0px 18px;
   }
+  .menuItem{
+    &:last-of-type{
+      margin-right: 0px;
+      padding-right: 18px;
+      &::after{
+        right: 18px;
+      }
+    }
+  }
 }
 
 .listMobile{

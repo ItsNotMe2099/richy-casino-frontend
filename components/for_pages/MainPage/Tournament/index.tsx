@@ -15,6 +15,7 @@ import { ITournamentRichy } from 'data/interfaces/ITournamentRichy'
 import Formatter from 'utils/formatter'
 import { useTournamentContext } from 'context/tournament_state'
 import * as Scroll from 'react-scroll'
+import classNames from 'classnames'
 interface Props {
 
 }
@@ -110,9 +111,10 @@ export default function Tournament(props: Props) {
             <div className={styles.timerMobile}>
               <Timer expiredAt={new Date(tournament.timeEnd)} days style='tournamentMobile' />
             </div>
-            {tournamentContext.userActiveRounds.length == 0 && <Button spinner={tournamentContext.participateLoading} onClick={handleJoin} className={styles.btnMobile} size='normal' background='payGradient500'>
+             <Button spinner={tournamentContext.participateLoading} onClick={handleJoin} className={classNames({[styles.btnMobile]: true, [styles.hidden]: tournamentContext.userActiveRounds.length == 0})}
+              size='normal' background='payGradient500'>
               <span style={{ fontSize: isMobile && `${width / 24}px` }}>{t('tournament_banner_button')}</span>
-            </Button>}
+            </Button>
           </div>
         </div>
       </VisibleXs>
