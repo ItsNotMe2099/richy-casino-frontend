@@ -12,6 +12,8 @@ services:
           dockerfile: docker/app/Dockerfile
           args:
             - ENV_FILE=.env.prod
+        volumes: 
+          - /src/richy-casino-frontend/cache:/usr/src/app/.next/cache
         image: ${APP_IMAGE}
         container_name: richy-casino-front-app
         restart: ${DK_RESTART}
