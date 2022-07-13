@@ -2,10 +2,9 @@
 
 .root{
   background: linear-gradient(46.89deg, #4A16E4 2.09%, #933288 11.47%, #C1444E 32.44%, #FF5C00 108.03%);
-  padding: 4px 0 11px 0;
-  padding-left: 75px;
+ 
   position: relative;
-  max-height: 79px;
+  max-height: 76px;
   overflow: hidden;
   border-radius: 18px;
   text-align: left;
@@ -13,14 +12,66 @@
     display: none;
   }
   @media screen and (max-width: $mobile-max){
-    padding: 5px 0;
-    padding-left: 25px;
+ 
     .title{
       font-size: 12px;
       span{
         font-size: 12px;
       }
     }
+  }
+}
+.mobileLeft{
+  position: relative;
+  display: flex;
+  padding-right: 9px;
+  flex-direction: row;
+  align-items: stretch;
+  z-index: 1;
+  
+  .content{
+    padding: 0px 2% 0px 2%;
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden;
+    justify-content: center;
+    .contentWrapper{
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 5px 0px 2px 0px;
+    }
+    .fs{
+      white-space: nowrap;
+      line-height: 18px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+   .left{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+   }
+  }
+  .mobileLeftHero{
+    display: flex;
+    position: relative;
+    width: 64px;
+    height: 76px;
+    min-width: 64px;
+
+    overflow: hidden;
+   &:after{
+    content: '';
+    padding-bottom: 100%;;
+   }
+  }
+  .timer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
   }
 }
 
@@ -80,13 +131,10 @@
 }
 
 .wallet{
-  padding-left: 85px;
-  padding-top: 7px;
+
   @media screen and (max-width: $mobile-max){
-    padding-left: 25%;
-    padding-right: 10px;
-    padding-top: 4px;
-    max-height: 93px;
+    padding: 0px;
+
     .title{
       margin-bottom: 0;
     }
@@ -164,9 +212,7 @@
   @media screen and (max-width: $mobile-max){
     max-height: initial;
     padding-bottom: 55px;
-    .content{
-      margin-bottom: -5px;
-    }
+  
   }
   .moneyFooter{
     display: block;

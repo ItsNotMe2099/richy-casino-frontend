@@ -3,6 +3,7 @@ export interface IGameHistory {
   gameId: string
   gameProviderId: string,
   imageIconPreviewUrl: string
+  imageIconSmallUrl: string
   currencyIso: string
   amountBet: number
   amountWin: number

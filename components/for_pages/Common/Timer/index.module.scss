@@ -123,6 +123,9 @@
   .input{
     span{
       padding-top: 5.5px;
+      @media screen and (max-width: $xs-max) {
+          padding-top: 2px;
+      }
     }
   }
   @media screen and (max-width: $xs-max) {

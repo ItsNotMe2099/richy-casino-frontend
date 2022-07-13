@@ -4,7 +4,6 @@ import Logo from 'components/svg/Logo'
 import {useRouter} from 'next/router'
 import Link from 'next/link'
 import LangSelect from 'components/for_pages/Common/LangSelect'
-import {useState} from 'react'
 import {ModalType, ProfileModalType} from 'types/enums'
 import {useAppContext} from 'context/state'
 import ProfileAccountsMenu from './components/Profile/ProfileAccountsMenu'
@@ -14,10 +13,12 @@ import VisibleXs from 'components/ui/VisibleXS'
 import {useTranslation} from 'next-i18next'
 import {Routes} from 'types/routes'
 import {usePwaContext} from 'context/pwa_state'
+import { ReactElement } from 'react'
 
 interface Props {
   children?: React.ReactNode
   className?: string
+  rightButton?: ReactElement
 }
 
 interface UserBonusProps {
@@ -48,19 +49,6 @@ export default function Header(props: Props) {
         <div className={styles.amount} style={{color: color}}>{amount}</div>
       </div>
     )
-  }
-
-
-
-  const currencies = [
-    {label: 'USD', value: '99.99', symbol: '/img/Select/BTC.png'},
-    {label: 'BTC', value: '0.00025867', symbol: '/img/Select/BTC.png', crypto: true},
-  ]
-
-  const [current, setCurrent] = useState(currencies[0])
-
-  const handleChange = (item) => {
-    setCurrent(item)
   }
 
   const handleAppClick = () => {
@@ -140,7 +128,7 @@ export default function Header(props: Props) {
                         background='payGradient500' className={styles.wallet}>
                   <HiddenXs><img src='/img/icons/wallet.svg' alt=''/></HiddenXs>{t('header_deposit')}</Button>
                 <VisibleXs>
-                  <ProfileMenu className={styles.proMenu}/>
+                  {props.rightButton ? props.rightButton : <ProfileMenu className={styles.proMenu}/>}
                 </VisibleXs>
               </div>
             }

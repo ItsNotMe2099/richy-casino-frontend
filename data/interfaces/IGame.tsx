@@ -3,5 +3,6 @@ export interface IGame {
   name?: string
   providerId?: number
   imageIconPreviewUrl?: string
+  imageIconSmallUrl?: string
   categoryId?: number,
 }
