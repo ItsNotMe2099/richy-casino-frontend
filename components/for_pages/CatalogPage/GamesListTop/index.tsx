@@ -38,7 +38,7 @@ export default function GamesListTop(props: Props) {
   const [filter, setFilter] = useState<GameSwitchFilterKey>(GameSwitchFilterKey.WinNow)
   const allLink = Routes.catalogTop
   const currentPage = useIsActiveLink(allLink)
-  const limit = 20
+  const limit = 12
   const filters: ISwitchFilterItem<GameSwitchFilterKey>[] = [
     { label: t('catalog_list_top_tab_win_now'), value: GameSwitchFilterKey.WinNow, icon: <New /> },
     { label: t('catalog_list_top_tab_week'), value: GameSwitchFilterKey.TopWeek, icon: <Top /> },
