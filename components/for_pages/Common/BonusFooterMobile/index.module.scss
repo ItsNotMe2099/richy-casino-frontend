@@ -1,0 +1,252 @@
+@import "scss/index";
+
+.root{
+  background: linear-gradient(46.89deg, #4A16E4 2.09%, #933288 11.47%, #C1444E 32.44%, #FF5C00 108.03%);
+  padding: 4px 0 11px 0;
+  padding-left: 75px;
+  position: relative;
+  max-height: 79px;
+  overflow: hidden;
+  border-radius: 18px;
+  text-align: left;
+  .moneyWallet, .moneyWallet2, .moneyBlurWallet, .moneyFooter, .moneyFooter2, .moneyBurger{
+    display: none;
+  }
+  @media screen and (max-width: $mobile-max){
+    padding: 5px 0;
+    padding-left: 25px;
+    .title{
+      font-size: 12px;
+      span{
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.close{
+  position: absolute;
+  cursor: pointer;
+  right: 0px;
+  top: 0px;
+  display: flex;
+  z-index: 11;
+  justify-content: center;
+    padding: 12px 10px 20px 30px;
+  align-items: center;
+  img{
+    width: 14px;
+  }
+}
+
+.profileBurger{
+  padding-left: 70px;
+  @media screen and (max-width: $mobile-max){
+    padding-left: 25%;
+    max-height: 93px;
+    .title{
+      margin-bottom: 0;
+    }
+  }
+  @media screen and (min-width: 501px){
+    display: flex;
+    justify-content: center;
+    .left{
+      margin-right: 200px;
+    }
+    .noMargin{
+      margin-right: 0;
+    }
+  }
+  .timer{
+    margin-right: 8px;
+  }
+  .money2{
+    display: none;
+  }
+  .moneyBurger{
+    display: block;
+    position: absolute;
+    right: -30px;
+    top: 0;
+  }
+}
+
+.reg{
+  padding-left: 80px;
+  .timer{
+    margin-right: 8px;
+  }
+}
+
+.wallet{
+  padding-left: 85px;
+  padding-top: 7px;
+  @media screen and (max-width: $mobile-max){
+    padding-left: 25%;
+    padding-right: 10px;
+    padding-top: 4px;
+    max-height: 93px;
+    .title{
+      margin-bottom: 0;
+    }
+  }
+  .moneyWallet{
+    display: block;
+    position: absolute;
+    top: 30%;
+    right: -2%;
+    @media screen and (max-width: 375px){
+      right: -7%;
+    }
+  }
+  .moneyWallet2{
+    display: block;
+    position: absolute;
+    left: -6%;
+    top: 15%;
+    @media screen and (max-width: 375px){
+      left: -12%;
+    }
+  }
+  .moneyBlurWallet{
+    display: block;
+    position: absolute;
+    right: 8%;
+    top: 0;
+  }
+  .break{
+    display: none;
+    @media screen and (max-width: $mobile-max){
+      display: block;
+    }
+  }
+}
+
+.footer{
+  border-radius: 18px 18px 0px 0px;
+  padding: 5px 32px 30px 70px;
+  max-height: 140px;
+  @media screen and (min-width: 501px){
+    display: flex;
+    justify-content: center;
+    .left{
+      margin-right: 200px;
+    }
+    .noMargin{
+      margin-right: 0;
+    }
+  }
+  .hero {
+    left: 0px;
+    @media screen and (max-width: 340px){
+      top: 6%;
+    }
+  }
+  .bottom{
+  }
+  .title{
+    span{
+      font-size: 12px;
+    }
+  }
+  .money2{
+    bottom: 10px;
+  }
+  .money, .money2 {
+    @media screen and (max-width: $mobile-max){
+      display: none;
+    }
+  }
+
+
+
+  @media screen and (max-width: $mobile-max){
+    max-height: initial;
+    padding-bottom: 55px;
+    .content{
+      margin-bottom: -5px;
+    }
+  }
+  .moneyFooter{
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .moneyFooter2{
+    display: block;
+    position: absolute;
+    left: 0%;
+    top: 23%;
+  }
+}
+
+.title{
+  font-weight: bold;
+  font-size: 12px;
+  position: relative;
+  z-index: 2;
+  color: #AAFF55;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.fs{
+  color: #AAFF55;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.bottom{
+  display: flex;
+  flex-direction: column;
+}
+
+.content{
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.left{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.satoshi{
+  font-weight: 500;
+  font-size: 12px;
+  text-align: left;
+  @media screen and (max-width: 375px){
+    font-size: 11px;
+  }
+}
+
+.hero{
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  left: 0;
+}
+
+.money{
+  right: -20px;
+  bottom: -35px;
+  position: absolute;
+  @media screen and (max-width: $mobile-max){
+    left: 0;
+    right: auto;
+    bottom: -5px;
+  }
+}
+
+.money2{
+  position: absolute;
+  bottom: -24px;
+  left: -22px;
+  @media screen and (max-width: $mobile-max){
+    left: auto;
+    right: -10px;
+    bottom: -40px;
+  }
+}

@@ -24,7 +24,8 @@ export default function BonusSmallBanner(props: Props) {
   const expiredAt = new Date(details?.validTill)
 
   const bannerClass = classNames({
-   [styles.wallet]: true
+    [styles.wallet]: ['wallet' , 'registration', 'profileBurger'].includes(props.style),
+    [styles.foo]: props.style === 'footer'
   })
 
 
@@ -72,7 +73,7 @@ export default function BonusSmallBanner(props: Props) {
         
             </div>
             {content}
-            {appContext.showBonus && <div className={styles.timer}><Timer minutes style={props.style === 'wallet' ? 'wallet' : 'footerSmall'} expiredAt={expiredAt} /></div>}
+            {appContext.showBonus && <div className={styles.timer}><Timer minutes style={'wallet'} expiredAt={expiredAt} /></div>}
      
           </div>
           

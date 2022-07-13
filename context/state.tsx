@@ -15,7 +15,6 @@ import BannerRepository from 'data/repositories/BannerRepository'
 import { addHours } from 'date-fns'
 import { runtimeConfig } from 'config/runtimeConfig'
 import { IPaymentMethod } from 'data/interfaces/IPaymentMethod'
-import PaymentMethodRepository from 'data/repositories/PaymentMethodRepository'
 import { ICountry } from 'data/interfaces/ICountry'
 
 interface IState {
@@ -23,6 +22,7 @@ interface IState {
   isDesktop: boolean
   auth: boolean
   token: string
+  initialLoaded: boolean
   modalArguments?: any
   countryByIp: ICountry,
   modal: ModalType | ProfileModalType | null
@@ -57,6 +57,7 @@ interface IState {
 const defaultValue: IState = {
   countryByIp: null,
   modalArguments: null,
+  initialLoaded: false,
   isMobile: false,
   isDesktop: true,
   modal: null,
@@ -131,6 +132,8 @@ export function AppWrapper(props: Props) {
   const [snackbar, setSnackbar] = useState<SnackbarData | null>(null)
   const [modalProfileStack, setModalProfileStack] = useState<IModalProfileStackItem[]>([])
   const [countryByIp, setCountryByIp] = useState<ICountry | null>(null)
+  const [userLoaded, setUserLoaded] = useState<boolean>(false)
+  const [infoLoaded, setInfoLoaded] = useState<boolean>(false)
   const value: IState = {
     ...defaultValue,
     isMobile: props.isMobile,
@@ -149,6 +152,7 @@ export function AppWrapper(props: Props) {
     paymentMethodsDeposit,
     paymentMethodsWithdraw,
     countryByIp,
+    initialLoaded: userLoaded && infoLoaded,
     showModal: (type, props: any) => {
       showModal(type, props)
 
@@ -230,11 +234,10 @@ export function AppWrapper(props: Props) {
       setAuth(true)
       updateUserDetails()
     }
-    BannerRepository.fetchBanners().then(i => setBanners(i))
 
   }, [props.token])
   useEffect(() => {
-    updatePromoCodes()
+
     if (!Cookies.get(CookiesType.firstVisitAt)) {
       Cookies.set(CookiesType.firstVisitAt, (new Date()).toISOString(), { expires: CookiesLifeTime.firstVisitAt })
     }
@@ -244,16 +247,26 @@ export function AppWrapper(props: Props) {
   }, [])
   useEffect(() => {
 
-    InfoRepository.getCurrencies().then(i => setCurrencies(i))
-    InfoRepository.getCountryByIp().then(i => setCountryByIp(i))
-  }, [])
+    if(userLoaded || infoLoaded){
+      document.getElementById('global-page-loader').style.opacity = '0'
+      setTimeout(() => {
+        document.getElementById('global-page-loader').style.display = 'none'
+      }, 500)
+    }
+  }, [userLoaded, infoLoaded])
   useEffect(() => {
+    const promises = []
+    promises.push(InfoRepository.getCurrencies().then(i => setCurrencies(i)).catch(() => { }))
+    promises.push(InfoRepository.getCountryByIp().then(i => setCountryByIp(i)).catch(() => { }))
+    promises.push(BannerRepository.fetchBanners().then(i => setBanners(i)).catch(() => { }))
+    promises.push(updatePromoCodes().catch(() => { }))
+    Promise.all(promises).then(i => setInfoLoaded(true))
     if (!auth) {
       return
     }
-    PaymentMethodRepository.fetchDeposit().then(i => setPaymentMethodsDeposit(i))
-    PaymentMethodRepository.fetchWithdraw().then(i => setPaymentMethodsWithdraw(i))
-  }, [auth])
+    // PaymentMethodRepository.fetchDeposit().then(i => setPaymentMethodsDeposit(i))
+    // PaymentMethodRepository.fetchWithdraw().then(i => setPaymentMethodsWithdraw(i))
+  }, [])
   const showModal = (type: ModalType | ProfileModalType, args?: any) => {
 
     if (props.isMobile && ModalsBottomSheet.includes(type)) {
@@ -285,8 +298,13 @@ export function AppWrapper(props: Props) {
     setBottomSheet(null)
   }
   const updateUserDetails = async () => {
-    const res = await UserRepository.getUser()
-    setUser(res)
+    try {
+      const res = await UserRepository.getUser()
+      setUser(res)
+    } catch (e) {
+
+    }
+    setUserLoaded(true)
   }
   const updatePromoCodes = async () => {
     try {
