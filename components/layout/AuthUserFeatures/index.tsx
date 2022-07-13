@@ -1,13 +1,13 @@
 import {useAppContext} from 'context/state'
 import UserFooter from 'components/for_pages/Common/UserFooter'
 import styles from './index.module.scss'
-import BonusSmallBanner from 'components/for_pages/Common/BonusSmallBanner'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import {BonusDepositShowMode} from 'types/enums'
 import BonusFooter from 'components/for_pages/Common/BonusFooter'
 import { useRouter } from 'next/router'
 import Gift from 'components/for_pages/Common/Gift'
+import BonusFooterMobile from 'components/for_pages/Common/BonusFooterMobile'
 
 interface Props {}
 
@@ -27,8 +27,8 @@ export default function AuthUserFeatures(props: Props) {
             <BonusFooter style='footer' onRequestClose={() => context.setBonusShowMode(BonusDepositShowMode.Gift)}/>
           </HiddenXs>
           <VisibleXs>
-            <BonusSmallBanner style='footer' onRequestClose={() => context.setBonusShowMode(BonusDepositShowMode.Gift)}/>
-          </VisibleXs>
+           <BonusFooterMobile onRequestClose={() => context.setBonusShowMode(BonusDepositShowMode.Gift)}/>
+           </VisibleXs>
         </div>
       </>
     }

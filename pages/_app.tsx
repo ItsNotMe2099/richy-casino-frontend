@@ -29,9 +29,11 @@ import { CookiesLifeTime } from 'types/constants'
 import BottomSheetContainer from 'components/bottom_sheet/BottomSheetContainer'
 import Head from 'next/head'
 import { DefaultSeo } from 'next-seo'
-import ContentLoader from 'components/ui/ContentLoader'
 import ReactPWAInstallProvider from 'context/pwa_state'
 import { TournamentWrapper } from '../context/tournament_state'
+const PageLoader = () => {
+
+}
 function MyApp({ Component, pageProps }: AppProps) {
   const [clientVisible, setClientVisible] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
@@ -83,8 +85,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       </AuthWrapper>
       {clientVisible && <Snackbar />}
-      {clientVisible && <ContentLoader style={'fullscreen'} isOpen={isLoading} />}
-    </AppWrapper >
+       </AppWrapper >
   )
 }
 
