@@ -12,6 +12,7 @@ import GameListRepository from 'data/repositories/GameListRepository'
 import ProviderFilter from 'components/for_pages/MainPage/GamesList/ProviderFilter'
 import {Routes} from 'types/routes'
 import Formatter from 'utils/formatter'
+import {useMeasure} from 'react-use'
 export enum MainGameListType{
   All = 'all',
   Live = 'live'
@@ -35,6 +36,7 @@ export default function MainGamesList(props: Props) {
   const [data, setData] = useState<IPagination<IGame>>({data: [], total: 0})
   const [page, setPage] = useState<number>(0)
   const [loading, setLoading] = useState<boolean>(true)
+  const [ref, { width, height }] = useMeasure()
   const limit = 30
   const [categoryId, setCategoryId] = useState<number | null>(null)
   const [providerId, setProviderId] = useState<number | null>(null)
@@ -57,9 +59,9 @@ export default function MainGamesList(props: Props) {
       setLoading(false)
     })
   }
-
+  console.log('LIstWidth', width)
   return (
-    <div className={classNames(styles.root, {[styles.none]: data.total === 0})}>
+    <div ref={ref} className={classNames(styles.root, {[styles.none]: data.total === 0})}>
       <Header icon={props.icon} label={props.label} length={Formatter.formatNumber(data.total)} shadowColor={props.shadowColor} allLink={props.type === MainGameListType.All ? Routes.catalog :  Routes.catalogLive}/>
       <HiddenXs>
         <>
@@ -68,7 +70,7 @@ export default function MainGamesList(props: Props) {
             <ProviderFilter providerId={providerId} onChange={(providerId) => handleChangeFilter(categoryId, providerId)}/>
           </div>
           <div className={styles.list}>
-            {data.data.slice(0, 9).map((item, index) =>
+            {data.data.slice(0, width > 634 ? 12 : 9).map((item, index) =>
               <ItemGame item={item} key={index}/>
             )}
           </div>

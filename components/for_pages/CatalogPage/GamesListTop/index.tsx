@@ -4,19 +4,20 @@ import SwitchFilter from 'components/for_pages/Common/SwitchFilter'
 import Slider from 'react-slick'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
-import {useEffect, useRef, useState} from 'react'
-import {IPagination, ISwitchFilterItem} from 'types/interfaces'
+import { useEffect, useRef, useState } from 'react'
+import { IPagination, ISwitchFilterItem } from 'types/interfaces'
 import GameListRepository from 'data/repositories/GameListRepository'
-import {IGameWin} from 'data/interfaces/IGameWin'
+import { IGameWin } from 'data/interfaces/IGameWin'
 import New from 'components/svg/New'
 import Calendar from 'components/svg/Calendar'
 import Top from 'components/svg/Top'
-import {Routes} from 'types/routes'
+import { Routes } from 'types/routes'
 import useIsActiveLink from 'hooks/useIsActiveLink'
-import {IGame} from 'data/interfaces/IGame'
+import { IGame } from 'data/interfaces/IGame'
 import GamesList from 'components/for_pages/CatalogPage/GamesList'
-import {useTranslation} from 'next-i18next'
-enum GameSwitchFilterKey{
+import { useTranslation } from 'next-i18next'
+import ItemGame from 'components/for_pages/Common/ItemGame'
+enum GameSwitchFilterKey {
 
   WinNow = 'winNow',
   TopWeek = 'topWeek',
@@ -28,10 +29,10 @@ interface Props {
 }
 
 export default function GamesListTop(props: Props) {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [latestWin, setLatestWin] = useState<IGameWin[]>([])
-  const [top, setTop] = useState<IPagination<IGame>>({data: [], total: 0})
+  const [top, setTop] = useState<IPagination<IGame>>({ data: [], total: 0 })
   const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(true)
   const [filter, setFilter] = useState<GameSwitchFilterKey>(GameSwitchFilterKey.WinNow)
@@ -39,15 +40,15 @@ export default function GamesListTop(props: Props) {
   const currentPage = useIsActiveLink(allLink)
   const limit = 20
   const filters: ISwitchFilterItem<GameSwitchFilterKey>[] = [
-    {label: t('catalog_list_top_tab_win_now'), value: GameSwitchFilterKey.WinNow, icon: <New/>},
-    {label: t('catalog_list_top_tab_week'), value: GameSwitchFilterKey.TopWeek, icon: <Top/>},
-    {label: t('catalog_list_top_tab_month'), value: GameSwitchFilterKey.TopMonth, icon: <Calendar/>},
+    { label: t('catalog_list_top_tab_win_now'), value: GameSwitchFilterKey.WinNow, icon: <New /> },
+    { label: t('catalog_list_top_tab_week'), value: GameSwitchFilterKey.TopWeek, icon: <Top /> },
+    { label: t('catalog_list_top_tab_month'), value: GameSwitchFilterKey.TopMonth, icon: <Calendar /> },
   ]
   const sliderRef = useRef<Slider>(null)
 
   useEffect(() => {
     setLoading(true)
-    switch (filter){
+    switch (filter) {
       case GameSwitchFilterKey.TopMonth:
         GameListRepository.fetchTopMonth(1, limit).then(i => {
           setTop(i)
@@ -70,15 +71,15 @@ export default function GamesListTop(props: Props) {
 
   }, [filter])
   const handleChangeFilter = (item: GameSwitchFilterKey) => {
-    setTop({data: [], total: 0})
+    setTop({ data: [], total: 0 })
     setFilter(item)
   }
   const handleScrollNext = async () => {
     const newPage = page + 1
     setPage(newPage)
     setLoading(true)
-    let res: IPagination<IGame>  = {data: [], total: 0}
-    switch (filter){
+    let res: IPagination<IGame> = { data: [], total: 0 }
+    switch (filter) {
       case GameSwitchFilterKey.TopMonth:
         res = await GameListRepository.fetchTopMonth(newPage, limit)
         break
@@ -87,15 +88,17 @@ export default function GamesListTop(props: Props) {
         break
     }
 
-    setTop(data => ({data: [...data.data, ...res.data], total: res.total}))
+    setTop(data => ({ data: [...data.data, ...res.data], total: res.total }))
     setLoading(false)
   }
-  const Item = (prop:{item: IGameWin}) => {
+  const Item = (prop: { item: IGameWin }) => {
 
-    return(
+    return (
       <div className={styles.item}>
-        <img src={prop.item.game.imageIconPreviewUrl} alt=''/>
-        <div className={styles.label}>
+        <div className={styles.image}>
+        <ItemGame item={prop.item.game}/>
+        </div>
+           <div className={styles.label}>
           {prop.item.game.name}
         </div>
         <div className={styles.user}>
@@ -110,20 +113,64 @@ export default function GamesListTop(props: Props) {
 
   const settings = {
     className: `${styles.list}`,
+    dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 6,
     slidesToScroll: 1,
-    variableWidth: true,
-    adaptiveHeight: true,
+    initialSlide: 0,
+    variableWidth: false,
+    adaptiveHeight: false,
+    slidesToShow: 8,
     arrows: false,
-    dotsClass: `${styles.dots}`,
     beforeChange: (current: number, next: number) => setCurrentIndex(next),
-
+    responsive: [
+      {
+        breakpoint: 1600,
+        settings: {
+          slidesToShow: 7,
+          initialSlide: 0,
+        }
+      },
+      {
+        breakpoint: 1360,
+        settings: {
+          slidesToShow: 6,
+          initialSlide: 0,
+        }
+      },
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 5,
+          initialSlide: 0,
+        }
+      },
+      {
+        breakpoint: 1170,
+        settings: {
+          slidesToShow: 4,
+          initialSlide: 0,
+        }
+      },
+      {
+        breakpoint: 570,
+        settings: {
+          slidesToShow: 4,
+          initialSlide: 0,
+        }
+      },
+      {
+        breakpoint: 400,
+        settings: {
+          slidesToShow: 3,
+          initialSlide: 0,
+        },
+      }
+    ]
   }
 
 
-  if(filter === GameSwitchFilterKey.WinNow) {
+  if (filter === GameSwitchFilterKey.WinNow) {
 
     return (
       <div className={styles.root}>
@@ -135,21 +182,26 @@ export default function GamesListTop(props: Props) {
           style='fullOnlyOnMobile'
           onPrev={() => sliderRef.current?.slickGoTo(currentIndex - 1)}
           onNext={() => sliderRef.current?.slickGoTo(currentIndex + 1)}
-          slider/>
-        <div className={styles.wrapper}><SwitchFilter<GameSwitchFilterKey> items={filters} onClick={handleChangeFilter}
-                                                                           active={filter}/></div>
+          slider />
+        <div className={styles.wrapper}>
+          <SwitchFilter<GameSwitchFilterKey> items={filters} onClick={handleChangeFilter}
+            active={filter} />
+        </div>
         <>
           <HiddenXs>
-            <Slider {...settings} ref={sliderRef}>
+            <div className={styles.sliderWrapper}>
+            {latestWin.length > 0 && <Slider {...settings} ref={sliderRef}>
               {latestWin.map((item, index) =>
-                <Item item={item} key={index}/>
+                <Item item={item} key={index} />
               )}
-            </Slider>
+            </Slider>}
+            </div>
+         
           </HiddenXs>
           <VisibleXs>
             <div className={styles.overflow}>
               {latestWin.map((item, index) =>
-                <Item item={item} key={index}/>
+                <Item item={item} key={index} />
               )}
             </div>
           </VisibleXs>
@@ -158,13 +210,13 @@ export default function GamesListTop(props: Props) {
     )
   }
 
-  return  (<GamesList title={t('catalog_list_top')}
-                      icon='/img/Contents/money.svg'
-                     allLink={!currentPage? allLink : null}
-                     totalItems={top?.total}
-                     items={top?.data ?? []}
-                     loading={loading}
-                     onScrollNext={handleScrollNext}
-                     switchFilter={<SwitchFilter<GameSwitchFilterKey> items={filters} onClick={handleChangeFilter} active={filter}/> }
+  return (<GamesList title={t('catalog_list_top')}
+    icon='/img/Contents/money.svg'
+    allLink={!currentPage ? allLink : null}
+    totalItems={top?.total}
+    items={top?.data ?? []}
+    loading={loading}
+    onScrollNext={handleScrollNext}
+    switchFilter={<SwitchFilter<GameSwitchFilterKey> items={filters} onClick={handleChangeFilter} active={filter} />}
   />)
 }
