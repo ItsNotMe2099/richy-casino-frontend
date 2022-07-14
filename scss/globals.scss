@@ -9,6 +9,8 @@ html, body {
   line-height: 1.3;
   background: $dark800;
   color: $white;
+  overflow-x: hidden;
+  max-width: 100%;
   @media screen and (max-width: $mobile-max) {
     font-size: calc(14px + 1vw);
   }

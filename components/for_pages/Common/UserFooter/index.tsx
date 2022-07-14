@@ -13,15 +13,15 @@ import CasinoSvg from 'components/svg/CasinoSvg'
 import MenuSvg from 'components/svg/MenuSvg'
 import MenuCloseSvg from 'components/svg/MenuCloseSvg'
 import JoyStickSvg from 'components/svg/JoyStickSvg'
-import { ReactElement } from 'react'
 import { useTranslation } from 'next-i18next'
+import { colors } from 'scss/variables'
 
 interface Props {
 
 }
 
 interface ItemProps {
-  icon: ReactElement
+  icon: 'main' | 'poker' | 'casino' | 'menu' | 'close'
   label: string
   onClick: () => void
   link?: string
@@ -39,13 +39,30 @@ const Item = ({ icon, label, onClick, link }: ItemProps) => {
   const isActiveDisabled = function () {
     return link === Routes.catalog && router.asPath !== Routes.catalog
   }()
-  if (link === Routes.catalog) {
-
+  const color = isActive && !isActiveDisabled ? colors.white : colors.dark200
+  const getIcon = () => {
+    switch (icon) {
+      case 'main':
+        return <UserSvg  color={color}/>
+        break
+      case 'poker':
+        return <PokerSvg color={color} />
+        break
+      case 'casino':
+        return <CasinoSvg color={color}/>
+        break
+      case 'menu':
+        return <MenuSvg />
+        break
+      case 'close':
+        return <MenuCloseSvg />
+        break
+    }
   }
   return (
     <div className={classNames(styles.item, { [styles.active]: isActive && !isActiveDisabled })} onClick={onClick}>
       <div className={classNames(styles.icon, { [styles.active]: isActive && !isActiveDisabled })}>
-        {icon}
+        {getIcon()}
       </div>
       <div className={styles.label}>
         {label}
@@ -57,16 +74,21 @@ const Item = ({ icon, label, onClick, link }: ItemProps) => {
 export default function UserFooter(props: Props) {
   const { t } = useTranslation()
   const router = useRouter()
-  const items = [
-    { label: t('tabbar_main'), icon: <UserSvg />, key: ActionType.Main, link: '/' },
-    { label: t('tabbar_poker'), icon: <PokerSvg className={styles.poker} />, key: ActionType.Poker, link: Routes.poker },
-    { label: t('tabbar_casino'), icon: <CasinoSvg />, key: ActionType.Casino, link: Routes.catalog },
-    { label: t('tabbar_menu'), icon: <MenuSvg />, key: ActionType.Menu },
-  ]
-  const { showModal } = useAppContext()
   const context = useAppContext()
   const isMenuOpen = context.modal === ModalType.profileBurger || context.bottomSheet === ModalType.profileBurger
+ 
+  const items = [
+    { label: t('tabbar_main'), icon:  'main', key: ActionType.Main, link: '/' },
+    { label: t('tabbar_poker'), icon: 'poker', key: ActionType.Poker, link: Routes.poker },
+    { label: t('tabbar_casino'), icon: 'casino', key: ActionType.Casino, link: Routes.catalog },
+    { label: t('tabbar_menu'), icon: isMenuOpen ? 'close' : 'menu', key: ActionType.Menu },
+  ]
+  
   const handleClickItem = (item) => {
+
+    if (isMenuOpen) {
+      context.hideModal()
+    }
     switch (item.key) {
       case ActionType.Poker:
         if (context.auth) {
@@ -85,7 +107,7 @@ export default function UserFooter(props: Props) {
         if (isMenuOpen) {
           context.hideModal()
         } else {
-          showModal(ModalType.profileBurger)
+          context.showModal(ModalType.profileBurger)
         }
         break
     }
@@ -96,7 +118,7 @@ export default function UserFooter(props: Props) {
     <VisibleXs>
       <div className={classNames(styles.root, { [styles.isOverAll]: isMenuOpen })}>
         {items.slice(0, 2).map((item, index) =>
-          <Item onClick={() => handleClickItem(item)} icon={item.icon} label={item.label} key={item.key} link={item.link} />
+          <Item onClick={() => handleClickItem(item)} icon={item.icon as any} label={item.label} key={item.key} link={item.link} />
         )}
         <Link href={Routes.richyGames}>
           <a className={styles.joystick}>
@@ -107,7 +129,7 @@ export default function UserFooter(props: Props) {
           <Item
             onClick={() => handleClickItem(item)}
             link={item.link}
-            icon={(item.label === t('tabbar_menu') && isMenuOpen) ? <MenuCloseSvg /> : item.icon} label={item.label} key={item.key} />
+            icon={item.icon as any} label={item.label} key={item.key} />
         )}
       </div>
     </VisibleXs>

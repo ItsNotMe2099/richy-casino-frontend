@@ -5,6 +5,7 @@ import {ReactElement, useState} from 'react'
 import GameListRepository from 'data/repositories/GameListRepository'
 import classNames from 'classnames'
 import { debounce } from 'debounce'
+import GamesListSearch from 'components/for_pages/CatalogPage/GamesListSearch'
 interface Props{
   children?: ReactElement | ReactElement[]
   top?: ReactElement | ReactElement[]
@@ -46,7 +47,10 @@ export default function WithGameFilterLayout(props: Props) {
         <Filter isSearch={isSearch} showMobile={props.showMobile} onSearch={handleSearch}/>
         <div className={styles.content}>
           <div className={classNames(styles.children, {[styles.hidden]: isSearch})}>{props.children}</div>
-        
+          <div className={classNames(styles.search, {[styles.hidden]: !isSearch})}>
+            <GamesListSearch data={searchGames} onSelect={() => setIsSearch(false)} loading={isSearchLoading} onScrollNext={handleScrollNext}/>
+          </div>
+
           </div>
         </div>
     </Layout>

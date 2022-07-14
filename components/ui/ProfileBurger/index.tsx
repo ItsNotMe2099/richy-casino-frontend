@@ -177,7 +177,7 @@ export default function ProfileBurger(props: Props) {
       )}
     </div>
     <div className={styles.lang}>
-      <LangSelect/>
+      <LangSelect styleType={'menu'}/>
     </div>
     <div className={styles.chat}>
       <div className={styles.name}>

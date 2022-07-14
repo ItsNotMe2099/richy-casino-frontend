@@ -10,6 +10,7 @@
   }
   @media screen and (max-width: $xs-max){
     margin-top: 49px;
+    padding: 0 10px;
 }
 }
 
@@ -270,7 +271,7 @@
     }
     @media screen and (max-width: 320px){
       justify-content: flex-end;
-      padding-right: 12px;
+      padding-right: 0px;
     }
 }
 

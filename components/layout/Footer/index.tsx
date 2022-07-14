@@ -245,7 +245,7 @@ export default function Footer(props: Props) {
           <div className={styles.btnsMobile}>
                   <div className={styles.btn}><Button href="#top" size='extraSmall' background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button></div>
                   {/*<div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>*/}
-                  <div className={styles.lang}><LangSelect style='footer' /></div>
+                  <div className={styles.lang}><LangSelect styleType='footer' /></div>
                 </div>
           <div className={styles.bottom}>
             <div className={styles.bottomIcons}>
@@ -265,7 +265,7 @@ export default function Footer(props: Props) {
                 <div className={styles.btns}>
                   <div className={styles.btn}><Button href="#top" size='extraSmall' background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button></div>
                   {/*<div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>*/}
-                  <div className={styles.lang}><LangSelect style='footer'/></div>
+                  <div className={styles.lang}><LangSelect styleType='footer'/></div>
                 </div>
           </div>
     </div>

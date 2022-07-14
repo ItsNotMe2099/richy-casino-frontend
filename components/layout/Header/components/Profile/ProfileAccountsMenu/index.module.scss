@@ -26,6 +26,7 @@
   }
 
   .label {
+    padding-left: 2px;
     line-height: 100%;
   }
 
@@ -54,19 +55,29 @@
   @media screen and (max-width: $xs-max) {
     height: 40px;
     justify-content: normal;
-    max-width: 112px;
+   
     min-width: 100%;
     padding: 0 5px;
   }
 }
-
+.placeholderWrapper{
+  @media screen and (max-width: $xs-max) {
+    display: flex;
+    flex-direction: column-reverse;
+    .label{
+      padding-left: 0px;
+    }
+  }
+}
 .arrow {
   display: flex;
   margin-left: 7px;
+  transform: rotate(270deg);
+  @include dropDownArrow();
 }
 
-.notActive {
-  transform: rotate(270deg);
+.rotated {
+  transform: rotate(360deg);
 }
 
 .symbol {

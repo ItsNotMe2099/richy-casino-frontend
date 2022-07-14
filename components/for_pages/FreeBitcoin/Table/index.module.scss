@@ -53,13 +53,14 @@
   justify-content: space-between;
   border-radius: 8px;
   .cellHeader{
-    font-weight: 600;
+  
     padding-bottom: 26px;
       @media screen and (max-width: $xs-max){
           padding-bottom: 11px;
       }
+      font-size: 16px;
       @media screen and (max-width: $xs-max){
-          font-size: 12px;
+        font-size: 12px;
       }
     &:first-child{
 
@@ -159,9 +160,8 @@
   color: $dark200;
   text-align: center;
   padding-right: 28px;
-  @media screen and (max-width: 1360px){
-    font-size: 14px;
-  }
+  font-size: 16px;
+  
   @media screen and (max-width: $xs-max){
     font-size: 12px;
   }
