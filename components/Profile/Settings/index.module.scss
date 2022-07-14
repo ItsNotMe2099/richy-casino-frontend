@@ -13,6 +13,10 @@
   @media screen and (max-width: $xs-max) {
     background-color: $dark700;
   }
+  font-size: 16px !important;
+  @media screen and (max-width: $mobile-max){
+    font-size: 14px !important;
+  }
 }
 .input {
   &.inputPhone {
@@ -68,7 +72,7 @@
   color: $white;
 
   .btnText {
-    margin-right: 10px;
+
 
   }
 

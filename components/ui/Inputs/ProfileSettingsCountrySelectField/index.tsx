@@ -3,6 +3,8 @@ import {ProfileSettingsSelectField} from 'components/ui/Inputs/ProfileSettingsSe
 import {useEffect, useState} from 'react'
 import {useField} from 'formik'
 import InfoRepository from 'data/repositories/InfoRepository'
+import FlagIcon from 'components/ui/FlagIcon'
+
 
 interface Props extends IField{
 
@@ -20,7 +22,7 @@ export const ProfileSettingsCountrySelectField = (props: Props) => {
     })
   }, [])
   return (
-    <ProfileSettingsSelectField {...props} options={data} />
+    <ProfileSettingsSelectField {...props} renderIcon={(option) => option ? <FlagIcon country={option.value} countryName={option.label}/> : null} options={data} />
 
   )
 }
