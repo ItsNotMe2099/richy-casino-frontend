@@ -1,9 +1,11 @@
 @import "scss/index";
 
 .root{
-
+ 
 }
-
+.reverse{
+  transform: rotate(180deg);
+}
 .other{
   background-color: $dark700;
   padding: 12px 14px;
@@ -65,13 +67,14 @@ svg{
  
 
 }
-.dropDownActive{
+.dropDown{
     opacity: 1;
     visibility: visible;
     display: flex;
     flex-direction: column;
-      width: 200px;
       height: 200px;
+      z-index: 10;
+      font-size: 14px;
     filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.25));
     background: $dark500;
     border-radius: 12px;
@@ -95,13 +98,14 @@ svg{
   z-index: 2;
 }
 .option{
+  color:$white;
   display: flex;
   align-items: center;
   cursor: pointer;
   z-index: 1;
-  padding-left: 14px;
+  padding: 0px 19px;
 
-  height: 38px;
+  min-height: 38px;
   &:hover{
     background: #41424F;
   }
@@ -110,6 +114,10 @@ svg{
     img{
       max-width: 17px;
     }
+  }
+  .label{
+    flex: 1;
+    padding-left: 14px;
   }
 
 }

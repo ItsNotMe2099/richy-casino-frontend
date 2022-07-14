@@ -14,7 +14,10 @@ interface IOption {
 }
 
 interface Props {
+  offsetLeft: number
+  offsetTop: number
   value: string
+  className: string
   options: IOption[]
   onChange: (value: string) => void
 }
@@ -30,9 +33,38 @@ const FlagComponent = ({
 
 }
 
+const sameWidth = {
+  name: 'sameWidth',
+  enabled: true,
+  phase: 'beforeWrite',
+  requires: ['computeStyles'],
+  fn: ({ state }) => {
+    state.styles.popper.width = `${state.rects.reference.width}px`
+  },
+  effect: ({ state }) => {
+    state.elements.popper.style.width = `${state.elements.reference.offsetWidth
+      }px`
+  }
+}
+const sameWidthWithOffset = {
+  name: 'sameWidth',
+  enabled: true,
+  phase: 'beforeWrite',
+  requires: ['computeStyles'],
+  fn: ({ state }) => {
+    state.styles.popper.width = `${state.rects.reference.width - 20}px`
+  },
+  effect: ({ state }) => {
+    state.elements.popper.style.width = `${state.elements.reference.offsetWidth - 20
+      }px`
+  }
+}
+
+
 export default function CountrySelect(props: Props & FieldConfig) {
   const { t, i18n } = useTranslation()
   const dropdownRef = useRef(null)
+
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
   const { styles: popperStyles, attributes } = usePopper(referenceElement, popperElement, {
@@ -42,11 +74,19 @@ export default function CountrySelect(props: Props & FieldConfig) {
       {
         name: 'offset',
         options: {
-          offset: [0, 10],
+          offset: [props.offsetLeft ?? 0, props.offsetTop ?? 0],
         },
       },
+      props.offsetLeft > 0 ? sameWidthWithOffset : sameWidth as any
     ]
   })
+  console.log('OffestLeft', props.offsetLeft)
+  useEffect(() => {
+    setTimeout(() => {
+      setReferenceElement(document.querySelector('#phone-field'))
+    }, 100)
+
+  }, [])
   const currentOption = useMemo<IOption>(() => props.options.find(i => i.value === props.value), [props.value])
   const [listening, setListening] = useState(false)
   const [isActive, setIsActive] = useState(false)
@@ -68,28 +108,29 @@ export default function CountrySelect(props: Props & FieldConfig) {
 
   return (
     <div ref={(ref) => {
-      setReferenceElement(ref)
-      dropdownRef.current= ref
+      dropdownRef.current = ref
     }} className={classNames(styles.root)} onClick={handleClick}>
       <div className={styles.dropDownTrigger}>
         <div className={styles.icon}>
           <FlagComponent countryName={currentOption?.label} country={props.value}></FlagComponent>
-          </div>
+        </div>
 
         <img className={classNames({ [styles.reverse]: isActive })}
           src='/img/Select/arrow.svg' alt='' />
       </div>
-      {<div ref={setPopperElement} style={popperStyles.popper} className={styles.dropDown} {...attributes.popper}>
+      {isActive && <div ref={setPopperElement} style={popperStyles.popper} className={classNames(styles.dropDown, props.className)} {...attributes.popper}
+
+        >
         {/*style !== 'footer' && <div className={styles.triangle}></div>*/}
         <div className={styles.options}>
-          <Scrollbars style={{ height: 200}}
+          <Scrollbars style={{ height: 200 }}
             renderTrackVertical={props => <div {...props} className={styles.track} />}
             renderView={props => <div {...props} className={styles.view} />}>
             {props.options.map((item, index) =>
               <div className={styles.option} onClick={() => handleChange(item)} key={index}>
-                    <div className={styles.icon}>
-          <FlagComponent countryName={item.label} country={item.value}></FlagComponent>
-          </div>{item.label}
+                <div className={styles.icon}>
+                  <FlagComponent countryName={item.label} country={item.value}></FlagComponent>
+                </div> <div className={styles.label}>{item.label}</div>
               </div>
             )}
           </Scrollbars>

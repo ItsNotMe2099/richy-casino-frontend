@@ -9,23 +9,29 @@
   position: relative;
   flex-direction: column;
 }
-
-.input {
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  appearance: none !important;
-  border-radius: 8px;
+.fieldWrapper{
+  flex: 1;
+  padding: 0px 20px;
   background: $dark600;
+
+  border-radius: 8px;
+  @media screen and (max-width: $sm-min) {
+    padding: 0px 15px;
+  }
+}
+.input {
+ 
   border: 0;
   width: 100%;
-  padding: 0px 20px;
-  height: 53px;
   color: $dark200;
   flex: 1;
   font-weight: 500;
 
   input {
-    height: 51px;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    height: 53px;
     background: $dark600;
     color: #717384;
     font-weight: 500;
@@ -41,9 +47,7 @@
     }
   }
 
-  @media screen and (max-width: $sm-min) {
-    padding: 0px 15px;
-  }
+
 
   &.inputFocused {
     input{

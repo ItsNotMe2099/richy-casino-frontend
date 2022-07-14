@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import Header from 'components/for_pages/Common/Header'
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import {IPagination} from 'types/interfaces'
 import {IGameHistory} from 'data/interfaces/IGameHistory'
 import GameListRepository from 'data/repositories/GameListRepository'
@@ -9,6 +9,7 @@ import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
 import {useTranslation} from 'next-i18next'
 import Image from 'next/image'
 import { useAppContext } from 'context/state'
+import {useInterval} from 'react-use'
 
 interface Props {
 
@@ -19,17 +20,28 @@ export default function Statistics(props: Props) {
   const [data, setData] = useState<IPagination<IGameHistory>>({total: 0, data: []})
   const [loading, setLoading] = useState(true)
   const context = useAppContext()
-
+  const updatingRef = useRef<boolean>(true)
+ const [isUpdating, setIsUpdating] = useState<boolean>(true)
   const isMobile = context.isMobile
   useEffect(() => {
     GameListRepository.fetchGameSessionHistory(1, 10).then(i => {
       
       setData(i)
       setLoading(false)
+      setIsUpdating(false)
     })
   }, [])
 
-
+  useInterval(() => {
+    setIsUpdating(true)
+      GameListRepository.fetchGameSessionHistory(1, 10).then(i => {
+        setData(i)
+        setLoading(false)
+        setIsUpdating(false)
+      })
+    
+    
+  }, isUpdating ? null : 2000)
   return (
       <div className={styles.root}>
           <div className={styles.header}>
@@ -55,7 +67,7 @@ export default function Statistics(props: Props) {
               </div>
             </div>
             {data.data.slice(0, 7).map((item, index) =>
-              <div className={classNames(styles.row, styles.rowInner)} key={index}>
+              <div className={classNames(styles.row, styles.rowInner)} key={`${item.userId}${item.gameId}${item.coefficient}${item.amountWin}${item.amountBet}`}>
                 <div className={styles.cell}>
                   <div className={styles.game}>
                     <div className={styles.gameImg}>

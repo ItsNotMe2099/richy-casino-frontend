@@ -8,20 +8,35 @@
     overflow-y: auto;
   }
 }
-
-.input {
-  &.inputPhone{
-    :global .PhoneInput{
-      @media screen and (max-width: $xs-max) {
+.inputPhoneCountrySelect {
+  background-color: $dark600;
+  @media screen and (max-width: $xs-max) {
     background-color: $dark700;
+  }
+}
+.input {
+  &.inputPhone {
+    @media screen and (max-width: $xs-max) {
+      background-color: $dark700;
+    }
+    :global .PhoneInput {
+      @media screen and (max-width: $xs-max) {
+        background-color: $dark700;
       }
     }
+    input{
+  
+    }
   }
+
+  
+
   input {
     color: $white;
     font-weight: 500;
     font-size: 18px;
     height: 70px;
+
     @media screen and (max-width: $xs-max) {
       background-color: $dark700;
       font-size: 13px;
@@ -58,39 +73,46 @@
   }
 
   flex-basis: 204px;
+
   @media screen and (max-width: $xs-max) {
     padding: 0px;
     height: 50px;
 
   }
+
   @media screen and (min-width: $sm-min) {
     img {
       display: none;
     }
-    svg{
+
+    svg {
       display: none;
     }
   }
 
   &.btnPasswordChange {
     flex-basis: 204px;
-    svg{
-      path{
+
+    svg {
+      path {
         fill: $white;
       }
     }
+
     @media screen and (max-width: $xs-max) {
       flex-basis: 50px;
+
       .btnText {
         display: none;
       }
     }
   }
-  &.faBtn{
+
+  &.faBtn {
 
     @media screen and (max-width: $xs-max) {
       flex-basis: auto;
-        margin-left: 0px;
+      margin-left: 0px;
     }
   }
 }
@@ -102,6 +124,7 @@
   font-weight: 500;
   font-size: 16px;
   width: 100%;
+
   @media screen and (max-width: $xs-max) {
     height: 45px;
     font-size: 13px;
@@ -116,15 +139,18 @@
   display: flex;
   align-items: center;
   margin-bottom: 12px;
+
   .title {
     font-size: 16px;
   }
+
   .line {
     width: 4px;
     @include blueGradient500;
     height: 70px;
     border-radius: 12px;
     margin-right: 25px;
+
     @media screen and (max-width: $xs-max) {
       height: 50px;
     }
@@ -136,25 +162,29 @@
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px 0px;
   margin-top: 31px;
+
   @media screen and (max-width: $xs-max) {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
   }
-  &.boxesMobile{
+
+  &.boxesMobile {
     grid-gap: 10px 0px;
     margin-top: 21px;
   }
 }
-.checkbox{
+
+.checkbox {
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 0px;
 
-  > div{
+  >div {
     span {
       color: $dark200;
     }
+
     margin-top: 0px;
     margin-bottom: 0px;
   }
@@ -182,6 +212,7 @@
   font-size: 14px;
   text-align: left;
   flex: 1;
+
   @media screen and (max-width: $xs-max) {
     background-color: $dark700;
     text-align: center;
@@ -198,7 +229,7 @@
 }
 
 .fieldError {
-  > div > div:first-child {
+  >div>div:first-child {
     border: 1px solid $lose500;
     padding-right: 3px;
     padding-left: 2px;
@@ -209,6 +240,7 @@
   input {
     border: none !important;
     height: 68px;
+
     @media screen and (max-width: $xs-max) {
       height: 48px;
     }
