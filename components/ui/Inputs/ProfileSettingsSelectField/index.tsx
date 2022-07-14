@@ -54,7 +54,7 @@ export const ProfileSettingsSelectField = (props: Props) => {
     <div>
       <div className={classNames(styles.root, { [styles.error]: hasError })}>
         <div className={styles.label}>{props.label}</div>
-        <SelectField {...props} currentItemStyle={styles.current} className={styles.select}
+        <SelectField {...props} offset={'large'} popperStrategy={'fixed'} currentItemStyle={styles.current} className={styles.select} triggerClassName={styles.dropdownTrigger}
           itemComponent={(option, active, onClick) => <Option key={option.value} icon={props.renderIcon ? props.renderIcon(option) : null} isActive={active} option={option} onClick={onClick} />}
           activeComponent={(option, isActive) => <Placeholder option={option} icon={props.renderIcon ? props.renderIcon(option) : null} isActive={isActive} />}
         />

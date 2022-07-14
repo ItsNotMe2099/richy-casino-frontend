@@ -47,7 +47,9 @@
   flex: 1
 
 }
-
+.dropDownTrigger{
+  padding: 0px;
+}
 .group{
   display: flex;
   align-items: center;
@@ -55,5 +57,9 @@
 }
 
 .arrow{
-  margin-left: 6px;
+  @include dropDownArrow;
+  margin-left: 40px;
+  &.reversed{
+    transform: rotate(90deg);
+  }
 }

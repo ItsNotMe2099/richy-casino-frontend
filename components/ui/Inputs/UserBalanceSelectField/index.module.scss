@@ -109,6 +109,10 @@
   }
 }
 
-.reverse{
-  transform: rotate(90deg);
+.arrow{
+  @include dropDownArrow;
+  .reversed{
+    transform: rotate(270deg);
+  }
 }
+
