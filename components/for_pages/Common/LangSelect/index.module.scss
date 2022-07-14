@@ -7,6 +7,11 @@
     
     .dropDownTrigger {
      justify-content: flex-start;
+     height: 47px;
+     background: $dark600;
+     &:hover{
+      background: $dark600;
+     }
     }
     .dropDown{
       margin-top: 0px;
