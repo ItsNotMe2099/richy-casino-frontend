@@ -59,7 +59,7 @@ export default function PhoneForm(props: Props) {
         <div className={styles.select}>
         <RegCurrencySelectField name='currency' disabled={sending}/>
         </div>
-        <PhoneField defaultCountry={context.countryByIp?.iso} disabled={sending} name={'phone'} placeholder={t('registration_field_phone')} validate={Validator.required} />
+        <PhoneField defaultCountry={context.countryByIp?.iso} disabled={sending} name={'phone'} placeholder={t('registration_field_phone')} styleType={'vertical'} validate={Validator.required} />
         <FormPromocode/>
         <CheckBox size={'small'} name='checkBox' disabled={sending}
                   label={t('registration_terms')} validate={Validator.required}/>

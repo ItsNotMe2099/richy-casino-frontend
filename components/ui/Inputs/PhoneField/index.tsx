@@ -19,9 +19,12 @@ const metadata = new Metadata(minMetadata)
 interface Props extends IField {
   blurValidate?: FieldValidator
   className?: string
+  fieldWrapperClassName?: string
   label?: string
   errorClassName?: string
   defaultCountry?: string
+  countrySelectClassName?: string
+  styleType: 'horizontal' | 'vertical'
 }
 
 export default function PhoneField(props: Props & FieldConfig) {
@@ -40,35 +43,40 @@ export default function PhoneField(props: Props & FieldConfig) {
               {props.label}
             </div>
           }
-          <PhoneInputWithCountrySelect
-            disabled={props.disabled}
-            countrySelectComponent={CountrySelect}
-            defaultCountry={props.defaultCountry as CountryCode} 
-            className={classNames({
-              [styles.input]: true,
-              [styles.inputError]: showError,
-              [styles.inputFocused]: focused,
-            })}
-            placeholder={props.placeholder}
-            onFocus={(e) => {
-              setFocus(true)
-            }}
-            value={field.value}
-            onBlur={(e) => {
-              setFocus(false)
-              field.onBlur(e)
-              
-            }}
-            international
-            
-            withCountryCallingCode
-            useNationalFormatForDefaultCountryValue
-            countrySelectProps={{
-              arrowComponent: () => <img className={styles.arrow} src='/img/Select/arrow.svg' alt='' />
-            }}
+          <div id={'phone-field'} className={classNames(styles.fieldWrapper, props.fieldWrapperClassName)}>
+            <PhoneInputWithCountrySelect
 
-            onChange={helpers.setValue} />
+              disabled={props.disabled}
+              countrySelectComponent={CountrySelect}
+              defaultCountry={props.defaultCountry as CountryCode}
+              className={classNames({
+                [styles.input]: true,
+                [styles.inputError]: showError,
+                [styles.inputFocused]: focused,
+              })}
+              placeholder={props.placeholder}
+              onFocus={(e) => {
+                setFocus(true)
+              }}
+              value={field.value}
+              onBlur={(e) => {
+                setFocus(false)
+                field.onBlur(e)
 
+              }}
+              international
+
+              withCountryCallingCode
+              useNationalFormatForDefaultCountryValue
+              countrySelectProps={{
+                offsetLeft: props.styleType === 'horizontal' ? 20 : 0,
+                offsetTop: props.styleType === 'horizontal' ? 12 : 8,
+                className: props.countrySelectClassName
+
+              }}
+
+              onChange={helpers.setValue} />
+          </div>
         </div>
         <ErrorInput {...meta} />
       </div>
