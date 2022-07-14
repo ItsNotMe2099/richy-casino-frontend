@@ -61,6 +61,7 @@
   }
 }
 .placeholderWrapper{
+  display: flex;
   @media screen and (max-width: $xs-max) {
     display: flex;
     flex-direction: column-reverse;
