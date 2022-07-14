@@ -12,7 +12,7 @@ interface Props{
 export default function CatalogPage(props: Props) {
   const {t} = useTranslation()
   const appContext = useAppContext()
-  return (  <WithGameFilterLayout>
+  return (  <WithGameFilterLayout showMobile>
     <NextSeo title={t('page_games_richy_title')}/>
        <GamesListRichy/>
   </WithGameFilterLayout>)
