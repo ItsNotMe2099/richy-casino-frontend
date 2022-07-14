@@ -191,7 +191,7 @@ export default function GamesListTop(props: Props) {
           <HiddenXs>
             <div className={styles.sliderWrapper}>
             {latestWin.length > 0 && <Slider {...settings} ref={sliderRef}>
-              {latestWin.map((item, index) =>
+              {latestWin.slice(0, 12).map((item, index) =>
                 <Item item={item} key={index} />
               )}
             </Slider>}
