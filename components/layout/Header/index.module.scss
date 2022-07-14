@@ -289,6 +289,12 @@
   img{
     width: 16px;
     margin-right: 12px;
+    @media screen and (max-width: $mobile-max){
+      margin-right: 4px;
+    }
+    @media screen and (max-width: $mobile-md2){
+        display: none;
+    }
   }
   color: $white;
   font-weight: 700;

@@ -24,7 +24,8 @@
 
 .bonus{
   position: fixed;
-  top: 300px;
+  top: 50%;
+  transform: translateY(-50%);
   right: 10px;
   z-index: 1;
   cursor: pointer;

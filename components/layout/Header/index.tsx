@@ -126,13 +126,13 @@ export default function Header(props: Props) {
                 </HiddenXs>
                 <Button onClick={() => context.showModal(ProfileModalType.wallet)} size='normal'
                         background='payGradient500' className={styles.wallet}>
-                  <HiddenXs><img src='/img/icons/wallet.svg' alt=''/></HiddenXs>{t('header_deposit')}</Button>
+                  <img src='/img/icons/wallet.svg' alt=''/>{t('header_deposit')}</Button>
                 <VisibleXs>
                   {props.rightButton ? props.rightButton : <ProfileMenu className={styles.proMenu}/>}
                 </VisibleXs>
               </div>
             }
-            <div className={styles.lang}><LangSelect /></div>
+            <div className={styles.lang}><LangSelect styleType={'top'} /></div>
             {/*<Button className={styles.chat} size='normal' background='dark700'><img src='/img/layout/top/chat.svg' alt=''/></Button>*/}
           </div>
         </div>

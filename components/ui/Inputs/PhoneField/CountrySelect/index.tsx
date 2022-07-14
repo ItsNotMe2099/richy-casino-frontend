@@ -115,7 +115,7 @@ export default function CountrySelect(props: Props & FieldConfig) {
           <FlagComponent countryName={currentOption?.label} country={props.value}></FlagComponent>
         </div>
 
-        <img className={classNames({ [styles.reverse]: isActive })}
+        <img className={classNames({[styles.arrow]: true, [styles.reversed]: isActive })}
           src='/img/Select/arrow.svg' alt='' />
       </div>
       {isActive && <div ref={setPopperElement} style={popperStyles.popper} className={classNames(styles.dropDown, props.className)} {...attributes.popper}

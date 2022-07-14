@@ -1,24 +1,45 @@
 @import "scss/index";
 
-.root{
+.root {
   position: relative;
 
-  &.footer{
-    .dropDownTrigger{
+  &.menu{
+    
+    .dropDownTrigger {
+     justify-content: flex-start;
+    }
+    .dropDown{
+      margin-top: 0px;
+      margin-bottom: 26px;
+      &.opened{
+      margin-top: 0px;
+        margin-bottom: 14px;
+      }
+    }
+    .triangle{
+      right: auto;
+      left: 40px !important;
+    }
+  }
+  &.footer {
+    .dropDownTrigger {
       height: 41px;
       padding: 0px 12px;
+        text-transform: uppercase;
       @media only screen and (max-width: $xs-max) {
         height: 29px;
         padding: 0px 9px;
       }
     }
+    .dropDown{
+      margin-top: 0px;
+      margin-bottom: 26px;
+      &.opened{
+      margin-top: 0px;
+        margin-bottom: 14px;
+      }
+    }
   }
-}
-
-.other{
-  background-color: $dark700;
-  padding: 12px 14px;
-
 }
 
 .dropDownTrigger {
@@ -40,129 +61,87 @@
   border-radius: 8px;
   cursor: pointer;
 
-  img{
+  img {
     margin-right: 10px;
     max-width: 17px;
   }
-  &:hover{
+
+  &:hover {
     background-color: $dark500;
   }
+
+  .imageLng {
+    display: flex;
+
+    img {
+      border-radius: 50%;
+    }
+  }
+
 }
 
-.dropdownTriggerActive{
-  position: relative;
-  font-size: 13px;
-  color: #000000;
-  padding-bottom: 6px;
-}
 
 .dropDown {
-  position: absolute;
-  background: #ffffff;
-  opacity: 0;
-  display: none;
-  //transform: translateY(-20px);
-  //transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-  z-index: 20;
-  flex-direction: column;
-  margin-top: 16px;
-  left: 50%;
-  .option:first-child{
-    a{
-    &:hover{
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
-    }
-  }
-  }
-  .option:last-child{
-    a{
-    &:hover{
-      border-bottom-left-radius: 12px;
-      border-bottom-right-radius: 12px;
-    }
-  }
-  }
-  a{
-    padding: 10px 21px;
-    font-size: 13px;
-    font-weight: 500;
-    color: $white;
-    &:hover{
-      background-color: $dark400;
-    }
-  }
-  &.footer {
-    bottom: 58px;
-    @media only screen and (max-width: $xs-max) {
-      bottom: 44px;
-    }
-  }
-
+  @include dropDown()
 }
-.dropDownActive{
-    opacity: 1;
-    visibility: visible;
-    display: flex;
-    transform: translateX(-50%);
-    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.25));
-    background: $dark500;
-    border-radius: 12px;
-    .option:first-child{
-      &:hover{
+
+
+.option {
+  &:first-child {
+    .option:first-child {
+      &:hover {
         border-top-left-radius: 12px;
+      }
+    }
+
+    .option:last-child {
+      &:hover {
         border-top-right-radius: 12px;
       }
     }
-    .option:last-child{
-      &:hover{
+  }
+
+  &:last-child {
+    .option:first-child {
+      &:hover {
         border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
       }
     }
-}
 
-
-
-.options{
-  z-index: 2;
-}
-
-.track{
-  display: block !important;
-  width: 6px;
-  right: 2px;
-  bottom: 2px;
-  top: 2px;
-  border-radius: 3px;
-}
-
-.imageLng{
-  display: flex;
-  img{
-    border-radius: 50%;
   }
+
 }
 
-.scroll{
-  
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.option{
+.option {
+  width: 20%;
   display: flex;
   align-items: center;
+  padding: 5px 5px;
   cursor: pointer;
-  z-index: 1;
-  padding-left: 14px;
-  height: 52px;
-  &:hover{
+  text-transform: uppercase;
+  min-height: 40px;
+  flex: 0 0 auto;
+  font-size: 13px;
+
+  &:hover {
     background: #41424F;
   }
-  .image{
-    margin-right: 10px;
+
+  .name {
+    margin: 5px;
+  }
+
+  .image {
+    margin: 5px;
     display: flex;
-    img{
+
+    img {
       max-width: 17px;
       border-radius: 50%;
     }
@@ -170,9 +149,8 @@
 
 }
 
-.view{
-  margin-right: -17px !important;
-  overflow-y: scroll !important;
-  overflow-x: hidden !important;
+.options {
+  overflow: hidden;
+  border-radius: 12px;
+  z-index: 2;
 }
-

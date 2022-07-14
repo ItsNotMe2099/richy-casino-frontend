@@ -3,8 +3,8 @@
 .root{
  
 }
-.reverse{
-  transform: rotate(180deg);
+.arrow{
+  @include dropDownArrow;
 }
 .other{
   background-color: $dark700;

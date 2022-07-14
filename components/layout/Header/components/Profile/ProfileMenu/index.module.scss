@@ -218,6 +218,7 @@
   align-self: center;
   display: flex;
   transform: rotate(270deg);
+  @include dropDownArrow;
 }
 
 .rotate{

@@ -64,10 +64,12 @@ const Placeholder = (props: SelectProps) => {
   return (
     <div className={styles.placeholder}>
       <Symbol option={props.currentItem}/>
-      <div className={styles.value}>{props.currentItem.balance}&nbsp;</div>
+      <div className={styles.placeholderWrapper}>
+      <div className={styles.value}>{props.currentItem.balance}</div>
       <div className={styles.label}>{props.currentItem.label}</div>
+      </div>
       <HiddenXs>
-        <div className={classNames(styles.arrow, {[styles.notActive]: !props.isActive})}><img src='/img/Select/arrow-select-balance.svg' alt=''/></div>
+        <div className={classNames(styles.arrow, {[styles.rotated]: props.isActive})}><img src='/img/Select/arrow-select-balance.svg' alt=''/></div>
       </HiddenXs>
     </div>
   )
