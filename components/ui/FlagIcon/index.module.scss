@@ -1,0 +1,14 @@
+@import "scss/index";
+
+.root {
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  overflow: hidden;
+
+  svg {
+    width: 28px;
+    margin-top: -0px;
+    margin-left: -6px;
+  }
+}

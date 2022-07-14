@@ -27,7 +27,8 @@
 }
 
 .option{
-  padding: 7px 19px;
+  padding: 0px 19px;
+  min-height: 38px;
   display: flex;
   font-weight: 500;
   font-size: 16px;
@@ -37,6 +38,13 @@
   }
   @media screen and (max-width: $mobile-max){
     font-size: 14px;
+  }
+  .icon{
+    margin-right: 14px;
+
+  }
+  .optionLabel{
+    flex: 1;
   }
 }
 
@@ -78,7 +86,7 @@
     background-color: #1D1E25;
     height: 50px;
   }
-  div{
+  >  div > div{
     background: #272832;
     @media screen and (max-width: $mobile-max){
       background-color: #1D1E25;
@@ -88,10 +96,10 @@
     width: 100%;
   }
 }
-
-.reverse{
-  transform: rotate(180deg);
+.arrow{
+  @include dropDownArrow;
 }
+
 
 .placeholder{
   display: flex;
@@ -101,6 +109,15 @@
   .label{
     color: #fff;
     margin-left: 0;
+    flex: 1;
+  }
+  .icon{
+    margin-right: 14px;
+
+  }
+  .placeholderWrapper{
+    display: flex;
+    align-items: center;
   }
 }
 .errorMessage{
