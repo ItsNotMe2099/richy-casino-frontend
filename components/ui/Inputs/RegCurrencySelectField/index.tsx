@@ -40,7 +40,7 @@ const Placeholder = (props: PropsOption) => {
       <Symbol option={props.currentItem}/>
       {props.currentItem.label}
     </div>
-    <img className={classNames({[styles.reverse]: props.isActive})}
+    <img className={classNames(styles.arrow,{[styles.reverse]: props.isActive})}
         src='/img/Select/arrow.svg' alt=''/>
   </div>
   )

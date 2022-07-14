@@ -47,7 +47,7 @@ const Placeholder = (props: PropsOption) => {
       <Symbol option={props.option}/>
       {props.option?.label}
     </div>
-    <img className={classNames(styles.arrow, {[styles.reverse]: props.isActive})}
+    <img className={classNames(styles.arrow, {[styles.reversed]: props.isActive})}
         src='/img/Select/arrow-exchange.svg' alt=''/>
   </div>
   )
@@ -57,7 +57,7 @@ const Placeholder = (props: PropsOption) => {
 export const ExchangeCurrencySelectField = (props: Props) => {
 
   return (
-  <SelectField className={classNames(styles.root, props.className)} options={props.options}  name={props.name} currentItemStyle={styles.current}
+  <SelectField popperFlip popperStrategy={'fixed'}  triggerClassName={styles.dropDownTrigger} className={classNames(styles.root, props.className)} options={props.options}  name={props.name} currentItemStyle={styles.current}
     itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
     activeComponent={(option ,isActive) => <Placeholder option={option} isActive={isActive}/>}
   />

@@ -37,55 +37,26 @@
 .input{
   position: relative;
 }
-.dropDown {
-  position: absolute;
-  background: #ffffff;
-  opacity: 0;
-  visibility: hidden;
-  max-height: 200px;
-  overflow-y: auto;
-  //transform: translateY(-20px);
-  //transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-  z-index: 5;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-  top: 45px;
-  .option:first-child{
-    a{
-    &:hover{
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
+
+.dropDown{
+    @include dropDown;
+    max-height: 200px;
+    overflow-y: auto;
+
+    &.offsetNormal{
+
+        margin-top: 16px;
+      &.opened{
+
+        margin-top: 8px;
+      }
     }
-  }
-  }
-  .option:last-child{
-    a{
-    &:hover{
-      border-bottom-left-radius: 12px;
-      border-bottom-right-radius: 12px;
+    &.offsetLarge{
+      margin-top: 30px;
+      &.opened{
+        margin-top: 18px;
+      }
     }
-  }
-  }
-  a{
-    padding: 17px 21px;
-    font-size: 13px;
-    font-weight: 500;
-    color: $white;
-    &:hover{
-      background-color: $dark400;
-    }
-  }
-}
-.dropDownActive{
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.25));
-    background: $dark500;
-    border-radius: 12px;
     .option:first-child{
       &:hover{
         border-top-left-radius: 12px;

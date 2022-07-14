@@ -1,17 +1,50 @@
 import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
 import {FieldConfig, useField, useFormikContext} from 'formik'
-import {ReactElement, useRef} from 'react'
+import {ReactElement, useRef, useState} from 'react'
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import { IOption} from 'types/interfaces'
+import {usePopper} from 'react-popper'
+
 
 interface Props<T> {
   options: IOption<T>[]
   disabled?: boolean
   className?: string
+  triggerClassName?: string
   currentItemStyle?: string
+  popperFlip?: boolean
+  offset?: 'normal' | 'large' | null
+  popperStrategy?: 'fixed' | 'absolute' | null
   itemComponent?: (option: IOption<T> , isActive: boolean, onClick: () => void) => ReactElement
   activeComponent?: (option?: IOption<T>, isActive?: boolean) => ReactElement
+}
+
+const sameWidth = {
+  name: 'sameWidth',
+  enabled: true,
+  phase: 'beforeWrite',
+  requires: ['computeStyles'],
+  fn: ({ state }) => {
+    state.styles.popper.width = `${state.rects.reference.width}px`
+  },
+  effect: ({ state }) => {
+    state.elements.popper.style.width = `${state.elements.reference.offsetWidth
+      }px`
+  }
+}
+const sameWidthWithOffset = {
+  name: 'sameWidth',
+  enabled: true,
+  phase: 'beforeWrite',
+  requires: ['computeStyles'],
+  fn: ({ state }) => {
+    state.styles.popper.width = `${state.rects.reference.width - 20}px`
+  },
+  effect: ({ state }) => {
+    state.elements.popper.style.width = `${state.elements.reference.offsetWidth - 20
+      }px`
+  }
 }
 
 export  function SelectField<T>(props: Props<T> & FieldConfig){
@@ -21,6 +54,27 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
   const { setFieldValue, setFieldTouched } = useFormikContext()
   const dropdownRef = useRef(null)
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
+ 
+  const [referenceElement, setReferenceElement] = useState(null)
+  const [popperElement, setPopperElement] = useState(null)
+  const { styles: popperStyles, attributes } = usePopper(referenceElement, popperElement, {
+    strategy: props.popperStrategy ?? 'absolute',
+    placement: 'bottom-end',
+    modifiers: [
+      {
+        name: 'flip',
+        enabled: props.popperFlip ?? false,
+      },
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 0],
+        },
+      },
+      sameWidth as any
+     
+    ]
+  })
   const handleClick = (e) => {
     if(props.disabled){
       return
@@ -42,10 +96,14 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
   const hasError = !!meta.error && meta.touched
 
   return (
-    <div className={classNames(styles.root, {[styles.hasError]: !!meta.error && meta.touched}, className)} data-field={props.name}>
-      <div onClick={handleClick} className={classNames(styles.dropDownTrigger, currentItemStyle)}>
+    <div ref={(ref) => {
+      dropdownRef.current = ref
+      setReferenceElement(ref)
+    }} className={classNames(styles.root, {[styles.hasError]: !!meta.error && meta.touched}, className)} data-field={props.name}>
+      <div onClick={handleClick} className={classNames(styles.dropDownTrigger, currentItemStyle, props.triggerClassName)}>
         {props.activeComponent ? props.activeComponent(currentItem, isActive) : null}
-      <div ref={dropdownRef} className={classNames(styles.dropDown, { [styles.dropDownActive]: isActive })}>
+      <div ref={setPopperElement} style={popperStyles.popper}  {...attributes.popper} className={classNames(styles.dropDown
+        , { [styles.opened]: isActive, [styles.offsetLarge]: props.offset === 'large', [styles.offsetNormal]: props.offset === 'normal' || !props.offset})}>
        {options.map((item, index) => props.itemComponent ? props.itemComponent(item, currentItem?.value === item.value, () => handleChange(item.value)) :
        <div key={index}
          className={classNames(styles.option, {[styles.optionActive]: currentItem?.value === item.value })} onClick={() => handleChange(item.value)}>

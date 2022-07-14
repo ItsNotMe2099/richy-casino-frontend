@@ -87,7 +87,8 @@
 
 
 .dropDown {
-  @include dropDown()
+  @include dropDown();
+  display: flex;
 }
 
 

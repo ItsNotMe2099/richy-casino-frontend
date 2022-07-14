@@ -1,6 +1,6 @@
 // Box Shadow
 @mixin box-shadow-base {
-  box-shadow: 0 15px 20px 0 rgba(0,0,0,0.1);
+  box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
 // Font Style
@@ -52,7 +52,8 @@
 
 @mixin blueGradient500 {
   background: linear-gradient(270deg, #2C50FF -6.01%, #4785F6 114.87%);
-  &:hover{
+
+  &:hover {
     background: linear-gradient(273.01deg, #7000FF -8.03%, #1B6BFF 109.58%);
   }
 }
@@ -65,83 +66,89 @@
   color: linear-gradient(270deg, #2C50FF -6.01%, #4785F6 114.87%);
 }
 
-@mixin payGradient500{
+@mixin payGradient500 {
   background: linear-gradient(270deg, #6ABD37 -6.01%, #8EDC5D 114.87%);
-  &:hover{
+
+  &:hover {
     background: linear-gradient(270deg, #82D54F -6.01%, #A4FE6B 114.87%);
   }
 }
 
-@mixin placeGradient1st200{
+@mixin placeGradient1st200 {
   background: linear-gradient(94.97deg, rgba(36, 197, 129, 0.14) 0%, rgba(36, 38, 48, 0.29) 106.38%);
 }
 
-@mixin placeGradient1st500{
+@mixin placeGradient1st500 {
   background: linear-gradient(127.45deg, #24C581 2.24%, #079B5D 106.3%);
 }
 
-@mixin placeGradient2nd200{
+@mixin placeGradient2nd200 {
   background: linear-gradient(103.05deg, rgba(197, 152, 36, 0.14) -75.35%, rgba(36, 38, 48, 0.49) 93.03%), #1D1E25;
 }
 
-@mixin placeGradient2nd500{
+@mixin placeGradient2nd500 {
   background: linear-gradient(110.32deg, #FBC55C -12.49%, #FF9518 90.22%);
 }
 
 
-@mixin placeGradient4th200{
+@mixin placeGradient4th200 {
   background: linear-gradient(103.05deg, rgba(88, 125, 255, 0.14) -75.35%, rgba(36, 38, 48, 0.6) 93.03%), #1D1E25;
 }
 
-@mixin placeGradient7th200{
+@mixin placeGradient7th200 {
   background: linear-gradient(103.05deg, rgba(155, 36, 197, 0.14) -75.35%, rgba(36, 38, 48, 0.29) 93.03%), #1D1E25;
 }
 
-@mixin placeGradient7th500{
+@mixin placeGradient7th500 {
   background: linear-gradient(280.99deg, #5C00F3 18.02%, #905BFF 126.63%);
 }
 
-@mixin  darkGradient500 {
+@mixin darkGradient500 {
   background: linear-gradient(100.47deg, #323340 -32.54%, #272832 102.28%);
 }
 
 @mixin fortuneGradient500 {
   background: linear-gradient(280.99deg, #F30058 18.02%, #FF5B96 126.63%);
   box-shadow: 0px 4px 27px rgba(243, 0, 88, 0.1);
-  &:hover{
+
+  &:hover {
     background: linear-gradient(280.99deg, #FF055F 18.02%, #FF055F 18.02%, #FF055F 18.02%, #FF055F 18.03%, #FF2171 126.63%);
     box-shadow: 0px 4px 27px rgba(243, 0, 88, 0.1);
   }
 }
 
-@mixin componentRoot{
-    margin-top: 20px;
-    padding: 28px;
-    border-radius: 18px;
-    background-color: $dark700;
-    @media screen and (max-width: $xs-max){
-      padding: 16px;
-      margin-top: 12px;
-    }
+@mixin componentRoot {
+  margin-top: 20px;
+  padding: 28px;
+  border-radius: 18px;
+  background-color: $dark700;
+
+  @media screen and (max-width: $xs-max) {
+    padding: 16px;
+    margin-top: 12px;
+  }
 }
 
-@mixin mobileGamesGrid{
+@mixin mobileGamesGrid {
   grid-gap: 8px;
-  @media screen and (max-width: 840px){
-    grid-auto-columns:calc((100% - (4 - 1)*8px)/4);
+
+  @media screen and (max-width: 840px) {
+    grid-auto-columns: calc((100% - (4 - 1)*8px)/4);
   }
-  @media screen and (max-width: $xs-land){
-    grid-auto-columns:calc((100% - (3 - 1)*8px)/3);
+
+  @media screen and (max-width: $xs-land) {
+    grid-auto-columns: calc((100% - (3 - 1)*8px)/3);
   }
 }
 
-@mixin noScrollbar{
+@mixin noScrollbar {
   scrollbar-width: none;
-    &::-webkit-scrollbar {
-      -webkit-appearance: none;
-      display: none;
-      width: 0px;
-    }
+
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+    display: none;
+    width: 0px;
+  }
 }
 
 @mixin vertical-align($align: middle) {
@@ -154,15 +161,16 @@
     // the inline-block white-space to mess the width of your elements
     font-size: 0;
   }
-  & > * {
+
+  &>* {
     vertical-align: $align;
 
   }
 }
-@mixin dropDown(){
+
+@mixin dropDown() {
   opacity: 1;
   visibility: visible;
-  display: flex;
   z-index: 20;
   margin-top: 15px;
   filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.25));
@@ -172,39 +180,47 @@
   margin-top: 30px;
   opacity: 0;
   visibility: hidden;
- &.opened{
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  margin-top: 18px;
- }
 
- .triangle{
-  left: auto !important;
-  right: 15px;
-  z-index: 1;
-}  
+  &.opened {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    margin-top: 18px;
+  }
+
+  .triangle {
+    left: auto !important;
+    right: 15px;
+    z-index: 1;
+  }
 }
-@mixin dropDownArrow(){
-  &.reversed{
+
+@mixin dropDownArrow() {
+  &.reversed {
     transform: rotate(180deg);
   }
+
   transition: transform .3s ease;
 }
-@mixin heading(){
+
+@mixin heading() {
   font-weight: 700;
   font-size: 26px;
+
   @media screen and (max-width: 700px) {
     padding-left: 28px;
   }
+
   @media screen and (max-width: $xs-max) {
     font-size: 12px;
     padding-left: 16px;
   }
-  @media screen and (max-width: 1100px){
+
+  @media screen and (max-width: 1100px) {
     font-size: 18px;
   }
-  @media screen and (max-width: $mobile-max){
+
+  @media screen and (max-width: $mobile-max) {
     font-size: 1.2rem;
   }
 }

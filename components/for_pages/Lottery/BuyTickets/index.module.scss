@@ -2,6 +2,10 @@
 
 .root{
   flex: 1;
+  @media screen and (max-width: 870px){
+    flex: 0 1 auto;
+    margin-top: 23px;
+  }
 }
 
 .panel{
