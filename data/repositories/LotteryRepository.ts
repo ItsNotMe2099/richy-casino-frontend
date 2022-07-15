@@ -29,7 +29,7 @@ export default class LotteryRepository {
 
   static async buyTicket(amount: number): Promise<ILotteryBuyResponse> {
     const res = await request({
-      method: 'get',
+      method: 'post',
       url: '/api/lottery/ticket/buy',
       data: {
         amount
