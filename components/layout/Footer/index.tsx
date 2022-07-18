@@ -7,7 +7,6 @@ import classNames from 'classnames'
 import Youtube from 'components/svg/Youtube'
 import LinkedIn from 'components/svg/LinkedIn'
 import Twitter from 'components/svg/Twitter'
-import Logo from 'components/svg/Logo'
 import LangSelect from 'components/for_pages/Common/LangSelect'
 import {useState} from 'react'
 import {useRouter} from 'next/router'
@@ -111,10 +110,10 @@ export default function Footer(props: Props) {
     }}>
         <div className={styles.wrapper}>
         {currentRoute === '/' || currentPath === '/' ?
-          <div className={styles.logo}><Logo/></div>
+          <div className={styles.logo}><Image src={'/img/layout/logo.png'} height={36} width={97.55}/></div>
             :
           <Link href='/'>
-            <a className={styles.logo}><Logo/></a>
+            <a className={styles.logo}><Image src={'/img/layout/logo.png'} height={36} width={97.55}/></a>
           </Link>
         }
         <div className={styles.top}>

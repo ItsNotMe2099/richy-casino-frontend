@@ -99,10 +99,10 @@
     }
   }
   @media screen and (max-width: $xs-max) {
-    right: -2px;
+    right: 2px;
     left: auto;
     transform: none;
-    top: 0px;
+    top: 13px;
     margin-top: 42px;
   }
 }
@@ -125,6 +125,9 @@
   cursor: pointer;
   &:hover{
     background-color: $dark500;
+    @media screen and (max-width: $xs-max) {
+      background-color: transparent;
+    }
   }
   @media screen and (max-width: $xs-max) {
     padding: 0;
