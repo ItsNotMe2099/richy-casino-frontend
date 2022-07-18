@@ -17,11 +17,7 @@
   }
   height: auto !important;
   min-height: auto !important;
-  .item:last-child{
-    .label{
-      color: $white;
-    }
-  }
+
 }
 
 .label{
@@ -42,23 +38,29 @@
 
 .item{
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   cursor: pointer;
+  height: 46px;
+  .icon{
+    svg {
+      width: 26px;
+      height: 26px;
+
+    }
+    display: flex;
+  }
+
+  .label{
+    line-height: 16px;
+  }
   &.active{
   .label {
     color: $white;
   }
 
 
-    .icon{
-      .poker{
-          path{
-            stroke: $white;
-            fill: none;
-        }
-      }
-    }
+
   }
 }
