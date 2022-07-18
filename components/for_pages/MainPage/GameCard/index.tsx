@@ -61,6 +61,8 @@ export default function GameCard(props: Props) {
             {props.poker ? t('main_game_card_poker_title') : t('main_game_card_chess_title')}
           </div>
           <div className={styles.desc}>
+            {props.poker ? t('main_game_card_desc') : t('main_game_card_desc')}
+
             {t('main_game_card_desc')}
           </div>
         </div>

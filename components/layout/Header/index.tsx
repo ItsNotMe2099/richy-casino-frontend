@@ -1,6 +1,5 @@
 import styles from './index.module.scss'
 import Button from 'components/ui/Button'
-import Logo from 'components/svg/Logo'
 import {useRouter} from 'next/router'
 import Link from 'next/link'
 import LangSelect from 'components/for_pages/Common/LangSelect'
@@ -14,7 +13,7 @@ import {useTranslation} from 'next-i18next'
 import {Routes} from 'types/routes'
 import {usePwaContext} from 'context/pwa_state'
 import { ReactElement } from 'react'
-
+import Image from 'next/image'
 interface Props {
   children?: React.ReactNode
   className?: string
@@ -35,7 +34,7 @@ interface Lang {
 export default function Header(props: Props) {
   const {t} = useTranslation()
   const {route: currentRoute, asPath: currentPath} = useRouter()
-  
+
   const context = useAppContext()
   const pwaContext = usePwaContext()
 
@@ -56,7 +55,9 @@ export default function Header(props: Props) {
   }
 
 
-
+  const handleLogoClick = () => {
+    context.hideModal()
+  }
 
   return (
     <div>
@@ -95,13 +96,11 @@ export default function Header(props: Props) {
               </div>
             </div>
           </div>
-          {currentRoute === '/' || currentPath === '/' ?
-            <div className={styles.logoMobile}><Logo/></div>
-            :
+
             <Link href='/'>
-              <a className={styles.logoMobile}><Logo/></a>
+              <a className={styles.logoMobile} onClick={handleLogoClick}><Image src={'/img/layout/top/logo_mobile.png'}/></a>
             </Link>
-          }
+
           <div className={styles.right}>
             {!user ?
               <>
