@@ -208,6 +208,11 @@
 
 .logoMobile{
   align-self: center;
+
+  position: relative;
+  width: 35px;
+  height: 30px;
+
   @media screen and (min-width: 921px){
     display: none;
   }
@@ -281,7 +286,6 @@
 .wallet{
   padding: 12px 15px;
   @media screen and (max-width: $mobile-max){
-    padding: 9px 4px;
     font-weight: 700;
     font-size: 0.7rem;
     height: 40px;
@@ -289,12 +293,8 @@
   img{
     width: 16px;
     margin-right: 12px;
-    @media screen and (max-width: $mobile-max){
-      margin-right: 4px;
-    }
-    @media screen and (max-width: $mobile-md2){
-        display: none;
-    }
+
+
   }
   color: $white;
   font-weight: 700;

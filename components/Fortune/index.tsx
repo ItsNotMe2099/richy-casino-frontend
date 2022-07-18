@@ -43,7 +43,12 @@ export default function Fortune(props: Props) {
   const [expirationDate, setExpirationDate] = useState<Date>(null)
   const [loaded, setLoaded] = useState(false)
   const [available, setAvailable] = useState<boolean>(false)
-  const timer = useTimer({ expiryTimestamp: expirationDate })
+  const timer = useTimer({ expiryTimestamp: expirationDate, onExpire: () => {
+    setTimeout(() => {
+      init()
+    }, 500)
+
+    } })
 
   useEffect(() => {
     init()
@@ -134,7 +139,7 @@ export default function Fortune(props: Props) {
             </div>
           </div>
         </VisibleXs>
-        {/*available && (*/}
+        {(available || !appContext.auth)  && (
           <div className={styles.btn}>
             <Button
               onClick={play}
@@ -144,7 +149,7 @@ export default function Fortune(props: Props) {
             >{t('fortune_spin_button')}
             </Button>
           </div>
-        {/*})*/}
+        )}
         {!available && appContext.auth && (
           <div className={styles.next}>
             <div className={styles.free}>

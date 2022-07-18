@@ -120,7 +120,7 @@ export default function Footer(props: Props) {
         <div className={styles.top}>
           <div className={styles.mobile}>
             {(showAllItems ? allItems : allItems.slice(0, 3)).map((item, index) =>
-              <Link href={item.link} key={index}>
+              <Link href={item.link} key={index} scroll>
               <a className={styles.item}>
                 {item.label}
               </a>
