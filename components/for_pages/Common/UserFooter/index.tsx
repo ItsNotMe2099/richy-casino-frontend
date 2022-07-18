@@ -25,6 +25,7 @@ interface ItemProps {
   label: string
   onClick: () => void
   link?: string
+  itemKey: ActionType
 }
 
 enum ActionType {
@@ -33,10 +34,16 @@ enum ActionType {
   Casino = 'casino',
   Menu = 'menu'
 }
-const Item = ({ icon, label, onClick, link }: ItemProps) => {
-  const isActive = useIsActiveLink(link ?? '')
+const Item = ({ icon, label, onClick, link, itemKey}: ItemProps) => {
+  const linkActive = useIsActiveLink(link ?? '')
   const router = useRouter()
+  const appContext = useAppContext()
+  const isMenuOpen = appContext.modal === ModalType.profileBurger || appContext.bottomSheet === ModalType.profileBurger
+  const isActive = linkActive || (itemKey === ActionType.Menu && isMenuOpen)
   const isActiveDisabled = function () {
+    if(isMenuOpen &&  itemKey !== ActionType.Menu){
+      return true
+    }
     return link === Routes.catalog && router.asPath !== Routes.catalog
   }()
   const color = isActive && !isActiveDisabled ? colors.white : colors.dark200
@@ -52,7 +59,7 @@ const Item = ({ icon, label, onClick, link }: ItemProps) => {
         return <CasinoSvg color={color}/>
         break
       case 'menu':
-        return <MenuSvg />
+        return <MenuSvg color={color}/>
         break
       case 'close':
         return <MenuCloseSvg />
@@ -76,14 +83,14 @@ export default function UserFooter(props: Props) {
   const router = useRouter()
   const context = useAppContext()
   const isMenuOpen = context.modal === ModalType.profileBurger || context.bottomSheet === ModalType.profileBurger
- 
+
   const items = [
     { label: t('tabbar_main'), icon:  'main', key: ActionType.Main, link: '/' },
     { label: t('tabbar_poker'), icon: 'poker', key: ActionType.Poker, link: Routes.poker },
     { label: t('tabbar_casino'), icon: 'casino', key: ActionType.Casino, link: Routes.catalog },
     { label: t('tabbar_menu'), icon: isMenuOpen ? 'close' : 'menu', key: ActionType.Menu },
   ]
-  
+
   const handleClickItem = (item) => {
 
     if (isMenuOpen) {
@@ -118,7 +125,7 @@ export default function UserFooter(props: Props) {
     <VisibleXs>
       <div className={classNames(styles.root, { [styles.isOverAll]: isMenuOpen })}>
         {items.slice(0, 2).map((item, index) =>
-          <Item onClick={() => handleClickItem(item)} icon={item.icon as any} label={item.label} key={item.key} link={item.link} />
+          <Item onClick={() => handleClickItem(item)} icon={item.icon as any} label={item.label} key={item.key} itemKey={item.key} link={item.link} />
         )}
         <Link href={Routes.richyGames}>
           <a className={styles.joystick}>
@@ -129,6 +136,7 @@ export default function UserFooter(props: Props) {
           <Item
             onClick={() => handleClickItem(item)}
             link={item.link}
+            itemKey={item.key}
             icon={item.icon as any} label={item.label} key={item.key} />
         )}
       </div>
