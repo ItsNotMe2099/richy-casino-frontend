@@ -43,7 +43,12 @@ export default function Fortune(props: Props) {
   const [expirationDate, setExpirationDate] = useState<Date>(null)
   const [loaded, setLoaded] = useState(false)
   const [available, setAvailable] = useState<boolean>(false)
-  const timer = useTimer({ expiryTimestamp: expirationDate })
+  const timer = useTimer({ expiryTimestamp: expirationDate, onExpire: () => {
+    setTimeout(() => {
+      init()
+    }, 500)
+
+    } })
 
   useEffect(() => {
     init()
