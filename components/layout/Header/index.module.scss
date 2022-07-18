@@ -200,10 +200,14 @@
 }
 
 .logo{
-  margin-right: 36px;
-  @media screen and (max-width: 920px){
-    display: none;
+  display: none;
+  position: relative;
+
+  @media screen and (min-width: 390px) and (max-width: $xs-max){
+    display: flex;
   }
+
+
 }
 
 .logoMobile{
@@ -213,9 +217,7 @@
   width: 35px;
   height: 30px;
 
-  @media screen and (min-width: 921px){
-    display: none;
-  }
+
   @media screen and (max-width: $xs-max){
     display: flex;
     align-self: center;
@@ -227,6 +229,9 @@
     svg{
       height: 30px;
     }
+  }
+  @media screen and (min-width: 390px){
+    display: none;
   }
 }
 

@@ -148,6 +148,16 @@
     max-height: 267px;
   }
 }
+.categoriesStatic{
+  @media screen and (max-width: $xs-max) {
+    display: flex;
+    align-items: center;
+    grid-gap: 0px 8px;
+    > a {
+      flex: 1;
+    }
+  }
+}
 
 .categories{
   overflow-y: auto;

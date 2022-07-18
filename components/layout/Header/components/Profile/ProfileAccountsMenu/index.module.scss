@@ -55,16 +55,20 @@
   @media screen and (max-width: $xs-max) {
     height: 40px;
     justify-content: normal;
-   
+
     min-width: 100%;
+  }
+  @media screen and (max-width: $mobile-min) {
     padding: 0 5px;
   }
 }
 .placeholderWrapper{
   display: flex;
+
   @media screen and (max-width: $xs-max) {
     display: flex;
     flex-direction: column-reverse;
+    grid-gap: 2px;
     .label{
       padding-left: 0px;
     }

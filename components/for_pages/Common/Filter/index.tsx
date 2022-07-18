@@ -112,14 +112,10 @@ export default function Filter(props: Props) {
         <div className={classNames(styles.root, props.className)}>
 
           <InputSearch placeholder={t('catalog_filter_search_field')} onChange={props.onSearch} />
-          {games.slice(0, 1).map((item, index) =>
+          {games.map((item, index) =>
             <GameCategoryStaticCard key={index} icon={item.icon} label={item.label} link={item.link} quantity={item.quantity} />
           )}
-          <div className={styles.categoriesStatic}>
-          {games.length > 2 && games.slice(1, 2).map((item, index) =>
-            <GameCategoryStaticCard key={index} icon={item.icon} label={item.label} link={item.link} quantity={item.quantity} />
-          )}
-          </div>
+
           <div className={styles.categoriesLbl}>
             {t('catalog_filter_categories')}
           </div>
@@ -171,10 +167,16 @@ export default function Filter(props: Props) {
             </>
           }
         </div>
-        {!props.isSearch && games.map((item, index) =>
+        {!props.isSearch && games.slice(0, 1).map((item, index) =>
           <GameCategoryStaticCard key={index} icon={item.icon} label={item.label} link={item.link} quantity={item.quantity} />
-        )
-        }
+        )}
+        <div className={styles.categoriesStatic}>
+
+        {!props.isSearch && games.length > 2 && games.slice(1, 3).map((item, index) =>
+          <GameCategoryStaticCard key={index} icon={item.icon} label={item.label} link={item.link} quantity={item.quantity} />
+        )}
+
+        </div>
       </div>
     </>
   )

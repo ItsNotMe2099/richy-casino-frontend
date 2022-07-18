@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import Logo from 'components/svg/Logo'
 import {useRouter} from 'next/router'
 import Overflow from './Overflow'
 import Link from 'next/link'
@@ -11,6 +10,7 @@ import {useTranslation} from 'next-i18next'
 import {ModalType} from 'types/enums'
 import {Routes} from 'types/routes'
 import AviatorSvg from 'components/svg/AviatorSvg'
+import Image from 'next/image'
 
 interface Props {
   children?: React.ReactNode
@@ -54,7 +54,7 @@ export default function Menu(props: Props) {
   const renderMenu = (className, style) => {
     return  <div className={className} style={style}>
       <Link href='/'>
-        <a className={styles.logo}><Logo/></a>
+        <a className={styles.logo}><Image src={'/img/layout/logo.png'} height={36} width={97.55}/></a>
       </Link>
       <Overflow currentPath={currentPath} currentRoute={currentRoute} options={options} dropDownClassName={styles.dropDown}/>
     </div>

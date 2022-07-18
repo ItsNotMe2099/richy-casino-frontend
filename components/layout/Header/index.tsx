@@ -97,9 +97,12 @@ export default function Header(props: Props) {
             </div>
           </div>
 
-            <Link href='/'>
-              <a className={styles.logoMobile} onClick={handleLogoClick}><Image src={'/img/layout/top/logo_mobile.png'} layout={'fill'}/></a>
-            </Link>
+          <Link href='/'>
+            <a className={styles.logoMobile} onClick={handleLogoClick}><Image src={'/img/layout/logo_mobile.png'} layout={'fill'}/></a>
+          </Link>
+          <Link href='/'>
+            <a className={styles.logo} onClick={handleLogoClick}><Image src={'/img/layout/logo.png'} height={30} width={81.29}/></a>
+          </Link>
 
           <div className={styles.right}>
             {!user ?
