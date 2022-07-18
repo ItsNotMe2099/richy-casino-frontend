@@ -111,7 +111,8 @@
 }
 
 .spin{
-  padding: 27px 0;
+  min-height: 60px;
+  padding: 0px 0;
   font-weight: bold;
   font-size: 20px;
   color: $white;
@@ -153,8 +154,12 @@
   padding: 12px 0;
   margin-top: 34px;
   text-align: center;
+  margin-left: 14px;
+  margin-right: 14px;
   @media screen and (max-width: 430px){
     padding: 6px 0;
+    margin-left: 0px;
+    margin-right: 0px;
   }
 }
 
