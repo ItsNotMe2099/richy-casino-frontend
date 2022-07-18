@@ -134,7 +134,7 @@ export default function Fortune(props: Props) {
             </div>
           </div>
         </VisibleXs>
-        {/*available && (*/}
+        {(available || !appContext.auth)  && (
           <div className={styles.btn}>
             <Button
               onClick={play}
@@ -144,7 +144,7 @@ export default function Fortune(props: Props) {
             >{t('fortune_spin_button')}
             </Button>
           </div>
-        {/*})*/}
+        )}
         {!available && appContext.auth && (
           <div className={styles.next}>
             <div className={styles.free}>

@@ -98,7 +98,7 @@ export default function Header(props: Props) {
           </div>
 
             <Link href='/'>
-              <a className={styles.logoMobile} onClick={handleLogoClick}><Image src={'/img/layout/top/logo_mobile.png'}/></a>
+              <a className={styles.logoMobile} onClick={handleLogoClick}><Image src={'/img/layout/top/logo_mobile.png'} layout={'fill'}/></a>
             </Link>
 
           <div className={styles.right}>
@@ -108,7 +108,7 @@ export default function Header(props: Props) {
                                                       background='dark700'>{t('header_login')}</Button></div>
                 <div className={styles.reg}>
                   <Button onClick={() => context.showModal(ModalType.registration)} size='normal'
-                          background='payGradient500'><img src='/img/layout/top/person.svg' alt=''/>{t('header_registration')}</Button>
+                          background='payGradient500'><img src='/img/layout/top/person.svg' alt='' />{t('header_registration')}</Button>
                 </div>
               </>
               :

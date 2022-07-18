@@ -208,9 +208,11 @@
 
 .logoMobile{
   align-self: center;
-  img{
-    height: 30px;
-  }
+
+  position: relative;
+  width: 35px;
+  height: 30px;
+
   @media screen and (min-width: 921px){
     display: none;
   }
