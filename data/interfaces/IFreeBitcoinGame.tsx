@@ -5,6 +5,7 @@ export enum IFreeBitcoinGameStatus{
 export interface IFreeBitcoinGame {
   luckyNumber: number,
   status: IFreeBitcoinGameStatus,
+  lotteryTicketsAmount
   amount: number
   currency: string
   balanceLeft: number
