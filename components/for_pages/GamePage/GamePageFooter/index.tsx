@@ -6,6 +6,7 @@ import { ModalType, ProfileModalType } from 'types/enums'
 import GameHeaderBurgerSvg from 'components/svg/GameHeaderBurgerSvg'
 import GameHeaderArrowSvg from 'components/svg/GameHeaderBurgerSvg copy'
 import { useRouter } from 'next/router'
+import UserUtils from 'utils/user'
 
 interface Props {
 
@@ -22,6 +23,7 @@ export default function GamePageFooter(props: Props) {
   const handleMenuClick = () => {
     context.showModal(ModalType.profileBurger)
   }
+  const mainAccount = UserUtils.getMainBalanceTotals(context.user)
 
   return (
     <div className={styles.root}>
@@ -29,11 +31,11 @@ export default function GamePageFooter(props: Props) {
         <div className={styles.arrow} onClick={handleBack}>
         <GameHeaderArrowSvg />
         </div>
-     
+
       </div>
       {context.user && <div className={styles.balance}>
-          {context.user.balance.totalCalculatedAmount} <span className={styles.currency}>
-            {context.user.currencyIso}</span>
+          {mainAccount.value} <span className={styles.currency}>
+            {mainAccount.currency}</span>
       </div>}
       <Button background='payGradient500' className={styles.deposit}
         onClick={() => context.showModalProfile(ProfileModalType.wallet)}>{t('profile_deposit')}</Button>

@@ -38,9 +38,7 @@ export default function Banner(props: Props) {
     }
     FreeBitcoinRepository.fetchUserStatus().then(i => {
       setUserStatus(i)
-      console.log('Date111', new Date(i.freebitcoinTimeNewFreeAccrual))
       const isExpired = differenceInSeconds(new Date(i.freebitcoinTimeNewFreeAccrual), new Date()) <= 0
-      console.log('Date111', new Date(i.freebitcoinTimeNewFreeAccrual), isExpired, state)
 
       if(isExpired && !state){
         setState(State.Play)
@@ -84,7 +82,7 @@ export default function Banner(props: Props) {
   }
 
   const getNumber = () => {
-    return Formatter.pad('00000', /*userStatus?.balanceFreebitcoin*/10000 ?? 0)
+    return Formatter.pad('00000', result?.luckyNumber ?? 10000)
   }
   return (
     <div className={styles.root}>
@@ -114,11 +112,11 @@ export default function Banner(props: Props) {
           <div className={styles.btns}>
             <div className={styles.coins}>
               <img src='/img/FreeBitcoin/bitcoin.svg' alt=''/>
-              <div>{result.amount}</div>
+              <div>{result.amount} {result.currency}</div>
             </div>
             <div className={styles.ticket} onClick={handlePlay}>
               <img src='/img/FreeBitcoin/ticket.svg' alt=''/>
-              <div>{result.status} {t('freebitcoin_win_tickets')}</div>
+              <div>{result.lotteryTicketsAmount} {t('freebitcoin_win_tickets')}</div>
             </div>
           </div>
         </div>
