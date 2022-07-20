@@ -37,6 +37,7 @@ export enum CookiesType {
   notificationShown = 'notificationShown',
   firstVisitAt = 'firstVisitAt',
   bonusDepositShowMode = 'bonusDepositShowMode',
+  ppDetails = 'ppDetails'
 }
 export enum TimerType{
   ShowNotificationBanner = 'showNotificationBanner',

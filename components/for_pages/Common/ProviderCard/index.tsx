@@ -20,8 +20,10 @@ export default function ProviderCard(props: Props) {
     <Link href={link} scroll={!appContext.isMobile}>
     <a className={classNames(styles.root, {[styles.active]: active})} onClick={props.onClick}>
       <div className={styles.icon}>
-        {props.item.imagePreviewUrl ? <img src={props.item.imagePreviewUrl}/> : props.item.name}
-      </div>
+        {props.item.imagePreviewUrl && <img alt={props.item.name} src={props.item.imagePreviewUrl}/>}
+
+       </div>
+      <div className={styles.name}>{props.item.name}</div>
       <div className={styles.quantity}>
         {props.item.gamesAmount}
       </div>

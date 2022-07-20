@@ -135,6 +135,7 @@ export enum PaymentMethod{
 }
 export enum PaymentStep {
   Method = 'method',
+  PaymentSystem = 'paymentSystem',
   Currency = 'currency',
   Form = 'form',
   Success = 'success'

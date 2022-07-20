@@ -58,8 +58,7 @@ async function request(options: string | Options): Promise<Res> {
         err: res.statusText ?? 'Unauthorized',
       }
     }
-
-    const jsonData: IApiResponse = await res.json()
+   const jsonData: IApiResponse = await res.json()
     if(!jsonData?.success){
       return {
         data: jsonData,
@@ -74,6 +73,7 @@ async function request(options: string | Options): Promise<Res> {
       }
     }
   } catch (err) {
+    console.error('Weweqe', err)
     return {
       data: null,
       err: `${err}` ?? 'Error',

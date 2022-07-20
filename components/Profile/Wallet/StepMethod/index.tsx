@@ -2,6 +2,8 @@ import styles from './index.module.scss'
 import { PaymentMethodList } from 'components/Profile/Wallet/PaymentMethodList'
 import { IPaymentMethod } from 'data/interfaces/IPaymentMethod'
 import { PaymentMethodCard } from '../PaymentMethodCard'
+import {IPaymentSystem} from 'data/interfaces/IPaymentSystem'
+import {PaymentMethodCryptoCard} from 'components/Profile/Wallet/PaymentMethodCryptoCard'
 
 enum Step {
   Method = 'method',
@@ -11,16 +13,24 @@ enum Step {
 
 interface Props {
   paymentMethods: IPaymentMethod[]
-  onChange: (method: IPaymentMethod) => void
+  onChange: (method: IPaymentMethod, paymentSystem?: IPaymentSystem | null) => void
 }
 export default function StepMethod(props: Props) {
   console.log('Method11', props.paymentMethods)
   return (
     <div className={styles.root}>
       <PaymentMethodList>
-        {props.paymentMethods.map((i) =>
-          <PaymentMethodCard key={i.title}  label={i.title} icon={i.imageUrl}
-            onClick={() => props.onChange(i)} />
+        {props.paymentMethods.map((i, index) =>{
+            if(i.isCrypto){
+              return  <PaymentMethodCryptoCard method={i} onClick={() => props.onChange(i)} />
+            }
+            if(index === 0){
+              return  <PaymentMethodCard onClick={() => props.onChange(i)} />
+            }
+          return i.paymentSystems.map(paymentSystem => <PaymentMethodCard key={paymentSystem.id}  label={paymentSystem.name} icon={paymentSystem.imageUrl}
+                                                                          onClick={() => props.onChange(i, paymentSystem)} />)
+        }
+
         )}
         {/*<PaymentMethodCryptoCard onClick={() => props.onChange(PaymentMethod.Crypto)} />*/}
       </PaymentMethodList>

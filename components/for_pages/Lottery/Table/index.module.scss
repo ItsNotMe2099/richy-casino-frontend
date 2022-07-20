@@ -9,6 +9,8 @@
   }
   @media screen and (max-width: $xs-max) {
     max-height: 273px;
+    border-bottom-right-radius: 18px;
+    border-bottom-left-radius: 18px;
   }
 }
 
@@ -43,7 +45,7 @@
     @media screen and (max-width: $xs-max) {
      padding-left: 16px;
     }
-    
+
   }
 
 }

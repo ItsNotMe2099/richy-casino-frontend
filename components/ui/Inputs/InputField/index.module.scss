@@ -58,6 +58,14 @@
 
 .inputWrapper{
   position: relative;
+  &.withStaticSuffix{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    input{
+      flex: 1;
+    }
+  }
 }
 
 .withLabel{

@@ -21,7 +21,9 @@ interface Props extends IField {
   label?: string
   errorClassName?: string
   suffix?: 'clear' | 'arrow' | string | ReactElement
+  staticSuffix?: 'clear' | 'arrow' | string | ReactElement
   prefix?: string | ReactElement
+  onChange?: (val) => void
 }
 
 export default function InputField(props: Props) {
@@ -90,14 +92,23 @@ export default function InputField(props: Props) {
   return (
     <div className={classNames(styles.root, props.className, {  [props.errorClassName]: showError})}>
       <div className={styles.wrapper}>
-        <div className={classNames(styles.inputWrapper, {[styles.withLabel]: props.label})}>
+        <div className={classNames(styles.inputWrapper, {[styles.withLabel]: props.label, [styles.withStaticSuffix]: !!props.staticSuffix})}>
         {props.label &&
           <div className={styles.label}>
             {props.label}
           </div>
         }
+          {props.staticSuffix && (
+            props.staticSuffix
+          )}
         <input
           {...field}
+          onChange={(e) => {
+            field.onChange(e)
+            if(props.onChange){
+              props.onChange(e.currentTarget.value)
+            }
+          }}
           disabled={props.disabled}
           ref={props.format && ref as any}
           type={props.obscure ? (obscureShow ? 'text' : 'password') : props.type}

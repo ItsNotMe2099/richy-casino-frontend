@@ -15,17 +15,8 @@ export interface IPaymentSettings{
 }
 export interface IPaymentSystem {
   id: number
+  systemCode: string
   name: string
   imageUrl: string
   settings: IPaymentSettings[]
-  flags?: {
-    isCrypto: boolean
-    isDepositAllowed: boolean
-    isWithdrawalAllowed: boolean
-  }
-  rateCurrencies?: {
-    [key: string]: {
-      [key: string]: number
-    }
-  }
 }

@@ -37,7 +37,7 @@ export default function BonusFooterMobile(props: Props) {
   return (
     <div className={classNames(styles.root, bannerClass)}
          onClick={handleClick}>
-    
+
       <div className={styles.close} onClick={(e) => {
         e.stopPropagation()
         e.preventDefault()
@@ -91,7 +91,7 @@ export default function BonusFooterMobile(props: Props) {
         <div className={classNames(styles.left, {[styles.noMargin]: !user})}>
           <span className={styles.title}>   {t('bonus_banner_small_title')}</span>
           <div className={styles.fs}>
-            {Formatter.formatNumber(details?.amount)} {details?.currency.toUpperCase()}{details?.freeSpins ? ` + ${Formatter.formatNumber(details?.freeSpins)} ${t('bonus_fs')}` : ''}
+            {Formatter.formatNumber(details?.amount)}% {details?.freeSpins ? ` + ${Formatter.formatNumber(details?.freeSpins)} ${t('bonus_fs')}` : ''}
           </div>
           <div className={styles.bottom}>
           <div className={styles.satoshi}>

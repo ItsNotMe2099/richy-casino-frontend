@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import ReelsNumbers from './ReelNumber'
 import styles from './index.module.scss'
 const TYPE_STRING = 'string'
@@ -45,10 +45,16 @@ interface Props {
 export default function Reels(props: Props) {
     const [text, setText] = useState<string>('')
     const [delayArray, setDelayArray] = useState<number[]>([])
+  const lastTextRef = useRef<string>( null)
     useEffect(() => {
         const strippedPrev = +stripNonNumbers(text)
         const strippedNext = +stripNonNumbers(props.text)
-        setText(text)
+      if(lastTextRef.current === props.text){
+
+        return null
+      }
+      setText(text)
+      lastTextRef.current = props.text
         if (strippedPrev === strippedNext) {
             return null
         }
@@ -62,7 +68,6 @@ export default function Reels(props: Props) {
                 delayArray.push(i)
             }
         }
-        setText(text)
 
     }, [props.text])
 

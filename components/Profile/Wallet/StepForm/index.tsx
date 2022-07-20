@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import Validator from 'utils/validator'
 import {useEffect, useState} from 'react'
 import PromoCode from 'components/for_pages/Common/Promocode'
-import {PaymentMethod, PaymentStep} from 'types/interfaces'
+import { PaymentStep} from 'types/interfaces'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import {PaymentOptions} from 'components/Profile/Wallet/PaymentOptions'
 import PaymentsRepository from 'data/repositories/PaymentsRepository'
@@ -24,11 +24,16 @@ import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 import ProfileModalFooter from 'components/Profile/layout/ProfileModalFooter'
 import {WalletHeader} from 'components/Profile/Wallet/WalletHeader'
 import BonusSmallBanner from 'components/for_pages/Common/BonusSmallBanner'
+import {IPaymentSystem} from 'data/interfaces/IPaymentSystem'
+import {IPaymentMethod} from 'data/interfaces/IPaymentMethod'
+import {PaymentCurrencySelected} from 'components/Profile/Wallet/PaymentCurrencySelected'
+import {PaymentMethodSelected} from 'components/Profile/Wallet/PaymentMethodSelected'
 
 
 interface Props {
   isBottomSheet?: boolean
-  method: PaymentMethod
+  method: IPaymentMethod
+  paymentSystem: IPaymentSystem
   currency: ICurrency
   onSubmit?: (data: IDepositResponse) => void
   onSetStep: (step: PaymentStep) => void
@@ -52,8 +57,8 @@ export default function StepForm(props: Props) {
     setError(null)
     setSending(true)
     try {
-      const res = await PaymentsRepository.depositCrypto(props.currency.iso, data.amount * (rate ?? 1))
-      props.onSubmit(res)
+      const res = await PaymentsRepository.depositCrypto(props.currency.iso, props.paymentSystem.id, props.paymentSystem.systemCode, data.amount * (rate ?? 1))
+      props.onSubmit({...res, amount: data.amount * (rate ?? 1)})
     } catch (e) {
       setError(e)
     }
@@ -70,9 +75,9 @@ export default function StepForm(props: Props) {
     <div className={styles.root}>
       {context.showBonus && <BonusSmallBanner style='wallet'/>}
       <PaymentOptions>
-        {/*<PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>*/}
-       {/* <PaymentMethodCard icon={<CurrencySvg currencyIso={props.currency.iso} color/>} label={props.currency.name} selected
-                           onClick={() => props.onSetStep(PaymentStep.Currency)}/>*/}
+        <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>
+        {props.currency && <PaymentCurrencySelected currency={props.currency} onClick={() => props.onSetStep(PaymentStep.Currency)}/>}
+
       </PaymentOptions>
       {!context.isMobile && <PaymentSeparator/>}
       <div className={styles.cryptoActions}>
@@ -81,7 +86,7 @@ export default function StepForm(props: Props) {
       {context.isMobile && <PaymentSeparator/>}
       <FormikProvider value={formik}>
           <Form className={styles.form}>
-            <PaymentDepositAmountField name={'amount'} disabled={sending} validate={Validator.required}
+            <PaymentDepositAmountField name={'amount'} hasOptions currency={'$'} disabled={sending} validate={Validator.required}
                                        placeholder='0'/>
 
             <div className={classNames(styles.bottom)}>
@@ -90,7 +95,7 @@ export default function StepForm(props: Props) {
                 <span>{t('wallet_form_promocode')}</span>
               </div>
               {rate && <div className={styles.rate}>
-                <div>20 USDT ≈ {Formatter.formatAmount(rate * 20, props.currency?.iso)} {props.currency?.iso}</div>
+                {formik.values.amount && <div>{formik.values.amount ?? 0} USDT ≈ {Formatter.formatAmount(rate * formik.values.amount ?? 0, props.currency?.iso)} {props.currency?.iso}</div>}
                 <div>1 USDT ≈ {Formatter.formatAmount(rate, props.currency?.iso)} {props.currency?.iso}</div>
               </div>}
             </div>
@@ -119,7 +124,7 @@ export default function StepForm(props: Props) {
   } else {
     return (<ProfileModalLayout fixed>
         <WalletHeader showBack onBackClick={props.onBackClick}/>
-        <ProfileModalBody fixed>
+        <ProfileModalBody fixed className={styles.modalBody}>
           {result}
         </ProfileModalBody>
         {footer}

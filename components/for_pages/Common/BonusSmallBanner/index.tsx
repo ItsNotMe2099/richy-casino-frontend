@@ -42,7 +42,7 @@ export default function BonusSmallBanner(props: Props) {
     <div className={classNames(styles.left, { [styles.noMargin]: !user })}>
       <span className={styles.title}>   {t('bonus_banner_small_title')}</span>
       <div className={styles.fs}>
-        {Formatter.formatNumber(details?.amount)} {details?.currency.toUpperCase()}{details?.freeSpins ? ` + ${Formatter.formatNumber(details?.freeSpins)} ${t('bonus_fs')}` : ''}
+        {Formatter.formatNumber(details?.amount)}% {details?.freeSpins ? ` + ${Formatter.formatNumber(details?.freeSpins)} ${t('bonus_fs')}` : ''}
       </div>
       <div className={styles.bottom}>
         <div className={styles.satoshi}>
@@ -58,25 +58,25 @@ export default function BonusSmallBanner(props: Props) {
     return (
     <div className={classNames(styles.root, bannerClass)}
       onClick={handleClick}>
-     
+
 
       <HiddenXs>
         <>
-          
+
           <div className={styles.money}>
             <img src='/img/BonusSmallBanner/money.svg' alt='' />
           </div>
-          
+
           <div className={styles.mobileLeft}>
             <div className={styles.mobileLeftHero}>
               <Image src='/img/BonusSmallBanner/left.png' layout='fill' alt='' />
-        
+
             </div>
             {content}
             {appContext.showBonus && <div className={styles.timer}><Timer minutes style={'wallet'} expiredAt={expiredAt} /></div>}
-     
+
           </div>
-          
+
         </>
       </HiddenXs>
       <VisibleXs>
@@ -84,11 +84,11 @@ export default function BonusSmallBanner(props: Props) {
           <div className={styles.mobileLeft}>
             <div className={styles.mobileLeftHero}>
               <Image src='/img/BonusSmallBanner/left.png' layout='fill' alt='' />
-        
+
             </div>
             {content}
             {appContext.showBonus && <div className={styles.timer}><Timer minutes style={props.style === 'wallet' ? 'wallet' : 'footerSmall'} expiredAt={expiredAt} /></div>}
-     
+
           </div>
 
           <div className={styles.money2}>
@@ -97,7 +97,7 @@ export default function BonusSmallBanner(props: Props) {
           <div className={styles.moneyWallet}>
             <img src='/img/BonusSmallBanner/money-mobile-wallet-r.svg' alt='' />
           </div>
-         
+
           <div className={styles.moneyBlurWallet}>
             <img src='/img/BonusSmallBanner/money-blur-mobile-wallet.svg' alt='' />
           </div>
@@ -114,7 +114,7 @@ export default function BonusSmallBanner(props: Props) {
       </VisibleXs>
 
       </div>
-      
+
   )
 }
 

@@ -3,27 +3,29 @@ import {useTranslation} from 'next-i18next'
 import {IDepositCryptoResponse} from 'data/interfaces/IPaymentDeposit'
 import QRCode from 'react-qr-code'
 import {PaymentOptions} from 'components/Profile/Wallet/PaymentOptions'
-import {PaymentMethod} from 'types/interfaces'
+import { PaymentStep} from 'types/interfaces'
 import {PaymentMethodCard} from 'components/Profile/Wallet/PaymentMethodCard'
 import {PaymentSeparator} from 'components/Profile/Wallet/PaymentSeparator'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import Formatter from 'utils/formatter'
 import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
+import {IPaymentMethod} from 'data/interfaces/IPaymentMethod'
+import {PaymentMethodSelected} from 'components/Profile/Wallet/PaymentMethodSelected'
 interface Props {
   response:  IDepositCryptoResponse
-  method: PaymentMethod
+  method: IPaymentMethod
   currency: ICurrency
+  onSetStep: (step: PaymentStep) => void
 }
 
 
 export default function StepCrypto(props: Props) {
   const {t} = useTranslation()
-  console.log('Iso111', props.currency.iso)
  return (
       <div className={styles.root}>
         <PaymentOptions>
-          {/*<PaymentMethodSelected method={props.method}/>*/}
-          <PaymentMethodCard icon={<CurrencySvg currencyIso={props.currency.iso} color/>} label={props.currency.name} selected/>
+         <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>
+          <PaymentMethodCard icon={<CurrencySvg currencyIso={props.currency.iso} color/>} label={props.currency.name} selected  onClick={() => props.onSetStep(PaymentStep.Currency)}/>
         </PaymentOptions>
         <div className={styles.separator}>
         <PaymentSeparator/>

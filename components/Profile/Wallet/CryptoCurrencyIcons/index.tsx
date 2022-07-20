@@ -2,15 +2,17 @@ import styles from './index.module.scss'
 import classNames from 'classnames'
 import {useAppContext} from 'context/state'
 import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
+import {ICurrency} from 'data/interfaces/ICurrency'
 
 
 interface Props {
+  currencies: ICurrency[]
   selected?: boolean
   limit?: number
 }
 export const CryptoCurrencyIcons = (props: Props) => {
   const context = useAppContext()
-  const currencies = context.currencies.filter(i => i.flags?.isCrypto)
+  const currencies = props.currencies
   const limit = props.limit ?? 3
   const mainColor = props.selected ? '#628CFF' : '#373945'
   const iconColor = props.selected ? '#fff' : '#cacaca'

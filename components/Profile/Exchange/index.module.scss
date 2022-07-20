@@ -1,5 +1,7 @@
 @import "scss/index";
-
+.modalBody{
+  padding-bottom: 0px;
+}
 .form {
   @media screen and (max-width: $xs-max) {
     display: flex;
@@ -74,6 +76,9 @@
 .separator{
   margin: 16px 0;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .exchange{

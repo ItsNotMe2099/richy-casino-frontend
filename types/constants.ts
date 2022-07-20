@@ -20,6 +20,7 @@ export const CookiesLifeTime: {
   notificationShown: number
   firstVisitAt: number
   bonusDepositShowMode?: number
+  ppDetails?: number
 } = {
   accessToken: 365 * 3,
   sessionId: 365 * 3,
@@ -27,6 +28,7 @@ export const CookiesLifeTime: {
   notificationShown: 365 * 3,
   firstVisitAt: 365 * 3,
   bonusDepositShowMode: 365 * 3,
+  ppDetails: 365 * 3
 }
 export const Timers: {
   showNotificationBanner: number,

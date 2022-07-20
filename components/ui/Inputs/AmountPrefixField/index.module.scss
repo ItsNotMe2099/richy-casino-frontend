@@ -1,0 +1,121 @@
+@import "scss/index";
+.root{
+  position: relative;
+  margin-bottom: 12px;
+}
+.wrapper{
+  position: relative;
+  flex-direction: column;
+}
+
+.input{
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  background: $dark600;
+  border: 0;
+  width: 100%;
+  height: 51px;
+  color: #717384;
+  flex: 1;
+  font-weight: 500;
+  padding: 0px;
+  padding-left: 2px;
+  &:-webkit-autofill{
+    -webkit-text-fill-color: #717384 !important;
+  }
+  @media screen and (max-width: $sm-min) {
+    padding: 0px 15px;
+  }
+
+  &::placeholder{
+    font-size: 13px;
+    color: $dark200;
+  }
+  &.inputFocused{
+    color: $white;
+    font-weight: 500;
+  }
+  &.withSuffix{
+    padding-right: 40px;
+  }
+  &.withPrefix{
+    padding-left: 49px;
+  }
+
+  @media only screen and (max-device-width: 900px) {
+      -webkit-appearance: none;
+      font-size: 16px;
+  }
+}
+
+.inputWrapper{
+  position: relative;
+  background: $dark600;
+  border: 0;
+  width: 100%;
+  padding: 0px 20px;
+  height: 53px;
+  border-radius: 8px;
+  @media screen and (max-width: $sm-min) {
+    padding: 0px 15px;
+  }
+  &.inputError{
+    color: #ED4700;
+    border: 1px solid #ED4700;
+    &::placeholder{
+      color:  #ED4700 !important;
+    }
+  }
+  &.withStaticSuffix{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    input{
+      flex: 1;
+    }
+  }
+}
+
+.withLabel{
+  display: flex;
+  align-items: center;
+  background: #272832;
+  border-radius: 12px;
+  height: 70px;
+  @media screen and (max-width: $xs-max) {
+    height: 50px;
+    background-color: $dark700;
+  }
+}
+
+.label{
+  margin-left: 29px;
+  font-weight: 500;
+  font-size: 16px;
+  color: $dark200;
+  @media screen and (max-width: $xs-max) {
+    font-size: 12px;
+    margin-left: 17px;
+  }
+}
+
+
+.obscure{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  path{
+    fill: #6B6C77;
+  }
+  &.show{
+    path{
+      fill: $white;
+    }
+  }
+}
+

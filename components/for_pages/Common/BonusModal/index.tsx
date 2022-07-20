@@ -81,7 +81,7 @@ export default function BonusModal(props: Props) {
           {t('bonus_title')}
         </div>
         <div className={styles.bonus}>
-          {Formatter.formatNumber(details?.amount)} {details?.currency?.toUpperCase()}
+          {Formatter.formatNumber(details?.amount)}%
         </div>
         {details?.freeSpins > 0 && <div className={styles.fs}>
           {Formatter.formatNumber(details?.freeSpins)} {t('bonus_fs')}

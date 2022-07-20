@@ -92,6 +92,17 @@ function MyApp({ Component, pageProps }: AppProps) {
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const props = await App.getInitialProps(appContext)
   const ua = appContext.ctx.req ? appContext.ctx.req?.headers['user-agent'] : navigator.userAgent
+  const ppDetails = {
+    clickid: appContext.ctx.query.clickid,
+    sub1: appContext.ctx.query.sub1,
+    sub2: appContext.ctx.query.sub2,
+    sub3: appContext.ctx.query.sub3,
+    sub4: appContext.ctx.query.sub4,
+    sub5: appContext.ctx.query.sub5,
+    sub6: appContext.ctx.query.sub6,
+    pid: appContext.ctx.query.pid,
+    promocode: appContext.ctx.query.promocode
+  }
 
   if (ua) {
     const { isMobile } = getSelectorsByUserAgent(ua)
