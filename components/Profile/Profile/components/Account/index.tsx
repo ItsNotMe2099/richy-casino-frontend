@@ -66,13 +66,13 @@ export  const Account = (props: Props) => {
           <div className={styles.numbers}>
           <div className={styles.calculated}>
             <div className={styles.amount}>
-              {props.account.calculated}
+              {props.account.value}
             </div>
             <div className={styles.currency}>
-              {props.account.mainCurrency}
+              {props.account.currency}
             </div>
           </div>
-          <div className={styles.main}>{props.account.value}  {props.account.currency}</div>
+          <div className={styles.main}>{props.account.calculated}  {props.account.mainCurrency}</div>
           </div>
           {props.hasActions && <div className={styles.drop}>
             {loading ?  <Spinner size={22} color="#fff" secondaryColor="rgba(255,255,255,0.4)"/> : <DropdownMenu options={options} dots textLeft onChange={handleClick}/>}

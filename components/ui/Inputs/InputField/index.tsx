@@ -23,6 +23,7 @@ interface Props extends IField {
   suffix?: 'clear' | 'arrow' | string | ReactElement
   staticSuffix?: 'clear' | 'arrow' | string | ReactElement
   prefix?: string | ReactElement
+  onChange?: (val) => void
 }
 
 export default function InputField(props: Props) {
@@ -102,6 +103,12 @@ export default function InputField(props: Props) {
           )}
         <input
           {...field}
+          onChange={(e) => {
+            field.onChange(e)
+            if(props.onChange){
+              props.onChange(e.currentTarget.value)
+            }
+          }}
           disabled={props.disabled}
           ref={props.format && ref as any}
           type={props.obscure ? (obscureShow ? 'text' : 'password') : props.type}

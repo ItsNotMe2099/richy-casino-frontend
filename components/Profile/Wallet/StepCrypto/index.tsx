@@ -10,7 +10,6 @@ import {ICurrency} from 'data/interfaces/ICurrency'
 import Formatter from 'utils/formatter'
 import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
 import {IPaymentMethod} from 'data/interfaces/IPaymentMethod'
-import {PaymentMethodCryptoCard} from 'components/Profile/Wallet/PaymentMethodCryptoCard'
 import {PaymentMethodSelected} from 'components/Profile/Wallet/PaymentMethodSelected'
 interface Props {
   response:  IDepositCryptoResponse
@@ -25,7 +24,7 @@ export default function StepCrypto(props: Props) {
  return (
       <div className={styles.root}>
         <PaymentOptions>
-          {props.method.isCrypto ? <PaymentMethodCryptoCard selected method={props.method}  onClick={() => props.onSetStep(PaymentStep.Method)}/> : <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>}
+         <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>
           <PaymentMethodCard icon={<CurrencySvg currencyIso={props.currency.iso} color/>} label={props.currency.name} selected  onClick={() => props.onSetStep(PaymentStep.Currency)}/>
         </PaymentOptions>
         <div className={styles.separator}>

@@ -28,7 +28,6 @@ import {IPaymentSystem} from 'data/interfaces/IPaymentSystem'
 import {IPaymentMethod} from 'data/interfaces/IPaymentMethod'
 import {PaymentCurrencySelected} from 'components/Profile/Wallet/PaymentCurrencySelected'
 import {PaymentMethodSelected} from 'components/Profile/Wallet/PaymentMethodSelected'
-import {PaymentMethodCryptoCard} from 'components/Profile/Wallet/PaymentMethodCryptoCard'
 
 
 interface Props {
@@ -76,7 +75,7 @@ export default function StepForm(props: Props) {
     <div className={styles.root}>
       {context.showBonus && <BonusSmallBanner style='wallet'/>}
       <PaymentOptions>
-        {props.method.isCrypto ? <PaymentMethodCryptoCard selected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/> : <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>}
+        <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>
         {props.currency && <PaymentCurrencySelected currency={props.currency} onClick={() => props.onSetStep(PaymentStep.Currency)}/>}
 
       </PaymentOptions>

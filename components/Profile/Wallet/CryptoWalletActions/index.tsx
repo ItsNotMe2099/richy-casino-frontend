@@ -21,7 +21,7 @@ export const CryptoWalletActions = (props: Props) => {
   return (
     <div className={styles.actions}>
       <div className={styles.top}>
-        <Button className={styles.btn} background='dark600'><img src='/img/Wallet/wallet+.svg' alt=''/>{t('wallet_create')}</Button>
+        <Button className={styles.btn} href={'https://trustwallet.com'} target={'_blank'} background='dark600'><img src='/img/Wallet/wallet+.svg' alt=''/>{t('wallet_create')}</Button>
         <Button
           className={styles.btn}
           background='dark600'

@@ -26,6 +26,21 @@ export default class InfoRepository {
     }
     return res.data.data?.map(i => ({...Converter.objectKeysToCamelCase(i), rateCurrencies: i.rate_currencies})) ?? []
   }
+  static async convertCurrency(currencyFrom: string, currencyTo: string, amount: number): Promise<boolean> {
+    const res = await request({
+      method: 'post',
+      url: '/api/finance/currency/convert',
+      data: {
+        converted_from: currencyFrom,
+        converted_to: currencyTo,
+        amount
+      }
+    })
+    if (res.err) {
+      throw res.err
+    }
+    return true
+  }
 
   static async getCurrencyByCountry(): Promise<ICurrency> {
     const res = await request({

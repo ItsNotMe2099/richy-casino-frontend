@@ -1,5 +1,7 @@
 @import "scss/index";
-
+.modalBody{
+  padding-bottom: 0px;
+}
 .form {
   @media screen and (max-width: $xs-max) {
     display: flex;

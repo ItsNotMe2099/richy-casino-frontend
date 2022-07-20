@@ -12,7 +12,6 @@ import { IPaymentSystem } from 'data/interfaces/IPaymentSystem'
 import {useMemo} from 'react'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
-import {PaymentMethodCryptoCard} from 'components/Profile/Wallet/PaymentMethodCryptoCard'
 
 interface Props {
   method: IPaymentMethod
@@ -34,7 +33,7 @@ export default function StepCurrency(props: Props) {
   return (
     <div className={styles.root}>
       <PaymentOptions>
-        {props.method.isCrypto ? <PaymentMethodCryptoCard selected method={props.method}/> : <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>}
+        <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>
         </PaymentOptions>
       {!context.isMobile &&  <PaymentSeparator/>}
       {props.method.isCrypto && <div className={styles.cryptoActions}>

@@ -28,10 +28,10 @@ const Balance = (props: SelectProps) => {
   return (
     <div className={styles.balance}>
       <div className={styles.value}>
-        {props.option.calculatedBalance}&nbsp;<span>{props.option.mainCurrency}</span>
+        {props.option.balance}&nbsp;<span>{props.option.label}</span>
       </div>
       <div className={styles.dg}>
-        {props.option.balance}&nbsp;{props.option.label}
+        {props.option.calculatedBalance}&nbsp;{props.option.mainCurrency}
       </div>
 
     </div>
@@ -107,12 +107,12 @@ export default function ProfileAccountsMenu(props: Props){
         <div className={styles.separator}/>
           <div className={styles.bonusTitle}>Bonuses</div>
           {bonusOptions.map(option => <Option key={option.value} option={option as IOptionUserAccount} onClick={handleClick}/>)}
-          
+
           <OptionBonus color='#587DFF' label={t('profile_accounts_bonus_lottery')}
                  value={context.user.extraBalances.lotteryTickets ?? 0} icon='/img/Profile/icons/ticket.svg' onClick={handleClick}/>
           <OptionBonus color='#F81AAC' label={t('profile_accounts_bonus_free_spin')}
                  value={context.user.extraBalances.freespinAmount ?? 0} icon='/img/Profile/icons/spin.svg' onClick={handleClick}/>
-     
+
         </>}
         </div>
       </Select>
