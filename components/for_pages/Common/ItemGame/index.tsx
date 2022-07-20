@@ -54,7 +54,7 @@ export default function ItemGame(props: Props) {
       [styles.small]: width > 120 && width < 140,
       [styles.exSmall]: width <= 120
     })}>
-      {props.item.imageIconPreviewUrl && <Image src={props.item.imageIconPreviewUrl} layout={'fill'} alt={props.item.name} />}
+      {props.item.imageIconPreviewUrl && <Image src={props.item.imageIconPreviewUrl} priority layout={'fill'} alt={props.item.name} />}
       <div className={styles.shade}>
         <div className={styles.top}><FavoriteBtn id={props.item.id} inActiveClassName={styles.favoriteInActive} className={styles.favorite} onChange={(val) => !val && props.onDeleteFromFavorite ? props.onDeleteFromFavorite(props.item) : null} /></div>
         <div className={styles.btns}>
