@@ -25,7 +25,7 @@ interface Props extends IField {
   prefix?: string | ReactElement
 }
 
-export default function InputField(props: Props) {
+export default function AmountPrefixField(props: Props) {
   const defaultPhonePattern = '+*[********************]'
   const [focused, setFocus] = useState(false)
   const [obscureShow, setObscureShow] = useState(false)
@@ -91,7 +91,8 @@ export default function InputField(props: Props) {
   return (
     <div className={classNames(styles.root, props.className, {  [props.errorClassName]: showError})}>
       <div className={styles.wrapper}>
-        <div className={classNames(styles.inputWrapper, {[styles.withLabel]: props.label, [styles.withStaticSuffix]: !!props.staticSuffix})}>
+        <div className={classNames(styles.inputWrapper, {[styles.withLabel]: props.label,
+          [styles.inputError]: showError, [styles.withStaticSuffix]: !!props.staticSuffix})}>
         {props.label &&
           <div className={styles.label}>
             {props.label}

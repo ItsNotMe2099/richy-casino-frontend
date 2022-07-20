@@ -5,13 +5,11 @@ import classNames from 'classnames'
 import Validator from 'utils/validator'
 import {useEffect, useState} from 'react'
 import PromoCode from 'components/for_pages/Common/Promocode'
-import { PaymentStep} from 'types/interfaces'
-import {ICurrency} from 'data/interfaces/ICurrency'
+import {PaymentStep} from 'types/interfaces'
 import {PaymentOptions} from 'components/Profile/Wallet/PaymentOptions'
 import PaymentsRepository from 'data/repositories/PaymentsRepository'
 import FormError from 'components/ui/Form/FormError'
 import {IDepositResponse} from 'data/interfaces/IPaymentDeposit'
-import {CryptoWalletActions} from 'components/Profile/Wallet/CryptoWalletActions'
 import {PaymentSeparator} from 'components/Profile/Wallet/PaymentSeparator'
 import {useAppContext} from 'context/state'
 import {PaymentDepositAmountField} from 'components/Profile/Wallet/PaymentDepositAmountField'
@@ -26,9 +24,8 @@ import {WalletHeader} from 'components/Profile/Wallet/WalletHeader'
 import BonusSmallBanner from 'components/for_pages/Common/BonusSmallBanner'
 import {IPaymentSystem} from 'data/interfaces/IPaymentSystem'
 import {IPaymentMethod} from 'data/interfaces/IPaymentMethod'
-import {PaymentCurrencySelected} from 'components/Profile/Wallet/PaymentCurrencySelected'
-import {PaymentMethodSelected} from 'components/Profile/Wallet/PaymentMethodSelected'
-import {PaymentMethodCryptoCard} from 'components/Profile/Wallet/PaymentMethodCryptoCard'
+import {PaymentSystemSelected} from 'components/Profile/Wallet/PaymentSystemSelected'
+import {ICurrency} from 'data/interfaces/ICurrency'
 
 
 interface Props {
@@ -41,7 +38,7 @@ interface Props {
   onBackClick: () => void
 }
 
-export default function StepForm(props: Props) {
+export default function StepFormFiat(props: Props) {
   const {t} = useTranslation()
   const context = useAppContext()
   const [sending, setSending] = useState(false)
@@ -50,7 +47,20 @@ export default function StepForm(props: Props) {
     amount: 20,
   }
   const currencyUsd = context.currencies.find(i => i.iso === 'USD')
-  const rate = currencyUsd?.rateCurrencies['USD'][`to${props.currency?.iso}`]
+  const currencyIso = props.currency?.iso
+  const rate = currencyUsd?.rateCurrencies['USD'][`to${currencyIso}`]
+  const currentSettings = props.paymentSystem.settings.find(i => i.currencyIso === currencyIso)
+  const validateMinMax = (value: number) => {
+    const min = currentSettings?.deposit?.minAmount ?? 0
+    const max = currentSettings?.deposit?.maxAmount ?? 0
+    if(min && value < min){
+      return `Значение больше ${min}`
+    }
+    if(max && value > max){
+      return `Значение больше ${max}`
+    }
+    return undefined
+  }
   useEffect(() => {
     context.updateCurrencies()
   }, [])
@@ -58,9 +68,12 @@ export default function StepForm(props: Props) {
     setError(null)
     setSending(true)
     try {
-      const res = await PaymentsRepository.depositCrypto(props.currency.iso, props.paymentSystem.id, props.paymentSystem.systemCode, data.amount * (rate ?? 1))
-      props.onSubmit({...res, amount: data.amount * (rate ?? 1)})
-    } catch (e) {
+      const amount = typeof  data.amount === 'string' ? parseFloat(data.amount) : data.amount
+      const res = await PaymentsRepository.depositFiat(currencyIso, props.paymentSystem.id, props.paymentSystem.systemCode, `${window.location.origin}/payment/result`, amount)
+      if(res.url){
+        window.location.href = res.url
+      }
+      } catch (e) {
       setError(e)
     }
     setSending(false)
@@ -76,19 +89,15 @@ export default function StepForm(props: Props) {
     <div className={styles.root}>
       {context.showBonus && <BonusSmallBanner style='wallet'/>}
       <PaymentOptions>
-        {props.method.isCrypto ? <PaymentMethodCryptoCard selected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/> : <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>}
-        {props.currency && <PaymentCurrencySelected currency={props.currency} onClick={() => props.onSetStep(PaymentStep.Currency)}/>}
+        {props.paymentSystem && <PaymentSystemSelected paymentSystem={props.paymentSystem} onClick={() => props.onSetStep(PaymentStep.Method)}/>}
+        {/*props.currency && <PaymentCurrencySelected currency={props.currency} onClick={() => props.onSetStep(PaymentStep.Currency)}/>*/}
 
       </PaymentOptions>
-      {!context.isMobile && <PaymentSeparator/>}
-      <div className={styles.cryptoActions}>
-        <CryptoWalletActions/>
-      </div>
       {context.isMobile && <PaymentSeparator/>}
       <FormikProvider value={formik}>
           <Form className={styles.form}>
-            <PaymentDepositAmountField name={'amount'} hasOptions currency={'$'} disabled={sending} validate={Validator.required}
-                                       placeholder='0'/>
+            <PaymentDepositAmountField name={'amount'} currency={currencyIso} disabled={sending} validate={Validator.combine([Validator.required, validateMinMax])}
+                                       />
 
             <div className={classNames(styles.bottom)}>
               <div className={styles.promo} onClick={() =>  setPromoCode(!promoCode ? true : false)}>
@@ -96,8 +105,8 @@ export default function StepForm(props: Props) {
                 <span>{t('wallet_form_promocode')}</span>
               </div>
               {rate && <div className={styles.rate}>
-                {formik.values.amount && <div>{formik.values.amount ?? 0} USDT ≈ {Formatter.formatAmount(rate * formik.values.amount ?? 0, props.currency?.iso)} {props.currency?.iso}</div>}
-                <div>1 USDT ≈ {Formatter.formatAmount(rate, props.currency?.iso)} {props.currency?.iso}</div>
+                <div>20 USDT ≈ {Formatter.formatAmount(rate * 20, currencyIso)} {currencyIso}</div>
+                <div>1 USDT ≈ {Formatter.formatAmount(rate, currencyIso)} {currencyIso}</div>
               </div>}
             </div>
             {promoCode &&

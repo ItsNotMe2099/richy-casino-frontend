@@ -103,7 +103,7 @@ export default function Banner(props: Props) {
           <Digit digit={item} key={index}/>
         )}
       </div>
-      {state === State.Play &&
+      {(state === State.Play || (state === State.Win && result?.balanceLeft > 0)) &&
         <Button className={styles.btn} spinner={sending} size='huge' background='blueGradient500' onClick={context.auth ? handlePlay : handlePlayGuest}>   {t('freebitcoin_play_now')}</Button>
       }
       {state === State.Win &&
@@ -121,7 +121,7 @@ export default function Banner(props: Props) {
           </div>
         </div>
       }
-      {state === State.Timer &&
+      {(state === State.Timer || (state === State.Win && result.balanceLeft === 0 )) &&
         <div className={styles.timer}>
           <Timer expiredAt={new Date(userStatus.freebitcoinTimeNewFreeAccrual)} style='freebitcoin' onExpire={handleExpired}/>
           <div className={styles.again}>

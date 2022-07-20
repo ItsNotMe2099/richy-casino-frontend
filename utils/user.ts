@@ -67,8 +67,8 @@ export default class UserUtils {
     }
     for(const bonus of bonuses){
       //Amount
-      details.amount += bonus.maxAmount as number ?? 0
-      if(bonus.type === IPromoCodeBonusType.Fix && bonus.currencyIso){
+      details.amount += bonus.amount as number ?? 0
+      if(bonus.type === IPromoCodeBonusType.Fix){
         details.amount += bonus.amount as number
       }
       details.freeSpins += bonus.bonusBalance.freespins as number

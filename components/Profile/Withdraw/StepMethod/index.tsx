@@ -37,7 +37,7 @@ export default function StepMethod(props: Props) {
         {t('wallet_payment_method_choose')}
       </div>
       <PaymentMethodList>
-        <PaymentMethodCryptoCard onClick={() => props.onChange(PaymentMethod.Crypto)}/>
+        <PaymentMethodCryptoCard method={null} onClick={() => props.onChange(PaymentMethod.Crypto)}/>
       </PaymentMethodList>
     </div>
   )

@@ -1,15 +1,34 @@
 import request from 'utils/request'
 import Converter from 'utils/converter'
-import {IDepositCryptoResponse} from 'data/interfaces/IPaymentDeposit'
+import {IDepositCryptoResponse, IDepositFiatResponse} from 'data/interfaces/IPaymentDeposit'
 import {IWithdrawResponse} from 'data/interfaces/IPaymentWithDraw'
 
 export default class PaymentsRepository {
-  static async depositCrypto(currencyIso: string, amount: number): Promise<IDepositCryptoResponse> {
+  static async depositCrypto(currencyIso: string, paymentSystemId: number, paymentSystemCode: string, amount: number): Promise<IDepositCryptoResponse> {
     const res = await request({
       method: 'post',
       url: '/api/finance/payment/deposit/crypto',
       data: {
         currency_iso: currencyIso,
+        type_id: paymentSystemId,
+        code: paymentSystemCode,
+        amount
+      }
+    })
+    if (res.err) {
+      throw res.err
+    }
+    return res.data?.data ? Converter.objectKeysToCamelCase(res.data?.data) : null
+  }
+  static async depositFiat(currencyIso: string, paymentSystemId: number, paymentSystemCode: string, redirectUrl: string, amount: number): Promise<IDepositFiatResponse> {
+    const res = await request({
+      method: 'post',
+      url: '/api/finance/payment/deposit/fiat',
+      data: {
+        currency_iso: currencyIso,
+        type_id: paymentSystemId,
+        code: paymentSystemCode,
+        redirect_url: redirectUrl,
         amount
       }
     })

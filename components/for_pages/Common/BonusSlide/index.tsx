@@ -62,7 +62,7 @@ export default function BonusSlide(props: Props) {
           {t('bonus_title')}
         </div>
         <div className={styles.bonus} style={{fontSize: isMobile ? `${width /10.5}px` : `${width /13}px`, marginTop: isMobile ? `${width /39}px` : `${width /50}px` }}>
-          {Formatter.formatNumber(details?.amount)} {details?.currency?.toUpperCase()}
+          {Formatter.formatNumber(details?.amount)}%
         </div>
         {details?.freeSpins >0 && <div className={styles.fs} style={{fontSize: isMobile ? `${width /22}px` : `${width /29}px` }}>
           {Formatter.formatNumber(details?.freeSpins)} {t('bonus_fs')}

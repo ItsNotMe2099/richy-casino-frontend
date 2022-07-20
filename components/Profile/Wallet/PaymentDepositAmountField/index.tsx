@@ -1,12 +1,14 @@
 import styles from './index.module.scss'
 import {useTranslation} from 'next-i18next'
 import classNames from 'classnames'
-import InputField from 'components/ui/Inputs/InputField'
 import { useField} from 'formik'
 import {IField} from 'types/interfaces'
+import AmountPrefixField from 'components/ui/Inputs/AmountPrefixField'
 
 interface Props {
   isOpen?: boolean
+  hasOptions?: boolean
+  currency: string
 }
 
 interface Props extends IField{
@@ -27,8 +29,8 @@ export const PaymentDepositAmountField = (props: Props) => {
   ]
   return (
     <div className={styles.root}>
-      <InputField name={'amount'} {...props} className={styles.input} placeholder='$0' prefix={<div className={styles.prefix}>$</div>}/>
-      <div className={styles.options}>
+      <AmountPrefixField name={'amount'} {...props} className={styles.input} staticSuffix={<div className={styles.prefix}>{props.currency}</div>}/>
+      {props.hasOptions && <div className={styles.options}>
         {options.map((item, index) =>
           <div className={classNames(styles.option, {[styles.active]: item.value === field.value})}
                key={index}
@@ -36,7 +38,7 @@ export const PaymentDepositAmountField = (props: Props) => {
             {item.label}
           </div>
         )}
-      </div>
+      </div>}
     </div>
   )
 }

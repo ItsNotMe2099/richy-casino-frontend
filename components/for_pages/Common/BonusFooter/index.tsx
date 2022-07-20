@@ -81,7 +81,7 @@ export default function BonusFooter(props: Props) {
           {t('bonus_title')}
         </div>
         <div className={styles.bonus} style={{fontSize: `${width / 22}px`}}>
-          {Formatter.formatNumber(details?.amount)} {details?.currency?.toUpperCase()}
+          {Formatter.formatNumber(details?.amount)}%
         </div>
         {details?.freeSpins > 0 && <div className={styles.fs} style={{fontSize: `${width / 51}px`}}>
           {Formatter.formatNumber(details?.freeSpins)} {t('bonus_fs')}

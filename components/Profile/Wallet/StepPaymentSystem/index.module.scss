@@ -1,0 +1,19 @@
+@import "scss/index";
+
+.root{
+  display: flex;
+  flex-direction: column;
+  grid-gap: 16px 0px;
+}
+
+.cryptoActions{
+  @media screen and (max-width: $xs-max){
+    margin-top: -4px;
+  }
+}
+.methods{
+  margin-top: -4px;
+  @media screen and (max-width: $xs-max){
+  margin-top: 0px;
+  }
+}
