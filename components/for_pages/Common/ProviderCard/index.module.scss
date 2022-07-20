@@ -1,5 +1,6 @@
 @import "scss/index";
 .root{
+  position: relative;
   padding-top: 18px;
   padding-bottom: 9px;
   border-radius: 8px;
@@ -7,14 +8,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
   cursor: pointer;
   overflow: hidden;
+  grid-gap: 8px 0px;
   &:hover, &.active{
-    .icon{
+    .name{
       color: #fff;
-      svg{
-        fill: #fff;
-      }
+
     }
     .quantity{
       color: #fff;
@@ -24,21 +25,29 @@
 }
 .icon{
   display: flex;
-  justify-content: center;
-  color: $dark200;
+
   font-weight: 500;
+  padding: 0px 30px;
+
+
   img{
-    max-height: 18px;
+    max-width: 100%;
   }
   svg{
     fill: #6B6C77;
   }
 }
+.name{
+  text-align: center;
+  color: $dark200;
+}
 .quantity{
+  position: absolute;
+  right: 5px;
+  top: 5px;
   font-weight: 500;
   font-size: 13px;
   color: $dark300;
   display: flex;
   justify-content: center;
-  margin-top: 15px;
 }

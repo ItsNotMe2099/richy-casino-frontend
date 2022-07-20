@@ -21,7 +21,15 @@ export default function GamePageFooter(props: Props) {
     router.back()
   }
   const handleMenuClick = () => {
+
     context.showModal(ModalType.profileBurger)
+  }
+  const handleDepositClick = () => {
+    if(!context.auth){
+      context.showModal(ModalType.registration)
+    }else {
+      context.showModalProfile(ProfileModalType.wallet)
+    }
   }
   const mainAccount = context.user ? UserUtils.getMainBalanceTotals(context.user) : null
 
@@ -38,7 +46,7 @@ export default function GamePageFooter(props: Props) {
             {mainAccount.currency}</span>
       </div>}
       <Button background='payGradient500' className={styles.deposit}
-        onClick={() => context.showModalProfile(ProfileModalType.wallet)}>{t('profile_deposit')}</Button>
+        onClick={handleDepositClick}>{t('profile_deposit')}</Button>
       <div className={styles.menu} onClick={handleMenuClick}><GameHeaderBurgerSvg /></div>
 
     </div>
