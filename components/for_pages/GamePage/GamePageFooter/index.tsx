@@ -23,7 +23,7 @@ export default function GamePageFooter(props: Props) {
   const handleMenuClick = () => {
     context.showModal(ModalType.profileBurger)
   }
-  const mainAccount = UserUtils.getMainBalanceTotals(context.user)
+  const mainAccount = context.user ? UserUtils.getMainBalanceTotals(context.user) : null
 
   return (
     <div className={styles.root}>
@@ -33,7 +33,7 @@ export default function GamePageFooter(props: Props) {
         </div>
 
       </div>
-      {context.user && <div className={styles.balance}>
+      {mainAccount && <div className={styles.balance}>
           {mainAccount.value} <span className={styles.currency}>
             {mainAccount.currency}</span>
       </div>}
