@@ -9,6 +9,7 @@
   // @include componentRoot;
   flex: 1;
   &.mobile{
+    padding-bottom: 40px;
     .board{
       display: flex;
       flex-direction: column;
@@ -28,11 +29,11 @@
 .board {
   flex: 1;
   margin-top: 20px;
-  
+
     border-radius: 18px;
-   
+
     @media screen and (max-width: $xs-max){
-   
+
       margin-top: 0px;
     }
 }

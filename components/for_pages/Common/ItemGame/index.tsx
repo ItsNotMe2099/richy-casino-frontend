@@ -58,10 +58,11 @@ export default function ItemGame(props: Props) {
       <div className={styles.shade}>
         <div className={styles.top}><FavoriteBtn id={props.item.id} inActiveClassName={styles.favoriteInActive} className={styles.favorite} onChange={(val) => !val && props.onDeleteFromFavorite ? props.onDeleteFromFavorite(props.item) : null} /></div>
         <div className={styles.btns}>
-          <div className={styles.btnsWrapper}>
+          {!props.item.isBlackListed && <div className={styles.btnsWrapper}>
             <Button className={classNames(styles.btn)} href={link} onClick={handlePlayClick} size='small' background='blueGradient500'>{t('game_card_play')}</Button>
-            <Button className={classNames(styles.btn, styles.demo)} href={`${link}?demo=1`} onClick={handleDemoClick} size='small' background='blackTransparent'>{t('game_card_demo')}</Button>
-          </div>
+            <Button className={classNames(styles.btn, styles.demo, {[styles.hidden]: !props.item.isDemoEnable})}  href={`${link}?demo=1`} onClick={handleDemoClick} size='small' background='blackTransparent'>{t('game_card_demo')}</Button>
+          </div>}
+          {props.item.isBlackListed && <div className={styles.blackListed}>Игра не доступна в вашем регионе</div>}
         </div>
         <div className={classNames(styles.top, styles.bottom)}><FavoriteBtn id={props.item.id} inActiveClassName={styles.favoriteInActive} className={styles.favorite} /></div>
 
