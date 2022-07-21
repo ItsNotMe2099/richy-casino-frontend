@@ -192,15 +192,15 @@ max-width: 280px;
     color: #FFFFFF;
     line-height: 100%;
     @media screen and (max-width: 428px){
-      font-size: 14px;
+      font-size: $mobile14;
     }
     @media screen and (max-width: 414px){
-      font-size: 13px;
+      font-size: $mobile13;
     }
     @media screen and (max-width: 375px){
-      font-size: 12px;
+      font-size: $mobile12;
     }
-   
+
   }
 }
 

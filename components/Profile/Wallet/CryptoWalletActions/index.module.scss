@@ -24,7 +24,7 @@
     margin-right: 10px;
   }
   @media screen and (max-width: $xs-max){
-    font-size: 12px;
+    font-size: $mobile12;
     img{
       margin-right: 6px;
     }

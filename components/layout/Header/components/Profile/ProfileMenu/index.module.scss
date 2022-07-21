@@ -207,7 +207,7 @@
 
   @media screen and (max-width: $xs-max) {
     span {
-      font-size: 11px;
+      font-size: $mobile11;
     }
   }
 }

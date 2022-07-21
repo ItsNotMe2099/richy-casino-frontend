@@ -114,7 +114,7 @@
     height: 7vw;
     width: 12vw;
     margin-bottom: 11px;
-    font-size: 10px;
+    font-size: $mobile10;
   }
   @media screen and (max-width: 360px){
     margin-bottom: 2px;
@@ -149,7 +149,7 @@
     padding: 0;
     height: 7vw;
     width: 12vw;
-    font-size: 10px;
+    font-size: $mobile10;
   }
 }
 

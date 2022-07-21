@@ -53,7 +53,7 @@
   justify-content: space-between;
   border-radius: 8px;
   .cellHeader{
-  
+
     padding-bottom: 26px;
       @media screen and (max-width: $xs-max){
           padding-bottom: 11px;
@@ -136,7 +136,7 @@
     font-size: 14px;
 }
 @media screen and (max-width: 900px){
-  font-size: 11px;
+  font-size: $mobile11;
 }
 @media screen and (max-width: 700px){
   text-align: right;
@@ -152,7 +152,7 @@
     font-size: 14px;
 }
 @media screen and (max-width: 900px){
-  font-size: 11px;
+  font-size: $mobile11;
 }
 }
 
@@ -161,7 +161,7 @@
   text-align: center;
   padding-right: 28px;
   font-size: 16px;
-  
+
   @media screen and (max-width: $xs-max){
     font-size: 12px;
   }

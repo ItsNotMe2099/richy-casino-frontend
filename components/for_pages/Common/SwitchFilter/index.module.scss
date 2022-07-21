@@ -37,7 +37,7 @@
   white-space: nowrap;
   @media screen and (max-width: 414px){
     font-weight: 500;
-    font-size: 18px;
+    font-size: $mobile18;
   }
   @media screen and (max-width: 390px){
     font-weight: 500;

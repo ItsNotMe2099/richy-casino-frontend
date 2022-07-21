@@ -161,7 +161,7 @@
   font-size: 14px;
 
   @media screen and (max-width: $xs-max) {
-    font-size: 12px;
+    font-size: $mobile12;
   }
 
   span {
@@ -182,7 +182,7 @@
   line-height: 10px;
 
   @media screen and (max-width: $xs-max) {
-    font-size: 10px;
+    font-size: $mobile10;
   }
 }
 

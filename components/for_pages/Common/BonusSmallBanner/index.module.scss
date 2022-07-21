@@ -2,7 +2,7 @@
 
 .root{
   background: linear-gradient(46.89deg, #4A16E4 2.09%, #933288 11.47%, #C1444E 32.44%, #FF5C00 108.03%);
- 
+
   position: relative;
   max-height: 76px;
   overflow: hidden;
@@ -12,11 +12,11 @@
     display: none;
   }
   @media screen and (max-width: $mobile-max){
- 
+
     .title{
-      font-size: 12px;
+      font-size: $mobile12;
       span{
-        font-size: 12px;
+        font-size: $mobile12;
       }
     }
   }
@@ -28,7 +28,7 @@
   flex-direction: row;
   align-items: stretch;
   z-index: 1;
-  
+
   .content{
     padding: 0px 2% 0px 2%;
     flex: 1;
@@ -212,7 +212,7 @@
   @media screen and (max-width: $mobile-max){
     max-height: initial;
     padding-bottom: 55px;
-  
+
   }
   .moneyFooter{
     display: block;
@@ -264,7 +264,7 @@
   font-size: 12px;
   text-align: left;
   @media screen and (max-width: 375px){
-    font-size: 11px;
+    font-size: $mobile11;
   }
 }
 

@@ -109,7 +109,7 @@
 
 
     @media screen and (max-width: $xs-max){
-        font-size: 11px;
+        font-size: $mobile11;
       font-weight: 500;
     }
     @media screen and (max-width: $mobile-max){

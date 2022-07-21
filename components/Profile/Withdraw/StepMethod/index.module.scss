@@ -12,7 +12,7 @@
   margin-bottom: 12px;
   &.labelAccount{
     @media screen and (max-width: $xs-max){
-      font-size: 12px;
+      font-size: $mobile12;
     }
   }
   @media screen and (max-width: $xs-max){

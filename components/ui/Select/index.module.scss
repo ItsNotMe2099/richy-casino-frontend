@@ -210,7 +210,7 @@ max-width: 280px;
   }
   @media screen and (max-width: $xs-max){
     span{
-      font-size: 14px;
+      font-size: $mobile14;
     }
   }
 }
