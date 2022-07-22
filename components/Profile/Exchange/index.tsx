@@ -93,7 +93,7 @@ export default function Exchange(props: Props) {
     const num = parseFloat(value)
     console.log('CheckNum', num, parseFloat(`${`${currentBalance}`.replace(',', '.')}`))
     if(num > parseFloat(`${`${currentBalance}`.replace(',', '.')}`)){
-      return 'Больше чем на вашем балансе'
+      return  t('exchange_balance_error')
     }
     return  undefined
   }

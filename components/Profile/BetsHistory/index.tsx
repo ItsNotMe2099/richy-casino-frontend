@@ -70,7 +70,7 @@ export default function BetsHistory(props: Props) {
         </ProfileModalBody>
       <ProfileModalFooter>
         <div className={styles.btn}>
-          <Button size='normal' background='payGradient500'>Пополнить</Button>
+          <Button size='normal' background='payGradient500'>{t('bets_history_deposit')}</Button>
         </div>
       </ProfileModalFooter>
 

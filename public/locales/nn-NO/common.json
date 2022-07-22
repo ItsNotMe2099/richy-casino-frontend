@@ -58,6 +58,7 @@
   "error_not_found": "Side ikke funnet",
   "error_system": "Det har oppstått en feil",
   "exchange_balance": "Balansere:",
+  "exchange_balance_error": "meir enn",
   "exchange_button": "Utveksling",
   "exchange_title": "Utveksling",
   "exchange_you_get": "Du vil få",
