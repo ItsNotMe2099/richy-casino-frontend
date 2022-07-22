@@ -19,6 +19,7 @@ module.exports = {
     FAKE_BONUS: process.env.FAKE_BONUS,
     GAME_CHESS_ID: process.env.GAME_CHESS_ID,
     GAME_POKER_ID: process.env.GAME_POKER_ID,
+    RICHY_PROVIDER_ID: process.env.RICHY_PROVIDER_ID,
   },
   serverRuntimeConfig: {
     HOST: process.env.HOST,

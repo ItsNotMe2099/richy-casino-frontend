@@ -10,6 +10,7 @@ import {IGame} from 'data/interfaces/IGame'
 import {useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
 import ContentLoader from 'components/ui/ContentLoader'
+import {runtimeConfig} from 'config/runtimeConfig'
 
 interface Props {
 
@@ -43,7 +44,7 @@ export default function CatalogPage(props: Props) {
   useEffect(() => {
     init()
   }, [router.query.demo, router.query.id])
-  const isRichy = game?.providerName?.toLowerCase() === 'richy games'
+  const isRichy = `${game?.providerId}` === runtimeConfig.RICHY_PROVIDER_ID
 
   const result = loading ? <ContentLoader isOpen={true} style={'block'}/> : (isRichy ? <GameIframeRichy game={game} session={session}/> :
     <GameIframe session={session} error={error}/>)
