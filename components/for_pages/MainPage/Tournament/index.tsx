@@ -40,7 +40,7 @@ export default function Tournament(props: Props) {
       return
     }
     const res = await tournamentContext.participate(tournament.tournamentId)
-   
+
 
     if (res) {
       TournamentRepository.fetchRichyTournament().then(i => {
@@ -51,7 +51,7 @@ export default function Tournament(props: Props) {
           duration: 1500,
           delay: 100,
           smooth: true,
-          offset: -250, 
+          offset: -250,
         })
       }, 300)
     }
@@ -99,7 +99,7 @@ export default function Tournament(props: Props) {
               <div className={styles.title} style={{ fontSize: isMobile && `${width / 12.5}px` }}>
                 {t('tournament_banner_title')}
               </div>
-        
+
             <div className={styles.fund}>
               <div className={styles.prize}>
                 <span style={{ fontSize: isMobile && `${width / 29}px` }}>{t('tournament_banner_prize')}</span>
@@ -111,7 +111,7 @@ export default function Tournament(props: Props) {
             <div className={styles.timerMobile}>
               <Timer expiredAt={new Date(tournament.timeEnd)} days style='tournamentMobile' />
             </div>
-             <Button spinner={tournamentContext.participateLoading} onClick={handleJoin} className={classNames({[styles.btnMobile]: true, [styles.hidden]: tournamentContext.userActiveRounds.length == 0})}
+             <Button spinner={tournamentContext.participateLoading} onClick={handleJoin} className={classNames({[styles.btnMobile]: true, [styles.hidden]: tournamentContext.userActiveRounds.length == 0 && appContext.auth})}
               size='normal' background='payGradient500'>
               <span style={{ fontSize: isMobile && `${width / 24}px` }}>{t('tournament_banner_button')}</span>
             </Button>
