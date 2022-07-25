@@ -29,7 +29,7 @@ export default function PageItemPage(props: Props) {
         site_name: t('seo_info_og_site_name'),
         type: 'website',
         locale: 'en_US',
-        url: 'https://richy.casino/lottery',
+        url: 'https://richy.casino/info',
       }}
     />
     <InfoPage pages={props.pages} page={props.page}/>
