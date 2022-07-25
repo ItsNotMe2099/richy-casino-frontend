@@ -13,6 +13,7 @@ class MyDocument extends Document {
           <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
           <meta name="msapplication-TileColor" content="#da532c" />
           <meta name="theme-color" content={colors.dark800} />
+          <link rel="canonical" href="https://richy.casino/"/>
           <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"></meta>
           <link rel="alternate" hrefLang="x-default" href="https://richy.casino/" />
           <link rel="alternate" hrefLang="en" href="https://richy.casino/" title="English" />
@@ -83,7 +84,7 @@ class MyDocument extends Document {
       </div>
       `}}
     />
-         
+
           <Main />
           <NextScript />
         </body>
