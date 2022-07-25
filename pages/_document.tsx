@@ -22,6 +22,23 @@ class MyDocument extends Document {
           <link rel="alternate" hrefLang="de" href="https://richy.casino/de" title="German" />
         </Head>
         <body>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-421XSKMJH2"
+        />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-421XSKMJH2');
+
+            `,
+          }}
+        />
         <div
       dangerouslySetInnerHTML={{__html: `
       <style type='text/css'>
