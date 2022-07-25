@@ -13,6 +13,7 @@ import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import {NextSeo} from 'next-seo'
 import ContentLoader from 'components/ui/ContentLoader'
 import styles from 'pages/freebitcoin/index.module.scss'
+import Head from 'next/head'
 
 export default function FreeBitcoin() {
   const {t} = useTranslation()
@@ -34,7 +35,23 @@ export default function FreeBitcoin() {
 
   return (
     <WithGameFilterLayout>
-      <NextSeo title={t('freebitcoin_title')}/>
+      <Head>
+        <meta name="twitter:title" content={t('seo_freebitcoin_twitter_title')}/>
+        <meta name="twitter:description" content={t('seo_freebitcoin_twitter_description')}/>
+        <meta name="keywords" content={t('seo_freebitcoin_keywords')}/>
+      </Head>
+      <NextSeo
+        title={t('seo_freebitcoin_title')}
+        description={t('seo_freebitcoin_description')}
+        openGraph={{
+          title: t('seo_freebitcoin_og_title'),
+          description: t('seo_freebitcoin_og_description'),
+          site_name: t('seo_freebitcoin_og_site_name'),
+          type: 'website',
+          locale: 'en_US',
+          url: 'https://richy.casino/',
+        }}
+      />
           <PageTitle icon='/img/Contents/bitcoin.svg' title={t('freebitcoin_title')}
                      onClick={() => isShow ? setIsShow(false) : setIsShow(true)} shadowColor='yellow'/>
       {loading && <ContentLoader style={'block'} isOpen={true}/>}

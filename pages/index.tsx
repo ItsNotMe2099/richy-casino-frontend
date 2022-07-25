@@ -11,7 +11,6 @@ import Tournament from 'components/for_pages/MainPage/Tournament'
 import TopSlider from 'components/for_pages/MainPage/TopSlider'
 import BuyCrypto from 'components/for_pages/MainPage/BuyCrypto'
 import VisibleXs from 'components/ui/VisibleXS'
-import {NextSeo} from 'next-seo'
 import {useTranslation} from 'next-i18next'
 
 const casinos = [
@@ -44,7 +43,6 @@ export default function IndexPage() {
   const {t} = useTranslation()
   return (
         <Layout>
-          <NextSeo title={t('page_index_title')}/>
           <TopSlider/>
           <Contents/>
           <Games/>
