@@ -1,6 +1,8 @@
 export interface IGameHistory {
   userId: string,
   gameId: string
+  gameName: string,
+  nickname: string
   gameProviderId: string,
   imageIconPreviewUrl: string
   imageIconSmallUrl: string

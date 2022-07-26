@@ -235,6 +235,7 @@
       font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
+      text-overflow: ellipsis;
     }
     @media screen and (max-width: $mobile-max){
         font-size: $mobile12;

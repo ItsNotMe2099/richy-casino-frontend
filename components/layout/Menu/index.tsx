@@ -59,12 +59,10 @@ export default function Menu(props: Props) {
       <Overflow currentPath={currentPath} currentRoute={currentRoute} options={options} dropDownClassName={styles.dropDown}/>
     </div>
   }
-  return ( appContext.isDesktop ?
+  return (
      <Sticky>
-      {({style, isSticky}) => renderMenu(classNames(styles.menu, {[styles.isSticky]: isSticky}), style)}
+      {({style, isSticky}) => renderMenu(classNames(styles.menu, {[styles.isSticky]: isSticky, [styles.isMobile]: appContext.isMobile}), style)}
     </Sticky>
-      :
-      renderMenu(classNames(styles.menu, {[styles.isMobile]: true}), {})
   )
 }
 
