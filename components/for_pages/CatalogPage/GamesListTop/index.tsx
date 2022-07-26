@@ -17,6 +17,7 @@ import { IGame } from 'data/interfaces/IGame'
 import GamesList from 'components/for_pages/CatalogPage/GamesList'
 import { useTranslation } from 'next-i18next'
 import ItemGame from 'components/for_pages/Common/ItemGame'
+import {useInterval} from 'react-use'
 enum GameSwitchFilterKey {
 
   WinNow = 'winNow',
@@ -36,6 +37,8 @@ export default function GamesListTop(props: Props) {
   const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(true)
   const [filter, setFilter] = useState<GameSwitchFilterKey>(GameSwitchFilterKey.WinNow)
+
+  const [isUpdating, setIsUpdating] = useState<boolean>(true)
   const allLink = Routes.catalogTop
   const currentPage = useIsActiveLink(allLink)
   const limit = 12
@@ -65,11 +68,22 @@ export default function GamesListTop(props: Props) {
         GameListRepository.fetchLatestWinGames().then(i => {
           setLatestWin(i)
           setLoading(false)
+          setIsUpdating(false)
         })
+
         break
     }
 
   }, [filter])
+  useInterval(() => {
+    setIsUpdating(true)
+    GameListRepository.fetchLatestWinGames().then(i => {
+      setLatestWin(i)
+      setLoading(false)
+      setIsUpdating(false)
+    })
+
+  }, !isUpdating && filter === GameSwitchFilterKey.WinNow  ? 2000 : null)
   const handleChangeFilter = (item: GameSwitchFilterKey) => {
     setTop({ data: [], total: 0 })
     setFilter(item)
@@ -196,7 +210,7 @@ export default function GamesListTop(props: Props) {
               )}
             </Slider>}
             </div>
-         
+
           </HiddenXs>
           <VisibleXs>
             <div className={styles.overflow}>
