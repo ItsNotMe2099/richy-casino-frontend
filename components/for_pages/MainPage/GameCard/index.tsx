@@ -8,6 +8,7 @@ import { ModalType } from 'types/enums'
 import { useRouter } from 'next/router'
 import { Routes } from 'types/routes'
 import Link from 'next/link'
+import {MouseEventHandler} from 'react'
 interface Props {
   poker?: boolean
 }
@@ -17,15 +18,11 @@ export default function GameCard(props: Props) {
   const router = useRouter()
   const context = useAppContext()
   const isMobile = context.isMobile
-  const handleClick = () => {
-    if(!context.auth){
-        context.showModal(ModalType.registration)
-    }else{
-      if(props.poker){
-        router.push(Routes.poker)
-      }else{
-        router.push(Routes.chess)
-      }
+  const handleClick: MouseEventHandler = (e) => {
+    if (!context.auth) {
+      e.stopPropagation()
+      e.preventDefault()
+      context.showModal(ModalType.registration)
     }
   }
   const getShadow = (shadowColor) => {
@@ -49,7 +46,7 @@ export default function GameCard(props: Props) {
 
   return (
     <Link href={props.poker ? Routes.poker : Routes.chess}>
-      <a className={classNames(styles.root, {[styles.chess]: !props.poker})} >
+      <a className={classNames(styles.root, {[styles.chess]: !props.poker})} onClick={handleClick}>
         <div className={styles.bg}>
           <Image src={props.poker ? '/img/GameCard/poker.svg' : '/img/GameCard/chess.svg'} width={584} height={253}/>
         </div>
