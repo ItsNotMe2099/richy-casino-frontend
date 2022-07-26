@@ -35,7 +35,13 @@ async function request(options: string | Options): Promise<Res> {
     method = options.method ? options.method.toUpperCase() : 'GET'
     data = options.data
   }
-
+  const ppDetailsCookie = Cookies.get(CookiesType.ppDetails)
+  let ppDetails = null
+  try {
+     ppDetails = ppDetailsCookie ? JSON.parse(ppDetailsCookie) : null
+  }catch (e) {
+    console.error('ppDetailsErrors')
+  }
   const correctUrl = `${runtimeConfig.HOST}${url}${(method === 'GET' && data) ? `?${queryParams(data)}` : ''}`
 
   try {
@@ -46,6 +52,7 @@ async function request(options: string | Options): Promise<Res> {
         'Authorization': accessToken ? `Bearer ${accessToken}` : '',
         'X-Language': language ?? '',
         'X-UUID': sessionId ?? '',
+      ...(ppDetails ? ppDetails : {}),
       },
       body: (method !== 'GET' && data) ? JSON.stringify(data) : null,
     })

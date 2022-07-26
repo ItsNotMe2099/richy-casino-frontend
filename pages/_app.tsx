@@ -105,7 +105,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const props = await App.getInitialProps(appContext)
   const ua = appContext.ctx.req ? appContext.ctx.req?.headers['user-agent'] : navigator.userAgent
-  const ppDetails = {
+  let ppDetails: any = {
     clickid: appContext.ctx.query.clickid,
     sub1: appContext.ctx.query.sub1,
     sub2: appContext.ctx.query.sub2,
@@ -116,7 +116,13 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     pid: appContext.ctx.query.pid,
     promocode: appContext.ctx.query.promocode
   }
-
+   ppDetails = Object.fromEntries(Object.entries(ppDetails).filter(([_, v]) => v != null && !!v))
+   if (Object.keys(ppDetails).length > 0) {
+    nookies.set(appContext.ctx, CookiesType.ppDetails, JSON.stringify(ppDetails), {
+      maxAge: CookiesLifeTime.ppDetails * 60 * 60 * 24,
+      path: '/',
+    })
+  }
   if (ua) {
     const { isMobile } = getSelectorsByUserAgent(ua)
     props.pageProps.isMobile = isMobile
