@@ -23,14 +23,12 @@ export default class AuthRepository {
     return Converter.objectKeysToCamelCase(res.data?.data)
   }
 
-  static async socialLogin(code: string, state: string, currencyIso: string): Promise<IAuthLoginResponse> {
+  static async socialLogin(data: any): Promise<IAuthLoginResponse> {
     const res = await request({
       method: 'get',
       url: '/api/user/social/login',
       data: {
-        code,
-        state,
-        currency_iso: currencyIso
+        ...data
       },
     })
     if (res?.err) {
