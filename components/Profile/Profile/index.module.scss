@@ -100,7 +100,7 @@
   font-size: 22px;
   text-align: start;
   @media screen and (max-width: $mobile-max){
-    font-size: 18px;
+    font-size: $mobile18;
   }
 }
 
@@ -110,6 +110,9 @@
   color: #3c3d46;
   margin-top: 5px;
   text-align: left;
+  @media screen and (max-width: $xs-max){
+    font-size: $mobile13;
+  }
 }
 
 .logout{
@@ -224,6 +227,9 @@
   &:hover{
     background-color: $dark500;
   }
+  @media screen and (max-width: $xs-max){
+    font-size: $mobile16;
+  }
   @media screen and (max-width: 600px){
     flex: 1;
   }
@@ -241,6 +247,10 @@
   color: $white;
   font-weight: 500;
   font-size: 16px;
+
+  @media screen and (max-width: $xs-max){
+    font-size: $mobile16;
+  }
   @media screen and (max-width: 600px){
     flex: unset;
     width: 100%;

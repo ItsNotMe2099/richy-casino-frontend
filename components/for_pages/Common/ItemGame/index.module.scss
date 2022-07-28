@@ -65,7 +65,10 @@
       padding: 0% 5% 0px 5%;
     }
     .btn{
-      font-size: 13px;
+      @media screen and (max-width: $xs-max) {
+        font-size: $mobile13;
+      }
+
     }
     .favorite{
       height: 20px;

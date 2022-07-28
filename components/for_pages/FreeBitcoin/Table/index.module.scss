@@ -60,7 +60,7 @@
       }
       font-size: 16px;
       @media screen and (max-width: $xs-max){
-        font-size: 12px;
+        font-size: $mobile12;
       }
     &:first-child{
 
@@ -83,7 +83,7 @@
 
     @media screen and (max-width: $xs-max){
       height: 39px;
-      font-size: 12px;
+      font-size: $mobile12;
     }
   }
   .cellPayout{
@@ -136,7 +136,7 @@
     font-size: 14px;
 }
 @media screen and (max-width: 900px){
-  font-size: $mobile11;
+  font-size: $mobile12;
 }
 @media screen and (max-width: 700px){
   text-align: right;
@@ -152,7 +152,7 @@
     font-size: 14px;
 }
 @media screen and (max-width: 900px){
-  font-size: $mobile11;
+  font-size: $mobile12;
 }
 }
 
@@ -163,7 +163,7 @@
   font-size: 16px;
 
   @media screen and (max-width: $xs-max){
-    font-size: 12px;
+    font-size: $mobile12;
   }
 }
 

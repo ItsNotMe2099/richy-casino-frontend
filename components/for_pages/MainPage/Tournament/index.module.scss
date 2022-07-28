@@ -123,6 +123,7 @@
   align-items: center;
   font-weight: 500;
   font-size: calc(11px + 0.5vw);
+
 }
 
 .balance{
@@ -137,6 +138,8 @@
   align-items: center;
   @media screen and (max-width: $sm-max){
     padding: 4px 5px;
+
+
   }
 }
 
@@ -153,7 +156,7 @@
   color: $white;
   text-align: center;
   margin-bottom: 11px;
- 
+
 }
 
 .btn{
@@ -173,7 +176,7 @@
   font-size: 18px;
   font-weight: 700;
   width: 100%;
-  
+
 }
 
 .coinsBlur{
@@ -226,7 +229,7 @@
   position: relative;
   margin-top: 16px;
   overflow: hidden;
-  padding-bottom: 63%;
+  padding-bottom: 68%;
   .title{
     font-weight: 700;
     font-size: 23px;
@@ -242,21 +245,27 @@
       border-radius: 3px;
       text-align: center;
       span{
-        padding: 4px 8px;
+        display: block;
+        padding: 2px 8px;
         font-size: 10px;
+        @media screen and (max-width: $xs-max){
+          font-size: $mobile13;
+
+        }
       }
     }
     .balance{
       display: block;
       margin-left: 0;
       border-radius: 3px;
-      font-size: 8px;
+      font-weight: 700;
+      font-size: $mobile13;
     }
   }
 }
 
 .btnMobile{
- 
+
   height: 45px;
   width: 100%;
   color: $white;
@@ -360,5 +369,5 @@
 }
 
 .timerMobile{
- 
+
 }

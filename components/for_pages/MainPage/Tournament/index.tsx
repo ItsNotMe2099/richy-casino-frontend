@@ -102,8 +102,8 @@ export default function Tournament(props: Props) {
 
             <div className={styles.fund}>
               <div className={styles.prize}>
-                <span style={{ fontSize: isMobile && `${width / 29}px` }}>{t('tournament_banner_prize')}</span>
-                <div className={styles.balance} style={{ fontSize: isMobile && `${width / 33}px` }}>
+                <span >{t('tournament_banner_prize')}</span>
+                <div className={styles.balance}>
                   {Formatter.formatAmount(tournament?.totalBankMoneyAmount, tournament.currency)} {tournament.currency}
                 </div>
               </div>
@@ -113,7 +113,7 @@ export default function Tournament(props: Props) {
             </div>
              <Button spinner={tournamentContext.participateLoading} onClick={handleJoin} className={classNames({[styles.btnMobile]: true, [styles.hidden]: tournamentContext.userActiveRounds.length == 0 && appContext.auth})}
               size='normal' background='payGradient500'>
-              <span style={{ fontSize: isMobile && `${width / 24}px` }}>{t('tournament_banner_button')}</span>
+              <span>{t('tournament_banner_button')}</span>
             </Button>
           </div>
         </div>

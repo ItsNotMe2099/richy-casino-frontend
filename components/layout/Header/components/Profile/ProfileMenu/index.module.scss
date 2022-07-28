@@ -52,6 +52,9 @@
     &:hover {
       background-color: $dark400;
     }
+    @media screen and (max-width: $xs-max){
+      font-size: $mobile13;
+    }
   }
 
   .option:nth-child(2) {
@@ -202,6 +205,8 @@
 
   span {
     font-size: 13px;
+
+
     color: #FFFFFF;
   }
 

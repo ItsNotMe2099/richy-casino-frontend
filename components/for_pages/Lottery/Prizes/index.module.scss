@@ -142,7 +142,7 @@
   font-weight: bold;
   font-size: 22px;
   @media screen and (max-width: 450px){
-    font-size: $mobile14;
+    font-size: 1.1rem;
   }
 }
 
@@ -161,13 +161,22 @@
 .mediumFont{
   font-size: 16px;
   @media screen and (max-width: 450px){
-    font-size: $mobile11;
+    font-size: 1rem;
   }
 }
+
 
 .smallFont{
   font-size: 13px;
   @media screen and (max-width: 450px){
-    font-size: $mobile8;
+    font-size: $mobile12;
+  }
+}
+
+
+.exSmallFont{
+  font-size: 13px;
+  @media screen and (max-width: 450px){
+    font-size: $mobile11;
   }
 }

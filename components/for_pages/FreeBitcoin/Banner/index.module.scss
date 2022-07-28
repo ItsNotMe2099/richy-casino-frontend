@@ -81,7 +81,7 @@
   @media screen and (max-width: $xs-max) {
     min-width: 40px;
     max-width: 40px;
-    font-size: 20px;
+    font-size: $mobile20;
     height: 50px;
     border-radius: 9px;
   }

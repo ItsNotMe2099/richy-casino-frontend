@@ -8,6 +8,9 @@
   border-radius: 8px;
   justify-content: space-between;
   margin-top: 8px;
+  @media screen and (max-width: $xs-max){
+    font-size: $mobile16;
+  }
 }
 
 .bonusLeft{
@@ -24,6 +27,9 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 100%;
+  @media screen and (max-width: $xs-max){
+    font-size: $mobile16;
+  }
 }
 
 
