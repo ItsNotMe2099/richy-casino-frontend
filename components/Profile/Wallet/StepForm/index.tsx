@@ -86,7 +86,7 @@ export default function StepForm(props: Props) {
       {context.isMobile && <PaymentSeparator/>}
       <FormikProvider value={formik}>
           <Form className={styles.form}>
-            <PaymentDepositAmountField name={'amount'} hasOptions currency={'$'} disabled={sending} validate={Validator.required}
+            <PaymentDepositAmountField name={'amount'} hasOptions optionCurrency={'$'} currency={'$'} disabled={sending} validate={Validator.required}
                                        placeholder='0'/>
 
             <div className={classNames(styles.bottom)}>

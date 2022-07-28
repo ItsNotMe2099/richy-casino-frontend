@@ -9,6 +9,7 @@ interface Props {
   isOpen?: boolean
   hasOptions?: boolean
   currency: string
+  optionCurrency?: string
 }
 
 interface Props extends IField{
@@ -19,14 +20,14 @@ export const PaymentDepositAmountField = (props: Props) => {
   const [field, meta, helpers] = useField(props)
 
   const options = [
-    {label: '$10', value: 10},
-    {label: '$20', value: 20},
-    {label: '$50', value: 50},
-    {label: '$75', value: 75},
-    {label: '$150', value: 150},
-    {label: '$500', value: 500},
-    {label: '$1000', value: 1000},
-  ]
+    {label: '10', value: 10},
+    {label: '20', value: 20},
+    {label: '50', value: 50},
+    {label: '75', value: 75},
+    {label: '150', value: 150},
+    {label: '500', value: 500},
+    {label: '1000', value: 1000},
+  ].map(i => ({...i, label: `${props.optionCurrency ?? ''}${i.label}`}))
   return (
     <div className={styles.root}>
       <AmountPrefixField name={'amount'} {...props} className={styles.input} staticSuffix={<div className={styles.prefix}>{props.currency}</div>}/>

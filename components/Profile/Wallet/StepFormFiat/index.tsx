@@ -14,7 +14,6 @@ import {PaymentSeparator} from 'components/Profile/Wallet/PaymentSeparator'
 import {useAppContext} from 'context/state'
 import {PaymentDepositAmountField} from 'components/Profile/Wallet/PaymentDepositAmountField'
 import {useTranslation} from 'next-i18next'
-import Formatter from 'utils/formatter'
 import BottomSheetLayout from 'components/layout/BottomSheetLayout'
 import BottomSheetBody from 'components/layout/BottomSheetBody'
 import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
@@ -96,7 +95,7 @@ export default function StepFormFiat(props: Props) {
       {context.isMobile && <PaymentSeparator/>}
       <FormikProvider value={formik}>
           <Form className={styles.form}>
-            <PaymentDepositAmountField name={'amount'} currency={currencyIso} disabled={sending} validate={Validator.combine([Validator.required, validateMinMax])}
+            <PaymentDepositAmountField name={'amount'}  hasOptions currency={currencyIso} disabled={sending} validate={Validator.combine([Validator.required, validateMinMax])}
                                        />
 
             <div className={classNames(styles.bottom)}>
@@ -104,10 +103,7 @@ export default function StepFormFiat(props: Props) {
                 <div className={styles.plus}>{promoCode ? '-' : '+'}</div>
                 <span>{t('wallet_form_promocode')}</span>
               </div>
-              {rate && <div className={styles.rate}>
-                <div>20 USDT ≈ {Formatter.formatAmount(rate * 20, currencyIso)} {currencyIso}</div>
-                <div>1 USDT ≈ {Formatter.formatAmount(rate, currencyIso)} {currencyIso}</div>
-              </div>}
+
             </div>
             {promoCode &&
             <PromoCode/>
