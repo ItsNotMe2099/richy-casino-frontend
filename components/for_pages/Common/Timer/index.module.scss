@@ -60,13 +60,13 @@
   .end{
     display: block;
     margin-bottom: 4px;
-    font-size: 10px;
+    font-size: $mobile10;
     font-weight: 700;
   }
   .input{
-    width: 28px;
+    width: 32px;
     height: 22px;
-    font-size: 16px;
+    font-size: $mobile16;
     font-weight: 700;
       span{
         padding-top: 3px;
@@ -74,9 +74,9 @@
 
   }
   .label{
-    font-size: 10px;
+    font-size: $mobile10;
     font-weight: 500;
-    margin-top: 0;
+    margin-top: 2px;
   }
   .separator{
     margin: 0 3px;
@@ -100,7 +100,7 @@
   }
   .label{
     @media screen and (max-width: $xs-max){
-      font-size: 10px;
+      font-size: $mobile10;
       margin-top: 2px;
     }
   }

@@ -13,6 +13,7 @@ class MyDocument extends Document {
           <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
           <meta name="msapplication-TileColor" content="#da532c" />
           <meta name="theme-color" content={colors.dark800} />
+          <link rel="canonical" href="https://richy.casino/"/>
           <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"></meta>
           <link rel="alternate" hrefLang="x-default" href="https://richy.casino/" />
           <link rel="alternate" hrefLang="en" href="https://richy.casino/" title="English" />
@@ -21,6 +22,22 @@ class MyDocument extends Document {
           <link rel="alternate" hrefLang="de" href="https://richy.casino/de" title="German" />
         </Head>
         <body>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-421XSKMJH2"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-421XSKMJH2');
+
+            `,
+          }}
+        />
         <div
       dangerouslySetInnerHTML={{__html: `
       <style type='text/css'>
@@ -83,9 +100,15 @@ class MyDocument extends Document {
       </div>
       `}}
     />
-         
+
           <Main />
           <NextScript />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html:'',
+          }}
+        />
         </body>
       </Html>
     )

@@ -1,6 +1,6 @@
 # richy-casino-frontend
 
-
+http://localhost:3010/game/26071?demo=1
 Сделать 10 к когда только зашел
 lucky_number
 

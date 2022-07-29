@@ -7,7 +7,8 @@ import Image from 'next/image'
 import { ModalType } from 'types/enums'
 import { useRouter } from 'next/router'
 import { Routes } from 'types/routes'
-
+import Link from 'next/link'
+import {MouseEventHandler} from 'react'
 interface Props {
   poker?: boolean
 }
@@ -17,15 +18,11 @@ export default function GameCard(props: Props) {
   const router = useRouter()
   const context = useAppContext()
   const isMobile = context.isMobile
-  const handleClick = () => {
-    if(!context.auth){
-        context.showModal(ModalType.registration)
-    }else{
-      if(props.poker){
-        router.push(Routes.poker)
-      }else{
-        router.push(Routes.chess)
-      }
+  const handleClick: MouseEventHandler = (e) => {
+    if (!context.auth) {
+      e.stopPropagation()
+      e.preventDefault()
+      context.showModal(ModalType.registration)
     }
   }
   const getShadow = (shadowColor) => {
@@ -48,7 +45,8 @@ export default function GameCard(props: Props) {
   }
 
   return (
-      <div className={classNames(styles.root, {[styles.chess]: !props.poker})} onClick={handleClick}>
+    <Link href={props.poker ? Routes.poker : Routes.chess}>
+      <a className={classNames(styles.root, {[styles.chess]: !props.poker})} onClick={handleClick}>
         <div className={styles.bg}>
           <Image src={props.poker ? '/img/GameCard/poker.svg' : '/img/GameCard/chess.svg'} width={584} height={253}/>
         </div>
@@ -65,8 +63,9 @@ export default function GameCard(props: Props) {
 
           </div>
         </div>
-        <div className={styles.btn}><Button href='#' size='play' background='blueGradient500'>{t('main_game_card_button')}</Button></div>
-        <div className={styles.btnMobile}><Button href='#'><img src='/img/GameCard/arrow.svg' alt=''/></Button></div>
-      </div>
+        <div className={styles.btn}><Button  size='play' background='blueGradient500'>{t('main_game_card_button')}</Button></div>
+        <div className={styles.btnMobile}><Button ><img src='/img/GameCard/arrow.svg' alt=''/></Button></div>
+      </a>
+    </Link>
   )
 }

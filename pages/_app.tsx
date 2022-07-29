@@ -3,7 +3,6 @@ import '../scss/globals.scss'
 import type { AppContext, AppProps } from 'next/app'
 import { appWithTranslation, useTranslation } from 'next-i18next'
 import nextI18NextConfig from '../next-i18next.config.js'
-import SEO from '../next-seo.config'
 import { AppWrapper } from 'context/state'
 import { getSelectorsByUserAgent } from 'react-device-detect'
 import App from 'next/app'
@@ -69,8 +68,22 @@ function MyApp({ Component, pageProps }: AppProps) {
             <ReactPWAInstallProvider enableLogging>
               <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+                <meta name="twitter:title" content={t('seo_twitter_title')}/>
+                <meta name="twitter:description" content={t('seo_twitter_description')}/>
+                <meta name="keywords" content={t('seo_keywords')}/>
               </Head>
-              <DefaultSeo {...SEO as any} />
+              <DefaultSeo
+                title={t('seo_title')}
+                defaultTitle={t('seo_default_title')}
+                description={t('seo_description')}
+                openGraph={{
+                  title: t('seo_og_title'),
+                  description: t('seo_og_description'),
+                  site_name: t('seo_og_site_name'),
+                  type: 'website',
+                  locale: 'en_US',
+                  url: 'https://richy.casino/',
+                }}/>
               <Component {...pageProps} />
               {clientVisible && <ModalContainer />}
               {clientVisible && <BottomSheetContainer />}
@@ -92,7 +105,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const props = await App.getInitialProps(appContext)
   const ua = appContext.ctx.req ? appContext.ctx.req?.headers['user-agent'] : navigator.userAgent
-  const ppDetails = {
+  let ppDetails: any = {
     clickid: appContext.ctx.query.clickid,
     sub1: appContext.ctx.query.sub1,
     sub2: appContext.ctx.query.sub2,
@@ -103,7 +116,13 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     pid: appContext.ctx.query.pid,
     promocode: appContext.ctx.query.promocode
   }
-
+   ppDetails = Object.fromEntries(Object.entries(ppDetails).filter(([_, v]) => v != null && !!v))
+   if (Object.keys(ppDetails).length > 0) {
+    nookies.set(appContext.ctx, CookiesType.ppDetails, JSON.stringify(ppDetails), {
+      maxAge: CookiesLifeTime.ppDetails * 60 * 60 * 24,
+      path: '/',
+    })
+  }
   if (ua) {
     const { isMobile } = getSelectorsByUserAgent(ua)
     props.pageProps.isMobile = isMobile

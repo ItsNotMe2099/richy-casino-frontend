@@ -39,6 +39,7 @@
     font-weight: 500;
     font-size: 12px;
     @media screen and (max-width: 700px){
+      font-size: $mobile12;
         padding: 8px 12px;
     }
   }
@@ -118,7 +119,7 @@
             font-weight: bold;
         }
         @media screen and (max-width: $mobile-max){
-            font-size: 0.7rem;
+            font-size: $mobile12;
         }
     }
     .cell:first-child{
@@ -126,7 +127,7 @@
     }
     .cell:nth-child(3){
         text-align: center;
-        
+
     }
     .cell:nth-child(4){
         text-align: center;
@@ -217,7 +218,7 @@
         max-width: 38px;
     }
     @media screen and (max-width: $mobile-max){
-        font-size: 0.7rem;
+        font-size: $mobile12;
 
     }
     @media screen and (max-width: $mobile-min){
@@ -234,9 +235,10 @@
       font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
+      text-overflow: ellipsis;
     }
     @media screen and (max-width: $mobile-max){
-        font-size: 0.7rem;
+        font-size: $mobile12;
         max-width: 44px;
     }
     @media screen and (max-width: $mobile-min){
@@ -255,7 +257,7 @@
         max-width: 100px;
     }
     @media screen and (max-width: $xs-max){
-        font-size: 11px;
+        font-size: $mobile11;
         max-width: 50px;
     }
     @media screen and (max-width: $xs-max){
@@ -283,7 +285,7 @@
         font-size: calc(10px + 0.5vw);
     }
     @media screen and (max-width: $mobile-max){
-        font-size: 0.7rem;
+        font-size: $mobile12;
     }
 }
 
@@ -311,7 +313,7 @@
         font-size: calc(10px + 0.5vw);
     }
     @media screen and (max-width: $mobile-max){
-        font-size: 0.7rem;
+        font-size: $mobile12;
     }
 }
 

@@ -1,32 +1,24 @@
 @import "scss/index";
 
 .root{
-  position: relative;
   cursor: pointer;
 }
 
-.popover{
-  padding: 10px;
-  background: #272832;
-  z-index: 1;
-  border-radius: 8px;
-}
 
-.info{
-  position: relative;
+
+.dropDown{
   font-size: 12px;
+  @include dropDown();
+  width: 50%;
+  padding: 10px;
+  white-space: pre-line;
+  @media screen and (max-width: $xs-max){
+    width: calc(100vw - 36px);
+  }
 }
 
 .triangle{
-  position: absolute;
-  transform: rotate(-45deg);
-  width: 22px;
-  height: 22px;
-  border-top: 1px solid #cdbaa9;
-  border-right: 1px solid #cdbaa9;
-  top: -21px;
-  background: #fff;
-  right: 38px;
+  right: 4px !important;
 }
 
 .inner{

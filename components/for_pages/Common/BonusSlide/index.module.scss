@@ -11,20 +11,25 @@
   width: 100%;
   @media screen and (max-width: $mobile-max){
     padding-bottom: 59.04%;
-  
+
   }
 
  overflow: hidden;
   .hero{
     position: absolute;
     right: 0;
+    top: 0px;
+    bottom: 0px;
     z-index: 1;
     width: 60%;
-    height: 100%;
+    &:after{
+      content: '';
+      padding-bottom: 100%;
+    }
+
     span{
       img{
-        width: 100% !important; 
-        height: 100% !important;
+
       }
     }
   }
@@ -139,7 +144,7 @@
   }
   .hero{
     top: 0;
-    right: -14px;
+    right: -8px;
     img{
       width: auto;
     }

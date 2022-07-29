@@ -9,6 +9,7 @@ import classNames from 'classnames'
 import { useAppContext } from 'context/state'
 import Image from 'next/image'
 import { useMeasure } from 'react-use'
+import Head from 'next/head'
 
 export default function Bonuses(){
 
@@ -22,7 +23,23 @@ export default function Bonuses(){
 
   return (
     <Layout>
-      <NextSeo title={t('page_games_bonus_title')}/>
+      <Head>
+        <meta name="twitter:title" content={t('seo_bonuses_twitter_title')}/>
+        <meta name="twitter:description" content={t('seo_bonuses_twitter_description')}/>
+        <meta name="keywords" content={t('seo_bonuses_keywords')}/>
+      </Head>
+      <NextSeo
+        title={t('seo_bonuses_title')}
+        description={t('seo_bonuses_description')}
+        openGraph={{
+          title: t('seo_bonuses_og_title'),
+          description: t('seo_bonuses_og_description'),
+          site_name: t('seo_bonuses_og_site_name'),
+          type: 'website',
+          locale: 'en_US',
+          url: 'https://richy.casino/bonuses',
+        }}
+      />
         <div className={styles.root} >
           <div className={styles.title}>{t('page_games_bonus_title')}</div>
           <div className={styles.grid}>

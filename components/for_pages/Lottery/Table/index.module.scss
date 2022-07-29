@@ -163,7 +163,7 @@
       padding-bottom: 11px;
     }
     @media screen and (max-width: $xs-max) {
-      font-size: 0.7rem;
+      font-size: $mobile12;
     }
   }
 
@@ -258,7 +258,7 @@
   font-size: 1.1rem;
   color: $dark200;
   @media screen and (max-width: $xs-max) {
-    font-size: 0.7rem;
+    font-size: $mobile12;
   }
 }
 
@@ -267,7 +267,7 @@
   font-size: 16px;
   color: #FFFFFF;
   @media screen and (max-width: 1360px) {
-    font-size: 12px;
+    font-size: $mobile12;
   }
 }
 
@@ -283,7 +283,7 @@
     font-size: 12px;
   }
   @media screen and (max-width: 900px) {
-    font-size: 11px;
+    font-size: $mobile11;
   }
 }
 
@@ -291,6 +291,9 @@
   color: $dark200;
   @media screen and (max-width: 1360px) {
     font-size: 12px;
+  }
+  @media screen and (max-width: $xs-max) {
+    font-size: $mobile12;
   }
 }
 

@@ -2,7 +2,7 @@
 
 .root {
   margin-top: 23px;
-  
+
 }
 
 .item{
@@ -63,10 +63,10 @@
     opacity: 0.5;
   }
   @media screen and (max-width: $xs-max){
-    font-size: 16px;
+    font-size: $mobile16;
   }
   @media screen and (max-width: 340px){
-    font-size: 14px;
+    font-size: $mobile14;
   }
 }
 

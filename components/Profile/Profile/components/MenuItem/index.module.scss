@@ -40,9 +40,9 @@
   font-size: 16px;
   color: $white;
   text-align: start;
-  @media screen and (max-width: 600px){
+  @media screen and (max-width: $xs-max){
     margin-top: 0;
-    font-size: 13px;
+    font-size: $mobile13;
   }
 }
 

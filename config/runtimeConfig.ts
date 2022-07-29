@@ -11,6 +11,7 @@ interface IRuntimeConfig {
   FAKE_BONUS: boolean
   GAME_CHESS_ID: string,
   GAME_POKER_ID: string,
+  RICHY_PROVIDER_ID: string
 }
 
 function getRuntimeConfig(): IRuntimeConfig {

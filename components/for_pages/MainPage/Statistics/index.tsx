@@ -25,7 +25,7 @@ export default function Statistics(props: Props) {
   const isMobile = context.isMobile
   useEffect(() => {
     GameListRepository.fetchGameSessionHistory(1, 10).then(i => {
-      
+
       setData(i)
       setLoading(false)
       setIsUpdating(false)
@@ -39,8 +39,8 @@ export default function Statistics(props: Props) {
         setLoading(false)
         setIsUpdating(false)
       })
-    
-    
+
+
   }, isUpdating ? null : 2000)
   return (
       <div className={styles.root}>
@@ -75,13 +75,13 @@ export default function Statistics(props: Props) {
                       {item.imageIconPreviewUrl && <Image src={item.imageIconSmallUrl || item.imageIconPreviewUrl} width={isMobile ? 16 : 28} height={isMobile ? 16 : 28}/>}
                     </div>
                     <div className={styles.gameLbl}>
-                      {item.gameId}
+                      {item.gameName}
                     </div>
                   </div>
                 </div>
                 <div className={styles.cell}>
                   <div className={styles.gambler}>
-                    #{item.userId}
+                    {item.nickname ?? `#${item.userId}`}
                   </div>
                 </div>
                 {/*<div className={styles.cell}>

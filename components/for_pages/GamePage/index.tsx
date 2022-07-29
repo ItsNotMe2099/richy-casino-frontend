@@ -10,17 +10,17 @@ import {IGame} from 'data/interfaces/IGame'
 import {useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
 import ContentLoader from 'components/ui/ContentLoader'
-import {runtimeConfig} from 'config/runtimeConfig'
 
 interface Props {
-
+  gameId: number,
+  isDemo: boolean
 }
 
-export default function CatalogPage(props: Props) {
+export default function GamePage(props: Props) {
   const appContext = useAppContext()
   const router = useRouter()
-  const gameId = parseInt(router.query.id as string, 10)
-  const demo = router.query.demo as string
+  const gameId = props.gameId
+  const demo = props.isDemo
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [session, setSession] = useState<IGameSession | null>(null)
@@ -43,9 +43,9 @@ export default function CatalogPage(props: Props) {
   }
   useEffect(() => {
     init()
-  }, [router.query.demo, router.query.id])
-  const isRichy = `${game?.providerId}` === runtimeConfig.RICHY_PROVIDER_ID
-
+  }, [props.isDemo, props.gameId])
+  const isRichy = game?.providerName?.toLowerCase() === 'richy games'
+  console.log('Gamre111', game)
   const result = loading ? <ContentLoader isOpen={true} style={'block'}/> : (isRichy ? <GameIframeRichy game={game} session={session}/> :
     <GameIframe session={session} error={error}/>)
   if (appContext.isMobile) {

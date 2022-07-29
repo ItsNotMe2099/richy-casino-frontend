@@ -37,7 +37,7 @@ export default function Winners(props: Props) {
 
 
   }, [])
- 
+
 
   const user = context.auth
 
@@ -73,7 +73,7 @@ export default function Winners(props: Props) {
             </thead>
             <tbody>
               <Scrollbars className={styles.scroll}>
-                {winners.slice(0, 10).map((item, index) =>
+                {(winners ?? []).slice(0, 10).map((item, index) =>
                   <tr className={styles.user} key={index}>
                     <td className={classNames(styles.cell, styles.cellSort)}>
                       <div className={styles.nick}>{index + 1}</div>
@@ -99,7 +99,7 @@ export default function Winners(props: Props) {
                     </td>
                     <td className={styles.cell}>
                       <div className={styles.group}>
-                        <CurrencySvg className={styles.currency} currencyIso={item.tournamentCurrencyIso} />
+                        <CurrencySvg className={styles.currency} color currencyIso={item.tournamentCurrencyIso} />
                         {Formatter.formatAmount(parseFloat(item.bankWinAmount), item.tournamentCurrencyIso)} {item.tournamentCurrencyIso}
                       </div>
                     </td>

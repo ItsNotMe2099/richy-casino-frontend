@@ -1,8 +1,11 @@
 import styles from './index.module.scss'
-import { Popover } from 'react-tiny-popover'
-import { useState } from 'react'
+import {useEffect, useRef, useState} from 'react'
 import classNames from 'classnames'
 import Image from 'next/image'
+import {usePopper} from 'react-popper'
+import {listenForOutsideClicks} from 'components/hooks/useDetectOutsideClick'
+import DropDownTriangle from 'components/ui/DropDownTriangle'
+import {useAppContext} from 'context/state'
 
 interface Props {
   info: string
@@ -12,23 +15,46 @@ interface Props {
 
 
 export default function QuestionPopover(props: Props) {
+  const appContext = useAppContext()
+  const dropdownRef = useRef(null)
+  const [listening, setListening] = useState(false)
+  const [isActive, setIsActive] = useState(false)
 
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false)
+  const [referenceElement, setReferenceElement] = useState(null)
+  const [popperElement, setPopperElement] = useState(null)
+  const { styles: popperStyles, attributes } = usePopper(referenceElement, popperElement, {
+    strategy: 'absolute',
+    placement: 'bottom-end',
+    modifiers: [
+      {
+        name: 'flip',
+        enabled: false,
+      },
+      {
+        name: 'offset',
+        options: {
+          offset: [appContext.isMobile ? 8 : 13, 0],
+        },
+      },
 
+    ]
+  })
+  useEffect(listenForOutsideClicks(
+    listening,
+    setListening,
+    dropdownRef,
+    setIsActive,
+  ))
   return (
-    <div className={classNames(styles.root, props.className)}>
-      <Popover
-        isOpen={isPopoverOpen}
-        positions={['bottom']} // preferred positions by priority
-        containerClassName={styles.popover}
-        onClickOutside={() => setIsPopoverOpen(false)}
-        content={<div className={styles.info}>{props.info}</div>}
-      >
-      
-      <div className={styles.inner} onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
+    <div ref={dropdownRef} className={classNames(styles.root,  props.className)}  onClick={() => setIsActive(!isActive)}>
+      <div ref={setReferenceElement} className={styles.inner} >
         <Image src='/img/icons/question.svg' width={20} height={20}/>
       </div>
-    </Popover>
+      <div className={classNames({[styles.dropDown]: true, [styles.opened]: isActive})} ref={setPopperElement} style={popperStyles.popper}  {...attributes.popper}>{props.info}
+      <DropDownTriangle className={styles.triangle}/>
+      </div>
     </div>
+
+
   )
 }

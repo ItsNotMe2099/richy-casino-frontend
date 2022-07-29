@@ -51,8 +51,9 @@ const PlaceBlock = (props: {place: number, bitcoin: number, className?: string, 
 
   const bitcoinClass = classNames({
     [styles.column]: props.place > 1,
-    [styles.mediumFont]: props.place > 1 && props.place < 7,
-    [styles.smallFont]: props.place > 6
+    [styles.mediumFont]: props.place > 1 && props.place < 4,
+    [styles.smallFont]: props.place > 3 && props.place < 7,
+    [styles.exSmallFont]: props.place > 6
   })
 
   return (

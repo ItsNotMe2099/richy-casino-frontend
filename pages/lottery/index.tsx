@@ -15,6 +15,7 @@ import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import {useAppContext} from 'context/state'
 import {NextSeo} from 'next-seo'
 import ContentLoader from 'components/ui/ContentLoader'
+import Head from 'next/head'
 
 export default function Lottery() {
   const {t} = useTranslation()
@@ -41,7 +42,23 @@ export default function Lottery() {
 
   return (
     <WithGameFilterLayout>
-        <NextSeo title={t('lottery_title')}/>
+      <Head>
+        <meta name="twitter:title" content={t('seo_lottery_twitter_title')}/>
+        <meta name="twitter:description" content={t('seo_lottery_twitter_description')}/>
+        <meta name="keywords" content={t('seo_lottery_keywords')}/>
+      </Head>
+      <NextSeo
+        title={t('seo_lottery_title')}
+        description={t('seo_lottery_description')}
+        openGraph={{
+          title: t('seo_lottery_og_title'),
+          description: t('seo_lottery_og_description'),
+          site_name: t('seo_lottery_og_site_name'),
+          type: 'website',
+          locale: 'en_US',
+          url: 'https://richy.casino/lottery',
+        }}
+      />
         <PageTitle icon='/img/Lottery/lottery.svg' title={t('lottery_title')} onClick={() => isShow ? setIsShow(false) : setIsShow(true)} lottery/>
       {loading && <ContentLoader style={'block'} isOpen={true}/>}
       {!loading && currentRound?.roundEndTime && <><Timer roundId={currentRound.roundId} expiredAt={new Date(currentRound?.roundEndTime)}/>

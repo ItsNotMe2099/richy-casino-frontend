@@ -172,6 +172,20 @@ export default class GameListRepository {
     return Converter.convertApiPaginationResponse(res.data)
   }
 
+  static async fetchGameInfo(id: number): Promise<IGame | null> {
+    const res = await request({
+      method: 'get',
+      url: '/api/games/game/info-game',
+      data:{
+       id
+      }
+    })
+    if (res.err) {
+      throw res.err
+    }
+    return Converter.objectKeysToCamelCase(res.data?.data)
+  }
+
   static async createGame(gameId: number, clientType: string, token?: string, sessionId?: string, language?: string): Promise<IGameSession> {
     const res = await request({
       method: 'post',
@@ -184,7 +198,7 @@ export default class GameListRepository {
     console.log('gameId', gameId)
     console.error(res.err)
     if (res.err) {
-      return null
+      throw res.err
     }
     return res.data.data ?  Converter.objectKeysToCamelCase(res.data.data) : null
   }
@@ -204,9 +218,9 @@ export default class GameListRepository {
     })
     console.log('ResErr', res.err)
     if (res.err) {
-      return null
+      throw res.err
     }
-      
+
     return res.data.data ?  Converter.objectKeysToCamelCase(res.data.data) : null
   }
 

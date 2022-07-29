@@ -101,7 +101,7 @@ export default function Profile(props: Props) {
               </Button>
             </div>
             <Button onClick={() => context.showModalProfile(ProfileModalType.wallet)} size='normal' background='payGradient500'
-                    className={styles.wallet}><img src='/img/icons/wallet.svg' alt=''/>Пополнить</Button>
+                    className={styles.wallet}><img src='/img/icons/wallet.svg' alt=''/>{t('profile_deposit')}</Button>
           </div>
           {otherAccounts.length > 0 && <div className={classNames(styles.field, styles.additional)}>
               <div className={styles.title}>

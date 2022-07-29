@@ -5,11 +5,11 @@ import Menu from 'components/layout/Menu'
 import {StickyContainer} from 'react-sticky'
 import {useAppContext} from 'context/state'
 
-interface Props{
+interface Props {
   children?: React.ReactNode
 }
 
-export default function Layout({children}: Props){
+export default function Layout({children}: Props) {
   const appContext = useAppContext()
   const renderMainContent = () => {
     return <>
@@ -17,14 +17,14 @@ export default function Layout({children}: Props){
 
       {children}
       <Footer/>
-      </>
+    </>
   }
-   return (
+  return (
     <div className={styles.root}>
-        <Header/>
-      {appContext.isDesktop ? <StickyContainer>
+      <Header/>
+      <StickyContainer>
         {renderMainContent()}
-      </StickyContainer> : renderMainContent()}
+      </StickyContainer>
     </div>
   )
 }

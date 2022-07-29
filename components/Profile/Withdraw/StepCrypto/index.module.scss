@@ -38,7 +38,7 @@
   color: $dark200;
   text-align: left;
   @media screen and (max-width: $xs-max){
-    font-size: 12px;
+    font-size: $mobile12;
   }
 }
 

@@ -43,6 +43,8 @@ export default function Fortune(props: Props) {
   const [expirationDate, setExpirationDate] = useState<Date>(null)
   const [loaded, setLoaded] = useState(false)
   const [available, setAvailable] = useState<boolean>(false)
+  const [showWinner, setShowWinner] = useState<boolean>(false)
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false)
   const timer = useTimer({ expiryTimestamp: expirationDate, onExpire: () => {
     setTimeout(() => {
       init()
@@ -76,12 +78,20 @@ export default function Fortune(props: Props) {
   const play = async () => {
     console.log('Plsy')
     if (appContext.auth) {
-      const res = await WheelRepository.play()
-      // const res = mockRes
-      userRef.current = res.player
-      setGameResult(res)
-      checkAvailable(userRef.current)
-      setTimeout(clear, totalTime)
+      setButtonDisabled(true)
+      setShowWinner(false)
+      setGameResult(null)
+      setWinnerResult(null)
+      try {
+        const res = await WheelRepository.play()
+        // const res = mockRes
+        userRef.current = res.player
+        setGameResult(res)
+        checkAvailable(userRef.current)
+        setTimeout(clear, totalTime)
+      }catch (e) {
+        setButtonDisabled(false)
+      }
     }else{
       appContext.showModal(ModalType.registration)
     }
@@ -90,6 +100,7 @@ export default function Fortune(props: Props) {
   const clear = () => {
     if (gameResultRef.current) {
       setWinnerResult(gameResultRef.current)
+      setShowWinner(true)
     }
   }
 
@@ -145,7 +156,7 @@ export default function Fortune(props: Props) {
               onClick={play}
               className={styles.spin}
               background="pink"
-              disabled={!!gameResult}
+              disabled={buttonDisabled}
             >{t('fortune_spin_button')}
             </Button>
           </div>
@@ -173,14 +184,15 @@ export default function Fortune(props: Props) {
       </div>
       <div className={classNames({
         [styles.winnerOverlay]: true,
-        [styles.visible]: winnerResult,
+        [styles.visible]: showWinner,
       })}>
         <Winner
           data={winnerResult}
           className={styles.winner}
           onRequestClose={() => {
+            setShowWinner(false)
             setWinnerResult(null)
-            setGameResult(null)
+            setButtonDisabled(false)
           }}
         />
       </div>

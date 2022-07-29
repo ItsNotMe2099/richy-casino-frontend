@@ -29,6 +29,9 @@
     text-align: end;
     margin-top: 1px;
     line-height: 10px;
+    @media screen and (max-width: $xs-max){
+      font-size: $mobile12;
+    }
   }
 }
 .calculated{

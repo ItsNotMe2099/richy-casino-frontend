@@ -1,3 +1,5 @@
+import {runtimeConfig} from 'config/runtimeConfig'
+
 export class Routes{
 
   static get bonuses(){
@@ -57,10 +59,10 @@ export class Routes{
     return '/game/11933'
   }
   static get poker(){
-    return '/catalog/poker'
+    return `/game/${runtimeConfig.GAME_POKER_ID}`
   }
   static get chess(){
-    return '/catalog/chess'
+    return `/game/${runtimeConfig.GAME_CHESS_ID}`
   }
   static get tournaments(){
     return '/tournaments'

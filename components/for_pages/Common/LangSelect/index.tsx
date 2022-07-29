@@ -76,7 +76,6 @@ export default function LangSelect(props: Props) {
     { icon: '/img/langs/pl.svg', name: 'Pl', code: 'pl' },
     { icon: '/img/langs/ro.svg', name: 'Ro', code: 'ro' },
     { icon: '/img/langs/bn.svg', name: 'Bn', code: 'bn' },
-    { icon: '/img/langs/no.svg', name: 'No', code: 'no' },
     { icon: '/img/langs/hu.svg', name: 'Hu', code: 'hu' },
     { icon: '/img/langs/fi.svg', name: 'Fi', code: 'fi' },
     { icon: '/img/langs/ne.svg', name: 'Ne', code: 'ne' },
@@ -93,7 +92,7 @@ export default function LangSelect(props: Props) {
     dropdownRef,
     setIsActive,
   ))
-  
+
 
 
   const handleClick = (e) => {
@@ -106,9 +105,9 @@ export default function LangSelect(props: Props) {
 
   const rows = Converter.splitIntoGroups<ILanguage>(items, 5)
   return (
-    <div ref={dropdownRef} className={classNames(styles.root, { 
+    <div ref={dropdownRef} className={classNames(styles.root, {
       [styles.footer]: props.styleType === 'footer',
-      [styles.menu]: props.styleType === 'menu' 
+      [styles.menu]: props.styleType === 'menu'
       }, props.className)} onClick={handleClick}>
       <div ref={setReferenceElement} className={styles.dropDownTrigger}>
         <div className={styles.imageLng}><img src={currentLanguage.icon} alt='' /></div> {currentLanguage.name}
@@ -123,11 +122,11 @@ export default function LangSelect(props: Props) {
           {rows.map((row, index) => <div key={index} className={styles.row}>
             {row.map((item, index) =>
               <div className={styles.option} onClick={() => handleChange(item)} key={index}>
-                <div className={styles.image}><img key={index} src={item.icon} alt='' /></div> 
+                <div className={styles.image}><img key={index} src={item.icon} alt='' /></div>
                 <div className={styles.name}>
                 {item.name}
                 </div>
-    
+
               </div>
             )}
           </div>)}

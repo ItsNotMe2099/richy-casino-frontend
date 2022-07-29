@@ -20,6 +20,7 @@
     font-weight: 500;
     font-size: 12px;
     @media screen and (max-width: 700px){
+      font-size: $mobile12;
         padding: 8px 9px;
         span{
             display: none;
@@ -75,7 +76,7 @@
         font-size: calc(10px + 0.5vw);
     }
     @media screen and (max-width: $mobile-max){
-        font-size: 0.7rem;
+        font-size: $mobile12;
     }
 }
 
@@ -126,7 +127,7 @@
                 }
             }
         }
-    }  
+    }
     tbody{
       display: block;
       width: 100%;
@@ -174,7 +175,7 @@
             font-size: calc(10px + 0.5vw);
         }
         @media screen and (max-width: $mobile-max){
-            font-size: 0.7rem;
+            font-size: $mobile12;
         }
     }
     .cell:first-child{

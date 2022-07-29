@@ -156,7 +156,7 @@ function Section(props: SectionProps) {
         [styles.active]: props.active,
       })}/>
       <div className={styles.sectionContent}>
-        <CurrencySvg currencyIso={props.currencyIso} className={styles.sectionIcon} />
+        <CurrencySvg currencyIso={props.currencyIso} color className={styles.sectionIcon} />
         <div className={styles.sectionText}>
           {props.text}
         </div>

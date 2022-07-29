@@ -113,7 +113,7 @@ flex: 1;
 
   @media screen and (max-width: $xs-max){
     font-weight: 500;
-      font-size: 11px;
+      font-size: $mobile11;
   }
 }
 
