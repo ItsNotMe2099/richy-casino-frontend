@@ -48,8 +48,9 @@ export default function StepForm(props: Props) {
   const initialValues = {
     amount: 20,
   }
-  const currencyUsd = context.currencies.find(i => i.iso === 'USD')
-  const rate = currencyUsd?.rateCurrencies['USD'][`to${props.currency?.iso}`]
+
+  const rate = props.currency?.toUsd
+  console.log('Rate', props.currency)
   useEffect(() => {
     context.updateCurrencies()
   }, [])
@@ -95,7 +96,7 @@ export default function StepForm(props: Props) {
                 <span>{t('wallet_form_promocode')}</span>
               </div>
               {rate && <div className={styles.rate}>
-                {formik.values.amount && <div>{formik.values.amount ?? 0} USDT ≈ {Formatter.formatAmount(rate * formik.values.amount ?? 0, props.currency?.iso)} {props.currency?.iso}</div>}
+                {formik.values.amount && <div>{formik.values.amount ?? 0} USDT ≈ {Formatter.formatAmount((formik.values.amount ?? 0) / rate, props.currency?.iso)} {props.currency?.iso}</div>}
                 <div>1 USDT ≈ {Formatter.formatAmount(rate, props.currency?.iso)} {props.currency?.iso}</div>
               </div>}
             </div>

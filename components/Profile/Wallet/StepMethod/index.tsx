@@ -20,13 +20,11 @@ export default function StepMethod(props: Props) {
   return (
     <div className={styles.root}>
       <PaymentMethodList>
-        {props.paymentMethods.map((i, index) =>{
+        {props.paymentMethods.sort((a, b) => a.isCrypto ? -1 : 1 ).map((i, index) =>{
             if(i.isCrypto){
               return  <PaymentMethodCryptoCard method={i} onClick={() => props.onChange(i)} />
             }
-            if(index === 0){
-              return  <PaymentMethodCard onClick={() => props.onChange(i)} />
-            }
+
           return i.paymentSystems.map(paymentSystem => <PaymentMethodCard key={paymentSystem.id}  label={paymentSystem.name} icon={paymentSystem.imageUrl}
                                                                           onClick={() => props.onChange(i, paymentSystem)} />)
         }

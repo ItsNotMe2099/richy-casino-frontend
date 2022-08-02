@@ -51,9 +51,9 @@ interface Props {
 export default function Exchange(props: Props) {
   const {t} = useTranslation()
   const context = useAppContext()
-  const currencies = Converter.convertCurrencyToOptionsExchange(context.currencies.filter(i => i.flags.isCrypto))
+  const currencies = Converter.convertCurrencyToOptionsExchange(context.currencies.filter(i => i.convertableTo.length > 0))
   const initialCurrencySent = currencies.find(i => i.value.toUpperCase() === 'BTC')?.value ?? currencies[0]?.value
-    const initialCurrencyGet = currencies.find(i => i.value.toUpperCase() === 'ETH')?.value ?? currencies[1]?.value
+  const initialCurrencyGet = currencies.find(i => i.value.toUpperCase() === 'ETH')?.value ?? currencies[1]?.value
 
   const lastCurrencyIsoSentRef = useRef<string | null>(initialCurrencySent)
   const lastCurrencyIsoGetRef = useRef<string | null>(initialCurrencyGet)
@@ -102,7 +102,7 @@ export default function Exchange(props: Props) {
   const currencyGet = context.currencies.find(i => i.iso === formik.values.currencyGet)
   const getRate = (currencyIsoSent: string, currencyIsoGet: string) => {
     const currencySent = context.currencies.find(i => i.iso === currencyIsoSent)
-    return currencySent?.rateCurrencies[currencyIsoSent][`to${currencyIsoGet}`]
+    return currencySent?.convertableTo.find(i => i.currencyIso === currencyIsoGet)?.rate
 
   }
   const rate = getRate(formik.values.currencySent, formik.values.currencyGet)

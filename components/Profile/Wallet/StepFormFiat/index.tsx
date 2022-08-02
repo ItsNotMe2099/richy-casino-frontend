@@ -45,15 +45,13 @@ export default function StepFormFiat(props: Props) {
   const initialValues = {
     amount: 20,
   }
-  const currencyUsd = context.currencies.find(i => i.iso === 'USD')
   const currencyIso = props.currency?.iso
-  const rate = currencyUsd?.rateCurrencies['USD'][`to${currencyIso}`]
   const currentSettings = props.paymentSystem.settings.find(i => i.currencyIso === currencyIso)
   const validateMinMax = (value: number) => {
     const min = currentSettings?.deposit?.minAmount ?? 0
     const max = currentSettings?.deposit?.maxAmount ?? 0
     if(min && value < min){
-      return `Значение больше ${min}`
+      return `Значение меньше ${min}`
     }
     if(max && value > max){
       return `Значение больше ${max}`

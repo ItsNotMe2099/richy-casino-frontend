@@ -37,3 +37,5 @@ export const Timers: {
   showNotificationBanner: 3 * 1000,
   showBonusesBanner: 3 * 1000,
 }
+
+export const DEFAULT_CURRENCY = 'USD'

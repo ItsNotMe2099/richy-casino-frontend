@@ -14,6 +14,7 @@ import {IPagination} from 'types/interfaces'
 import {IBetHistoryItem} from 'data/interfaces/IBetHistoryItem'
 import ContentLoader from 'components/ui/ContentLoader'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import Image from 'next/image'
 
 const Item = ({item}: {item: IBetHistoryItem}) => {
 
@@ -23,10 +24,11 @@ const Item = ({item}: {item: IBetHistoryItem}) => {
         <div className={styles.game}>
           <HiddenXs>
             <div className={styles.icon}>
-              {(item.imageIconSmallUrl || item.imageIconPreviewUrl) && <img src={item.imageIconSmallUrl || item.imageIconPreviewUrl} alt=''/>}
+              {(item.imageIconSmallUrl || item.imageIconPreviewUrl)  && <Image src={item.imageIconSmallUrl || item.imageIconPreviewUrl} width={64} height={64}/>}
+
             </div>
           </HiddenXs>
-          <div>
+          <div className={styles.info}>
             <div className={styles.label}>{item.gameId}</div>
             <div className={styles.id}>
               id
@@ -86,11 +88,7 @@ export default function BetsHistory(props: Props) {
   return (
     <ProfileModalLayout fixed>
       <ProfileModalHeader title={t('bets_history_title')}/>
-      <ProfileModalBody fixed>
-        {data.data.map((item, index) =>
-          <Item key={index} item={item}/>
-        )}
-      </ProfileModalBody>
+
       <ProfileModalBody fixed id={'bet-history-list'} className={styles.body}>
         {loading && data.total == 0 && <ContentLoader style={'block'} isOpen={true}/>}
         <InfiniteScroll

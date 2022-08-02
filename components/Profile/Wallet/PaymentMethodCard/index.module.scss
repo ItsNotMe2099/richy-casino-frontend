@@ -20,7 +20,7 @@
   &:hover, &.selected{
     @include blueGradient500NoHover;
 
-      color: #A7BFFF;
+      color: $white;
     .iconsGroup{
       svg{
         rect{
