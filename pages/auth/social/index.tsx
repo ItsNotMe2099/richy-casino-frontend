@@ -1,31 +1,38 @@
 import AuthRepository from 'data/repositories/AuthRepository'
-import nookies from 'nookies'
-import {CookiesType} from 'types/enums'
-import {CookiesLifeTime} from 'types/constants'
 import {GetServerSideProps} from 'next'
+import {useEffect} from 'react'
+import {useRouter} from 'next/router'
+import {useAppContext} from 'context/state'
 interface Props {
+  referer: string
 }
 
 export default function AuthSocialSuccess(props: Props) {
+  const router = useRouter()
+  const appContext = useAppContext()
+  const init = async () => {
+    const res = await AuthRepository.socialLogin(router.query, props.referer)
+    if(res.token){
+      appContext.setToken(res.token)
+      router.replace('/')
+    }
+
+  }
+  useEffect(() => {
+    init()
+  }, [])
  return null
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   console.log('SocialReqHeaders', context.req.headers)
-  const res = await AuthRepository.socialLogin(context.query, context.req.headers.referer)
-  if(res.token){
-    nookies.set(context, CookiesType.accessToken, res.token, {
-      maxAge: CookiesLifeTime.accessToken * 60 * 60 * 24,
-      path: '/',
-    });
-    (context.req as any).cookies[CookiesType.accessToken] = res.token
-  }
+
+
 
   return {
     props: {
+      referer: context.req.headers.referer
     },
-    redirect: {
-      permanent: true,
-    }
+
   }
 }
