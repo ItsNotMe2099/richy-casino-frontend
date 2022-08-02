@@ -19,12 +19,12 @@ export default class InfoRepository {
   static async getCurrencies(): Promise<ICurrency[]> {
     const res = await request({
       method: 'get',
-      url: '/api/finance/currency/index',
+      url: '/api/finance/currency',
     })
     if (res.err) {
       return []
     }
-    return res.data.data?.map(i => ({...Converter.objectKeysToCamelCase(i), rateCurrencies: i.rate_currencies})) ?? []
+    return res.data.data?.map(i => ({...Converter.objectKeysToCamelCase(i)})) ?? []
   }
   static async convertCurrency(currencyFrom: string, currencyTo: string, amount: number): Promise<boolean> {
     const res = await request({

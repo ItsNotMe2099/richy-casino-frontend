@@ -4,6 +4,7 @@ import Converter from 'utils/converter'
 import {UserFormData} from 'types/form-data'
 import {IPhoneNewConfirm, IPhoneOldConfirm} from 'data/interfaces/IPhoneConfirm'
 import IUserUpdateResponse from 'data/interfaces/IUserUpdateResponse'
+import {DEFAULT_CURRENCY} from 'types/constants'
 
 export default class UserRepository {
   static async getUser(token?: string): Promise<IUser | null> {
@@ -16,7 +17,7 @@ export default class UserRepository {
       return null
     }
     const convertCurrencyToArray = (data: IUserBalanceCurrencyRaw, calculated: IUserBalanceCurrencyRaw, mainCurrency: string) => {
-      return Object.keys(data).map(key => ({currency: key?.toUpperCase(), value: data[key], calculated: calculated[key], mainCurrency}))
+      return Object.keys(data).map(key => ({currency: key?.toUpperCase(), value: data[key], calculated: calculated[key], mainCurrency: DEFAULT_CURRENCY}))
     }
     if(res.data?.data) {
       const data = {...Converter.objectKeysToCamelCase(res.data?.data)}

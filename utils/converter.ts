@@ -2,6 +2,7 @@ import { IApiPaginationResponse, IApiResponse, IOption, IOptionUserAccount, IPos
 import { ICurrency } from 'data/interfaces/ICurrency'
 import { IUserBalanceCurrency } from 'data/interfaces/IUser'
 import UserUtils from 'utils/user'
+import {DEFAULT_CURRENCY} from 'types/constants'
 const camelcaseObjectDeep = require('camelcase-object-deep')
 
 export default class Converter {
@@ -63,7 +64,7 @@ export default class Converter {
       label: item.currency,
       value: item.currency,
       balance: item.value,
-      mainCurrency: item.mainCurrency,
+      mainCurrency: DEFAULT_CURRENCY,
       calculatedBalance: item.calculated,
       symbol: UserUtils.getCurrencyIcon(item.currency)
     }
