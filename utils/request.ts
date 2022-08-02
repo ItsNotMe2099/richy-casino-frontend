@@ -12,7 +12,7 @@ interface Options {
   token?: string // needed for requests from server side
   sessionId?: string // needed for requests from server side
   language?: string // needed for requests from server side
-  referer: string
+  referer?: string
 }
 
 interface Res {
