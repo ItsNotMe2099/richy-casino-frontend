@@ -91,7 +91,7 @@ export default function Statistics(props: Props) {
             </div>*/}
                 <div className={styles.cell}>
                   <div className={styles.multWrapper}>
-                    <div className={classNames(styles.mult, {[styles.zero]:  item.amountWin <= 0})}>
+                    <div className={classNames(styles.mult, {[styles.zero]:  item.amountWin <= 0 || item.coefficient < 0})}>
                       x{Math.abs(item.coefficient)?.toFixed(2)}
                     </div>
                   </div>
