@@ -158,7 +158,7 @@ export default function Banner(props: Props) {
           </div>
         </div>
       }
-      {(state === State.Timer) &&
+      {(state === State.Timer && userStatus) &&
         <div className={styles.timer}>
           <Timer expiredAt={addSeconds(new Date(userStatus.freebitcoinTimeNewFreeAccrual), 30)} style='freebitcoin' onExpire={handleExpired}/>
           <div className={styles.again}>

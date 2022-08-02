@@ -12,6 +12,7 @@ interface Options {
   token?: string // needed for requests from server side
   sessionId?: string // needed for requests from server side
   language?: string // needed for requests from server side
+  referer: string
 }
 
 interface Res {
@@ -27,13 +28,14 @@ async function request(options: string | Options): Promise<Res> {
   let url = ''
   let method = 'GET'
   let data = null
-
+  let referer = null
   if (optionsIsString) {
     url = options
   } else {
     url = options.url
     method = options.method ? options.method.toUpperCase() : 'GET'
     data = options.data
+    referer = options.referer
   }
   const ppDetailsCookie = Cookies.get(CookiesType.ppDetails)
   let ppDetails = null
@@ -45,6 +47,14 @@ async function request(options: string | Options): Promise<Res> {
   const correctUrl = `${runtimeConfig.HOST}${url}${(method === 'GET' && data) ? `?${queryParams(data)}` : ''}`
 
   try {
+    console.log('headers11',   {
+      'Content-Type': 'application/json',
+        'Authorization': accessToken ? `Bearer ${accessToken}` : '',
+        'X-Language': language ?? '',
+        'X-UUID': sessionId ?? '',
+    ...(ppDetails ? ppDetails : {}),
+    ...(referer ? {'Referrer': referer} : {})
+    })
     const res = await fetch(correctUrl, {
       method,
       headers: {
@@ -53,6 +63,7 @@ async function request(options: string | Options): Promise<Res> {
         'X-Language': language ?? '',
         'X-UUID': sessionId ?? '',
       ...(ppDetails ? ppDetails : {}),
+      ...(referer ? {'Referrer': referer} : {})
       },
       body: (method !== 'GET' && data) ? JSON.stringify(data) : null,
     })
