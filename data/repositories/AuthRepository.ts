@@ -24,6 +24,7 @@ export default class AuthRepository {
   }
 
   static async socialLogin(data: any, referer: string): Promise<IAuthLoginResponse> {
+    console.log('SocialReq', data)
     const res = await request({
       method: 'get',
       url: '/api/user/social/login',

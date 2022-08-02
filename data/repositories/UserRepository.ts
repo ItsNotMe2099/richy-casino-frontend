@@ -21,9 +21,9 @@ export default class UserRepository {
     if(res.data?.data) {
       const data = {...Converter.objectKeysToCamelCase(res.data?.data)}
       console.log('Data', res.data?.data)
-      data.balance.currencies.totals = convertCurrencyToArray(data.balance.currencies.totals, data.balance.calculatedToUserCurrency.totals, data.currencyIso)
-      data.balance.currencies.bonus = convertCurrencyToArray(data.balance.currencies.bonus, data.balance.calculatedToUserCurrency.bonus, data.currencyIso)
-      data.balance.currencies.real = convertCurrencyToArray(data.balance.currencies.real, data.balance.calculatedToUserCurrency.real, data.currencyIso)
+      data.balance.currencies.totals = convertCurrencyToArray(data.balance.currencies.totals, data.balance.calculatedToDefaultCurrency.totals, data.currencyIso)
+      data.balance.currencies.bonus = convertCurrencyToArray(data.balance.currencies.bonus, data.balance.calculatedToDefaultCurrency.bonus, data.currencyIso)
+      data.balance.currencies.real = convertCurrencyToArray(data.balance.currencies.real, data.balance.calculatedToDefaultCurrency.real, data.currencyIso)
       return data
     }else{
       return null
