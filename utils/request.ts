@@ -53,7 +53,7 @@ async function request(options: string | Options): Promise<Res> {
         'X-Language': language ?? '',
         'X-UUID': sessionId ?? '',
     ...(ppDetails ? ppDetails : {}),
-    ...(referer ? {'Referrer': referer} : {})
+    ...(referer ? {'Referer': referer} : {})
     })
     const res = await fetch(correctUrl, {
       method,
@@ -63,7 +63,7 @@ async function request(options: string | Options): Promise<Res> {
         'X-Language': language ?? '',
         'X-UUID': sessionId ?? '',
       ...(ppDetails ? ppDetails : {}),
-      ...(referer ? {'Referrer': referer} : {})
+      ...(referer ? {'Referer': referer} : {})
       },
       body: (method !== 'GET' && data) ? JSON.stringify(data) : null,
     })
