@@ -1,5 +1,5 @@
 import Button from 'components/ui/Button'
-import { format } from 'date-fns'
+import {format} from 'date-fns'
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import HiddenXs from 'components/ui/HiddenXS'
@@ -8,6 +8,41 @@ import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
 import {useTranslation} from 'next-i18next'
 import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 import ProfileModalFooter from 'components/Profile/layout/ProfileModalFooter'
+import BalanceTransactionRepository from 'data/repositories/BalanceTransationRepository'
+import {useEffect, useState} from 'react'
+import {IPagination} from 'types/interfaces'
+import {IBetHistoryItem} from 'data/interfaces/IBetHistoryItem'
+import ContentLoader from 'components/ui/ContentLoader'
+import InfiniteScroll from 'react-infinite-scroll-component'
+
+const Item = ({item}: {item: IBetHistoryItem}) => {
+
+  return (
+    <div className={styles.item}>
+      <div className={styles.left}>
+        <div className={styles.game}>
+          <HiddenXs>
+            <div className={styles.icon}>
+              {(item.imageIconSmallUrl || item.imageIconPreviewUrl) && <img src={item.imageIconSmallUrl || item.imageIconPreviewUrl} alt=''/>}
+            </div>
+          </HiddenXs>
+          <div>
+            <div className={styles.label}>{item.gameId}</div>
+            <div className={styles.id}>
+              id
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={styles.right}>
+        <div className={styles.date}>{format(new Date(item.time), 'dd MMMM yyyy · hh:mm')}</div>
+        <div className={classNames(styles.usdt, {[styles.plus]: item.money > 0 })}>{item.money} <span>{item.currencyIso}</span>
+        </div>
+        {/*<div className={classNames(styles.btc, {[styles.plus]: usdt.slice(0, 1) === '+'})}>{btc}</div>*/}
+      </div>
+    </div>
+  )
+}
 
 interface Props {
 
@@ -24,50 +59,57 @@ interface ItemProps {
 
 export default function BetsHistory(props: Props) {
   const {t} = useTranslation()
-  const items = [
-    {label: 'Aviator', icon: '/img/BetsHistory/aviator.svg', date: '2021-12-27T12:46:24.007Z', usdt: '+ 0.00000001', btc: '0.00000000 BTC', id: '87345678987654321245'},
-    {label: 'Aviator', icon: '/img/BetsHistory/aviator.svg', date: '2021-12-27T12:46:24.007Z', usdt: '+ 0.00000001', btc: '0.00000000 BTC', id: '87345678987654321245'},
-    {label: 'Aviator', icon: '/img/BetsHistory/aviator.svg', date: '2021-12-27T12:46:24.007Z', usdt: '0.00000001', btc: '0.00000000 BTC', id: '87345678987654321245'},
-    {label: 'Aviator', icon: '/img/BetsHistory/aviator.svg', date: '2021-12-27T12:46:24.007Z', usdt: '+ 0.00000001', btc: '0.00000000 BTC', id: '87345678987654321245'},
-  ]
+  const initialData = {data: [], total: 0}
+  const [data, setData] = useState<IPagination<IBetHistoryItem>>(initialData)
+  const [page, setPage] = useState<number>(0)
+  const [loading, setLoading] = useState<boolean>(true)
+  const limit = 30
 
-  const Item = ({label, icon, date, usdt, btc, id}: ItemProps) => {
+  useEffect(() => {
+    BalanceTransactionRepository.fetchBetHistory(1, limit).then(i => {
+      setData(i)
+      setLoading(false)
+    })
+  }, [])
 
-    return (
-    <div className={styles.item}>
-      <div className={styles.left}>
-        <div className={styles.game}>
-          <HiddenXs>
-            <div className={styles.icon}>
-              <img src={icon} alt=''/>
-            </div>
-          </HiddenXs>
-          <div>
-            <div className={styles.label}>{label}</div>
-            <div className={styles.id}>
-              {id}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className={styles.right}>
-        <div className={styles.date}>{format(new Date(date), 'dd MMMM yyyy · hh:mm')}</div>
-        <div className={classNames(styles.usdt, {[styles.plus]: usdt.slice(0, 1) === '+'})}>{usdt} <span>USDT</span></div>
-        <div className={classNames(styles.btc, {[styles.plus]: usdt.slice(0, 1) === '+'})}>{btc}</div>
-      </div>
-    </div>
-    )
+  const handleScrollNext = async () => {
+    const newPage = page + 1
+    setPage(newPage)
+    setLoading(true)
+
+    const res = await BalanceTransactionRepository.fetchBetHistory(newPage, limit)
+    setData(data => ({data: [...data.data, ...res.data], total: res.total}))
+
+    setLoading(false)
   }
-
 
   return (
     <ProfileModalLayout fixed>
       <ProfileModalHeader title={t('bets_history_title')}/>
-        <ProfileModalBody fixed>
-          {items.map((item, index) =>
-            <Item label={item.label} btc={item.btc} date={item.date} usdt={item.usdt} key={index} icon={item.icon} id={item.id}/>
-          )}
-        </ProfileModalBody>
+      <ProfileModalBody fixed>
+        {data.data.map((item, index) =>
+          <Item key={index} item={item}/>
+        )}
+      </ProfileModalBody>
+      <ProfileModalBody fixed id={'bet-history-list'} className={styles.body}>
+        {loading && data.total == 0 && <ContentLoader style={'block'} isOpen={true}/>}
+        <InfiniteScroll
+          dataLength={data.data.length}
+          next={handleScrollNext}
+          loader={ data.total > 0 ? <ContentLoader style={'infiniteScroll'} isOpen={true}/> : null}
+          hasMore={data.total > data.data.length}
+          scrollThreshold={0.6}
+          scrollableTarget={'bet-history-list'}
+        >
+          <div className={styles.list}>
+            {data.data.map((item, index) =>
+              <Item key={index} item={item}/>
+            )}
+
+          </div>
+        </InfiniteScroll>
+
+      </ProfileModalBody>
       <ProfileModalFooter>
         <div className={styles.btn}>
           <Button size='normal' background='payGradient500'>{t('bets_history_deposit')}</Button>

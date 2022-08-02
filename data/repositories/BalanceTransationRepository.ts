@@ -3,6 +3,7 @@ import Converter from 'utils/converter'
 import {IPagination} from 'types/interfaces'
 import {BalanceTransactionType, IBalanceTransaction} from 'data/interfaces/IBalanceTransaction'
 import {IWithdrawHistory} from 'data/interfaces/IWithdrawHistory'
+import {IBetHistoryItem} from 'data/interfaces/IBetHistoryItem'
 const queryString = require('query-string')
 export default class BalanceTransactionRepository {
   static async fetchTransactions(type: BalanceTransactionType[], page: number = 1, limit: number = 1000): Promise<IPagination<IBalanceTransaction>> {
@@ -10,6 +11,21 @@ export default class BalanceTransactionRepository {
       method: 'get',
       url: `/api/finance/transaction?${queryString.stringify({
         type,
+        page,
+        'per-page': limit
+      }, {arrayFormat: 'bracket'})}`,
+
+    })
+    if (res.err) {
+      return null
+    }
+    return Converter.convertApiPaginationResponse(res.data)
+  }
+
+  static async fetchBetHistory(page: number = 1, limit: number = 1000): Promise<IPagination<IBetHistoryItem>> {
+    const res = await request({
+      method: 'get',
+      url: `/api/finance/transaction/bet-history?${queryString.stringify({
         page,
         'per-page': limit
       }, {arrayFormat: 'bracket'})}`,
