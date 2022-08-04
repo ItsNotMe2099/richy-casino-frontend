@@ -25,7 +25,7 @@ const Symbol = (props: PropsOption) => {
   <>
   {props.separator && <div className={styles.separator}/>}
 
-    <CurrencySvg className={styles.symbol} color currencyIso={props.option.value}/>
+    <CurrencySvg className={styles.symbol} color currencyIso={props.option?.value}/>
   </>
   )
 }

@@ -58,7 +58,7 @@ export default class Formatter {
     return num?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
   }
 
-  static formatAmount(amount: number, currency: string){
+  static formatAmount(amount: number | string, currency: string){
     const convertFiat = (amount) => {
       if(amount < 0.0000001){
         return amount.toFixed(8)
@@ -94,6 +94,9 @@ export default class Formatter {
       'XRP',
       'XTZ',
       'ZEC'].includes(currency.toUpperCase())
+    if(typeof amount === 'string'){
+      return (amount ?? '').replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')
+    }
     return isCrypto ? amount.toFixed(8).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1') : convertFiat(amount).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')
   }
 
