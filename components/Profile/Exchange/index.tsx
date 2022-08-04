@@ -51,10 +51,14 @@ interface Props {
 export default function Exchange(props: Props) {
   const {t} = useTranslation()
   const context = useAppContext()
-  const currencies = Converter.convertCurrencyToOptionsExchange(context.currencies.filter(i => i.convertableTo.length > 0))
-  const initialCurrencySent = currencies.find(i => i.value.toUpperCase() === 'BTC')?.value ?? currencies[0]?.value
-  const initialCurrencyGet = currencies.find(i => i.value.toUpperCase() === 'ETH')?.value ?? currencies[1]?.value
-
+  const currenciesFiltered = context.currencies.filter(i => i.convertableTo.length > 0)
+  const currencies = Converter.convertCurrencyToOptionsExchange(context.currencies)
+  const currenciesSent = Converter.convertCurrencyToOptionsExchange(context.currencies.filter(i => i.convertableTo.length > 0))
+  const initialCurrencySent = currenciesSent.find(i => i.value.toUpperCase() === 'BTC')?.value ?? currencies[0]?.value
+  const _temp = currenciesFiltered.find(i => i.iso.toUpperCase() === 'BTC') ?? currenciesFiltered[0]
+  const initialCurrenciesGet = currencies.filter(i => _temp.convertableTo.map(i => i.currencyIso).includes(i.value))
+  const initialCurrencyGet =  initialCurrenciesGet.find(i => i.value.toUpperCase() === 'ETH')?.value ?? initialCurrenciesGet[0]?.value
+  console.log('initialCurrencyGet', initialCurrencyGet)
   const lastCurrencyIsoSentRef = useRef<string | null>(initialCurrencySent)
   const lastCurrencyIsoGetRef = useRef<string | null>(initialCurrencyGet)
   const amountSentRef = useRef<number | null>(30)
@@ -89,6 +93,12 @@ export default function Exchange(props: Props) {
   const otherAccounts = (UserUtils.getOtherBalancesTotals(context.user))
 
   const currentBalance = [mainAccount, ...otherAccounts].find(i => i.currency === formik.values.currencySent)?.value
+
+  const currencyRotating = useRef<boolean>(false)
+  const currencySent = context.currencies.find(i => i.iso === formik.values.currencySent)
+  const currencyGet = context.currencies.find(i => i.iso === formik.values.currencyGet)
+  const currenciesGet = currencies.filter(i => currencySent.convertableTo.map(i => i.currencyIso).includes(i.value))
+  console.log('currenciesGet', currencies,currenciesGet, currencySent.convertableTo)
   const validationBalance = (value) => {
     const num = parseFloat(value)
     console.log('CheckNum', num, parseFloat(`${`${currentBalance}`.replace(',', '.')}`))
@@ -97,9 +107,6 @@ export default function Exchange(props: Props) {
     }
     return  undefined
   }
-  const currencyRotating = useRef<boolean>(false)
-  const currencySent = context.currencies.find(i => i.iso === formik.values.currencySent)
-  const currencyGet = context.currencies.find(i => i.iso === formik.values.currencyGet)
   const getRate = (currencyIsoSent: string, currencyIsoGet: string) => {
     const currencySent = context.currencies.find(i => i.iso === currencyIsoSent)
     return currencySent?.convertableTo.find(i => i.currencyIso === currencyIsoGet)?.rate
@@ -182,8 +189,9 @@ export default function Exchange(props: Props) {
               </div>
               <div className={styles.inputs}>
                 <InputField name={'amountSent'}  onChange={handleChangeAmountSent} className={styles.input} validate={Validator.combine([Validator.required, validationBalance])}/>
-                <div className={styles.exchange}><ExchangeCurrencySelectField className={styles.select} name='currencySent' options={currencies}
-                                                                             /></div>
+                <div className={styles.exchange}>
+                  <ExchangeCurrencySelectField className={styles.select} name='currencySent' options={Converter.convertCurrencyToOptionsExchange(currenciesFiltered)}/>
+                </div>
               </div>
             </div>
             <div className={styles.equality}>
@@ -199,7 +207,7 @@ export default function Exchange(props: Props) {
               <div className={styles.inputs}>
                 <InputField name={'amountGet'} onChange={handleChangeAmountGet} className={styles.input} validate={Validator.required}/>
                 <div className={styles.exchange}><ExchangeCurrencySelectField
-                  name='currencyGet' options={currencies} />
+                  name='currencyGet' options={currenciesGet} />
                 </div>
               </div>
             </div>
