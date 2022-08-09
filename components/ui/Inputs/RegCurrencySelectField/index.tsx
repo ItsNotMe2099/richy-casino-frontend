@@ -26,7 +26,7 @@ interface PropsOption{
 }
 
 const Symbol = (props: PropsOption) => {
-  return <CurrencySvg className={styles.symbol} currencyIso={props.option.value} color/>
+  return <CurrencySvg className={styles.symbol} color currencyIso={props.option.value}/>
 }
 
 const Option = (props: PropsOption) => {
