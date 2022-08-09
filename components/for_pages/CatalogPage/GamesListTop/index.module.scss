@@ -64,13 +64,13 @@
     display: flex;
     overflow: hidden;
     width: 100%;
-  
+
     &:after {
       content: '';
       padding-bottom: 100%;
     }
   }
- 
+
 }
 
 .label{
@@ -78,6 +78,9 @@
   font-size: calc(14px + 0.1vw);
   color: $white;
   margin-top: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   @media screen and (max-width: 850px){
     font-size: calc(12px + 0.1vw);
   }
@@ -88,6 +91,10 @@
   font-size: calc(14px + 0.1vw);
   color: $dark100;
   margin-top: 4px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
   @media screen and (max-width: 850px){
     font-size: calc(12px + 0.1vw);
   }
@@ -99,6 +106,9 @@
 
 .win{
   color: #7bd245;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   span{
     color: $white;
   }
