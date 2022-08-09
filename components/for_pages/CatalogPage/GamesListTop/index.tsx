@@ -27,7 +27,25 @@ enum GameSwitchFilterKey {
 const getId = (game: IGameWin | null)=>{
   return `${game?.username}${game?.currencyIso}${game?.game?.id}${game?.winAmount}`
 }
+const Item = (prop: { item: IGameWin }) => {
 
+  return (
+    <div className={styles.item}>
+      <div className={styles.image}>
+        <ItemGame item={prop.item.game}/>
+      </div>
+      <div className={styles.label}>
+        {prop.item.game.name}
+      </div>
+      <div className={styles.user}>
+        {prop.item.username}
+      </div>
+      <div className={styles.win}>
+        <span>Win:</span> {prop.item.winAmount} {prop.item.currencyIso?.toUpperCase()}
+      </div>
+    </div>
+  )
+}
 
 interface Props {
 }
@@ -121,25 +139,7 @@ export default function GamesListTop(props: Props) {
     setTop(data => ({ data: [...data.data, ...res.data], total: res.total }))
     setLoading(false)
   }
-  const Item = (prop: { item: IGameWin }) => {
 
-    return (
-      <div className={styles.item}>
-        <div className={styles.image}>
-        <ItemGame item={prop.item.game}/>
-        </div>
-           <div className={styles.label}>
-          {prop.item.game.name}
-        </div>
-        <div className={styles.user}>
-          {prop.item.username}
-        </div>
-        <div className={styles.win}>
-          <span>Win:</span> {prop.item.winAmount} {prop.item.currencyIso?.toUpperCase()}
-        </div>
-      </div>
-    )
-  }
 
   const settings = {
     className: `${styles.list}`,
