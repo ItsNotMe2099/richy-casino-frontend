@@ -37,13 +37,6 @@
   }
 }
 
-.select{
-  padding: 14px 16px 14px 0 !important;
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-  height: 53px;
-  background-color: #272832 !important;
-}
 
 .selectRoot{
   margin-bottom: 0;
@@ -96,4 +89,7 @@
   line-height: 14px;
   color: $dark400;
   text-align: left;
+}
+.exchange{
+  min-width: 135px;
 }

@@ -67,5 +67,21 @@ export default class PaymentsRepository {
     return res.data?.data
   }
 
+  static async purchaseCalculate(currencyIsoFrom: string, currencyIsoTo: string, amount: number): Promise<{ currencyIsoFrom: string, currencyIsoTo: string, amount: number, resultCoinAmount: number }> {
+    const res = await request({
+      method: 'post',
+      url: '/api/finance/payment/purchase/calculate',
+      data: {
+        currency_iso_from: currencyIsoFrom,
+        currency_iso_to: currencyIsoTo,
+        amount
+      }
+    })
+    if (res.err) {
+      throw res.err
+    }
+    return res.data?.data
+  }
+
 
 }
