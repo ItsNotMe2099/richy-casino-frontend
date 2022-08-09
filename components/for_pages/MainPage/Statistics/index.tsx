@@ -14,19 +14,26 @@ import {useInterval} from 'react-use'
 interface Props {
 
 }
+const getId = (game: IGameHistory)=>{
+  return `${game?.gameId}${game?.userId}${game?.amountBet}${game?.coefficient}`
+}
 
 export default function Statistics(props: Props) {
   const {t} = useTranslation()
   const [data, setData] = useState<IPagination<IGameHistory>>({total: 0, data: []})
+  const dataRef = useRef<IPagination<IGameHistory>>({total: 0, data: []})
   const [loading, setLoading] = useState(true)
   const context = useAppContext()
   const updatingRef = useRef<boolean>(true)
  const [isUpdating, setIsUpdating] = useState<boolean>(true)
   const isMobile = context.isMobile
   useEffect(() => {
-    GameListRepository.fetchGameSessionHistory(1, 10).then(i => {
+    dataRef.current = data
+  }, [data])
+  useEffect(() => {
+    GameListRepository.fetchGameSessionHistory(1, 10).then(newData => {
 
-      setData(i)
+      setData(newData)
       setLoading(false)
       setIsUpdating(false)
     })
@@ -34,8 +41,16 @@ export default function Statistics(props: Props) {
 
   useInterval(() => {
     setIsUpdating(true)
-      GameListRepository.fetchGameSessionHistory(1, 10).then(i => {
-        setData(i)
+      GameListRepository.fetchGameSessionHistory(1, 10).then(data => {
+        const currentData = dataRef.current
+        if(data.data.length > 0 && currentData.data.find(i => getId(i) === getId(data.data[0])) ){
+          setLoading(false)
+          setIsUpdating(false)
+          return
+        }
+        const setNewData = !currentData.data.find(i => getId(i) === getId(data.data[0])) ? [data.data[0], ...currentData.data] : [...currentData.data]
+        setNewData.pop()
+        setData({data: setNewData, total: currentData.total})
         setLoading(false)
         setIsUpdating(false)
       })
@@ -67,7 +82,7 @@ export default function Statistics(props: Props) {
               </div>
             </div>
             {data.data.slice(0, 7).map((item, index) =>
-              <div className={classNames(styles.row, styles.rowInner)} key={`${item.userId}${item.gameId}${item.coefficient}${item.amountWin}${item.amountBet}`}>
+              <div className={classNames(styles.row, styles.rowInner)} key={getId(item)}>
                 <div className={styles.cell}>
                   <div className={styles.game}>
                     <div className={styles.gameImg}>

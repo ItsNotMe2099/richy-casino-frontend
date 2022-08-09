@@ -306,9 +306,7 @@
     color: $pay500;
     display: flex;
     justify-content: center;
-    svg, img{
-        margin-right: 10px;
-    }
+
     @media screen and (max-width: $xs-max){
         font-size: calc(10px + 0.5vw);
     }
@@ -348,4 +346,5 @@
 .currencyIcon{
   width: 16px;
   height: 16px;
+  margin-right: 10px;
 }

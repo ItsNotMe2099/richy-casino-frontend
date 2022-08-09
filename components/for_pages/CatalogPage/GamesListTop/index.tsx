@@ -24,6 +24,9 @@ enum GameSwitchFilterKey {
   TopWeek = 'topWeek',
   TopMonth = 'topMonth'
 }
+const getId = (game: IGameWin | null)=>{
+  return `${game?.username}${game?.currencyIso}${game?.game?.id}${game?.winAmount}`
+}
 
 
 interface Props {
@@ -37,6 +40,7 @@ export default function GamesListTop(props: Props) {
   const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(true)
   const [filter, setFilter] = useState<GameSwitchFilterKey>(GameSwitchFilterKey.WinNow)
+  const latestWinRef = useRef<IGameWin[]>([])
 
   const [isUpdating, setIsUpdating] = useState<boolean>(true)
   const allLink = Routes.catalogTop
@@ -48,7 +52,9 @@ export default function GamesListTop(props: Props) {
     { label: t('catalog_list_top_tab_month'), value: GameSwitchFilterKey.TopMonth, icon: <Calendar /> },
   ]
   const sliderRef = useRef<Slider>(null)
-
+  useEffect(() => {
+    latestWinRef.current = latestWin
+  }, [latestWin])
   useEffect(() => {
     setLoading(true)
     switch (filter) {
@@ -77,8 +83,18 @@ export default function GamesListTop(props: Props) {
   }, [filter])
   useInterval(() => {
     setIsUpdating(true)
-    GameListRepository.fetchLatestWinGames().then(i => {
-      setLatestWin(i)
+    GameListRepository.fetchLatestWinGames().then(data => {
+      const currentData = latestWinRef.current
+      if(data.length > 0 && currentData.find(i => getId(i) === getId(data[0])) ){
+        setLoading(false)
+        setIsUpdating(false)
+        console.log('setNewDataEmpty')
+        return
+      }
+      const setNewData = [data[0], ...currentData]
+      console.log('setNewData', setNewData)
+      setNewData.pop()
+      setLatestWin(setNewData)
       setLoading(false)
       setIsUpdating(false)
     })
@@ -205,8 +221,8 @@ export default function GamesListTop(props: Props) {
           <HiddenXs>
             <div className={styles.sliderWrapper}>
             {latestWin.length > 0 && <Slider {...settings} ref={sliderRef}>
-              {latestWin.slice(0, 12).map((item, index) =>
-                <Item item={item} key={index} />
+              {latestWin.map((item, index) =>
+                <Item item={item} key={getId(item)} />
               )}
             </Slider>}
             </div>
@@ -215,7 +231,7 @@ export default function GamesListTop(props: Props) {
           <VisibleXs>
             <div className={styles.overflow}>
               {latestWin.map((item, index) =>
-                <Item item={item} key={index} />
+                <Item item={item} key={getId(item)} />
               )}
             </div>
           </VisibleXs>
