@@ -1,8 +1,8 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import styles from './index.module.scss'
 
 import {useTranslation} from 'next-i18next'
-import {PaymentMethod, PaymentStep, WithdrawModalArguments} from 'types/interfaces'
+import { PaymentStep, WithdrawModalArguments} from 'types/interfaces'
 import {useAppContext} from 'context/state'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import StepMethod from './StepMethod'
@@ -19,6 +19,9 @@ import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
 import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
 import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 import ModalFooterTwoFa from 'components/Profile/layout/ModalFooterTwoFa'
+import PaymentMethodRepository from 'data/repositories/PaymentMethodRepository'
+import {IPaymentMethod} from 'data/interfaces/IPaymentMethod'
+import {IPaymentSystem} from 'data/interfaces/IPaymentSystem'
 
 
 
@@ -29,52 +32,46 @@ interface Props {
 export default function Widraw(props: Props) {
   const {t} = useTranslation()
   const context = useAppContext()
-  const methods = [
-    {label: t('wallet_payment_type_crypto'), bonus: true},
-    {iconLabel: 'visa', label: t('wallet_payment_type_card')},
-    {icon: '/img/Wallet/paypal.svg', label: 'PayPal'},
-    {icon: '/img/Wallet/yoo.svg', label: 'YooMoney'},
-    {icon: '/img/Wallet/web.svg', label: 'WebMoney'},
-    {icon: '/img/Wallet/skrill.svg', label: 'Skrill'},
-    {icon: '/img/Wallet/pia.svg', label: 'Piastrix'},
-    {icon: '/img/Wallet/neteller.svg', label: 'Neteller'},
-    {icon: '/img/Wallet/qiwi.svg', label: 'Qiwi'},
-  ]
 
-  const crypto = [
-    {icon: '/img/Wallet/crypto/bitcoin.svg', label: 'Bitcoin', iso: 'btc'},
-    {icon: '/img/Wallet/crypto/tether.svg', label: 'Tether', iso: 'th'},
-    {icon: '/img/Wallet/crypto/eth.svg', label: 'Ethereum', iso: 'eth'},
-    {icon: '/img/Wallet/crypto/tron.svg', label: 'Tron', iso: 'tr'},
-    {icon: '/img/Wallet/crypto/usdc.svg', label: 'USD Coin', iso: 'USD'},
-    {icon: '/img/Wallet/crypto/monero.svg', label: 'Monero', iso: 'mo'},
-    {icon: '/img/Wallet/crypto/doge.svg', label: 'Doge', iso: 'dg'},
-    {icon: '/img/Wallet/crypto/bitcoin-cash.svg', label: 'Bitcoin Cash', iso: 'btcc'},
-    {icon: '/img/Wallet/crypto/litecoin.svg', label: 'Litecoin', iso: 'ltc'},
-  ]
-
-  const bank = [
-    {icon: '/img/Wallet/bank/visa.svg', label: 'Visa'},
-    {icon: '/img/Wallet/bank/master-card.svg', label: 'Master Card'},
-    {icon: '/img/Wallet/bank/mir.svg', label: 'МИР'},
-  ]
   const args = context.modalArguments as WithdrawModalArguments
 
   const [account, setAccount] = useState<IUserBalanceCurrency>(args?.account ?? UserUtils.getMainBalanceReal(context?.user))
-  const [method, setMethod] = useState<PaymentMethod>(PaymentMethod.Crypto)
-  const [currency, setCurrency] = useState<ICurrency>(null)
+  const [paymentMethods, setPaymentMethods] = useState<IPaymentMethod[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [method, setMethod] = useState<IPaymentMethod | null>(null)
+  const [paymentSystem, setPaymentSystem] = useState<IPaymentSystem | null>(null)
+  const [currency, setCurrency] = useState<ICurrency | null>(null)
   const [depositResponse, setDepositResponse] = useState<IDepositResponse>(null)
-  const [step, setStep] = useState<PaymentStep>(PaymentStep.Currency)
+  const [step, setStep] = useState<PaymentStep>(PaymentStep.Method)
+  useEffect(() => {
+    PaymentMethodRepository.fetchWithdraw().then(i => {
+      setPaymentMethods(i)
+      if(i.length === 1){
+     //   setMethod(i[0])
+      }
+      setLoading(false)
+    })
+  }, [])
   const handleClose = () => {
 
     context.hideModal()
   }
-  const handlePaymentMethod = (method: PaymentMethod) => {
+  const handlePaymentMethod = (method: IPaymentMethod, paymentSystem: IPaymentSystem) => {
     setMethod(method)
-    setStep(PaymentStep.Currency)
+    setPaymentSystem(paymentSystem ?? null)
+    setCurrency(null)
+    setStep(PaymentStep.Currency )
   }
-  const handleCurrencyMethod = (currency: ICurrency) => {
+  const handlePaymentSystemMethod = (paymentSystem: IPaymentSystem) => {
+    setPaymentSystem(paymentSystem)
+    setCurrency(context.currencies.find(i => i.iso === paymentSystem.settings[0].currencyIso))
+    setStep(PaymentStep.Form)
+  }
+  const handleCurrency = (currency: ICurrency, paymentSystem?: IPaymentSystem | null) => {
     setCurrency(currency)
+    if(paymentSystem){
+      setPaymentSystem(paymentSystem)
+    }
     setStep(PaymentStep.Form)
   }
   const handleSubmit = (deposit: IDepositResponse) => {
@@ -105,10 +102,10 @@ export default function Widraw(props: Props) {
   const result = (
     <div className={styles.root}>
 
-      {step === PaymentStep.Method && <StepMethod account={account} onChange={handlePaymentMethod} onChangeUserAccount={setAccount}/>}
-      {step === PaymentStep.Currency && <StepCurrency method={method} onChange={handleCurrencyMethod} onSetStep={handleSetStep}/>}
-      {step === PaymentStep.Form && <StepForm account={account} currency={currency}  method={method} onSubmit={handleSubmit} onSetStep={handleSetStep}/>}
-      {step === PaymentStep.Success && <StepCrypto currency={currency} method={method} response={depositResponse as IDepositCryptoResponse}/>}
+      {step === PaymentStep.Method && <StepMethod account={account} paymentMethods={paymentMethods} onChange={handlePaymentMethod} onChangeUserAccount={setAccount}/>}
+      {step === PaymentStep.Currency && <StepCurrency method={method} paymentSystem={paymentSystem}  onChange={handleCurrency} onSetStep={handleSetStep}/>}
+      {step === PaymentStep.Form && <StepForm account={account} currency={currency}  method={method} paymentSystem={paymentSystem} onSubmit={handleSubmit} onSetStep={handleSetStep}/>}
+      {step === PaymentStep.Success && <StepCrypto currency={currency} method={method} paymentSystem={paymentSystem} response={depositResponse as IDepositCryptoResponse}/>}
     </div>
   )
 

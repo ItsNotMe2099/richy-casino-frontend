@@ -28,7 +28,6 @@ interface Props {
   type: MainGameListType
   icon: string
   label: string
-  items: IItem[]
   shadowColor?: 'red' | 'blue' | 'yellow'
 }
 

@@ -76,7 +76,7 @@ export default function StepForm(props: Props) {
     <div className={styles.root}>
       {context.showBonus && <BonusSmallBanner style='wallet'/>}
       <PaymentOptions>
-        <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>
+        <PaymentMethodSelected method={props.method} paymentSystem={props.paymentSystem} onClick={() => props.onSetStep(PaymentStep.Method)}/>
         {props.currency && <PaymentCurrencySelected currency={props.currency} onClick={() => props.onSetStep(PaymentStep.Currency)}/>}
 
       </PaymentOptions>

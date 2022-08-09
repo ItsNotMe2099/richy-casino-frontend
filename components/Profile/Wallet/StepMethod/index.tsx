@@ -28,9 +28,7 @@ export default function StepMethod(props: Props) {
           return i.paymentSystems.map(paymentSystem => <PaymentMethodCard key={paymentSystem.id}  label={paymentSystem.name} icon={paymentSystem.imageUrl}
                                                                           onClick={() => props.onChange(i, paymentSystem)} />)
         }
-
         )}
-        {/*<PaymentMethodCryptoCard onClick={() => props.onChange(PaymentMethod.Crypto)} />*/}
       </PaymentMethodList>
     </div>
   )
