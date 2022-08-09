@@ -1,6 +1,9 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import classNames from 'classnames'
 import styles from './index.module.scss'
+import {useAppContext} from 'context/state'
+import Image from 'next/image'
+import {runtimeConfig} from 'config/runtimeConfig'
 interface Props {
   currencyIso: string
   color?: boolean
@@ -9,6 +12,14 @@ interface Props {
 
 function CurrencySvg(props: Props) {
   const className = classNames(styles.root, props.className)
+  const appContext = useAppContext()
+  const currency = useMemo(() => {
+    return appContext.currencies.find(i => i.iso === props.currencyIso)
+  }, [props.currencyIso, appContext.currencies])
+
+  if(currency && currency.imageIconSmallUrl && props.color){
+    return (<div className={className}><Image  src={`${runtimeConfig.HOST}${currency.imageIconSmallUrl}`} width={24} height={24}/></div>)
+  }
   switch (props.currencyIso?.toUpperCase()){
     case 'BTC':
       if(props.color){

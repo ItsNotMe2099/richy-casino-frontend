@@ -15,6 +15,8 @@ import BottomSheetHeader from 'components/layout/BottomSheetHeader'
 import BottomSheetBody from 'components/layout/BottomSheetBody'
 import { useAppContext } from 'context/state'
 import { ExchangeCurrencySelectField } from 'components/ui/Inputs/ExchangeCurrencySelectField'
+import PaymentsRepository from 'data/repositories/PaymentsRepository'
+import {debounce} from 'debounce'
 
 
 interface Props {
@@ -25,9 +27,9 @@ export default function BuyCrypto(props: Props) {
   const {t} = useTranslation()
   const context = useAppContext()
   const initialValues = {
-    currencySent: Converter.convertCurrencyToOptionsExchange(context.currencies)[0].value,
+    currencySent: 'USD',
     amountSent: 0,
-    currencyGet: Converter.convertCurrencyToOptionsExchange(context.currencies)[1].value,
+    currencyGet: 'BTC',
     amountGet: 0
   }
 
@@ -35,24 +37,27 @@ export default function BuyCrypto(props: Props) {
 
   }
 
-
-
-  const array = [
-    {iso: 'btc', name: 'BTC', rate: 0, /*symbol: '/img/Exchange/bitcoin.png'*/},
-    {iso: 'eht', name: 'EHT', rate: 0, /*symbol: '/img/Exchange/eth.png'*/}
-  ]
-
   const formik = useFormik({
     initialValues,
     onSubmit: handleSubmit,
   })
 
-  const {values, setFieldValue, handleChange} = formik
+  const calc = async (currencyFrom: string, currencyTo: string, amount: number) => {
+    try {
+      const res = await PaymentsRepository.purchaseCalculate(currencyFrom, currencyTo, amount)
+      await formik.setFieldValue('amountGet', res.resultCoinAmount)
+    }catch (e) {
 
+    }
+  }
+  const {values, setFieldValue, handleChange} = formik
+  const debouncedCalc = debounce(async (currencyFrom: string, currencyTo: string, amount: number) => {
+   calc(currencyFrom, currencyTo, amount)
+  }, 500)
   const currencies = Converter.convertCurrencyToOptionsExchange(context.currencies)
     useEffect(() => {
-    setFieldValue('amountGet', (values.amountSent * 2))
-  }, [values.amountSent])
+      debouncedCalc(values.currencySent, values.currencyGet, values.amountSent)
+  }, [values.amountSent, values.currencySent, values.currencyGet])
 
   const result = (<>
     <div className={styles.send}>
@@ -63,7 +68,9 @@ export default function BuyCrypto(props: Props) {
               </div>
               <div className={styles.inputs}>
                 <InputField name={'amountSent'} className={styles.input} validate={Validator.required}/>
-                <ExchangeCurrencySelectField className={styles.select} name='currencySent' options={currencies}/>
+                <div className={styles.exchange}>
+                  <ExchangeCurrencySelectField  name='currencySent' options={Converter.convertCurrencyToOptionsExchange(context.currencies.filter(i => !i.flags?.isCrypto))}/>
+                </div>
               </div>
             </div>
             <div className={styles.send}>
@@ -74,8 +81,8 @@ export default function BuyCrypto(props: Props) {
               </div>
               <div className={styles.inputs}>
                 <InputField name={'amountGet'} className={styles.input} validate={Validator.required} disabled/>
-                <ExchangeCurrencySelectField className={styles.select}
-                  name='currencyGet' options={Converter.convertCurrencyToOptionsExchange(context.currencies)}/>
+                <div className={styles.exchange}> <ExchangeCurrencySelectField
+                                                                               name='currencyGet' options={Converter.convertCurrencyToOptionsExchange(context.currencies.filter(i => i.flags?.isCrypto && i.flags?.isDepositAllowed))}/></div>
               </div>
             </div>
             <div className={styles.disclaimer}>

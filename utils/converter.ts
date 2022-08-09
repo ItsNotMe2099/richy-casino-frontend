@@ -54,7 +54,7 @@ export default class Converter {
   }
   static convertCurrencyToOptionsExchange(currencies: ICurrency[]): IOption<string>[] {
     return currencies.map(i => ({
-      label: i.name,
+      label: i.iso,
       value: i.iso
     }))
   }

@@ -93,7 +93,7 @@ export default function Winners(props: Props) {
                     </td>
                     <td className={styles.cell}>
                       <div className={styles.group}>
-                        <CurrencySvg className={styles.currency} currencyIso={item.userCurrencyIso} />
+                        <CurrencySvg className={styles.currency} color currencyIso={item.userCurrencyIso} />
                         {Formatter.formatAmount(item.spentMoneyAmount, item.userCurrencyIso)} {item.userCurrencyIso}
                       </div>
                     </td>
