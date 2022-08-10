@@ -2,6 +2,7 @@ import request from 'utils/request'
 import Converter from 'utils/converter'
 import {IDepositCryptoResponse, IDepositFiatResponse} from 'data/interfaces/IPaymentDeposit'
 import {IWithdrawResponse} from 'data/interfaces/IPaymentWithDraw'
+import {AxiosRequestConfig} from 'axios'
 
 export default class PaymentsRepository {
   static async depositCrypto(currencyIso: string, paymentSystemId: number, paymentSystemCode: string, amount: number): Promise<IDepositCryptoResponse> {
@@ -87,7 +88,7 @@ export default class PaymentsRepository {
     return res.data?.data
   }
 
-  static async purchaseCalculate(currencyIsoFrom: string, currencyIsoTo: string, amount: number): Promise<{ currencyIsoFrom: string, currencyIsoTo: string, amount: number, resultCoinAmount: number }> {
+  static async purchaseCalculate(currencyIsoFrom: string, currencyIsoTo: string, amount: number, config: AxiosRequestConfig): Promise<{ currencyIsoFrom: string, currencyIsoTo: string, amount: number, resultCoinAmount: number }> {
     const res = await request({
       method: 'post',
       url: '/api/finance/payment/purchase/calculate',
@@ -95,7 +96,8 @@ export default class PaymentsRepository {
         currency_iso_from: currencyIsoFrom,
         currency_iso_to: currencyIsoTo,
         amount
-      }
+      },
+      config
     })
     if (res.err) {
       throw res.err

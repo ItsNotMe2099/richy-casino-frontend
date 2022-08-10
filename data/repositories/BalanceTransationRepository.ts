@@ -25,7 +25,7 @@ export default class BalanceTransactionRepository {
   static async fetchBetHistory(page: number = 1, limit: number = 1000): Promise<IPagination<IBetHistoryItem>> {
     const res = await request({
       method: 'get',
-      url: `/api/finance/transaction/bet-history?${queryString.stringify({
+      url: `/api/finance/transaction/user-bet-history?${queryString.stringify({
         page,
         'per-page': limit
       }, {arrayFormat: 'bracket'})}`,

@@ -2,7 +2,11 @@ export interface IBetHistoryItem {
   gameId?: number
   imageIconPreviewUrl?: string
   imageIconSmallUrl?: string
-  currencyIso?: string
-  money: number
+  money: {
+    convertedCurrency: {[key: string]: number}
+    currency: {[key: string]: number}
+  }
+  name: string
+  sessionId: string
   time: string
 }

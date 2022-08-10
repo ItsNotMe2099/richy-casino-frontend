@@ -14,25 +14,48 @@ import {NextSeo} from 'next-seo'
 import ContentLoader from 'components/ui/ContentLoader'
 import styles from 'pages/freebitcoin/index.module.scss'
 import Head from 'next/head'
+import {IPagination} from 'types/interfaces'
 
 export default function FreeBitcoin() {
   const {t} = useTranslation()
   const context = useAppContext()
   const [loading, setLoading] = useState<boolean>(true)
   const [slots, setSlots] = useState<IFreeBitcoinSlot[]>([])
-  const [history, setHistory] = useState<IFreeBitcoinHistory[]>([])
+  const [history, setHistory] = useState<IPagination<IFreeBitcoinHistory>>({data: [], total: 0})
   const [userStatus, setUserStatus] = useState<IFreeBitcoinUserStatus>(null)
+  const [historyPage, setHistoryPage] = useState<number>(1)
+  const [historyLoading, setHistoryLoading] = useState(false)
+  const limit = 7
   useEffect(() => {
-    console.log('context.auth ', context.user )
+    console.log('context.auth ', context.user)
     Promise.all([
       FreeBitcoinRepository.fetchSlots().then(i => setSlots(i)),
-      FreeBitcoinRepository.fetchHistory().then(i => setHistory(i ?? [])),
+      FreeBitcoinRepository.fetchHistory(1, limit).then(i => setHistory(i)),
       ...(context.auth ? [FreeBitcoinRepository.fetchUserStatus().then(i => setUserStatus(i))] : []),
     ]).then(() => setLoading(false))
   }, [context.auth])
 
   const [isShow, setIsShow] = useState(false)
-
+  const handlePrevHistory = async () => {
+    if (historyPage * limit === history.total) {
+      return
+    }
+    setHistoryLoading(true)
+    setHistoryPage(historyPage + 1)
+    const res = await FreeBitcoinRepository.fetchHistory(historyPage + 1, limit)
+    setHistory(res)
+    setHistoryLoading(false)
+  }
+  const handleNextHistory = async () => {
+    if (historyPage == 1) {
+      return
+    }
+    setHistoryLoading(true)
+    setHistoryPage(historyPage - 1)
+    const res = await FreeBitcoinRepository.fetchHistory(historyPage - 1, limit)
+    setHistory(res)
+    setHistoryLoading(false)
+  }
   return (
     <WithGameFilterLayout>
       <Head>
@@ -52,22 +75,22 @@ export default function FreeBitcoin() {
           url: 'https://richy.casino/',
         }}
       />
-          <PageTitle icon='/img/Contents/bitcoin.svg' title={t('freebitcoin_title')}
-                     onClick={() => isShow ? setIsShow(false) : setIsShow(true)} shadowColor='yellow'/>
+      <PageTitle icon='/img/Contents/bitcoin.svg' title={t('freebitcoin_title')}
+                 onClick={() => isShow ? setIsShow(false) : setIsShow(true)} shadowColor='yellow'/>
       {loading && <ContentLoader style={'block'} isOpen={true}/>}
-      {!loading &&   <><Banner/>
-          <div className={styles.tables}>
-            <div className={styles.table}><Table items={slots}/></div>
-            <Table items={history} history/>
-          </div>
-            </>}
+      {!loading && <><Banner/>
+        <div className={styles.tables}>
+          <div className={styles.table}><Table items={slots}/></div>
+          <Table items={history.data} nextDisabled={historyPage === 1}
+                 prevDisabled={historyPage * limit === history.total} loading={historyLoading} history onNext={handleNextHistory}
+                 onPrev={handlePrevHistory}/>
+        </div>
+      </>}
     </WithGameFilterLayout>
   )
 }
 export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
-    props: {
-
-    },
+    props: {},
   }
 }

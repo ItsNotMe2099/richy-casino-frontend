@@ -9,7 +9,7 @@ import Converter from 'utils/converter'
 import Button from 'components/ui/Button'
 import ProfileModalFooter from 'components/Profile/layout/ProfileModalFooter'
 import {useTranslation} from 'next-i18next'
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import BottomSheetLayout from 'components/layout/BottomSheetLayout'
 import BottomSheetHeader from 'components/layout/BottomSheetHeader'
 import BottomSheetBody from 'components/layout/BottomSheetBody'
@@ -29,9 +29,11 @@ export default function BuyCrypto(props: Props) {
   const context = useAppContext()
   const [sending, setSending] = useState<boolean>(false)
   const [error, setError] = useState<any | null>(null)
+  const abortControllerRef = useRef<AbortController | null>(null)
+
   const initialValues = {
     currencySent: 'USD',
-    amountSent: 0,
+    amountSent: 30,
     currencyGet: 'BTC',
     amountGet: 0
   }
@@ -59,7 +61,12 @@ export default function BuyCrypto(props: Props) {
 
   const calc = async (currencyFrom: string, currencyTo: string, amount: number) => {
     try {
-      const res = await PaymentsRepository.purchaseCalculate(currencyFrom, currencyTo, amount)
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
+      abortControllerRef.current = new AbortController()
+      const res = await PaymentsRepository.purchaseCalculate(currencyFrom, currencyTo, amount, {signal: abortControllerRef.current.signal})
+      abortControllerRef.current = null
       console.log('res.resultCoinAmount', res.resultCoinAmount)
       await formik.setFieldValue('amountGet', res.resultCoinAmount)
     }catch (e) {
@@ -69,7 +76,7 @@ export default function BuyCrypto(props: Props) {
   const {values, setFieldValue, handleChange} = formik
   const debouncedCalc = debounce(async (currencyFrom: string, currencyTo: string, amount: number) => {
    calc(currencyFrom, currencyTo, amount)
-  }, 500)
+  }, 250)
   const currencies = Converter.convertCurrencyToOptionsExchange(context.currencies)
     useEffect(() => {
       debouncedCalc(values.currencySent, values.currencyGet, values.amountSent)

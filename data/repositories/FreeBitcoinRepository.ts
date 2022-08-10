@@ -4,17 +4,22 @@ import {IFreeBitcoinHistory} from 'data/interfaces/IFreeBitcoinHistory'
 import {IFreeBitcoinSlot} from 'data/interfaces/IFreeBitcoinSlot'
 import {IFreeBitcoinUserStatus} from 'data/interfaces/IFreeBitcoinUserStatus'
 import {IFreeBitcoinGame} from 'data/interfaces/IFreeBitcoinGame'
+import {IPagination} from 'types/interfaces'
 
 export default class FreeBitcoinRepository {
-  static async fetchHistory(): Promise<IFreeBitcoinHistory[]> {
+  static async fetchHistory(page: number, limit : number): Promise<IPagination<IFreeBitcoinHistory>> {
     const res = await request({
       method: 'get',
       url: '/api/freebitcoin/slot/history',
+      data: {
+        page,
+        'per-page': limit
+      }
     })
     if (res.err) {
       return null
     }
-    return res.data.data?.map(i => Converter.objectKeysToCamelCase(i)) ?? []
+    return  Converter.convertApiPaginationResponse(res.data)
   }
 
   static async fetchSlots(): Promise<IFreeBitcoinSlot[]> {

@@ -12,6 +12,7 @@ import FormError from 'components/ui/Form/FormError'
 import {useAppContext} from 'context/state'
 import {ModalType} from 'types/enums'
 import Formatter from 'utils/formatter'
+import {debounce} from 'debounce'
 
 interface Props {
   pricePerTicket: number,
@@ -24,6 +25,9 @@ export default function BuyTicketsForm(props: Props) {
   const appContext = useAppContext()
   const [sending, setSending] = useState(false)
   const [error, setError] = useState(null)
+  const debouncedUpdateBalance = debounce( () => {
+    appContext.updateUserFromCookies()
+  }, 300)
   const handleBuy = async (data) => {
     if(!appContext.auth){
       appContext.showModal(ModalType.registration)
@@ -34,6 +38,7 @@ export default function BuyTicketsForm(props: Props) {
     try {
       const res = await LotteryRepository.buyTicket(parseInt(data.amount, 10))
       props.onBuy(res)
+      debouncedUpdateBalance()
     }catch (e) {
       setError(e)
     }

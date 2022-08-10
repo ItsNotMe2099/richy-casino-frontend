@@ -77,7 +77,9 @@ export default function Exchange(props: Props) {
     setSending(true)
     try{
       await InfoRepository.convertCurrency(data.currencySent, data.currencyGet, data.amountSent)
+      await context.updateUserFromCookies()
       context.goBackModalProfile()
+
     }catch (e) {
       setError(e)
     }
