@@ -29,9 +29,7 @@ export default function Select<T>(props: Props<T>){
     dropdownRef,
     setIsActive,
   ))
-  console.log('isActive', isActive)
   const handleClick = (e) => {
-    console.log('handleClick', e)
     if(options.length === 0 && onTriggerClick){
       onTriggerClick()
     }

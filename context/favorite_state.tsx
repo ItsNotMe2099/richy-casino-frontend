@@ -44,7 +44,6 @@ export function FavoriteWrapper(props: Props) {
   }, [store])
 
   useEffect(() => {
-    console.log('isLoggedRef.current && isLogged', isLoggedRef.current , isLogged)
     if (isLoggedRef.current && !isLogged) {
       setStore({...initStore})
     }

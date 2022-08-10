@@ -97,7 +97,6 @@ export const ReactPWAInstallProvider = ({children, enableLogging}: Props) => {
   }
 
   const handleBeforeInstallPromptEvent = async (event) => {
-    console.log('handleBeforeInstallPromptEvent', event)
     event.preventDefault()
     deferredprompt.current = event
     logger('beforeinstallprompt event fired and captured')
@@ -125,7 +124,6 @@ export const ReactPWAInstallProvider = ({children, enableLogging}: Props) => {
       try {
         await deferredprompt.current.prompt()
         const choiceResult = await deferredprompt.current.userChoice
-        console.log('UserChoice', choiceResult)
         if (choiceResult.outcome === 'accepted') {
           logger('PWA native installation succesful')
           setState(PwaState.Installed)

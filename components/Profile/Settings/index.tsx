@@ -59,7 +59,6 @@ export default function Settings(props: Props) {
   const [error, setError] = useState(null)
   const [error2Fa, setError2Fa] = useState(null)
   const enabled2Fa = context.user.flags.is2FaEnabled
-  console.log('userFlags', context.user.flags)
   const initialValues: UserFormData = {
     id: context.user.id,
     username: context.user.username,
@@ -100,9 +99,7 @@ export default function Settings(props: Props) {
       const res = await UserRepository.updateUser({...data, ...(data.phone ? {phone: Formatter.cleanPhone(data.phone)} : {})})
       const oldPhone = context.user.phone
       await context.updateUserFromCookies()
-      console.log('UpdateRes', res)
       if(res.shouldConfirmOldPhone){
-        console.log('UpdateRes2', res.shouldConfirmOldPhone)
         context.goBackModalProfile()
         context.showModalProfile(ProfileModalType.oldPhoneConfirm, {phone: oldPhone, shouldConfirmNewPhone: res.shouldConfirmNewPhone} as ConfirmOldPhoneModalArguments)
       }else if(res.shouldConfirmNewPhone){
@@ -161,8 +158,7 @@ export default function Settings(props: Props) {
     try {
       if (enable) {
         const qrUrl = await UserRepository.twoFaEnable()
-        console.log('qrUrl', qrUrl)
-        context.showModalProfile(ProfileModalType.FA, {qrUrl} as TwoFaModalArguments)
+         context.showModalProfile(ProfileModalType.FA, {qrUrl} as TwoFaModalArguments)
       } else {
         await UserRepository.twoFaDisable()
         context.updateUserFromCookies()
@@ -200,7 +196,7 @@ export default function Settings(props: Props) {
             <ProfileSettingsSelectField name='currency_iso' validate={Validator.required} options={currencies}
                                         label={t('settings_field_currency')} disabled={sending}/>
           <PhoneField defaultCountry={context.countryByIp?.iso}   label={t('settings_field_phone')} disabled={sending} name={'phone'} styleType={'horizontal'}  countrySelectClassName={styles.inputPhoneCountrySelect} fieldWrapperClassName={classNames(styles.input, styles.inputPhone)} errorClassName={styles.fieldError} validate={Validator.required} />
-      
+
             <InputField name={'email'} disabled={true} className={styles.input} label={t('settings_field_email')}
                         errorClassName={styles.fieldError}/>
             <div className={classNames(styles.change, {[styles.justify]: isChange})}>

@@ -19,7 +19,6 @@ export default function ModalFooterTwoFa(props: Props) {
     setLoading(true)
     try {
       const qrUrl = await UserRepository.twoFaEnable()
-      console.log('qrUrl', qrUrl)
       context.showModalProfile(ProfileModalType.FA, {qrUrl} as TwoFaModalArguments)
     }catch (error) {
       context.showSnackbar(Array.isArray(error) ? error[0] : error, SnackbarType.error)

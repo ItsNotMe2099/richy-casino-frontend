@@ -39,7 +39,6 @@ export default function ModalLogin(props: Props) {
       if (!res) {
         return
       }
-      console.log('LoginRes', res)
 
       if(res.is2FaRequired){
         appContext.showModal(ModalType.faLogin, {identity: values.authInput, password: values.password} as TwoFaLoginModalArguments)

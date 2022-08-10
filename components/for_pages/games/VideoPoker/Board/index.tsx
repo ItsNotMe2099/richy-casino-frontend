@@ -54,7 +54,6 @@ export default function Board(props: Props) {
 
   }, [gameContext])
 
-  console.log('turn?.deck', turn?.deck)
 
   return (
     <GamePageBoardLayout className={styles.layout} toolbarColor={'green'}>

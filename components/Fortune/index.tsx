@@ -79,8 +79,7 @@ export default function Fortune(props: Props) {
     appContext.updateUserFromCookies()
   }, 300)
   const play = async () => {
-    console.log('Plsy')
-    if (appContext.auth) {
+     if (appContext.auth) {
       setButtonDisabled(true)
       setShowWinner(false)
       setGameResult(null)

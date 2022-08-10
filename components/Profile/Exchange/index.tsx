@@ -58,7 +58,6 @@ export default function Exchange(props: Props) {
   const _temp = currenciesFiltered.find(i => i.iso.toUpperCase() === 'BTC') ?? currenciesFiltered[0]
   const initialCurrenciesGet = currencies.filter(i => _temp.convertableTo.map(i => i.currencyIso).includes(i.value))
   const initialCurrencyGet =  initialCurrenciesGet.find(i => i.value.toUpperCase() === 'ETH')?.value ?? initialCurrenciesGet[0]?.value
-  console.log('initialCurrencyGet', initialCurrencyGet)
   const lastCurrencyIsoSentRef = useRef<string | null>(initialCurrencySent)
   const lastCurrencyIsoGetRef = useRef<string | null>(initialCurrencyGet)
   const amountSentRef = useRef<number | null>(30)
@@ -100,10 +99,8 @@ export default function Exchange(props: Props) {
   const currencySent = context.currencies.find(i => i.iso === formik.values.currencySent)
   const currencyGet = context.currencies.find(i => i.iso === formik.values.currencyGet)
   const currenciesGet = currencies.filter(i => currencySent.convertableTo.map(i => i.currencyIso).includes(i.value))
-  console.log('currenciesGet', currencies,currenciesGet, currencySent.convertableTo)
   const validationBalance = (value) => {
     const num = parseFloat(value)
-    console.log('CheckNum', num, parseFloat(`${`${currentBalance}`.replace(',', '.')}`))
     if(num > parseFloat(`${`${currentBalance}`.replace(',', '.')}`)){
       return  t('exchange_balance_error')
     }
@@ -119,8 +116,7 @@ export default function Exchange(props: Props) {
   const handleChangeAmountSent = (value: string) => {
     const num = customParseFloat(value)
     amountSentRef.current = num
-    console.log('Rate11', rate, num,  rate * num)
-    formik.setFieldValue('amountGet', (rate * num).toFixed(8).replace(/\.?0+$/,'')  )
+     formik.setFieldValue('amountGet', (rate * num).toFixed(8).replace(/\.?0+$/,'')  )
   }
   const handleChangeAmountGet = (value: string) => {
     const num = +value
@@ -142,7 +138,6 @@ export default function Exchange(props: Props) {
       currencyRotating.current = true
       const num = amountSentRef.current ?? 0
       const rate = getRate(lastCurrencyIsoGetRef.current, formik.values.currencyGet)
-      console.log('GetRate', num, rate, formik.values.currencyGet, lastCurrencyIsoGetRef.current)
       formik.setFieldValue('amountGet',  (num * rate).toFixed(8).replace(/\.?0+$/,''))
       formik.setFieldValue('currencySent', lastCurrencyIsoGetRef.current)
     }else{
@@ -163,7 +158,6 @@ export default function Exchange(props: Props) {
 
       const num = amountSentRef.current ?? 0
       const rate = getRate(formik.values.currencySent, lastCurrencyIsoSentRef.current)
-      console.log('GetRate', num, rate, lastCurrencyIsoSentRef.current, formik.values.currencyGet)
       formik.setFieldValue('amountGet',  (num * rate).toFixed(8).replace(/\.?0+$/,''))
       formik.setFieldValue('currencyGet', lastCurrencyIsoSentRef.current)
     }else{

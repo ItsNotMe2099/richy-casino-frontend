@@ -54,7 +54,7 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
   const { setFieldValue, setFieldTouched } = useFormikContext()
   const dropdownRef = useRef(null)
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
- 
+
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
   const { styles: popperStyles, attributes } = usePopper(referenceElement, popperElement, {
@@ -72,7 +72,7 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
         },
       },
       sameWidth as any
-     
+
     ]
   })
   const handleClick = (e) => {
@@ -82,7 +82,6 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
     e.preventDefault()
     e.stopPropagation()
     setIsActive(!isActive)
-    console.log('HandleClick', !isActive)
   }
   const handleChange = (value) => {
     if(disabled){

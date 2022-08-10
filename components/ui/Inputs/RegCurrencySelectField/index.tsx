@@ -52,7 +52,6 @@ export const RegCurrencySelectField = (props: Props) => {
   useEffect(() => {
     context.fetchDefaultCurrency().then(i =>{
       if(i) {
-        console.log('SetDefaultCurrency', i)
         helpers.setValue(i.iso)
       }
     })

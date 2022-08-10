@@ -80,7 +80,6 @@ export default function CountrySelect(props: Props & FieldConfig) {
       props.offsetLeft > 0 ? sameWidthWithOffset : sameWidth as any
     ]
   })
-  console.log('OffestLeft', props.offsetLeft)
   useEffect(() => {
     setTimeout(() => {
       setReferenceElement(document.querySelector('#phone-field'))

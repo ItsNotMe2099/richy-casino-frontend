@@ -32,7 +32,6 @@ export default function Lottery() {
     ]).then(() => setLoading(false))
   }, [appContext.auth])
   const handleBuy = async (data: ILotteryBuyResponse) => {
-    console.log('handleBuy', data)
 
     LotteryRepository.fetchCurrentActiveRound().then(i => {
       setCurrentRound(i)

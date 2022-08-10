@@ -64,7 +64,6 @@ export default function StepForm(props: Props) {
       }else{
         const res = await PaymentsRepository.withdrawFiat(props.currency.iso, props.paymentSystem.id, props.paymentSystem.systemCode,`${window.location.origin}?withdrawal=1`, data.amount, data.address)
         if(res.url){
-          console.log('ResUrl11', res.url)
           window.location.href = res.url
         }
 

@@ -21,7 +21,6 @@ export default class UserRepository {
     }
     if(res.data?.data) {
       const data = {...Converter.objectKeysToCamelCase(res.data?.data)}
-      console.log('Data', res.data?.data)
       data.balance.currencies.totals = convertCurrencyToArray(data.balance.currencies.totals, data.balance.calculatedToDefaultCurrency.totals, data.currencyIso)
       data.balance.currencies.bonus = convertCurrencyToArray(data.balance.currencies.bonus, data.balance.calculatedToDefaultCurrency.bonus, data.currencyIso)
       data.balance.currencies.real = convertCurrencyToArray(data.balance.currencies.real, data.balance.calculatedToDefaultCurrency.real, data.currencyIso)
@@ -78,7 +77,6 @@ export default class UserRepository {
     if (res?.err) {
       throw res.err
     }
-    console.log('qrUrlD', res.data)
     return res.data?.data?.qrUrl
   }
   static async twoFaConfirm({code, password}): Promise<any> {
@@ -90,7 +88,6 @@ export default class UserRepository {
     if (res?.err) {
       throw res.err
     }
-    console.log('qrUrlD', res.data)
     return res.data?.qrUrl
   }
   static async twoFaDisable(): Promise<string> {

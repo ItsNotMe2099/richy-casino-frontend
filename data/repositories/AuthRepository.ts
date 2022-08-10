@@ -24,7 +24,6 @@ export default class AuthRepository {
   }
 
   static async socialLogin(data: any, referer: string): Promise<IAuthLoginResponse> {
-    console.log('SocialReq', data)
     const res = await request({
       method: 'get',
       url: '/api/user/social/login',
@@ -34,8 +33,6 @@ export default class AuthRepository {
       referer,
     })
     if (res?.err) {
-      console.log('Eqweqwewqe')
-      console.error(res.err)
       throw res.err
     }
     return Converter.objectKeysToCamelCase(res.data?.data)

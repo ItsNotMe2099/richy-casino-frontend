@@ -26,7 +26,6 @@ export default function FreeBitcoin() {
   const [historyLoading, setHistoryLoading] = useState(false)
   const limit = 7
   useEffect(() => {
-    console.log('context.auth ', context.user)
     Promise.all([
       FreeBitcoinRepository.fetchSlots().then(i => setSlots(i)),
       FreeBitcoinRepository.fetchHistory(1, limit).then(i => setHistory(i)),
@@ -55,7 +54,6 @@ export default function FreeBitcoin() {
     setHistory(res)
     setHistoryLoading(false)
   }
-  console.log('historyTotal', historyPage, history.totalPages)
   return (
     <WithGameFilterLayout>
       <Head>

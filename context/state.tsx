@@ -270,7 +270,6 @@ export function AppWrapper(props: Props) {
   const showModal = (type: ModalType | ProfileModalType, args?: any) => {
 
     if (props.isMobile && ModalsBottomSheet.includes(type)) {
-      console.log('ModalsBottomSheet.includes(type)', type)
       showBottomSheet(type, args)
       return
     }
@@ -280,7 +279,6 @@ export function AppWrapper(props: Props) {
 
   }
   const hideModal = () => {
-    console.log('hideModal', bottomSheet)
     if (bottomSheet) {
       hideBottomSheet()
       return
@@ -291,7 +289,6 @@ export function AppWrapper(props: Props) {
   const showBottomSheet = (type: ModalType | ProfileModalType, props?: any) => {
     ReactModal.setAppElement('body')
     setModalArguments(props)
-    console.log('SetBottomSheet', type)
     setBottomSheet(type)
   }
   const hideBottomSheet = () => {

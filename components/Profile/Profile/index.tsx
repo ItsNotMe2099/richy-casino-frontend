@@ -50,7 +50,6 @@ export default function Profile(props: Props) {
   }
   const mainAccount = UserUtils.getMainBalanceReal(context.user)
   const otherAccounts = UserUtils.getOtherBalancesReal(context.user)
-  console.log('otherAccounts1', otherAccounts)
   const bonusAccounts = UserUtils.getBonusBalances(context.user)
   const currenciesToAdd = context.currencies.filter(i => !context.user.balance.currencies.totals.find(a => a.currency === i.iso))
   return (

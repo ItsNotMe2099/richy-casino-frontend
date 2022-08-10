@@ -50,7 +50,6 @@ export default function StepForm(props: Props) {
   }
 
   const rate = props.currency?.toUsd
-  console.log('Rate', props.currency)
   useEffect(() => {
     context.updateCurrencies()
   }, [])

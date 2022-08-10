@@ -38,7 +38,6 @@ self.addEventListener('activate', function(event) {
             .then((keyList) => {
                 return Promise.all(keyList.map((key) => {
                     if (key !== CACHE_NAME) {
-                        console.log('[ServiceWorker] Hapus cache lama', key)
                         return caches.delete(key)
                     }
                 }))

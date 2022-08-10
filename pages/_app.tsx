@@ -47,8 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       //  setIsLoading(false)
     }, 1000)
     if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
-      console.log('registerServiceWorker')
-      navigator.serviceWorker.register('/pwabuilder-sw.js', { scope: './' })
+       navigator.serviceWorker.register('/pwabuilder-sw.js', { scope: './' })
     }
     if (typeof window !== 'undefined') {
       const appHeight = () => {

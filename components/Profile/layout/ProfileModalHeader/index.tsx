@@ -22,7 +22,6 @@ export default function ProfileModalHeader(props: Props) {
     context.hideModal()
   }
   const handleBackClick = () => {
-    console.log('handleBackClick', handleBackClick)
     if(props.onBackClick){
       props.onBackClick()
     }else{
