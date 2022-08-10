@@ -3,15 +3,17 @@ import {useTranslation} from 'next-i18next'
 import {IDepositCryptoResponse} from 'data/interfaces/IPaymentDeposit'
 import QRCode from 'react-qr-code'
 import {PaymentOptions} from 'components/Profile/Wallet/PaymentOptions'
-import {PaymentMethod} from 'types/interfaces'
 import {PaymentMethodCard} from 'components/Profile/Wallet/PaymentMethodCard'
 import UserUtils from 'utils/user'
 import {PaymentSeparator} from 'components/Profile/Wallet/PaymentSeparator'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import {useAppContext} from 'context/state'
+import {IPaymentMethod} from 'data/interfaces/IPaymentMethod'
+import {IPaymentSystem} from 'data/interfaces/IPaymentSystem'
 interface Props {
   response:  IDepositCryptoResponse
-  method: PaymentMethod
+  method: IPaymentMethod
+  paymentSystem: IPaymentSystem
   currency: ICurrency
 }
 

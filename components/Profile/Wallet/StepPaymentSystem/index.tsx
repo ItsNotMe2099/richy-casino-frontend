@@ -21,7 +21,7 @@ export default function StepPaymentSystem(props: Props) {
   return (
     <div className={styles.root}>
       <PaymentOptions>
-        <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>
+        <PaymentMethodSelected method={props.method} paymentSystem={null} onClick={() => props.onSetStep(PaymentStep.Method)}/>
       </PaymentOptions>
       {!context.isMobile &&  <PaymentSeparator/>}
       {props.method.isCrypto ? <div className={styles.cryptoActions}>

@@ -13,6 +13,7 @@ import Formatter from 'utils/formatter'
 import { ModalType } from 'types/enums'
 import Reels from 'components/ui/Reels'
 import React, {useEffect, useRef, useState} from 'react'
+import {debounce} from 'debounce'
 enum State{
   Timer = 'timer',
   Play = 'play',
@@ -70,6 +71,9 @@ export default function Banner(props: Props) {
       }
     })
   }
+  const debouncedUpdateBalance = debounce( () => {
+    context.updateUserFromCookies()
+  }, 300)
   const handlePlay = async () => {
     setSending(true)
     if(winTimerRef.current){
@@ -103,7 +107,7 @@ export default function Banner(props: Props) {
         setResult(null)
       }, 3000)
 
-
+      debouncedUpdateBalance()
 
     }catch (e){
       setError(e)

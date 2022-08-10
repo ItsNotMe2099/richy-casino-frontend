@@ -56,7 +56,7 @@ const Placeholder = (props: PropsOption) => {
 export const ExchangeCurrencySelectField = (props: Props) => {
 
   return (
-  <SelectField popperFlip popperStrategy={'fixed'}  triggerClassName={styles.dropDownTrigger} className={classNames(styles.root, props.className)} options={props.options}  name={props.name} currentItemStyle={styles.current}
+  <SelectField  popperStrategy={'fixed'}  triggerClassName={styles.dropDownTrigger} className={classNames(styles.root, props.className)} options={props.options}  name={props.name} currentItemStyle={styles.current}
     itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
     activeComponent={(option ,isActive) => <Placeholder option={option} isActive={isActive}/>}
   />

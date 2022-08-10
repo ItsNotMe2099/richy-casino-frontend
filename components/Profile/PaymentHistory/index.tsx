@@ -12,7 +12,7 @@ import {PaymentSwitchFilterKey, ProfileModalType} from 'types/enums'
 import {useEffect, useState} from 'react'
 import BalanceTransactionRepository from 'data/repositories/BalanceTransationRepository'
 import {BalanceTransactionType, IBalanceTransaction} from 'data/interfaces/IBalanceTransaction'
-import {IPagination} from 'types/interfaces'
+import {IPagination, PaymentHistoryModalArguments} from 'types/interfaces'
 import {IWithdrawHistory} from 'data/interfaces/IWithdrawHistory'
 import classNames from 'classnames'
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -56,7 +56,8 @@ export default function PaymentHistory(props: Props) {
   const {t} = useTranslation()
   const appContext = useAppContext()
   const initialData = {data: [], total: 0}
-  const [filter, setFilter] = useState<PaymentSwitchFilterKey>(PaymentSwitchFilterKey.All)
+  const args = appContext.modalArguments as PaymentHistoryModalArguments
+  const [filter, setFilter] = useState<PaymentSwitchFilterKey>(args.filter ?? PaymentSwitchFilterKey.All)
   const [data, setData] = useState<IPagination<IBalanceTransaction>>(initialData)
   const [applicationsData, setApplicationsData] = useState<IPagination<IWithdrawHistory>>(initialData)
   const [page, setPage] = useState<number>(0)

@@ -6,9 +6,11 @@ import { PaymentMethodCard } from '../PaymentMethodCard'
 import {CryptoCurrencyIcons} from 'components/Profile/Wallet/CryptoCurrencyIcons'
 import {useMemo} from 'react'
 import {ICurrency} from 'data/interfaces/ICurrency'
+import {IPaymentSystem} from 'data/interfaces/IPaymentSystem'
 
 interface Props {
   method: IPaymentMethod
+  paymentSystem: IPaymentSystem | null
   onClick?: () => void
 }
 
@@ -23,6 +25,8 @@ export const PaymentMethodSelected = (props: Props) => {
   }, [props.method])
   const isMobile = context.isMobile
   const {t} = useTranslation()
-  return isMobile ? <PaymentMethodSelectedMobile icon={props.method.isCrypto ? <CryptoCurrencyIcons currencies={currencies} selected={true}/> : props.method.imageUrl} label={props.method.title} onClick={props.onClick}/> : <PaymentMethodCard  icon={props.method.isCrypto ? <CryptoCurrencyIcons currencies={currencies} selected={true}/> : props.method.imageUrl}  label={props.method.title}  selected onClick={props.onClick}/>
+  const label = props.method.isCrypto ? props.method.title : props.paymentSystem?.name ?? props.method.title
+  const image =  props.paymentSystem?.imageUrl ??  props.method.imageUrl
+  return isMobile ? <PaymentMethodSelectedMobile icon={props.method.isCrypto ? <CryptoCurrencyIcons currencies={currencies} selected={true}/> : image} label={label} onClick={props.onClick}/> : <PaymentMethodCard  icon={props.method.isCrypto ? <CryptoCurrencyIcons currencies={currencies} selected={true}/> : image}  label={label}  selected onClick={props.onClick}/>
 }
 

@@ -12,6 +12,11 @@ import TopSlider from 'components/for_pages/MainPage/TopSlider'
 import BuyCrypto from 'components/for_pages/MainPage/BuyCrypto'
 import VisibleXs from 'components/ui/VisibleXS'
 import {useTranslation} from 'next-i18next'
+import {useEffect} from 'react'
+import {useRouter} from 'next/router'
+import {useAppContext} from 'context/state'
+import {PaymentSwitchFilterKey, ProfileModalType} from 'types/enums'
+import {PaymentHistoryModalArguments} from 'types/interfaces'
 
 const casinos = [
   {image: '/img/GamesList/hotline.png', label: 'hotline', provider: 'provider1', category: 'category1'},
@@ -41,14 +46,23 @@ const live = [
 
 export default function IndexPage() {
   const {t} = useTranslation()
+  const appContext = useAppContext()
+  const router = useRouter()
+  useEffect(() => {
+    if(router.query.withdrawal){
+      appContext.showModalProfile(ProfileModalType.paymentHistory, {filter: PaymentSwitchFilterKey.Applications} as PaymentHistoryModalArguments)
+      router.replace('/', '/', {shallow: true})
+    }
+
+  }, [router.query])
   return (
         <Layout>
           <TopSlider/>
           <Contents/>
           <Games/>
           <div className={styles.lists}>
-            <GamesList type={MainGameListType.All} label='Казино' icon='/img/Contents/casino.svg' items={casinos} shadowColor='red'/>
-            <GamesList type={MainGameListType.Live} label='Live Casino' icon='/img/Contents/live.svg' items={live} shadowColor='blue'/>
+            <GamesList type={MainGameListType.All} label='Казино' icon='/img/Contents/casino.svg' shadowColor='red'/>
+            <GamesList type={MainGameListType.Live} label='Live Casino' icon='/img/Contents/live.svg' shadowColor='blue'/>
           </div>
           <VisibleXs>
             <BuyCrypto/>

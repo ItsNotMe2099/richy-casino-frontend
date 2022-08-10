@@ -98,6 +98,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       </AuthWrapper>
       {clientVisible && <Snackbar />}
+
        </AppWrapper >
   )
 }

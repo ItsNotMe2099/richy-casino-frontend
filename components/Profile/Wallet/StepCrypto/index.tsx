@@ -24,7 +24,7 @@ export default function StepCrypto(props: Props) {
  return (
       <div className={styles.root}>
         <PaymentOptions>
-         <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>
+         <PaymentMethodSelected method={props.method} paymentSystem={null}  onClick={() => props.onSetStep(PaymentStep.Method)}/>
           <PaymentMethodCard icon={<CurrencySvg currencyIso={props.currency.iso} color/>} label={props.currency.name} selected  onClick={() => props.onSetStep(PaymentStep.Currency)}/>
         </PaymentOptions>
         <div className={styles.separator}>

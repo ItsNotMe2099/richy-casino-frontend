@@ -16,6 +16,7 @@ import RichyLoader from 'components/ui/RichyLoader'
 import { ModalType } from 'types/enums'
 import { useMeasure } from 'react-use'
 import { useTranslation } from 'next-i18next'
+import {debounce} from 'debounce'
 
 const Board = dynamic(() => import('./Board'), { ssr: false })
 
@@ -74,7 +75,9 @@ export default function Fortune(props: Props) {
     }
     setLoaded(true)
   }
-
+  const debouncedUpdateBalance = debounce( () => {
+    appContext.updateUserFromCookies()
+  }, 300)
   const play = async () => {
     console.log('Plsy')
     if (appContext.auth) {
@@ -89,6 +92,7 @@ export default function Fortune(props: Props) {
         setGameResult(res)
         checkAvailable(userRef.current)
         setTimeout(clear, totalTime)
+        debouncedUpdateBalance()
       }catch (e) {
         setButtonDisabled(false)
       }

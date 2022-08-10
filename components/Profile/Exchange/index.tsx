@@ -77,7 +77,9 @@ export default function Exchange(props: Props) {
     setSending(true)
     try{
       await InfoRepository.convertCurrency(data.currencySent, data.currencyGet, data.amountSent)
+      await context.updateUserFromCookies()
       context.goBackModalProfile()
+
     }catch (e) {
       setError(e)
     }
@@ -188,9 +190,9 @@ export default function Exchange(props: Props) {
                 </div>
               </div>
               <div className={styles.inputs}>
-                <InputField name={'amountSent'}  onChange={handleChangeAmountSent} className={styles.input} validate={Validator.combine([Validator.required, validationBalance])}/>
+                <InputField name={'amountSent'}  onChange={handleChangeAmountSent} className={styles.input} disabled={sending} validate={Validator.combine([Validator.required, validationBalance])}/>
                 <div className={styles.exchange}>
-                  <ExchangeCurrencySelectField className={styles.select} name='currencySent' options={Converter.convertCurrencyToOptionsExchange(currenciesFiltered)}/>
+                  <ExchangeCurrencySelectField className={styles.select} disabled={sending} name='currencySent' options={Converter.convertCurrencyToOptionsExchange(currenciesFiltered)}/>
                 </div>
               </div>
             </div>
@@ -205,9 +207,9 @@ export default function Exchange(props: Props) {
                 </div>
               </div>
               <div className={styles.inputs}>
-                <InputField name={'amountGet'} onChange={handleChangeAmountGet} className={styles.input} validate={Validator.required}/>
+                <InputField name={'amountGet'}  disabled={sending} onChange={handleChangeAmountGet} className={styles.input} validate={Validator.required}/>
                 <div className={styles.exchange}><ExchangeCurrencySelectField
-                  name='currencyGet' options={currenciesGet} />
+                  name='currencyGet' options={currenciesGet} disabled={sending} />
                 </div>
               </div>
             </div>

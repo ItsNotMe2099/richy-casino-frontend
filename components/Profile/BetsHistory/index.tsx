@@ -15,9 +15,13 @@ import {IBetHistoryItem} from 'data/interfaces/IBetHistoryItem'
 import ContentLoader from 'components/ui/ContentLoader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Image from 'next/image'
+import Formatter from 'utils/formatter'
 
 const Item = ({item}: {item: IBetHistoryItem}) => {
-
+  const mainCurrency = item.money.currency && Object.keys(item.money.currency).length > 0 ? Object.keys(item.money.currency)[0] : null
+  const convertedCurrency = item.money.convertedCurrency && Object.keys(item.money.convertedCurrency).length > 0 ? Object.keys(item.money.convertedCurrency)[0] : null
+  const mainAmount = mainCurrency ? item.money.currency[mainCurrency] : null
+  const convertedAmount = convertedCurrency ? item.money.convertedCurrency[convertedCurrency] : null
   return (
     <div className={styles.item}>
       <div className={styles.left}>
@@ -29,18 +33,18 @@ const Item = ({item}: {item: IBetHistoryItem}) => {
             </div>
           </HiddenXs>
           <div className={styles.info}>
-            <div className={styles.label}>{item.gameId}</div>
+            <div className={styles.label}>{item.name}</div>
             <div className={styles.id}>
-              id
+              {item.sessionId}
             </div>
           </div>
         </div>
       </div>
       <div className={styles.right}>
         <div className={styles.date}>{format(new Date(item.time), 'dd MMMM yyyy · hh:mm')}</div>
-        <div className={classNames(styles.usdt, {[styles.plus]: item.money > 0 })}>{item.money} <span>{item.currencyIso}</span>
+        <div className={classNames(styles.usdt, {[styles.plus]: mainAmount > 0 })}>{mainCurrency && Formatter.formatAmount(mainAmount, mainCurrency)} <span>{mainCurrency?.toUpperCase()}</span>
         </div>
-        {/*<div className={classNames(styles.btc, {[styles.plus]: usdt.slice(0, 1) === '+'})}>{btc}</div>*/}
+        {convertedCurrency && <div className={classNames(styles.btc, {[styles.plus]: convertedAmount > 0})}>{Formatter.formatAmount(convertedAmount, convertedCurrency)} {convertedCurrency?.toUpperCase()}</div>}
       </div>
     </div>
   )

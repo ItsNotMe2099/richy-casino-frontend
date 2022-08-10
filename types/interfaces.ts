@@ -1,6 +1,6 @@
 import {HTMLInputTypeAttribute, MouseEventHandler, ReactElement} from 'react'
 import { FieldConfig } from 'formik'
-import {FavoriteEntityType, ProfileModalType, SnackbarType} from 'types/enums'
+import {FavoriteEntityType, PaymentSwitchFilterKey, ProfileModalType, SnackbarType} from 'types/enums'
 import {IUserBalanceCurrency} from 'data/interfaces/IUser'
 
 export interface IField extends FieldConfig {
@@ -107,6 +107,9 @@ export interface ProfileModalArguments {
 }
 export interface WithdrawModalArguments {
   account: IUserBalanceCurrency
+}
+export interface PaymentHistoryModalArguments{
+  filter: PaymentSwitchFilterKey
 }
 
 export interface IPosition{

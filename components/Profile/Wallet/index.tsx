@@ -34,47 +34,20 @@ export default function Wallet(props: Props) {
 
   const [paymentMethods, setPaymentMethods] = useState<IPaymentMethod[]>([])
   const [loading, setLoading] = useState<boolean>(true)
-  useEffect(() => {
-    PaymentMethodRepository.fetchDeposit().then(i => {
-      setPaymentMethods(i)
-    setLoading(false)
-    })
-  }, [])
-  const methods = [
-    {label: t('wallet_payment_type_crypto'), bonus: true},
-    {iconLabel: 'visa', label: t('wallet_payment_type_card')},
-    {icon: '/img/Wallet/paypal.svg', label: 'PayPal'},
-    {icon: '/img/Wallet/yoo.svg', label: 'YooMoney'},
-    {icon: '/img/Wallet/web.svg', label: 'WebMoney'},
-    {icon: '/img/Wallet/skrill.svg', label: 'Skrill'},
-    {icon: '/img/Wallet/pia.svg', label: 'Piastrix'},
-    {icon: '/img/Wallet/neteller.svg', label: 'Neteller'},
-    {icon: '/img/Wallet/qiwi.svg', label: 'Qiwi'},
-  ]
-
-  const crypto = [
-    {icon: '/img/Wallet/crypto/bitcoin.svg', label: 'Bitcoin', iso: 'btc'},
-    {icon: '/img/Wallet/crypto/tether.svg', label: 'Tether', iso: 'th'},
-    {icon: '/img/Wallet/crypto/eth.svg', label: 'Ethereum', iso: 'eth'},
-    {icon: '/img/Wallet/crypto/tron.svg', label: 'Tron', iso: 'tr'},
-    {icon: '/img/Wallet/crypto/usdc.svg', label: 'USD Coin', iso: 'USD'},
-    {icon: '/img/Wallet/crypto/monero.svg', label: 'Monero', iso: 'mo'},
-    {icon: '/img/Wallet/crypto/doge.svg', label: 'Doge', iso: 'dg'},
-    {icon: '/img/Wallet/crypto/bitcoin-cash.svg', label: 'Bitcoin Cash', iso: 'btcc'},
-    {icon: '/img/Wallet/crypto/litecoin.svg', label: 'Litecoin', iso: 'ltc'},
-  ]
-
-  const bank = [
-    {icon: '/img/Wallet/bank/visa.svg', label: 'Visa'},
-    {icon: '/img/Wallet/bank/master-card.svg', label: 'Master Card'},
-    {icon: '/img/Wallet/bank/mir.svg', label: 'МИР'},
-  ]
-
   const [method, setMethod] = useState<IPaymentMethod | null>(null)
   const [paymentSystem, setPaymentSystem] = useState<IPaymentSystem | null>(null)
   const [currency, setCurrency] = useState<ICurrency | null>(null)
   const [depositResponse, setDepositResponse] = useState<IDepositResponse>(null)
   const [step, setStep] = useState<PaymentStep>(PaymentStep.Method)
+  useEffect(() => {
+    PaymentMethodRepository.fetchDeposit().then(i => {
+      setPaymentMethods(i)
+      if(i.length === 1){
+        setMethod(i[0])
+      }
+      setLoading(false)
+    })
+  }, [])
   const handleClose = () => {
 
     context.hideModal()

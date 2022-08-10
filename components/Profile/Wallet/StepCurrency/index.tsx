@@ -12,7 +12,9 @@ import { IPaymentSystem } from 'data/interfaces/IPaymentSystem'
 import {useMemo} from 'react'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
-
+interface ICurrencyWithPaymentSystem extends ICurrency{
+  paymentSystem: IPaymentSystem
+}
 interface Props {
   method: IPaymentMethod
   paymentSystem: IPaymentSystem | null
@@ -21,19 +23,35 @@ interface Props {
 }
 export default function StepCurrency(props: Props) {
   const context = useAppContext()
-  const currencies  = useMemo<ICurrency[]>(() => {
+  const currencies  = useMemo<ICurrencyWithPaymentSystem[]>(() => {
     let currencies: string[] = []
     if(props.method.isCrypto){
       currencies = props.method.paymentSystems.map(i => i.settings.map(i => i.currencyIso)).flat()
     }else if(props.paymentSystem){
       currencies = props.paymentSystem.settings.map(i => i.currencyIso)
     }
-    return context.currencies.filter(i => currencies.includes(i.iso))
+    const res = [...context.currencies.filter(i => currencies.includes(i.iso)).map(i => ({...i, paymentSystem: props.method.paymentSystems.find(a => a.settings.find(a => a.currencyIso === i.iso))}))]
+    const usdtIndex = res.findIndex(i => i.iso?.toUpperCase() === 'USDT')
+    if(!usdtIndex || !props.method.isCrypto){
+      return res
+    }
+    const newRes = [...res]
+    newRes[usdtIndex] = {
+      ...newRes[usdtIndex],
+      name: 'USDT ERC20',
+      paymentSystem: props.method.paymentSystems.find(a => a.name === 'ERC20')
+    }
+    newRes.splice( usdtIndex, 0, {
+      ...res[usdtIndex],
+      name: 'USDT TRC20',
+      paymentSystem: props.method.paymentSystems.find(a => a.name === 'TRC20')
+    })
+    return newRes
   }, [props.method, props.paymentSystem])
   return (
     <div className={styles.root}>
       <PaymentOptions>
-        <PaymentMethodSelected method={props.method} onClick={() => props.onSetStep(PaymentStep.Method)}/>
+        <PaymentMethodSelected method={props.method} paymentSystem={props.paymentSystem}  onClick={() => props.onSetStep(PaymentStep.Method)}/>
         </PaymentOptions>
       {!context.isMobile &&  <PaymentSeparator/>}
       {props.method.isCrypto && <div className={styles.cryptoActions}>
@@ -42,7 +60,7 @@ export default function StepCurrency(props: Props) {
       {context.isMobile &&  <PaymentSeparator/>}
       <div className={styles.methods}>
       <PaymentMethodList>
-        {currencies.map(i => <PaymentMethodCard key={i.iso} icon={<CurrencySvg currencyIso={i.iso} color/>} label={i.name} onClick={() => props.onChange(i, props.method.paymentSystems.find(a => a.settings.find(a => a.currencyIso === i.iso)))}/>)}
+        {currencies.map(i => <PaymentMethodCard key={i.iso} icon={<CurrencySvg currencyIso={i.iso} color/>} label={i.name} onClick={() => props.onChange(i, i.paymentSystem)}/>)}
       </PaymentMethodList>
       </div>
     </div>

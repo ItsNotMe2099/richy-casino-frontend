@@ -9,7 +9,7 @@ import Converter from 'utils/converter'
 import Button from 'components/ui/Button'
 import ProfileModalFooter from 'components/Profile/layout/ProfileModalFooter'
 import {useTranslation} from 'next-i18next'
-import {useEffect} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import BottomSheetLayout from 'components/layout/BottomSheetLayout'
 import BottomSheetHeader from 'components/layout/BottomSheetHeader'
 import BottomSheetBody from 'components/layout/BottomSheetBody'
@@ -17,6 +17,7 @@ import { useAppContext } from 'context/state'
 import { ExchangeCurrencySelectField } from 'components/ui/Inputs/ExchangeCurrencySelectField'
 import PaymentsRepository from 'data/repositories/PaymentsRepository'
 import {debounce} from 'debounce'
+import FormError from 'components/ui/Form/FormError'
 
 
 interface Props {
@@ -26,15 +27,31 @@ interface Props {
 export default function BuyCrypto(props: Props) {
   const {t} = useTranslation()
   const context = useAppContext()
+  const [sending, setSending] = useState<boolean>(false)
+  const [error, setError] = useState<any | null>(null)
+  const abortControllerRef = useRef<AbortController | null>(null)
+
   const initialValues = {
     currencySent: 'USD',
-    amountSent: 0,
+    amountSent: 30,
     currencyGet: 'BTC',
     amountGet: 0
   }
 
-  const handleSubmit = /*async*/ () => {
+  const handleSubmit = async (data) => {
 
+    try{
+      setError(null)
+      setSending(true)
+      const res = await PaymentsRepository.purchaseCrypto(data.currencySent, data.currencyGet)
+      if(res.paymentUrl){
+        window.location.href = res.paymentUrl
+      }
+    }catch (e) {
+      console.error(e)
+      setError(e)
+    }
+    setSending(false)
   }
 
   const formik = useFormik({
@@ -44,7 +61,13 @@ export default function BuyCrypto(props: Props) {
 
   const calc = async (currencyFrom: string, currencyTo: string, amount: number) => {
     try {
-      const res = await PaymentsRepository.purchaseCalculate(currencyFrom, currencyTo, amount)
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
+      abortControllerRef.current = new AbortController()
+      const res = await PaymentsRepository.purchaseCalculate(currencyFrom, currencyTo, amount, {signal: abortControllerRef.current.signal})
+      abortControllerRef.current = null
+      console.log('res.resultCoinAmount', res.resultCoinAmount)
       await formik.setFieldValue('amountGet', res.resultCoinAmount)
     }catch (e) {
 
@@ -53,7 +76,7 @@ export default function BuyCrypto(props: Props) {
   const {values, setFieldValue, handleChange} = formik
   const debouncedCalc = debounce(async (currencyFrom: string, currencyTo: string, amount: number) => {
    calc(currencyFrom, currencyTo, amount)
-  }, 500)
+  }, 250)
   const currencies = Converter.convertCurrencyToOptionsExchange(context.currencies)
     useEffect(() => {
       debouncedCalc(values.currencySent, values.currencyGet, values.amountSent)
@@ -67,9 +90,9 @@ export default function BuyCrypto(props: Props) {
                 </div>
               </div>
               <div className={styles.inputs}>
-                <InputField name={'amountSent'} className={styles.input} validate={Validator.required}/>
+                <InputField name={'amountSent'} className={styles.input} validate={Validator.required} disabled={sending}/>
                 <div className={styles.exchange}>
-                  <ExchangeCurrencySelectField  name='currencySent' options={Converter.convertCurrencyToOptionsExchange(context.currencies.filter(i => !i.flags?.isCrypto))}/>
+                  <ExchangeCurrencySelectField  name='currencySent' disabled={sending} options={Converter.convertCurrencyToOptionsExchange(context.currencies.filter(i => !i.flags?.isCrypto))}/>
                 </div>
               </div>
             </div>
@@ -81,7 +104,7 @@ export default function BuyCrypto(props: Props) {
               </div>
               <div className={styles.inputs}>
                 <InputField name={'amountGet'} className={styles.input} validate={Validator.required} disabled/>
-                <div className={styles.exchange}> <ExchangeCurrencySelectField
+                <div className={styles.exchange}> <ExchangeCurrencySelectField disabled={sending}
                                                                                name='currencyGet' options={Converter.convertCurrencyToOptionsExchange(context.currencies.filter(i => i.flags?.isCrypto && i.flags?.isDepositAllowed))}/></div>
               </div>
             </div>
@@ -101,7 +124,7 @@ export default function BuyCrypto(props: Props) {
             {result}
           </BottomSheetBody>
           <ProfileModalFooter>
-            <Button type='submit' size='play' fluid background='blueGradient500'
+            <Button type='submit' size='play' fluid background='blueGradient500' spinner={sending}
                     className={styles.btn}>{t('buy_crypto_but_button')}</Button>
           </ProfileModalFooter>
         </BottomSheetLayout>
@@ -123,12 +146,11 @@ export default function BuyCrypto(props: Props) {
             {result}
           </ProfileModalBody>
           <ProfileModalFooter>
-            <Button type='submit' size='play' fluid background='blueGradient500'
+            <FormError error={error}/>
+            <Button type='submit' size='play' fluid background='blueGradient500' spinner={sending}
                     className={styles.btn}>{t('buy_crypto_but_button')}</Button>
           </ProfileModalFooter>
         </ProfileModalLayout>
-
-
 
       </Form>
     </FormikProvider>
