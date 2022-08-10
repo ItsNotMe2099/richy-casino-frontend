@@ -33,7 +33,6 @@ export default function ModalConfirmOldPhone(props: Props) {
     try {
       setSending(true)
       setError(null)
-      console.log('args.phone', args)
       const res = await UserRepository.confirmOldPhone({
         code:  data.code,
         phone: Formatter.cleanPhone(args.phone),

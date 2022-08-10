@@ -18,7 +18,6 @@ export default class ChessGameRepository {
       data
 
     })
-    console.log('resCreate', res)
     if (res?.err) {
       throw res.err
     }

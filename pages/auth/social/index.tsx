@@ -11,8 +11,6 @@ export default function AuthSocialSuccess(props: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log('SocialReqHeaders', context.req.headers)
-
   const res = await AuthRepository.socialLogin(context.query, context.req.headers.referer)
 
   if(res.token){

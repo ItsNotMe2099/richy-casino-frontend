@@ -23,7 +23,6 @@ export default class LotteryRepository {
     if (res.err) {
       throw res.err
     }
-    console.log('CurRound', res.data?.data)
     return res.data?.data ? Converter.objectKeysToCamelCase(res.data?.data) : null
   }
 

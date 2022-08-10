@@ -37,8 +37,7 @@ export default class PromoCodeRepository {
     if (res.err) {
       throw res.err
     }
-    console.log('Reeee', Converter.objectKeysToCamelCase(res.data?.data))
-    return res.data?.data ? Converter.objectKeysToCamelCase(res.data?.data) : null
+   return res.data?.data ? Converter.objectKeysToCamelCase(res.data?.data) : null
   }
 
 

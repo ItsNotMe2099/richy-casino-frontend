@@ -19,7 +19,7 @@ self.addEventListener('install', function(event) {
             .then(self.skipWaiting())
     )
 })
-
+/*
 self.addEventListener('fetch', function(event) {
     event.respondWith(
         fetch(event.request)
@@ -38,7 +38,6 @@ self.addEventListener('activate', function(event) {
             .then((keyList) => {
                 return Promise.all(keyList.map((key) => {
                     if (key !== CACHE_NAME) {
-                        console.log('[ServiceWorker] Hapus cache lama', key)
                         return caches.delete(key)
                     }
                 }))
@@ -46,3 +45,5 @@ self.addEventListener('activate', function(event) {
             .then(() => self.clients.claim())
     )
 })
+
+ */

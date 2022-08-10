@@ -39,8 +39,6 @@ function Section(props: SectionProps) {
     y: radius,
   }
 
-  console.log('log: ', firstPoint, secondPoint)
-
   return (
     <Shape
       sceneFunc={(ctx, shape) => {

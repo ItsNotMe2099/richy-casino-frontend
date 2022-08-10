@@ -39,7 +39,6 @@ export default function FA(props: Props) {
       .then( async (response) => {
         const buffer = await response.text()
         const matches = /<img[^>]+src="([^">]+)"/.exec(buffer)
-        console.log('ResponseImg', matches)
         if (imgRef.current && matches.length > 1 && matches[1]) {
           imgRef.current.src = matches[1]
         }

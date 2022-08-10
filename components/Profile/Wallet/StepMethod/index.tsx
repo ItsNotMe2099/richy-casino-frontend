@@ -16,8 +16,7 @@ interface Props {
   onChange: (method: IPaymentMethod, paymentSystem?: IPaymentSystem | null) => void
 }
 export default function StepMethod(props: Props) {
-  console.log('Method11', props.paymentMethods)
-  return (
+ return (
     <div className={styles.root}>
       <PaymentMethodList>
         {props.paymentMethods.sort((a, b) => a.isCrypto ? -1 : 1 ).map((i, index) =>{

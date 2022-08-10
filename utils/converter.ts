@@ -22,7 +22,6 @@ export default class Converter {
     } : null
   }
   static convertApiResponseError(res: IApiResponse) {
-    console.log('ApiResponse', res)
     if (res?.error?.details?.length > 0) {
       const messages = res.error.details.map(i => i.message)
       return messages.length === 1 ? messages[0] : messages

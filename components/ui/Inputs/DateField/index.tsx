@@ -33,7 +33,6 @@ export const DateField = (props: Props) => {
     setIsActive(false)
   }
   const hasError = !!meta.error && meta.touched
-  console.log('NewValue', value)
   return (
     <div className={classNames(styles.root, props.className)}>
       <div className={styles.wrapper}>
@@ -61,8 +60,6 @@ export const DateField = (props: Props) => {
             if (isNaN(value.getTime()) || value.getFullYear() < 1000) {
               return
             }
-
-            console.log('formatISO(value, {representation: \'date\'})', formatISO(value, {representation: 'date'}))
             handleChange(formatISO(value, {representation: 'date'}))
           } catch (e) {
             console.error(e)

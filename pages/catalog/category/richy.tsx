@@ -1,4 +1,3 @@
-import {GetServerSideProps} from 'next'
 import {IGameCategory} from 'data/interfaces/IGameCategory'
 import GamesListRichy from 'components/for_pages/CatalogPage/GamesListRichy'
 import {NextSeo} from 'next-seo'
@@ -33,12 +32,4 @@ export default function CatalogPage(props: Props) {
     />
        <GamesListRichy/>
   </WithGameFilterLayout>)
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  return {
-    props: {
-
-    },
-  }
 }

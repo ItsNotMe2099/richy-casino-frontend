@@ -19,6 +19,7 @@ export default function GamesListFavorite(props: Props) {
   useEffect(() => {
     GameFavoriteRepository.fetchGames().then(i => {
       setData({data: i, total: i.length})
+      setLoading(false)
     })
   }, [])
 

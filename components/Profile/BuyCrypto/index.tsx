@@ -43,7 +43,7 @@ export default function BuyCrypto(props: Props) {
     try{
       setError(null)
       setSending(true)
-      const res = await PaymentsRepository.purchaseCrypto(data.currencySent, data.currencyGet)
+      const res = await PaymentsRepository.purchaseCrypto(data.currencySent, data.currencyGet, data.amountSent)
       if(res.paymentUrl){
         window.location.href = res.paymentUrl
       }
@@ -67,7 +67,6 @@ export default function BuyCrypto(props: Props) {
       abortControllerRef.current = new AbortController()
       const res = await PaymentsRepository.purchaseCalculate(currencyFrom, currencyTo, amount, {signal: abortControllerRef.current.signal})
       abortControllerRef.current = null
-      console.log('res.resultCoinAmount', res.resultCoinAmount)
       await formik.setFieldValue('amountGet', res.resultCoinAmount)
     }catch (e) {
 

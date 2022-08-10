@@ -1,6 +1,5 @@
 import TopSlider from 'components/for_pages/CatalogPage/TopSlider'
 import GamesListTop from 'components/for_pages/CatalogPage/GamesListTop'
-import {GetServerSideProps} from 'next'
 import VisibleXs from 'components/ui/VisibleXS'
 import HiddenXs from 'components/ui/HiddenXS'
 import BuyCrypto from 'components/for_pages/MainPage/BuyCrypto'
@@ -42,12 +41,4 @@ export default function CatalogPage() {
           <GamesListRichy />
     </WithGameFilterLayout>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  return {
-    props: {
-
-    },
-  }
 }

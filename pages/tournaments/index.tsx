@@ -1,4 +1,3 @@
-import {GetServerSideProps} from 'next'
 import Tournament from 'components/for_pages/MainPage/Tournament'
 import Winners from 'components/for_pages/MainPage/Winners'
 import styles from 'pages/tournaments/index.module.scss'
@@ -38,11 +37,4 @@ export default function Tournaments(){
         </div>
     </Layout>
   )
-}
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  return {
-    props: {
-
-    },
-  }
 }

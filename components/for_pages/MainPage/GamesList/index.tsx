@@ -58,7 +58,6 @@ export default function MainGamesList(props: Props) {
       setLoading(false)
     })
   }
-  console.log('LIstWidth', width)
   return (
     <div ref={ref} className={classNames(styles.root, {[styles.none]: data.total === 0})}>
       <Header icon={props.icon} label={props.label} length={Formatter.formatNumber(data.total)} shadowColor={props.shadowColor} allLink={props.type === MainGameListType.All ? Routes.catalog :  Routes.catalogLive}/>

@@ -195,8 +195,6 @@ export default class GameListRepository {
       sessionId,
       data: {game_id: gameId, client_type: clientType}
     })
-    console.log('gameId', gameId)
-    console.error(res.err)
     if (res.err) {
       throw res.err
     }
@@ -216,7 +214,6 @@ export default class GameListRepository {
       sessionId,
       data: {game_id: gameId, client_type: clientType}
     })
-    console.log('ResErr', res.err)
     if (res.err) {
       throw res.err
     }

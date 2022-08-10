@@ -43,9 +43,7 @@ export default function ProfileModalHeaderMobile(props: Props) {
         return t('withdraw_title')
     }
   }
-
-  console.log('context.lastProfileModal?.type', context.lastProfileModal?.type)
-  return (
+ return (
     <div className={styles.root}>
       <div className={styles.header}>
       <Header rightButton={<ModalClose className={styles.close} onClick={props.onClose}/>}/>

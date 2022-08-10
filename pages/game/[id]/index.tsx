@@ -61,10 +61,3 @@ export default function CatalogPage(props: Props) {
     </WithGameFilterLayout>
   )
 }
-
-export const getServerSideProps = async (context) => {
-  return {
-    props: {
-    },
-  }
-}

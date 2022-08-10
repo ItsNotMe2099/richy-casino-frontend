@@ -15,7 +15,6 @@ interface Props {
 
 export default function GameCategoryCard(props: Props) {
   const appContext = useAppContext()
-  console.log('CategoryCardItem', props.item.internalName)
   const link = props.item.internalName.toLowerCase() === RICHY_CATEGORY_NAME ? Routes.richyGames : Routes.catalogCategory(props.item.id)
   const active = useIsActiveLink(link)
   return (

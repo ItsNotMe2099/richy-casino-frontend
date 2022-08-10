@@ -106,11 +106,9 @@ export default function GamesListTop(props: Props) {
       if(data.length > 0 && currentData.find(i => getId(i) === getId(data[0])) ){
         setLoading(false)
         setIsUpdating(false)
-        console.log('setNewDataEmpty')
         return
       }
       const setNewData = [data[0], ...currentData]
-      console.log('setNewData', setNewData)
       setNewData.pop()
       setLatestWin(setNewData)
       setLoading(false)

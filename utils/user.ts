@@ -39,7 +39,6 @@ export default class UserUtils {
     }
   }
   static getDepositPromoCodes(promoCodes: IPromoCode[]): IPromoCode[]{
-    console.log('promoCodes', promoCodes)
     return promoCodes.filter(i => i.activation.event === IPromoCodeActivationEvent.Deposit)
   }
   static isBonusEnabled(_promoCodes: IPromoCode[]): boolean{
@@ -52,7 +51,6 @@ export default class UserUtils {
     const validTill = promoCodes.find(i => i.validTill)?.validTill
     const bonuses = promoCodes.map(i => i.bonuses).flat()
     const currency = bonuses.find(i => !!i.currencyIso)?.currencyIso
-    console.log('promoCodes', promoCodes)
     if(promoCodes.length === 0){
       return null
     }
@@ -76,7 +74,6 @@ export default class UserUtils {
       details.lotteryTickets += bonus.bonusBalance.lotteryTicket as number
       details.wheelSpins += bonus.bonusBalance.wheelSpin as number
     }
-    console.log('details', details)
     return details
   }
 }

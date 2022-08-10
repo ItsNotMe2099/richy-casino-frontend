@@ -47,8 +47,6 @@ export default function TopSlider(props: Props) {
     ]
   }
 
-  console.log('Banners', context.banners)
-
   return (
 
     <div className={styles.root} ref={ref}>
