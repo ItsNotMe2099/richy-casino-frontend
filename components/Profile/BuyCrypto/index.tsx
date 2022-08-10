@@ -43,7 +43,7 @@ export default function BuyCrypto(props: Props) {
     try{
       setError(null)
       setSending(true)
-      const res = await PaymentsRepository.purchaseCrypto(data.currencySent, data.currencyGet)
+      const res = await PaymentsRepository.purchaseCrypto(data.currencySent, data.currencyGet, data.amountSent)
       if(res.paymentUrl){
         window.location.href = res.paymentUrl
       }

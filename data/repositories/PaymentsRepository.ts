@@ -105,13 +105,14 @@ export default class PaymentsRepository {
     return res.data?.data ? Converter.objectKeysToCamelCase(res.data?.data) : null
   }
 
-  static async purchaseCrypto(currencyIsoFrom: string, currencyIsoTo: string): Promise<{ currencyIsoFrom: string, currencyIsoTo: string, paymentUrl: string }> {
+  static async purchaseCrypto(currencyIsoFrom: string, currencyIsoTo: string, amount: string | number): Promise<{ currencyIsoFrom: string, currencyIsoTo: string, paymentUrl: string }> {
     const res = await request({
       method: 'post',
       url: '/api/finance/payment/purchase/crypto',
       data: {
         currency_iso_from: currencyIsoFrom,
         currency_iso_to: currencyIsoTo,
+        amount
       }
     })
     if (res.err) {
