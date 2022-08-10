@@ -56,8 +56,8 @@ export default function Table(props: Props) {
             {props.history && <th colSpan={2} className={classNames(styles.cell, styles.cellHeader, styles.headerHistory)}>
              <div> {t('freebitcoin_last_wins')}</div>
               <div className={styles.nav}>
-                <Button type='button' disabled={props.loading} className={classNames(styles.navButton, styles.prev,{[styles.disabled]: props.prevDisabled})} size='submit' background='dark600' onClick={props.onPrev}>   <ArrowBackSvg/></Button>
-                <Button type='button'  disabled={props.loading} className={classNames(styles.navButton, styles.next,{[styles.disabled]: props.nextDisabled})} size='submit' background='dark600' onClick={props.onNext}>    <ArrowBackSvg/> </Button>
+                <Button type='button' disabled={props.loading || props.prevDisabled} className={classNames(styles.navButton, styles.prev,{[styles.disabled]: props.prevDisabled})} size='submit' background='dark600' onClick={props.onPrev}>   <ArrowBackSvg/></Button>
+                <Button type='button'  disabled={props.loading|| props.nextDisabled} className={classNames(styles.navButton, styles.next,{[styles.disabled]: props.nextDisabled})} size='submit' background='dark600' onClick={props.onNext}>    <ArrowBackSvg/> </Button>
 
               </div>
             </th>}

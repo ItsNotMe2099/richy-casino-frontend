@@ -37,7 +37,7 @@ export default function FreeBitcoin() {
 
   const [isShow, setIsShow] = useState(false)
   const handlePrevHistory = async () => {
-    if (historyPage * limit === history.total) {
+    if (historyPage >= history.totalPages) {
       return
     }
     setHistoryLoading(true)
@@ -56,6 +56,7 @@ export default function FreeBitcoin() {
     setHistory(res)
     setHistoryLoading(false)
   }
+  console.log('historyTotal', historyPage, history.totalPages)
   return (
     <WithGameFilterLayout>
       <Head>
@@ -82,7 +83,7 @@ export default function FreeBitcoin() {
         <div className={styles.tables}>
           <div className={styles.table}><Table items={slots}/></div>
           <Table items={history.data} nextDisabled={historyPage === 1}
-                 prevDisabled={historyPage * limit === history.total} loading={historyLoading} history onNext={handleNextHistory}
+                 prevDisabled={historyPage >= history.totalPages} loading={historyLoading} history onNext={handleNextHistory}
                  onPrev={handlePrevHistory}/>
         </div>
       </>}
