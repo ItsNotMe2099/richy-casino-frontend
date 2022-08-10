@@ -2,7 +2,6 @@ import PageTitle from 'components/for_pages/Common/PageTitle'
 import Banner from 'components/for_pages/FreeBitcoin/Banner'
 import Table from 'components/for_pages/FreeBitcoin/Table'
 import {useEffect, useState} from 'react'
-import {GetServerSideProps} from 'next'
 import FreeBitcoinRepository from 'data/repositories/FreeBitcoinRepository'
 import {IFreeBitcoinSlot} from 'data/interfaces/IFreeBitcoinSlot'
 import {IFreeBitcoinHistory} from 'data/interfaces/IFreeBitcoinHistory'
@@ -89,9 +88,4 @@ export default function FreeBitcoin() {
       </>}
     </WithGameFilterLayout>
   )
-}
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  return {
-    props: {},
-  }
 }

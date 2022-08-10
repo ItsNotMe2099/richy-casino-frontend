@@ -1,4 +1,3 @@
-import {GetServerSideProps} from 'next'
 import styles from 'pages/index.module.scss'
 import Layout from 'components/layout/Layout'
 import Contents from 'components/for_pages/MainPage/Contents'
@@ -77,12 +76,3 @@ export default function IndexPage() {
         </Layout>
   )
 }
-
-export const getServerSideProps: GetServerSideProps = async (context ) => {
-  return {
-    props: {
-
-    },
-  }
-}
-

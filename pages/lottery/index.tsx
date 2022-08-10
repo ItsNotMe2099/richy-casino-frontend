@@ -7,7 +7,6 @@ import Prizes from 'components/for_pages/Lottery/Prizes'
 import BuyTickets from 'components/for_pages/Lottery/BuyTickets'
 import Statistics from 'components/for_pages/Lottery/Statistics'
 import VisibleXs from 'components/ui/VisibleXS'
-import {GetServerSideProps} from 'next'
 import {ILotteryBuyResponse, ILotteryRoundCurrent} from 'data/interfaces/ILotteryRound'
 import LotteryRepository from 'data/repositories/LotteryRepository'
 import {useTranslation} from 'next-i18next'
@@ -83,11 +82,4 @@ export default function Lottery() {
       </>}
     </WithGameFilterLayout>
   )
-}
-export const getServerSideProps: GetServerSideProps = async (context ) => {
-  return {
-    props: {
-
-    },
-  }
 }

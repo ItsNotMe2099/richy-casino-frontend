@@ -1,4 +1,3 @@
-import {GetServerSideProps} from 'next'
 import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import {IGameCategory} from 'data/interfaces/IGameCategory'
 import GamesListTop from 'components/for_pages/CatalogPage/GamesListTop'
@@ -16,12 +15,4 @@ export default function CatalogPage(props: Props) {
          <GamesListTop/>
     </WithGameFilterLayout>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  return {
-    props: {
-
-    },
-  }
 }
