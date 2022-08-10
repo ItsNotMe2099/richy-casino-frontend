@@ -19,7 +19,7 @@ self.addEventListener('install', function(event) {
             .then(self.skipWaiting())
     )
 })
-
+/*
 self.addEventListener('fetch', function(event) {
     event.respondWith(
         fetch(event.request)
@@ -45,3 +45,5 @@ self.addEventListener('activate', function(event) {
             .then(() => self.clients.claim())
     )
 })
+
+ */
