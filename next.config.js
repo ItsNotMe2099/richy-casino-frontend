@@ -34,6 +34,7 @@ module.exports = {
   images: {
     domains: ['stage-backend.richy.casino', 'api.richy-trk.com'],
     formats: ['image/webp'],
+    minimumCacheTTL: 60 * 60 * 24
   },
   async rewrites() {
     return [
