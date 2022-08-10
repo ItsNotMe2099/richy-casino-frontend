@@ -50,6 +50,7 @@ export interface IOptionUserAccount extends IOption<string> {
 export interface IPagination<T>{
   data: T[]
   total: number
+  totalPages?: number
 }
 export interface IApiResponseErrorDetails{
   field: string,

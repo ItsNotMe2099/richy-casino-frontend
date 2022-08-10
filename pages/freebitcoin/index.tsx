@@ -82,7 +82,7 @@ export default function FreeBitcoin() {
         <div className={styles.tables}>
           <div className={styles.table}><Table items={slots}/></div>
           <Table items={history.data} nextDisabled={historyPage === 1}
-                 prevDisabled={historyPage * limit === history.total} loading={historyLoading} history onNext={handleNextHistory}
+                 prevDisabled={historyPage === history.totalPages} loading={historyLoading} history onNext={handleNextHistory}
                  onPrev={handlePrevHistory}/>
         </div>
       </>}

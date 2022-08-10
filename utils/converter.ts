@@ -17,7 +17,8 @@ export default class Converter {
   static convertApiPaginationResponse(res: IApiPaginationResponse) {
     return res?.data ? {
       data: res.data?.map(i => Converter.objectKeysToCamelCase(i)),
-      total: res._meta?.totalCount
+      total: res._meta?.totalCount,
+      totalPages: res._meta?.pageCount
     } : null
   }
   static convertApiResponseError(res: IApiResponse) {
