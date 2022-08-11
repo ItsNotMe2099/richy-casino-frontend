@@ -52,6 +52,7 @@ interface IState {
   banners: IBanner[]
   snackbar: SnackbarData | null,
   showSnackbar: (text: string, type: SnackbarType) => void
+  openSupport: () => void
 }
 
 const defaultValue: IState = {
@@ -89,6 +90,7 @@ const defaultValue: IState = {
   paymentMethodsWithdraw: [],
   snackbar: null,
   showSnackbar: (text, type) => null,
+  openSupport: () => null,
 }
 const ModalsBottomSheet = [
   ProfileModalType.withdraw,
@@ -225,6 +227,11 @@ export function AppWrapper(props: Props) {
     },
     updateCurrencies: () => {
       InfoRepository.getCurrencies().then(i => setCurrencies(i))
+    },
+    openSupport: () => {
+      if((window as any).Tawk_API){
+        (window as any).Tawk_API.maximize()
+      }
     }
 
   }
