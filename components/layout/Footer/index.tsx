@@ -143,7 +143,7 @@ export default function Footer(props: Props) {
   const langSelect = ( <div className={styles.lang}><LangSelect styleType='footer'/></div>)
   return (
     <div className={styles.root} style={{
-      paddingBottom: `${(appContext.auth  && appContext.isMobile ? 81 : 0) + (appContext.showBonus && appContext.bonusShowMode === BonusDepositShowMode.Spoiler ? 20 : 0)}px`
+      paddingBottom: `${(appContext.isMobile ? 81 : 0) + (appContext.showBonus && appContext.bonusShowMode === BonusDepositShowMode.Spoiler ? 90 : 0)}px`
     }}>
       <div className={styles.wrapper}>
         {logo}

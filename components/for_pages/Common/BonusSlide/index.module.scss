@@ -22,6 +22,9 @@
     bottom: 0px;
     z-index: 1;
     width: 60%;
+    img{
+      object-fit: cover;
+    }
     &:after{
       content: '';
       padding-bottom: 100%;
@@ -134,6 +137,7 @@
   margin: 0px -5px;
   @media screen and (max-width: $xs-max){
     width: auto;
+    object-fit: cover;
     .timer{
       display: block;
     }
@@ -145,8 +149,10 @@
   .hero{
     top: 0;
     right: -8px;
+    width: 55%;
     img{
       width: auto;
+      object-fit: contain;
     }
   }
   .downBanner{
