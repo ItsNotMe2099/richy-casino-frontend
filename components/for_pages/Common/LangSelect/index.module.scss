@@ -4,7 +4,7 @@
   position: relative;
 
   &.menu{
-    
+
     .dropDownTrigger {
      justify-content: flex-start;
      height: 47px;
@@ -29,12 +29,8 @@
   &.footer {
     .dropDownTrigger {
       height: 41px;
-      padding: 0px 12px;
+      padding: 0px 14px;
         text-transform: uppercase;
-      @media only screen and (max-width: $xs-max) {
-        height: 29px;
-        padding: 0px 9px;
-      }
     }
     .dropDown{
       margin-top: 0px;
@@ -42,6 +38,17 @@
       &.opened{
       margin-top: 0px;
         margin-bottom: 14px;
+        @media screen and (max-width: $xs-max){
+
+        }
+      }
+    }
+    .triangle{
+      right: auto;
+      left: 40px !important;
+      @media screen and (max-width: $xs-max){
+        left: auto !important;
+        right: 20px !important;
       }
     }
   }

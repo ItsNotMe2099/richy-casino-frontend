@@ -3,12 +3,12 @@ import Header from 'components/for_pages/Common/Header'
 import {ReactElement, useState} from 'react'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
-import ItemGame from 'components/for_pages/Common/ItemGame'
 import {IGame} from 'data/interfaces/IGame'
 import Formatter from 'utils/formatter'
 import Spinner from 'components/ui/Spinner'
 import ContentLoader from 'components/ui/ContentLoader'
 import {useTranslation} from 'next-i18next'
+import GameCard from 'components/for_pages/Common/GameCard'
 interface Item extends IGame{
   link?: string
 }
@@ -53,14 +53,14 @@ export default function GamesList(props: Props) {
         <HiddenXs>
               <div className={styles.list}>
                 {props.items && (isShow ? props.items : props.items.slice(0, 10)).map((item, index) =>
-                  <ItemGame item={item} key={item.id} link={item.link} onClickDemo={props.onSelect} onClickPlay={props.onSelect}/>
+                  <GameCard item={item} key={item.id} link={item.link} onClickDemo={props.onSelect} onClickPlay={props.onSelect}/>
                 )}
               </div>
         </HiddenXs>
         <VisibleXs>
           <div className={styles.list}>
             {props.items && (isShow ? props.items : props.items.slice(0, 12)).map((item, index) =>
-              <ItemGame  item={item} key={item.id} link={item.link} onClickDemo={props.onSelect} onClickPlay={props.onSelect}/>
+              <GameCard  item={item} key={item.id} link={item.link} onClickDemo={props.onSelect} onClickPlay={props.onSelect}/>
             )}
           </div>
         </VisibleXs>

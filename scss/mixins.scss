@@ -224,3 +224,9 @@
     font-size: 1.2rem;
   }
 }
+@mixin maxLines($count) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $count;
+  -webkit-box-orient: vertical;
+}

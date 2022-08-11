@@ -2,12 +2,12 @@ import styles from './index.module.scss'
 import {useEffect, useState} from 'react'
 import {IGame} from 'data/interfaces/IGame'
 import GameFavoriteRepository from 'data/repositories/GameFavoriteRepository'
-import ItemGame from 'components/for_pages/Common/ItemGame'
 import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
 import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
 import {useTranslation} from 'next-i18next'
 import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 import ContentLoader from 'components/ui/ContentLoader'
+import GameCard from 'components/for_pages/Common/GameCard'
 
 interface Props {
 
@@ -38,7 +38,7 @@ export default function Favorite(props: Props) {
         {loading && <ContentLoader style={'block'} isOpen={true}/>}
         {!loading && <div className={styles.root}>
           {data.map((item, index) =>
-            <ItemGame item={item} key={item.id} onDeleteFromFavorite={handleDelete}/>
+            <GameCard item={item} key={item.id} onDeleteFromFavorite={handleDelete}/>
           )}
         </div>}
       </ProfileModalBody>

@@ -16,9 +16,11 @@ import {format} from 'date-fns'
 import {useTranslation} from 'next-i18next'
 import {BonusDepositShowMode, ModalType} from 'types/enums'
 import {usePwaContext} from 'context/pwa_state'
-import { isDesktop } from 'react-device-detect'
-import { isMobile } from 'mobile-device-detect'
+import {isDesktop} from 'react-device-detect'
+import {isMobile} from 'mobile-device-detect'
 import Image from 'next/image'
+import VisibleXs from 'components/ui/VisibleXS'
+import HiddenXs from 'components/ui/HiddenXS'
 
 interface Props {
   children?: React.ReactNode
@@ -36,17 +38,17 @@ export default function Footer(props: Props) {
   const pwaContext = usePwaContext()
 
   const options = [
-    { label: t('footer_menu_terms_of_service'), link: '/terms_of_service' },
-    { label: t('footer_menu_bonuses'), link: '/bonuses' },
-    { label: t('footer_menu_info'), link: '/info' },
-    { label: t('footer_menu_affiliate'), link: 'https://richy.partners', blank: true },
+    {label: t('footer_menu_terms_of_service'), link: '/terms_of_service'},
+    {label: t('footer_menu_bonuses'), link: '/bonuses'},
+    {label: t('footer_menu_info'), link: '/info'},
+    {label: t('footer_menu_affiliate'), link: 'https://richy.partners', blank: true},
   ]
 
   const items = [
-    { label: t('footer_menu_privacy_policy'), link: '/privacy_policy' },
-    { label: t('footer_menu_user_agreements'), link: '/user_agreements' },
-    { label: t('footer_menu_user_gambling_aware'), link: '/gambling_aware' },
-    { label: t('footer_menu_user_kyc_and_aml'), link: '/kyc_and_aml' },
+    {label: t('footer_menu_privacy_policy'), link: '/privacy_policy'},
+    {label: t('footer_menu_user_agreements'), link: '/user_agreements'},
+    {label: t('footer_menu_user_gambling_aware'), link: '/gambling_aware'},
+    {label: t('footer_menu_user_kyc_and_aml'), link: '/kyc_and_aml'},
   ]
 
   const allItems = options.concat(items)
@@ -90,183 +92,181 @@ export default function Footer(props: Props) {
   ]
   const [showAllItems, setShowAllItems] = useState(false)
 
-  const { route: currentRoute, asPath: currentPath } = useRouter()
+  const {route: currentRoute, asPath: currentPath} = useRouter()
 
   const handleAppClick = (apple: boolean = false) => {
-    if(isDesktop){
+    if (isDesktop) {
       appContext.showModal(ModalType.mobileApp)
-    }
-    else if(isMobile && apple){
+    } else if (isMobile && apple) {
       appContext.showBottomSheet(ModalType.mobileApp)
-    }
-    else if(isMobile && !apple){
+    } else if (isMobile && !apple) {
       pwaContext.install()
     }
   }
+  const socialButtons = (<div className={styles.socials}>
+     <Button className={classNames(styles.socialButton, styles.facebook)} href={CONTACTS.facebook} size='extraSmall' background='dark500'>
+        <Facebook/>
+      </Button>
+      <Button className={classNames(styles.socialButton, styles.youtube)} href={CONTACTS.youtube} size='extraSmall' background='dark500'>
+        <Youtube/>
+      </Button>
+      <Button className={classNames(styles.socialButton, styles.twitter)} href={CONTACTS.twitter} size='extraSmall' background='dark500'>
+        <Twitter/>
+      </Button>
+      <Button className={classNames(styles.socialButton, styles.linkedIn)} href={CONTACTS.linkedIn} size='extraSmall' background='dark500'>
+        <LinkedIn/>
+      </Button>
+   </div>)
 
+  const apps = (<div className={styles.apps}>
+    <Button size='extraSmall' background='dark700' onClick={() => handleAppClick(true)}><img
+      src='/img/layout/top/apple.svg' alt=''/></Button>
+    <Button size='extraSmall' background='dark700' onClick={() => handleAppClick()}><img
+      src='/img/layout/top/android.svg' alt=''/></Button>
+  </div>)
+  const mail =  (<div className={styles.mail}>
+    <a href={`mailto:${CONTACTS.email}`}>{CONTACTS.email}</a>
+  </div>)
+  const footerTopText = (   <div className={styles.footerTopText}>
+    {t('footer_text_1')}
+  </div>)
+  const logo = (currentRoute === '/' || currentPath === '/' ?
+    <div className={styles.logo}><Image src={'/img/layout/logo.png'} height={36} width={97.55}/></div>
+    :
+    <Link href='/'>
+      <a className={styles.logo}><Image src={'/img/layout/logo.png'} height={36} width={97.55}/></a>
+    </Link>)
+  const langSelect = ( <div className={styles.lang}><LangSelect styleType='footer'/></div>)
   return (
     <div className={styles.root} style={{
-      paddingBottom: `${(appContext.auth  ? 81 : 0) + (appContext.showBonus && appContext.bonusShowMode === BonusDepositShowMode.Spoiler ? 20 : 0)}px`
+      paddingBottom: `${(appContext.auth  && appContext.isMobile ? 81 : 0) + (appContext.showBonus && appContext.bonusShowMode === BonusDepositShowMode.Spoiler ? 20 : 0)}px`
     }}>
-        <div className={styles.wrapper}>
-        {currentRoute === '/' || currentPath === '/' ?
-          <div className={styles.logo}><Image src={'/img/layout/logo.png'} height={36} width={97.55}/></div>
-            :
-          <Link href='/'>
-            <a className={styles.logo}><Image src={'/img/layout/logo.png'} height={36} width={97.55}/></a>
-          </Link>
-        }
-        <div className={styles.top}>
-          <div className={styles.mobile}>
-            {(showAllItems ? allItems : allItems.slice(0, 3)).map((item, index) =>
-              <Link href={item.link} key={index} scroll>
-              <a className={styles.item}>
-                {item.label}
-              </a>
-            </Link>
-            )}
-            {showAllItems &&
-            <>
-              <div className={styles.desc}>
-                {t('footer_text_1')}
-              </div>
-            <div className={styles.mail}>
-              <a href={`mailto:${CONTACTS.email}`}>{CONTACTS.email}</a>
-            </div>
-            </>
-            }
-          </div>
-          <div className={classNames(styles.show, {[styles.notShow]: !showAllItems})}>
-            <Button className={styles.menuMobileToggle} onClick={() => showAllItems ? setShowAllItems(false) : setShowAllItems(true)} size='extraSmall' background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button>
-          </div>
-          <div className={styles.left}>
-            <div className={styles.desc}>
-              {t('footer_text_1')}
-            </div>
-            <div className={styles.mail}>
-              <a href={`mailto:${CONTACTS.email}`}>{CONTACTS.email}</a>
-            </div>
-            <div className={styles.btns}>
-              <SupportButton className={styles.support}/>
-              <div className={styles.btn}><Button size='extraSmall' background='dark700' onClick={() => handleAppClick(true)}><img src='/img/layout/top/apple.svg' alt=''/></Button></div>
-              <Button size='extraSmall' background='dark700' onClick={() => handleAppClick()}><img src='/img/layout/top/android.svg' alt=''/></Button>
-            </div>
-            </div>
-            <div className={styles.list}>
-            {options.map((option, index) =>
-              <Link href={option.link} key={index}>
-                <a className={styles.item} target={option.blank ? '_blank' : null}>
-                  {option.label}
-                </a>
-              </Link>
-            )}
-            </div>
-            <div className={styles.list}>
-            {items.map((option, index) =>
-              <Link href={option.link} key={index} >
-                <a className={styles.item} >
-                  {option.label}
-                </a>
-              </Link>
-            )}
-            </div>
-            <div className={styles.socials}>
-              <div className={classNames(styles.btn, styles.facebook)}>
-                <Button href={CONTACTS.facebook} size='extraSmall' background='dark500'>
-                  <Facebook/>
-                </Button>
-              </div>
-              <div className={classNames(styles.btn, styles.youtube)}>
-                <Button href={CONTACTS.youtube} size='extraSmall' background='dark500'>
-                  <Youtube/>
-                </Button>
-              </div>
-              <div className={classNames(styles.btn, styles.twitter)}>
-                <Button href={CONTACTS.twitter} size='extraSmall' background='dark500'>
-                  <Twitter/>
-                </Button>
-              </div>
-              <div className={classNames(styles.btn, styles.linkedIn)}>
-                <Button href={CONTACTS.linkedIn} size='extraSmall' background='dark500'>
-                  <LinkedIn/>
-                </Button>
-              </div>
-            </div>
-          </div>
-            <div className={styles.supportMobile}>
-              <div style={{flex: 1}}>
-              <SupportButton className={styles.support}/>
-              </div>
-              <div className={styles.btn}><Button size='extraSmall' background='dark700' onClick={() => handleAppClick(true)}><img src='/img/layout/top/apple.svg' alt=''/></Button></div>
-              <Button size='extraSmall' background='dark700' onClick={() => handleAppClick()}><img src='/img/layout/top/android.svg' alt=''/></Button>
-            </div>
-        </div>
-        <div className={styles.sliders}>
+      <div className={styles.wrapper}>
+        {logo}
+        <VisibleXs>
+          <>
 
-            <div className={styles.sliderTop}>
-              {slidesTop.map((slide, index) => <Link href={slide.link ?? '#'} key={index} >
-                <a className={styles.slide} target={slide.link ? '_blank' : null}>
-                  <img src={slide.image} alt=''/>
-                </a>
+            <div className={styles.topMobile}>
+              {footerTopText}
+              <div className={styles.menuMobile}>
+              {(showAllItems ? allItems : allItems.slice(0, 3)).map((item, index) =>
+                <Link href={item.link} key={index} scroll>
+                  <a className={styles.menuItem}>
+                    {item.label}
+                  </a>
                 </Link>
               )}
+              </div>
+              <Button className={classNames(styles.menuMobileToggle, {[styles.expanded]: !showAllItems})}
+                      onClick={() => showAllItems ? setShowAllItems(false) : setShowAllItems(true)} size='extraSmall'
+                      background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button>
+              <SupportButton className={styles.support}/>
+              {mail}
+              {socialButtons}
+              <div className={styles.mobileMenuBottom}>
+                {apps}
+                {langSelect}
+              </div>
             </div>
-            <div className={styles.sliderBottom}>
-              {slidesBottom.map((slide, index) =>
-                <div className={styles.slide} key={index}>
-                  <img src={slide.image} alt=''/>
-                </div>
-              )}
+          </>
+        </VisibleXs>
+        <HiddenXs>
+        <div className={styles.top}>
+          <div className={styles.left}>
+            {footerTopText}
+            {mail}
+            <div className={styles.buttonsLeft}>
+              <SupportButton className={styles.support}/>
+              {langSelect}
             </div>
           </div>
-          <div className={styles.socialsMobile}>
-              <div className={classNames(styles.btn, styles.facebook)}>
-                <Button href={CONTACTS.facebook} size='extraSmall' background='dark500'>
-                  <Facebook/>
-                </Button>
-              </div>
-              <div className={classNames(styles.btn, styles.youtube)}>
-                <Button href={CONTACTS.youtube} size='extraSmall' background='dark500'>
-                  <Youtube/>
-                </Button>
-              </div>
-              <div className={classNames(styles.btn, styles.twitter)}>
-                <Button href={CONTACTS.twitter} size='extraSmall' background='dark500'>
-                  <Twitter/>
-                </Button>
-              </div>
-              <div className={classNames(styles.btn, styles.linkedIn)}>
-                <Button href={CONTACTS.linkedIn} size='extraSmall' background='dark500'>
-                  <LinkedIn/>
-                </Button>
-              </div>
+          <div className={styles.list}>
+            {options.map((option, index) =>
+              <Link href={option.link} key={index}>
+                <a className={styles.menuItem} target={option.blank ? '_blank' : null}>
+                  {option.label}
+                </a>
+              </Link>
+            )}
           </div>
-          <div className={styles.btnsMobile}>
-                  <div className={styles.btn}><Button href="#top" size='extraSmall' background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button></div>
-                  {/*<div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>*/}
-                  <div className={styles.lang}><LangSelect styleType='footer' /></div>
-                </div>
-          <div className={styles.bottom}>
-            <div className={styles.bottomIcons}>
-            <div className={styles.eighteen}>
-              <img src='/img/layout/footer/eighteen.svg' alt='' />
-            </div>
-            <a href={'https://gateway.pinata.cloud/ipfs/QmREPXquK2dmUBSNx3e9H32YTgNTXT5W17vZk4sJaQevvM'} target={'_blank'} className={styles.logoLicense} rel="noreferrer">
-              <Image src='/img/licenses/richycuracaointeractivelicenlogo.png' alt='Richy License' width={120} height={120} layout={'responsive'}  objectFit='contain'/>
-            </a>
-            </div>
-              <div className={styles.desc}>
-                © {format(new Date(),'y')} {t('footer_text_2')}
-              </div>
-                <div className={styles.copyright}>
-                  © {format(new Date(),'y')} {t('footer_copyright')}
-                </div>
-                <div className={styles.btns}>
-                  <div className={styles.btn}><Button href="#top" size='extraSmall' background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button></div>
-                  {/*<div className={styles.btn}><Button size='extraSmall' background='dark700'><img src='/img/layout/top/phone.svg' alt=''/></Button></div>*/}
-                  <div className={styles.lang}><LangSelect styleType='footer'/></div>
-                </div>
+          <div className={styles.list}>
+            {items.map((option, index) =>
+              <Link href={option.link} key={index}>
+                <a className={styles.menuItem}>
+                  {option.label}
+                </a>
+              </Link>
+            )}
           </div>
+          <div className={styles.socialsWrapper}>
+            {socialButtons}
+            {apps}
+          </div>
+        </div>
+        </HiddenXs>
+        <div className={styles.textWrapper}>
+          <h1>Онлайн казино Richy</h1>
+          <div className={styles.text}>
+            Казино онлайн существовали не всегда, но мы можем с уверенностью сказать, что онлайн-казино пользуются
+            большим спросом с тех пор, как они появились на рынке. И сейчас, в 2022 году, у нас есть 1000 и 1000
+            вариантов на выбор - вопрос только в том, что вам нравится и какие варианты оплаты вы хотели бы видеть в
+            казино.
+            <br/><br/>
+            Игроки всегда ищут что-то новое, что поможет сделать игровой опыт намного лучше и доступнее. Это позволит
+            игроку сосредоточиться на самом главном развлечении в казино, то есть на самих играх.
+            <br/><br/>
+            Именно поэтому сейчас мы расскажем вам все, что вам нужно знать о крипто-казино, или биткоин-гемблинге, или
+            биткоин-казино, как бы вы его ни называли.
+          </div>
+        </div>
+
+      </div>
+      <div className={styles.sliders}>
+
+        <div className={styles.sliderPayments}>
+          {slidesTop.map((slide, index) => <Link href={slide.link ?? '#'} key={index}>
+              <a className={styles.slide} target={slide.link ? '_blank' : null}>
+                <img src={slide.image} alt=''/>
+              </a>
+            </Link>
+          )}
+        </div>
+        <div className={styles.sliderProviders}>
+          {slidesBottom.map((slide, index) =>
+            <div className={styles.slide} key={index}>
+              <img src={slide.image} alt=''/>
+            </div>
+          )}
+        </div>
+      </div>
+
+
+      <div className={styles.bottom}>
+        <div className={styles.bottomIcons}>
+          <div className={styles.eighteen}>
+            <img src='/img/layout/footer/eighteen.svg' alt=''/>
+          </div>
+          <a href={'https://gateway.pinata.cloud/ipfs/QmREPXquK2dmUBSNx3e9H32YTgNTXT5W17vZk4sJaQevvM'} target={'_blank'}
+             className={styles.logoLicense} rel="noreferrer">
+            <Image src='/img/licenses/richycuracaointeractivelicenlogo.png' alt='Richy License' width={120} height={120}
+                   layout={'responsive'} objectFit='contain'/>
+          </a>
+        </div>
+        <HiddenXs>
+        <div className={styles.separator}></div>
+        </HiddenXs>
+        <div className={styles.bottomText}>
+          © {format(new Date(), 'y')} {t('footer_text_2')}
+        </div>
+
+      </div>
+      <div className={styles.copyrightWrapper}>
+        <div className={styles.copyright}>
+          © {format(new Date(), 'y')} {t('footer_copyright')}
+        </div>
+          <Button className={styles.buttonToTop} onClick={() => window.scrollTo(0, 0)} size='extraSmall' background='dark700'><img
+            src='/img/layout/footer/up.svg' alt=''/></Button>
+      </div>
     </div>
   )
 }

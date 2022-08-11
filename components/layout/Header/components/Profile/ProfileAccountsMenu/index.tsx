@@ -81,8 +81,8 @@ interface Props{
 export default function ProfileAccountsMenu(props: Props){
   const context = useAppContext()
   const {t} = useTranslation()
-  const mainAccount = UserUtils.getMainBalanceTotals(context.user)
-  const otherAccounts = (UserUtils.getOtherBalancesTotals(context.user))
+  const mainAccount = UserUtils.getMainBalanceReal(context.user)
+  const otherAccounts = (UserUtils.getOtherBalancesReal(context.user))
   const bonusAccounts = (UserUtils.getBonusBalances(context.user))
   const accountOptions = Converter.convertUserBalanceCurrencyToOptions([mainAccount, ...otherAccounts])
   const bonusOptions = Converter.convertUserBalanceCurrencyToOptions(bonusAccounts)

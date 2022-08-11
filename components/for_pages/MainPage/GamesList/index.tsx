@@ -4,7 +4,6 @@ import {useEffect, useState} from 'react'
 import classNames from 'classnames'
 import VisibleXs from 'components/ui/VisibleXS'
 import HiddenXs from 'components/ui/HiddenXS'
-import ItemGame from 'components/for_pages/Common/ItemGame'
 import CategoryFilter from 'components/for_pages/MainPage/GamesList/CategoryFilter'
 import {IPagination} from 'types/interfaces'
 import {IGame} from 'data/interfaces/IGame'
@@ -13,6 +12,7 @@ import ProviderFilter from 'components/for_pages/MainPage/GamesList/ProviderFilt
 import {Routes} from 'types/routes'
 import Formatter from 'utils/formatter'
 import {useMeasure} from 'react-use'
+import GameCard from 'components/for_pages/Common/GameCard'
 export enum MainGameListType{
   All = 'all',
   Live = 'live'
@@ -69,7 +69,7 @@ export default function MainGamesList(props: Props) {
           </div>
           <div className={styles.list}>
             {data.data.slice(0, width > 634 ? 12 : 9).map((item, index) =>
-              <ItemGame item={item} key={index}/>
+              <GameCard item={item} key={index}/>
             )}
           </div>
         </>
@@ -77,7 +77,7 @@ export default function MainGamesList(props: Props) {
       <VisibleXs>
         <div className={styles.mobile}>
             {data.data.map((item, index) =>
-              <ItemGame item={item} key={index}/>
+              <GameCard item={item} key={index}/>
             )}
         </div>
       </VisibleXs>
