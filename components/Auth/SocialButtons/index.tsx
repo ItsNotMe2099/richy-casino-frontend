@@ -56,13 +56,30 @@ export default function SocialButtons(props: Props) {
 
 
   const {t} = useTranslation('common')
+  const handleTelegram = () => {
 
+    console.log('handleTegramd', window);
+    (window as any).Telegram.Login.auth(
+      { bot_id: 'dasdsadsd', request_access: true },
+      (data) => {
+        if (!data) {
+          // authorization failed
+        }
+        console.log('TelegramData', data)
+      }
+    )
+  }
 
   return (
     <div className={styles.root}>
       {socials.map((item, index) =>
         <SocialItem {...item} key={index}/>
       )}
+
+      <div className={styles.btn} onClick={handleTelegram}>
+        T
+      </div>
+
     </div>
   )
 }
