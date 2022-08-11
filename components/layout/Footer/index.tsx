@@ -40,14 +40,7 @@ export default function Footer(props: Props) {
   const pwaContext = usePwaContext()
   const [textExpanded, setTextExpanded] = useState(false)
 
-  const text = ` Казино онлайн существовали не всегда, но мы можем с уверенностью сказать, что онлайн-казино пользуются
-            большим спросом с тех пор, как они появились на рынке. И сейчас, в 2022 году, у нас есть 1000 и 1000
-            вариантов на выбор - вопрос только в том, что вам нравится и какие варианты оплаты вы хотели бы видеть в
-            казино. \n
-            Игроки всегда ищут что-то новое, что поможет сделать игровой опыт намного лучше и доступнее. Это позволит
-            игроку сосредоточиться на самом главном развлечении в казино, то есть на самих играх.\n
-            Именно поэтому сейчас мы расскажем вам все, что вам нужно знать о крипто-казино, или биткоин-гемблинге, или
-            биткоин-казино, как бы вы его ни называли.`
+  const text = t('footer_main_text')
   const options = [
     {label: t('footer_menu_terms_of_service'), link: '/terms_of_service'},
     {label: t('footer_menu_bonuses'), link: '/bonuses'},
@@ -216,7 +209,7 @@ export default function Footer(props: Props) {
         </div>
         </HiddenXs>
         <div className={styles.textWrapper}>
-          <h1>Онлайн казино Richy</h1>
+          <h1>{t('footer_main_text_title')}</h1>
           <div className={styles.text}>
             {textExpanded ? text : <LinesEllipsis
               text={text}
@@ -226,7 +219,7 @@ export default function Footer(props: Props) {
           <div className={styles.buttonTextExpandWrapper}>
           <Button className={styles.buttonTextExpand} size='normal' background={appContext.isMobile ? 'dark600' : 'dark600'} onClick={() => setTextExpanded(i => !i)}>
             <ArrowSvg className={classNames(styles.arrow, {[styles.reversed]: textExpanded})} color={colors.dark100}/>
-            Показать больше </Button>
+            {textExpanded ? t('footer_show_less') : t('footer_show_more')}</Button>
           </div>
         </div>
 

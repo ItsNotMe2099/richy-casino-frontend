@@ -20,6 +20,7 @@ interface Props {
   shadowColor?: 'red' | 'blue' | 'yellow' | 'violet'
   className?: string
   allLink?: string
+  iconClassName?: string
 }
 
 export default function Header(props: Props) {
@@ -61,7 +62,7 @@ export default function Header(props: Props) {
             {props.shadowColor && <div className={styles.shadow}>
               <Image src={getShadow(props.shadowColor)} width={isMobile ? 30 : 84} height={isMobile ? 30 : 84}/>
               </div>}
-            <div className={styles.image}><img src={props.icon} alt=''/></div>
+            <div className={classNames(styles.image, props.iconClassName)}><img src={props.icon} alt=''/></div>
           </div>}
           <div className={styles.label}>
             {props.label}

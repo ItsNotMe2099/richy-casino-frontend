@@ -16,6 +16,7 @@ interface Props {
   items: Item[]
   title: string
   icon?: string
+  iconClassName?: string
   loading: boolean
   totalItems: number
   switchFilter?: ReactElement
@@ -47,7 +48,7 @@ export default function GamesList(props: Props) {
 
   return (
     <div className={styles.root}>
-      <Header icon={props.icon} allLink={props.allLink} label={props.title} length={`${Formatter.formatNumber(props.totalItems)}`} shadowColor={getShadow(props.icon)}/>
+      <Header icon={props.icon} iconClassName={props.iconClassName} allLink={props.allLink} label={props.title} length={`${Formatter.formatNumber(props.totalItems)}`} shadowColor={getShadow(props.icon)}/>
       {props.switchFilter && <div className={styles.wrapper}>{props.switchFilter}</div>}
       {props.loading && props.totalItems === 0 && <ContentLoader style={'block'} isOpen={true}/>}
         <HiddenXs>

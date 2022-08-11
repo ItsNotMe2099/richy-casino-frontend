@@ -1,5 +1,6 @@
 import GamesList from 'components/for_pages/CatalogPage/GamesList'
 import {useEffect, useState} from 'react'
+import styles from './index.module.scss'
 import {IPagination} from 'types/interfaces'
 import {IGame} from 'data/interfaces/IGame'
 import GameListRepository from 'data/repositories/GameListRepository'
@@ -34,6 +35,7 @@ export default function GamesListProvider(props: Props) {
   }
   return (
     <GamesList title={props.provider.name}
+               iconClassName={styles.headerIcon}
                icon={props.provider.imagePreviewUrl}
                totalItems={data?.total ?? 0}
                items={data?.data ?? []}

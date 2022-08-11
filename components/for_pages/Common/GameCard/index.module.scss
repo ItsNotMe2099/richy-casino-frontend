@@ -16,6 +16,7 @@
       padding: 7px 4px 5px 7px;
       border-bottom-right-radius: 18px;
       border-bottom-left-radius: 18px;
+      min-height: 34px;
     }
     .favoriteWrapper{
       padding: 2px 0px 2px 0px;
@@ -75,6 +76,7 @@
   background: $dark600;
   border-bottom-right-radius: 22px;
   border-bottom-left-radius: 22px;
+  min-height: 50px;
 }
 .favoriteWrapper{
   padding: 9px 0px 13px 0px;
