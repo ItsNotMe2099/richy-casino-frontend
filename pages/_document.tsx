@@ -26,7 +26,7 @@ class MyDocument extends Document {
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-421XSKMJH2"
         />
-        <script async src="https://telegram.org/js/telegram-widget.js?19" data-telegram-login="richygames_bot" data-size="small" data-userpic="false" data-onauth="onTelegramAuth(user)"></script>
+        <script style={{display: 'none'}} async src="https://telegram.org/js/telegram-widget.js?19" data-telegram-login="richygames_bot" data-size="small" data-userpic="false" ></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
