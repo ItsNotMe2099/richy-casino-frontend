@@ -13,6 +13,7 @@ import VK from 'components/svg/VK'
 import MailRu from 'components/svg/MailRu'
 import Steam from 'components/svg/Steam'
 import Instagram from 'components/svg/Instagram'
+import Telegram from 'components/svg/Telegram'
 
 interface Props{
   currency?: string
@@ -50,9 +51,11 @@ export default function SocialButtons(props: Props) {
         return <Steam/>
       case 'instragram':
         return <Instagram/>
+      case 'telegram':
+        return <Telegram/>
     }
   }
-  const socials = services.map(i => ({icon: getIcon(i.id), link: `${i.url}${props.currency ? `&currency_iso=${props.currency}` : ''}`})).filter(i => i.icon)
+  const socials = services.filter(i => i.id !== 'telegram').map(i => ({icon: getIcon(i.id), link: `${i.url}${props.currency ? `&currency_iso=${props.currency}` : ''}`})).filter(i => i.icon)
 
 
   const {t} = useTranslation('common')
@@ -77,7 +80,7 @@ export default function SocialButtons(props: Props) {
       )}
 
       <div className={styles.btn} onClick={handleTelegram}>
-        T
+        <Telegram/>
       </div>
 
     </div>
