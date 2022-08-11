@@ -28,9 +28,6 @@ import {IPaymentSystem} from 'data/interfaces/IPaymentSystem'
 import {IPaymentMethod} from 'data/interfaces/IPaymentMethod'
 import {PaymentCurrencySelected} from 'components/Profile/Wallet/PaymentCurrencySelected'
 import {PaymentMethodSelected} from 'components/Profile/Wallet/PaymentMethodSelected'
-import PlusCircleSvg from 'components/svg/PlusCircleSvg'
-import MinusCircleSvg from 'components/svg/MinusCircleSvg'
-import {colors} from 'scss/variables'
 
 
 interface Props {
@@ -94,7 +91,7 @@ export default function StepForm(props: Props) {
 
             <div className={classNames(styles.bottom)}>
               <div className={styles.promo} onClick={() =>  setPromoCode(!promoCode ? true : false)}>
-                {!promoCode ? <PlusCircleSvg color={colors.white}/> : <MinusCircleSvg color={colors.white}/>}
+                <div className={styles.plus}>{promoCode ? '-' : '+'}</div>
                 <span>{t('wallet_form_promocode')}</span>
               </div>
               {rate && <div className={styles.rate}>

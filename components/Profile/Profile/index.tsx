@@ -140,7 +140,7 @@ export default function Profile(props: Props) {
                   onClick={() => context.showModalProfile(ProfileModalType.betsHistory)}/>
         <MenuItem icon='/img/Profile/icons/favorite.svg' label={t('profile_menu_favorite')}
                   onClick={() => context.showModalProfile(ProfileModalType.favorite)}/>
-        <MenuItem icon='/img/Profile/icons/support.svg' label={t('profile_menu_support')}/>
+        <MenuItem icon='/img/Profile/icons/support.svg' label={t('profile_menu_support')} onClick={context.openSupport}/>
         <MenuItem icon='/img/Profile/icons/wallet2.svg' label={t('profile_menu_payments_history')}
                   onClick={() => context.showModalProfile(ProfileModalType.paymentHistory)}/>
         <MenuItem icon='/img/Profile/icons/settings.svg' label={t('profile_menu_settings')}

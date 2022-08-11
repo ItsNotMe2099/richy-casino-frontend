@@ -114,6 +114,9 @@ overflow: hidden;
   max-height: 100%;
   padding-bottom: 52%;
   overflow: hidden;
+  img{
+    object-fit: cover;
+  }
   @media screen and (max-width: $mobile-max){
     padding-bottom: 59.04%;
   }
