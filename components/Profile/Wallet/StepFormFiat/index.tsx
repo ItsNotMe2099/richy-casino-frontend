@@ -51,10 +51,10 @@ export default function StepFormFiat(props: Props) {
     const min = currentSettings?.deposit?.minAmount ?? 0
     const max = currentSettings?.deposit?.maxAmount ?? 0
     if(min && value < min){
-      return `Значение меньше ${min}`
+      return t('form_field_validation_amount_less', {number: min})
     }
     if(max && value > max){
-      return `Значение больше ${max}`
+      return t('form_field_validation_amount_greater', {number: max})
     }
     return undefined
   }
