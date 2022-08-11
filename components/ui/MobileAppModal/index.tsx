@@ -35,7 +35,7 @@ export default function MobileAppModal(props: Props) {
           {t('pwa-instruction_title_ios')}
         </div>
         <div className={styles.steps}>
-          {steps.map((step, index) => 
+          {steps.map((step, index) =>
             <div className={styles.step} key={index}>
               <div className={styles.count}></div>
               <div>
@@ -49,7 +49,7 @@ export default function MobileAppModal(props: Props) {
             </div>
           )}
         </div>
-        <img className={styles.video} src='/gifs/ios.gif'/>
+        {/*<img className={styles.video} src='/gifs/ios.gif'/>*/}
       </div>
     </div>
   )

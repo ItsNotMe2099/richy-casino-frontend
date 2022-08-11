@@ -4,7 +4,6 @@ import {useEffect, useState} from 'react'
 import Header from 'components/for_pages/Common/Header'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
-import ItemGame from 'components/for_pages/Common/ItemGame'
 import {Routes} from 'types/routes'
 import {useAppContext} from 'context/state'
 import {IPagination} from 'types/interfaces'
@@ -12,6 +11,7 @@ import {IGame} from 'data/interfaces/IGame'
 import GameListRepository from 'data/repositories/GameListRepository'
 import ContentLoader from 'components/ui/ContentLoader'
 import {useTranslation} from 'next-i18next'
+import GameCard from 'components/for_pages/Common/GameCard'
 
 interface Props {
   slider?: any
@@ -95,7 +95,7 @@ export default function Games(props: Props) {
         <div className={styles.sliderWrapper}>
         <Slider {...settings} ref={slider1 => (slider = slider1)}>
           {data.data.map((item, index) =>
-            <ItemGame slider item={item} key={item.id}/>
+            <GameCard slider item={item} key={item.id}/>
           )}
         </Slider>
         </div>
@@ -103,7 +103,7 @@ export default function Games(props: Props) {
       <VisibleXs>
         <div className={styles.overflow}>
           {data.data.map((item, index) =>
-            <ItemGame slider item={item} key={item.id}/>
+            <GameCard slider item={item} key={item.id}/>
           )}
         </div>
       </VisibleXs>

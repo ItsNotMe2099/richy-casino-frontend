@@ -90,8 +90,8 @@ export default function Exchange(props: Props) {
     onSubmit: handleSubmit,
     enableReinitialize: true
   })
-  const mainAccount = UserUtils.getMainBalanceTotals(context.user)
-  const otherAccounts = (UserUtils.getOtherBalancesTotals(context.user))
+  const mainAccount = UserUtils.getMainBalanceReal(context.user)
+  const otherAccounts = (UserUtils.getOtherBalancesReal(context.user))
 
   const currentBalance = [mainAccount, ...otherAccounts].find(i => i.currency === formik.values.currencySent)?.value
 

@@ -56,7 +56,7 @@ export default function ItemGame(props: Props) {
     })}>
       {props.item.imageIconPreviewUrl && <Image src={props.item.imageIconPreviewUrl} priority layout={'fill'} alt={props.item.name} />}
       <div className={styles.shade}>
-        <div className={styles.top}><FavoriteBtn id={props.item.id} inActiveClassName={styles.favoriteInActive} className={styles.favorite} onChange={(val) => !val && props.onDeleteFromFavorite ? props.onDeleteFromFavorite(props.item) : null} /></div>
+        <div className={styles.top}><div className={styles.providerName}>{props.item.providerName}</div></div>
         <div className={styles.btns}>
           {!props.item.isBlackListed && <div className={styles.btnsWrapper}>
             <Button className={classNames(styles.btn)} href={link} onClick={handlePlayClick} size='small' background='blueGradient500'>{t('game_card_play')}</Button>

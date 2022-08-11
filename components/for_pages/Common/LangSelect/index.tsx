@@ -9,6 +9,7 @@ import { CookiesLifeTime } from 'types/constants'
 import { usePopper } from 'react-popper'
 import DropDownTriangle from 'components/ui/DropDownTriangle'
 import Converter from 'utils/converter'
+import {useAppContext} from 'context/state'
 interface ILanguage {
   icon: string
   code: string
@@ -21,17 +22,19 @@ interface Props {
 
   className?: string
   styleType?: 'footer' | 'top' | 'menu'
+  background?: 'dark500' | 'dark700'
 }
 
 export default function LangSelect(props: Props) {
   const { t, i18n } = useTranslation()
+  const appContext = useAppContext()
   const dropdownRef = useRef(null)
   const [referenceElement, setReferenceElement] = useState(null)
   const [arrowElement, setArrowElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
   const { styles: popperStyles, attributes } = usePopper(referenceElement, popperElement, {
     strategy: props.styleType === 'menu' ? 'fixed' : 'absolute',
-    placement: ['footer', 'menu'].includes(props.styleType) ? props.styleType === 'menu' ? 'top-start' : 'top-end' :  'bottom-end',
+    placement: ['footer', 'menu'].includes(props.styleType) ? props.styleType === 'menu' ? 'top-start' :  appContext.isMobile ? 'top-end' : 'top-start' :  'bottom-end',
     modifiers: [
       {
         name: 'flip',
@@ -116,7 +119,6 @@ export default function LangSelect(props: Props) {
 
         style={popperStyles.popper}  {...attributes.popper}
         className={classNames(styles.dropDown, {[styles.opened]: isActive, [styles.footer]: props.styleType === 'footer', })}>
-        {/*style !== 'footer' && <div className={styles.triangle}></div>*/}
 
         <div className={styles.options}>
           {rows.map((row, index) => <div key={index} className={styles.row}>
