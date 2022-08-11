@@ -31,7 +31,15 @@
       height: 41px;
       padding: 0px 14px;
         text-transform: uppercase;
+      background: $dark500;
+      &:hover{
+        background: $dark600;
+      }
+      @media screen and (max-width: $xs-max){
+        background: $dark700;
+      }
     }
+
     .dropDown{
       margin-top: 0px;
       margin-bottom: 26px;

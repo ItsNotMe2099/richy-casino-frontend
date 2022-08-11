@@ -21,7 +21,9 @@ import {isMobile} from 'mobile-device-detect'
 import Image from 'next/image'
 import VisibleXs from 'components/ui/VisibleXS'
 import HiddenXs from 'components/ui/HiddenXS'
-
+import LinesEllipsis from 'react-lines-ellipsis'
+import ArrowSvg from 'components/svg/ArrowSvg'
+import {colors} from 'scss/variables'
 interface Props {
   children?: React.ReactNode
   className?: string
@@ -36,7 +38,16 @@ export default function Footer(props: Props) {
   const {t} = useTranslation()
   const appContext = useAppContext()
   const pwaContext = usePwaContext()
+  const [textExpanded, setTextExpanded] = useState(false)
 
+  const text = ` Казино онлайн существовали не всегда, но мы можем с уверенностью сказать, что онлайн-казино пользуются
+            большим спросом с тех пор, как они появились на рынке. И сейчас, в 2022 году, у нас есть 1000 и 1000
+            вариантов на выбор - вопрос только в том, что вам нравится и какие варианты оплаты вы хотели бы видеть в
+            казино. \n
+            Игроки всегда ищут что-то новое, что поможет сделать игровой опыт намного лучше и доступнее. Это позволит
+            игроку сосредоточиться на самом главном развлечении в казино, то есть на самих играх.\n
+            Именно поэтому сейчас мы расскажем вам все, что вам нужно знать о крипто-казино, или биткоин-гемблинге, или
+            биткоин-казино, как бы вы его ни называли.`
   const options = [
     {label: t('footer_menu_terms_of_service'), link: '/terms_of_service'},
     {label: t('footer_menu_bonuses'), link: '/bonuses'},
@@ -119,9 +130,9 @@ export default function Footer(props: Props) {
    </div>)
 
   const apps = (<div className={styles.apps}>
-    <Button size='extraSmall' background='dark700' onClick={() => handleAppClick(true)}><img
+    <Button size='extraSmall' background={appContext.isMobile ? 'dark700' : 'dark500'} onClick={() => handleAppClick(true)}><img
       src='/img/layout/top/apple.svg' alt=''/></Button>
-    <Button size='extraSmall' background='dark700' onClick={() => handleAppClick()}><img
+    <Button size='extraSmall' background={appContext.isMobile ? 'dark700' : 'dark500'} onClick={() => handleAppClick()}><img
       src='/img/layout/top/android.svg' alt=''/></Button>
   </div>)
   const mail =  (<div className={styles.mail}>
@@ -160,7 +171,7 @@ export default function Footer(props: Props) {
               <Button className={classNames(styles.menuMobileToggle, {[styles.expanded]: !showAllItems})}
                       onClick={() => showAllItems ? setShowAllItems(false) : setShowAllItems(true)} size='extraSmall'
                       background='dark700'><img src='/img/layout/footer/up.svg' alt=''/></Button>
-              <SupportButton className={styles.support}/>
+              <SupportButton className={styles.support} background={appContext.isMobile ? 'dark700' : 'dark500'}/>
               {mail}
               {socialButtons}
               <div className={styles.mobileMenuBottom}>
@@ -176,7 +187,7 @@ export default function Footer(props: Props) {
             {footerTopText}
             {mail}
             <div className={styles.buttonsLeft}>
-              <SupportButton className={styles.support}/>
+              <SupportButton className={styles.support} background={appContext.isMobile ? 'dark700' : 'dark500'}/>
               {langSelect}
             </div>
           </div>
@@ -207,16 +218,15 @@ export default function Footer(props: Props) {
         <div className={styles.textWrapper}>
           <h1>Онлайн казино Richy</h1>
           <div className={styles.text}>
-            Казино онлайн существовали не всегда, но мы можем с уверенностью сказать, что онлайн-казино пользуются
-            большим спросом с тех пор, как они появились на рынке. И сейчас, в 2022 году, у нас есть 1000 и 1000
-            вариантов на выбор - вопрос только в том, что вам нравится и какие варианты оплаты вы хотели бы видеть в
-            казино.
-            <br/><br/>
-            Игроки всегда ищут что-то новое, что поможет сделать игровой опыт намного лучше и доступнее. Это позволит
-            игроку сосредоточиться на самом главном развлечении в казино, то есть на самих играх.
-            <br/><br/>
-            Именно поэтому сейчас мы расскажем вам все, что вам нужно знать о крипто-казино, или биткоин-гемблинге, или
-            биткоин-казино, как бы вы его ни называли.
+            {textExpanded ? text : <LinesEllipsis
+              text={text}
+              maxLine={appContext.isMobile ? 17 : 7}
+            />}
+          </div>
+          <div className={styles.buttonTextExpandWrapper}>
+          <Button className={styles.buttonTextExpand} size='normal' background={appContext.isMobile ? 'dark600' : 'dark600'} onClick={() => setTextExpanded(i => !i)}>
+            <ArrowSvg className={classNames(styles.arrow, {[styles.reversed]: textExpanded})} color={colors.dark100}/>
+            Показать больше </Button>
           </div>
         </div>
 
@@ -264,7 +274,7 @@ export default function Footer(props: Props) {
         <div className={styles.copyright}>
           © {format(new Date(), 'y')} {t('footer_copyright')}
         </div>
-          <Button className={styles.buttonToTop} onClick={() => window.scrollTo(0, 0)} size='extraSmall' background='dark700'><img
+          <Button className={styles.buttonToTop} onClick={() => window.scrollTo(0, 0)} size='extraSmall' background={appContext.isMobile ? 'dark700' : 'dark500'}><img
             src='/img/layout/footer/up.svg' alt=''/></Button>
       </div>
     </div>

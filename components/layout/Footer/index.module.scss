@@ -104,7 +104,7 @@
     color: $white;
     @media screen and (max-width: $xs-max) {
       font-weight: 500;
-      font-size: $mobile13;
+      font-size: $mobile12;
     }
   }
 
@@ -414,12 +414,41 @@
   .text {
     font-weight: 500;
     font-size: 16px;
+    white-space: pre-line;
     @media screen and (max-width: $xs-max) {
       font-size: $mobile12;
     }
   }
 }
+.buttonTextExpandWrapper{
+  margin-top: 32px;
+  @media screen and (max-width: $xs-max) {
+    margin-top: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.buttonTextExpand{
+  font-weight: 600;
+  font-size: 16px;
+  color: $dark100;
+  height: 46px;
+  padding: 0px 32px;
+  @media screen and (max-width: $xs-max) {
+    padding: 0px 15px;
+    height: 29px;
+    font-size: $mobile12;
+  }
+  .arrow{
 
+    @include dropDownArrow();
+    &.reversed {
+      transform: rotate(180deg);
+    }
+    margin-right: 16px;
+  }
+}
 .copyrightWrapper {
   display: flex;
   align-items: center;

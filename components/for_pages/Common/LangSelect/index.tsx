@@ -22,6 +22,7 @@ interface Props {
 
   className?: string
   styleType?: 'footer' | 'top' | 'menu'
+  background?: 'dark500' | 'dark700'
 }
 
 export default function LangSelect(props: Props) {
