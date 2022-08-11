@@ -60,7 +60,7 @@ export default function SocialButtons(props: Props) {
 
     console.log('handleTegramd', window);
     (window as any).Telegram.Login.auth(
-      { bot_id: 'dasdsadsd', request_access: true },
+      { bot_id: '2110156771', request_access: true },
       (data) => {
         if (!data) {
           // authorization failed
