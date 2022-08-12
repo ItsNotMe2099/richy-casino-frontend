@@ -14,6 +14,7 @@ import {Routes} from 'types/routes'
 import {usePwaContext} from 'context/pwa_state'
 import { ReactElement } from 'react'
 import Image from 'next/image'
+import ErrorBoundary from 'components/ui/ErrorBoundary'
 interface Props {
   children?: React.ReactNode
   className?: string
@@ -122,15 +123,17 @@ export default function Header(props: Props) {
                     <UserBonus icon='/img/icons/spin.svg' amount={context.user.extraBalances.freespinAmount ?? 0} color='#F81AAC'/>
                   </div>
             */}
-                {!user.flags.isHideBalance && <ProfileAccountsMenu/>}
+                {!user.flags.isHideBalance && <ErrorBoundary><ProfileAccountsMenu/></ErrorBoundary>}
                 <HiddenXs>
+                  <ErrorBoundary>
                   <ProfileMenu/>
+                  </ErrorBoundary>
                 </HiddenXs>
                 <Button onClick={() => context.showModal(ProfileModalType.wallet)} size='normal'
                         background='payGradient500' className={styles.wallet}>
                   <img src='/img/icons/wallet.svg' alt=''/>{t('header_deposit')}</Button>
                 <VisibleXs>
-                  {props.rightButton ? props.rightButton : <ProfileMenu className={styles.proMenu}/>}
+                  {props.rightButton ? props.rightButton : <ErrorBoundary><ProfileMenu className={styles.proMenu}/></ErrorBoundary>}
                 </VisibleXs>
               </div>
             }

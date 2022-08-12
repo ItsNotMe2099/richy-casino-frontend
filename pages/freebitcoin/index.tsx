@@ -14,7 +14,7 @@ import ContentLoader from 'components/ui/ContentLoader'
 import styles from 'pages/freebitcoin/index.module.scss'
 import Head from 'next/head'
 import {IPagination} from 'types/interfaces'
-
+import ErrorBoundary from 'components/ui/ErrorBoundary'
 export default function FreeBitcoin() {
   const {t} = useTranslation()
   const context = useAppContext()
@@ -76,13 +76,15 @@ export default function FreeBitcoin() {
       <PageTitle icon='/img/Contents/bitcoin.svg' title={t('freebitcoin_title')}
                  onClick={() => isShow ? setIsShow(false) : setIsShow(true)} shadowColor='yellow'/>
       {loading && <ContentLoader style={'block'} isOpen={true}/>}
-      {!loading && <><Banner/>
+      {!loading && <>   <ErrorBoundary><Banner/></ErrorBoundary>
+      <ErrorBoundary>
         <div className={styles.tables}>
           <div className={styles.table}><Table items={slots}/></div>
           <Table items={history.data} nextDisabled={historyPage === 1}
                  prevDisabled={historyPage >= history.totalPages} loading={historyLoading} history onNext={handleNextHistory}
                  onPrev={handlePrevHistory}/>
         </div>
+      </ErrorBoundary>
       </>}
     </WithGameFilterLayout>
   )

@@ -10,6 +10,7 @@ import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import {NextSeo} from 'next-seo'
 import {useTranslation} from 'next-i18next'
 import Head from 'next/head'
+import ErrorBoundary from 'components/ui/ErrorBoundary'
 
 export default function CatalogPage() {
   const {t} = useTranslation()
@@ -33,12 +34,21 @@ export default function CatalogPage() {
                  url: 'https://richy.casino/catalog',
                }}
       />
-            <HiddenXs><TopSlider/></HiddenXs>
+      <HiddenXs>
+        <ErrorBoundary><TopSlider/></ErrorBoundary></HiddenXs>
+      <ErrorBoundary>
           <GamesListTop />
+      </ErrorBoundary>
           <VisibleXs><BuyCrypto/></VisibleXs>
+      <ErrorBoundary>
           <GamesListAll />
+      </ErrorBoundary>
+      <ErrorBoundary>
           <GamesListLive />
+      </ErrorBoundary>
+      <ErrorBoundary>
           <GamesListRichy />
+      </ErrorBoundary>
     </WithGameFilterLayout>
   )
 }

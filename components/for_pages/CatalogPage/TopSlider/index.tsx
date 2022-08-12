@@ -14,6 +14,7 @@ import JackPotRepository from 'data/repositories/JackPotRepository'
 import {IJackpotNearest} from 'data/interfaces/IJackpotNearest'
 import {useTranslation} from 'next-i18next'
 
+import ErrorBoundary from 'components/ui/ErrorBoundary'
 interface Props {
   children?: React.ReactNode
   className?: string
@@ -60,12 +61,12 @@ export default function TopSlider(props: Props) {
             <div className={styles.wrapper}>
           <div className={styles.rootJack}>
             <div className={styles.jackpot}>
-              {jackpot && <div className={styles.content}>
+              {jackpot &&       <ErrorBoundary><div className={styles.content}>
               <div className={styles.title} style={{fontSize: `${width / 27}px`}}>{t('catalog_banner_jackpot_title')}</div>
               <div className={styles.money} style={{fontSize: `${width / 18.5}px`}}>
                 {jackpot.sum} {jackpot.currency}
               </div>
-            </div>}
+              </div></ErrorBoundary>}
             </div>
           </div>
           <div className={styles.desktop}>
@@ -86,7 +87,7 @@ export default function TopSlider(props: Props) {
             </div>}
             </div>
           </div>
-          <BonusSlide className={styles.bonusSlideMobile}/>
+          <ErrorBoundary><BonusSlide className={styles.bonusSlideMobile}/></ErrorBoundary>
             {appContext.banners.map((item, index) => <div className={styles.rootSlide} key={index}>
                  <div className={styles.item} key={item.id}>
                    {(item.imageDesktopUrl || item.imageMobileUrl) && <Image src={appContext.isMobile ? item.imageMobileUrl || item.imageDesktopUrl : item.imageDesktopUrl || item.imageMobileUrl}  layout={'fill'}/>}

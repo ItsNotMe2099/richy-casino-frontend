@@ -16,6 +16,7 @@ import {useRouter} from 'next/router'
 import {useAppContext} from 'context/state'
 import {PaymentSwitchFilterKey, ProfileModalType} from 'types/enums'
 import {PaymentHistoryModalArguments} from 'types/interfaces'
+import ErrorBoundary from 'components/ui/ErrorBoundary'
 
 const casinos = [
   {image: '/img/GamesList/hotline.png', label: 'hotline', provider: 'provider1', category: 'category1'},
@@ -56,23 +57,43 @@ export default function IndexPage() {
   }, [router.query])
   return (
         <Layout>
+          <ErrorBoundary>
           <TopSlider/>
+          </ErrorBoundary>
+          <ErrorBoundary>
+            <ErrorBoundary>
           <Contents/>
+            </ErrorBoundary>
+          </ErrorBoundary>
           <Games/>
           <div className={styles.lists}>
+            <ErrorBoundary>
             <GamesList type={MainGameListType.All} label='Казино' icon='/img/Contents/casino.svg' shadowColor='red'/>
+            </ErrorBoundary>
+            <ErrorBoundary>
             <GamesList type={MainGameListType.Live} label='Live Casino' icon='/img/Contents/live.svg' shadowColor='blue'/>
+            </ErrorBoundary>
           </div>
           <VisibleXs>
+            <ErrorBoundary>
             <BuyCrypto/>
+            </ErrorBoundary>
           </VisibleXs>
+          <ErrorBoundary>
               <div className={styles.cards}>
                 <GameCard poker/>
                 <GameCard/>
               </div>
-          <Tournament/>
+          </ErrorBoundary>
+          <ErrorBoundary>
+            <Tournament/>
+          </ErrorBoundary>
+          <ErrorBoundary>
           <Winners/>
+          </ErrorBoundary>
+          <ErrorBoundary>
           <Statistics/>
+          </ErrorBoundary>
         </Layout>
   )
 }
