@@ -194,7 +194,7 @@ export default function Winners(props: Props) {
             <div className={styles.value}>
               <div className={styles.group}>
                 <CurrencySvg className={styles.currency} currencyIso={tournamentContext.userPosition.userCurrencyIso} />
-                {Formatter.formatAmount(tournamentContext.userPosition.sumToReachTop10, tournamentContext.userPosition.userCurrencyIso)} {tournamentContext.userPosition.userCurrencyIso}
+                {Formatter.formatAmount(tournamentContext.userPosition.sumToReachTop10, tournamentContext.userPosition.userCurrencyIso) ?? 0} {tournamentContext.userPosition.userCurrencyIso}
 
               </div>
             </div>
@@ -207,7 +207,7 @@ export default function Winners(props: Props) {
               <div className={styles.group}>
                 <CurrencySvg className={styles.currency} currencyIso={tournamentContext.userPosition.tournamentCurrencyIso} />
 
-                {Formatter.formatAmount(tournamentContext.userPosition.totalBankMoneyAmount, tournamentContext.userPosition.tournamentCurrencyIso)} {tournamentContext.userPosition.tournamentCurrencyIso}
+                {Formatter.formatAmount(tournamentContext.userPosition.totalBankMoneyAmount, tournamentContext.userPosition.tournamentCurrencyIso) ?? 0} {tournamentContext.userPosition.tournamentCurrencyIso}
               </div>
             </div>
           </div>

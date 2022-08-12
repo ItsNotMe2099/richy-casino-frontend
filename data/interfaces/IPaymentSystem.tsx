@@ -19,6 +19,7 @@ export interface IPaymentSettings{
     commissionAmount: number
     commissionPercent: number
     isWalletRequired: boolean
+    isCardDataRequired: boolean
     isRedirectUrlRequired: boolean
   }
 }

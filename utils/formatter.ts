@@ -97,6 +97,9 @@ export default class Formatter {
     if(typeof amount === 'string'){
       return (amount ?? '').replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')
     }
+    if(!amount){
+      return ''
+    }
     return isCrypto ? amount.toFixed(8).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1') : convertFiat(amount).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')
   }
 

@@ -106,4 +106,11 @@ export default class Converter {
       return chunksArr
     }
   }
+  static getMonthYearCardExpiry(value: string): {month: number, year: number} | null{
+    const split = value.split('/')
+    if(split.length !== 2){
+      return null
+    }
+    return {month: parseInt(split[0], 0), year: parseInt(split[1], 0)}
+  }
 }

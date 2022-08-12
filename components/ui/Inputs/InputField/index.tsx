@@ -11,7 +11,7 @@ import Eye from 'components/svg/Eye'
 import ErrorInput from 'components/ui/Inputs/components/ErrorInput'
 import cx from 'classnames'
 
-type FormatType = 'phone' | 'phoneAndEmail'
+type FormatType = 'phone' | 'phoneAndEmail' | 'cardExpiry'
 
 interface Props extends IField {
   obscure?: boolean
@@ -28,16 +28,18 @@ interface Props extends IField {
 
 export default function InputField(props: Props) {
   const defaultPhonePattern = '+*[********************]'
+  const defaultCardExpiryPattern = '**/**'
   const [focused, setFocus] = useState(false)
   const [obscureShow, setObscureShow] = useState(false)
   const [field, meta, helpers] = useField(props as FieldConfig)
   const [phoneIsValid, setPhoneIsValid] = useState(false)
-  const [pattern, setPattern] = useState<string | null>(props.format === 'phone' ? defaultPhonePattern : null)
+  const [pattern, setPattern] = useState<string | null>(props.format === 'phone' ? defaultPhonePattern : props.format  === 'cardExpiry' ? defaultCardExpiryPattern : null)
   const showError = meta.touched && !!meta.error && !focused
   const { ref, maskRef } = useIMask({ mask: pattern as any || /.*/ })
 
   useEffect(() => {
-    if (maskRef.current && (props.format === 'phone' || props.format === 'phoneAndEmail')) {
+
+      if (maskRef.current && (props.format === 'phone' || props.format === 'phoneAndEmail')) {
       const phone = `${field.value && !`${field.value}`.startsWith('+') ? '+' : ''}${field.value}`
       if (isValidPhoneNumber(phone || '')) {
         if (!phoneIsValid) {
@@ -64,6 +66,10 @@ export default function InputField(props: Props) {
         }
       }
     }
+      if(props.format === 'cardExpiry'){
+        setPattern(defaultCardExpiryPattern)
+        updateValueFromMask()
+      }
   }, [ref.current, field.value])
 
   const updateValueFromMask = () => {
