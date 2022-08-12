@@ -179,12 +179,12 @@ export default function ProfileBurger(props: Props) {
     <div className={styles.lang}>
       <LangSelect styleType={'menu'}/>
     </div>
-    <div className={styles.chat}>
+    <div className={styles.chat} onClick={appContext.openSupport}>
       <div className={styles.name}>
         <div className={styles.icon}>
           <img src='/img/ProfileBurger/chat.svg' alt=''/>
         </div>
-        <div className={styles.label}>Чат</div>
+        <div className={styles.label}>{t('profile_mobile_menu_chat')}</div>
       </div>
       <div className={styles.back}>
         <img src='/img/icons/back-arrow-white.svg'/>
