@@ -23,7 +23,9 @@
   @media screen and (max-width: 550px){
     margin-top: 16px;
 }
+
 }
+
 
 .table{
   width: 100%;
@@ -56,7 +58,7 @@
 
     padding-bottom: 26px;
       @media screen and (max-width: $xs-max){
-          padding-bottom: 11px;
+          padding-bottom: 11px !important;
       }
       font-size: 16px;
       @media screen and (max-width: $xs-max){
@@ -191,6 +193,9 @@
   display: flex;
   flex-direction: row;
   grid-gap: 0px 9px;
+  @media screen and (max-width: $xs-max){
+    padding-right: 16px;
+  }
   .navButton{
     height: 35px;
     font-size: 16px;
@@ -232,4 +237,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.stats{
+  .table{
+    margin-top: 8px;
+    @media screen and (max-width: $xs-max){
+      margin-top: 0px;
+    }
+  }
+  .cellHeader{
+    padding-bottom: 32px;
+  }
 }

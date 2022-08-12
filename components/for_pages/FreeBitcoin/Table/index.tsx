@@ -46,7 +46,7 @@ export default function Table(props: Props) {
   }
 
   return (
-    <div className={classNames(styles.col, {[styles.last]: props.history})}>
+    <div className={classNames(styles.col, {[styles.last]: props.history, [styles.stats]: !props.history})}>
     <div className={styles.root}>
       <table className={styles.table}>
         <thead>
