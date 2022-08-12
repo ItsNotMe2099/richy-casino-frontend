@@ -30,6 +30,7 @@ import Head from 'next/head'
 import { DefaultSeo } from 'next-seo'
 import ReactPWAInstallProvider from 'context/pwa_state'
 import { TournamentWrapper } from '../context/tournament_state'
+import ErrorBoundary from 'components/ui/ErrorBoundary'
 const PageLoader = () => {
 
 }
@@ -84,15 +85,15 @@ function MyApp({ Component, pageProps }: AppProps) {
                   url: 'https://richy.casino/',
                 }}/>
               <Component {...pageProps} />
-              {clientVisible && <ModalContainer />}
-              {clientVisible && <BottomSheetContainer />}
+              {clientVisible && <ErrorBoundary><ModalContainer /></ErrorBoundary>}
+              {clientVisible && <ErrorBoundary><BottomSheetContainer /></ErrorBoundary>}
             </ReactPWAInstallProvider>
           </TournamentWrapper>
         </FavoriteWrapper>
 
-        {clientVisible && <AuthUserFeatures />}
+        {clientVisible && <ErrorBoundary><AuthUserFeatures /></ErrorBoundary>}
         <HiddenXs>
-          <NotificationBanner />
+          <ErrorBoundary><NotificationBanner /></ErrorBoundary>
         </HiddenXs>
 
       </AuthWrapper>

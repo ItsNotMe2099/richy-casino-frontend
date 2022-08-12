@@ -15,7 +15,7 @@ import {useAppContext} from 'context/state'
 import {NextSeo} from 'next-seo'
 import ContentLoader from 'components/ui/ContentLoader'
 import Head from 'next/head'
-
+import ErrorBoundary from 'components/ui/ErrorBoundary'
 export default function Lottery() {
   const {t} = useTranslation()
  const appContext = useAppContext()
@@ -61,13 +61,16 @@ export default function Lottery() {
       {loading && <ContentLoader style={'block'} isOpen={true}/>}
       {!loading && currentRound?.roundEndTime && <><Timer roundId={currentRound.roundId} expiredAt={new Date(currentRound?.roundEndTime)}/>
         <VisibleXs>
+          <ErrorBoundary>
           <Statistics className={styles.statistics}
                       yourTicket={currentRound?.currentUserInfo?.ticketsCount}
                       winChance={currentRound?.currentUserInfo?.chancePercent}
                       totalTickets={currentRound?.totalTickets}
           />
+          </ErrorBoundary>
         </VisibleXs>
         <div className={styles.row}>
+          <ErrorBoundary>
           <BuyTickets  yourTicket={currentRound?.currentUserInfo?.ticketsCount}
                        winChance={currentRound?.currentUserInfo?.chancePercent}
                        totalTickets={currentRound?.totalTickets}
@@ -75,9 +78,12 @@ export default function Lottery() {
                        currency={currentRound?.ticketCost?.currencyIso}
                        onBuy={handleBuy}
           />
+          </ErrorBoundary>
+          <ErrorBoundary>
           <Prizes slots={currentRound?.slots}/>
+          </ErrorBoundary>
         </div>
-      {currentRound && <Table roundId={currentRound.roundId}/>}
+        {currentRound &&        <ErrorBoundary><Table roundId={currentRound.roundId}/></ErrorBoundary>}
       </>}
     </WithGameFilterLayout>
   )

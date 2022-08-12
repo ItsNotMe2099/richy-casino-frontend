@@ -6,6 +6,7 @@ import GameListRepository from 'data/repositories/GameListRepository'
 import classNames from 'classnames'
 import { debounce } from 'debounce'
 import GamesListSearch from 'components/for_pages/CatalogPage/GamesListSearch'
+import ErrorBoundary from 'components/ui/ErrorBoundary'
 interface Props{
   children?: ReactElement | ReactElement[]
   top?: ReactElement | ReactElement[]
@@ -44,13 +45,14 @@ export default function WithGameFilterLayout(props: Props) {
     <Layout>
       {props.top}
       <div className={styles.desktop}>
-        <Filter isSearch={isSearch} showMobile={props.showMobile} onSearch={handleSearch}/>
+        <ErrorBoundary><Filter isSearch={isSearch} showMobile={props.showMobile} onSearch={handleSearch}/></ErrorBoundary>
         <div className={styles.content}>
-          <div className={classNames(styles.children, {[styles.hidden]: isSearch})}>{props.children}</div>
+          <div className={classNames(styles.children, {[styles.hidden]: isSearch})}><ErrorBoundary>{props.children}</ErrorBoundary></div>
+         <ErrorBoundary>
           <div className={classNames(styles.search, {[styles.hidden]: !isSearch})}>
             <GamesListSearch data={searchGames} onSelect={() => setIsSearch(false)} loading={isSearchLoading} onScrollNext={handleScrollNext}/>
           </div>
-
+         </ErrorBoundary>
           </div>
         </div>
     </Layout>

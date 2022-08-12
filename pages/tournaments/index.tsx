@@ -6,6 +6,7 @@ import {NextSeo} from 'next-seo'
 import {useTranslation} from 'next-i18next'
 import PageTitle from 'components/for_pages/Common/PageTitle'
 import Head from 'next/head'
+import ErrorBoundary from 'components/ui/ErrorBoundary'
 
 export default function Tournaments(){
 
@@ -32,8 +33,12 @@ export default function Tournaments(){
       />
         <div className={styles.root}>
           <PageTitle title={t('page_tournament_title')}/>
-          <Tournament />
+          <ErrorBoundary>
+            <Tournament />
+          </ErrorBoundary>
+          <ErrorBoundary>
           <Winners/>
+          </ErrorBoundary>
         </div>
     </Layout>
   )
