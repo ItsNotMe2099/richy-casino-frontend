@@ -104,7 +104,7 @@ export default function Tournament(props: Props) {
               <div className={styles.prize}>
                 <span >{t('tournament_banner_prize')}</span>
                 <div className={styles.balance}>
-                  {Formatter.formatAmount(tournament?.totalBankMoneyAmount, tournament.currency)} {tournament.currency}
+                  {Formatter.formatAmount(tournament?.totalBankMoneyAmount, tournament.currency) ?? 0} {tournament.currency}
                 </div>
               </div>
             </div>

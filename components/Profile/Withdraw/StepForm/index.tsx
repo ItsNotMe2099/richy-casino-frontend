@@ -42,7 +42,9 @@ export default function StepForm(props: Props) {
   const max = currentSettings?.withdraw?.maxAmount ?? 0
   const initialValues = {
     amount: '',
-    address: ''
+    address: '',
+    cardOwnerName: '',
+    cardExpiry: ''
   }
   const validateMinMax = (value: number) => {
 
@@ -62,7 +64,7 @@ export default function StepForm(props: Props) {
         const res = await PaymentsRepository.withdrawCrypto(props.currency.iso, props.paymentSystem.id, props.paymentSystem.systemCode, data.amount, data.address)
         context.showModalProfile(ProfileModalType.paymentHistory, {filter: PaymentSwitchFilterKey.Applications} as PaymentHistoryModalArguments)
       }else{
-        const res = await PaymentsRepository.withdrawFiat(props.currency.iso, props.paymentSystem.id, props.paymentSystem.systemCode,`${window.location.origin}?withdrawal=1`, data.amount, data.address)
+        const res = await PaymentsRepository.withdrawFiat(props.currency.iso, props.paymentSystem.id, props.paymentSystem.systemCode,`${window.location.origin}?withdrawal=1`, data.amount, data.address, data.cardHolderName, data.cardExpiry)
         if(res.url){
           window.location.href = res.url
         }
@@ -91,10 +93,21 @@ export default function StepForm(props: Props) {
               </div>
             </div>
             <AmountCurrencyField name={'amount'} currency={props.currency.iso} className={styles.input} disabled={sending} validate={Validator.combine([Validator.required, validateMinMax])}/>
-            <div className={styles.label}>
+            {(props.method.isCrypto || currentSettings.withdraw.isWalletRequired) && <><div className={styles.label}>
               {t('withdraw_form_address')}
             </div>
-            <InputField name={'address'} disabled={sending} className={styles.input} validate={currentSettings.withdraw.isWalletRequired ? Validator.required : null}/>
+              <InputField name={'address'} disabled={sending} className={styles.input} validate={Validator.required}/>
+            </>}
+            {!props.method.isCrypto && currentSettings.withdraw.isCardDataRequired && <>
+               <div className={styles.label}>
+                {t('withdraw_form_card_owner')}
+              </div>
+              <InputField name={'cardOwnerName'} disabled={sending} className={styles.input} validate={Validator.required}/>
+              <div className={styles.label}>
+                {t('withdraw_form_card_expiry')}
+              </div>
+              <InputField name={'cardExpiry'} placeholder={'01/25'} disabled={sending} className={styles.input} format={'cardExpiry'} validate={Validator.cardExpiryValidation}/>
+            </>}
             <FormError error={error}/>
             <Button type='submit' size='normal' spinner={sending} background='blueGradient500' className={styles.button}>{t('withdraw_form_button_continue')}</Button>
           </Form>

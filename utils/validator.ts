@@ -1,4 +1,5 @@
 import { FieldValidator } from 'formik/dist/types'
+import Converter from 'utils/converter'
 
 export default class Validator {
   static emailRe = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
@@ -35,6 +36,25 @@ export default class Validator {
   }
   static otpValidation(value: string | number) {
     return !value || `${value}`.length === 4  ? undefined : 'form_field_validation_otp'
+  }
+
+  static cardExpiryValidation(value: string) {
+    const error = 'form_field_validation_card_expiry'
+    if(value || value.length !== 5){
+      return error
+    }
+    const split = value.split('/')
+    if(split.length !== 2){
+      return error
+    }
+    const date = Converter.getMonthYearCardExpiry(value)
+    if(date.month < 1 || date.month > 12){
+      return error
+    }
+    if(!date.year){
+      return error
+    }
+    return undefined
   }
 
 }
