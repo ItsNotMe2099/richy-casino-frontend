@@ -59,7 +59,7 @@ export default function Tournament(props: Props) {
   if (!tournament) {
     return null
   }
-
+  console.log(' tournamentContext.userActiveRounds.lengt',  tournamentContext.userActiveRounds.length)
   return (
     <>
       <HiddenXs>
@@ -111,10 +111,10 @@ export default function Tournament(props: Props) {
             <div className={styles.timerMobile}>
               <Timer expiredAt={new Date(tournament.timeEnd)} days style='tournamentMobile' />
             </div>
-            {tournamentContext.userActiveRounds.length === 0 && <Button spinner={tournamentContext.participateLoading} onClick={handleJoin} className={classNames({[styles.btnMobile]: true, [styles.hidden]: tournamentContext.userActiveRounds.length == 0 && appContext.auth})}
+             <Button spinner={tournamentContext.participateLoading} onClick={handleJoin} className={classNames({[styles.btnMobile]: true, [styles.hidden]: tournamentContext.userActiveRounds.length > 0 && appContext.auth})}
               size='normal' background='payGradient500'>
               <span>{t('tournament_banner_button')}</span>
-            </Button>}
+            </Button>
           </div>
         </div>
       </VisibleXs>
