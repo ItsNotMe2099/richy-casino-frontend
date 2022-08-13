@@ -11,9 +11,9 @@ interface Props {
 export default function RichyLoader(props: Props) {
   return (
     <div className={classNames(styles.root, props.className)}>
-      <Spinner size={140} color={colors.blue500} secondaryColor="rgba(66,123,248,0.2)" thickness={180}/>
+      <Spinner size={140} color={colors.pay500} secondaryColor="rgb(123, 210, 69, 0.2)" thickness={120}/>
       <div className={styles.logo}>
-      <Image src={'/img/layout/logo_mobile.png'} width={35} height={30}/>
+      <Image src={'/img/layout/logo_mobile.png'} width={52} height={44}/>
       </div>
     </div>
   )
