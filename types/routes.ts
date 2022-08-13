@@ -24,6 +24,9 @@ export class Routes{
   static get catalog(){
     return '/catalog'
   }
+  static tournamentPage(key?: number): string{
+    return `/tournaments/${key}`
+  }
   static catalogCategory(key?: number): string{
     return `/catalog/category/${key}`
   }

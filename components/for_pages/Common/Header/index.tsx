@@ -10,7 +10,7 @@ import { useAppContext } from 'context/state'
 
 interface Props {
   length?: number | string
-  icon: string
+  icon?: string
   label: string
   onPrev?: () => void
   onNext?: () => void

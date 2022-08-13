@@ -29,7 +29,9 @@ export default function Lottery() {
         setCurrentRound(i)
         setLoading(false)
       }),
-    ]).then(() => setLoading(false))
+    ]).then(() => setLoading(false)).catch(() => {
+      setLoading(false)
+    })
   }, [appContext.auth])
   const handleBuy = async (data: ILotteryBuyResponse) => {
 

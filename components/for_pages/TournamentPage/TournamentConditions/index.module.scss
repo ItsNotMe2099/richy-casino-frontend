@@ -1,0 +1,40 @@
+@import "scss/index";
+
+.root {
+  @include componentRoot;
+
+}
+.items{
+  > * + *{
+    border-top: 1px solid $dark500;
+  }
+}
+.item{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 15px 0px;
+}
+.number{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: $dark600;
+  color: $pay500;
+  font-weight: 700;
+  font-size: 20px;
+  border-radius: 5px;
+  @media screen and (max-width: $xs-max) {
+    font-size: $mobile16;
+  }
+}
+.value{
+  color: $dark100;
+  line-height: 130%;
+  padding-left: 17px;
+  @media screen and (max-width: $xs-max) {
+    font-size: $mobile12;
+  }
+}
