@@ -20,7 +20,7 @@ export const CryptoCurrencyIcons = (props: Props) => {
   return (
     <div className={classNames(styles.root, {[styles.selected]: props.selected})}>
       {(currencies.length > limit ? currencies.slice(0, limit) : currencies).map(i => <div key={i.iso} className={styles.card}><CurrencySvg className={styles.icon} currencyIso={i.iso}/></div>)}
-      {currencies.length > limit && <div className={classNames(styles.card, styles.number)}>+{currencies.length - limit}</div>}
+      {currencies.length > limit && <div className={classNames(styles.card, styles.number)}>+{(currencies.length + 1) - limit}</div>}
     </div>
   )
 }
