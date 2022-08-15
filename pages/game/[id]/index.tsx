@@ -31,7 +31,7 @@ export default function CatalogPage(props: Props) {
         demo ? GameListRepository.createGameDemo(gameId, appContext.isMobile ? 'mobile' : 'desktop') : GameListRepository.createGame(gameId, appContext.isMobile ? 'mobile' : 'desktop'),
         GameListRepository.fetchGameInfo(gameId)
       ])
-      setSession({...session, gameUrl: 'http://localhost:3009/game/start?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI5MiIsInNlc3Npb25JZCI6Imo1UkVMTzZZcCIsImN1cnJlbmN5IjoiVVNEIiwiZ2FtZVR5cGUiOiJsaW1ibyIsImxvZ2luIjpudWxsLCJwYXJ0bmVyVXNlcklkIjpudWxsLCJpc0RlbW8iOnRydWUsImlhdCI6MTY2MDU0NDAwMSwiZXhwIjoxNjcxMzQ0MDAxfQ.P5iLJmy0_CyUpUZQVZ_EYsfYWfsd9faf5vlr-Wxych4'})
+      setSession({...session})
 
       setGame(game)
     } catch (e) {
