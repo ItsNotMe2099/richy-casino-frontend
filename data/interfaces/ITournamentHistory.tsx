@@ -1,8 +1,8 @@
 export enum ITournamentRoundStatus {
-  Active = 1,
-  Block = 2,
-  Payment = 3,
-  Complete = 4
+  Active = 'active',
+  Block = 'blocked',
+  Payment = 'payment',
+  Complete = 'complete'
 }
 
 export interface ITournamentHistoryUser {
@@ -13,6 +13,7 @@ export interface ITournamentHistoryUser {
 }
 export interface ITournamentHistory {
   id?: number
+  image: string
   tournamentId?: number
   status?: ITournamentRoundStatus
   timeStart: string
@@ -23,5 +24,6 @@ export interface ITournamentHistory {
   totalUsersSpentMoneyAmount: number
   currency: string
   internalName: string
+  tournamentName: string
   user: ITournamentHistoryUser
 }

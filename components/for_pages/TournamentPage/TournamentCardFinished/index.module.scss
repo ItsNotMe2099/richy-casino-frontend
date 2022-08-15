@@ -1,0 +1,33 @@
+@import "scss/index";
+$radius: 6px;
+$radiusMobile: 4px;
+
+.root{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background: #32333E;
+  border-radius: $radius;
+  padding: 14px 0px 14px 0px;
+  @media screen and (max-width: $xs-max){
+    border-radius: $radiusMobile;
+    padding: 8px 0px 8px 0px;
+  }
+}
+.label{
+  text-transform: uppercase;
+  color: $dark100;
+  text-align: center;
+}
+.dates{
+  color: $white;
+  font-size: 20px;
+  margin-top: 7px;
+  font-weight: 700;
+  @media screen and (max-width: $xs-max){
+    margin-top: 6px;
+    font-size: $mobile16;
+  }
+}
