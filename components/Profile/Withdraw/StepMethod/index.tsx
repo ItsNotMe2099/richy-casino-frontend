@@ -34,7 +34,7 @@ export default function StepMethod(props: Props) {
                               currentItem={Converter.convertUserBalanceCurrencyToOption(props.account)}
       />*/}
       <div className={styles.label}>
-        {t('wallet_payment_method_choose')}
+        {t('withdraw_payment_method_choose')}
       </div>
       <PaymentMethodList>
         {props.paymentMethods.sort((a, b) => a.isCrypto ? -1 : 1 ).map((i, index) =>{

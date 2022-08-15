@@ -119,7 +119,7 @@ export default function Wallet(props: Props) {
       <BottomSheetBody className={styles.sheetBody}>
         {result}
       </BottomSheetBody>
-      {step === PaymentStep.Success && <ModalFooterTwoFa/>}
+      <ModalFooterTwoFa/>
     </BottomSheetLayout>)
   } else {
     return (<ProfileModalLayout fixed>
@@ -127,7 +127,7 @@ export default function Wallet(props: Props) {
         <ProfileModalBody fixed>
           {result}
         </ProfileModalBody>
-        {step === PaymentStep.Success && <ModalFooterTwoFa/>}
+        <ModalFooterTwoFa/>
       </ProfileModalLayout>
     )
   }

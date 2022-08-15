@@ -7,12 +7,14 @@ import {ProfileModalType, SnackbarType} from 'types/enums'
 import UserRepository from 'data/repositories/UserRepository'
 import {TwoFaModalArguments} from 'types/interfaces'
 import {useState} from 'react'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
   className?: string
 }
 
 export default function ModalFooterTwoFa(props: Props) {
+  const {t} = useTranslation()
   const context = useAppContext()
   const [loading, setLoading] = useState(false)
   const handleClick = async () => {
@@ -32,10 +34,10 @@ export default function ModalFooterTwoFa(props: Props) {
     return (
       <ProfileModalFooter className={classNames(styles.root, props.className)}>
         <div className={styles.text}>
-          Повысьте безопасность аккаунта с помощью двухфакторной аутентификации
+          {t('2fa_modal_footer_text')}
         </div>
         <Button background={'payGradient500'} spinner={loading} type='submit' className={styles.btn} onClick={handleClick}>
-          Включить 2FA
+          {t('2fa_modal_2fa_enable')}
         </Button>
       </ProfileModalFooter>
     )
