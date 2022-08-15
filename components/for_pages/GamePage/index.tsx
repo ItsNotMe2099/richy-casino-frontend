@@ -46,7 +46,7 @@ export default function GamePage(props: Props) {
   }, [props.isDemo, props.gameId])
   const isRichy = game?.providerName?.toLowerCase() === 'richy games'
   const result = loading ? <ContentLoader isOpen={true} style={'block'}/> : (isRichy ? <GameIframeRichy game={game} session={session}/> :
-    <GameIframe session={session} error={error}/>)
+    <GameIframe showHeader={false} game={game} session={session} error={error}/>)
   if (appContext.isMobile) {
     return (<div className={styles.mobile}>
       {result}
