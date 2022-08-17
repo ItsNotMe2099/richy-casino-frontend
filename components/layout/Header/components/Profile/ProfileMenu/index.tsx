@@ -24,11 +24,13 @@ enum ActionType{
   Referral,
   Settings,
   Wallet,
+  Support,
   Logout
 }
 
 export default function ProfileMenu(props: Props){
   const {t} = useTranslation()
+  const appContext = useAppContext()
   const dropdownRef = useRef(null)
   const {showModal, showModalProfile, logout} = useAppContext()
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
@@ -38,9 +40,9 @@ export default function ProfileMenu(props: Props){
     {label: t('header_profile_menu_deposit'),  key: ActionType.AddMoney},
     {label: t('header_profile_menu_withdrawal'), key: ActionType.Payout},
     {label: t('header_profile_menu_bets_history'), key: ActionType.Transactions},
-    {label: t('header_profile_menu_referral'), key: ActionType.Referral},
     {label: t('header_profile_menu_settings'), key: ActionType.Settings},
     {label: t('header_profile_menu_wallet'), key: ActionType.Wallet},
+    {label: t('header_profile_menu_support'), key: ActionType.Support},
     {label: t('header_profile_menu_logout'), key: ActionType.Logout},
   ]
   const handleClickItem = (e, item) => {
@@ -66,6 +68,9 @@ export default function ProfileMenu(props: Props){
         break
       case ActionType.Wallet:
         showModalProfile(ProfileModalType.wallet)
+        break
+      case ActionType.Support:
+        appContext.openSupport()
         break
       case ActionType.Logout:
         logout()

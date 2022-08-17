@@ -38,6 +38,20 @@ export default class AuthRepository {
     return Converter.objectKeysToCamelCase(res.data?.data)
   }
 
+  static async telegramLogin(data: any): Promise<IAuthLoginResponse> {
+    const res = await request({
+      method: 'get',
+      url: '/api/user/social/telegram',
+      data: {
+        ...data
+      }
+    })
+    if (res?.err) {
+      throw res.err
+    }
+    return Converter.objectKeysToCamelCase(res.data?.data)
+  }
+
   static async faLogin(login: string, password: string, code: string): Promise<IAuthFaLoginResponse> {
     const res = await request({
       method: 'post',
