@@ -96,7 +96,7 @@ export default function Statistics(props: Props) {
                 </div>
                 <div className={styles.cell}>
                   <div className={styles.gambler}>
-                    {item.nickname ?? `#${item.userId}`}
+                    {item.nickname || t('stats_player_hidden')}
                   </div>
                 </div>
                 {/*<div className={styles.cell}>
