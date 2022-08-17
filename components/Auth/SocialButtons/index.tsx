@@ -73,7 +73,7 @@ export default function SocialButtons(props: Props) {
           return
         }
         console.log('TelegramData', data)
-       const res = await  AuthRepository.telegramLogin(data)
+       const res = await  AuthRepository.telegramLogin({...data, currency_iso: props.currency})
         if(res.token){
           appContext.setToken(res.token)
           await appContext.updateUserFromCookies()

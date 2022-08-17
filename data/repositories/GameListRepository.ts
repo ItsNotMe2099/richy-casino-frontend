@@ -44,13 +44,14 @@ export default class GameListRepository {
     }
     return Converter.convertApiPaginationResponse(res.data)
   }
-  static async fetchGames({name, providerId, categoryId, providerInternalName}: {name?: string, providerId?: number, categoryId?: number, providerInternalName?: string} = {}, page: number = 1, limit: number = 1000): Promise<IPagination<IGame>> {
+  static async fetchGames({name, providerId, categoryId, providerInternalName, isShowAll}: {name?: string, providerId?: number, categoryId?: number, providerInternalName?: string, isShowAll?: boolean} = {}, page: number = 1, limit: number = 1000): Promise<IPagination<IGame>> {
     const res = await request({
       method: 'get',
       url: '/api/games/game',
       data:{
         ...(name ? {name} : {}),
         ...(providerId ? {provider_id: providerId} : {}),
+        ...(isShowAll ? {is_show_all: true} : {}),
         ...(categoryId ? {category_id: categoryId} : {}),
         ...(providerInternalName ? {providerInternalName} : {}),
 

@@ -19,7 +19,7 @@ export default function GamesListProvider(props: Props) {
   const limit = 20
 
   useEffect(() => {
-    GameListRepository.fetchGames({providerId: props.provider.id}, 1, limit).then(i => {
+    GameListRepository.fetchGames({providerId: props.provider.id, isShowAll: true}, 1, limit).then(i => {
       setData(i)
       setLoading(false)
     })
@@ -29,7 +29,7 @@ export default function GamesListProvider(props: Props) {
     const newPage = page + 1
     setPage(newPage)
     setLoading(true)
-    const res = await GameListRepository.fetchGames({providerId: props.provider.id}, newPage, limit)
+    const res = await GameListRepository.fetchGames({providerId: props.provider.id, isShowAll: true}, newPage, limit)
     setData(data => ({data: [...data.data, ...res.data], total: res.total}))
     setLoading(false)
   }
