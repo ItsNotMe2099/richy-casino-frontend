@@ -14,7 +14,7 @@ function CurrencySvg(props: Props) {
   const className = classNames(styles.root, props.className)
   const appContext = useAppContext()
   const currency = useMemo(() => {
-    return appContext.currencies.find(i => i.iso === (['usd_erc20', 'usd_trc20'].includes(props.currencyIso?.toLowerCase()) ? 'usd' : props.currencyIso))
+    return appContext.currencies.find(i => i.iso === (['usdt_erc20', 'usdt_trc20'].includes(props.currencyIso?.toLowerCase()) ? 'usd' : props.currencyIso))
   }, [props.currencyIso, appContext.currencies])
 
   if(currency && currency.imageIconSmallUrl && props.color){
