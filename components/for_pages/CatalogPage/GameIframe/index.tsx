@@ -12,8 +12,8 @@ interface Item extends IGame{
 interface Props {
   session: IGameSession
   error?: string
-  game: IGame
-  showHeader: boolean
+  game?: IGame
+  showHeader?: boolean
 }
 
 export default function GameIframe(props: Props) {
