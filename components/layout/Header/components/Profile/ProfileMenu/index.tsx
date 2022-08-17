@@ -41,7 +41,7 @@ export default function ProfileMenu(props: Props){
     {label: t('header_profile_menu_withdrawal'), key: ActionType.Payout},
     {label: t('header_profile_menu_bets_history'), key: ActionType.Transactions},
     {label: t('header_profile_menu_settings'), key: ActionType.Settings},
-    {label: t('header_profile_menu_wallet'), key: ActionType.Wallet},
+    {label: t('header_profile_menu_wallet'), key: ActionType.Profile},
     {label: t('header_profile_menu_support'), key: ActionType.Support},
     {label: t('header_profile_menu_logout'), key: ActionType.Logout},
   ]
