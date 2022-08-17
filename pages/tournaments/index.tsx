@@ -6,34 +6,21 @@ import Head from 'next/head'
 import {useEffect, useState} from 'react'
 import TournamentRepository from 'data/repositories/TournamentRepository'
 import {ITournamentHistory, ITournamentRoundStatus} from 'data/interfaces/ITournamentHistory'
-import TournamentCard from 'components/for_pages/TournamentListPage/TournamentCard'
-import classNames from 'classnames'
 import ContentLoader from 'components/ui/ContentLoader'
-const BlockHeading = (props: {title: string}) => {
-  return (<div className={classNames(styles.heading)}>
+import TournamentListBlock from 'components/for_pages/TournamentListPage/TournamentListBlock'
+import {IPagination} from 'types/interfaces'
 
-    <div className={classNames(styles.headingIcon)}>
-      <div className={styles.headingIconShadow}>
-        <img src={'/img/shadows/yellow-tournament.png'} alt=''/>
-      </div>
-      <img src={'/img/Contents/cup.svg'} alt=''/>
-    </div>
-    <div className={styles.headingTitle}>
-      {props.title}
-    </div>
-  </div>)
-}
 export default function Tournaments(){
 
   const {t} = useTranslation()
-  const [listActive, setListActive] = useState<ITournamentHistory[]>([])
-  const [listFinished, setListFinished] = useState<ITournamentHistory[]>([])
+  const [listActive, setListActive] = useState<IPagination<ITournamentHistory>>({total: 0, data: []})
+  const [listFinished, setListFinished] = useState<IPagination<ITournamentHistory>>({total: 0, data: []})
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     TournamentRepository.fetchHistory(1, 100).then(i => {
       console.log('Loadsadasd', i)
-      setListActive(i.data.filter(i => i.status === ITournamentRoundStatus.Active))
-      setListFinished(i.data.filter(i => i.status === ITournamentRoundStatus.Complete))
+      setListActive({...i, data: i.data.filter(i => i.status === ITournamentRoundStatus.Active)})
+      setListFinished({...i, data: i.data.filter(i => i.status === ITournamentRoundStatus.Complete)})
       setLoading(false)
     })
   }, [])
@@ -58,20 +45,8 @@ export default function Tournaments(){
         }}
       />
       {loading ? <ContentLoader style={'block'} isOpen/> :    <div className={styles.root}>
-     <div className={styles.block}>
-            <BlockHeading title={t('page_tournament_title')}/>
-            <div className={styles.list}>
-              {listActive.map(i => <TournamentCard key={i.id} tournament={i}/>)}
-            </div>
-
-          </div>
-          <div className={styles.block}>
-            <BlockHeading title={t('page_tournament_title')}/>
-            <div className={styles.list}>
-              {listFinished.map(i => <TournamentCard key={i.id} tournament={i} disabled/>)}
-            </div>
-
-          </div>
+        <TournamentListBlock initialData={listActive} title={t('page_tournament_active_title')} type={'active'}/>
+        <TournamentListBlock initialData={listFinished} title={t('page_tournament_completed_title')} type={'completed'}/>
         </div>}
     </Layout>
   )
