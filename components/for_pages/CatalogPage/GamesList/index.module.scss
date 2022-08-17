@@ -45,22 +45,3 @@
   }
 }
 
-.more{
-  display: flex;
-  padding: 21px 0;
-  border-radius: 12px;
-  background-color: $dark600;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  cursor: pointer;
-  @media screen and (max-width: $xs-max){
-    padding: 11px 0;
-    font-weight: 500;
-    margin-top: 14px;
-  }
-}
-
-.icon{
-  margin-right: 12px;
-}

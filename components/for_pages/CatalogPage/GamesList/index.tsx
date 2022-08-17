@@ -5,10 +5,10 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import {IGame} from 'data/interfaces/IGame'
 import Formatter from 'utils/formatter'
-import Spinner from 'components/ui/Spinner'
 import ContentLoader from 'components/ui/ContentLoader'
 import {useTranslation} from 'next-i18next'
 import GameCard from 'components/for_pages/Common/GameCard'
+import ShowMoreButton from 'components/ui/ShowMoreButton'
 interface Item extends IGame{
   link?: string
 }
@@ -66,15 +66,7 @@ export default function GamesList(props: Props) {
           </div>
         </VisibleXs>
 
-      {props.items.length < props.totalItems && !(props.loading && props.items.length === 0) && <div className={styles.more} onClick={props.loading ? null : handleShowTrigger}>
-        <div className={styles.icon}>
-          {props.loading ?   <Spinner size={22} color="#fff" secondaryColor="rgba(255,255,255,0.4)"/>
-            : <img src='/img/CatalogPage/more.svg' alt=''/>}
-        </div>
-        <div className={styles.text}>
-          {t('catalog_list_more')}
-        </div>
-      </div>}
+      {props.items.length < props.totalItems && !(props.loading && props.items.length === 0) && <ShowMoreButton loading={props.loading} onShow={handleShowTrigger}/>}
     </div>
   )
 }
