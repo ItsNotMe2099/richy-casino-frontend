@@ -16,7 +16,7 @@ export const PaymentMethodSelectedMobile = ({ onClick, icon, label}: Props) => {
       <div className={styles.left}>
         <div className={styles.icon}>{icon}</div>
         <div className={styles.text}>
-          <div className={styles.label}>Способ пополения</div>
+          <div className={styles.label}>{t('wallet_payment_method_title')}</div>
           <div className={styles.method}>{label}</div>
         </div>
       </div>

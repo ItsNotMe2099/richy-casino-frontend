@@ -276,6 +276,7 @@
     height: 30px;
   }
   &.hidden{
+    background-color: transparent;
     visibility: hidden;
     opacity: 0;
   }

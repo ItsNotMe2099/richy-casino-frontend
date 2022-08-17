@@ -5,7 +5,7 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import SlideSlider from 'components/for_pages/MainPage/TopSlider/SlideSlider'
 import {useAppContext} from 'context/state'
-import { useMeasure } from 'react-use'
+import {useInterval, useMeasure} from 'react-use'
 import Button from 'components/ui/Button'
 import classNames from 'classnames'
 import Image from 'next/image'
@@ -24,9 +24,20 @@ export default function TopSlider(props: Props) {
   const {t} = useTranslation()
   const appContext = useAppContext()
   const [jackpot, setJackpot] = useState<IJackpotNearest | null>()
+  const [isUpdating, setIsUpdating] = useState<boolean>(true)
   useEffect(() => {
-    JackPotRepository.fetchNearest().then(i => setJackpot(i))
+    JackPotRepository.fetchNearest().then(i =>{
+      setJackpot(i)
+      setIsUpdating(false)
+    })
   }, [])
+  useInterval(() => {
+    setIsUpdating(true)
+    JackPotRepository.fetchNearest().then(i =>{
+      setJackpot(i)
+      setIsUpdating(false)
+    })
+  }, isUpdating ? null : 2000)
   const [ref, { width, height }] = useMeasure()
   const settings = {
     className: `${styles.slider}`,

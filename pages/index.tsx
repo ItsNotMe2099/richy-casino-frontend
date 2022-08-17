@@ -68,10 +68,10 @@ export default function IndexPage() {
           <Games/>
           <div className={styles.lists}>
             <ErrorBoundary>
-            <GamesList type={MainGameListType.All} label='Казино' icon='/img/Contents/casino.svg' shadowColor='red'/>
+            <GamesList type={MainGameListType.All} label={t('main_games_list_casino_title')} icon='/img/Contents/casino.svg' shadowColor='red'/>
             </ErrorBoundary>
             <ErrorBoundary>
-            <GamesList type={MainGameListType.Live} label='Live Casino' icon='/img/Contents/live.svg' shadowColor='blue'/>
+            <GamesList type={MainGameListType.Live} label={t('main_games_list_live_casino_title')} icon='/img/Contents/live.svg' shadowColor='blue'/>
             </ErrorBoundary>
           </div>
           <VisibleXs>

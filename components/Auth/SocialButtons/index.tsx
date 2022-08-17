@@ -14,6 +14,8 @@ import MailRu from 'components/svg/MailRu'
 import Steam from 'components/svg/Steam'
 import Instagram from 'components/svg/Instagram'
 import Telegram from 'components/svg/Telegram'
+import AuthRepository from 'data/repositories/AuthRepository'
+import {useAppContext} from 'context/state'
 
 interface Props{
   currency?: string
@@ -26,6 +28,7 @@ const SocialItem = ({link, icon}) => <Link href={link || '#'}>
 
 export default function SocialButtons(props: Props) {
   const [services, setServices] = useState<ISocialService[]>([])
+  const appContext = useAppContext()
   useEffect( () => {
     SocialServiceRepository.fetchServices().then(i => setServices(i ?? []))
   }, [])
@@ -64,11 +67,19 @@ export default function SocialButtons(props: Props) {
     console.log('handleTegramd', window);
     (window as any).Telegram.Login.auth(
       { bot_id: '2110156771', request_access: true },
-      (data) => {
+      async (data) => {
         if (!data) {
           // authorization failed
+          return
         }
         console.log('TelegramData', data)
+       const res = await  AuthRepository.telegramLogin(data)
+        if(res.token){
+          appContext.setToken(res.token)
+          await appContext.updateUserFromCookies()
+          appContext.hideModal()
+        }
+
       }
     )
   }

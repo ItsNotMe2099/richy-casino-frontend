@@ -59,6 +59,7 @@ export default function GamePage(props: Props) {
       {result}
     </WithGameFilterLayout>
   )
+
 }
 
 export const getServerSideProps = async (context) => {

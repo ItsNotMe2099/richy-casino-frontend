@@ -22,7 +22,7 @@ const TournamentContext = createContext<IState>(defaultValue)
 
 interface Props {
   children: React.ReactNode
-  
+
 }
 
 export function TournamentWrapper(props: Props) {
@@ -32,7 +32,7 @@ export function TournamentWrapper(props: Props) {
   const [participateLoading, setParticipateLoading] = useState(false)
   const fetchUserPositions = () => {
     TournamentRepository.fetchPositions().then(i => {
-      if (i.length > 0) {
+      if (i?.length > 0) {
         setUserPosition(i[0])
       } else {
         setUserPosition(null)
@@ -59,7 +59,7 @@ export function TournamentWrapper(props: Props) {
     userActiveRounds,
     participateLoading,
     participate: async (tournamentId: number) => {
- 
+
       if (!appContext.auth) {
         appContext.showModal(ModalType.registration)
       } else {

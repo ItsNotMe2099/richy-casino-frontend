@@ -90,7 +90,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             </ReactPWAInstallProvider>
           </TournamentWrapper>
         </FavoriteWrapper>
-
         {clientVisible && <ErrorBoundary><AuthUserFeatures /></ErrorBoundary>}
         <HiddenXs>
           <ErrorBoundary><NotificationBanner /></ErrorBoundary>
