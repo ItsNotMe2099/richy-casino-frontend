@@ -25,7 +25,7 @@ export const PaymentMethodSelected = (props: Props) => {
   }, [props.method])
   const isMobile = context.isMobile
   const {t} = useTranslation()
-  const label = props.method.isCrypto ? props.method.title : props.paymentSystem?.name ?? props.method.title
+  const label = props.method.isCrypto ? t('wallet_payment_type_crypto') : props.paymentSystem?.name ?? props.method.title
   const image =  props.paymentSystem?.imageUrl ??  props.method.imageUrl
   return isMobile ? <PaymentMethodSelectedMobile icon={props.method.isCrypto ? <CryptoCurrencyIcons currencies={currencies} selected={true}/> : image} label={label} onClick={props.onClick}/> : <PaymentMethodCard  icon={props.method.isCrypto ? <CryptoCurrencyIcons currencies={currencies} selected={true}/> : image}  label={label}  selected onClick={props.onClick}/>
 }
