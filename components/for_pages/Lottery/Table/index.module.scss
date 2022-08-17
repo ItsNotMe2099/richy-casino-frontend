@@ -23,15 +23,45 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  @media screen and (max-width: $xs-max) {
+    flex-direction: column;
+    > * + *{
+      margin-top: 12px;
+    }
+  }
+  .nav{
+    display: flex;
+    flex-direction: row;
+    grid-gap: 0px 9px;
+  }
+  .headerTop{
+    width: 100%;
+    display: none;
+    padding: 0px 16px;
+    flex-direction: row;
+    > * + * {
+      margin-left: 8px;
+    }
+    .nav{
+      flex: 1;
+    }
+    @media screen and (max-width: 390px) {
+    flex-direction: column;
+      align-items: center;
+      > * + * {
+        margin-left: 0px;
+        margin-top: 16px;
+      }
+    }
+    @media screen and (max-width: $xs-max) {
+      display: flex;
+    }
+  }
   .headerRight{
     display: flex;
     flex-direction: row;
     grid-gap: 0px 16px;
-    .nav{
-      display: flex;
-      flex-direction: row;
-      grid-gap: 0px 9px;
-    }
+
     @media screen and (max-width: $xs-max) {
       display: none;
     }
@@ -78,9 +108,15 @@
     }
     &.prev{
       padding: 0px 12px 0px 19px;
+      @media screen and (max-width: $xs-max) {
+        padding: 0px 20px;
+      }
     }
     &.next{
       padding: 0px 19px 0px 12px;
+      @media screen and (max-width: $xs-max) {
+        padding: 0px 20px;
+      }
       svg{
         transform: rotate(180deg);
       }

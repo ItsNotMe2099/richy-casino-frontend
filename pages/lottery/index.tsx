@@ -1,5 +1,5 @@
 import PageTitle from 'components/for_pages/Common/PageTitle'
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import styles from 'pages/lottery/index.module.scss'
 import Timer from 'components/for_pages/Lottery/Timer'
 import Table from 'components/for_pages/Lottery/Table'
@@ -16,27 +16,47 @@ import {NextSeo} from 'next-seo'
 import ContentLoader from 'components/ui/ContentLoader'
 import Head from 'next/head'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
+import {useInterval} from 'react-use'
 export default function Lottery() {
   const {t} = useTranslation()
  const appContext = useAppContext()
   const [currentRound, setCurrentRound] = useState<ILotteryRoundCurrent | null>(null)
   const [loading, setLoading] = useState(true)
   const [isShow, setIsShow] = useState(false)
+  const [isUpdating, setIsUpdating] = useState<boolean>(true)
+  const abortControllerRef = useRef<AbortController | null>(null)
 
   useEffect(() => {
     Promise.all([
       LotteryRepository.fetchCurrentActiveRound().then(i => {
         setCurrentRound(i)
         setLoading(false)
+        setIsUpdating(false)
       }),
     ]).then(() => setLoading(false)).catch(() => {
       setLoading(false)
+      setIsUpdating(false)
     })
   }, [appContext.auth])
-  const handleBuy = async (data: ILotteryBuyResponse) => {
+  useInterval(() => {
+    setIsUpdating(true)
+    abortControllerRef.current = new AbortController()
 
     LotteryRepository.fetchCurrentActiveRound().then(i => {
       setCurrentRound(i)
+      setIsUpdating(false)
+      abortControllerRef.current = null
+    })
+
+  }, isUpdating ? null : 2000)
+  const handleBuy = async (data: ILotteryBuyResponse) => {
+    setIsUpdating(true)
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort()
+    }
+    LotteryRepository.fetchCurrentActiveRound().then(i => {
+      setCurrentRound(i)
+      setIsUpdating(false)
     })
   }
 

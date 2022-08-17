@@ -56,6 +56,14 @@ export default function Table(props: Props) {
       {!loading && round && <>
     <div className={styles.root}>
       <div className={styles.header}>
+        <div className={styles.headerTop}>
+          <div className={styles.nav}>
+            <Button type='button' disabled={changing} className={classNames(styles.navButton, styles.prev,{[styles.disabled]: round.roundId <= 1})} size='submit' background='dark600' onClick={handlePrev}>   <ArrowBackSvg/></Button>
+            <Button type='button'  disabled={changing} className={classNames(styles.navButton, styles.next,{[styles.disabled]: round.roundId >= props.roundId - 1})} size='submit' background='dark600' onClick={handleNext}>  <ArrowBackSvg/> </Button>
+
+          </div>
+          <div className={styles.totalTickets}> {t('lottery_top_10_total_tickets')} {round.totalTickets}</div>
+        </div>
       <div className={styles.title}>
         {t('lottery_top_10')}
       </div>
