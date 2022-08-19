@@ -21,9 +21,9 @@ import {isMobile} from 'mobile-device-detect'
 import Image from 'next/image'
 import VisibleXs from 'components/ui/VisibleXS'
 import HiddenXs from 'components/ui/HiddenXS'
-import LinesEllipsis from 'react-lines-ellipsis'
 import ArrowSvg from 'components/svg/ArrowSvg'
 import {colors} from 'scss/variables'
+import ClampLines from 'react-clamp-lines'
 interface Props {
   children?: React.ReactNode
   className?: string
@@ -211,9 +211,13 @@ export default function Footer(props: Props) {
         <div className={styles.textWrapper}>
           <h1>{t('footer_main_text_title')}</h1>
           <div className={styles.text}>
-            {textExpanded ? text : <LinesEllipsis
+            {textExpanded ? text :  <ClampLines
+              id={'footer-text'}
               text={text}
-              maxLine={appContext.isMobile ? 17 : 7}
+              lines={appContext.isMobile ? 17 : 7}
+              ellipsis="..."
+              buttons={false}
+              innerElement="div"
             />}
           </div>
           <div className={styles.buttonTextExpandWrapper}>

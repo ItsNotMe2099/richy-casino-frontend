@@ -19,6 +19,7 @@ module.exports = {
     FAKE_BONUS: process.env.FAKE_BONUS,
     GAME_CHESS_ID: process.env.GAME_CHESS_ID,
     GAME_POKER_ID: process.env.GAME_POKER_ID,
+    GAME_AVIATOR_ID: process.env.GAME_AVIATOR_ID,
     RICHY_PROVIDER_ID: process.env.RICHY_PROVIDER_ID,
   },
   serverRuntimeConfig: {
@@ -30,6 +31,8 @@ module.exports = {
     PROD: process.env.NODE_ENV !== 'development',
     GAME_CHESS_ID: process.env.GAME_CHESS_ID,
     GAME_POKER_ID: process.env.GAME_POKER_ID,
+    GAME_AVIATOR_ID: process.env.GAME_AVIATOR_ID,
+    RICHY_PROVIDER_ID: process.env.RICHY_PROVIDER_ID,
   },
   images: {
     domains: ['stage-backend.richy.casino', 'api.richy-trk.com'],
