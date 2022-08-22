@@ -12,7 +12,7 @@ services:
           dockerfile: docker/app/Dockerfile
           args:
             - ENV_FILE=.env.prod
-        volumes: 
+        volumes:
           - /src/richy-casino-frontend/cache:/usr/src/app/.next/cache
         image: ${APP_IMAGE}
         container_name: richy-casino-front-app
@@ -28,6 +28,8 @@ services:
         image: ${NGINX_IMAGE}
         container_name: richy-casino-front-nginx
         restart: ${DK_RESTART}
+        ports:
+          - "80:80"
         networks:
           - app
           - nginx-proxy
@@ -36,6 +38,4 @@ services:
         environment:
           API_HOST: http://api
           ADMIN_HOST: http://admin
-          VIRTUAL_HOST: richy.casino
-          VIRTUAL_PORT: 80
 
