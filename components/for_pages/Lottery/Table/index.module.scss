@@ -2,13 +2,8 @@
 
 .root {
   background-color: $dark700;
-  overflow-y: auto;
-  overflow-x: hidden;
-  @media screen and (max-width: 700px) {
-    padding: 0;
-  }
+
   @media screen and (max-width: $xs-max) {
-    max-height: 273px;
     border-bottom-right-radius: 18px;
     border-bottom-left-radius: 18px;
   }

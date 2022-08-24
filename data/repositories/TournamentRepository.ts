@@ -2,7 +2,7 @@ import request from 'utils/request'
 import Converter from 'utils/converter'
 import {IPagination} from 'types/interfaces'
 import {ITournamentRichy} from 'data/interfaces/ITournamentRichy'
-import {ITournamentHistory} from 'data/interfaces/ITournamentHistory'
+import {ITournamentHistory, ITournamentHistoryItem} from 'data/interfaces/ITournamentHistory'
 import {ITournamentPosition} from 'data/interfaces/ITournamentPosition'
 import {ITournamentNearest} from 'data/interfaces/ITournamentNearest'
 import {ITournamentWinner} from 'data/interfaces/ITournamentWinner'
@@ -111,6 +111,23 @@ export default class TournamentRepository {
       return null
     }
     return  res.data.data?.map(i => Converter.objectKeysToCamelCase(i))
+  }
+
+  static async fetchRoundByTournamentId(tournamentId: string | number): Promise<ITournamentHistoryItem | null> {
+    const res = await request({
+      method: 'get',
+      url: '/api/tournament/round',
+      data: {
+        tournament_id: tournamentId
+      }
+    })
+    if (res.err) {
+      return null
+    }
+    if(res.data?.data?.length === 0){
+      return null
+    }
+    return res.data?.data.map(i => Converter.objectKeysToCamelCase(i))[0]
   }
 
 }

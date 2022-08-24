@@ -5,27 +5,27 @@ import {useTranslation} from 'next-i18next'
 import Head from 'next/head'
 import {useEffect, useState} from 'react'
 import TournamentRepository from 'data/repositories/TournamentRepository'
-import {ITournamentHistory} from 'data/interfaces/ITournamentHistory'
+import { ITournamentHistoryItem} from 'data/interfaces/ITournamentHistory'
 import ContentLoader from 'components/ui/ContentLoader'
 import {useRouter} from 'next/router'
 import TournamentProviders from 'components/for_pages/TournamentPage/TournamentProviders'
 import TournamentGames from 'components/for_pages/TournamentPage/TournamentGames'
 import TournamentConditions from 'components/for_pages/TournamentPage/TournamentConditions'
+import TournamentPrizes from 'components/for_pages/TournamentPage/TournamentPrizes'
 export default function Tournaments(){
 
   const {t} = useTranslation()
   const router = useRouter()
-  const [tournament, setTournament] = useState<ITournamentHistory | null>(null)
+  const [tournament, setTournament] = useState<ITournamentHistoryItem | null>(null)
   const [loading, setLoading] = useState(true)
   useEffect(() => {
-    TournamentRepository.fetchHistory(1, 100).then(i => {
+    console.log('router.query.id', router.query.id)
+    TournamentRepository.fetchRoundByTournamentId(router.query.id as string).then(i => {
       console.log('Loadsadasd', i)
-      setTournament(i.data.find(i => i.id === parseInt(router.query.id as string, 10)))
+      setTournament(i)
       setLoading(false)
     })
   }, [router.query.id])
-
-  return null
   return (
     <Layout>
       <Head>
@@ -49,8 +49,12 @@ export default function Tournaments(){
         <div className={styles.columnsTop}>
           <TournamentProviders tournament={tournament}/>
           <TournamentGames tournament={tournament}/>
-          <TournamentConditions tournament={tournament}/>
         </div>
+        <div className={styles.columnsBottom}>
+          <TournamentConditions tournament={tournament}/>
+          <TournamentPrizes tournament={tournament}/>
+        </div>
+
       </div>}
     </Layout>
   )

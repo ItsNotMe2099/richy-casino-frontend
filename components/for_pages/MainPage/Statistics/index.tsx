@@ -31,7 +31,7 @@ export default function Statistics(props: Props) {
     dataRef.current = data
   }, [data])
   useEffect(() => {
-    GameListRepository.fetchGameSessionHistory(1, 10).then(newData => {
+    GameListRepository.fetchGameSessionHistoryLastRows(10).then(newData => {
 
       setData(newData)
       setLoading(false)
@@ -41,7 +41,7 @@ export default function Statistics(props: Props) {
 
   useInterval(() => {
     setIsUpdating(true)
-      GameListRepository.fetchGameSessionHistory(1, 10).then(data => {
+      GameListRepository.fetchGameSessionHistoryLastRows(1).then(data => {
         const currentData = dataRef.current
         if(data.data.length > 0 && currentData.data.find(i => getId(i) === getId(data.data[0])) ){
           setLoading(false)

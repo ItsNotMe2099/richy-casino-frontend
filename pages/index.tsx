@@ -17,6 +17,7 @@ import {useAppContext} from 'context/state'
 import {PaymentSwitchFilterKey, ProfileModalType} from 'types/enums'
 import {PaymentHistoryModalArguments} from 'types/interfaces'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
+import ProviderMainList from 'components/for_pages/MainPage/ProviderList'
 
 const casinos = [
   {image: '/img/GamesList/hotline.png', label: 'hotline', provider: 'provider1', category: 'category1'},
@@ -79,6 +80,9 @@ export default function IndexPage() {
             <BuyCrypto/>
             </ErrorBoundary>
           </VisibleXs>
+          <ErrorBoundary>
+            <ProviderMainList/>
+          </ErrorBoundary>
           <ErrorBoundary>
               <div className={styles.cards}>
                 <GameCard poker/>

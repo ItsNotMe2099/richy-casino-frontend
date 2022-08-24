@@ -57,7 +57,7 @@ export default function PaymentHistory(props: Props) {
   const appContext = useAppContext()
   const initialData = {data: [], total: 0}
   const args = appContext.modalArguments as PaymentHistoryModalArguments
-  const [filter, setFilter] = useState<PaymentSwitchFilterKey>(args.filter ?? PaymentSwitchFilterKey.All)
+  const [filter, setFilter] = useState<PaymentSwitchFilterKey>(args?.filter ?? PaymentSwitchFilterKey.All)
   const [data, setData] = useState<IPagination<IBalanceTransaction>>(initialData)
   const [applicationsData, setApplicationsData] = useState<IPagination<IWithdrawHistory>>(initialData)
   const [page, setPage] = useState<number>(0)

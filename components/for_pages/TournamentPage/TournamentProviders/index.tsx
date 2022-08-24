@@ -1,19 +1,17 @@
 import styles from './index.module.scss'
-import {ITournamentHistory} from 'data/interfaces/ITournamentHistory'
+import { ITournamentHistoryItem} from 'data/interfaces/ITournamentHistory'
 import {useTranslation} from 'next-i18next'
 import Header from 'components/for_pages/Common/Header'
 import {useAppContext} from 'context/state'
-import {useEffect, useRef, useState} from 'react'
+import { useRef, useState} from 'react'
 import ContentLoader from 'components/ui/ContentLoader'
 import HiddenXs from 'components/ui/HiddenXS'
 import Slider from 'react-slick'
 import VisibleXs from 'components/ui/VisibleXS'
-import GameListRepository from 'data/repositories/GameListRepository'
-import {IGameProvider} from 'data/interfaces/IGameProvider'
 import ProviderCard from 'components/for_pages/Common/ProviderCard'
 
 interface Props {
-  tournament: ITournamentHistory
+  tournament: ITournamentHistoryItem
 }
 
 export default function TournamentProviders(props: Props) {
@@ -21,13 +19,9 @@ export default function TournamentProviders(props: Props) {
   const appContext = useAppContext()
   const sliderRef = useRef(null)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [providers, setProviders] = useState<IGameProvider[]>([])
-  const [loading, setLoading] = useState<boolean>(true)
-  useEffect(() => {
-    GameListRepository.fetchProviders().then(i => {setProviders(i.data ?? [])
-    setLoading(false)
-    })
-  })
+  const providers = props.tournament.providers
+  const [loading, setLoading] = useState<boolean>(false)
+
   const handleJoin = () => {
 
   }
