@@ -41,9 +41,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
 
-    if (pageProps.language !== i18n.language) {
-      i18n.changeLanguage(pageProps.language)
-    }
     setTimeout(() => {
       //  setIsLoading(false)
     }, 1000)
@@ -141,7 +138,6 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
       (appContext.ctx.req as any).cookies[CookiesType.sessionId] = sessionId
 
     }
-    props.pageProps.language = (appContext.ctx as any).req.cookies[CookiesType.language]
     props.pageProps.token = (appContext.ctx as any).req.cookies[CookiesType.accessToken]
     props.pageProps.initialUser = await UserRepository.getUser(props.pageProps.token)
 

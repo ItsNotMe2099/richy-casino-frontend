@@ -4,6 +4,7 @@ import {IGameProvider} from 'data/interfaces/IGameProvider'
 import GameListRepository from 'data/repositories/GameListRepository'
 import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import {NextSeo} from 'next-seo'
+import {getServerSideTranslation} from 'utils/i18'
 interface Props{
   provider: IGameProvider
 }
@@ -28,6 +29,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
+      ...await getServerSideTranslation(context),
       provider,
 
     },

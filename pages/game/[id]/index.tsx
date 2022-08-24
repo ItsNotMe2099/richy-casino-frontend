@@ -11,6 +11,8 @@ import {useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
 import ContentLoader from 'components/ui/ContentLoader'
 import {runtimeConfig} from 'config/runtimeConfig'
+import {GetServerSideProps} from 'next'
+import {getServerSideTranslation} from 'utils/i18'
 
 interface Props {
 
@@ -60,4 +62,11 @@ export default function CatalogPage(props: Props) {
       {result}
     </WithGameFilterLayout>
   )
+}
+export const getServerSideProps: GetServerSideProps = async (context ) => {
+  return {
+    props: {
+      ...await getServerSideTranslation(context),
+    },
+  }
 }
