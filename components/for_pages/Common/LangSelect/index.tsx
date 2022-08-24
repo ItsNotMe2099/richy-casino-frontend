@@ -75,7 +75,7 @@ export default function LangSelect(props: Props) {
     { icon: '/img/langs/es-PE.svg', name: 'Pe', code: 'es-PE' },
     { icon: '/img/langs/pt.svg', name: 'Pt', code: 'pt' },
     { icon: '/img/langs/be.svg', name: 'Be', code: 'be' },
-    { icon: '/img/langs/cz.svg', name: 'Cz', code: 'cz-CZ' },
+    { icon: '/img/langs/cz.svg', name: 'Cz', code: 'cs-CZ' },
     { icon: '/img/langs/pl.svg', name: 'Pl', code: 'pl' },
     { icon: '/img/langs/ro.svg', name: 'Ro', code: 'ro' },
     { icon: '/img/langs/bn.svg', name: 'Bn', code: 'bn' },
