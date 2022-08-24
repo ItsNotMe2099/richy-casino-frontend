@@ -18,8 +18,6 @@ import {PaymentSwitchFilterKey, ProfileModalType} from 'types/enums'
 import {PaymentHistoryModalArguments} from 'types/interfaces'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
 import ProviderMainList from 'components/for_pages/MainPage/ProviderList'
-import {GetServerSideProps} from 'next'
-import {getServerSideTranslation} from 'utils/i18'
 
 const casinos = [
   {image: '/img/GamesList/hotline.png', label: 'hotline', provider: 'provider1', category: 'category1'},
@@ -102,12 +100,4 @@ export default function IndexPage() {
           </ErrorBoundary>
         </Layout>
   )
-}
-export const getServerSideProps: GetServerSideProps = async (context ) => {
-  console.log('locale111', context.locale)
-  return {
-    props: {
-      ...await getServerSideTranslation(context),
-    },
-  }
 }

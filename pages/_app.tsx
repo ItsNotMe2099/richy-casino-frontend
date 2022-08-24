@@ -30,6 +30,7 @@ import { DefaultSeo } from 'next-seo'
 import ReactPWAInstallProvider from 'context/pwa_state'
 import { TournamentWrapper } from '../context/tournament_state'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
+import {getServerSideTranslation} from 'utils/i18'
 const PageLoader = () => {
 
 }
@@ -146,7 +147,10 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     }
 
    */
+    const pageProps = await getServerSideTranslation(appContext.ctx)
+    props.pageProps = {... props.pageProps, ...pageProps}
   }
+
   return props
 }
 
