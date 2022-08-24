@@ -17,6 +17,8 @@ import ContentLoader from 'components/ui/ContentLoader'
 import Head from 'next/head'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
 import {useInterval} from 'react-use'
+import {GetServerSideProps} from 'next'
+import {getServerSideTranslation} from 'utils/i18'
 export default function Lottery() {
   const {t} = useTranslation()
  const appContext = useAppContext()
@@ -109,4 +111,11 @@ export default function Lottery() {
       </>}
     </WithGameFilterLayout>
   )
+}
+export const getServerSideProps: GetServerSideProps = async (context ) => {
+  return {
+    props: {
+      ...await getServerSideTranslation(context),
+    },
+  }
 }

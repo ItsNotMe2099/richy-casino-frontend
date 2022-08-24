@@ -9,6 +9,8 @@ import {ITournamentHistory, ITournamentRoundStatus} from 'data/interfaces/ITourn
 import ContentLoader from 'components/ui/ContentLoader'
 import TournamentListBlock from 'components/for_pages/TournamentListPage/TournamentListBlock'
 import {IPagination} from 'types/interfaces'
+import {GetServerSideProps} from 'next'
+import {getServerSideTranslation} from 'utils/i18'
 
 export default function Tournaments(){
 
@@ -50,4 +52,11 @@ export default function Tournaments(){
         </div>}
     </Layout>
   )
+}
+export const getServerSideProps: GetServerSideProps = async (context ) => {
+  return {
+    props: {
+      ...await getServerSideTranslation(context),
+    },
+  }
 }

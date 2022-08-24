@@ -1,4 +1,4 @@
-const ChainedBackend = require('i18next-chained-backend')
+/*const ChainedBackend = require('i18next-chained-backend')
 const FSBackend = require('i18next-fs-backend/cjs')
 const LocizeBackend = require('i18next-locize-backend/cjs')
 
@@ -48,4 +48,45 @@ module.exports = {
   ns: ['common', 'footer', 'second-page'],
 }),
 
+}
+*/
+const allLangs = ['en', 'ru',
+  'uz',
+  'az',
+  'tr',
+  'hi',
+  'fa',
+  'uk',
+  'kk',
+  'es',
+  'fr',
+  'hy',
+//  'br',
+  'th',
+//  'vn',
+  'es-MX',
+  'es-CL',
+  'es-PE',
+  'pt',
+  'be',
+ // 'cz',
+  'pl',
+  'ro',
+  'bn',
+ // 'hu',
+  //'fi',
+  'ne',
+  'sw',
+  'de',
+  'it']
+module.exports = {
+  i18n: {
+    debug: true,
+    defaultNS: 'common',
+    defaultLocale: 'en',
+    fallbackLng: [...allLangs],
+    otherLanguages: [...allLangs],
+    locales: [...allLangs],
+    localeDetection: false,
+  },
 }
