@@ -3,8 +3,6 @@ import {IGameCategory} from 'data/interfaces/IGameCategory'
 import {NextSeo} from 'next-seo'
 import {useTranslation} from 'next-i18next'
 import GamesListAll from 'components/for_pages/CatalogPage/GamesListAll'
-import {GetServerSideProps} from 'next'
-import {getServerSideTranslation} from 'utils/i18'
 interface Props{
   category: IGameCategory
 }
@@ -19,10 +17,3 @@ export default function CatalogPage(props: Props) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context ) => {
-  return {
-    props: {
-      ...await getServerSideTranslation(context),
-    },
-  }
-}

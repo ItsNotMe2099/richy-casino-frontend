@@ -9,8 +9,6 @@ import { useAppContext } from 'context/state'
 import Image from 'next/image'
 import { useMeasure } from 'react-use'
 import Head from 'next/head'
-import {GetServerSideProps} from 'next'
-import {getServerSideTranslation} from 'utils/i18'
 
 export default function Bonuses(){
 
@@ -64,12 +62,4 @@ export default function Bonuses(){
         </div>
     </Layout>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async (context ) => {
-  return {
-    props: {
-      ...await getServerSideTranslation(context),
-    },
-  }
 }
