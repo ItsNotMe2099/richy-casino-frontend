@@ -41,7 +41,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { t, i18n, ready } = useTranslation()
 
   useEffect(() => {
-
     setTimeout(() => {
       //  setIsLoading(false)
     }, 1000)

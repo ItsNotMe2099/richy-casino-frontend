@@ -103,6 +103,9 @@ export default function LangSelect(props: Props) {
   }
   const handleChange = (item: ILanguage) => {
     i18n.changeLanguage(item.code)
+    i18n.loadLanguages([item.code], (err) => {
+      console.log('LoadedLang', err)
+    })
     Cookies.set(CookiesType.language, item.code, { expires: CookiesLifeTime.language })
   }
 
