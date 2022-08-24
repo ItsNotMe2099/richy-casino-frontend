@@ -80,6 +80,15 @@ function MyApp({ Component, pageProps }: AppProps) {
                   type: 'website',
                   locale: 'en_US',
                   url: 'https://richy.casino',
+                  images: [
+                    {
+                      url: 'https://richy.casino/og_image.jpg',
+                      width: 578,
+                      height: 578,
+                      type: 'image/jpeg',
+                    },
+                  ],
+
                 }}/>
               <Component {...pageProps} />
               {clientVisible && <ErrorBoundary><ModalContainer /></ErrorBoundary>}
