@@ -32,6 +32,7 @@
     "framer-motion": "^4.1.17",
     "google-libphonenumber": "^3.2.26",
     "howler": "^2.2.3",
+    "i18next": "^12.1.0",
     "i18next-chained-backend": "^3.0.2",
     "i18next-localstorage-backend": "^3.1.3",
     "i18next-locize-backend": "^5.1.2",
