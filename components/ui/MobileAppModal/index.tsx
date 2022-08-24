@@ -1,11 +1,11 @@
 import styles from './index.module.scss'
-import {useTranslation} from 'react-i18next'
 import {useAppContext} from 'context/state'
 import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
 import ProfileModalHeader from 'components/Profile/layout/ProfileModalHeader'
 import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 import BottomSheetLayout from 'components/layout/BottomSheetLayout'
 import BottomSheetBody from 'components/layout/BottomSheetBody'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
   isBottomSheet?: boolean

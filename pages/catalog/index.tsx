@@ -11,8 +11,6 @@ import {NextSeo} from 'next-seo'
 import {useTranslation} from 'next-i18next'
 import Head from 'next/head'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
-import {GetServerSideProps} from 'next'
-import {getServerSideTranslation} from 'utils/i18'
 
 export default function CatalogPage() {
   const {t} = useTranslation()
@@ -54,10 +52,4 @@ export default function CatalogPage() {
     </WithGameFilterLayout>
   )
 }
-export const getServerSideProps: GetServerSideProps = async (context ) => {
-  return {
-    props: {
-      ...await getServerSideTranslation(context),
-    },
-  }
-}
+

@@ -11,6 +11,9 @@
   cursor: pointer;
   overflow: hidden;
   grid-gap: 8px 0px;
+  @media screen and (max-width: $xs-max) {
+    padding: 22px 14px 22px 14px;
+  }
   &:hover, &.active{
     .name{
       color: #fff;
