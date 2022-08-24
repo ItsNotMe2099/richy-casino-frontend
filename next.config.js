@@ -35,7 +35,7 @@ module.exports = {
     RICHY_PROVIDER_ID: process.env.RICHY_PROVIDER_ID,
   },
   images: {
-    domains: ['stage-backend.richy.casino', 'api.richy-trk.com'],
+    domains: ['api-rc.grtestdemo.com', 'api.richy-trk.com'],
     formats: ['image/webp'],
     minimumCacheTTL: 60 * 60 * 24
   },

@@ -94,7 +94,7 @@ export default function Table(props: Props) {
             {t('lottery_top_10_tickets')}
           </div>
         </div>
-        {round.roundWinners.slice(0, 3).map((item, index) =>
+        {round.roundWinners.slice(0, 10).map((item, index) =>
           <div className={classNames(styles.row, styles.rowInner)} key={index}>
             <div className={styles.cell}>
               <div className={styles.text}>

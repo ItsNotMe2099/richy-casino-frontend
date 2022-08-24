@@ -22,7 +22,7 @@ export default function TournamentCard(props: Props) {
 
   }
   return (
-    <Link href={Routes.tournamentPage(props.tournament.id)}>
+    <Link href={Routes.tournamentPage(props.tournament.tournamentId)}>
     <a className={classNames(styles.root, {[styles.disabled]: props.disabled})}>
       <div className={styles.image}></div>
       <div className={styles.wrapper}>

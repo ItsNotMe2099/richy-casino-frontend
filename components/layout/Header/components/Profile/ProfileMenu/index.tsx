@@ -21,6 +21,7 @@ enum ActionType{
   AddMoney,
   Payout,
   Transactions,
+  BetsHistory,
   Referral,
   Settings,
   Wallet,
@@ -39,7 +40,8 @@ export default function ProfileMenu(props: Props){
     {label: t('header_profile_menu_profile'), key: ActionType.Profile},
     {label: t('header_profile_menu_deposit'),  key: ActionType.AddMoney},
     {label: t('header_profile_menu_withdrawal'), key: ActionType.Payout},
-    {label: t('header_profile_menu_bets_history'), key: ActionType.Transactions},
+    {label: t('header_profile_menu_bets_history'), key: ActionType.BetsHistory},
+    {label: t('header_profile_menu_transactions'), key: ActionType.Transactions},
     {label: t('header_profile_menu_settings'), key: ActionType.Settings},
     {label: t('header_profile_menu_wallet'), key: ActionType.Profile},
     {label: t('header_profile_menu_support'), key: ActionType.Support},
@@ -58,6 +60,9 @@ export default function ProfileMenu(props: Props){
         showModalProfile(ProfileModalType.withdraw)
         break
       case ActionType.Transactions:
+        showModalProfile(ProfileModalType.paymentHistory)
+        break
+      case ActionType.BetsHistory:
         showModalProfile(ProfileModalType.betsHistory)
         break
       case ActionType.Referral:

@@ -151,3 +151,4 @@ padding-top: 85px;
 padding-bottom: 85px;
 min-height: -webkit-fill-available;
 
+"header_profile_menu_transactions": "История транакций",

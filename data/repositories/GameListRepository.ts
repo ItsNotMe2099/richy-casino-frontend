@@ -1,7 +1,7 @@
 import request from 'utils/request'
 import Converter from 'utils/converter'
 import {IPagination} from 'types/interfaces'
-import {IGameProvider} from 'data/interfaces/IGameProvider'
+import {IGameProvider, IGameProviderTop3} from 'data/interfaces/IGameProvider'
 import {IGameCategory} from 'data/interfaces/IGameCategory'
 import {IGame} from 'data/interfaces/IGame'
 import {IGameWin} from 'data/interfaces/IGameWin'
@@ -16,7 +16,7 @@ export default class GameListRepository {
       method: 'get',
       url: '/api/games/provider',
       data:{
-      ...(name ? {name} : {}),
+        ...(name ? {name} : {}),
         page,
         'per-page': limit
       }
@@ -25,6 +25,19 @@ export default class GameListRepository {
       return {data: [], total: 0}
     }
     return Converter.convertApiPaginationResponse(res.data)
+  }
+
+  static async fetchProvidersTop3(): Promise<IGameProviderTop3[]> {
+    const res = await request({
+      method: 'get',
+      url: '/api/games/provider/top3-games-providers',
+
+    })
+    if (res.err) {
+      return  []
+    }
+    return res.data.data?.map(i => Converter.objectKeysToCamelCase(i)) ?? []
+
   }
 
   static async fetchCategories(name: string  = null, bannerSlogan: string  = null, page: number = 1, limit: number = 1000, isFeatured?: boolean): Promise<IPagination<IGameCategory>> {
@@ -165,6 +178,20 @@ export default class GameListRepository {
       data:{
         page,
         'per-page': limit
+      }
+    })
+    if (res.err) {
+      return {data: [], total: 0}
+    }
+    return Converter.convertApiPaginationResponse(res.data)
+  }
+
+  static async fetchGameSessionHistoryLastRows(rowAmount: number): Promise<IPagination<IGameHistory>> {
+    const res = await request({
+      method: 'get',
+      url: '/api/games/session/history-richy',
+      data:{
+        row_amount: rowAmount
       }
     })
     if (res.err) {

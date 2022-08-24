@@ -87,7 +87,7 @@ export default function Winners(props: Props) {
                           <Image src={'/img/Winners/avatarM.svg'} width={isMobile ? 16 : 32} height={isMobile ? 16 : 32} />
                         </div>
                         <div className={styles.nick}>
-                          {item.nickname}
+                          {item.nickname || t('stats_player_hidden')}
                         </div>
                       </div>
                     </td>
