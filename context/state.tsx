@@ -267,7 +267,7 @@ export function AppWrapper(props: Props) {
     promises.push(InfoRepository.getCountryByIp().then(i => setCountryByIp(i)).catch(() => { }))
     promises.push(BannerRepository.fetchBanners().then(i => setBanners(i)).catch(() => { }))
     promises.push(updatePromoCodes().catch(() => { }))
-    Promise.all(promises).then(i => setInfoLoaded(true))
+    Promise.all(promises).then(i => setTimeout(( ) => setInfoLoaded(true), 300) )
     if (!auth) {
       return
     }
