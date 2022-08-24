@@ -26,7 +26,7 @@ export default function ProviderMainCard(props: Props) {
        </div>
       {!props.item.imagePreviewUrl && <div className={styles.name}>{props.item.name}</div>}
       {!appContext.isMobile && <div className={styles.games}>
-        {props.item.games.map(i => <ItemGame key={i.id} item={i}/>)}
+        {props.item.games.map(i => <ItemGame className={styles.game} key={i.id} item={i}/>)}
       </div>}
     </a>
     </Link>

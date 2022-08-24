@@ -19,6 +19,7 @@ interface IItem {
 
 interface Props {
   item: IGame
+  className?: string
   slider?: boolean
   link?: string
   richy?: boolean
@@ -53,7 +54,7 @@ export default function ItemGame(props: Props) {
     <div ref={ref} className={classNames(styles.root, {
       [styles.small]: width > 120 && width < 140,
       [styles.exSmall]: width <= 120
-    })}>
+    }, props.className)}>
       {props.item.imageIconPreviewUrl && <Image src={props.item.imageIconPreviewUrl} priority layout={'fill'} alt={props.item.name} />}
       <div className={styles.shade}>
         <div className={styles.top}><div className={styles.providerName}>{props.item.providerName}</div></div>
