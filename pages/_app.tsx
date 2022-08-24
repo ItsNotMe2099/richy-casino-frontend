@@ -18,7 +18,6 @@ import 'react-calendar/dist/Calendar.css'
 import 'react-phone-number-input/style.css'
 import NotificationBanner from 'components/for_pages/Common/NotificationBanner'
 import HiddenXs from 'components/ui/HiddenXS'
-import UserRepository from 'data/repositories/UserRepository'
 import Snackbar from 'components/layout/Snackbar'
 import { useEffect, useState } from 'react'
 import { FavoriteWrapper } from 'context/favorite_state'
@@ -139,12 +138,14 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
 
     }
     props.pageProps.token = (appContext.ctx as any).req.cookies[CookiesType.accessToken]
-    props.pageProps.initialUser = await UserRepository.getUser(props.pageProps.token)
+  /*  props.pageProps.initialUser = await UserRepository.getUser(props.pageProps.token)
 
     if (props.pageProps.initialUser === null) {
       props.pageProps.token = null
       nookies.destroy(appContext.ctx, CookiesType.accessToken)
     }
+
+   */
   }
   return props
 }
