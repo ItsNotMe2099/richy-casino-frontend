@@ -81,11 +81,8 @@ const allLangs = ['en', 'ru',
   'it']
 module.exports = {
   i18n: {
-    debug: true,
-    defaultNS: 'common',
+   // debug: true,
     defaultLocale: 'en',
-    fallbackLng: [...allLangs],
-    otherLanguages: [...allLangs],
     locales: [...allLangs],
     localeDetection: false,
   },

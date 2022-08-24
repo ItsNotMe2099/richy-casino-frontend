@@ -1,9 +1,11 @@
 
 export const CONTACTS = {
   email: 'support@richy.casino',
-  facebook: '#',
-  youtube: '#',
-  twitter: '#',
+  facebook: 'https://www.facebook.com/richygamesonline',
+  youtube: 'https://www.youtube.com/channel/UCO50cIEX2SN5xoch8e5Z7eg',
+  instagram: 'https://instagram.com/richy.games',
+  twitter: 'https://twitter.com/richy_casino',
+  telegram: 'https://t.me/richycasino',
   linkedIn: '#'
 }
 
