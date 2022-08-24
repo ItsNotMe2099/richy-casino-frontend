@@ -31,13 +31,14 @@ import ReactPWAInstallProvider from 'context/pwa_state'
 import { TournamentWrapper } from '../context/tournament_state'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
 import {getServerSideTranslation} from 'utils/i18'
+import ContentLoader from 'components/ui/ContentLoader'
 const PageLoader = () => {
 
 }
 function MyApp({ Component, pageProps }: AppProps) {
   const [clientVisible, setClientVisible] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
-  const { t, i18n } = useTranslation()
+  const { t, i18n, ready } = useTranslation()
 
   useEffect(() => {
 
@@ -94,7 +95,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       </AuthWrapper>
       {clientVisible && <Snackbar />}
-
+      {!ready && <ContentLoader style={'fullscreen'}/>}
        </AppWrapper >
   )
 }
