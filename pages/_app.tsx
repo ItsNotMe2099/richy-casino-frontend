@@ -78,7 +78,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   site_name: t('seo_og_site_name'),
                   type: 'website',
                   locale: 'en_US',
-                  url: 'https://richy.casino/',
+                  url: 'https://richy.casino',
                 }}/>
               <Component {...pageProps} />
               {clientVisible && <ErrorBoundary><ModalContainer /></ErrorBoundary>}
