@@ -239,7 +239,6 @@ export function AppWrapper(props: Props) {
   useEffect(() => {
     if (props.token) {
       setAuth(true)
-      updateUserDetails()
     }
 
   }, [props.token])
@@ -263,11 +262,14 @@ export function AppWrapper(props: Props) {
   }, [userLoaded, infoLoaded])
   useEffect(() => {
     const promises = []
+    if(props.token){
+      promises.push(updateUserDetails().catch(() => {setAuth(false)}))
+    }
     promises.push(InfoRepository.getCurrencies().then(i => setCurrencies(i)).catch(() => { }))
     promises.push(InfoRepository.getCountryByIp().then(i => setCountryByIp(i)).catch(() => { }))
     promises.push(BannerRepository.fetchBanners().then(i => setBanners(i)).catch(() => { }))
     promises.push(updatePromoCodes().catch(() => { }))
-    Promise.all(promises).then(i => setInfoLoaded(true))
+    Promise.all(promises).then(i => setTimeout(( ) => setInfoLoaded(true), 100) )
     if (!auth) {
       return
     }
