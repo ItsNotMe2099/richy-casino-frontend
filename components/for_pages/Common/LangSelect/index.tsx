@@ -101,7 +101,8 @@ export default function LangSelect(props: Props) {
   const handleClick = (e) => {
     setIsActive(!isActive)
   }
-  const handleChange = (item: ILanguage) => {
+  const handleChange = async (item: ILanguage) => {
+   const res = await i18n.reloadResources(item.code, ['common'])
     i18n.changeLanguage(item.code)
     Cookies.set(CookiesType.language, item.code, { expires: CookiesLifeTime.language })
   }
