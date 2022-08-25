@@ -93,9 +93,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       'sw',
       'de',
       'it']
-    i18n.reloadResources(allLangs, ['common']).then(i => {
+    i18n.loadResources(i => {
       currentLangLoaded.current = true
       console.log('loadResources', i18n.language)
+      i18n.loadLanguages(allLangs).then(i => {
+        currentLangLoaded.current = true
+        i18n.changeLanguage(i18n.language)
+        console.log('loadResources', i18n.language)
+      })
     })
   }, [i18n.language])
 

@@ -8,6 +8,7 @@ import {IUserBalanceCurrency} from 'data/interfaces/IUser'
 import {IPaymentMethod} from 'data/interfaces/IPaymentMethod'
 import {IPaymentSystem} from 'data/interfaces/IPaymentSystem'
 import {PaymentMethodCard} from 'components/Profile/Wallet/PaymentMethodCard'
+import {runtimeConfig} from 'config/runtimeConfig'
 
 enum Step{
   Method = 'method',
@@ -42,7 +43,7 @@ export default function StepMethod(props: Props) {
               return  <PaymentMethodCryptoCard method={i} onClick={() => props.onChange(i)} />
             }
 
-            return i.paymentSystems.map(paymentSystem => <PaymentMethodCard key={paymentSystem.id}  label={paymentSystem.name} icon={paymentSystem.imageUrl}
+            return i.paymentSystems.map(paymentSystem => <PaymentMethodCard key={paymentSystem.id}  label={paymentSystem.name} icon={`${runtimeConfig.HOST}${paymentSystem.imageUrl}`}
                                                                             onClick={() => props.onChange(i, paymentSystem)} />)
           }
         )}
