@@ -43,6 +43,9 @@ export default function Statistics(props: Props) {
     setIsUpdating(true)
       GameListRepository.fetchGameSessionHistoryLastRows(1).then(data => {
         const currentData = dataRef.current
+        if(data.data.length === 0){
+          return
+        }
         if(data.data.length > 0 && currentData.data.find(i => getId(i) === getId(data.data[0])) ){
           setLoading(false)
           setIsUpdating(false)

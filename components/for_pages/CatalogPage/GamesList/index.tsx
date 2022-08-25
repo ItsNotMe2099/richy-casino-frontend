@@ -66,7 +66,7 @@ export default function GamesList(props: Props) {
           </div>
         </VisibleXs>
 
-      {props.items.length < props.totalItems && !(props.loading && props.items.length === 0) && <ShowMoreButton loading={props.loading} onShow={handleShowTrigger}/>}
+      {((!isShow && props.items.length > 12) || (props.items.length < props.totalItems && !(props.loading && props.items.length === 0))) && <ShowMoreButton loading={props.loading} onShow={handleShowTrigger}/>}
     </div>
   )
 }

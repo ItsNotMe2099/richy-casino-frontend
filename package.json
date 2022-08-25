@@ -19,6 +19,7 @@
     "@stefanprobst/next-error-boundary": "^3.0.2",
     "@types/matter-js": "^0.17.7",
     "@types/react-sticky": "^6.0.4",
+    "accept-language-parser": "^1.5.0",
     "axios": "^0.27.2",
     "bitcoin-units": "^0.3.0",
     "camelcase-object-deep": "^1.1.5",
