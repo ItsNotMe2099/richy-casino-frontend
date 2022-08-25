@@ -14,7 +14,8 @@ export const PaymentMethodSelectedMobile = ({ onClick, icon, label}: Props) => {
   return (
     <PaymentMethodCard className={styles.root} selected onClick={onClick}>
       <div className={styles.left}>
-        <div className={styles.icon}>{icon}</div>
+        {icon && typeof icon === 'string' && <img  className={styles.icon} src={icon} alt=''/>}
+        {icon &&  typeof icon !== 'string' && icon}
         <div className={styles.text}>
           <div className={styles.label}>{t('wallet_payment_method_title')}</div>
           <div className={styles.method}>{label}</div>
