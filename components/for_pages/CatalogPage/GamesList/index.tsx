@@ -43,7 +43,10 @@ export default function GamesList(props: Props) {
 
   const handleShowTrigger = () => {
     setIsShow(true)
-    props.onScrollNext()
+    if(props.items.length < props.totalItems){
+
+      props.onScrollNext()
+    }
   }
 
   return (
