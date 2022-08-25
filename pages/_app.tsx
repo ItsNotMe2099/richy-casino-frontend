@@ -41,6 +41,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
 
+    i18n.reloadResources(i18n.language, ['common'])
     setTimeout(() => {
       //  setIsLoading(false)
     }, 1000)
