@@ -19,7 +19,7 @@ import 'react-phone-number-input/style.css'
 import NotificationBanner from 'components/for_pages/Common/NotificationBanner'
 import HiddenXs from 'components/ui/HiddenXS'
 import Snackbar from 'components/layout/Snackbar'
-import { useEffect, useState } from 'react'
+import {useEffect, useRef, useState} from 'react'
 import { FavoriteWrapper } from 'context/favorite_state'
 import nookies from 'nookies'
 import { v4 as uuidv4 } from 'uuid'
@@ -38,8 +38,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [clientVisible, setClientVisible] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
   const { t, i18n } = useTranslation()
-
+  const currentLangLoaded = useRef(false)
   useEffect(() => {
+
 
     setTimeout(() => {
       //  setIsLoading(false)
@@ -55,7 +56,48 @@ function MyApp({ Component, pageProps }: AppProps) {
       appHeight()
       window.addEventListener('resize', appHeight)
     }
+
   }, [])
+  useEffect(() => {
+    if(!i18n.language ||  currentLangLoaded.current){
+      return
+    }
+    console.log('reloadResources', i18n.language, pageProps)
+
+    const allLangs = ['en', 'ru',
+      'uz',
+      'az',
+      'tr',
+      'hi',
+      'fa',
+      'uk',
+      'kk',
+      'es',
+      'fr',
+      'hy',
+      'pt-BR',
+      'th',
+      'vi',
+      'es-MX',
+      'es-CL',
+      'es-PE',
+      'pt',
+      'be',
+      'cs-CZ',
+      'pl',
+      'ro',
+      'bn',
+      'hu-HU',
+      'fi-FI',
+      'ne',
+      'sw',
+      'de',
+      'it']
+    i18n.reloadResources(allLangs, ['common']).then(i => {
+      currentLangLoaded.current = true
+      console.log('loadResources', i18n.language)
+    })
+  }, [i18n.language])
 
   return (
     <AppWrapper isMobile={pageProps.isMobile} token={pageProps.token} initialUser={pageProps.initialUser}>
@@ -157,8 +199,9 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
 
    */
     const pageProps = await getServerSideTranslation(appContext.ctx)
-    props.pageProps = {... props.pageProps, ...pageProps}
+     props.pageProps = {... props.pageProps, ...pageProps}
   }
+  console.log('appContextLocal',appContext.ctx?.req?.headers, appContext.ctx?.locale,  props.pageProps)
 
   return props
 }
