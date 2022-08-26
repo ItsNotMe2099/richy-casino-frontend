@@ -103,8 +103,9 @@ export default function LangSelect(props: Props) {
   }
   const handleChange = async (item: ILanguage) => {
    const res = await i18n.reloadResources(item.code, ['common'])
-    i18n.changeLanguage(item.code)
     Cookies.set(CookiesType.language, item.code, { expires: CookiesLifeTime.language })
+    i18n.changeLanguage(item.code)
+
   }
 
   const rows = Converter.splitIntoGroups<ILanguage>(items, 5)

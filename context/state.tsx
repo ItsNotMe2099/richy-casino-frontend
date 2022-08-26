@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import {createContext, useContext, useEffect, useRef, useState} from 'react'
 import { BonusDepositShowMode, CookiesType, ModalType, ProfileModalType, SnackbarType } from 'types/enums'
 import ReactModal from 'react-modal'
 import UserRepository from 'data/repositories/UserRepository'
@@ -16,6 +16,7 @@ import { addHours } from 'date-fns'
 import { runtimeConfig } from 'config/runtimeConfig'
 import { IPaymentMethod } from 'data/interfaces/IPaymentMethod'
 import { ICountry } from 'data/interfaces/ICountry'
+import { useTranslation} from 'next-i18next'
 
 interface IState {
   isMobile: boolean
@@ -121,6 +122,8 @@ export function AppWrapper(props: Props) {
   const [modal, setModal] = useState<ModalType | ProfileModalType | null>(null)
   const [bottomSheet, setBottomSheet] = useState<ModalType | ProfileModalType | null>(null)
   const [modalArguments, setModalArguments] = useState<ModalType | ProfileModalType | null>(null)
+  const {t, i18n} = useTranslation()
+  const langInitdRef = useRef(false)
   const [user, setUser] = useState<IUser | null>(props.initialUser)
   const [auth, setAuth] = useState<boolean>(!!props.initialUser)
   const [showBonus, setShowBonus] = useState<boolean>(false)
@@ -260,6 +263,15 @@ export function AppWrapper(props: Props) {
       }, 500)
     }
   }, [userLoaded, infoLoaded])
+  useEffect(() => {
+    console.log('ChangeLang', i18n.language)
+    if(!langInitdRef.current){
+      langInitdRef.current = true
+
+      return
+    }
+   BannerRepository.fetchBanners().then(i => setBanners(i)).catch(() => { })
+  }, [i18n.language])
   useEffect(() => {
     const promises = []
     if(props.token){
