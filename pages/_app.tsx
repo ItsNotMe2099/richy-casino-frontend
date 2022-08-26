@@ -47,7 +47,7 @@ const getIsMobile = (_isMobileProps) => {
   return _isMobileProps
 }
 const getToken = () => {
-  const cookies =  nookies.get(null)
+  const cookies =  nookies.get(null) ?? {}
   return cookies[CookiesType.accessToken]
 }
 function MyApp({ Component, pageProps }: AppProps) {
@@ -100,7 +100,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         path: '/',
       })
     }
-    const cookies = nookies.get(null)
+    const cookies = nookies.get(null) ?? {}
 
     if (!cookies[CookiesType.sessionId]) {
       const sessionId = uuidv4()
