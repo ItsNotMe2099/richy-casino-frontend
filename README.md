@@ -152,3 +152,6 @@ padding-bottom: 85px;
 min-height: -webkit-fill-available;
 
 "header_profile_menu_transactions": "История транакций",
+
+
+sudo openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -keyout nginx-selfsigned.key -out nginx-selfsigned.crt

@@ -59,10 +59,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   }, [])
   useEffect(() => {
+    console.log('reloadResources', i18n.language, i18n)
     if(!i18n.language ||  currentLangLoaded.current){
       return
     }
-    console.log('reloadResources', i18n.language, pageProps)
 
     const allLangs = ['en', 'ru',
       'uz',
@@ -93,12 +93,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       'sw',
       'de',
       'it']
-    i18n.loadResources(i => {
+    i18n.reloadResources([...allLangs]).then(i => {
       currentLangLoaded.current = true
       console.log('loadResources', i18n.language)
       i18n.loadLanguages(allLangs).then(i => {
         currentLangLoaded.current = true
-        i18n.changeLanguage(i18n.language)
         console.log('loadResources', i18n.language)
       })
     })
