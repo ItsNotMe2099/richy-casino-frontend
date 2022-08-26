@@ -1,11 +1,10 @@
 import 'normalize.css'
 import '../scss/globals.scss'
-import type { AppContext, AppProps } from 'next/app'
+import type { AppProps } from 'next/app'
 import { appWithTranslation, useTranslation } from 'next-i18next'
 import nextI18NextConfig from '../next-i18next.config.js'
 import { AppWrapper } from 'context/state'
 import { getSelectorsByUserAgent } from 'react-device-detect'
-import App from 'next/app'
 import ModalContainer from 'components/layout/Modals'
 import { AuthWrapper } from 'context/auth_state'
 import { CookiesType } from 'types/enums'
@@ -30,11 +29,29 @@ import { DefaultSeo } from 'next-seo'
 import ReactPWAInstallProvider from 'context/pwa_state'
 import { TournamentWrapper } from '../context/tournament_state'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
-import {getServerSideTranslation} from 'utils/i18'
+import {useRouter} from 'next/router'
+import App, {AppContext} from 'next/app'
 const PageLoader = () => {
 
 }
+const getIsMobile = (_isMobileProps) => {
+  if(typeof  navigator === 'undefined'){
+    return _isMobileProps
+  }
+  const ua =  navigator.userAgent
+
+  if (ua) {
+    const { isMobile } = getSelectorsByUserAgent(ua)
+   return isMobile
+  }
+  return _isMobileProps
+}
+const getToken = () => {
+  const cookies =  nookies.get(null)
+  return cookies[CookiesType.accessToken]
+}
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter()
   const [clientVisible, setClientVisible] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
   const { t, i18n } = useTranslation()
@@ -64,9 +81,42 @@ function MyApp({ Component, pageProps }: AppProps) {
       i18n.reloadResources(i18n.resolvedLanguage || i18n.language, ['common'])
     }
   }, [])
-  console.log('isMobile', pageProps.isMobile)
+  useEffect(() => {
+    let ppDetails: any = {
+      clickid: router.query.clickid,
+      sub1: router.query.sub1,
+      sub2: router.query.sub2,
+      sub3: router.query.sub3,
+      sub4:router.query.sub4,
+      sub5: router.query.sub5,
+      sub6: router.query.sub6,
+      pid: router.query.pid,
+      promocode: router.query.promocode
+    }
+    ppDetails = Object.fromEntries(Object.entries(ppDetails).filter(([_, v]) => v != null && !!v))
+    if (Object.keys(ppDetails).length > 0) {
+      nookies.set(null, CookiesType.ppDetails, JSON.stringify(ppDetails), {
+        maxAge: CookiesLifeTime.ppDetails * 60 * 60 * 24,
+        path: '/',
+      })
+    }
+    const cookies = nookies.get(null)
+
+    if (!cookies[CookiesType.sessionId]) {
+      const sessionId = uuidv4()
+
+      nookies.set(null, CookiesType.sessionId, sessionId, {
+        maxAge: CookiesLifeTime.sessionId * 60 * 60 * 24,
+        path: '/',
+      })
+
+    }
+
+  }, [])
+
+  console.log('isMobile', getIsMobile(pageProps.isMobile))
   return (
-    <AppWrapper isMobile={pageProps.isMobile} token={pageProps.token} initialUser={pageProps.initialUser}>
+    <AppWrapper isMobile={getIsMobile(pageProps.isMobile)} token={getToken()} initialUser={pageProps.initialUser}>
       <AuthWrapper>
         <FavoriteWrapper>
           <TournamentWrapper>
@@ -120,24 +170,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const props = await App.getInitialProps(appContext)
   const ua = appContext.ctx.req ? appContext.ctx.req?.headers['user-agent'] : navigator.userAgent
-  let ppDetails: any = {
-    clickid: appContext.ctx.query.clickid,
-    sub1: appContext.ctx.query.sub1,
-    sub2: appContext.ctx.query.sub2,
-    sub3: appContext.ctx.query.sub3,
-    sub4: appContext.ctx.query.sub4,
-    sub5: appContext.ctx.query.sub5,
-    sub6: appContext.ctx.query.sub6,
-    pid: appContext.ctx.query.pid,
-    promocode: appContext.ctx.query.promocode
-  }
-  ppDetails = Object.fromEntries(Object.entries(ppDetails).filter(([_, v]) => v != null && !!v))
-  if (Object.keys(ppDetails).length > 0) {
-    nookies.set(appContext.ctx, CookiesType.ppDetails, JSON.stringify(ppDetails), {
-      maxAge: CookiesLifeTime.ppDetails * 60 * 60 * 24,
-      path: '/',
-    })
-  }
+
   if (ua) {
     const { isMobile } = getSelectorsByUserAgent(ua)
     props.pageProps.isMobile = isMobile
@@ -145,28 +178,10 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   else {
     props.pageProps.isMobile = false
   }
-  if ((appContext.ctx.req as any)?.cookies) {
-    if (!(appContext.ctx.req as any).cookies[CookiesType.sessionId]) {
-      const sessionId = uuidv4()
+  if ((appContext.ctx.req as any)) {
 
-      nookies.set(appContext.ctx, CookiesType.sessionId, sessionId, {
-        maxAge: CookiesLifeTime.sessionId * 60 * 60 * 24,
-        path: '/',
-      });
-      (appContext.ctx.req as any).cookies[CookiesType.sessionId] = sessionId
-
-    }
     props.pageProps.token = (appContext.ctx as any).req.cookies[CookiesType.accessToken]
-    /*  props.pageProps.initialUser = await UserRepository.getUser(props.pageProps.token)
 
-      if (props.pageProps.initialUser === null) {
-        props.pageProps.token = null
-        nookies.destroy(appContext.ctx, CookiesType.accessToken)
-      }
-
-     */
-      const pageProps = await getServerSideTranslation(appContext)
-    props.pageProps = {...props.pageProps, ...pageProps}
   }else{
 
 

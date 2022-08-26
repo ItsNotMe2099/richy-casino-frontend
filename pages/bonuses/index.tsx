@@ -65,7 +65,7 @@ export default function Bonuses(){
     </Layout>
   )
 }
-export async function getServerSideProps(context: AppContext) {
+export async function getStaticProps(context: AppContext) {
   return {
     props: {
       ...await getServerSideTranslation(context)
