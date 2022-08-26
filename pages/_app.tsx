@@ -73,6 +73,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <meta name="twitter:title" content={t('seo_twitter_title')}/>
                 <meta name="twitter:description" content={t('seo_twitter_description')}/>
                 <meta name="keywords" content={t('seo_keywords')}/>
+                <meta prefix="og: http://ogp.me/ns#" />
               </Head>
               <DefaultSeo
                 title={t('seo_title')}
