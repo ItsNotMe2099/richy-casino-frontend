@@ -33,7 +33,7 @@ export enum ProfileModalType {
 export enum CookiesType {
   accessToken = 'accessToken',
   sessionId = 'sessionId',
-  language = 'NEXT_LOCALE',
+  language = 'language',
   notificationShown = 'notificationShown',
   firstVisitAt = 'firstVisitAt',
   bonusDepositShowMode = 'bonusDepositShowMode',

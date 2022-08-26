@@ -58,37 +58,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   }, [])
   useEffect(() => {
-    const allLangs = ['en', 'ru',
-      'uz',
-      'az',
-      'tr',
-      'hi',
-      'fa',
-      'uk',
-      'kk',
-      'es',
-      'fr',
-      'hy',
-      'pt-BR',
-      'th',
-      'vi',
-      'es-MX',
-      'es-CL',
-      'es-PE',
-      'pt',
-      'be',
-      'cs-CZ',
-      'pl',
-      'ro',
-      'bn',
-      'hu-HU',
-      'fi-FI',
-      'ne',
-      'sw',
-      'de',
-      'it']
-    console.log('reloadResources12')
-    i18n.reloadResources(allLangs, ['common'])
+
+    i18n.reloadResources(i18n.resolvedLanguage, ['common'])
   }, [])
 
   return (
