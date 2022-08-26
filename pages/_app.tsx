@@ -30,6 +30,7 @@ import { DefaultSeo } from 'next-seo'
 import ReactPWAInstallProvider from 'context/pwa_state'
 import { TournamentWrapper } from '../context/tournament_state'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
+import {getServerSideTranslation} from 'utils/i18'
 const PageLoader = () => {
 
 }
@@ -59,7 +60,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [])
   useEffect(() => {
 
-    i18n.reloadResources(i18n.resolvedLanguage, ['common'])
+    if(i18n.resolvedLanguage || i18n.language) {
+      i18n.reloadResources(i18n.resolvedLanguage || i18n.language, ['common'])
+    }
   }, [])
   console.log('isMobile', pageProps.isMobile)
   return (
@@ -162,6 +165,8 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
       }
 
      */
+      const pageProps = await getServerSideTranslation(appContext)
+    props.pageProps = {...props.pageProps, ...pageProps}
   }else{
 
 
