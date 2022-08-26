@@ -25,6 +25,25 @@ export default function CatalogPage(props: Props) {
   const [error, setError] = useState<string | null>(null)
   const [session, setSession] = useState<IGameSession | null>(null)
   const [game, setGame] = useState<IGame | null>(null)
+  useEffect(() => {
+    const handler = event => {
+      console.log('EventData', event.data)
+      try {
+        const data = JSON.parse(event.data)
+        console.log('iframe event', data)
+        if (data?.type === 'loaded') {
+          setLoading(false)
+        }
+      }catch (e) {
+
+      }
+    }
+
+    window.addEventListener('message', handler)
+
+    // clean up
+    return () => window.removeEventListener('message', handler)
+  }, [])
   const init = async () => {
     setLoading(true)
     try {
@@ -34,11 +53,15 @@ export default function CatalogPage(props: Props) {
       ])
       setSession(session)
       setGame(game)
+      console.log('CheckProvider', `${game?.providerId}` !== runtimeConfig.RICHY_PROVIDER_ID, game.providerId)
+      if(`${game?.providerId}` !== runtimeConfig.RICHY_PROVIDER_ID){
+        setLoading(false)
+      }
     } catch (e) {
-
+      setLoading(false)
       setError(e)
     }
-    setLoading(false)
+
 
   }
   useEffect(() => {

@@ -18,7 +18,6 @@ interface Props {
 export default function GameIframeRichy(props: Props) {
   const appContext = useAppContext()
   const {t} = useTranslation()
-
   return (
     <div className={classNames(styles.root, {[styles.mobile]: appContext.isMobile})}>
      {!appContext.isMobile && <GameIFrameHeader  title={props.game.name} icon={props.game.imageIconSmallUrl ?? props.game.imageIconPreviewUrl}/>}
