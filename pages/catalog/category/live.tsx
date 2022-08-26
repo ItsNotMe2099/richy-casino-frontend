@@ -4,6 +4,8 @@ import GamesListLive from 'components/for_pages/CatalogPage/GamesListLive'
 import {NextSeo} from 'next-seo'
 import {useTranslation} from 'next-i18next'
 import Head from 'next/head'
+import {AppContext} from 'next/app'
+import {getServerSideTranslation} from 'utils/i18'
 interface Props{
   category: IGameCategory
 }
@@ -34,3 +36,10 @@ export default function CatalogPage(props: Props) {
   )
 }
 
+export async function getStaticProps(context: AppContext) {
+  return {
+    props: {
+      ...await getServerSideTranslation(context)
+    }
+  }
+}

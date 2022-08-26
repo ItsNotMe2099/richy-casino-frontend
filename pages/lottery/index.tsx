@@ -17,6 +17,8 @@ import ContentLoader from 'components/ui/ContentLoader'
 import Head from 'next/head'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
 import {useInterval} from 'react-use'
+import {AppContext} from 'next/app'
+import {getServerSideTranslation} from 'utils/i18'
 export default function Lottery() {
   const {t} = useTranslation()
  const appContext = useAppContext()
@@ -111,3 +113,10 @@ export default function Lottery() {
   )
 }
 
+export async function getStaticProps(context: AppContext) {
+  return {
+    props: {
+      ...await getServerSideTranslation(context)
+    }
+  }
+}

@@ -17,14 +17,14 @@ interface Props {
 
 export default function GameIframeRichy(props: Props) {
   const appContext = useAppContext()
-  const {t} = useTranslation()
+  const {t, i18n} = useTranslation()
   return (
     <div className={classNames(styles.root, {[styles.mobile]: appContext.isMobile})}>
      {!appContext.isMobile && <GameIFrameHeader  title={props.game.name} icon={props.game.imageIconSmallUrl ?? props.game.imageIconPreviewUrl}/>}
       <div className={styles.board}>
         {props.session && (appContext.isMobile ?
           <iframe
-            src={props.session.gameUrl}
+            src={`${props.session.gameUrl}&lang=${i18n.language}`}
             className={styles.iframe}
             style={{ width: '100%', minWidth: '100%'}}
           />: <IframeResizer
