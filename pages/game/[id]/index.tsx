@@ -69,11 +69,15 @@ export default function CatalogPage(props: Props) {
   }, [router.query.demo, router.query.id])
   const isRichy = `${game?.providerId}` === runtimeConfig.RICHY_PROVIDER_ID
 
-  const result = loading ? <ContentLoader isOpen={true} style={'block'}/> : (isRichy ? <GameIframeRichy game={game} session={session}/> :
-    <GameIframe session={session} error={error}/>)
+  const result = (<>
+    {loading && <ContentLoader isOpen={true} style={'block'}/> }
+    {game && <div style={{visibility: loading ? 'hidden' : 'visible'}}>{(isRichy ? <GameIframeRichy game={game} session={session}/> :
+      <GameIframe session={session} error={error}/>)}</div>}
+  </>)
   if (appContext.isMobile) {
     return (<div className={styles.mobile}>
       {result}
+
       <GamePageFooter/>
     </div>)
   }
