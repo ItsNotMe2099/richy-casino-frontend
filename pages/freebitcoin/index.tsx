@@ -91,7 +91,7 @@ export default function FreeBitcoin() {
     </WithGameFilterLayout>
   )
 }
-export async function getStaticProps(context: AppContext) {
+export async function getServerSideProps(context: AppContext) {
   return {
     props: {
       ...await getServerSideTranslation(context)

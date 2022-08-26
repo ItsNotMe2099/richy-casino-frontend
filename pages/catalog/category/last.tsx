@@ -18,7 +18,7 @@ export default function CatalogPage(props: Props) {
     </WithGameFilterLayout>
   )
 }
-export async function getStaticProps(context: AppContext) {
+export async function getServerSideProps(context: AppContext) {
   return {
     props: {
       ...await getServerSideTranslation(context)
