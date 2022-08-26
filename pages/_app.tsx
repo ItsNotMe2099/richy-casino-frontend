@@ -61,7 +61,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     i18n.reloadResources(i18n.resolvedLanguage, ['common'])
   }, [])
-
+  console.log('isMobile', pageProps.isMobile)
   return (
     <AppWrapper isMobile={pageProps.isMobile} token={pageProps.token} initialUser={pageProps.initialUser}>
       <AuthWrapper>
@@ -167,7 +167,8 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
 
   }
 
-  console.log('appContextLocal',appContext,  props.pageProps)
+  console.log('appContextLocal',
+    props.pageProps)
 
   return props
 }
