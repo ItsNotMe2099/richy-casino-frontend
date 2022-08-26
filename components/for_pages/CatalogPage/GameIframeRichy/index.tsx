@@ -32,7 +32,7 @@ export default function GameIframeRichy(props: Props) {
             autoResize={!appContext.isMobile}
             className={styles.iframe}
             heightCalculationMethod="bodyScroll"
-            src={props.session.gameUrl}
+            src={`${props.session.gameUrl}&lang=${i18n.language}`}
             style={{ width: '1px', minWidth: '100%'}}
           />)}
         {!props.session && <div className={styles.error}>{t('game_error_unavailable')}</div>}
