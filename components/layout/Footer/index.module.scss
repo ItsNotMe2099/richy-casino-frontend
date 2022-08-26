@@ -191,6 +191,22 @@
       background: #3F6EA6;
     }
   }
+  &.instagram {
+    &:hover {
+      background: #262626;
+    }
+    @media screen and (max-width: $xs-max) {
+      background: #262626;
+    }
+  }
+  &.telegram {
+    &:hover {
+      background: #0D70E3;
+    }
+    @media screen and (max-width: $xs-max) {
+      background: #0D70E3;
+    }
+  }
 }
 
 .apps {
