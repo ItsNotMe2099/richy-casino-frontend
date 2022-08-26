@@ -22,7 +22,7 @@ services:
     nginx:
         build:
           context: .
-          dockerfile: docker/nginx/Dockerfile
+          dockerfile: docker/nginx_prod/Dockerfile
           args:
             - APP_IMAGE=${APP_IMAGE}
         image: ${NGINX_IMAGE}
@@ -30,6 +30,7 @@ services:
         restart: ${DK_RESTART}
         ports:
           - "80:80"
+          - "443:443"
         networks:
           - app
           - nginx-proxy
