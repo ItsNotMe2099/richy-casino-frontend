@@ -8,6 +8,6 @@ type Data = {
 export default function getLangFromRequest(
   req: NextRequest
 ) {
-  const languages = parser.parse(req.headers['accept-language'])
+  const languages = parser.parse(req.headers.get('accept-language'))
   return languages.length > 0 ? languages[0].code : null
 }

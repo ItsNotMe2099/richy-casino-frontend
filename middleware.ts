@@ -8,7 +8,7 @@ export  function middleware(req: NextRequest, ev: NextFetchEvent) {
     const url = req.nextUrl.clone()
     const acceptLang = req ? getLangFromRequest(req) : null
     url.locale = req.cookies.get(CookiesType.language) ?? acceptLang ?? url.locale ?? 'en'
-    console.log('nextUrl', req.nextUrl.pathname,req.cookies.get(CookiesType.language), url.locale)
+    console.log('nextUrl', req.nextUrl.pathname,req.cookies.get(CookiesType.language), acceptLang, url.locale)
     return NextResponse.rewrite(url)
     console.log(req.nextUrl.locale) // undefined
   }
