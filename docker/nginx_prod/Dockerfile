@@ -7,8 +7,8 @@ RUN apk add --update --no-cache \
     bash\
     curl
 
-COPY  docker/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY  docker/nginx/server.conf /etc/nginx/conf.d/default.conf.template
+COPY  docker/nginx_prod/nginx.conf /etc/nginx/nginx.conf
+COPY  docker/nginx_prod/server.conf /etc/nginx/conf.d/default.conf.template
 COPY --from=app /usr/src/app/.next/static /var/www/public/_next/static
 COPY --from=app /usr/src/app/public /var/www/public
 COPY  docker/nginx_prod/certs/nginx-selfsigned.crt /etc/ssl/certs/nginx-selfsigned.crt
