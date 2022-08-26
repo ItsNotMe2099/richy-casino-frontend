@@ -87,7 +87,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   url: 'https://richy.casino',
                   images: [
                     {
-                      url: 'https://richy.casino/og_image.jpg',
+                      url: 'https://richy.casino/img/og_image.jpg',
                       width: 578,
                       height: 578,
                       type: 'image/jpeg',
