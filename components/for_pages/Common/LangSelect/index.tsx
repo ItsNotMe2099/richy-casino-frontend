@@ -105,7 +105,7 @@ export default function LangSelect(props: Props) {
    const res = await i18n.reloadResources(item.code, ['common'])
     Cookies.set(CookiesType.language, item.code, { expires: CookiesLifeTime.language })
     i18n.changeLanguage(item.code)
-
+  console.log('changeLanguage11')
   }
 
   const rows = Converter.splitIntoGroups<ILanguage>(items, 5)

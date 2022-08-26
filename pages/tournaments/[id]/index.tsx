@@ -12,8 +12,8 @@ import TournamentProviders from 'components/for_pages/TournamentPage/TournamentP
 import TournamentGames from 'components/for_pages/TournamentPage/TournamentGames'
 import TournamentConditions from 'components/for_pages/TournamentPage/TournamentConditions'
 import TournamentPrizes from 'components/for_pages/TournamentPage/TournamentPrizes'
-import {GetServerSideProps} from 'next'
 import {getServerSideTranslation} from 'utils/i18'
+import {AppContext} from 'next/app'
 export default function Tournaments(){
 
   const {t} = useTranslation()
@@ -61,10 +61,10 @@ export default function Tournaments(){
     </Layout>
   )
 }
-export const getServerSideProps: GetServerSideProps = async (context ) => {
+export async function getServerSideProps(context: AppContext) {
   return {
     props: {
-      ...await getServerSideTranslation(context),
-    },
+      ...await getServerSideTranslation(context)
+    }
   }
 }

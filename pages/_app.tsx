@@ -30,7 +30,6 @@ import { DefaultSeo } from 'next-seo'
 import ReactPWAInstallProvider from 'context/pwa_state'
 import { TournamentWrapper } from '../context/tournament_state'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
-import {getServerSideTranslation} from 'utils/i18'
 const PageLoader = () => {
 
 }
@@ -59,49 +58,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   }, [])
   useEffect(() => {
-    console.log('reloadResources', i18n.language, i18n)
-    if(!i18n.language ||  currentLangLoaded.current){
-      return
-    }
 
-    const allLangs = ['en', 'ru',
-      'uz',
-      'az',
-      'tr',
-      'hi',
-      'fa',
-      'uk',
-      'kk',
-      'es',
-      'fr',
-      'hy',
-      'pt-BR',
-      'th',
-      'vi',
-      'es-MX',
-      'es-CL',
-      'es-PE',
-      'pt',
-      'be',
-      'cs-CZ',
-      'pl',
-      'ro',
-      'bn',
-      'hu-HU',
-      'fi-FI',
-      'ne',
-      'sw',
-      'de',
-      'it']
-    i18n.reloadResources([...allLangs]).then(i => {
-      currentLangLoaded.current = true
-      console.log('loadResources', i18n.language)
-      i18n.loadLanguages(allLangs).then(i => {
-        currentLangLoaded.current = true
-        console.log('loadResources', i18n.language)
-      })
-    })
-  }, [i18n.language])
+    i18n.reloadResources(i18n.resolvedLanguage, ['common'])
+  }, [])
 
   return (
     <AppWrapper isMobile={pageProps.isMobile} token={pageProps.token} initialUser={pageProps.initialUser}>
@@ -168,8 +127,8 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     pid: appContext.ctx.query.pid,
     promocode: appContext.ctx.query.promocode
   }
-   ppDetails = Object.fromEntries(Object.entries(ppDetails).filter(([_, v]) => v != null && !!v))
-   if (Object.keys(ppDetails).length > 0) {
+  ppDetails = Object.fromEntries(Object.entries(ppDetails).filter(([_, v]) => v != null && !!v))
+  if (Object.keys(ppDetails).length > 0) {
     nookies.set(appContext.ctx, CookiesType.ppDetails, JSON.stringify(ppDetails), {
       maxAge: CookiesLifeTime.ppDetails * 60 * 60 * 24,
       path: '/',
@@ -194,20 +153,24 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
 
     }
     props.pageProps.token = (appContext.ctx as any).req.cookies[CookiesType.accessToken]
-  /*  props.pageProps.initialUser = await UserRepository.getUser(props.pageProps.token)
+    /*  props.pageProps.initialUser = await UserRepository.getUser(props.pageProps.token)
 
-    if (props.pageProps.initialUser === null) {
-      props.pageProps.token = null
-      nookies.destroy(appContext.ctx, CookiesType.accessToken)
-    }
+      if (props.pageProps.initialUser === null) {
+        props.pageProps.token = null
+        nookies.destroy(appContext.ctx, CookiesType.accessToken)
+      }
 
-   */
-    const pageProps = await getServerSideTranslation(appContext.ctx)
-     props.pageProps = {... props.pageProps, ...pageProps}
+     */
+  }else{
+
+
   }
-  console.log('appContextLocal',appContext.ctx?.req?.headers, appContext.ctx?.locale,  props.pageProps)
+
+  console.log('appContextLocal',appContext,  props.pageProps)
 
   return props
 }
+
+
 
 export default appWithTranslation(MyApp, nextI18NextConfig)
