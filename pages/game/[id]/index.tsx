@@ -11,8 +11,8 @@ import {useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
 import ContentLoader from 'components/ui/ContentLoader'
 import {runtimeConfig} from 'config/runtimeConfig'
-import {AppContext} from 'next/app'
 import {getServerSideTranslation} from 'utils/i18'
+import {GetServerSideProps} from 'next'
 
 interface Props {
 
@@ -91,7 +91,8 @@ export default function CatalogPage(props: Props) {
   )
 }
 
-export async function getServerSideProps(context: AppContext) {
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       ...await getServerSideTranslation(context)

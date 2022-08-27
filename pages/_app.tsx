@@ -180,7 +180,6 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   }
   if ((appContext.ctx.req as any)) {
 
-    props.pageProps.token = (appContext.ctx as any).req.cookies[CookiesType.accessToken]
 
   }else{
 

@@ -19,7 +19,7 @@ import {PaymentHistoryModalArguments} from 'types/interfaces'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
 import ProviderMainList from 'components/for_pages/MainPage/ProviderList'
 import {AppContext} from 'next/app'
-import {getServerSideTranslation} from 'utils/i18'
+import { getStaticPropsTranslations} from 'utils/i18'
 
 const casinos = [
   {image: '/img/GamesList/hotline.png', label: 'hotline', provider: 'provider1', category: 'category1'},
@@ -106,7 +106,7 @@ export default function IndexPage() {
 export async function getStaticProps(context: AppContext) {
   return {
     props: {
-      ...await getServerSideTranslation(context)
+      ...await getStaticPropsTranslations(context)
     }
   }
 }

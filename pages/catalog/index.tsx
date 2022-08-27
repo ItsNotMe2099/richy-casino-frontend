@@ -12,7 +12,7 @@ import {useTranslation} from 'next-i18next'
 import Head from 'next/head'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
 import {AppContext} from 'next/app'
-import {getServerSideTranslation} from 'utils/i18'
+import { getStaticPropsTranslations} from 'utils/i18'
 
 export default function CatalogPage() {
   const {t} = useTranslation()
@@ -57,7 +57,7 @@ export default function CatalogPage() {
 export async function getStaticProps(context: AppContext) {
   return {
     props: {
-      ...await getServerSideTranslation(context)
+      ...await getStaticPropsTranslations(context)
     }
   }
 }
