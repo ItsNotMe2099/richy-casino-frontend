@@ -3,7 +3,7 @@ import {CookiesType} from 'types/enums'
 import getLangFromRequest from 'utils/language'
 
 export  function middleware(req: NextRequest, ev: NextFetchEvent) {
-  if(!req.nextUrl.pathname.includes('.') && !req.nextUrl.pathname.includes('_next')) {
+  if( (!req.nextUrl.pathname.includes('.') && !req.nextUrl.pathname.includes('_next')) || (req.nextUrl.pathname.includes('_next/data'))) {
 
     const url = req.nextUrl.clone()
     const acceptLang = req ? getLangFromRequest(req) : null
