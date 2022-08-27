@@ -7,6 +7,7 @@ import Winners from 'components/for_pages/MainPage/Winners'
 import Statistics from 'components/for_pages/MainPage/Statistics'
 import GamesList, {MainGameListType} from 'components/for_pages/MainPage/GamesList'
 import Tournament from 'components/for_pages/MainPage/Tournament'
+import TopSlider from 'components/for_pages/MainPage/TopSlider'
 import BuyCrypto from 'components/for_pages/MainPage/BuyCrypto'
 import VisibleXs from 'components/ui/VisibleXS'
 import {useTranslation} from 'next-i18next'
@@ -17,10 +18,7 @@ import {PaymentSwitchFilterKey, ProfileModalType} from 'types/enums'
 import {PaymentHistoryModalArguments} from 'types/interfaces'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
 import ProviderMainList from 'components/for_pages/MainPage/ProviderList'
-import dynamic from 'next/dynamic'
-const DynamicTopSlider = dynamic(() => import('components/for_pages/MainPage/TopSlider'), {
 
-})
 const casinos = [
   {image: '/img/GamesList/hotline.png', label: 'hotline', provider: 'provider1', category: 'category1'},
   {image: '/img/GamesList/hotline.png', label: 'hotline2', provider: 'provider2', category: 'category2'},
@@ -61,7 +59,7 @@ export default function IndexPage() {
   return (
         <Layout>
           <ErrorBoundary>
-          <DynamicTopSlider/>
+          <TopSlider/>
           </ErrorBoundary>
           <ErrorBoundary>
             <ErrorBoundary>

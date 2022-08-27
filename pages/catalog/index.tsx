@@ -10,11 +10,8 @@ import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import {NextSeo} from 'next-seo'
 import {useTranslation} from 'next-i18next'
 import Head from 'next/head'
-import dynamic from 'next/dynamic'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
-const DynamicTopSlider = dynamic(() => import('components/for_pages/CatalogPage/TopSlider'), {
 
-})
 export default function CatalogPage() {
   const {t} = useTranslation()
 
@@ -38,7 +35,7 @@ export default function CatalogPage() {
                }}
       />
       <HiddenXs>
-        <ErrorBoundary><DynamicTopSlider/></ErrorBoundary></HiddenXs>
+        <ErrorBoundary><TopSlider/></ErrorBoundary></HiddenXs>
       <ErrorBoundary>
           <GamesListTop />
       </ErrorBoundary>
