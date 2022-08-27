@@ -79,8 +79,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [])
   useEffect(() => {
 
-    if(i18n.resolvedLanguage || i18n.language) {
-      i18n.reloadResources(i18n.resolvedLanguage || i18n.language, ['common'])
+    if(i18n.language) {
+      i18n.reloadResources( i18n.language, ['common'])
     }
   }, [])
   useEffect(() => {
