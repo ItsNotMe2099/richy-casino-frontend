@@ -15,8 +15,6 @@ import styles from 'pages/freebitcoin/index.module.scss'
 import Head from 'next/head'
 import {IPagination} from 'types/interfaces'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
-import {AppContext} from 'next/app'
-import { getStaticPropsTranslations} from 'utils/i18'
 export default function FreeBitcoin() {
   const {t} = useTranslation()
   const context = useAppContext()
@@ -90,11 +88,4 @@ export default function FreeBitcoin() {
       </>}
     </WithGameFilterLayout>
   )
-}
-export async function getStaticProps(context: AppContext) {
-  return {
-    props: {
-      ...await getStaticPropsTranslations(context)
-    }
-  }
 }

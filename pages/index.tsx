@@ -18,8 +18,6 @@ import {PaymentHistoryModalArguments} from 'types/interfaces'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
 import ProviderMainList from 'components/for_pages/MainPage/ProviderList'
 import dynamic from 'next/dynamic'
-import {AppContext} from 'next/app'
-import { getStaticPropsTranslations} from 'utils/i18'
 const DynamicTopSlider = dynamic(() => import('components/for_pages/MainPage/TopSlider'), {
 
 })
@@ -104,11 +102,4 @@ export default function IndexPage() {
           </ErrorBoundary>
         </Layout>
   )
-}
-export async function getStaticProps(context: AppContext) {
-  return {
-    props: {
-      ...await getStaticPropsTranslations(context)
-    }
-  }
 }

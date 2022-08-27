@@ -17,8 +17,6 @@ import ContentLoader from 'components/ui/ContentLoader'
 import Head from 'next/head'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
 import {useInterval} from 'react-use'
-import {AppContext} from 'next/app'
-import { getStaticPropsTranslations} from 'utils/i18'
 export default function Lottery() {
   const {t} = useTranslation()
  const appContext = useAppContext()
@@ -111,12 +109,4 @@ export default function Lottery() {
       </>}
     </WithGameFilterLayout>
   )
-}
-
-export async function getStaticProps(context: AppContext) {
-  return {
-    props: {
-      ...await getStaticPropsTranslations(context)
-    }
-  }
 }
