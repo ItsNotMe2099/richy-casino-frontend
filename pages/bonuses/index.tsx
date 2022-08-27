@@ -9,8 +9,6 @@ import { useAppContext } from 'context/state'
 import Image from 'next/image'
 import { useMeasure } from 'react-use'
 import Head from 'next/head'
-import {AppContext} from 'next/app'
-import { getStaticPropsTranslations} from 'utils/i18'
 
 export default function Bonuses(){
 
@@ -64,11 +62,4 @@ export default function Bonuses(){
         </div>
     </Layout>
   )
-}
-export async function getStaticProps(context: AppContext) {
-  return {
-    props: {
-      ...await getStaticPropsTranslations(context)
-    }
-  }
 }

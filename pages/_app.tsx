@@ -41,7 +41,7 @@ const getIsMobile = (_isMobileProps) => {
     return _isMobileProps
   }
   const ua =  navigator.userAgent
-
+  console.log('userAgent')
   if (ua) {
     const { isMobile } = getSelectorsByUserAgent(ua)
    return isMobile
@@ -78,7 +78,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   }, [])
   useEffect(() => {
-
+    (window as any).i18n = i18n
     if(i18n.language) {
       i18n.reloadResources( i18n.language, ['common'])
     }
@@ -181,18 +181,19 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     props.pageProps.isMobile = false
   }
   if ((appContext.ctx.req as any)) {
-
-  const pro = await serverSideTranslations(
-    'en'
-  )
-    console.log('pro', pro)
+    const acceptLang = getLangFromHeader(appContext.ctx.req.headers['accept-language'])
+    const cookies = nookies.get(appContext.ctx)
+    const cookie = cookies[CookiesType.language]
+    console.log('getServerSideTranslation', acceptLang, cookie)
+    const prop = await serverSideTranslations( cookie ?? acceptLang ?? 'en', ['common'])
+    props.pageProps = {...props.pageProps,...prop}
   }else{
     const acceptedLang = getLangFromHeader(navigator.language)
     const cookies = nookies.get(null)
     const cookie = cookies[CookiesType.language]
     //globalI18n.state
     props.pageProps = {...props.pageProps,   _nextI18Next: {
-        initialI18nStore:  {},
+        initialI18nStore:      (window as any).i18n.store?.data,
         initialLocale: cookie ?? acceptedLang ?? 'en',
         ns: [ 'common' ],
         userConfig: null
