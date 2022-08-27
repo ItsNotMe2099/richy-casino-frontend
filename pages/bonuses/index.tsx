@@ -10,7 +10,7 @@ import Image from 'next/image'
 import { useMeasure } from 'react-use'
 import Head from 'next/head'
 import {AppContext} from 'next/app'
-import {getServerSideTranslation} from 'utils/i18'
+import { getStaticPropsTranslations} from 'utils/i18'
 
 export default function Bonuses(){
 
@@ -65,10 +65,10 @@ export default function Bonuses(){
     </Layout>
   )
 }
-export async function getServerSideProps(context: AppContext) {
+export async function getStaticProps(context: AppContext) {
   return {
     props: {
-      ...await getServerSideTranslation(context)
+      ...await getStaticPropsTranslations(context)
     }
   }
 }

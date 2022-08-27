@@ -10,7 +10,7 @@ import ContentLoader from 'components/ui/ContentLoader'
 import TournamentListBlock from 'components/for_pages/TournamentListPage/TournamentListBlock'
 import {IPagination} from 'types/interfaces'
 import {AppContext} from 'next/app'
-import {getServerSideTranslation} from 'utils/i18'
+import { getStaticPropsTranslations} from 'utils/i18'
 
 export default function Tournaments(){
 
@@ -53,10 +53,10 @@ export default function Tournaments(){
     </Layout>
   )
 }
-export async function getServerSideProps(context: AppContext) {
+export async function getStaticProps(context: AppContext) {
   return {
     props: {
-      ...await getServerSideTranslation(context)
+      ...await getStaticPropsTranslations(context)
     }
   }
 }
