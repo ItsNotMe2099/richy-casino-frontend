@@ -31,6 +31,8 @@ import { TournamentWrapper } from '../context/tournament_state'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
 import {useRouter} from 'next/router'
 import App, {AppContext} from 'next/app'
+import {getLangFromHeader} from 'utils/language'
+import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 const PageLoader = () => {
 
 }
@@ -180,10 +182,22 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   }
   if ((appContext.ctx.req as any)) {
 
-
+  const pro = await serverSideTranslations(
+    'en'
+  )
+    console.log('pro', pro)
   }else{
-
-
+    const acceptedLang = getLangFromHeader(navigator.language)
+    const cookies = nookies.get(null)
+    const cookie = cookies[CookiesType.language]
+    //globalI18n.state
+    props.pageProps = {...props.pageProps,   _nextI18Next: {
+        initialI18nStore:  {},
+        initialLocale: cookie ?? acceptedLang ?? 'en',
+        ns: [ 'common' ],
+        userConfig: null
+      }
+    }
   }
 
   console.log('appContextLocal',
