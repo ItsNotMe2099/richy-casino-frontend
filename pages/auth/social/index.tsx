@@ -11,7 +11,7 @@ export default function AuthSocialSuccess(props: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const res = await AuthRepository.socialLogin(context.query, context.req.headers.referer)
+  const res = await AuthRepository.socialLogin(context.query, context.req.headers.referer,  (context.req as any).cookies[CookiesType.sessionId])
 
   if(res.token){
     nookies.set(context, CookiesType.accessToken, res.token, {
