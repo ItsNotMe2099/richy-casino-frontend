@@ -14,7 +14,7 @@ import {useTranslation} from 'next-i18next'
 import {useEffect} from 'react'
 import {useRouter} from 'next/router'
 import {useAppContext} from 'context/state'
-import {PaymentSwitchFilterKey, ProfileModalType} from 'types/enums'
+import {ModalType, PaymentSwitchFilterKey, ProfileModalType} from 'types/enums'
 import {PaymentHistoryModalArguments} from 'types/interfaces'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
 import ProviderMainList from 'components/for_pages/MainPage/ProviderList'
@@ -52,6 +52,14 @@ export default function IndexPage() {
   useEffect(() => {
     if(router.query.withdrawal){
       appContext.showModalProfile(ProfileModalType.paymentHistory, {filter: PaymentSwitchFilterKey.Applications} as PaymentHistoryModalArguments)
+      router.replace('/', '/', {shallow: true})
+    }
+    if(router.query.registration){
+      appContext.showModal(ModalType.registration)
+      router.replace('/', '/', {shallow: true})
+    }
+    if(router.query.fortune){
+      appContext.showModal(ModalType.fortune)
       router.replace('/', '/', {shallow: true})
     }
 
