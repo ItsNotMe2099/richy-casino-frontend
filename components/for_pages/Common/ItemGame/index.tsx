@@ -38,7 +38,7 @@ export default function ItemGame(props: Props) {
   const handlePlayClick = (e) => {
     if (!context.auth) {
       e.preventDefault()
-      context.showModal(ModalType.login)
+      context.showModal(ModalType.registration)
       return
     }
     if (props.onClickPlay) {
