@@ -14,7 +14,7 @@ export const LINKS = {
 }
 
 export const RICHY_CATEGORY_NAME = 'richy'
-
+export const BONUS_SATOSHI = 200
 export const CookiesLifeTime: {
   accessToken: number,
   sessionId: number,

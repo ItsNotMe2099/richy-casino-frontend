@@ -11,6 +11,7 @@ import {Routes} from 'types/routes'
 import {useMeasure} from 'react-use'
 import {useTranslation} from 'next-i18next'
 import {pluralize} from 'numeralize-ru'
+import {BONUS_SATOSHI} from 'types/constants'
 
 interface Props {
   children?: React.ReactNode
@@ -99,7 +100,7 @@ export default function BonusModal(props: Props) {
           <div>
             <div className={styles.bottom}>
               <div className={styles.satoshi}>
-                {Formatter.formatNumber(details?.freeBitcoin)} {t('bonus_satoshi')}
+                {BONUS_SATOSHI} {t('bonus_satoshi')}
               </div>
               <div className={styles.satoshi}>
                 {Formatter.formatNumber(details?.lotteryTickets)} {pluralize(details?.lotteryTickets, t('bonus_lottery_1'), t('bonus_lottery_2'), t('bonus_lottery_5'))}
