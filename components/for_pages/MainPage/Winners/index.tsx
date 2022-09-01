@@ -172,7 +172,7 @@ export default function Winners(props: Props) {
               {t('tournament_top10_user_position')}
             </div>
             <div className={styles.value}>
-              {tournamentContext.userPosition.userPosition}
+              {(tournamentContext.userPosition.userPosition ?? 0) <= 50 ? tournamentContext.userPosition.userPosition : '50+'}
             </div>
           </div>
           <div className={styles.element}>
@@ -182,7 +182,7 @@ export default function Winners(props: Props) {
             <div className={styles.value}>
               <div className={styles.group}>
                 <CurrencySvg className={styles.currency} currencyIso={tournamentContext.userPosition.userCurrencyIso} />
-                {Formatter.formatAmount(tournamentContext.userPosition.spentMoneyAmount, tournamentContext.userPosition.userCurrencyIso)} {tournamentContext.userPosition.userCurrencyIso}
+                {Formatter.formatAmount(tournamentContext.userPosition.spentMoneyAmount, tournamentContext.userPosition.userCurrencyIso) ?? 0} {tournamentContext.userPosition.userCurrencyIso}
 
               </div>
             </div>
