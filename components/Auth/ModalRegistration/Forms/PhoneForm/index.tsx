@@ -34,6 +34,8 @@ export default function PhoneForm(props: Props) {
 
       if (!accessToken) {
         setError(t('registration_error'))
+        setSending(false)
+        return
       }
 
       context.setToken(accessToken)
