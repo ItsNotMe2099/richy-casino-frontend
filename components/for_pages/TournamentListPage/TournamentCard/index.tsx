@@ -10,21 +10,24 @@ import TournamentCardFinished from 'components/for_pages/TournamentPage/Tourname
 import ArrowRightButtonSvg from 'components/svg/ArrowRightButtonSvg'
 import {colors} from 'scss/variables'
 import BitcoinSvg from 'components/svg/BitcoinSvg'
-
+import {useAppContext} from 'context/state'
+import Image from 'next/image'
 interface Props {
   tournament: ITournamentHistory
   disabled?: boolean
 }
 
 export default function TournamentCard(props: Props) {
+  const appContext = useAppContext()
   const {t} = useTranslation()
   const handleJoin = () => {
 
   }
+  const image = !appContext.isMobile ? props.tournament?.icon ?? props.tournament?.imageMobileSmall : props.tournament?.imageMobileSmall ?? props.tournament?.icon
   return (
     <Link href={Routes.tournamentPage(props.tournament.tournamentId)}>
     <a className={classNames(styles.root, {[styles.disabled]: props.disabled})}>
-      <div className={styles.image}></div>
+      <div className={styles.image}>{image && <Image objectFit={'cover'} src={image} layout={'fill'}/>}</div>
       <div className={styles.wrapper}>
 
       <div className={styles.name}>{props.tournament.tournamentName}</div>

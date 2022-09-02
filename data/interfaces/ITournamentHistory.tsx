@@ -16,8 +16,10 @@ export interface ITournamentHistoryUser {
 }
 export interface ITournamentHistory {
   id?: number
+  icon: string
   image: string
   imageMobile: string
+  imageMobileSmall: string
   tournamentId?: number
   status?: ITournamentRoundStatus
   timeStart: string

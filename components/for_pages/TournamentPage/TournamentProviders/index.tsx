@@ -34,21 +34,21 @@ export default function TournamentProviders(props: Props) {
     initialSlide: 0,
     variableWidth: false,
     adaptiveHeight: false,
-    slidesToShow: 8,
+    slidesToShow: 3,
     arrows: false,
     beforeChange: (current: number, next: number) => setCurrentIndex(next),
     responsive: [
       {
         breakpoint: 1360,
         settings: {
-          slidesToShow: 6,
+          slidesToShow: 3,
           initialSlide: 0,
         }
       },
       {
         breakpoint: 570,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           initialSlide: 0,
         }
       },
@@ -74,7 +74,7 @@ export default function TournamentProviders(props: Props) {
        <div className={styles.sliderWrapper}>
          <Slider {...settings} ref={sliderRef}>
            {providers.map((item, index) =>
-             <ProviderCard item={item} key={item.id}/>
+             <ProviderCard item={{...item, imagePreviewUrl: (item as any).image}} key={item.id}/>
            )}
          </Slider>
        </div>

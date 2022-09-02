@@ -1,4 +1,4 @@
-import styles from 'pages/tournaments/index.module.scss'
+import styles from './index.module.scss'
 import Layout from 'components/layout/Layout'
 import {NextSeo} from 'next-seo'
 import {useTranslation} from 'next-i18next'
@@ -14,19 +14,29 @@ import TournamentConditions from 'components/for_pages/TournamentPage/Tournament
 import TournamentPrizes from 'components/for_pages/TournamentPage/TournamentPrizes'
 import {getServerSideTranslation} from 'utils/i18'
 import {GetServerSideProps} from 'next'
+import {ITournamentTop10} from 'data/interfaces/ITournamentTop10'
+import {IPagination} from 'types/interfaces'
+import TournamentTop10 from 'components/for_pages/TournamentPage/TournamentTop10'
+import TournamentBanner from 'components/for_pages/TournamentPage/TournamentBanner'
+import TournamentHeader from 'components/for_pages/TournamentPage/TournamentHeader'
 export default function Tournaments(){
 
   const {t} = useTranslation()
   const router = useRouter()
   const [tournament, setTournament] = useState<ITournamentHistoryItem | null>(null)
+  const [top, setTop] = useState<ITournamentHistoryItem | null>(null)
   const [loading, setLoading] = useState(true)
+  const [top10, setTop10] = useState<IPagination<ITournamentTop10>>({data: [], total: 0})
+
+  const init = async () => {
+    const tournament = await TournamentRepository.fetchRoundByTournamentId(router.query.id as string)
+    setTournament(tournament)
+    setLoading(false)
+   // const top10 = await TournamentRepository.fetchTop10({tournamentId: tournament.tournamentId, roundId: tournament.id }, 1, 10)
+
+  }
   useEffect(() => {
-    console.log('router.query.id', router.query.id)
-    TournamentRepository.fetchRoundByTournamentId(router.query.id as string).then(i => {
-      console.log('Loadsadasd', i)
-      setTournament(i)
-      setLoading(false)
-    })
+    init()
   }, [router.query.id])
   return (
     <Layout>
@@ -48,14 +58,24 @@ export default function Tournaments(){
         }}
       />
       {loading ? <ContentLoader style={'block'} isOpen/> :    <div className={styles.root}>
+        <TournamentHeader tournament={tournament}/>
+        <TournamentBanner tournament={tournament}/>
         <div className={styles.columnsTop}>
           <TournamentProviders tournament={tournament}/>
           <TournamentGames tournament={tournament}/>
         </div>
+
+
         <div className={styles.columnsBottom}>
-          <TournamentConditions tournament={tournament}/>
-          <TournamentPrizes tournament={tournament}/>
+          <div className={styles.columnsLeft}>
+            <TournamentConditions tournament={tournament}/>
+            <TournamentPrizes tournament={tournament}/>
+          </div>
+          <div className={styles.columnsRight}>
+            <TournamentTop10 tournament={tournament}/>
+          </div>
         </div>
+
 
       </div>}
     </Layout>

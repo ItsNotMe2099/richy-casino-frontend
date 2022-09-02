@@ -4,12 +4,11 @@ import { useTranslation } from 'next-i18next'
 import {Form, Formik} from 'formik'
 import { CheckBox } from 'components/ui/Inputs/CheckBox'
 import Validator from 'utils/validator'
-import {ModalType} from 'types/enums'
+import { ProfileModalType} from 'types/enums'
 import { useAppContext } from 'context/state'
 import AuthRepository from 'data/repositories/AuthRepository'
 import FormError from 'components/ui/Form/FormError'
 import Converter from 'utils/converter'
-import {RegistrationPhoneModalArguments} from 'types/interfaces'
 import { RegCurrencySelectField } from 'components/ui/Inputs/RegCurrencySelectField'
 import FormFooter from 'components/Auth/ModalRegistration/Forms/FormFooter'
 import FormPromocode from 'components/Auth/ModalRegistration/Forms/FormPromocode'
@@ -31,7 +30,8 @@ export default function PhoneForm(props: Props) {
         phone: Formatter.cleanPhone(data.phone),
         currency: data.currency
       })
-      context.showModal(ModalType.registrationPhone, {phone: data.phone} as RegistrationPhoneModalArguments)
+      await  context.updateUserFromCookies()
+      context.showModal(ProfileModalType.wallet)
     } catch (e) {
       setError(e)
     }

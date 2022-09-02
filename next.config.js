@@ -5,6 +5,11 @@ const { withSentryConfig } = require('@sentry/nextjs')
 const moduleExports = {
   reactStrictMode: true,
   i18n,
+  experimental: {
+    images: {
+      allowFutureImage: true,
+    },
+  },
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback.fs = false
