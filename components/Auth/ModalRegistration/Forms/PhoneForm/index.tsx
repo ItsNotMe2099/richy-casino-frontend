@@ -26,11 +26,19 @@ export default function PhoneForm(props: Props) {
     setSending(true)
     try {
       setError(null)
-      await AuthRepository.registerPhoneSendOtp({
+     const res = await AuthRepository.registerPhoneSendOtp({
         phone: Formatter.cleanPhone(data.phone),
         currency: data.currency
       })
-      await  context.updateUserFromCookies()
+      const accessToken = res.token
+
+      if (!accessToken) {
+        setError(t('registration_error'))
+      }
+
+      context.setToken(accessToken)
+      await context.updateUserFromCookies()
+      setSending(false)
       context.showModal(ProfileModalType.wallet)
     } catch (e) {
       setError(e)

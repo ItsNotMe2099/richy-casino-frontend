@@ -95,7 +95,7 @@ export default class AuthRepository {
     return Converter.objectKeysToCamelCase(res.data?.data)
   }
 
-  static async registerPhoneSendOtp({phone, currency}): Promise<{ id: string, phone: string, currency_iso: string }> {
+  static async registerPhoneSendOtp({phone, currency}): Promise<{ id: string, phone: string, token: string, currency_iso: string }> {
     const res = await request({
       method: 'post',
       url: '/api/user/registration/phone',
@@ -113,7 +113,7 @@ export default class AuthRepository {
   static async registerPhone({code, phone, password}): Promise<IAuthPhoneResponse> {
     const res = await request({
       method: 'post',
-      url: '/api/user/sms/activate',
+      url: '/api/user/registration/phone',
       data: {
         phone,
         code,
