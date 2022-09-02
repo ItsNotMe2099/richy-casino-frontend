@@ -1,0 +1,21 @@
+@import "scss/index";
+.root{
+ display: flex;
+  flex-direction: row;
+  > * + *{
+    margin-left: 5px;
+  }
+  padding: 0px;
+  margin-top: 35px;
+  @media screen and (max-width: $xs-max){
+    margin-top: 20px;
+  }
+}
+.active{
+  > div{
+    background: $pay500;
+    &:hover{
+      background: $pay500;
+    }
+  }
+}

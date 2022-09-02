@@ -23,6 +23,9 @@ $radiusMobile: 15px;
   display: flex;
   overflow: hidden;
   border-radius: $radius;
+  img{
+    object-fit: cover;
+  }
   &:after {
     content: '';
     padding-bottom: 50%;

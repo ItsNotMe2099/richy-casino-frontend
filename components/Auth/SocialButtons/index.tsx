@@ -16,6 +16,7 @@ import Instagram from 'components/svg/Instagram'
 import Telegram from 'components/svg/Telegram'
 import AuthRepository from 'data/repositories/AuthRepository'
 import {useAppContext} from 'context/state'
+import {ProfileModalType} from 'types/enums'
 
 interface Props{
   currency?: string
@@ -78,6 +79,7 @@ export default function SocialButtons(props: Props) {
           appContext.setToken(res.token)
           await appContext.updateUserFromCookies()
           appContext.hideModal()
+          appContext.showModal(ProfileModalType.wallet)
         }
 
       }

@@ -24,7 +24,7 @@ interface Props {
 
 }
 
-export default function Winners(props: Props) {
+export default function TournamentTop10(props: Props) {
   const { t } = useTranslation()
   const context = useAppContext()
   const tournamentContext = useTournamentContext()
@@ -182,7 +182,7 @@ export default function Winners(props: Props) {
             <div className={styles.value}>
               <div className={styles.group}>
                 <CurrencySvg className={styles.currency} currencyIso={tournamentContext.userPosition.userCurrencyIso} />
-                {Formatter.formatAmount(tournamentContext.userPosition.spentMoneyAmount, tournamentContext.userPosition.userCurrencyIso) ?? 0} {tournamentContext.userPosition.userCurrencyIso}
+                {Formatter.formatAmount(tournamentContext.userPosition.spentMoneyAmount, tournamentContext.userPosition.userCurrencyIso) || 0} {tournamentContext.userPosition.userCurrencyIso}
 
               </div>
             </div>
@@ -194,7 +194,7 @@ export default function Winners(props: Props) {
             <div className={styles.value}>
               <div className={styles.group}>
                 <CurrencySvg className={styles.currency} currencyIso={tournamentContext.userPosition.userCurrencyIso} />
-                {Formatter.formatAmount(tournamentContext.userPosition.sumToReachTop10, tournamentContext.userPosition.userCurrencyIso) ?? 0} {tournamentContext.userPosition.userCurrencyIso}
+                {Formatter.formatAmount(tournamentContext.userPosition.sumToReachTop10, tournamentContext.userPosition.userCurrencyIso) || 0} {tournamentContext.userPosition.userCurrencyIso}
 
               </div>
             </div>

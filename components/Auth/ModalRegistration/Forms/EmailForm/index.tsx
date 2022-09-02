@@ -39,7 +39,7 @@ export default function EmailForm(props: Props) {
       }
 
       context.setToken(accessToken)
-      context.updateUserFromCookies()
+      await  context.updateUserFromCookies()
       context.showModal(ProfileModalType.wallet)
     } catch (e) {
       setError(e)

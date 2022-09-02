@@ -272,6 +272,9 @@
   font-weight: 600;
   font-size: 12px;
   border-radius: 3px;
+  @media screen and (max-width: $xs-max){
+    font-size: $mobile13;
+  }
   @media screen and (max-width: 350px){
     height: 30px;
   }

@@ -1,0 +1,47 @@
+@import "scss/index";
+.root {
+  background: $dark600;
+  border-radius: 7px;
+  color: $white;
+  cursor: pointer;
+  &.active{
+    background: $pay500;
+    &:hover{
+      background: $pay500;
+    }
+
+  }
+  &:hover{
+    background: #3E3F4D;
+  }
+  font-size: 16px;
+  font-weight: 600;
+  height: 40px;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  &.isArrow {
+    width: 73px;
+    &.prev {
+
+      margin-right: 18px;
+      .arrow{
+        transform: rotate(-180deg);
+      }
+    }
+    &.next{
+      margin-left: 18px;
+    }
+  }
+  @media screen and (max-width: $xs-max){
+    height: 30px;
+    min-width: 30px;
+    font-size: $mobile12;
+    &.arrow{
+      width: 30px;
+    }
+  }
+}

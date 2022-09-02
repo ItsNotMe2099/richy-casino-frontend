@@ -90,3 +90,52 @@
     }
   }
 }
+
+.columnsTop{
+  display: flex;
+  flex-direction: row;
+  > div{
+    width: 50%;
+  }
+  > * + * {
+    margin-left: 20px;
+    flex: 1;
+  }
+  @media screen and (max-width: $xs-max){
+    flex-direction: column;
+    > div{
+      width: 100%;
+    }
+    > * + * {
+      margin: 0px;
+      margin-top: 20px;
+    }
+  }
+}
+.columnsBottom{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  > * + *{
+    margin-left: 20px;
+  }
+  .columnsLeft{
+    flex-basis: 420px;
+  }
+  .columnsRight{
+    flex: 1;
+  }
+  @media screen and (max-width: $xs-max){
+    flex-direction: column;
+    > * + *{
+      margin-left: 0px;
+      margin-top: 20px;
+    }
+    .columnsLeft{
+      flex-basis: auto;
+    }
+    .columnsRight{
+      flex: auto;
+    }
+  }
+}
