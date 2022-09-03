@@ -54,7 +54,7 @@ export default function TournamentBanner(props: Props) {
         <div className={styles.label}> {context.isMobile && <BitcoinSvg color={'#FFC700'} className={styles.btc} />}<div>Призовой фонд</div>
         </div>
         <div className={styles.amount}>
-          {Formatter.formatAmount(props.tournament?.totalBankMoneyAmount, props.tournament.currency)}  {props.tournament.currency}
+          {Formatter.formatAmount(props.tournament.totalBankMoneyAmount, props.tournament.currency|| 'BTC')} {props.tournament?.currency || 'BTC'}
         </div>
       </div>
 

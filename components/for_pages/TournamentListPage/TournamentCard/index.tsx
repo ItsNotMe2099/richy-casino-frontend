@@ -14,6 +14,7 @@ import {useAppContext} from 'context/state'
 import Image from 'next/image'
 import {useTournamentContext} from 'context/tournament_state'
 import {useState} from 'react'
+import Formatter from 'utils/formatter'
 interface Props {
   tournament: ITournamentHistory
   disabled?: boolean
@@ -47,7 +48,7 @@ export default function TournamentCard(props: Props) {
         <div className={styles.label}>{t('tournament_card_prize_label')}</div>
         <div className={styles.prizeValue}>
           <BitcoinSvg color={props.disabled ? colors.dark100 : '#FFC700' } />
-          <div className={styles.value}>{props.tournament.totalBankMoneyAmount} BTC</div>
+          <div className={styles.value}>{Formatter.formatAmount(props.tournament.totalBankMoneyAmount, props.tournament.currency|| 'BTC')} {props.tournament?.currency || 'BTC'}</div>
         </div>
       </div>
         {!props.disabled && props.tournament.timeEnd && <div className={styles.timer}>
@@ -60,7 +61,7 @@ export default function TournamentCard(props: Props) {
         </Button>}
         {!props.disabled && isParticipate && <Button spinner={sending}  onClick={handleJoin} className={classNames(styles.buttonJoin)}
                                                       size='normal' background='dark700'>
-          Вы участвуете
+          {t('tournament_card_button_joined')}
         </Button>}
         {props.disabled && <Button disabled onClick={handleJoin} className={classNames(styles.buttonWinners)}
                                     size='normal' >
