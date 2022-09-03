@@ -25,6 +25,7 @@ export default function Tournament(props: Props) {
   const appContext = useAppContext()
   const tournamentContext = useTournamentContext()
   const [tournament, setTournament] = useState<ITournamentRichy | null>(null)
+  const isParticipate = tournament && !!tournamentContext.userActiveRounds.find(i => i.roundId === tournament?.id)
 
   useEffect(() => {
     TournamentRepository.fetchRichyTournament().then(i => {
@@ -83,7 +84,7 @@ export default function Tournament(props: Props) {
           </div>
           <div className={styles.right}>
             <Timer expiredAt={new Date(tournament?.timeEnd)} days style='tournament' />
-            {(tournamentContext.userActiveRounds?.length ?? 0) === 0 && <div className={styles.btnContainer}><Button spinner={tournamentContext.participateLoading} onClick={handleJoin} className={styles.btn} size='normal' background='payGradient500'>{t('tournament_banner_button')}</Button></div>}
+            {!isParticipate && <div className={styles.btnContainer}><Button spinner={tournamentContext.participateLoading} onClick={handleJoin} className={styles.btn} size='normal' background='payGradient500'>{t('tournament_banner_button')}</Button></div>}
           </div>
         </div>
       </HiddenXs>
@@ -110,7 +111,7 @@ export default function Tournament(props: Props) {
             <div className={styles.timerMobile}>
               <Timer expiredAt={new Date(tournament.timeEnd)} days style='tournamentMobile' />
             </div>
-             <Button spinner={tournamentContext.participateLoading} onClick={handleJoin} className={classNames({[styles.btnMobile]: true, [styles.hidden]: tournamentContext.userActiveRounds?.length > 0 && appContext.auth})}
+             <Button spinner={tournamentContext.participateLoading} onClick={handleJoin} className={classNames({[styles.btnMobile]: true, [styles.hidden]: isParticipate && appContext.auth})}
               size='normal' background='payGradient500'>
               <span>{t('tournament_banner_button')}</span>
             </Button>

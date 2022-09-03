@@ -35,6 +35,9 @@
     &.next{
       margin-left: 18px;
     }
+    @media screen and (max-width: $xs-max){
+      width: 30px;
+    }
   }
   @media screen and (max-width: $xs-max){
     height: 30px;

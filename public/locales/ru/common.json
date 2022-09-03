@@ -487,5 +487,10 @@
   "withdraw_type_change": "Изменить",
   "withdraw_type_choose": "Выберите метод вывода",
   "withdraw_type_crypto": "Криптовалюта",
-  "withdraw_type_title": "Способ выплаты"
+  "withdraw_type_title": "Способ выплаты",
+  "tournament_page_providers": "Участвующие провадйеры",
+  "tournament_page_games": "Участвующие провадйеры",
+  "tournament_page_conditions": "Условия турнира",
+  "tournament_page_top": "Рейтинг. Топ-50",
+  "tournament_page_top_participants": "Участники:"
 }

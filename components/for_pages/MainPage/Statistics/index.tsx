@@ -115,7 +115,7 @@ export default function Statistics(props: Props) {
                   </div>
                 </div>
                 <div className={styles.cell}>
-                  <div className={classNames(styles.amount, {[styles.red]: item.amountWin <= 0})}>
+                  <div className={classNames(styles.amount, {[styles.red]:  item.amountWin <= 0 || item.coefficient < 1})}>
                     <CurrencySvg currencyIso={item.currencyIso} color className={styles.currencyIcon}/>
                   <div className={styles.amountText}>{item.amountWin}</div>
                   </div>
