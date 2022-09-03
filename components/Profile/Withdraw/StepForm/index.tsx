@@ -47,11 +47,11 @@ export default function StepForm(props: Props) {
     cardExpiry: ''
   }
   const validateMinMax = (value: number) => {
-
-    if(min && value < min){
+    const num = parseFloat(`${value}`)
+    if(min && num < min){
       return t('form_field_validation_amount_less', {number: min})
     }
-    if(max && value > max){
+    if(max && num > max){
       return t('form_field_validation_amount_greater', {number: max})
     }
     return undefined
