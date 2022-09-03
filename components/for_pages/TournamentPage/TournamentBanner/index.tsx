@@ -62,7 +62,7 @@ export default function TournamentBanner(props: Props) {
     </div>
 
   </div>)
-  const isParticipate =!!tournamentContext.userActiveRounds.find(i => i.roundId === props.tournament.id)
+  const isParticipate =!!tournamentContext.userActiveRounds?.find(i => i.roundId === props.tournament.id)
   const joinButton = ( <Button spinner={tournamentContext.participateLoading} onClick={handleJoin} className={classNames({[styles.btnMobile]: context.isMobile, [styles.btn]: !context.isMobile, [styles.hidden]: isParticipate && context.auth})}
                                size='normal' background='payGradient500'>
     <span>{t('tournament_banner_button')}</span>
