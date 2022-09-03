@@ -41,7 +41,7 @@ export default function TournamentListBlock(props: Props) {
       <div className={styles.list}>
         {(isExpanded ? data.data : data.data.length > limit ? data.data.slice(0, limit) : data.data).map(i => <TournamentCard key={i.id} disabled={props.type === 'completed'} tournament={i}/>)}
       </div>
-      {!isExpanded && data.data.length > limit  && <ShowMoreButton title={'page_tournaments_show_more'} onShow={() => setIsExpanded(true)}/>}
+      {!isExpanded && data.data.length > limit  && <ShowMoreButton title={t('page_tournaments_show_more')} onShow={() => setIsExpanded(true)}/>}
 
     </div>
 
