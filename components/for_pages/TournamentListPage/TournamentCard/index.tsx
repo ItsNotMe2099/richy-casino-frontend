@@ -24,7 +24,7 @@ export default function TournamentCard(props: Props) {
   const tournamentContext = useTournamentContext()
   const [sending, setSending] = useState(false)
   const {t} = useTranslation()
-  const isParticipate =!!tournamentContext.userActiveRounds.find(i => i.roundId === props.tournament.id)
+  const isParticipate =!!tournamentContext.userActiveRounds?.find(i => i.roundId === props.tournament.id)
 
   const handleJoin = async (e) => {
     e.stopPropagation()

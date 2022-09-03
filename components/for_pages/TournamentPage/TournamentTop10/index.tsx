@@ -117,7 +117,7 @@ export default function TournamentTop10(props: Props) {
 
       </div>
       <div className={styles.pagination}>
-      <Pagination pageCount={standings.totalPages} page={page}
+      <Pagination pageCount={Math.ceil(standings.total / 10) >= 5 ? 5 : Math.ceil(standings.total / 10)} page={page}
                   handlePageClick={handlePageClick} isMobile={context.isMobile}
       />
       </div>
