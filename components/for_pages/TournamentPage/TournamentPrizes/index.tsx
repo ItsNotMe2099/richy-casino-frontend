@@ -37,7 +37,7 @@ export default function TournamentPrizes(props: Props) {
   return (
    <div className={styles.root}>
      <Header
-       label={'Условия турнира'}/>
+       label={'Призовые места'}/>
      <div className={styles.items}>
        {places.map(i => <ListItem key={i.place} place={i.place} prize={i.amount} currency={i.currency}/>)}
      </div>

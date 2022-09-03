@@ -12,6 +12,8 @@ import {colors} from 'scss/variables'
 import BitcoinSvg from 'components/svg/BitcoinSvg'
 import {useAppContext} from 'context/state'
 import Image from 'next/image'
+import {useTournamentContext} from 'context/tournament_state'
+import {useState} from 'react'
 interface Props {
   tournament: ITournamentHistory
   disabled?: boolean
@@ -19,8 +21,18 @@ interface Props {
 
 export default function TournamentCard(props: Props) {
   const appContext = useAppContext()
+  const tournamentContext = useTournamentContext()
+  const [sending, setSending] = useState(false)
   const {t} = useTranslation()
-  const handleJoin = () => {
+  const isParticipate =!!tournamentContext.userActiveRounds.find(i => i.roundId === props.tournament.id)
+
+  const handleJoin = async (e) => {
+    e.stopPropagation()
+    e.preventDefault()
+    setSending(true)
+    const res = await tournamentContext.participate(props.tournament.tournamentId)
+
+    setSending(false)
 
   }
   const image = !appContext.isMobile ? props.tournament?.icon ?? props.tournament?.imageMobileSmall : props.tournament?.imageMobileSmall ?? props.tournament?.icon
@@ -42,11 +54,15 @@ export default function TournamentCard(props: Props) {
           <TournamentCardTimer expiredAt={new Date(props.tournament.timeEnd)}/>
         </div>}
         {props.disabled && <div className={styles.timer}><TournamentCardFinished tournament={props.tournament}/></div>}
-        {!props.disabled && <Button  onClick={handleJoin} className={classNames(styles.buttonJoin)}
-                size='normal' background='payGradient500'>
+        {!props.disabled && !isParticipate && <Button spinner={sending}  onClick={handleJoin} className={classNames(styles.buttonJoin)}
+                                                      size='normal' background='payGradient500'>
           {t('tournament_card_button_join')}
         </Button>}
-        {props.disabled && <Button  onClick={handleJoin} className={classNames(styles.buttonWinners)}
+        {!props.disabled && isParticipate && <Button spinner={sending}  onClick={handleJoin} className={classNames(styles.buttonJoin)}
+                                                      size='normal' background='dark700'>
+          Вы участвуете
+        </Button>}
+        {props.disabled && <Button disabled onClick={handleJoin} className={classNames(styles.buttonWinners)}
                                     size='normal' >
           <div className={styles.buttonWinnersWrapper}>
             <div>{t('tournament_card_button_winners')}</div>

@@ -63,7 +63,7 @@ export default function TournamentGames(props: Props) {
   return (
    <div className={styles.root}>
      <Header
-       label={'Участвующие игры'}
+       label={t('tournament_page_games')}
        style={!appContext.isMobile ? 'withoutLength' : null}
        onPrev={!appContext.isMobile ? () => sliderRef.current?.slickGoTo(currentIndex - 1) : null}
        onNext={!appContext.isMobile ? () => sliderRef.current?.slickGoTo(currentIndex + 1) : null}

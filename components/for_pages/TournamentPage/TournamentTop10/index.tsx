@@ -63,10 +63,10 @@ export default function TournamentTop10(props: Props) {
   return (
     <div className={styles.root} id={'leader-board'}>
       <div className={styles.header}>
-        <div className={styles.title}>{t('tournament_top10_title')}</div>
+        <div className={styles.title}>{t('tournament_page_top')}</div>
         <div className={styles.participants}>
-          <img src={'/img/Tournament/users.svg'}/>
-          <div className={styles.label}>Участники</div>
+          {context.isDesktop && <img src={'/img/Tournament/users.svg'}/>}
+          <div className={styles.label}>{t('tournament_page_top_participants')}</div>
           <div className={styles.total}>{standings.total}</div>
         </div>
       </div>

@@ -9,7 +9,8 @@ import { useAppContext } from 'context/state'
 interface Props {
   item: IGameProvider
   onClick?: () => void,
-
+  iconClassName?: string
+  rootClassName?: string
 }
 
 export default function ProviderCard(props: Props) {
@@ -18,8 +19,8 @@ export default function ProviderCard(props: Props) {
   const active = useIsActiveLink(link)
   return (
     <Link href={link} scroll={!appContext.isMobile}>
-    <a className={classNames(styles.root, {[styles.active]: active})} onClick={props.onClick}>
-      <div className={styles.icon}>
+    <a className={classNames(styles.root,props.rootClassName, {[styles.active]: active})} onClick={props.onClick}>
+      <div className={classNames(styles.icon, props.iconClassName)}>
         {props.item.imagePreviewUrl && <img alt={props.item.name} src={props.item.imagePreviewUrl}/>}
 
        </div>

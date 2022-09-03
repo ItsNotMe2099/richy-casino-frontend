@@ -26,11 +26,13 @@
     background: $dark600;
     border-radius: 7px;
     line-height: 14px;
+    img{
+      margin-right: 13px;
+    }
     .label {
       color: $dark200;
       font-size: 12px;
       font-weight: 600;
-      margin-left: 13px;
     }
 
     .total {

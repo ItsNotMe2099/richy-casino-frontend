@@ -64,7 +64,7 @@ export default function TournamentProviders(props: Props) {
   return (
    <div className={styles.root}>
      <Header
-       label={'Участвующие провайдеры'}
+       label={t('tournament_page_providers')}
        style={!appContext.isMobile ? 'withoutLength' : null}
        onPrev={!appContext.isMobile ? () => sliderRef.current?.slickGoTo(currentIndex - 1) : null}
        onNext={!appContext.isMobile ? () => sliderRef.current?.slickGoTo(currentIndex + 1) : null}
@@ -82,7 +82,7 @@ export default function TournamentProviders(props: Props) {
      <VisibleXs>
        <div className={styles.overflow}>
          {providers.map((item, index) =>
-           <ProviderCard item={item} key={item.id}/>
+           <ProviderCard rootClassName={styles.providerCard} iconClassName={styles.providerCardIcon} item={{...item, imagePreviewUrl: (item as any).image}} key={item.id}/>
          )}
        </div>
      </VisibleXs>

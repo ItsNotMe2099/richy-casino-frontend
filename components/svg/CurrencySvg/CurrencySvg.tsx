@@ -20,7 +20,8 @@ function CurrencySvg(props: Props) {
     }else   if( ['usdc_erc20', 'usdc_trc20'].includes(props.currencyIso?.toLowerCase())){
       currencyIso = 'usdc'
     }
-    return appContext.currencies.find(i => i.iso === currencyIso)
+
+    return appContext.currencies.find(i => i.iso.toLowerCase() === currencyIso.toLowerCase())
   }, [props.currencyIso, appContext.currencies])
 
   if(currency && currency.imageIconSmallUrl && props.color){

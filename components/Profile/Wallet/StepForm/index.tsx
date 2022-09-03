@@ -58,7 +58,7 @@ export default function StepForm(props: Props) {
     setSending(true)
     try {
       const res = await PaymentsRepository.depositCrypto(props.currency.iso, props.paymentSystem.id, props.paymentSystem.systemCode, data.amount * (rate ?? 1))
-      props.onSubmit({...res, amount: data.amount * (rate ?? 1)})
+      props.onSubmit({...res, amount: data.amount / (rate ?? 1)})
     } catch (e) {
       setError(e)
     }

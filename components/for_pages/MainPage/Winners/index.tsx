@@ -207,7 +207,7 @@ export default function TournamentTop10(props: Props) {
               <div className={styles.group}>
                 <CurrencySvg className={styles.currency} currencyIso={tournamentContext.userPosition.tournamentCurrencyIso} />
 
-                {Formatter.formatAmount(tournamentContext.userPosition.totalBankMoneyAmount, tournamentContext.userPosition.tournamentCurrencyIso) ?? 0} {tournamentContext.userPosition.tournamentCurrencyIso}
+                {Formatter.formatAmount(tournamentContext.userPosition.totalBankMoneyAmount, tournamentContext.userPosition.tournamentCurrencyIso) || 0} {tournamentContext.userPosition.tournamentCurrencyIso}
               </div>
             </div>
           </div>

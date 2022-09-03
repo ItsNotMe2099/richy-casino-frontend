@@ -67,6 +67,7 @@ export function TournamentWrapper(props: Props) {
         try {
           const res = await TournamentRepository.participate(tournamentId)
           await Promise.all([fetchUserActiveRounds(), fetchUserPositions()])
+          setParticipateLoading(false)
           return true
         } catch (err) {
           appContext.showSnackbar(err, SnackbarType.error)
