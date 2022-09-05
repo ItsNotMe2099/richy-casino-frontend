@@ -113,4 +113,63 @@ export default class Converter {
     }
     return {month: parseInt(split[0], 0), year: parseInt(split[1], 0)}
   }
+
+  static convertRateToMin(rate: number, mul: number){
+    console.log('convertRateToMin', rate, mul)
+    const value = mul / rate
+    let round = value
+    /*
+    если число больше нуля то проверяем сколько знаков до точки
+     */
+    let m; let count, number
+    if(value > 1){
+
+      if(value <= 5){
+        round = 5
+      }else if (value <= 10){
+        round = 10
+      }else if (value <= 50){
+        round = 50
+      }else if (value <= 100){
+        round = 100
+      }else if (value <= 250){
+        round = 250
+      }else if (value <= 500){
+        round = 500
+      }else if (value <= 750){
+        round = 750
+      }else if (value <= 1000){
+        round = 1000
+      }else if(value > 1000){
+        const countBeforeDot =`${value}`.includes('.') ? `${value}`.split('.')[0].length : 1
+        //15000
+        //
+        m = `1${Array.from({length: countBeforeDot - 1 }, (v, i) => '0').join('')}`
+        round = Math.floor(value/500) * 500
+        const round1000 = Math.floor(value/1000) * 1000
+        if(value <= round1000 + 500){
+          round = round1000 + 500
+        }else{
+          round = round1000 + 1000
+        }
+      }
+    }else{
+      const afterDot = `${value}`.split('.')[1]
+      count = (afterDot.match(/^0+/) || [''])[0].length
+
+      number = parseInt(`${parseInt(afterDot, 10)}`[0], 10)
+      if(number < 5){
+        m = `${Array.from({length: count }, (v, i) => '0').join('')}`
+        round = parseFloat(`0.${m}1`)
+
+      }else if(count > 0){
+        m = `${Array.from({length: count - 1 }, (v, i) => '0').join('')}`
+        round = parseFloat(`0.${m}1`)
+      }else{
+        round = 1
+      }
+
+    }
+    return round
+  }
 }
