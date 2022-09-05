@@ -22,13 +22,11 @@ export const PaymentDepositAmountField = (props: Props) => {
   const {t} = useTranslation()
   const [field, meta, helpers] = useField(props)
   const options = [
+    {label: '5', value: 10},
     {label: '10', value: 10},
-    {label: '20', value: 20},
     {label: '50', value: 50},
-    {label: '75', value: 75},
-    {label: '150', value: 150},
-    {label: '500', value: 500},
-    {label: '1000', value: 1000},
+    {label: '100', value: 100},
+    {label: '1000', value: 1000}
   ].map(i => {
     if( props.currencyObject && props.currencyObject.iso !== 'USD'){
       const val = Converter.convertRateToMin(props.currencyObject.toUsd, i.value)
