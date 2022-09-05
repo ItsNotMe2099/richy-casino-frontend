@@ -12,3 +12,17 @@
 
 }
 
+.error{
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  // @include componentRoot;
+  flex: 1;
+  color: $dark100;
+  text-align: center;
+  font-size: 18px;
+  padding-top: 100px;
+
+}
+
