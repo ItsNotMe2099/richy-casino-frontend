@@ -74,7 +74,7 @@ export default function CatalogPage(props: Props) {
   const result = (<>
     {loading && <ContentLoader isOpen={true} style={'block'}/> }
     {!loading && !game && error && <div className={styles.error}>{error}</div>}
-    {game && <div style={{visibility: loading ? 'hidden' : 'visible'}}>{(isRichy ? <GameIframeRichy game={game} session={session}/> :
+    {game && <div className={styles.wrapper} style={{visibility: loading ? 'hidden' : 'visible'}}>{(isRichy ? <GameIframeRichy game={game} session={session}/> :
       <GameIframe session={session} error={error}/>)}</div>}
   </>)
   if (appContext.isMobile) {
