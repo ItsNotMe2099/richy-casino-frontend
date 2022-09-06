@@ -15,18 +15,14 @@
   }
 }
 .options{
-  display: flex;
-  justify-content: space-between;
-  overflow: auto;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    -webkit-appearance: none;
-    display: none;
-    width: 0px;
-  }
+
+
+  overflow: hidden;
+  margin: -5px -5px 0px -5px;
 }
 
 .option{
+  float: left;
   background: $dark600;
   border-radius: 8px;
   padding: 0px 8px 0px 8px;
@@ -38,6 +34,12 @@
   color: $dark200;
   height: 22px;
   line-height: 22px;
+  margin: 5px 5px;
+
+  @media screen and (max-width: $xs-max){
+    font-size: $mobile13;
+    height: 30px;
+  }
   &.active{
     @include blueGradient500NoHover;
     color: $white;
