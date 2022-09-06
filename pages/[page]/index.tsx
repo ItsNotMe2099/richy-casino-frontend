@@ -24,6 +24,7 @@ export const getServerSideProps: GetServerSideProps = async (context ) => {
      notFound: true
    }
  }
+
   const page = await PagesRepository.fetchBySlug(context.query.page as string, context.locale ?? 'en')
   const pages = await PagesRepository.fetchList(1, 30)
   return {

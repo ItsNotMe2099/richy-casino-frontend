@@ -1,6 +1,7 @@
 import styles from './index.module.scss'
 import ArrowBackSvg from 'components/svg/ArrowBackSvg'
 import {useRouter} from 'next/router'
+import {Routes} from 'types/routes'
 interface Props {
   icon: string,
   title: string
@@ -10,7 +11,7 @@ export default function GameIFrameHeader(props: Props) {
   const router = useRouter()
 
   const handleBack = () => {
-  router.back()
+  router.push(Routes.catalog)
   }
   return (
     <div className={styles.root}>
