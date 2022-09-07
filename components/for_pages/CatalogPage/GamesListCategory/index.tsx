@@ -16,7 +16,7 @@ export default function GamesListCategory(props: Props) {
   const limit = 20
 
   useEffect(() => {
-    GameListRepository.fetchGames({categoryId: props.category.id}, 1, limit).then(i => {
+    GameListRepository.fetchGames({categoryId: props.category.id, isShowAll: true}, 1, limit).then(i => {
       setData(i)
       setLoading(false)
     })
