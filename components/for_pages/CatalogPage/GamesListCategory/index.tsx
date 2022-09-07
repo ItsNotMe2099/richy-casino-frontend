@@ -26,7 +26,7 @@ export default function GamesListCategory(props: Props) {
     const newPage = page + 1
     setPage(newPage)
     setLoading(true)
-    const res = await GameListRepository.fetchGames({categoryId: props.category.id}, newPage, limit)
+    const res = await GameListRepository.fetchGames({categoryId: props.category.id, isShowAll: true}, newPage, limit)
     setData(data => ({data: [...data.data, ...res.data], total: res.total}))
     setLoading(false)
   }
