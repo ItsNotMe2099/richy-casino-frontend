@@ -81,6 +81,9 @@ export default function TournamentTop10(props: Props) {
               {t('tournament_top10_header_player')}
             </th>
             <th className={styles.cell}>
+              {t('tournament_top10_header_wager')}
+            </th>
+            <th className={styles.cell}>
               {t('tournament_top10_header_prize')}
             </th>
           </tr>
@@ -104,10 +107,15 @@ export default function TournamentTop10(props: Props) {
                   </div>
                 </div>
               </td>
-              <td className={classNames(styles.cell, styles.prize)}>
+              <td className={classNames(styles.cell, styles.wager)}>
                 <div className={styles.group}>
                   {Formatter.formatAmount(item.spentMoneyAmount, item.currencyIso)} {item.currencyIso}
                 </div>
+              </td>
+              <td className={classNames(styles.cell, styles.prize)}>
+                {item.sumPrize && <div className={styles.group}>
+                  {Formatter.formatAmount(item.sumPrize, item.currencyIso)} {item.currencyIso}
+                </div>}
               </td>
             </tr>
           )}
