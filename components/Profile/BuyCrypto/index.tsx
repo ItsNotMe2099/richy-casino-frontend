@@ -33,11 +33,16 @@ export default function BuyCrypto(props: Props) {
 
   const initialValues = {
     currencySent: 'USD',
-    amountSent: 30,
+    amountSent: 60,
     currencyGet: 'BTC',
     amountGet: 0
   }
+  const init = async () => {
 
+  }
+  useEffect(() => {
+    init()
+  }, [])
   const handleSubmit = async (data) => {
 
     try{

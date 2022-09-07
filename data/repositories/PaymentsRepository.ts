@@ -91,7 +91,7 @@ export default class PaymentsRepository {
     return res.data?.data
   }
 
-  static async purchaseCalculate(currencyIsoFrom: string, currencyIsoTo: string, amount: number, config: AxiosRequestConfig): Promise<{ currencyIsoFrom: string, currencyIsoTo: string, amount: number, resultCoinAmount: number }> {
+  static async purchaseCalculate(currencyIsoFrom: string, currencyIsoTo: string, amount: number, config?: AxiosRequestConfig): Promise<{ currencyIsoFrom: string, currencyIsoTo: string, amount: number, resultCoinAmount: number }> {
     const res = await request({
       method: 'post',
       url: '/api/finance/payment/purchase/calculate',
