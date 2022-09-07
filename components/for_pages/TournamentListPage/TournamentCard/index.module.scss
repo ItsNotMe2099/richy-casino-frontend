@@ -34,6 +34,19 @@ $radiusMobile: 15px;
     border-radius: $radiusMobile;
   }
 }
+.imageTitle {
+  color: $white;
+  font-size: 36px;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10%;
+  white-space: pre-line;
+  @media screen and (max-width: $xs-max) {
+    font-size: 30px;
+  }
+}
 .wrapper{
   display: flex;
   flex-direction: column;

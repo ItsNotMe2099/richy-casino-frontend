@@ -40,7 +40,9 @@ export default function TournamentCard(props: Props) {
   return (
     <Link href={Routes.tournamentPage(props.tournament.tournamentId)}>
     <a className={classNames(styles.root, {[styles.disabled]: props.disabled})}>
-      <div className={styles.image}>{image && <Image objectFit={'cover'} src={image} layout={'fill'}/>}</div>
+      <div className={styles.image}>{image && <Image objectFit={'cover'} src={image} layout={'fill'}/>}
+        <div className={styles.imageTitle}>{props.tournament.tournamentName.split(' ').join('\n')}</div>
+      </div>
       <div className={styles.wrapper}>
 
       <div className={styles.name}>{props.tournament.tournamentName}</div>
