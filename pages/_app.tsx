@@ -124,7 +124,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <TournamentWrapper>
             <ReactPWAInstallProvider enableLogging>
               <Head>
-                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover" />
                 <meta name="twitter:title" content={t('seo_twitter_title')}/>
                 <meta name="twitter:description" content={t('seo_twitter_description')}/>
                 <meta name="keywords" content={t('seo_keywords')}/>
