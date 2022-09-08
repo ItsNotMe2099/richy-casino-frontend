@@ -35,7 +35,7 @@ export default function TournamentHeader(props: Props) {
   }
   return (
     <div className={styles.root}>
-      <div className={styles.back} onClick={handleBack}><SliderArrowSvg />{!context.isMobile && <div>Назад</div>}</div>
+      <div className={styles.back} onClick={handleBack}><SliderArrowSvg />{!context.isMobile && <div>{t('tournament_page_back')}</div>}</div>
       <BlockHeading title={props.tournament.tournamentName}/>
     </div>
   )
