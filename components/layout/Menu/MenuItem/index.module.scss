@@ -1,26 +1,39 @@
 @import "scss/index";
 
-.root{
+.root {
   font-weight: 600;
   font-size: 1.1rem;
   color: #FFFFFF;
   position: relative;
   display: flex;
   align-items: center;
-  @media screen and (max-width: 920px){
+  @media screen and (max-width: 920px) {
     flex-shrink: 0;
     margin-right: 18px;
   }
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $sm-max) {
     font-weight: 600;
   }
-  @media screen and (max-width: $mobile-max){
+  @media screen and (max-width: $mobile-max) {
     font-size: 0.8rem;
   }
+
+  @include mobileUserAgent {
+    &:hover {
+      color: white;
+
+      &:after {
+        display: none;
+      }
+    }
+
+  }
+
   &.active, &:hover {
     color: #427BF8;
     overflow: hidden;
     position: relative;
+
     &:after {
       position: absolute;
       left: 0;
@@ -35,6 +48,9 @@
       @media screen and (max-width: 920px) {
         bottom: 0px;
       }
+
     }
   }
+
+
 }

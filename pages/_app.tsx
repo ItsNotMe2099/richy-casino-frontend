@@ -74,6 +74,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       }
       appHeight()
       window.addEventListener('resize', appHeight)
+      if(pageProps.isMobile){
+        document.body.classList.add('mobile-ua')
+        document.documentElement.className = 'mobile-ua'
+      }
     }
 
   }, [])

@@ -11,7 +11,6 @@ import {useRouter} from 'next/router'
 import TournamentProviders from 'components/for_pages/TournamentPage/TournamentProviders'
 import TournamentGames from 'components/for_pages/TournamentPage/TournamentGames'
 import TournamentConditions from 'components/for_pages/TournamentPage/TournamentConditions'
-import TournamentPrizes from 'components/for_pages/TournamentPage/TournamentPrizes'
 import {getServerSideTranslation} from 'utils/i18'
 import {GetServerSideProps} from 'next'
 import {ITournamentTop10} from 'data/interfaces/ITournamentTop10'
@@ -69,7 +68,6 @@ export default function Tournaments(){
         <div className={styles.columnsBottom}>
           <div className={styles.columnsLeft}>
             <TournamentConditions tournament={tournament}/>
-            <TournamentPrizes tournament={tournament}/>
           </div>
           <div className={styles.columnsRight}>
             <TournamentTop10 tournament={tournament}/>

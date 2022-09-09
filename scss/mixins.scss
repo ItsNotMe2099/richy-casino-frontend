@@ -242,3 +242,18 @@
     font-size: $mobile18;
   }
 }
+
+@mixin mobileUserAgent {
+  $p: &;
+  @at-root {
+    :global{
+      .mobile-ua{
+        :local{
+          #{$p}{
+            @content;
+          }
+        }
+      }
+    }
+  }
+}
