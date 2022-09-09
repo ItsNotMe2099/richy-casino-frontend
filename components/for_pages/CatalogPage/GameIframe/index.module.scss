@@ -13,6 +13,9 @@
     .board{
       display: flex;
       flex-direction: column;
+      @media (orientation: landscape) and (max-width: 1023px)  {
+        padding-left: constant(safe-area-inset-top);
+      }
       @media screen and (max-width: 1023px){
 
         margin-top: 0px;
