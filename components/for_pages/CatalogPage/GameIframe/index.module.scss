@@ -13,6 +13,10 @@
     .board{
       display: flex;
       flex-direction: column;
+      @media screen and (max-width: 1023px){
+
+        margin-top: 0px;
+      }
       > div{
         display: flex;
         flex-direction: column;
@@ -32,10 +36,7 @@
 
     border-radius: 18px;
 
-    @media screen and (max-width: $xs-max){
 
-      margin-top: 0px;
-    }
 }
 
 .iframeWrapper {
