@@ -14,6 +14,11 @@ $radiusMobile: 15px;
         color: $dark100;
       }
     }
+    .image{
+      img{
+        filter: grayscale(1);
+      }
+    }
   }
 }
 .image{
