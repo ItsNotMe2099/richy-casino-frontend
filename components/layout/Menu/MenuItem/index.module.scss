@@ -50,6 +50,12 @@
       }
 
     }
+    &.active {
+      color: #427BF8 !important;
+      &:after {
+        display: block !important;
+      }
+    }
   }
 
 

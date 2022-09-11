@@ -5,6 +5,7 @@ import {useTranslation} from 'next-i18next'
 import classNames from 'classnames'
 import { useAppContext } from 'context/state'
 import GameIFrameHeader from 'components/for_pages/CatalogPage/GameIframeRichy/GameIFrameHeader'
+import useScreenOrientation from 'components/hooks/screen-orientation'
 
 interface Item extends IGame{
   link?: string
@@ -19,8 +20,12 @@ interface Props {
 export default function GameIframe(props: Props) {
   const {t} = useTranslation()
   const appContext = useAppContext()
+  const screenOrientation = useScreenOrientation()
   return (
-    <div className={classNames(styles.root, {[styles.mobile]: appContext.isMobile})}>
+    <div className={classNames(styles.root, {
+      [styles.orientationLeftTop]: appContext.isMobile && screenOrientation === 'landscape-primary',
+      [styles.orientationRightTop]: appContext.isMobile && screenOrientation === 'landscape-secondary',
+      [styles.mobile]: appContext.isMobile})}>
       {props.showHeader && <GameIFrameHeader  title={props.game.name} icon={props.game.imageIconSmallUrl ?? props.game.imageIconPreviewUrl}/>}
 
       <div className={styles.board}>
