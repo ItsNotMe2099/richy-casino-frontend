@@ -25,6 +25,7 @@ import {IPaymentSystem} from 'data/interfaces/IPaymentSystem'
 import {IPaymentMethod} from 'data/interfaces/IPaymentMethod'
 import {PaymentSystemSelected} from 'components/Profile/Wallet/PaymentSystemSelected'
 import {ICurrency} from 'data/interfaces/ICurrency'
+import Converter from 'utils/converter'
 
 
 interface Props {
@@ -43,7 +44,8 @@ export default function StepFormFiat(props: Props) {
   const [sending, setSending] = useState(false)
   const [error, setError] = useState(null)
   const initialValues = {
-    amount: 20,
+    amount: props.currency && props.currency.iso !== 'USD' ? Converter.convertRateToMin(props.currency.toUsd, 20) : 20
+
   }
   const currencyIso = props.currency?.iso
   const currentSettings = props.paymentSystem.settings.find(i => i.currencyIso === currencyIso)
