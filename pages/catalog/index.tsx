@@ -11,6 +11,7 @@ import {NextSeo} from 'next-seo'
 import {useTranslation} from 'next-i18next'
 import Head from 'next/head'
 import ErrorBoundary from 'components/ui/ErrorBoundary'
+import ProviderMainList from 'components/for_pages/MainPage/ProviderList'
 
 export default function CatalogPage() {
   const {t} = useTranslation()
@@ -45,6 +46,9 @@ export default function CatalogPage() {
       </ErrorBoundary>
       <ErrorBoundary>
           <GamesListLive />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <ProviderMainList/>
       </ErrorBoundary>
       <ErrorBoundary>
           <GamesListRichy />
