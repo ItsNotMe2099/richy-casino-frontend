@@ -9,10 +9,14 @@
   // @include componentRoot;
   flex: 1;
   &.orientationLeftTop{
-    padding-left: env(safe-area-inset-left);
+    .board {
+      padding-left: env(safe-area-inset-left);
+    }
   }
   &.orientationRightTop{
-    padding-right: env(safe-area-inset-right);
+    .board {
+      padding-right: env(safe-area-inset-right);
+    }
   }
   &.mobile{
     padding-bottom: 50px;

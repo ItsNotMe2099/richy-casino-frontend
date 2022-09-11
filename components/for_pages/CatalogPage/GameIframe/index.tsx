@@ -21,6 +21,7 @@ export default function GameIframe(props: Props) {
   const {t} = useTranslation()
   const appContext = useAppContext()
   const screenOrientation = useScreenOrientation()
+  console.log('screenOrientation', screenOrientation)
   return (
     <div className={classNames(styles.root, {
       [styles.orientationLeftTop]: appContext.isMobile && screenOrientation === 'landscape-primary',
