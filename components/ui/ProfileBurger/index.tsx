@@ -117,7 +117,7 @@ export default function ProfileBurger(props: Props) {
     {icon: '/img/ProfileBurger/poker.svg', label: t('profile_mobile_menu_poker'), key: LinkKey.Poker, link: null},
     {icon: '/img/ProfileBurger/chess.svg', label: t('profile_mobile_menu_chess'), key: LinkKey.Chess, link: null},
     {icon: '/img/ProfileBurger/cup.svg', label: t('profile_mobile_menu_leaderboard'), key: LinkKey.LeaderBoard, link: Routes.leaderBoard},
-    {icon: '/img/ProfileBurger/referral.svg', label: t('profile_mobile_menu_referral'), key: LinkKey.Referral, link: Routes.referral},
+    // {icon: '/img/ProfileBurger/referral.svg', label: t('profile_mobile_menu_referral'), key: LinkKey.Referral, link: Routes.referral},
     {icon: '/img/ProfileBurger/like.svg', label: t('profile_mobile_menu_favorite'), key: LinkKey.Favorite, link: Routes.catalogFavorite},
   ]
 
@@ -160,7 +160,21 @@ export default function ProfileBurger(props: Props) {
         <img src='/img/icons/back-arrow-white.svg'/>
       </div>
     </div>}
-    {appContext.showBonus && <BonusSmallBanner style='profileBurger'/>}
+    {appContext.showBonus && <div className={styles.bonusBanner}><BonusSmallBanner style='profileBurger'/></div>}
+    <div className={styles.top}>
+      <div className={styles.lang}>
+        <LangSelect styleType={'menu'}/>
+      </div>
+      <div className={styles.chat} onClick={appContext.openSupport}>
+        <div className={styles.name}>
+          <div className={styles.icon}>
+            <img src='/img/ProfileBurger/chat.svg' alt=''/>
+          </div>
+          <div className={styles.label}>{t('profile_mobile_menu_chat')}</div>
+        </div>
+      </div>
+    </div>
+
     <div className={styles.bonuses}>
       {bonuses.map((item, index) =>
         <Bonus
@@ -174,33 +188,7 @@ export default function ProfileBurger(props: Props) {
       )}
     </div>
     <div className={styles.block}>
-      {options.slice(0, 3).map((item, index) =>
-        <Option icon={item.icon} itemKey={item.key} label={item.label}   link={item.link}
-                onClick={() => handleClick(item.key)} key={item.key}/>
-      )}
-    </div>
-    <div className={styles.block}>
-      {options.slice(3, 7).map((item, index) =>
-        <Option icon={item.icon} itemKey={item.key} label={item.label}   link={item.link}
-                onClick={() => handleClick(item.key)} key={item.key}/>
-      )}
-    </div>
-    <div className={styles.lang}>
-      <LangSelect styleType={'menu'}/>
-    </div>
-    <div className={styles.chat} onClick={appContext.openSupport}>
-      <div className={styles.name}>
-        <div className={styles.icon}>
-          <img src='/img/ProfileBurger/chat.svg' alt=''/>
-        </div>
-        <div className={styles.label}>{t('profile_mobile_menu_chat')}</div>
-      </div>
-      <div className={styles.back}>
-        <img src='/img/icons/back-arrow-white.svg'/>
-      </div>
-    </div>
-    <div className={styles.last}>
-      {options.slice(7).map((item, index) =>
+      {options.map((item, index) =>
         <Option icon={item.icon} itemKey={item.key} label={item.label}   link={item.link}
                 onClick={() => handleClick(item.key)} key={item.key}/>
       )}
