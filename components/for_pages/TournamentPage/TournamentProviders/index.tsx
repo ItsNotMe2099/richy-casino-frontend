@@ -9,6 +9,7 @@ import HiddenXs from 'components/ui/HiddenXS'
 import Slider from 'react-slick'
 import VisibleXs from 'components/ui/VisibleXS'
 import ProviderCard from 'components/for_pages/Common/ProviderCard'
+import classNames from 'classnames'
 
 interface Props {
   tournament: ITournamentHistoryItem
@@ -80,7 +81,7 @@ export default function TournamentProviders(props: Props) {
        </div>
      </HiddenXs>}
      <VisibleXs>
-       <div className={styles.overflow}>
+       <div className={classNames(styles.overflow, {[styles.center]: providers.length < 3})}>
          {providers.map((item, index) =>
            <ProviderCard rootClassName={styles.providerCard} iconClassName={styles.providerCardIcon} item={{...item, imagePreviewUrl: (item as any).image}} key={item.id}/>
          )}

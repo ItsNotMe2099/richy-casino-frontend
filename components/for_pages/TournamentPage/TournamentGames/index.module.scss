@@ -56,5 +56,15 @@
 
   padding-top: 14px;
   overflow:auto;
-
+  &.center{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    > div, > a {
+      max-width: calc(33% - 4px );
+    }
+    grid-auto-columns: unset;
+    width: 100%;
+  }
 }

@@ -8,6 +8,7 @@ import HiddenXs from 'components/ui/HiddenXS'
 import Slider from 'react-slick'
 import VisibleXs from 'components/ui/VisibleXS'
 import ItemGame from 'components/for_pages/Common/ItemGame'
+import classNames from 'classnames'
 
 interface Props {
   tournament: ITournamentHistoryItem
@@ -78,8 +79,8 @@ export default function TournamentGames(props: Props) {
        </div>
      </HiddenXs>}
      <VisibleXs>
-       <div className={styles.overflow}>
-         {games.map((item, index) =>
+       <div className={classNames(styles.overflow, {[styles.center]: games.length < 3})}>
+       {games.map((item, index) =>
            <ItemGame item={item} key={item.id}/>
          )}
        </div>
