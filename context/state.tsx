@@ -161,6 +161,7 @@ export function AppWrapper(props: Props) {
     showModal: (type, props: any) => {
       showModal(type, props)
 
+      console.log('ShowModal', type)
     },
     showModalProfile: (type, args: any, skipStack?: boolean) => {
       showModal(type, args)
@@ -182,6 +183,7 @@ export function AppWrapper(props: Props) {
       }
     },
     hideModal: () => {
+      console.log('HideModal', modal)
       hideModal()
     },
     showBottomSheet: (type, props: any) => {

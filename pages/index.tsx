@@ -50,6 +50,9 @@ export default function IndexPage() {
   const appContext = useAppContext()
   const router = useRouter()
   useEffect(() => {
+    if(!appContext.initialLoaded){
+      return
+    }
     if(router.query.withdrawal){
       appContext.showModalProfile(ProfileModalType.paymentHistory, {filter: PaymentSwitchFilterKey.Applications} as PaymentHistoryModalArguments)
       router.replace('/', '/', {shallow: true})
@@ -63,7 +66,7 @@ export default function IndexPage() {
       router.replace('/', '/', {shallow: true})
     }
 
-  }, [router.query])
+  }, [router.query, appContext.initialLoaded])
   return (
         <Layout>
           <ErrorBoundary>
