@@ -15,6 +15,7 @@ import {Routes} from 'types/routes'
 import Link from 'next/link'
 import LangSelect from 'components/for_pages/Common/LangSelect'
 import { useRouter } from 'next/router'
+import AviatorSvg from 'components/svg/AviatorSvg'
 
 enum LinkKey{
   FreeBitCoin,
@@ -43,6 +44,7 @@ interface BonusProps {
   link?: string
   style?: 'bitcoin' | 'gift' | 'wheel'
   onClick: (e) => void
+  itemKey?: LinkKey,
 }
 const Bonus = ({icon, label, style, link, onClick}: BonusProps) => {
 
@@ -73,17 +75,24 @@ const Bonus = ({icon, label, style, link, onClick}: BonusProps) => {
   )
 }
 
-const Option = ({icon, label, link, onClick}: BonusProps) => {
+const Option = ({icon, label, link, onClick, itemKey}: BonusProps) => {
 
+  const renderContent = () => {
+    if(itemKey === LinkKey.Aviator){
+      return <AviatorSvg className={styles.aviatorMenuItem}/>
+    }else{
+      return <> <div className={styles.icon}>
+        <img src={icon} alt=''/>
+      </div>
+        <div className={styles.label}>
+          {label}
+        </div></>
+    }
+  }
   return (
     <Link href={link ?? '#'}>
     <a className={styles.option} onClick={onClick}>
-      <div className={styles.icon}>
-        <img src={icon} alt=''/>
-      </div>
-      <div className={styles.label}>
-        {label}
-      </div>
+      {renderContent()}
     </a>
     </Link>
   )
@@ -166,13 +175,13 @@ export default function ProfileBurger(props: Props) {
     </div>
     <div className={styles.block}>
       {options.slice(0, 3).map((item, index) =>
-        <Option icon={item.icon} label={item.label}   link={item.link}
+        <Option icon={item.icon} itemKey={item.key} label={item.label}   link={item.link}
                 onClick={() => handleClick(item.key)} key={item.key}/>
       )}
     </div>
     <div className={styles.block}>
       {options.slice(3, 7).map((item, index) =>
-        <Option icon={item.icon} label={item.label}   link={item.link}
+        <Option icon={item.icon} itemKey={item.key} label={item.label}   link={item.link}
                 onClick={() => handleClick(item.key)} key={item.key}/>
       )}
     </div>
@@ -192,7 +201,7 @@ export default function ProfileBurger(props: Props) {
     </div>
     <div className={styles.last}>
       {options.slice(7).map((item, index) =>
-        <Option icon={item.icon} label={item.label}   link={item.link}
+        <Option icon={item.icon} itemKey={item.key} label={item.label}   link={item.link}
                 onClick={() => handleClick(item.key)} key={item.key}/>
       )}
     </div>
