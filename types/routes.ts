@@ -59,7 +59,7 @@ export class Routes{
     return '/catalog/category/richy'
   }
   static get aviator(){
-    return `/game/${runtimeConfig.GAME_AVIATOR_ID}`
+    return `/game/25313`
   }
   static get poker(){
     return `/game/${runtimeConfig.GAME_POKER_ID}`
