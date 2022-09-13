@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="78px" height="55px" viewBox="0 0 78 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>logo-rgc-dark</title>
+    <defs>
+        <radialGradient cx="49.0489208%" cy="50.0006324%" fx="49.0489208%" fy="50.0006324%" r="45.8442889%" gradientTransform="translate(0.490489,0.500006),scale(0.705444,1.000000),translate(-0.490489,-0.500006)" id="radialGradient-1">
+            <stop stop-color="#00B189" offset="0%"></stop>
+            <stop stop-color="#09B48D" stop-opacity="0.9151" offset="8.49%"></stop>
+            <stop stop-color="#22BB99" stop-opacity="0.7763" offset="22.37%"></stop>
+            <stop stop-color="#49C7AB" stop-opacity="0.6008" offset="39.92%"></stop>
+            <stop stop-color="#81D8C5" stop-opacity="0.3954" offset="60.46%"></stop>
+            <stop stop-color="#C7EEE5" stop-opacity="0.1679" offset="83.21%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="49.0489208%" cy="50.0006324%" fx="49.0489208%" fy="50.0006324%" r="45.8442889%" gradientTransform="translate(0.490489,0.500006),scale(0.705444,1.000000),translate(-0.490489,-0.500006)" id="radialGradient-2">
+            <stop stop-color="#6B6C77" offset="0%"></stop>
+            <stop stop-color="#6B6C77" stop-opacity="0.9151" offset="8.49%"></stop>
+            <stop stop-color="#6B6C77" stop-opacity="0.7763" offset="22.37%"></stop>
+            <stop stop-color="#6B6C77" stop-opacity="0.6008" offset="39.92%"></stop>
+            <stop stop-color="#6B6C77" stop-opacity="0.3954" offset="60.46%"></stop>
+            <stop stop-color="#6B6C77" stop-opacity="0.1679" offset="83.21%"></stop>
+            <stop stop-color="#6B6C77" stop-opacity="0" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="logo-rgc-dark" fill-rule="nonzero">
+            <polygon id="Path" fill="url(#radialGradient-2)" points="21.1102 54.398488 0 54.398488 56 0 77.1124 0"></polygon>
+            <path d="M46.5821,25.610588 L37.0641,25.610588 L37.0641,29.631588 L41.7321,29.631588 C40.8615,30.757688 39.78,31.219388 38.4632,31.219388 C35.5895,31.219388 34.2704,29.810688 34.2704,26.993388 C34.2704,24.585888 35.5362,23.024088 37.8036,23.024088 C39.0161,23.024088 39.86,23.459888 40.3086,24.150188 L46.4777,24.150188 C45.9248,20.282288 42.7336,17.773488 37.7769,17.773488 C37.737,17.773488 37.697,17.775588 37.6593,17.775588 L28.3433,26.825088 C28.3433,26.881188 28.3389,26.937288 28.3389,26.993388 C28.3389,32.397188 31.952,36.213288 37.8302,36.213288 C38.7319,36.213288 39.558,36.118388 40.3108,35.947988 L46.5821,29.855988 L46.5821,25.610588 Z" id="Path" fill="#6B6C77"></path>
+            <path d="M58.3962,30.963588 C56.4197,30.963588 55.205,29.401788 55.205,26.994288 C55.205,24.586888 56.4175,23.024988 58.3962,23.024988 C59.7153,23.024988 60.8212,23.717488 61.3764,24.921188 L67.5456,24.921188 C66.795,20.716788 63.5438,17.882188 58.7515,17.785188 L49.2734,27.039588 C49.2912,32.421888 52.7933,36.218588 58.5005,36.218588 C63.4306,36.218588 66.7794,33.349488 67.5433,29.073888 L61.3742,29.073888 C60.8212,30.273288 59.7153,30.963588 58.3962,30.963588 Z" id="Path" fill="#6B6C77"></path>
+            <path d="M16.4154,29.581688 L16.442,29.581688 L19.6132,35.380288 L23.686,31.404488 L22.3225,29.145888 C24.9851,28.300288 26.3575,26.276788 26.3575,23.895288 C26.3575,20.566688 23.9592,17.952188 19.2645,17.952188 L10.5615,17.952188 L10.5615,36.085688 L16.4154,36.085688 L16.4154,29.581688 Z M16.4154,22.717388 L18.736,22.717388 C19.8442,22.717388 20.4238,23.332288 20.4238,24.253388 C20.4238,25.329788 19.8442,25.789288 18.736,25.789288 L16.4154,25.789288 L16.4154,22.717388 Z" id="Shape" fill="#6B6C77"></path>
+        </g>
+    </g>
+</svg>
