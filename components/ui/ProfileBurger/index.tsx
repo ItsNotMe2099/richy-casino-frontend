@@ -121,12 +121,16 @@ export default function ProfileBurger(props: Props) {
     {icon: '/img/ProfileBurger/like.svg', label: t('profile_mobile_menu_favorite'), key: LinkKey.Favorite, link: Routes.catalogFavorite},
   ]
 
-  const handleClick = (key: LinkKey) => {
+  const handleClick = (e,key: LinkKey) => {
     switch (key){
       case LinkKey.WheelOfFortune:
+        e.preventDefault()
+        e.stopPropagation()
         appContext.showModal(ModalType.fortune)
         break
         case LinkKey.Poker:
+          e.preventDefault()
+          e.stopPropagation()
           if (appContext.auth) {
             router.push(Routes.poker)
             appContext.hideModal()
@@ -135,6 +139,8 @@ export default function ProfileBurger(props: Props) {
           }
           break
           case LinkKey.Chess:
+            e.preventDefault()
+            e.stopPropagation()
           if (appContext.auth) {
             router.push(Routes.poker)
             appContext.hideModal()
@@ -184,7 +190,7 @@ export default function ProfileBurger(props: Props) {
           icon={item.icon}
           label={item.label}
           link={item.link}
-          onClick={() => handleClick(item.key)}
+          onClick={(e) => handleClick(e,item.key)}
           style={item.key === LinkKey.Bonuses ? 'gift' : item.key === LinkKey.FreeBitCoin ? 'bitcoin' : 'wheel'}
         />
       )}
@@ -192,7 +198,7 @@ export default function ProfileBurger(props: Props) {
     <div className={styles.block}>
       {options.map((item, index) =>
         <Option icon={item.icon} itemKey={item.key} label={item.label}   link={item.link}
-                onClick={() => handleClick(item.key)} key={item.key}/>
+                onClick={(e) => handleClick(e,item.key)} key={item.key}/>
       )}
     </div>
   </div>)
