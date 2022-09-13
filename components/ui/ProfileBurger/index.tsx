@@ -129,6 +129,7 @@ export default function ProfileBurger(props: Props) {
         case LinkKey.Poker:
           if (appContext.auth) {
             router.push(Routes.poker)
+            appContext.hideModal()
           } else {
             appContext.showModal(ModalType.registration)
           }
@@ -136,6 +137,7 @@ export default function ProfileBurger(props: Props) {
           case LinkKey.Chess:
           if (appContext.auth) {
             router.push(Routes.poker)
+            appContext.hideModal()
           } else {
             appContext.showModal(ModalType.registration)
           }
