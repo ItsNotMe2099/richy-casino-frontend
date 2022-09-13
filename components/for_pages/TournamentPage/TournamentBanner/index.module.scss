@@ -93,6 +93,11 @@
   }
 
   .image{
+    &.disabled{
+      img{
+        filter: grayscale(1);
+      }
+    }
     @media screen and (max-width: $xs-max){
      width: 58.7px;
 
@@ -183,6 +188,22 @@
       font-size: 18px;
       margin-top: 4px;
       margin-left: -15px;
+    }
+  }
+  &.disabled{
+    img{
+      filter: grayscale(1);
+    }
+    .amount{
+      color: $dark100;
+    }
+
+    .label {
+      svg {
+        path {
+          fill: $dark100;
+        }
+      }
     }
   }
 }

@@ -1,0 +1,150 @@
+@import "scss/index";
+
+.root{
+  @media screen and (max-width: $xs-max){
+    .block{
+      &:last-child{
+          margin-top: 50px;
+      }
+    }
+  }
+}
+.block{
+  padding: 28px;
+  background: $dark700;
+  margin-top: 20px;
+  border-radius: 18px;
+  @media screen and (max-width: $xs-max){
+    padding: 0px;
+    background: transparent;
+  }
+}
+.heading{
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  @media screen and (max-width: $xs-max){
+    margin-bottom: 18px;
+  }
+}
+
+.headingIcon{
+  position: relative;
+  margin-right: 20px;
+  @media screen and (max-width: $xs-max){
+    margin-right: 9px;
+  }
+  img{
+    width: 42px;
+    height: 42px;
+    position: relative;
+    @media screen and (max-width: $xs-max){
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+.headingIconShadow{
+  position: absolute;
+  left: 0;
+  margin-left: -50%;
+  top: 50%;
+  display: flex;
+  transform: translate(0%, -50%);
+
+  img{
+    width: 84px;
+    height: 84px;
+    @media screen and (max-width: $xs-max){
+      width: 44px;
+      height: 44px;
+    }
+  }
+  @media screen and (max-width: $xs-max){
+    margin-left: -6px;
+    top: -6px;
+    transform: translate(0%, 0);
+  }
+
+}
+
+.headingTitle{
+
+  color: #fff;
+  font-weight: bold;
+  font-size: 21px;
+  @media screen and (max-width: $xs-max){
+    font-size: 18px;
+  }
+}
+.list{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+  @media screen and (max-width: $xs-max){
+    display: flex;
+    flex-direction: column;
+    grid-gap: unset;
+    > * + *{
+      margin-top: 12px;
+    }
+  }
+}
+
+.columnsTop{
+  display: flex;
+  flex-direction: row;
+  > div{
+    width: 50%;
+  }
+  > * + * {
+    margin-left: 20px;
+    flex: 1;
+  }
+  @media screen and (max-width: $xs-max){
+    flex-direction: column;
+    > div{
+      width: 100%;
+    }
+    > * + * {
+      margin: 0px;
+      margin-top: 20px;
+    }
+  }
+}
+.columnsBottom{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  .columnsLeft{
+    position: relative;
+    flex: 1;
+    max-width: 50%;
+    padding-right: 10px;
+  }
+  .columnsRight{
+    flex: 1;
+
+    padding-left: 10px;
+  }
+  @media screen and (max-width: $xs-max){
+    flex-direction: column;
+    > * + *{
+      margin-left: 0px;
+      margin-top: 20px;
+    }
+    .columnsLeft{
+      flex-basis: auto;
+      padding-right: 0px;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .columnsRight{
+      flex: auto;
+      padding-left: 0px;
+      width: 100%;
+    }
+  }
+}

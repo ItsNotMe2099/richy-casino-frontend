@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 import {useAppContext} from 'context/state'
 import {useTranslation} from 'next-i18next'
-import {ITournamentHistory} from 'data/interfaces/ITournamentHistory'
+import {ITournamentHistory, ITournamentRoundStatus} from 'data/interfaces/ITournamentHistory'
 import Image from 'next/image'
 import Timer from 'components/for_pages/Common/Timer'
 import Formatter from 'utils/formatter'
@@ -32,7 +32,7 @@ export default function TournamentBanner(props: Props) {
   const context = useAppContext()
   const image = !context.isMobile ? props.tournament?.image ?? props.tournament?.imageMobile : props.tournament?.imageMobile ?? props.tournament?.image
   const css = { maxWidth: '100%', height: 'auto' }
-
+  const isDisabled = props.tournament.status === ITournamentRoundStatus.Complete
   const handleJoin = async () => {
 
     const res = await tournamentContext.participate(props.tournament.tournamentId)
@@ -42,7 +42,7 @@ export default function TournamentBanner(props: Props) {
 
     }
   }
-  const prize = (<div className={styles.prize}>
+  const prize = (<div className={classNames(styles.prize, {[styles.disabled]: isDisabled})}>
     {context.isDesktop && <img src={'/img/Tournament/banner_prize_bg.svg'}/>}
     {context.isMobile && <svg width={'58.7px'} height={'55px'} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58.7 55" ><path d="M58.4 0C54 0 49.8 1.8 46.8 5.1L0 55l58.7-.1L58.4 0z"  fill="#1d1e25"/></svg>}
     <div className={styles.wrapper}>
@@ -74,7 +74,7 @@ export default function TournamentBanner(props: Props) {
   const title = (   <div className={styles.title}>{props.tournament.tournamentName}</div>)
   return (
     <div className={styles.root}>
-      <div className={styles.image}>{image && <Image objectFit={'cover'} src={image} style={css} layout={'fill'} />}</div>
+      <div className={classNames(styles.image, {[styles.disabled]: isDisabled})}>{image && <Image objectFit={'cover'} src={image} style={css} layout={'fill'} />}</div>
 
       {context.isDesktop && <div className={styles.content}>
         <div className={styles.left}>
@@ -85,23 +85,22 @@ export default function TournamentBanner(props: Props) {
           {prize}
         </div>
         <div className={styles.right}>
-          {timer}
+          {!isDisabled && timer}
         </div>
       </div>}
       {context.isMobile && <div className={styles.contentMobile}>
         <div className={styles.top}>
           {title}
         </div>
-        <div className={styles.center}>
+        {!isDisabled && <div className={styles.center}>
           {timer}
-        </div>
-        <div className={styles.center}>
+        </div>}
+        {!isDisabled && <div className={styles.center}>
           {context.isMobile && joinButton}
-        </div>
+        </div>}
 
 
         <div className={styles.bottom}>
-
           {prize}
         </div>
 

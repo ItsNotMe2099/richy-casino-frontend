@@ -3,7 +3,7 @@ import {GetServerSideProps} from 'next'
 import TournamentPage from 'components/for_pages/TournamentPage'
 export default function Tournaments(){
 
- return <TournamentPage isRound={false}/>
+ return <TournamentPage isRound={true}/>
 }
 export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
