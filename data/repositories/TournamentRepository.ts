@@ -111,7 +111,7 @@ export default class TournamentRepository {
       url: '/api/tournament/round/standings',
       data: {
         tournament_round_id: tournamentRoundId,
-        page, limit
+        page, 'per-page': limit
       },
       config
     })

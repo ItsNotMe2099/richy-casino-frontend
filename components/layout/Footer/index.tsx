@@ -58,6 +58,7 @@ export default function Footer(props: Props) {
 
   const slidesTop = [
     {image: 'https://cdn.freekassa.ru/banners/small-dark-2.png', link: 'https://freekassa.ru'},
+    {image: '/img/layout/footer/sliders/top/astropayrichy.png'},
     {image: '/img/layout/footer/sliders/top/discover.svg'},
     {image: '/img/layout/footer/sliders/top/jcb.svg'},
     {image: '/img/layout/footer/sliders/top/piastrix.svg'},
@@ -264,6 +265,14 @@ export default function Footer(props: Props) {
              className={styles.logoLicense} rel="noreferrer">
             <Image src='/img/licenses/richycuracaointeractivelicenlogo.png' alt='Richy License' width={120} height={120}
                    layout={'responsive'} objectFit='contain'/>
+          </a>
+          <a href={'https://www.responsiblegambling.org'} target={'_blank'}
+             className={styles.logoLicense} rel="noreferrer">
+            <img src='/img/licenses/rgcrichy.svg' alt='responsiblegambling'/>
+          </a>
+          <a href={'https://www.begambleaware.org'} target={'_blank'}
+             className={styles.logoLicense} rel="noreferrer">
+            <img src='/img/licenses/begambleawarerichy.svg' alt='begambleaware'/>
           </a>
         </div>
         <HiddenXs>
