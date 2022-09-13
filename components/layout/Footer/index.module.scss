@@ -383,9 +383,20 @@
     .logoLicense {
       position: relative;
       display: block;
-      width: 61px;
-      @media screen and (max-width: 620px) {
-        max-width: 28px;
+
+      &.curacao{
+        width: 61px;
+        @media screen and (max-width: 620px) {
+          max-width: 28px;
+        }
+      }
+      &.rgcrichy{
+        img {
+          max-height: auto;
+        }
+      }
+      &.begambleawarerichy{
+
       }
     }
   }

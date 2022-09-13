@@ -262,16 +262,16 @@ export default function Footer(props: Props) {
             <img src='/img/layout/footer/eighteen.svg' alt=''/>
           </div>
           <a href={'https://gateway.pinata.cloud/ipfs/QmREPXquK2dmUBSNx3e9H32YTgNTXT5W17vZk4sJaQevvM'} target={'_blank'}
-             className={styles.logoLicense} rel="noreferrer">
+             className={classNames(styles.logoLicense, styles.curacao)} rel="noreferrer">
             <Image src='/img/licenses/richycuracaointeractivelicenlogo.png' alt='Richy License' width={120} height={120}
                    layout={'responsive'} objectFit='contain'/>
           </a>
           <a href={'https://www.responsiblegambling.org'} target={'_blank'}
-             className={styles.logoLicense} rel="noreferrer">
+             className={classNames(styles.logoLicense, styles.rgcrichy)} rel="noreferrer">
             <img src='/img/licenses/rgcrichy.svg' alt='responsiblegambling'/>
           </a>
           <a href={'https://www.begambleaware.org'} target={'_blank'}
-             className={styles.logoLicense} rel="noreferrer">
+             className={classNames(styles.logoLicense, styles.begambleawarerichy)} rel="noreferrer">
             <img src='/img/licenses/begambleawarerichy.svg' alt='begambleaware'/>
           </a>
         </div>
