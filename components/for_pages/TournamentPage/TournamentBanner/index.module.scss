@@ -84,6 +84,13 @@
 
   }
 }
+.image{
+  &.disabled{
+    img{
+      filter: grayscale(1);
+    }
+  }
+}
 .prize{
   position: relative;
   display: flex;
@@ -93,11 +100,7 @@
   }
 
   .image{
-    &.disabled{
-      img{
-        filter: grayscale(1);
-      }
-    }
+
     @media screen and (max-width: $xs-max){
      width: 58.7px;
 
