@@ -4,7 +4,14 @@
 .container{
  padding-bottom: 60px;
 }
-
+.top{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0px 8px;
+}
+.bonusBanner{
+  margin-bottom: 16px;
+}
 .info{
   display: flex;
   align-items: center;
@@ -54,7 +61,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-right: 7px;
+  margin-right: 8px;
   .icon{
     width: 24px;
     height: 24px;
@@ -82,7 +89,6 @@
 }
 
 .block{
-  border-bottom:  1px solid $dark600;
   margin-top: 23px;
 }
 
@@ -127,7 +133,6 @@
   padding: 10px 19px 13px 14px;
   display: flex;
   align-items: center;
-  margin-top: 23px;
   border-radius: 8px;
   background-color: $dark600;
   justify-content: space-between;
@@ -146,10 +151,8 @@
 }
 
 .last{
-  margin-top: 26px;
 }
 
 .lang{
 
-  margin-top: 23px;
 }

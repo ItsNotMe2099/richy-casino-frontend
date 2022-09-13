@@ -34,7 +34,7 @@ export default function LangSelect(props: Props) {
   const [popperElement, setPopperElement] = useState(null)
   const { styles: popperStyles, attributes } = usePopper(referenceElement, popperElement, {
     strategy: props.styleType === 'menu' ? 'fixed' : 'absolute',
-    placement: ['footer', 'menu'].includes(props.styleType) ? props.styleType === 'menu' ? 'top-start' :  appContext.isMobile ? 'top-end' : 'top-start' :  'bottom-end',
+    placement: ['footer', 'menu'].includes(props.styleType) ? props.styleType === 'menu' ? 'bottom-start' :  appContext.isMobile ? 'top-end' : 'top-start' :  'bottom-end',
     modifiers: [
       {
         name: 'flip',
@@ -136,7 +136,7 @@ export default function LangSelect(props: Props) {
           </div>)}
 
         </div>
-        <DropDownTriangle className={styles.triangle} bottom={['footer', 'menu'].includes(props.styleType)} />
+        <DropDownTriangle className={styles.triangle} bottom={['footer'].includes(props.styleType)} />
       </div>
     </div>
   )

@@ -15,6 +15,7 @@ import Image from 'next/image'
 import {useTournamentContext} from 'context/tournament_state'
 import {useState} from 'react'
 import Formatter from 'utils/formatter'
+import {useMeasure} from 'react-use'
 interface Props {
   tournament: ITournamentHistory
   disabled?: boolean
@@ -27,6 +28,7 @@ export default function TournamentCard(props: Props) {
   const {t} = useTranslation()
   const isParticipate =!!tournamentContext.userActiveRounds?.find(i => i.roundId === props.tournament.id)
 
+  const [ref, { width, height }] = useMeasure()
   const handleJoin = async (e) => {
     e.stopPropagation()
     e.preventDefault()
@@ -38,10 +40,10 @@ export default function TournamentCard(props: Props) {
   }
   const image = !appContext.isMobile ? props.tournament?.icon ?? props.tournament?.imageMobileSmall : props.tournament?.imageMobileSmall ?? props.tournament?.icon
   return (
-    <Link href={Routes.tournamentPage(props.tournament.tournamentId)}>
-    <a className={classNames(styles.root, {[styles.disabled]: props.disabled})}>
+    <Link href={props.disabled ? Routes.tournamentRoundPage(props.tournament.id) : Routes.tournamentPage(props.tournament.tournamentId)}>
+    <a ref={ref} className={classNames(styles.root, {[styles.disabled]: props.disabled})}>
       <div className={styles.image}>{image && <Image objectFit={'cover'} src={image} layout={'fill'}/>}
-        <div className={styles.imageTitle}>{props.tournament.tournamentName.split(' ').join('\n')}</div>
+        <div className={styles.imageTitle} style={{... (appContext.isDesktop ? {fontSize: `${width / 14}px`} : {})}}>{props.tournament.tournamentName.split(' ').join('\n')}</div>
       </div>
       <div className={styles.wrapper}>
 
@@ -65,7 +67,7 @@ export default function TournamentCard(props: Props) {
                                                       size='normal' background='dark700'>
           {t('tournament_card_button_joined')}
         </Button>}
-        {props.disabled && <Button disabled onClick={handleJoin} className={classNames(styles.buttonWinners)}
+        {props.disabled && <Button disabled  className={classNames(styles.buttonWinners)}
                                     size='normal' >
           <div className={styles.buttonWinnersWrapper}>
             <div>{t('tournament_card_button_winners')}</div>

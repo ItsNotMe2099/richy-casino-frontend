@@ -37,7 +37,7 @@ export default function TournamentListBlock(props: Props) {
   }
   return (
     <div className={styles.block}>
-      <BlockHeading title={t('page_tournament_title')}/>
+      <BlockHeading title={props.title}/>
       <div className={styles.list}>
         {(isExpanded ? data.data : data.data.length > limit ? data.data.slice(0, limit) : data.data).map(i => <TournamentCard key={i.id} disabled={props.type === 'completed'} tournament={i}/>)}
       </div>

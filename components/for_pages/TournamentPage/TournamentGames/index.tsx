@@ -41,7 +41,7 @@ export default function TournamentGames(props: Props) {
       {
         breakpoint: 1360,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 4,
           initialSlide: 0,
         }
       },

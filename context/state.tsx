@@ -159,6 +159,8 @@ export function AppWrapper(props: Props) {
     countryByIp,
     initialLoaded: userLoaded && infoLoaded,
     showModal: (type, props: any) => {
+
+      console.log('ShowModal0', type)
       showModal(type, props)
 
       console.log('ShowModal', type)
@@ -278,6 +280,8 @@ export function AppWrapper(props: Props) {
     const promises = []
     if(props.token){
       promises.push(updateUserDetails().catch(() => {setAuth(false)}))
+    }else{
+      setUserLoaded(true)
     }
     promises.push(InfoRepository.getCurrencies().then(i => setCurrencies(i)).catch(() => { }))
     promises.push(InfoRepository.getCountryByIp().then(i => setCountryByIp(i)).catch(() => { }))

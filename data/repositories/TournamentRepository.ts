@@ -148,5 +148,21 @@ export default class TournamentRepository {
     }
     return res.data?.data.map(i => Converter.objectKeysToCamelCase(i))[0]
   }
+  static async fetchRoundByIdId(roundId: string | number): Promise<ITournamentHistoryItem | null> {
+    const res = await request({
+      method: 'get',
+      url: '/api/tournament/round',
+      data: {
+        id: roundId
+      }
+    })
+    if (res.err) {
+      return null
+    }
+    if(res.data?.data?.length === 0){
+      return null
+    }
+    return res.data?.data.map(i => Converter.objectKeysToCamelCase(i))[0]
+  }
 
 }
