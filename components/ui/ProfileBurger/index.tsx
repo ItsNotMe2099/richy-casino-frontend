@@ -142,7 +142,7 @@ export default function ProfileBurger(props: Props) {
             e.preventDefault()
             e.stopPropagation()
           if (appContext.auth) {
-            router.push(Routes.poker)
+            router.push(Routes.chess)
             appContext.hideModal()
           } else {
             appContext.showModal(ModalType.registration)
