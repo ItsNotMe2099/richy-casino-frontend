@@ -33,7 +33,7 @@ export default function TournamentTop10(props: Props) {
   const abortControllerRef = useRef<AbortController | null>(null)
 
   const isMobile = context.isMobile
-  const limit = 30
+  const limit = 10
   useEffect(() => {
     TournamentRepository.fetchRoundStandings(props.tournament.id, 1, limit).then(i => {
       setStandings(i)
