@@ -59,7 +59,6 @@ export function TournamentWrapper(props: Props) {
     userActiveRounds,
     participateLoading,
     participate: async (tournamentId: number) => {
-
       if (!appContext.auth) {
         appContext.showModal(ModalType.registration)
       } else {
