@@ -19,7 +19,7 @@
       height: 100vh;
       height: var(--app-height);
       position: fixed;
-      padding-bottom: calc(40px + env(safe-area-inset-bottom, 0));
+      padding-bottom: calc(50px + env(safe-area-inset-bottom, 0));
 
     }
     .iframe{

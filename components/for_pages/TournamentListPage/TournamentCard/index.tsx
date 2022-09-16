@@ -67,7 +67,7 @@ export default function TournamentCard(props: Props) {
                                                       size='normal' background='dark700'>
           {t('tournament_card_button_joined')}
         </Button>}
-        {props.disabled && <Button disabled  className={classNames(styles.buttonWinners)}
+        {props.disabled && <Button   className={classNames(styles.buttonWinners)}
                                     size='normal' >
           <div className={styles.buttonWinnersWrapper}>
             <div>{t('tournament_card_button_winners')}</div>
