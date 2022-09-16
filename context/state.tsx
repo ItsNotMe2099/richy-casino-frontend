@@ -1,22 +1,22 @@
 import {createContext, useContext, useEffect, useRef, useState} from 'react'
-import { BonusDepositShowMode, CookiesType, ModalType, ProfileModalType, SnackbarType } from 'types/enums'
+import {BonusDepositShowMode, CookiesType, ModalType, ProfileModalType, SnackbarType} from 'types/enums'
 import ReactModal from 'react-modal'
 import UserRepository from 'data/repositories/UserRepository'
 import Cookies from 'js-cookie'
-import { ICurrency } from 'data/interfaces/ICurrency'
+import {ICurrency} from 'data/interfaces/ICurrency'
 import InfoRepository from 'data/repositories/InfoRepository'
 import IUser from 'data/interfaces/IUser'
-import { IBonusBannerDetails, IModalProfileStackItem, SnackbarData } from 'types/interfaces'
-import { CookiesLifeTime, Timers } from 'types/constants'
+import {IBonusBannerDetails, IModalProfileStackItem, SnackbarData} from 'types/interfaces'
+import {CookiesLifeTime, Timers} from 'types/constants'
 import PromoCodeRepository from 'data/repositories/PromoCodeRepository'
 import UserUtils from 'utils/user'
-import { IBanner } from 'data/interfaces/IBanner'
+import {IBanner} from 'data/interfaces/IBanner'
 import BannerRepository from 'data/repositories/BannerRepository'
-import { addHours } from 'date-fns'
-import { runtimeConfig } from 'config/runtimeConfig'
-import { IPaymentMethod } from 'data/interfaces/IPaymentMethod'
-import { ICountry } from 'data/interfaces/ICountry'
-import { useTranslation} from 'next-i18next'
+import {addHours} from 'date-fns'
+import {runtimeConfig} from 'config/runtimeConfig'
+import {IPaymentMethod} from 'data/interfaces/IPaymentMethod'
+import {ICountry} from 'data/interfaces/ICountry'
+import {useTranslation} from 'next-i18next'
 
 interface IState {
   isMobile: boolean
@@ -124,6 +124,7 @@ export function AppWrapper(props: Props) {
   const [modalArguments, setModalArguments] = useState<ModalType | ProfileModalType | null>(null)
   const {t, i18n} = useTranslation()
   const langInitdRef = useRef(false)
+  const modalRef = useRef<ModalType | ProfileModalType | null>(null)
   const [user, setUser] = useState<IUser | null>(props.initialUser)
   const [auth, setAuth] = useState<boolean>(!!props.initialUser)
   const [showBonus, setShowBonus] = useState<boolean>(false)
@@ -139,6 +140,9 @@ export function AppWrapper(props: Props) {
   const [countryByIp, setCountryByIp] = useState<ICountry | null>(null)
   const [userLoaded, setUserLoaded] = useState<boolean>(false)
   const [infoLoaded, setInfoLoaded] = useState<boolean>(false)
+  useEffect(() => {
+    modalRef.current = modal
+  }, [modal])
   const value: IState = {
     ...defaultValue,
     isMobile: props.isMobile,
@@ -352,6 +356,9 @@ export function AppWrapper(props: Props) {
 
       if ((runtimeConfig.FAKE_BONUS || isEnabled) && !auth && !Cookies.get(CookiesType.bonusDepositShowMode) && !([ModalType.fortune, ModalType.registration] as ModalType[]).includes(modal as ModalType)) {
         setTimeout(() => {
+          if(   modalRef.current === ModalType.registration){
+            return
+          }
           showModal(ModalType.bonus)
         }, Timers.showBonusesBanner)
       }
