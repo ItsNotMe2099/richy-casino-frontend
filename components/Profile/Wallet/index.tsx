@@ -109,25 +109,29 @@ export default function Wallet(props: Props) {
       {step === PaymentStep.Success && <StepCrypto  method={method} currency={currency} response={depositResponse as IDepositCryptoResponse} onSetStep={handleSetStep}/>}
     </div>
   )
+  let resultModal = (props.isBottomSheet ? <>  <WalletHeader isBottomSheet/>
+    <BottomSheetBody className={styles.sheetBody}>
+      {result}
+    </BottomSheetBody>
+    <ModalFooterTwoFa/>
+  </> : <>
+      <WalletHeader showBack={step !== PaymentStep.Method} onBackClick={step !== PaymentStep.Method ? handleBack : null}/>
+      <ProfileModalBody fixed>
+        {result}
+      </ProfileModalBody>
+      <ModalFooterTwoFa/>
+    </>)
   if(step === PaymentStep.Form){
-   return  method.isCrypto ? <StepForm isBottomSheet={props.isBottomSheet} paymentSystem={paymentSystem} method={method} currency={currency} onSubmit={handleSubmit} onSetStep={handleSetStep} onBackClick={handleBack}/>
+    resultModal =  method.isCrypto ? <StepForm isBottomSheet={props.isBottomSheet} paymentSystem={paymentSystem} method={method} currency={currency} onSubmit={handleSubmit} onSetStep={handleSetStep} onBackClick={handleBack}/>
      : <StepFormFiat isBottomSheet={props.isBottomSheet} paymentSystem={paymentSystem} method={method} currency={context.currencies.find(i => i.iso === context.user.currencyIso)} onSubmit={handleSubmit} onSetStep={handleSetStep} onBackClick={handleBack}/>
   }
   if (props.isBottomSheet) {
     return (<BottomSheetLayout>
-      <WalletHeader isBottomSheet/>
-      <BottomSheetBody className={styles.sheetBody}>
-        {result}
-      </BottomSheetBody>
-      <ModalFooterTwoFa/>
+      {resultModal}
     </BottomSheetLayout>)
   } else {
     return (<ProfileModalLayout fixed>
-        <WalletHeader showBack={step !== PaymentStep.Method} onBackClick={step !== PaymentStep.Method ? handleBack : null}/>
-        <ProfileModalBody fixed>
-          {result}
-        </ProfileModalBody>
-        <ModalFooterTwoFa/>
+        {resultModal}
       </ProfileModalLayout>
     )
   }
