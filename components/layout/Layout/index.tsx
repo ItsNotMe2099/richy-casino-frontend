@@ -12,27 +12,22 @@ interface Props {
 
 export default function Layout({children}: Props) {
   const appContext = useAppContext()
-  const renderMainContent = () => {
-    return <>
-      <ErrorBoundary>
-      <Menu/>
-      </ErrorBoundary>
 
-      <ErrorBoundary>
-      {children}
-      </ErrorBoundary>
-      <ErrorBoundary>
-      <Footer/>
-      </ErrorBoundary>
-    </>
-  }
   return (
     <div className={styles.root}>
       <ErrorBoundary>
       <Header/>
       </ErrorBoundary>
       <StickyContainer>
-        {renderMainContent()}
+        <ErrorBoundary>
+          <Menu/>
+        </ErrorBoundary>
+        <ErrorBoundary>
+          {children}
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Footer/>
+        </ErrorBoundary>
       </StickyContainer>
     </div>
   )
