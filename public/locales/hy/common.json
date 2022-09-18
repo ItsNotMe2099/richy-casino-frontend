@@ -1,5 +1,8 @@
 {
+  "2fa_activate": "Ակտիվացրեք 2FA",
   "2fa_attention": "ԿԱՐԵՎՈՐ.",
+  "2fa_field_code": "Հաստատման կոդը Google Authenticator-ից",
+  "2fa_field_password": "քո գաղտնաբառը",
   "2fa_login_button": "Թույլտվություն",
   "2fa_login_field_code": "Հաստատման կոդը Google Authenticator-ից",
   "2fa_login_text": "Մուտքագրեք հավելվածի 6 նիշանոց կոդը\nGoogle Authenticator",

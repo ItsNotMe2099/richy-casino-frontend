@@ -1,5 +1,8 @@
 {
+  "2fa_activate": "Aktivujte 2FA",
   "2fa_attention": "DŮLEŽITÉ:",
+  "2fa_field_code": "Ověřovací kód z aplikace Google Authenticator",
+  "2fa_field_password": "vaše heslo",
   "2fa_login_button": "Povolení",
   "2fa_login_field_code": "Ověřovací kód z aplikace Google Authenticator",
   "2fa_login_text": "Zadejte 6místný kód z aplikace\nGoogle Authenticator",

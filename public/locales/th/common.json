@@ -1,5 +1,8 @@
 {
+  "2fa_activate": "เปิดใช้งาน2FA",
   "2fa_attention": "สำคัญ:",
+  "2fa_field_code": "รหัสยืนยันจาก Google Authenticator",
+  "2fa_field_password": "รหัสผ่านของคุณ",
   "2fa_login_button": "การอนุญาต",
   "2fa_login_field_code": "รหัสยืนยันจาก Google Authenticator",
   "2fa_login_text": "กรอกรหัส 6 หลักจากแอปพลิเคชัน\nGoogle Authenticator",

@@ -1,5 +1,8 @@
 {
+  "2fa_activate": "2FA іске қосыңыз",
   "2fa_attention": "МАҢЫЗДЫ:",
+  "2fa_field_code": "Google Authenticator растау коды",
+  "2fa_field_password": "құпия сөзіңіз",
   "2fa_login_button": "Авторизация",
   "2fa_login_field_code": "Google Authenticator растау коды",
   "2fa_login_text": "Қолданбадан 6 таңбалы кодты енгізіңіз\nGoogle Authenticator",

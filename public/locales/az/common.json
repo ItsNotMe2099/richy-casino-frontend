@@ -1,5 +1,8 @@
 {
+  "2fa_activate": "2FA-nı aktivləşdirin",
   "2fa_attention": "ƏHƏMİYYƏTLİ:",
+  "2fa_field_code": "Google Authenticator-dan doğrulama kodu",
+  "2fa_field_password": "parolunuz",
   "2fa_login_button": "Səlahiyyət",
   "2fa_login_field_code": "Google Authenticator-dan doğrulama kodu",
   "2fa_login_text": "Proqramdan 6 rəqəmli kodu daxil edin\nGoogle Authenticator",

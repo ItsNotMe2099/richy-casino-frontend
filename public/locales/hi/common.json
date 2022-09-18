@@ -1,5 +1,8 @@
 {
+  "2fa_activate": "2FA सक्रिय करें",
   "2fa_attention": "महत्वपूर्ण:",
+  "2fa_field_code": "Google प्रमाणक से सत्यापन कोड",
+  "2fa_field_password": "आपका पासवर्ड",
   "2fa_login_button": "प्राधिकार",
   "2fa_login_field_code": "Google प्रमाणक से सत्यापन कोड",
   "2fa_login_text": "आवेदन से 6 अंकों का कोड दर्ज करें\nगूगल प्रमाणक",

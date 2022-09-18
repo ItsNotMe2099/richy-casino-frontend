@@ -88,15 +88,15 @@ export default function FA(props: Props) {
 
 
               <div className={styles.confirm}>
-                Код подтверждения из Google Authenticator
+                {t('2fa_field_code')}
               </div>
               <InputOtpCode name={'code'} length={6} validate={Validator.required}/>
-              <InputField name={'password'} placeholder={'Ваш пароль'} type={'password'} obscure
+              <InputField name={'password'} placeholder= {t('2fa_field_password')} type={'password'} obscure
                           validate={Validator.required} className={styles.password}/>
       </ProfileModalBody>
       <ProfileModalFooter fixed>
         <FormError error={error}/>
-        <Button type='submit' size='play' spinner={sending} fluid background='blueGradient500' className={styles.btn}>Активировать 2FA</Button>
+        <Button type='submit' size='play' spinner={sending} fluid background='blueGradient500' className={styles.btn}> {t('2fa_activate')}</Button>
       </ProfileModalFooter>
     </ProfileModalLayout>
       </Form>

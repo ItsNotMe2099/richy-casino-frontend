@@ -1,5 +1,8 @@
 {
+  "2fa_activate": "Kích hoạt 2FA",
   "2fa_attention": "QUAN TRỌNG:",
+  "2fa_field_code": "Mã xác minh từ Google Authenticator",
+  "2fa_field_password": "mật khẩu của bạn",
   "2fa_login_button": "Ủy quyền",
   "2fa_login_field_code": "Mã xác minh từ Google Authenticator",
   "2fa_login_text": "Nhập mã gồm 6 chữ số từ ứng dụng\nGoogle Authenticator",
