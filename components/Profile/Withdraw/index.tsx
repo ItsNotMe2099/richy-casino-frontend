@@ -112,7 +112,7 @@ export default function Widraw(props: Props) {
   if (props.isBottomSheet) {
     return (<BottomSheetLayout>
       <BottomSheetHeader className={styles.sheetHeader} title={t('withdraw_title')}  suffix={ <div className={styles.userId}>ID {context.user?.id}</div>}/>
-      <BottomSheetBody className={styles.sheetBody}>
+      <BottomSheetBody className={styles.sheetBody} detectKeyboard={step === PaymentStep.Form} footerHeight={73.8}>
         {result}
       </BottomSheetBody>
       <ModalFooterTwoFa/>

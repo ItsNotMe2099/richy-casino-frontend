@@ -14,9 +14,7 @@ import {PaymentSeparator} from 'components/Profile/Wallet/PaymentSeparator'
 import {useAppContext} from 'context/state'
 import {PaymentDepositAmountField} from 'components/Profile/Wallet/PaymentDepositAmountField'
 import {useTranslation} from 'next-i18next'
-import BottomSheetLayout from 'components/layout/BottomSheetLayout'
 import BottomSheetBody from 'components/layout/BottomSheetBody'
-import ProfileModalLayout from 'components/Profile/layout/ProfileModalLayout'
 import ProfileModalBody from 'components/Profile/layout/ProfileModalBody'
 import ProfileModalFooter from 'components/Profile/layout/ProfileModalFooter'
 import {WalletHeader} from 'components/Profile/Wallet/WalletHeader'
@@ -121,21 +119,21 @@ export default function StepFormFiat(props: Props) {
       src='/img/icons/wallet.svg' alt=''/>{t('wallet_form_button_deposit')}</Button>
   </ProfileModalFooter>)
   if (props.isBottomSheet) {
-    return (<BottomSheetLayout>
+    return (<>
       <WalletHeader isBottomSheet showBack onBackClick={props.onBackClick}/>
-      <BottomSheetBody className={styles.sheetBody}>
+      <BottomSheetBody className={styles.sheetBody} detectKeyboard footerHeight={73.8}>
         {result}
       </BottomSheetBody>
       {footer}
-    </BottomSheetLayout>)
+    </>)
   } else {
-    return (<ProfileModalLayout fixed>
+    return (<>
         <WalletHeader showBack onBackClick={props.onBackClick}/>
         <ProfileModalBody fixed className={styles.modalBody}>
           {result}
         </ProfileModalBody>
         {footer}
-      </ProfileModalLayout>
+      </>
     )
   }
 }

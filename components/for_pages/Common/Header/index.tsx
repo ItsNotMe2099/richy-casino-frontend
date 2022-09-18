@@ -6,7 +6,7 @@ import Link from 'next/link'
 import VisibleXs from 'components/ui/VisibleXS'
 import {useTranslation} from 'next-i18next'
 import Image from 'next/image'
-import { useAppContext } from 'context/state'
+import {useAppContext} from 'context/state'
 import SliderArrowSvg from 'components/svg/SliderArrowSvg'
 
 interface Props {
@@ -30,9 +30,8 @@ export default function Header(props: Props) {
   const isMobile = context.isMobile
 
 
-
   const getShadow = (shadowColor) => {
-    switch (shadowColor){
+    switch (shadowColor) {
       case 'blue':
         return '/img/shadows/light-blue.png'
       case 'red':
@@ -50,33 +49,42 @@ export default function Header(props: Props) {
     [styles.fullOnlyOnMobile]: props.style === 'fullOnlyOnMobile',
     [styles.popover]: props.style === 'popover',
   }
-
+  const block = (<div className={styles.blockInner}>
+    {props.icon && <div className={styles.icon}>
+      {props.shadowColor && <div className={styles.shadow}>
+        <Image src={getShadow(props.shadowColor)} width={isMobile ? 30 : 84} height={isMobile ? 30 : 84}/>
+      </div>}
+      <div className={classNames(styles.image, props.iconClassName)}><img src={props.icon} alt=''/></div>
+    </div>}
+    <div className={styles.label}>
+      {props.label}
+    </div>
+  </div>)
   return (
-        <div className={classNames(styles.root, rootClasses, props.className)}>
-          <div className={styles.block}>
-            {props.icon && <div className={styles.icon}>
-            {props.shadowColor && <div className={styles.shadow}>
-              <Image src={getShadow(props.shadowColor)} width={isMobile ? 30 : 84} height={isMobile ? 30 : 84}/>
-              </div>}
-            <div className={classNames(styles.image, props.iconClassName)}><img src={props.icon} alt=''/></div>
-          </div>}
-          <div className={styles.label}>
-            {props.label}
-          </div>
-        </div>
-        <div className={styles.right}>
-          <QuestionPopover info={props.popoverText} className={styles.question}/>
-          <div className={styles.length}>
-            {props.length}
-          </div>
-          {props.allLink && <Link href={props.allLink}>
-            <a className={styles.all}>
-              <VisibleXs>{t('catalog_header_all')}</VisibleXs>
-               <HiddenXs>{t('catalog_header_all_games')}</HiddenXs>
-            </a>
-          </Link>}
+    <div className={classNames(styles.root, rootClasses, props.className)}>
+      <div className={styles.block}>
+        {props.allLink && <Link href={props.allLink}>
+          <a >
+            {block}
+          </a>
+        </Link>}
+        {!props.allLink && block}
+      </div>
 
-          {props.slider &&
+
+      <div className={styles.right}>
+        <QuestionPopover info={props.popoverText} className={styles.question}/>
+        <div className={styles.length}>
+          {props.length}
+        </div>
+        {props.allLink && <Link href={props.allLink}>
+          <a className={styles.all}>
+            <VisibleXs>{t('catalog_header_all')}</VisibleXs>
+            <HiddenXs>{t('catalog_header_all_games')}</HiddenXs>
+          </a>
+        </Link>}
+
+        {props.slider &&
           <div className={styles.controls}>
             <div className={styles.prev} onClick={props.onPrev}>
               <SliderArrowSvg/>
@@ -85,7 +93,7 @@ export default function Header(props: Props) {
               <SliderArrowSvg/>
             </div>
           </div>}
-          </div>
       </div>
+    </div>
   )
 }

@@ -17,6 +17,7 @@ import BottomSheetBody from 'components/layout/BottomSheetBody'
 import BottomSheetHeader from 'components/layout/BottomSheetHeader'
 import {useState} from 'react'
 import AuthRepository from 'data/repositories/AuthRepository'
+import {isSafari} from 'react-device-detect'
 
 interface Props {
   isBottomSheet?: boolean
@@ -33,13 +34,18 @@ export default function ModalLogin(props: Props) {
   const login = async (values: LoginFormData) => {
     setLoginFormData(values)
     setLoading(true)
+    const scrollY = window.scrollY
     try {
       setError(null)
       const res = await AuthRepository.login(values?.authInput, values.password)
       if (!res) {
         return
       }
-
+      if(isSafari) {
+        setTimeout(() => {
+          window.scrollTo(0, scrollY)
+        }, 10)
+      }
       if(res.is2FaRequired){
         appContext.showModal(ModalType.faLogin, {identity: values.authInput, password: values.password} as TwoFaLoginModalArguments)
         return
@@ -54,6 +60,8 @@ export default function ModalLogin(props: Props) {
       appContext.setToken(accessToken)
       appContext.updateUserFromCookies()
       appContext.hideModal()
+
+
     }catch (e){
       console.error(e)
       setError(e)

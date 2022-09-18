@@ -43,7 +43,7 @@ export default function StepForm(props: Props) {
   const context = useAppContext()
   const [sending, setSending] = useState(false)
   const [error, setError] = useState(null)
-  const initialValues = {
+ const initialValues = {
     amount: 20,
   }
 
@@ -106,7 +106,7 @@ export default function StepForm(props: Props) {
     </div>
   )
 
-  const footer = (<ProfileModalFooter className={styles.fixTemp}>
+  const footer = (<ProfileModalFooter>
     <FormError error={error}/>
     <Button type='button' onClick={() => formik.handleSubmit()} size='normal' spinner={sending} background='payGradient500' className={styles.wallet}><img
       src='/img/icons/wallet.svg' alt=''/>{t('wallet_form_button_deposit')}</Button>
@@ -114,7 +114,7 @@ export default function StepForm(props: Props) {
   if (props.isBottomSheet) {
     return (<>
       <WalletHeader isBottomSheet showBack onBackClick={props.onBackClick}/>
-      <BottomSheetBody className={styles.sheetBody}>
+      <BottomSheetBody className={styles.sheetBody} detectKeyboard footerHeight={73.8}>
         {result}
       </BottomSheetBody>
       {footer}
