@@ -18,6 +18,7 @@ import GamesList from 'components/for_pages/CatalogPage/GamesList'
 import { useTranslation } from 'next-i18next'
 import ItemGame from 'components/for_pages/Common/ItemGame'
 import {useInterval} from 'react-use'
+import {useAppContext} from 'context/state'
 enum GameSwitchFilterKey {
 
   WinNow = 'winNow',
@@ -52,6 +53,7 @@ interface Props {
 
 export default function GamesListTop(props: Props) {
   const { t } = useTranslation()
+  const appContext = useAppContext()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [latestWin, setLatestWin] = useState<IGameWin[]>([])
   const [top, setTop] = useState<IPagination<IGame>>({ data: [], total: 0 })
@@ -210,7 +212,7 @@ export default function GamesListTop(props: Props) {
           style='fullOnlyOnMobile'
           onPrev={() => sliderRef.current?.slickGoTo(currentIndex - 1)}
           onNext={() => sliderRef.current?.slickGoTo(currentIndex + 1)}
-          slider />
+          slider={filter === GameSwitchFilterKey.WinNow && appContext.isDesktop} />
         <div className={styles.wrapper}>
           <SwitchFilter<GameSwitchFilterKey> items={filters} onClick={handleChangeFilter}
             active={filter} />
