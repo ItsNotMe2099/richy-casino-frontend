@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from 'react'
 
-const useDetectKeyboardOpen = (minKeyboardHeight = 300,defaultValue = false) => {
+const useDetectKeyboardOpen = (minKeyboardHeight = 200,defaultValue = false) => {
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(defaultValue)
   const [keyboardHeight, setKeyboardHeight] = useState(0)
   const [screenHeight, setScreenHeight] = useState(0)
