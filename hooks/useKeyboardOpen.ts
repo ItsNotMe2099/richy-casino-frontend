@@ -26,7 +26,7 @@ const useDetectKeyboardOpen = (minKeyboardHeight = 300,defaultValue = false) => 
     }
   }, [])
 
-  return [isKeyboardOpen, keyboardHeight]
+  return [isKeyboardOpen, keyboardHeight, screenHeight]
 }
 
 export default useDetectKeyboardOpen
