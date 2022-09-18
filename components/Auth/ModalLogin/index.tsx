@@ -33,13 +33,13 @@ export default function ModalLogin(props: Props) {
   const login = async (values: LoginFormData) => {
     setLoginFormData(values)
     setLoading(true)
+    const scrollY = window.scrollY
     try {
       setError(null)
       const res = await AuthRepository.login(values?.authInput, values.password)
       if (!res) {
         return
       }
-
       if(res.is2FaRequired){
         appContext.showModal(ModalType.faLogin, {identity: values.authInput, password: values.password} as TwoFaLoginModalArguments)
         return
@@ -54,6 +54,7 @@ export default function ModalLogin(props: Props) {
       appContext.setToken(accessToken)
       appContext.updateUserFromCookies()
       appContext.hideModal()
+      window.scrollTo(0, scrollY)
     }catch (e){
       console.error(e)
       setError(e)
