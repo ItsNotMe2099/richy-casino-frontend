@@ -265,10 +265,12 @@ export function AppWrapper(props: Props) {
   useEffect(() => {
 
     if(userLoaded || infoLoaded){
+      setTimeout(() => {
       document.getElementById('global-page-loader').style.opacity = '0'
       setTimeout(() => {
         document.getElementById('global-page-loader').style.display = 'none'
       }, 500)
+      }, 400)
     }
   }, [userLoaded, infoLoaded])
   useEffect(() => {
@@ -291,7 +293,7 @@ export function AppWrapper(props: Props) {
     promises.push(InfoRepository.getCountryByIp().then(i => setCountryByIp(i)).catch(() => { }))
     promises.push(BannerRepository.fetchBanners().then(i => setBanners(i)).catch(() => { }))
     promises.push(updatePromoCodes().catch(() => { }))
-    Promise.all(promises).then(i => setTimeout(( ) => setInfoLoaded(true), 400) )
+    Promise.all(promises).then(i => setTimeout(( ) => setInfoLoaded(true), 1) )
     if (!auth) {
       return
     }
