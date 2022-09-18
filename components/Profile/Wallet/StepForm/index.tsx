@@ -43,7 +43,7 @@ export default function StepForm(props: Props) {
   const context = useAppContext()
   const [sending, setSending] = useState(false)
   const [error, setError] = useState(null)
-  const initialValues = {
+ const initialValues = {
     amount: 20,
   }
 
