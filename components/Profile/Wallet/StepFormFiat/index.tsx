@@ -121,7 +121,7 @@ export default function StepFormFiat(props: Props) {
   if (props.isBottomSheet) {
     return (<>
       <WalletHeader isBottomSheet showBack onBackClick={props.onBackClick}/>
-      <BottomSheetBody className={styles.sheetBody}>
+      <BottomSheetBody className={styles.sheetBody} detectKeyboard footerHeight={73.8}>
         {result}
       </BottomSheetBody>
       {footer}
