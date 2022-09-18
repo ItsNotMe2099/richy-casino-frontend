@@ -11,17 +11,17 @@ const useDetectKeyboardOpen = (minKeyboardHeight = 200,defaultValue = false) => 
     setScreenHeight(heightRef.current)
     const listener = () => {
       const newState = window.screen.height - minKeyboardHeight > window.visualViewport.height
-      console.log('newState', window.visualViewport.height, window.screen.height - minKeyboardHeight, newState)
+      console.log('newState', window.visualViewport.height, window.screen.height - minKeyboardHeight, newState, isKeyboardOpenRef.current)
       if (isKeyboardOpenRef.current != newState) {
         setIsKeyboardOpen(newState)
-        isKeyboardOpenRef.current = newState
+
         if(newState) {
           setKeyboardHeight(heightRef.current - window.visualViewport.height)
           setScreenHeight(window.visualViewport.height)
         }
         heightRef.current = window.visualViewport.height
       }
-
+      isKeyboardOpenRef.current = newState
     }
     window.visualViewport.addEventListener('resize', listener)
     return () => {
