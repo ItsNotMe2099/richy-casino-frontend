@@ -106,7 +106,7 @@ export default function StepForm(props: Props) {
     </div>
   )
 
-  const footer = (<ProfileModalFooter detectKeyboard className={styles.fixTemp}>
+  const footer = (<ProfileModalFooter>
     <FormError error={error}/>
     <Button type='button' onClick={() => formik.handleSubmit()} size='normal' spinner={sending} background='payGradient500' className={styles.wallet}><img
       src='/img/icons/wallet.svg' alt=''/>{t('wallet_form_button_deposit')}</Button>

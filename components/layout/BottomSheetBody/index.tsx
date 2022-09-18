@@ -15,7 +15,7 @@ export default function BottomSheetBody(props: Props) {
   const [isKeyboardOpen, keyboardHeight, screenHeight] = useDetectKeyboardOpen()
   console.log('isKeyboardOpen', isKeyboardOpen, keyboardHeight, screenHeight)
   return (
-    <div className={classNames(styles.root, props.className)}  style={{...(isKeyboardOpen && appContext.isMobile && props.detectKeyboard ? {maxHeight: `${screenHeight}px`} : {})}}>
+    <div className={classNames(styles.root, props.className)}  style={{...(isKeyboardOpen && appContext.isMobile && props.detectKeyboard ? {maxHeight: `${screenHeight as number - (props.footerHeight ?? 0)}px`} : {})}}>
       {props.children}
     </div>
   )

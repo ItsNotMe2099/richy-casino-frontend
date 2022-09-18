@@ -7,7 +7,6 @@ interface Props {
   fixed?: boolean
   children?: ReactElement | ReactElement[]
   className?: string
-  detectKeyboard?: boolean
 }
 
 export default function ProfileModalFooter(props: Props) {
