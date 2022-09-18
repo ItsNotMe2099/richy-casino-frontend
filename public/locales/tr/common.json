@@ -1,5 +1,8 @@
 {
+  "2fa_activate": "2FA'yı etkinleştir",
   "2fa_attention": "ÖNEMLİ:",
+  "2fa_field_code": "Google Authenticator'dan doğrulama kodu",
+  "2fa_field_password": "şifreniz",
   "2fa_login_button": "yetki",
   "2fa_login_field_code": "Google Authenticator'dan doğrulama kodu",
   "2fa_login_text": "Uygulamadan 6 haneli kodu girin\nGoogle Kimlik Doğrulayıcı",

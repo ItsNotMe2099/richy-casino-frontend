@@ -1,5 +1,8 @@
 {
+  "2fa_activate": "Актываваць 2FA",
   "2fa_attention": "ВАЖНА:",
+  "2fa_field_code": "Код пацверджання з Google Authenticator",
+  "2fa_field_password": "Ваш пароль",
   "2fa_login_button": "Аўтарызацыя",
   "2fa_login_field_code": "Код пацверджання з Google Authenticator",
   "2fa_login_text": "Увядзіце 6-значны код з прыкладання\nGoogle Authenticator",

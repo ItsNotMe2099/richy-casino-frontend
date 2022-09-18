@@ -100,7 +100,9 @@ export default function IndexPage() {
                 <GameCard/>
               </div>
           </ErrorBoundary>
+          <ErrorBoundary>
             <Tournament/>
+          </ErrorBoundary>
           <ErrorBoundary>
           <Winners/>
           </ErrorBoundary>

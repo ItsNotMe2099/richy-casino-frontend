@@ -1,5 +1,8 @@
 {
+  "2fa_activate": "Aktywuj 2FA",
   "2fa_attention": "WAŻNY:",
+  "2fa_field_code": "Kod weryfikacyjny z Google Authenticator",
+  "2fa_field_password": "Twoje hasło",
   "2fa_login_button": "Upoważnienie",
   "2fa_login_field_code": "Kod weryfikacyjny z Google Authenticator",
   "2fa_login_text": "Wprowadź 6-cyfrowy kod z aplikacji\nGoogle Authenticator",

@@ -1,5 +1,8 @@
 {
+  "2fa_activate": "Активировать 2FA",
   "2fa_attention": "ВАЖНО:",
+  "2fa_field_code": "Код подтверждения из Google Authenticator",
+  "2fa_field_password": "Ваш пароль",
   "2fa_login_button": "Авторизация",
   "2fa_login_field_code": "Код подтверждения из Google Authenticator",
   "2fa_login_text": "Введите 6-значный код из приложения \nGoogle Authenticator",

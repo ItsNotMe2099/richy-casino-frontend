@@ -116,7 +116,7 @@ export default function ProfileBurger(props: Props) {
     {icon: '/img/ProfileBurger/rocket.svg', label: t('profile_mobile_menu_aviator'), key: LinkKey.Aviator, link: Routes.aviator},
     {icon: '/img/ProfileBurger/poker.svg', label: t('profile_mobile_menu_poker'), key: LinkKey.Poker, link: null},
     {icon: '/img/ProfileBurger/chess.svg', label: t('profile_mobile_menu_chess'), key: LinkKey.Chess, link: null},
-    {icon: '/img/ProfileBurger/cup.svg', label: t('profile_mobile_menu_leaderboard'), key: LinkKey.LeaderBoard, link: Routes.leaderBoard},
+    {icon: '/img/ProfileBurger/cup.svg', label: t('profile_mobile_menu_leaderboard'), key: LinkKey.LeaderBoard, link: Routes.tournaments},
     // {icon: '/img/ProfileBurger/referral.svg', label: t('profile_mobile_menu_referral'), key: LinkKey.Referral, link: Routes.referral},
     {icon: '/img/ProfileBurger/like.svg', label: t('profile_mobile_menu_favorite'), key: LinkKey.Favorite, link: Routes.catalogFavorite},
   ]

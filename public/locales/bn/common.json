@@ -1,5 +1,8 @@
 {
+  "2fa_activate": "2FA সক্রিয় করুন",
   "2fa_attention": "গুরুত্বপূর্ণ:",
+  "2fa_field_code": "Google প্রমাণীকরণকারী থেকে যাচাইকরণ কোড",
+  "2fa_field_password": "আপনার পাসওয়ার্ড",
   "2fa_login_button": "অনুমোদন",
   "2fa_login_field_code": "Google প্রমাণীকরণকারী থেকে যাচাইকরণ কোড",
   "2fa_login_text": "অ্যাপ্লিকেশন থেকে 6-সংখ্যার কোড লিখুন\nগুগল প্রমাণীকরণকারী",

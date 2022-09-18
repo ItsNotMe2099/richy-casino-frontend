@@ -1,5 +1,8 @@
 {
+  "2fa_activate": "2FA را فعال کنید",
   "2fa_attention": "مهم:",
+  "2fa_field_code": "کد تأیید از Google Authenticator",
+  "2fa_field_password": "رمز عبور شما",
   "2fa_login_button": "مجوز",
   "2fa_login_field_code": "کد تأیید از Google Authenticator",
   "2fa_login_text": "کد 6 رقمی برنامه را وارد کنید\nGoogle Authenticator",

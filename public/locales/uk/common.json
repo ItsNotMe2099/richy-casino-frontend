@@ -1,5 +1,8 @@
 {
+  "2fa_activate": "Активувати 2FA",
   "2fa_attention": "ВАЖЛИВО:",
+  "2fa_field_code": "Код підтвердження з Google Authenticator",
+  "2fa_field_password": "Ваш пароль",
   "2fa_login_button": "Авторизація",
   "2fa_login_field_code": "Код підтвердження з Google Authenticator",
   "2fa_login_text": "Введіть 6-значний код із програми\nGoogle Authenticator",

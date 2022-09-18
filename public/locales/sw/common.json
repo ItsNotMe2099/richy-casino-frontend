@@ -1,5 +1,8 @@
 {
+  "2fa_activate": "Washa 2FA",
   "2fa_attention": "MUHIMU:",
+  "2fa_field_code": "Nambari ya kuthibitisha kutoka kwa Kithibitishaji cha Google",
+  "2fa_field_password": "nenosiri lako",
   "2fa_login_button": "Uidhinishaji",
   "2fa_login_field_code": "Nambari ya kuthibitisha kutoka kwa Kithibitishaji cha Google",
   "2fa_login_text": "Weka msimbo wa tarakimu 6 kutoka kwa programu\nKithibitishaji cha Google",
