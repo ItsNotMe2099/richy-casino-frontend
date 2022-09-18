@@ -14,7 +14,7 @@ interface Props {
 export default function ProfileModalFooter(props: Props) {
   const appContext = useAppContext()
   const [isKeyboardOpen, keyboardHeight] = useDetectKeyboardOpen()
-
+  console.log('isKeyboardOpen', isKeyboardOpen, keyboardHeight)
   return (
     <div className={classNames(styles.root, {[styles.fixed]: props.fixed}, props.className)} style={{...(isKeyboardOpen && appContext.isMobile && props.detectKeyboard ? {bottom: `${keyboardHeight}px`} : {})}}>
       {props.children}
