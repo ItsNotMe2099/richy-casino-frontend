@@ -2,7 +2,7 @@
   "2fa_activate": "Aktiválja a 2FA-t",
   "2fa_attention": "FONTOS:",
   "2fa_field_code": "Ellenőrző kód a Google Hitelesítőből",
-  "2fa_field_password": "a jelszavad",
+  "2fa_field_password": "A jelszavad",
   "2fa_login_button": "Engedélyezés",
   "2fa_login_field_code": "Ellenőrző kód a Google Hitelesítőből",
   "2fa_login_text": "Írja be a 6 számjegyű kódot az alkalmazásból\nGoogle Authenticator",

@@ -270,7 +270,7 @@ export function AppWrapper(props: Props) {
       setTimeout(() => {
         document.getElementById('global-page-loader').style.display = 'none'
       }, 500)
-      }, 400)
+      }, 500)
     }
   }, [userLoaded, infoLoaded])
   useEffect(() => {

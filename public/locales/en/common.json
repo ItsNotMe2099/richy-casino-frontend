@@ -2,7 +2,7 @@
   "2fa_activate": "Activate 2FA",
   "2fa_attention": "IMPORTANT:",
   "2fa_field_code": "Verification code from Google Authenticator",
-  "2fa_field_password": "your password",
+  "2fa_field_password": "Your password",
   "2fa_login_button": "Log in",
   "2fa_login_field_code": "Verification code from Google Authenticator",
   "2fa_login_text": "Enter the 6-digit code from the app\nGoogle Authenticator",
