@@ -26,6 +26,7 @@ import {IPaymentSystem} from 'data/interfaces/IPaymentSystem'
 import {IPaymentMethod} from 'data/interfaces/IPaymentMethod'
 import {PaymentCurrencySelected} from 'components/Profile/Wallet/PaymentCurrencySelected'
 import {PaymentMethodSelected} from 'components/Profile/Wallet/PaymentMethodSelected'
+import useDetectKeyboardOpen from 'hooks/useKeyboardOpen'
 
 
 interface Props {
@@ -41,6 +42,8 @@ interface Props {
 export default function StepForm(props: Props) {
   const {t} = useTranslation()
   const context = useAppContext()
+  const [isKeyboardOpen, keyboardHeight, screenHeight] = useDetectKeyboardOpen()
+
   const [sending, setSending] = useState(false)
   const [error, setError] = useState(null)
  const initialValues = {
@@ -114,10 +117,11 @@ export default function StepForm(props: Props) {
   if (props.isBottomSheet) {
     return (<>
       <WalletHeader isBottomSheet showBack onBackClick={props.onBackClick}/>
-      <BottomSheetBody className={styles.sheetBody} detectKeyboard footerHeight={73.8}>
+      <BottomSheetBody className={styles.sheetBody}  footerHeight={73.8}>
         {result}
+        {isKeyboardOpen && footer}
       </BottomSheetBody>
-      {footer}
+      {!isKeyboardOpen && footer}
     </>)
   } else {
     return (<>
