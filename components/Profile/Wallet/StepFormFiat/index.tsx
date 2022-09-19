@@ -24,6 +24,7 @@ import {IPaymentMethod} from 'data/interfaces/IPaymentMethod'
 import {PaymentSystemSelected} from 'components/Profile/Wallet/PaymentSystemSelected'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import Converter from 'utils/converter'
+import useDetectKeyboardOpen from 'hooks/useKeyboardOpen'
 
 
 interface Props {
@@ -39,6 +40,7 @@ interface Props {
 export default function StepFormFiat(props: Props) {
   const {t} = useTranslation()
   const context = useAppContext()
+  const [isKeyboardOpen, keyboardHeight, screenHeight] = useDetectKeyboardOpen()
   const [sending, setSending] = useState(false)
   const [error, setError] = useState(null)
   const initialValues = {
@@ -123,8 +125,9 @@ export default function StepFormFiat(props: Props) {
       <WalletHeader isBottomSheet showBack onBackClick={props.onBackClick}/>
       <BottomSheetBody className={styles.sheetBody} detectKeyboard footerHeight={73.8}>
         {result}
+        {isKeyboardOpen && footer}
       </BottomSheetBody>
-      {footer}
+      {!isKeyboardOpen && footer}
     </>)
   } else {
     return (<>
