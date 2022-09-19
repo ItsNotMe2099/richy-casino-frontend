@@ -104,7 +104,7 @@ export default function TopSlider(props: Props) {
                    {(item.imageDesktopUrl || item.imageMobileUrl) && <Image src={appContext.isMobile ? item.imageMobileUrl || item.imageDesktopUrl : item.imageDesktopUrl || item.imageMobileUrl}  layout={'fill'}/>}
 
                    <div className={styles.left}>
-                    <div className={styles.label} style={{fontSize: `${width / 24}px`}}>
+                    <div className={styles.label} style={{fontSize:appContext.isDesktop ? `${width / 24}px` : '1.2rem'}}>
                       {item.title}
                     </div>
                     <div className={classNames(styles.btn, {[styles.alt]: index === 1})} style={{fontSize: `${width / 25}px`}}>
