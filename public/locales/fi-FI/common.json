@@ -2,7 +2,7 @@
   "2fa_activate": "Aktivoi 2FA",
   "2fa_attention": "TÄRKEÄ:",
   "2fa_field_code": "Vahvistuskoodi Google Authenticatorista",
-  "2fa_field_password": "salasanasi",
+  "2fa_field_password": "Salasanasi",
   "2fa_login_button": "Valtuutus",
   "2fa_login_field_code": "Vahvistuskoodi Google Authenticatorista",
   "2fa_login_text": "Syötä 6-numeroinen koodi sovelluksesta\nGoogle Authenticator",

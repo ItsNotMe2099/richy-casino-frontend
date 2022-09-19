@@ -5,24 +5,27 @@ import {useTranslation} from 'next-i18next'
 import Head from 'next/head'
 import {useEffect, useState} from 'react'
 import TournamentRepository from 'data/repositories/TournamentRepository'
-import {ITournamentHistory, ITournamentRoundStatus} from 'data/interfaces/ITournamentHistory'
+import {ITournamentHistory} from 'data/interfaces/ITournamentHistory'
 import ContentLoader from 'components/ui/ContentLoader'
 import TournamentListBlock from 'components/for_pages/TournamentListPage/TournamentListBlock'
 import {IPagination} from 'types/interfaces'
 
-export default function Tournaments(){
+export default function Tournaments() {
 
   const {t} = useTranslation()
   const [listActive, setListActive] = useState<IPagination<ITournamentHistory>>({total: 0, data: []})
   const [listFinished, setListFinished] = useState<IPagination<ITournamentHistory>>({total: 0, data: []})
   const [loading, setLoading] = useState(true)
   useEffect(() => {
-    TournamentRepository.fetchHistory(1, 100).then(i => {
-      console.log('Loadsadasd', i)
-      setListActive({...i, data: i.data.filter(i => i.status === ITournamentRoundStatus.Active)})
-      setListFinished({...i, data: i.data.filter(i => i.status === ITournamentRoundStatus.Complete)})
-      setLoading(false)
-    })
+    Promise.all([
+      TournamentRepository.fetchHistory(1, 1, 12).then(i => {
+        setListActive(i)
+      }),
+      TournamentRepository.fetchHistory(4, 1, 12).then(i => {
+        console.log('Loadsadasd', i)
+        setListFinished(i)
+      })]).then(() => setLoading(false))
+
   }, [])
   console.log('listActive', listActive)
   return (
@@ -44,10 +47,11 @@ export default function Tournaments(){
           url: 'https://richy.casino/tournaments',
         }}
       />
-      {loading ? <ContentLoader style={'block'} isOpen/> :    <div className={styles.root}>
+      {loading ? <ContentLoader style={'block'} isOpen/> : <div className={styles.root}>
         <TournamentListBlock initialData={listActive} title={t('page_tournament_active_title')} type={'active'}/>
-        <TournamentListBlock initialData={listFinished} title={t('page_tournament_completed_title')} type={'completed'}/>
-        </div>}
+        <TournamentListBlock initialData={listFinished} title={t('page_tournament_completed_title')}
+                             type={'completed'}/>
+      </div>}
     </Layout>
   )
 }

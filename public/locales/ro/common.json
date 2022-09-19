@@ -2,7 +2,7 @@
   "2fa_activate": "Activați 2FA",
   "2fa_attention": "IMPORTANT:",
   "2fa_field_code": "Cod de verificare de la Google Authenticator",
-  "2fa_field_password": "parola Dvs",
+  "2fa_field_password": "Parola Dvs",
   "2fa_login_button": "Autorizare",
   "2fa_login_field_code": "Cod de verificare de la Google Authenticator",
   "2fa_login_text": "Introduceți codul din 6 cifre din aplicație\nGoogle Authenticator",

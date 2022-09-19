@@ -52,11 +52,12 @@ export default class TournamentRepository {
     return Converter.objectKeysToCamelCase(res.data?.data)
   }
 
-  static async fetchHistory(page: number = 1, limit: number = 1000): Promise<IPagination<ITournamentHistory>> {
+  static async fetchHistory(status: number,page: number = 1, limit: number = 1000): Promise<IPagination<ITournamentHistory>> {
     const res = await request({
       method: 'get',
       url: '/api/tournament/round/history',
       data:{
+      ...(status ? {status}: {}),
         page,
         'per-page': limit
       }
