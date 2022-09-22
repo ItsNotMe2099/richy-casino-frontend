@@ -197,7 +197,7 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     const cookie = cookies[CookiesType.language]
     //globalI18n.state
     props.pageProps = {...props.pageProps,   _nextI18Next: {
-        initialI18nStore:      (window as any)?.i18n.store?.data,
+        initialI18nStore:      (window as any)?.i18n?.store?.data,
         initialLocale: cookie ?? acceptedLang ?? 'en',
         ns: [ 'common' ],
         userConfig: null
