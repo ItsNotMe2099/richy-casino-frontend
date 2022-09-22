@@ -23,7 +23,6 @@ import {PaymentCurrencySelected} from 'components/Profile/Wallet/PaymentCurrency
 import PaymentMethodRepository from 'data/repositories/PaymentMethodRepository'
 import {IPaymentMethodField, IPaymentMethodFieldType} from 'data/interfaces/IPaymentFields'
 import {SelectField} from 'components/ui/Inputs/SelectField'
-import GFieldLabel from 'components/for_pages/games/components/inputs/GFieldLabel'
 import PhoneField from 'components/ui/Inputs/PhoneField'
 
 
@@ -114,13 +113,13 @@ export default function StepForm(props: Props) {
 
                   if(field.key === 'phone') {
                     return  <>
-                      <GFieldLabel label={field.title}/>
+                      <div className={styles.label}>{field.title}</div>
                       <PhoneField defaultCountry={context.countryByIp?.iso} styleType={'vertical'} name={`extra_data.${field.key}`} disabled={sending} className={styles.input} validate={Validator.combine([...(field.isRequired ? [Validator.required] : [])])}/>
                     </>
 
                   }
                   return  <>
-                    <GFieldLabel label={field.title}/>
+                    <div className={styles.label}>{field.title}</div>
                     <InputField name={`extra_data.${field.key}`} disabled={sending} className={styles.input} validate={Validator.combine([...(field.isRequired ? [Validator.required] : []), ...(field.key === 'email' ? [Validator.email] : []) ])}/>
                   </>
                 case IPaymentMethodFieldType.Dropdown:
@@ -128,13 +127,14 @@ export default function StepForm(props: Props) {
                   if(!options.length){
                     return null
                   }
-                  return  <SelectField name={`extra_data.${field.key}`}
+                  return    <> <div className={styles.label}>{field.title}</div>
+                  <SelectField name={`extra_data.${field.key}`}
                                        options={Object.keys(field.options).map(key => ({label: field.options[key], value: key}))}
                                        disabled={sending}
                                        className={styles.input}
                                        validate={field.isRequired ? Validator.required : null}
                   />
-
+                  </>
 
               }
             })}
