@@ -2,7 +2,7 @@ import Button from 'components/ui/Button'
 import {Form, Formik} from 'formik'
 import styles from './index.module.scss'
 import Validator from 'utils/validator'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {PaymentHistoryModalArguments, PaymentStep} from 'types/interfaces'
 import {ICurrency} from 'data/interfaces/ICurrency'
 import {PaymentOptions} from 'components/Profile/Wallet/PaymentOptions'
@@ -20,6 +20,11 @@ import {IPaymentMethod} from 'data/interfaces/IPaymentMethod'
 import {IPaymentSystem} from 'data/interfaces/IPaymentSystem'
 import {PaymentMethodSelected} from 'components/Profile/Wallet/PaymentMethodSelected'
 import {PaymentCurrencySelected} from 'components/Profile/Wallet/PaymentCurrencySelected'
+import PaymentMethodRepository from 'data/repositories/PaymentMethodRepository'
+import {IPaymentMethodField, IPaymentMethodFieldType} from 'data/interfaces/IPaymentFields'
+import {SelectField} from 'components/ui/Inputs/SelectField'
+import GFieldLabel from 'components/for_pages/games/components/inputs/GFieldLabel'
+import PhoneField from 'components/ui/Inputs/PhoneField'
 
 
 interface Props {
@@ -36,6 +41,7 @@ export default function StepForm(props: Props) {
   const {t} = useTranslation()
   const [sending, setSending] = useState(false)
   const [error, setError] = useState(null)
+  const [fields, setFields] = useState<IPaymentMethodField[]>([])
   const currencyIso = props.currency?.iso
   const currentSettings = props.paymentSystem.settings.find(i => i.currencyIso === currencyIso)
   const min = currentSettings?.withdraw?.minAmount ?? 0
@@ -46,6 +52,14 @@ export default function StepForm(props: Props) {
     cardOwnerName: '',
     cardExpiry: ''
   }
+  useEffect(() => {
+    if(!props.paymentSystem.systemCode){
+      return
+    }
+    PaymentMethodRepository.fetchFields(props.paymentSystem.systemCode).then((fields) => {
+      setFields(fields)
+    })
+  }, [])
   const validateMinMax = (value: number) => {
     const num = parseFloat(`${value}`)
     if(min && num < min){
@@ -64,7 +78,7 @@ export default function StepForm(props: Props) {
         const res = await PaymentsRepository.withdrawCrypto(props.currency.iso, props.paymentSystem.id, props.paymentSystem.systemCode, data.amount, data.address)
         context.showModalProfile(ProfileModalType.paymentHistory, {filter: PaymentSwitchFilterKey.Applications} as PaymentHistoryModalArguments)
       }else{
-        const res = await PaymentsRepository.withdrawFiat(props.currency.iso, props.paymentSystem.id, props.paymentSystem.systemCode,`${window.location.origin}?withdrawal=1`, data.amount, data.address, data.cardHolderName, data.cardExpiry)
+        const res = await PaymentsRepository.withdrawFiat(props.currency.iso, props.paymentSystem.id, props.paymentSystem.systemCode,`${window.location.origin}?withdrawal=1`, data.amount, data.address, data.cardHolderName, data.cardExpiry, data)
         if(res.url){
           window.location.href = res.url
         }
@@ -86,6 +100,44 @@ export default function StepForm(props: Props) {
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {({setFieldValue, values}) => (
           <Form className={styles.form}>
+            {fields.map(field => {
+              if(field.isPaymentAddress){
+                return  <><div className={styles.label}>
+                  {field.title}
+                </div>
+                  <InputField name={'address'} disabled={sending} className={styles.input} validate={field.isRequired ? Validator.required : null}/>
+                </>
+              }
+              switch (field.type){
+                case IPaymentMethodFieldType.String:
+                case IPaymentMethodFieldType.Number:
+
+                  if(field.key === 'phone') {
+                    return  <>
+                      <GFieldLabel label={field.title}/>
+                      <PhoneField defaultCountry={context.countryByIp?.iso} styleType={'vertical'} name={`extra_data.${field.key}`} disabled={sending} className={styles.input} validate={Validator.combine([...(field.isRequired ? [Validator.required] : [])])}/>
+                    </>
+
+                  }
+                  return  <>
+                    <GFieldLabel label={field.title}/>
+                    <InputField name={`extra_data.${field.key}`} disabled={sending} className={styles.input} validate={Validator.combine([...(field.isRequired ? [Validator.required] : []), ...(field.key === 'email' ? [Validator.email] : []) ])}/>
+                  </>
+                case IPaymentMethodFieldType.Dropdown:
+                  const options = Object.keys(field.options).map(key => ({label: field.options[key], value: key})).filter(i => !!i.label)
+                  if(!options.length){
+                    return null
+                  }
+                  return  <SelectField name={`extra_data.${field.key}`}
+                                       options={Object.keys(field.options).map(key => ({label: field.options[key], value: key}))}
+                                       disabled={sending}
+                                       className={styles.input}
+                                       validate={field.isRequired ? Validator.required : null}
+                  />
+
+
+              }
+            })}
             <div className={styles.label}>
                 {t('withdraw_form_sum')}
               <div className={styles.limit}>
