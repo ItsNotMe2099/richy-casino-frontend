@@ -33,9 +33,40 @@ import {useRouter} from 'next/router'
 import App, {AppContext} from 'next/app'
 import {getLangFromHeader} from 'utils/language'
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
+import {LANGS} from 'types/langs'
 const PageLoader = () => {
 
 }
+
+const allLangs = ['en', 'ru',
+  'uz',
+  'az',
+  'tr',
+  'hi',
+  'fa',
+  'uk',
+  'kk',
+  'es',
+  'fr',
+  'hy',
+  'pt-BR',
+  'th',
+  'vi',
+  'es-MX',
+  'es-CL',
+  'es-PE',
+  'pt',
+  'be',
+  'cs-CZ',
+  'pl',
+  'ro',
+  'bn',
+  'hu-HU',
+  'fi-FI',
+  'ne',
+  'sw',
+  'de',
+  'it']
 const getIsMobile = (_isMobileProps) => {
   if(typeof  navigator === 'undefined'){
     return _isMobileProps
@@ -184,21 +215,22 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   else {
     props.pageProps.isMobile = false
   }
+
   if ((appContext.ctx.req as any)) {
     const acceptLang = getLangFromHeader(appContext.ctx.req.headers['accept-language'])
     const cookies = nookies.get(appContext.ctx)
     const cookie = cookies[CookiesType.language]
-    console.log('getServerSideTranslation', acceptLang, cookie)
-    const prop = await serverSideTranslations( cookie ?? acceptLang ?? 'en', ['common'])
+     const prop = await serverSideTranslations( LANGS.includes(cookie ?? acceptLang) ? (cookie ?? acceptLang) :  'en', ['common'])
     props.pageProps = {...props.pageProps,...prop}
   }else{
     const acceptedLang = getLangFromHeader(navigator.language)
     const cookies = nookies.get(null)
     const cookie = cookies[CookiesType.language]
+
     //globalI18n.state
     props.pageProps = {...props.pageProps,   _nextI18Next: {
         initialI18nStore:      (window as any)?.i18n?.store?.data,
-        initialLocale: cookie ?? acceptedLang ?? 'en',
+        initialLocale: LANGS.includes(cookie ?? acceptedLang) ? (cookie ?? acceptedLang) :  'en',
         ns: [ 'common' ],
         userConfig: null
       }

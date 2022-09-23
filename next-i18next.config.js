@@ -50,7 +50,13 @@ module.exports = {
 
 }
 */
-const allLangs = ['en', 'ru',
+
+const HttpBackend = require('i18next-http-backend/cjs')
+const ChainedBackend= require('i18next-chained-backend').default
+const LocalStorageBackend = require('i18next-localstorage-backend').default
+
+const isBrowser = typeof window !== 'undefined'
+const LANGS = ['en', 'ru',
   'uz',
   'az',
   'tr',
@@ -78,13 +84,8 @@ const allLangs = ['en', 'ru',
   'ne',
   'sw',
   'de',
-  'it']
-
-const HttpBackend = require('i18next-http-backend/cjs')
-const ChainedBackend= require('i18next-chained-backend').default
-const LocalStorageBackend = require('i18next-localstorage-backend').default
-
-const isBrowser = typeof window !== 'undefined'
+  'it'
+]
 module.exports = {
   debug: false,
   backend: {
@@ -95,7 +96,7 @@ module.exports = {
   use: isBrowser ? [ChainedBackend] : [],
   i18n: {
     defaultLocale: 'en',
-    locales: [...allLangs],
+    locales: [...LANGS],
     localeDetection: false,
   },
 }
