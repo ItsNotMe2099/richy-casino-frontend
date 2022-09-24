@@ -56,7 +56,7 @@ export default class PaymentsRepository {
     }
     return res.data?.data ? Converter.objectKeysToCamelCase(res.data?.data) : null
   }
-  static async withdrawFiat(currencyIso: string, paymentSystemId: number, paymentSystemCode: string, redirectUrl: string, amount: number, wallet: string, cardHolder: string, cardExpiry: string): Promise<IWithdrawResponse> {
+  static async withdrawFiat(currencyIso: string, paymentSystemId: number, paymentSystemCode: string, redirectUrl: string, amount: number, wallet: string, cardHolder: string, cardExpiry: string, data: any): Promise<IWithdrawResponse> {
     const date = cardExpiry ? Converter.getMonthYearCardExpiry(cardExpiry) : null
     const res = await request({
       method: 'post',
@@ -69,7 +69,8 @@ export default class PaymentsRepository {
         amount,
         wallet,
         card_holder_name: cardHolder,
-      ...(date ? {card_valid_month: date.month, card_valid_year: date.year} : {})
+      ...(date ? {card_valid_month: date.month, card_valid_year: date.year} : {}),
+        ...(data ? data : {})
       }
     })
     if (res.err) {

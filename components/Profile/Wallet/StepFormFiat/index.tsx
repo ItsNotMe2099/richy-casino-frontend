@@ -63,7 +63,7 @@ export default function StepFormFiat(props: Props) {
   }
   useEffect(() => {
     context.updateCurrencies()
-  }, [])
+    }, [])
   const handleSubmit = async (data) => {
     setError(null)
     setSending(true)
