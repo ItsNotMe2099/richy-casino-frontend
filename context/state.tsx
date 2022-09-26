@@ -240,9 +240,13 @@ export function AppWrapper(props: Props) {
       InfoRepository.getCurrencies().then(i => setCurrencies(i))
     },
     openSupport: () => {
-      if((window as any).Tawk_API){
-        (window as any).Tawk_API.maximize()
+      if((window as any).LiveChatWidget){
+        (window as any).LiveChatWidget.call('maximize')
+
       }
+    //  if((window as any).Tawk_API){
+    //    (window as any).Tawk_API.maximize()
+    //  }
     }
 
   }
