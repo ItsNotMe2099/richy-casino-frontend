@@ -24,7 +24,7 @@ export default class GameListRepository {
     if (res.err) {
       return {data: [], total: 0}
     }
-    return Converter.convertApiPaginationResponse(res.data)
+   return Converter.convertApiPaginationResponse(res.data)
   }
 
   static async fetchProvidersTop3(): Promise<IGameProviderTop3[]> {

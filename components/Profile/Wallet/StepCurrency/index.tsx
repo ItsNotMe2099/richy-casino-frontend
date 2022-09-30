@@ -36,11 +36,11 @@ export default function StepCurrency(props: Props) {
       return res
     }
     const newRes = [...res]
-    newRes[usdtIndex] = {
+  /*  newRes[usdtIndex] = {
       ...newRes[usdtIndex],
       name: 'USDT ERC20',
       paymentSystem: props.method.paymentSystems.find(a => a.name === 'ERC20')
-    }
+    }*/
     newRes.splice( usdtIndex, 0, {
       ...res[usdtIndex],
       name: 'USDT TRC20',
