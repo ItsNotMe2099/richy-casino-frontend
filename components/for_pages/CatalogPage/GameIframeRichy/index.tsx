@@ -23,16 +23,13 @@ export default function GameIframeRichy(props: Props) {
   const {t, i18n} = useTranslation()
   const timeoutHeightResetRef = useRef(null)
   useEffect(() => {
-    if(!appContext.isMobile){
-      return
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      document.body.style.height = '100%'
+      return () => {
+        document.body.style.height = ''
+      }
     }
-    if(    timeoutHeightResetRef.current ){
-      clearTimeout(    timeoutHeightResetRef.current )
-    }
-    document.body.style.height = '100vh'
-    timeoutHeightResetRef.current = setTimeout(() => {
-      document.body.style.height = ''
-    }, 100)
+
   }, [screenOrientation])
   return (
     <div className={classNames(styles.root, {
