@@ -25,7 +25,14 @@
     }
   }
 }
-
+.searchField{
+  font-size: 16px;
+  height: 70px;
+  @media screen and (max-width: $mobile-max){
+    font-size: $mobile14;
+    height: 50px;
+  }
+}
 .option{
   padding: 0px 19px;
   min-height: 38px;

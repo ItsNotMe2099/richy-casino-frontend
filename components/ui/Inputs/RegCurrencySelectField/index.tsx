@@ -4,7 +4,7 @@ import { SelectField } from 'components/ui/Inputs/SelectField'
 import classNames from 'classnames'
 import {useAppContext} from 'context/state'
 import Converter from 'utils/converter'
-import {useEffect, useMemo} from 'react'
+import {ReactElement, useEffect, useMemo} from 'react'
 import UserUtils from 'utils/user'
 import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
 import {useField} from 'formik'
@@ -23,6 +23,7 @@ interface PropsOption{
   isActive?: boolean
   onClick?: () => void
   currentItem?: ICustomSelectViewOption
+  search?: ReactElement
 }
 
 const Symbol = (props: PropsOption) => {
@@ -36,10 +37,10 @@ const Option = (props: PropsOption) => {
 const Placeholder = (props: PropsOption) => {
   return (
   <div className={styles.placeholder}>
-    <div className={styles.group}>
+    {props.search ? props.search : <div className={styles.group}>
       <Symbol option={props.currentItem}/>
       {props.currentItem.label}
-    </div>
+    </div>}
     <img className={classNames(styles.arrow,{[styles.reverse]: props.isActive})}
         src='/img/Select/arrow.svg' alt=''/>
   </div>
@@ -58,9 +59,9 @@ export const RegCurrencySelectField = (props: Props) => {
   }, [])
   const data = useMemo( () => Converter.convertCurrencyToOptions(context.currencies).map(i => ({...i, symbol: <img src={UserUtils.getCurrencyIcon(i.value)}/> })), [context.currencies])
   return (
-  <SelectField<string> disabled={props.disabled} options={data} name={props.name} currentItemStyle={styles.current} className={styles.select}
+  <SelectField<string> disabled={props.disabled} search options={data} name={props.name} currentItemStyle={styles.current} className={styles.select}
     itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
-    activeComponent={(option, isActive) => <Placeholder currentItem={option} isActive={isActive}/>}
+    activeComponent={(option, isActive, search) => <Placeholder currentItem={option} search={search} isActive={isActive}/>}
     />
   )
 }
