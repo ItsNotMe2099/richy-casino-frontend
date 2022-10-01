@@ -23,11 +23,11 @@ export default function GameIframeRichy(props: Props) {
      {!appContext.isMobile && <GameIFrameHeader  title={props.game.name} icon={props.game.imageIconSmallUrl ?? props.game.imageIconPreviewUrl}/>}
       <div className={styles.board}>
         {props.session && (appContext.isMobile ?
-          <iframe
+          <div className={styles.iframeWrapper}> <iframe
             src={`${props.session.gameUrl}&lang=${i18n.language}`}
             className={styles.iframe}
             style={{ width: '100%', minWidth: '100%'}}
-          />: <IframeResizer
+          /></div>: <IframeResizer
             log
             autoResize={!appContext.isMobile}
             className={styles.iframe}
