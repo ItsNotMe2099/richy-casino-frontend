@@ -6,6 +6,7 @@ import { useAppContext } from 'context/state'
 import classNames from 'classnames'
 import GameIFrameHeader from './GameIFrameHeader'
 import IframeResizer from 'iframe-resizer-react'
+import useScreenOrientation from 'components/hooks/screen-orientation'
 
 interface Item extends IGame{
   link?: string
@@ -17,9 +18,14 @@ interface Props {
 
 export default function GameIframeRichy(props: Props) {
   const appContext = useAppContext()
+  const screenOrientation = useScreenOrientation()
   const {t, i18n} = useTranslation()
   return (
-    <div className={classNames(styles.root, {[styles.mobile]: appContext.isMobile})}>
+    <div className={classNames(styles.root, {
+      [styles.orientationLeftTop]: appContext.isMobile && screenOrientation === 'landscape-primary',
+      [styles.orientationRightTop]: appContext.isMobile && screenOrientation === 'landscape-secondary',
+
+      [styles.mobile]: appContext.isMobile})}>
      {!appContext.isMobile && <GameIFrameHeader  title={props.game.name} icon={props.game.imageIconSmallUrl ?? props.game.imageIconPreviewUrl}/>}
       <div className={styles.board}>
         {props.session && (appContext.isMobile ?
