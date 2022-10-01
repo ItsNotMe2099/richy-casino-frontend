@@ -7,6 +7,7 @@ import classNames from 'classnames'
 import GameIFrameHeader from './GameIFrameHeader'
 import IframeResizer from 'iframe-resizer-react'
 import useScreenOrientation from 'components/hooks/screen-orientation'
+import {useEffect, useRef} from 'react'
 
 interface Item extends IGame{
   link?: string
@@ -20,6 +21,19 @@ export default function GameIframeRichy(props: Props) {
   const appContext = useAppContext()
   const screenOrientation = useScreenOrientation()
   const {t, i18n} = useTranslation()
+  const timeoutHeightResetRef = useRef(null)
+  useEffect(() => {
+    if(!appContext.isMobile){
+      return
+    }
+    if(    timeoutHeightResetRef.current ){
+      clearTimeout(    timeoutHeightResetRef.current )
+    }
+    document.body.style.height = '100vh'
+    timeoutHeightResetRef.current = setTimeout(() => {
+      document.body.style.height = ''
+    }, 100)
+  }, [screenOrientation])
   return (
     <div className={classNames(styles.root, {
       [styles.orientationLeftTop]: appContext.isMobile && screenOrientation === 'landscape-primary',
