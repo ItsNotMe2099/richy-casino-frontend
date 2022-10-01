@@ -12,6 +12,9 @@
   grid-gap: 0px 12px;
   padding: 0px 20px 0px 0px;
   background: $dark800;
+  @media all and (display-mode: fullscreen) {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
 .arrow{
   height: 40px;

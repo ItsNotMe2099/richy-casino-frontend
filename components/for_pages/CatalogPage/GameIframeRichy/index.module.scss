@@ -20,6 +20,10 @@
     align-items: stretch;
     flex: 1 1;
     padding-bottom: 50px;
+    @media all and (display-mode: fullscreen) {
+      padding-bottom: calc(env(safe-area-inset-bottom) + 50px)
+    }
+
     .board{
       display: flex;
       flex-direction: column;
