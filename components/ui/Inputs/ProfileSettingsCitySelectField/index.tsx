@@ -28,7 +28,7 @@ export const ProfileSettingsCitySelectField = (props: Props) => {
     })
   }, [props.countryIso])
   return (
-    <ProfileSettingsSelectField name='country_iso' {...props} disabled={props.disabled || data.length === 0}  options={data.length > 0 ? data : [{label: 'Нет городов', value: null}]}/>
+    <ProfileSettingsSelectField search name='country_iso' {...props} disabled={props.disabled || data.length === 0}  options={data.length > 0 ? data : [{label: 'Нет городов', value: null}]}/>
 
   )
 }

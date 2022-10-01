@@ -22,7 +22,7 @@ export const ProfileSettingsCountrySelectField = (props: Props) => {
     })
   }, [])
   return (
-    <ProfileSettingsSelectField {...props} renderIcon={(option) => option ? <FlagIcon country={option.value} countryName={option.label}/> : null} options={data} />
+    <ProfileSettingsSelectField {...props}  search renderIcon={(option) => option ? <FlagIcon country={option.value} countryName={option.label}/> : null} options={data} />
 
   )
 }

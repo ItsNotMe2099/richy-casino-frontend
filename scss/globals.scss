@@ -161,3 +161,6 @@ select:-webkit-autofill:focus {
 #telegram-login-richygames_bot{
   display: none;
 }
+#chat-widget-container{
+  z-index: 4 !important;
+}

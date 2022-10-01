@@ -193,7 +193,7 @@ export default function Settings(props: Props) {
                                                validate={Validator.required}/>
             <ProfileSettingsCitySelectField name={'city_id'} label={t('settings_field_city')}
                                             countryIso={values.country_iso} disabled={sending}/>
-            <ProfileSettingsSelectField name='currency_iso' validate={Validator.required} options={currencies}
+            <ProfileSettingsSelectField name='currency_iso' search validate={Validator.required} options={currencies}
                                         label={t('settings_field_currency')} disabled={sending}/>
           <PhoneField defaultCountry={context.countryByIp?.iso}   label={t('settings_field_phone')} disabled={sending} name={'phone'} styleType={'horizontal'}  countrySelectClassName={styles.inputPhoneCountrySelect} fieldWrapperClassName={classNames(styles.input, styles.inputPhone)} errorClassName={styles.fieldError} validate={Validator.required} />
 
