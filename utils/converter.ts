@@ -172,4 +172,23 @@ export default class Converter {
     }
     return round
   }
+   static sortByOrder(data: any, order: string[]){
+    const sortByObject = order
+      .reduce((obj, item, index) => {
+        return {
+          ...obj,
+          [item.toLowerCase()]: index,
+        }
+      }, {})
+
+    let key = order.length
+    for(const item of data){
+      if(typeof sortByObject[item.name?.toLowerCase()] === 'undefined') {
+        sortByObject[item.name?.toLowerCase()] = key
+      }
+      ++key
+    }
+    const sorted = data.sort((a, b) => sortByObject[a.name?.toLowerCase()] - sortByObject[b.name?.toLowerCase()])
+     return sorted
+  }
 }
