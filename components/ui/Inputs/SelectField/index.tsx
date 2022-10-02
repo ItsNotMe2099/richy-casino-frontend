@@ -61,7 +61,7 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
   const [search, setSearch] = useState<string | null>(null)
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
-  const { styles: popperStyles, attributes, forceUpdate } = usePopper(referenceElement, popperElement, {
+  const { styles: popperStyles, attributes, forceUpdate, update } = usePopper(referenceElement, popperElement, {
     strategy: props.popperStrategy ?? 'absolute',
     placement: 'bottom-end',
     modifiers: [
@@ -107,7 +107,7 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
       clearTimeout(popperTimerRef.current)
     }
     popperTimerRef.current = setTimeout(() => {
-      forceUpdate()
+      update()
     }, 300)
 
   }
