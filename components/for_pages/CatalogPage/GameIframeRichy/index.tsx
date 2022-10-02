@@ -24,7 +24,7 @@ export default function GameIframeRichy(props: Props) {
   const timeoutHeightResetRef = useRef(null)
   useEffect(() => {
     if (window.matchMedia('(display-mode: standalone)').matches) {
-      document.body.style.height = '100vh'
+      document.body.style.height = '100%'
       document.documentElement.style.height = '100%'
       return () => {
         document.body.style.height = ''
