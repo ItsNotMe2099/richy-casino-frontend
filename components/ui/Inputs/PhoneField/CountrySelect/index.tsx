@@ -20,6 +20,7 @@ interface Props {
   className: string
   options: IOption[]
   onChange: (value: string) => void
+  country?: string
 }
 const FlagComponent = ({
   country,
@@ -86,7 +87,7 @@ export default function CountrySelect(props: Props & FieldConfig) {
     }, 100)
 
   }, [])
-  const currentOption = useMemo<IOption>(() => props.options.find(i => i.value === props.value), [props.value])
+  const currentOption = useMemo<IOption>(() =>  props.value ? props.options.find(i => i.value === props.value) : props.country ? props.options.find(i => i.value === props.country) : null, [props.value, props.country])
   const [listening, setListening] = useState(false)
   const [isActive, setIsActive] = useState(false)
   useEffect(listenForOutsideClicks(
@@ -111,7 +112,7 @@ export default function CountrySelect(props: Props & FieldConfig) {
     }} className={classNames(styles.root)} onClick={handleClick}>
       <div className={styles.dropDownTrigger}>
         <div className={styles.icon}>
-          <FlagComponent countryName={currentOption?.label} country={props.value}></FlagComponent>
+          <FlagComponent countryName={currentOption?.label} country={props.value ?? props.country}></FlagComponent>
         </div>
 
         <img className={classNames({[styles.arrow]: true, [styles.reversed]: isActive })}

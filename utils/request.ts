@@ -85,7 +85,7 @@ async function request(options: string | Options): Promise<Res> {
       try {
         Sentry.captureException(new Error('401Error'))
       }catch (e) {
-        
+
       }
       Cookies.remove(CookiesType.accessToken)
       setTimeout(() => {
@@ -110,9 +110,17 @@ async function request(options: string | Options): Promise<Res> {
         data: jsonData,
         err: null,
       }
+    }else{
+      console.log('RequestUrl', url)
+      console.log('RequestData', data)
+      console.log('RequestStatus', res?.status)
+      try {
+        Sentry.captureException(new Error('ResError'))
+      }catch (e) {
+
+      }
     }
   } catch (err) {
-    console.error('Weweqe', err)
     return {
       data: null,
       err: `${err}` ?? 'Error',
