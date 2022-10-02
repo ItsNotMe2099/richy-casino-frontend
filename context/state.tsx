@@ -206,6 +206,7 @@ export function AppWrapper(props: Props) {
       Cookies.remove(CookiesType.accessToken)
       setAuth(false)
       setUser(null)
+      console.log('Logout11')
     },
     async updateUserFromCookies() {
       return updateUserDetails()
