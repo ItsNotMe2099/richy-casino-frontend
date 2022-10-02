@@ -82,7 +82,11 @@ async function request(options: string | Options): Promise<Res> {
     if (res.status === 401) {
       console.log('RequestUrl', url)
       console.log('RequestData', data)
-      Sentry.captureException(new Error('401Error'))
+      try {
+        Sentry.captureException(new Error('401Error'))
+      }catch (e) {
+        
+      }
       Cookies.remove(CookiesType.accessToken)
       setTimeout(() => {
         window.location.replace('/')
