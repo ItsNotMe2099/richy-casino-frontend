@@ -4,6 +4,7 @@ import { CookiesType } from 'types/enums'
 import {IApiResponse} from 'types/interfaces'
 import Converter from 'utils/converter'
 import axios, {AxiosRequestConfig, AxiosRequestHeaders} from 'axios'
+import * as Sentry from '@sentry/nextjs'
 interface Options {
   url: string
   method?: 'post' | 'put' | 'get' | 'delete'
@@ -79,8 +80,15 @@ async function request(options: string | Options): Promise<Res> {
     })
 
     if (res.status === 401) {
+      console.log('RequestUrl', url)
+      console.log('RequestData', data)
+      Sentry.captureException(new Error('401Error'))
       Cookies.remove(CookiesType.accessToken)
-      window.location.replace('/')
+      setTimeout(() => {
+        window.location.replace('/')
+      }, 300)
+
+
       return {
         data: null,
         err: res.statusText ?? 'Unauthorized',
@@ -94,7 +102,6 @@ async function request(options: string | Options): Promise<Res> {
       }
     }
     if (res.status === 200 || res.status === 201) {
-
       return {
         data: jsonData,
         err: null,
