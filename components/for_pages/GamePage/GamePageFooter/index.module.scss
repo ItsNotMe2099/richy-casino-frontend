@@ -12,6 +12,10 @@
   grid-gap: 0px 12px;
   padding: 0px 20px 0px 0px;
   background: $dark800;
+  @media all and (display-mode: standalone) {
+    padding-bottom: env(safe-area-inset-bottom);
+    height: calc(env(safe-area-inset-bottom) + 50px);
+  }
 }
 .arrow{
   height: 40px;
