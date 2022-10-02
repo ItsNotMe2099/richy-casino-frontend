@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app'
 import { appWithTranslation, useTranslation } from 'next-i18next'
 import nextI18NextConfig from '../next-i18next.config.js'
 import { AppWrapper } from 'context/state'
-import { getSelectorsByUserAgent } from 'react-device-detect'
+import {getSelectorsByUserAgent, isSafari} from 'react-device-detect'
 import ModalContainer from 'components/layout/Modals'
 import { AuthWrapper } from 'context/auth_state'
 import { CookiesType } from 'types/enums'
@@ -95,7 +95,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     setTimeout(() => {
       //  setIsLoading(false)
     }, 1000)
-    if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
+    if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator && !isSafari) {
        navigator.serviceWorker.register('/pwabuilder-sw.js?v2', { scope: './' })
     }
     if (typeof window !== 'undefined') {
