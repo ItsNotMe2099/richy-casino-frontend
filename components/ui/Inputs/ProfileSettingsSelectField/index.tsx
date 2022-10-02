@@ -17,6 +17,7 @@ interface Props extends IField {
   currentItem?: ICustomSelectViewOption
   renderIcon?: (option: ICustomSelectViewOption) => ReactElement | null
   search?: boolean
+  searchPlaceholder?: string
 }
 interface PropsOption {
   option?: ICustomSelectViewOption

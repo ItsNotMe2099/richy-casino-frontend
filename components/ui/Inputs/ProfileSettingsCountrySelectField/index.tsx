@@ -7,7 +7,7 @@ import FlagIcon from 'components/ui/FlagIcon'
 
 
 interface Props extends IField{
-
+  searchPlaceholder?: string
 }
 export const ProfileSettingsCountrySelectField = (props: Props) => {
   const [data, setData] = useState<IOption<string>[]>([])

@@ -188,12 +188,12 @@ export default function Settings(props: Props) {
                         disabled={sending} errorClassName={styles.fieldError}/>
             <DateField name={'birthday_date'} className={styles.input} label={t('settings_field_birthday')}
                         disabled={sending} errorClassName={styles.fieldError}/>
-            <ProfileSettingsCountrySelectField name={'country_iso'} label={t('settings_field_country')}
+            <ProfileSettingsCountrySelectField name={'country_iso'} searchPlaceholder={t('settings_field_country_search')} label={t('settings_field_country')}
                                                disabled={sending}
                                                validate={Validator.required}/>
-            <ProfileSettingsCitySelectField name={'city_id'} label={t('settings_field_city')}
+            <ProfileSettingsCitySelectField name={'city_id'} label={t('settings_field_city')} searchPlaceholder={t('settings_field_city_search')}
                                             countryIso={values.country_iso} disabled={sending}/>
-            <ProfileSettingsSelectField name='currency_iso' search validate={Validator.required} options={currencies}
+            <ProfileSettingsSelectField name='currency_iso' search validate={Validator.required} options={currencies} searchPlaceholder={t('field_currency_search')}
                                         label={t('settings_field_currency')} disabled={sending}/>
           <PhoneField defaultCountry={context.countryByIp?.iso}   label={t('settings_field_phone')} disabled={sending} name={'phone'} styleType={'horizontal'}  countrySelectClassName={styles.inputPhoneCountrySelect} fieldWrapperClassName={classNames(styles.input, styles.inputPhone)} errorClassName={styles.fieldError} validate={Validator.required} />
 

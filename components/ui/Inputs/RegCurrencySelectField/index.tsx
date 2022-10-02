@@ -8,6 +8,7 @@ import {ReactElement, useEffect, useMemo} from 'react'
 import UserUtils from 'utils/user'
 import CurrencySvg from 'components/svg/CurrencySvg/CurrencySvg'
 import {useField} from 'formik'
+import {useTranslation} from 'next-i18next'
 
 export interface ICustomSelectViewOption extends IOption<string>{
 
@@ -50,6 +51,7 @@ const Placeholder = (props: PropsOption) => {
 export const RegCurrencySelectField = (props: Props) => {
   const context = useAppContext()
   const [field, meta, helpers] = useField(props)
+  const {t} = useTranslation()
   useEffect(() => {
     context.fetchDefaultCurrency().then(i =>{
       if(i) {
@@ -59,7 +61,7 @@ export const RegCurrencySelectField = (props: Props) => {
   }, [])
   const data = useMemo( () => Converter.convertCurrencyToOptions(context.currencies).map(i => ({...i, symbol: <img src={UserUtils.getCurrencyIcon(i.value)}/> })), [context.currencies])
   return (
-  <SelectField<string> disabled={props.disabled} search options={data} name={props.name} currentItemStyle={styles.current} className={styles.select}
+  <SelectField<string> disabled={props.disabled} search options={data} name={props.name} searchPlaceholder={t('field_currency_search')} currentItemStyle={styles.current} className={styles.select}
     itemComponent={(option, active, onClick) => <Option key={option.value} isActive={active} option={option} onClick={onClick}/>}
     activeComponent={(option, isActive, search) => <Placeholder currentItem={option} search={search} isActive={isActive}/>}
     />
