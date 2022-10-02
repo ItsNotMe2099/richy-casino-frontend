@@ -33,7 +33,7 @@ self.addEventListener('activate', function(event) {
   )
 })
 
-/*
+
 self.addEventListener('fetch', function(event) {
     event.respondWith(
         fetch(event.request)
@@ -45,7 +45,7 @@ self.addEventListener('fetch', function(event) {
             })
     )
 })
-
+/*
 self.addEventListener('activate', function(event) {
     event.waitUntil(
         caches.keys()
