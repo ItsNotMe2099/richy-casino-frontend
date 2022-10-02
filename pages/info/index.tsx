@@ -22,14 +22,9 @@ export default function PageItemPage(props: Props) {
       <meta name="keywords" content={t('seo_info_keywords')}/>
     </Head>
     <NextSeo
-      title={t('seo_info_title')}
-      description={t('seo_info_description')}
+      title={t('page_information_title')}
       openGraph={{
-        title: t('seo_info_og_title'),
-        description: t('seo_info_og_description'),
-        site_name: t('seo_info_og_site_name'),
         type: 'website',
-        locale: 'en_US',
         url: 'https://richy.casino/info',
       }}
     />
