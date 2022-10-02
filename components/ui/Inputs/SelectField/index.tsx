@@ -75,6 +75,12 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
           offset: [0, 0],
         },
       },
+      {
+        name: 'preventOverflow',
+        options: {
+          rootBoundary: 'viewport'
+        }
+      },
       sameWidth as any
 
     ]
