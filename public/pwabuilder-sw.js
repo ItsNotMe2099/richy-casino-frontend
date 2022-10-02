@@ -19,6 +19,20 @@ self.addEventListener('install', function(event) {
             .then(self.skipWaiting())
     )
 })
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys()
+      .then((keyList) => {
+        return Promise.all(keyList.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key)
+          }
+        }))
+      })
+      .then(() => self.clients.claim())
+  )
+})
+
 /*
 self.addEventListener('fetch', function(event) {
     event.respondWith(
