@@ -24,13 +24,15 @@ export default function GameIframeRichy(props: Props) {
   const timeoutHeightResetRef = useRef(null)
   useEffect(() => {
     if (window.matchMedia('(display-mode: standalone)').matches) {
-      document.body.style.height = '100%'
+      document.body.style.height = '100vh'
+      document.documentElement.style.height = '100%'
       return () => {
         document.body.style.height = ''
+        document.documentElement.style.height = ''
       }
     }
 
-  }, [screenOrientation])
+  }, [])
   return (
     <div className={classNames(styles.root, {
       [styles.orientationLeftTop]: appContext.isMobile && screenOrientation === 'landscape-primary',
