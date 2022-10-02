@@ -20,6 +20,7 @@ interface Props<T> {
   activeComponent?: (option?: IOption<T>, isActive?: boolean, search?: ReactElement) => ReactElement
   search?: boolean
   searchClassName?: string
+  searchPlaceholder?: string
 }
 
 const sameWidth = {
@@ -59,7 +60,7 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
   const [search, setSearch] = useState<string | null>(null)
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
-  const { styles: popperStyles, attributes } = usePopper(referenceElement, popperElement, {
+  const { styles: popperStyles, attributes, forceUpdate, update } = usePopper(referenceElement, popperElement, {
     strategy: props.popperStrategy ?? 'absolute',
     placement: 'bottom-end',
     modifiers: [
@@ -109,7 +110,7 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
       setReferenceElement(ref)
     }} className={classNames(styles.root, {[styles.hasError]: !!meta.error && meta.touched}, className)} data-field={props.name}>
       <div onClick={handleClick} className={classNames(styles.dropDownTrigger, currentItemStyle, props.triggerClassName)}>
-        {props.activeComponent ? props.activeComponent(currentItem, isActive, isActive && props.search ? <input name={'search'} autoFocus placeholder={'Поиск валюты'} onClick={handleClickInput} onChange={onSearch} className={classNames(styles.searchField, props.searchClassName)} /> : null) : null}
+        {props.activeComponent ? props.activeComponent(currentItem, isActive, isActive && props.search ? <input name={'search'} autoFocus placeholder={props.searchPlaceholder} onClick={handleClickInput} onChange={onSearch} className={classNames(styles.searchField, props.searchClassName)} /> : null) : null}
       <div ref={setPopperElement} style={popperStyles.popper}  {...attributes.popper} className={classNames(styles.dropDown, { [styles.opened]: isActive, [styles.offsetLarge]: props.offset === 'large', [styles.offsetNormal]: props.offset === 'normal' || !props.offset})}>
        {(search ? options.filter(i => i.label.toLowerCase().indexOf(search.toLowerCase()) >= 0) : options).map((item, index) => props.itemComponent ? props.itemComponent(item, currentItem?.value === item.value, () => handleChange(item.value)) :
        <div key={index}

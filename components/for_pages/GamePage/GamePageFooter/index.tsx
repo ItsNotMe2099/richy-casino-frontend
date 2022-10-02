@@ -31,7 +31,7 @@ export default function GamePageFooter(props: Props) {
       context.showModalProfile(ProfileModalType.wallet)
     }
   }
-  const mainAccount = context.user ? UserUtils.getMainBalanceTotals(context.user) : null
+  const mainAccount = context.user ? UserUtils.getMainBalanceReal(context.user) : null
 
   return (
     <div className={styles.root}>

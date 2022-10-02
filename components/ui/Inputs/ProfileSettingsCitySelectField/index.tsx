@@ -9,7 +9,8 @@ export interface ICustomSelectViewOption extends IOption<string>{
 }
 
 interface Props extends IField{
-  countryIso: string
+  countryIso: string,
+  searchPlaceholder?: string
 }
 export const ProfileSettingsCitySelectField = (props: Props) => {
   const {t, i18n} = useTranslation()

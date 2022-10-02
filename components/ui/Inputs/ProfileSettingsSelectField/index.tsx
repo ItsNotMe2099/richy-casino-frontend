@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import { useField } from 'formik'
 import ErrorInput from 'components/ui/Inputs/components/ErrorInput'
 import { ReactElement } from 'react'
+import {useAppContext} from 'context/state'
 
 export interface ICustomSelectViewOption extends IOption<string> {
 
@@ -17,6 +18,7 @@ interface Props extends IField {
   currentItem?: ICustomSelectViewOption
   renderIcon?: (option: ICustomSelectViewOption) => ReactElement | null
   search?: boolean
+  searchPlaceholder?: string
 }
 interface PropsOption {
   option?: ICustomSelectViewOption
@@ -51,11 +53,13 @@ const Placeholder = (props: PropsOption) => {
 export const ProfileSettingsSelectField = (props: Props) => {
   const [field, meta] = useField(props)
   const hasError = !!meta.error && meta.touched
+  const appContext = useAppContext()
+
   return (
     <div>
       <div className={classNames(styles.root, { [styles.error]: hasError })}>
         <div className={styles.label}>{props.label}</div>
-        <SelectField {...props} searchClassName={styles.searchField} offset={'large'} popperStrategy={'fixed'} currentItemStyle={styles.current} className={styles.select} triggerClassName={styles.dropdownTrigger}
+        <SelectField {...props} searchClassName={styles.searchField} offset={'large'} popperStrategy={appContext.isMobile ? 'absolute' : 'fixed'} currentItemStyle={styles.current} className={styles.select} triggerClassName={styles.dropdownTrigger}
           itemComponent={(option, active, onClick) => <Option key={option.value} icon={props.renderIcon ? props.renderIcon(option) : null} isActive={active} option={option} onClick={onClick} />}
           activeComponent={(option, isActive, search) => <Placeholder search={search} option={option} icon={props.renderIcon ? props.renderIcon(option) : null} isActive={isActive} />}
         />

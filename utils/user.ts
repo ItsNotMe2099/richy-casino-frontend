@@ -11,15 +11,9 @@ export default class UserUtils {
   static getCurrencyIcon(currency: string){
     return `/img/currencies/${currency?.toLowerCase()}.png`
   }
-  static getMainBalanceTotals(user: IUser): IUserBalanceCurrency | null {
-    return user.currencyIso ? user.balance.currencies.totals.find(i => i.currency ?.toUpperCase()=== user.currencyIso?.toUpperCase()) : user.balance.currencies.totals[0]
-  }
 
-  static getOtherBalancesTotals(user: IUser): IUserBalanceCurrency[] {
-    return user.currencyIso ? user.balance.currencies.totals.filter(i => i.currency?.toUpperCase() != user.currencyIso?.toUpperCase()) : []
-  }
   static getMainBalanceReal(user: IUser): IUserBalanceCurrency | null {
-    return user.currencyIso ? user.balance.currencies.real.find(i => i.currency?.toUpperCase() === user.currencyIso?.toUpperCase()) : user.balance.currencies.totals[0]
+    return user.currencyIso ? user.balance.currencies.real.find(i => i.currency?.toUpperCase() === user.currencyIso?.toUpperCase()) : user.balance.currencies.real[0]
   }
 
   static getOtherBalancesReal(user: IUser): IUserBalanceCurrency[] {

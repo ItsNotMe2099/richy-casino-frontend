@@ -206,6 +206,7 @@ export function AppWrapper(props: Props) {
       Cookies.remove(CookiesType.accessToken)
       setAuth(false)
       setUser(null)
+      console.log('Logout11')
     },
     async updateUserFromCookies() {
       return updateUserDetails()
@@ -334,9 +335,10 @@ export function AppWrapper(props: Props) {
   const updateUserDetails = async () => {
     try {
       const res = await UserRepository.getUser()
+      console.log('getUser', res)
       setUser(res)
     } catch (e) {
-
+    console.error('e111',e)
     }
     setUserLoaded(true)
   }

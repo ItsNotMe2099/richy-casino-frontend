@@ -51,7 +51,7 @@ export default function Profile(props: Props) {
   const mainAccount = UserUtils.getMainBalanceReal(context.user)
   const otherAccounts = UserUtils.getOtherBalancesReal(context.user)
   const bonusAccounts = UserUtils.getBonusBalances(context.user)
-  const currenciesToAdd = context.currencies.filter(i => !context.user.balance.currencies.totals.find(a => a.currency === i.iso))
+  const currenciesToAdd = context.currencies.filter(i => !context.user.balance.currencies.real.find(a => a.currency === i.iso))
   return (
     <ProfileModalLayout fixed>
       <ProfileModalHeader title={context.isMobile ? null : t('profile_title')}/>
