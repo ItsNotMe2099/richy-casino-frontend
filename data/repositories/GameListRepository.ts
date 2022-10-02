@@ -24,7 +24,18 @@ export default class GameListRepository {
     if (res.err) {
       return {data: [], total: 0}
     }
-   return Converter.convertApiPaginationResponse(res.data)
+    const result = Converter.convertApiPaginationResponse(res.data)
+    try {
+
+      const newData = Converter.sortByOrder(result.data, [
+        'Bgaming', 'Evoplay', 'Habanero', 'Pragmatic Play', 'Spinomenal', 'Wazdan', 'Evolution Gaming', 'Retro Gaming', 'Relax Gaming', 'Play\'n Go', 'Quickspin', 'Red tiger'
+      ])
+
+      return {...result, data: newData}
+    }catch (e) {
+
+    }
+    return result
   }
 
   static async fetchProvidersTop3(): Promise<IGameProviderTop3[]> {
