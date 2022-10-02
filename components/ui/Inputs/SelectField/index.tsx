@@ -54,7 +54,6 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
   const {options, disabled, className, currentItemStyle} = props
   const [field, meta] = useField(props)
   const {value} = field
-  const popperTimerRef = useRef(null)
   const { setFieldValue, setFieldTouched } = useFormikContext()
   const dropdownRef = useRef(null)
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
@@ -74,12 +73,6 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
         options: {
           offset: [0, 0],
         },
-      },
-      {
-        name: 'preventOverflow',
-        options: {
-          rootBoundary: 'viewport'
-        }
       },
       sameWidth as any
 
@@ -109,12 +102,6 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
   const onSearch = (e) => {
     console.log('SetSearch')
     setSearch(e.target.value.trim())
-    if(popperTimerRef.current){
-      clearTimeout(popperTimerRef.current)
-    }
-    popperTimerRef.current = setTimeout(() => {
-      update()
-    }, 300)
 
   }
   return (
