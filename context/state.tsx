@@ -140,6 +140,7 @@ export function AppWrapper(props: Props) {
   const [countryByIp, setCountryByIp] = useState<ICountry | null>(null)
   const [userLoaded, setUserLoaded] = useState<boolean>(false)
   const [infoLoaded, setInfoLoaded] = useState<boolean>(false)
+  console.log('AppMobile', props.isMobile)
   useEffect(() => {
     modalRef.current = modal
   }, [modal])

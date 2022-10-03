@@ -72,9 +72,14 @@ const getIsMobile = (_isMobileProps) => {
     return _isMobileProps
   }
   const ua =  navigator.userAgent
-  console.log('userAgent')
+
   if (ua) {
-    const { isMobile } = getSelectorsByUserAgent(ua)
+    const { isMobile, isTablet } = getSelectorsByUserAgent(ua)
+    const d = getSelectorsByUserAgent(ua)
+    console.log('D111', window.screen.width)
+    if(isTablet && window?.screen?.width >=1024){
+      return false
+    }
    return isMobile
   }
   return _isMobileProps
@@ -207,7 +212,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const props = await App.getInitialProps(appContext)
   const ua = appContext.ctx.req ? appContext.ctx.req?.headers['user-agent'] : navigator.userAgent
-
   if (ua) {
     const { isMobile } = getSelectorsByUserAgent(ua)
     props.pageProps.isMobile = isMobile
