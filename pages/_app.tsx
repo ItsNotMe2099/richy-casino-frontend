@@ -67,23 +67,7 @@ const allLangs = ['en', 'ru',
   'sw',
   'de',
   'it']
-const getIsMobile = (_isMobileProps) => {
-  if(typeof  navigator === 'undefined'){
-    return _isMobileProps
-  }
-  const ua =  navigator.userAgent
 
-  if (ua) {
-    const { isMobile, isTablet } = getSelectorsByUserAgent(ua)
-    const d = getSelectorsByUserAgent(ua)
-    console.log('D111', window.screen.width)
-    if(isTablet && window?.screen?.width >=1024){
-      return false
-    }
-   return isMobile
-  }
-  return _isMobileProps
-}
 const getToken = () => {
   const cookies =  nookies.get(null) ?? {}
   return cookies[CookiesType.accessToken]
@@ -156,9 +140,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   }, [])
 
-  console.log('isMobile', getIsMobile(pageProps.isMobile))
   return (
-    <AppWrapper isMobile={getIsMobile(pageProps.isMobile)} token={getToken()} initialUser={pageProps.initialUser}>
+    <AppWrapper isMobile={pageProps.isMobile} token={getToken()} initialUser={pageProps.initialUser}>
       <AuthWrapper>
         <FavoriteWrapper>
           <TournamentWrapper>
@@ -213,8 +196,16 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   const props = await App.getInitialProps(appContext)
   const ua = appContext.ctx.req ? appContext.ctx.req?.headers['user-agent'] : navigator.userAgent
   if (ua) {
-    const { isMobile } = getSelectorsByUserAgent(ua)
-    props.pageProps.isMobile = isMobile
+    const { isMobile, isTablet } = getSelectorsByUserAgent(ua)
+    const data = getSelectorsByUserAgent(ua)
+    console.log('UAData', data)
+    if(isTablet && typeof window !== 'undefined' && window.screen.width >= 1024){
+
+      props.pageProps.isMobile = false
+    }else{
+      props.pageProps.isMobile = isMobile
+    }
+
   }
   else {
     props.pageProps.isMobile = false

@@ -17,6 +17,7 @@ import {runtimeConfig} from 'config/runtimeConfig'
 import {IPaymentMethod} from 'data/interfaces/IPaymentMethod'
 import {ICountry} from 'data/interfaces/ICountry'
 import {useTranslation} from 'next-i18next'
+import {getIsMobile} from 'utils/mobile'
 
 interface IState {
   isMobile: boolean
@@ -140,14 +141,19 @@ export function AppWrapper(props: Props) {
   const [countryByIp, setCountryByIp] = useState<ICountry | null>(null)
   const [userLoaded, setUserLoaded] = useState<boolean>(false)
   const [infoLoaded, setInfoLoaded] = useState<boolean>(false)
-  console.log('AppMobile', props.isMobile)
+  const [isMobile, setIsMobile] = useState<boolean>(props.isMobile)
+
+  useEffect(() => {
+    console.log('getIsMobile(props.isMobile)', getIsMobile(props.isMobile))
+    setIsMobile(getIsMobile(props.isMobile))
+  }, [])
   useEffect(() => {
     modalRef.current = modal
   }, [modal])
   const value: IState = {
     ...defaultValue,
-    isMobile: props.isMobile,
-    isDesktop: !props.isMobile,
+    isMobile: isMobile,
+    isDesktop: !isMobile,
     auth,
     modal,
     bottomSheet,
