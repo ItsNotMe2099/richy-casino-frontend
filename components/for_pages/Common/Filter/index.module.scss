@@ -7,7 +7,7 @@
   margin-top: 20px;
   overflow-y: hidden;
   margin-right: 20px;
-  @media screen and (max-width: 1024px){
+  @media screen and (max-width: 1023px){
   overflow-y: auto;
   overflow-x: hidden;
   margin-right: 20px;
@@ -18,7 +18,7 @@
   width: 25% !important;
   max-width: 25% !important;
   min-width: 370px;
-  @media screen and (max-width: 1024px){
+  @media screen and (max-width: 1023px){
     position: absolute !important;
     z-index: 1;
     width: 100% !important;
@@ -29,7 +29,7 @@
 .mobile{
   width: 100%;
   margin-top: 19px;
-  @media screen and (min-width: 1025px){
+  @media screen and (min-width: 1024px){
     display: none;
   }
 }
@@ -50,13 +50,13 @@
   img{
   cursor: pointer;
   }
-  @media screen and (min-width: 1025px){
+  @media screen and (min-width: 1024px){
     display: none;
   }
 }
 
 .none{
-  @media screen and (max-width: 1024px){
+  @media screen and (max-width: 1023px){
     display: none;
   }
 }
