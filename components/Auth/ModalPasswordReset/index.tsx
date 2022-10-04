@@ -32,7 +32,7 @@ export default function ModalPasswordReset(props: Props) {
     setSending(true)
     try {
       setError(null)
-      const res = await AuthRepository.resetPassword({identity: login, token: data.code, password: data.password})
+      const res = await AuthRepository.resetPassword({identity: login, token: data.codeNew, password: data.passwordNew})
       context.showModal(ModalType.login)
     } catch (e) {
       setError(e)
@@ -58,18 +58,18 @@ export default function ModalPasswordReset(props: Props) {
         </div>
         <div className={styles.inputs}>
           <InputField
-            name={'code'}
+            name={'codeNew'}
             noAutoComplete
             disabled={sending}
             placeholder={isEmail ? t('password_restore_field_code_email') : t('password_restore_field_code_sms')} validate={Validator.required}/>
           <InputField
-            name={'password'}
+            name={'passwordNew'}
             type={'password'}
             obscure={true}
             disabled={sending}
             placeholder={t('password_restore_field_password')} validate={Validator.required}/>
           <InputField
-            name={'passwordConfirm'}
+            name={'passwordNewConfirm'}
             type={'password'}
             obscure={true}
             disabled={sending}
