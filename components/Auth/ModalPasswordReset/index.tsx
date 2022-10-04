@@ -59,6 +59,7 @@ export default function ModalPasswordReset(props: Props) {
         <div className={styles.inputs}>
           <InputField
             name={'code'}
+            noAutoComplete
             disabled={sending}
             placeholder={isEmail ? t('password_restore_field_code_email') : t('password_restore_field_code_sms')} validate={Validator.required}/>
           <InputField
