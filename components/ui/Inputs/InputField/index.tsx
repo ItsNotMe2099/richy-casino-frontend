@@ -37,7 +37,7 @@ export default function InputField(props: Props) {
   const [pattern, setPattern] = useState<string | null>(props.format === 'phone' ? defaultPhonePattern : props.format  === 'cardExpiry' ? defaultCardExpiryPattern : null)
   const showError = meta.touched && !!meta.error && !focused
   const { ref, maskRef } = useIMask({ mask: pattern as any || /.*/ })
-  const autoCompleteProps: any = props.noAutoComplete ? {autoComplete: 'new-password', autoCorrect: 'off'} : {}
+  const autoCompleteProps: any = props.noAutoComplete ? {autoComplete: 'off', autoCorrect: 'off'} : {}
   useEffect(() => {
 
       if (maskRef.current && (props.format === 'phone' || props.format === 'phoneAndEmail')) {
