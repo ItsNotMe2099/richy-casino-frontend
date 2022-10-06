@@ -326,6 +326,9 @@ export function AppWrapper(props: Props) {
     ReactModal.setAppElement('body')
     setModalArguments(args)
     setModal(type)
+    if(bottomSheet){
+      hideBottomSheet()
+    }
 
   }
   const hideModal = () => {
