@@ -22,7 +22,7 @@ export default class PagesRepository {
     }
     return res.data.data ? Converter.objectKeysToCamelCase(res.data.data) : null
   }
-  static async fetchList(page: number = 1, limit: number = 30): Promise<IPagination<ITextPage>> {
+  static async fetchList(page: number = 1, limit: number = 30, language?: string): Promise<IPagination<ITextPage>> {
     const res = await request({
       url: '/api/content/text/index',
       method: 'get',
@@ -30,6 +30,7 @@ export default class PagesRepository {
         page,
         'per-page': limit
       },
+      language,
     })
     if (res.err) {
       return null
