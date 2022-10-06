@@ -126,6 +126,7 @@ export function AppWrapper(props: Props) {
   const {t, i18n} = useTranslation()
   const langInitdRef = useRef(false)
   const modalRef = useRef<ModalType | ProfileModalType | null>(null)
+  const bottomSheetRef = useRef<ModalType | ProfileModalType | null>(null)
   const [user, setUser] = useState<IUser | null>(props.initialUser)
   const [auth, setAuth] = useState<boolean>(!!props.initialUser)
   const [showBonus, setShowBonus] = useState<boolean>(false)
@@ -150,6 +151,10 @@ export function AppWrapper(props: Props) {
   useEffect(() => {
     modalRef.current = modal
   }, [modal])
+
+  useEffect(() => {
+    bottomSheetRef.current = bottomSheet
+  }, [bottomSheet])
   const value: IState = {
     ...defaultValue,
     isMobile: isMobile,
@@ -371,7 +376,7 @@ export function AppWrapper(props: Props) {
 
       if ((runtimeConfig.FAKE_BONUS || isEnabled) && !auth && !Cookies.get(CookiesType.bonusDepositShowMode) && !([ModalType.fortune, ModalType.registration] as ModalType[]).includes(modal as ModalType)) {
         setTimeout(() => {
-          if(   modalRef.current === ModalType.registration){
+          if(   modalRef.current === ModalType.registration || bottomSheetRef.current === ModalType.registration){
             return
           }
           showModal(ModalType.bonus)
