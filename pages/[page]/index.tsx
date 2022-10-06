@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (context ) => {
  }
 
   const page = await PagesRepository.fetchBySlug(context.query.page as string, context.locale ?? 'en')
-  const pages = await PagesRepository.fetchList(1, 30)
+  const pages = await PagesRepository.fetchList(1, 30, context.locale ?? 'en')
   return {
     props: {
       ...await getServerSideTranslation(context),
