@@ -27,12 +27,21 @@ export default function MenuItem(props: Props) {
     active = false
   }
   const handleClick = (e) => {
-    if(props.link === Routes.poker){
+
+    if(props.link === Routes.aviator){
+      e.stopPropagation()
+      e.preventDefault()
+      if (appContext.auth) {
+        router.push(Routes.aviator)
+      } else {
+        appContext.showModal(ModalType.registration)
+      }
+    }else if(props.link === Routes.poker){
+      e.stopPropagation()
+      e.preventDefault()
       if (appContext.auth) {
         router.push(Routes.poker)
       } else {
-        e.stopPropagation()
-        e.preventDefault()
         appContext.showModal(ModalType.registration)
       }
     }else if(props.link === Routes.chess){
