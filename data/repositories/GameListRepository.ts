@@ -9,6 +9,7 @@ import {IGameSession} from 'data/interfaces/IGameSession'
 import {RICHY_CATEGORY_NAME} from 'types/constants'
 import {IGameHistory} from 'data/interfaces/IGameHistory'
 import {format, subDays} from 'date-fns'
+import {RequestError} from 'types/request'
 
 export default class GameListRepository {
   static async fetchProviders(name: string = null, page: number = 1, limit: number = 1000): Promise<IPagination<IGameProvider>> {
@@ -235,6 +236,10 @@ export default class GameListRepository {
       data: {game_id: gameId, client_type: clientType}
     })
     if (res.err) {
+      console.log('Error11', res)
+      if(res.data?.error?.status === 403){
+        throw new RequestError(res.err as string, res.data?.error?.status ?? 500)
+      }
       throw res.err
     }
     return res.data.data ?  Converter.objectKeysToCamelCase(res.data.data) : null

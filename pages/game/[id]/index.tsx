@@ -1,6 +1,6 @@
 import WithGameFilterLayout from 'components/layout/WithGameFilterLayout'
 import GameListRepository from 'data/repositories/GameListRepository'
-import { IGameSession} from 'data/interfaces/IGameSession'
+import {IGameSession} from 'data/interfaces/IGameSession'
 import GameIframeRichy from 'components/for_pages/CatalogPage/GameIframeRichy'
 import GameIframe from 'components/for_pages/CatalogPage/GameIframe'
 import {useAppContext} from 'context/state'
@@ -13,6 +13,10 @@ import ContentLoader from 'components/ui/ContentLoader'
 import {runtimeConfig} from 'config/runtimeConfig'
 import {getServerSideTranslation} from 'utils/i18'
 import {GetServerSideProps} from 'next'
+import {RequestError} from 'types/request'
+import {ModalType} from 'types/enums'
+import Button from 'components/ui/Button'
+import {useTranslation} from 'next-i18next'
 
 interface Props {
 
@@ -20,11 +24,13 @@ interface Props {
 
 export default function CatalogPage(props: Props) {
   const appContext = useAppContext()
+  const {t} = useTranslation()
   const router = useRouter()
   const gameId = parseInt(router.query.id as string, 10)
   const demo = router.query.demo as string
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [errorAuth, setErrorAuth] = useState<boolean>(false)
   const [session, setSession] = useState<IGameSession | null>(null)
   const [game, setGame] = useState<IGame | null>(null)
   useEffect(() => {
@@ -60,8 +66,17 @@ export default function CatalogPage(props: Props) {
         setLoading(false)
       }
     } catch (e) {
+      if(e instanceof RequestError && (e as RequestError).code === 403){
+        console.log('AuthError', (e as RequestError).toString())
+        appContext.showModal(ModalType.registration)
+        setError( (e as RequestError).message)
+        setErrorAuth(true)
+      }else {
+        console.log('errorHappened', e)
+        console.error(e)
+        setError(e)
+      }
       setLoading(false)
-      setError(e)
     }
 
 
@@ -74,6 +89,11 @@ export default function CatalogPage(props: Props) {
   const result = (<>
     {loading && <ContentLoader isOpen={true} style={'block'}/> }
     {!loading && !game && error && <div className={styles.error}>{error}</div>}
+    {!loading && !game && errorAuth && <div className={styles.errorAuth}>
+
+      <Button className={styles.buttonLogin} type='submit' size='play' fluid background='blueGradient500' onClick={() => appContext.showModal(ModalType.registration)} spinner={loading}>{t('login_button')}</Button>
+
+    </div>}
     {game && <div className={styles.wrapper} style={{visibility: loading ? 'hidden' : 'visible'}}>{(isRichy ? <GameIframeRichy game={game} session={session}/> :
       <GameIframe session={session} error={error}/>)}</div>}
   </>)

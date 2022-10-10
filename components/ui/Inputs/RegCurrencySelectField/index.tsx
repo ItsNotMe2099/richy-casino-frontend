@@ -39,8 +39,8 @@ const Placeholder = (props: PropsOption) => {
   return (
   <div className={styles.placeholder}>
     {props.search ? props.search : <div className={styles.group}>
-      <Symbol option={props.currentItem}/>
-      {props.currentItem.label}
+      {props.currentItem && <Symbol option={props.currentItem}/>}
+      {props.currentItem?.label}
     </div>}
     <img className={classNames(styles.arrow,{[styles.reverse]: props.isActive})}
         src='/img/Select/arrow.svg' alt=''/>
