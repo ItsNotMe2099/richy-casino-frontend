@@ -18,9 +18,6 @@ export interface IPaymentSettings{
     maxAmount: number
     commissionAmount: number
     commissionPercent: number
-    isWalletRequired: boolean
-    isCardDataRequired: boolean
-    isRedirectUrlRequired: boolean
   }
 }
 export interface IPaymentSystem {
@@ -29,4 +26,7 @@ export interface IPaymentSystem {
   name: string
   imageUrl: string
   settings: IPaymentSettings[]
+  isWalletRequired: boolean
+  isCardDataRequired: boolean
+  isRedirectUrlRequired: boolean
 }
