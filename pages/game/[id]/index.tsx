@@ -54,6 +54,8 @@ export default function CatalogPage(props: Props) {
   }, [])
   const init = async () => {
     setLoading(true)
+    setError(null)
+    setErrorAuth(false)
     try {
       const [session, game] = await Promise.all([
         demo ? GameListRepository.createGameDemo(gameId, appContext.isMobile ? 'mobile' : 'desktop') : GameListRepository.createGame(gameId, appContext.isMobile ? 'mobile' : 'desktop'),
@@ -83,17 +85,17 @@ export default function CatalogPage(props: Props) {
   }
   useEffect(() => {
     init()
-  }, [router.query.demo, router.query.id])
+  }, [router.query.demo, router.query.id, appContext.auth])
   const isRichy = `${game?.providerId}` === runtimeConfig.RICHY_PROVIDER_ID
 
   const result = (<>
     {loading && <ContentLoader isOpen={true} style={'block'}/> }
-    {!loading && !game && error && <div className={styles.error}>{error}</div>}
-    {!loading && !game && errorAuth && <div className={styles.errorAuth}>
+    {!loading && error && !errorAuth && <div className={styles.error}>{error}</div>}
+    {!loading && errorAuth && <div className={styles.error}>{error}<div className={styles.errorAuth}>
 
       <Button className={styles.buttonLogin} type='submit' size='play' fluid background='blueGradient500' onClick={() => appContext.showModal(ModalType.registration)} spinner={loading}>{t('login_button')}</Button>
 
-    </div>}
+    </div></div>}
     {game && <div className={styles.wrapper} style={{visibility: loading ? 'hidden' : 'visible'}}>{(isRichy ? <GameIframeRichy game={game} session={session}/> :
       <GameIframe session={session} error={error}/>)}</div>}
   </>)
