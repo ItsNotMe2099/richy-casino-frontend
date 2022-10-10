@@ -145,12 +145,12 @@ export default function StepForm(props: Props) {
               </div>
             </div>
             <AmountCurrencyField name={'amount'} currency={props.currency.iso} className={styles.input} disabled={sending} validate={Validator.combine([Validator.required, validateMinMax])}/>
-            {(props.method.isCrypto || currentSettings.withdraw.isWalletRequired) && <><div className={styles.label}>
+            {(props.method.isCrypto || props.paymentSystem?.isWalletRequired) && <><div className={styles.label}>
               {t('withdraw_form_address')}
             </div>
               <InputField name={'address'} disabled={sending} className={styles.input} validate={Validator.required}/>
             </>}
-            {!props.method.isCrypto && currentSettings.withdraw.isCardDataRequired && <>
+            {!props.method.isCrypto && props.paymentSystem?.isCardDataRequired && <>
                <div className={styles.label}>
                 {t('withdraw_form_card_owner')}
               </div>
