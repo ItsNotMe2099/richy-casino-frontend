@@ -89,6 +89,7 @@
   "footer_text_2": "Richy.Casino. Richy.Casino operated by Ingenious Development Ltd under Curaçao Interactive Licensing N.V. (CIL) #5536/JAZ issued to Favorite Industry N.V., a limited company with its registered office at Zuikertuintjeweg Z/N (Zuikertuin Tower) Curacao, with company number 159622. Ingenious Development Ltd, a company, whose registered office is at Exegerseos, 4 SUNSET GARDENS, Flat/Office 102, Pervolia, 7560, Larnaca, Cyprus with company number HE428609.EU company Ingenious Development Ltd acts as a EU-EEA Representative of licensed entity Favorite Industry N.V.",
   "form_field_validation_amount_greater": "Значение больше {{number}}",
   "form_field_validation_amount_less": "Значение меньше {{number}}",
+  "form_field_validation_card_expiry": "Неверный формат",
   "form_field_validation_email": "Неверный формат Email",
   "form_field_validation_otp": "Введите 4-x значный код",
   "form_field_validation_password": "Мин. длина пароля 6 символов",

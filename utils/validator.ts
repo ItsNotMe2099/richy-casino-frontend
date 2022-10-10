@@ -40,7 +40,7 @@ export default class Validator {
 
   static cardExpiryValidation(value: string) {
     const error = 'form_field_validation_card_expiry'
-    if(value || value.length !== 5){
+    if(!value || value.length !== 5){
       return error
     }
     const split = value.split('/')
