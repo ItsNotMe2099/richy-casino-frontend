@@ -24,7 +24,7 @@ class MyDocument extends Document {
         <body>
         <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-421XSKMJH2"
+          src="https://www.googletagmanager.com/gtag/js?id=G-JSRZDN3Z5E"
         />
         <script style={{display: 'none'}} async src="https://telegram.org/js/telegram-widget.js?19" data-telegram-login="richygames_bot" data-size="small" data-userpic="false" ></script>
         <script
@@ -34,7 +34,8 @@ class MyDocument extends Document {
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-421XSKMJH2');
+  gtag('config', 'G-JSRZDN3Z5E');
+
 
             `,
           }}
@@ -114,6 +115,18 @@ class MyDocument extends Document {
   n.async=!0,n.type="text/javascript",
   n.src="https://cdn.livechatinc.com/tracking.js",t.head.appendChild(n)}};
   !n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))`,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html:` (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:3193469,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`,
           }}
         />
         </body>

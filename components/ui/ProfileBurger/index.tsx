@@ -128,16 +128,26 @@ export default function ProfileBurger(props: Props) {
         e.stopPropagation()
         appContext.showModal(ModalType.fortune)
         break
-        case LinkKey.Poker:
-          e.preventDefault()
-          e.stopPropagation()
-          if (appContext.auth) {
-            router.push(Routes.poker)
-            appContext.hideModal()
-          } else {
-            appContext.showModal(ModalType.registration)
-          }
-          break
+      case LinkKey.Poker:
+        e.preventDefault()
+        e.stopPropagation()
+        if (appContext.auth) {
+          router.push(Routes.poker)
+          appContext.hideModal()
+        } else {
+          appContext.showModal(ModalType.registration)
+        }
+        break
+      case LinkKey.Aviator:
+        e.preventDefault()
+        e.stopPropagation()
+        if (appContext.auth) {
+          router.push(Routes.aviator)
+          appContext.hideModal()
+        } else {
+          appContext.showModal(ModalType.registration)
+        }
+        break
           case LinkKey.Chess:
             e.preventDefault()
             e.stopPropagation()

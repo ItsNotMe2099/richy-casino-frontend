@@ -25,6 +25,16 @@
   padding-top: 100px;
 
 }
+.errorAuth{
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .buttonLogin{
+    max-width: 150px;
+  }
+}
 
 .wrapper{
   position: relative;
