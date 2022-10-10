@@ -236,7 +236,6 @@ export default class GameListRepository {
       data: {game_id: gameId, client_type: clientType}
     })
     if (res.err) {
-      console.log('Error11', res)
       if(res.data?.error?.status === 403){
         throw new RequestError(res.err as string, res.data?.error?.status ?? 500)
       }
@@ -259,6 +258,9 @@ export default class GameListRepository {
       data: {game_id: gameId, client_type: clientType}
     })
     if (res.err) {
+      if(res.data?.error?.status === 403){
+        throw new RequestError(res.err as string, res.data?.error?.status ?? 500)
+      }
       throw res.err
     }
 
