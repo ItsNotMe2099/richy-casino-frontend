@@ -100,6 +100,10 @@ async function request(options: string | Options): Promise<Res> {
     }
    const jsonData: IApiResponse = res.data
     if(!jsonData?.success){
+      console.log('RequestUrl', url)
+      console.log('RequestData', data)
+      console.log('RequestStatus', res?.status)
+      Sentry.captureException(new Error('ResError'))
       return {
         data: jsonData,
         err: Converter.convertApiResponseError(jsonData),
