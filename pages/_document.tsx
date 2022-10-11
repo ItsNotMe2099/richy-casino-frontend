@@ -20,6 +20,17 @@ class MyDocument extends Document {
           <link rel="alternate" hrefLang="en-US" href="https://richy.casino/" title="English (USA)" />
           <link rel="alternate" hrefLang="ru" href="https://richy.casino/ru" title="Русский" />
           <link rel="alternate" hrefLang="de" href="https://richy.casino/de" title="German" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TKC3PJM');
+            `,
+            }}
+          />
         </Head>
         <body>
         <script
@@ -33,10 +44,7 @@ class MyDocument extends Document {
               window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-JSRZDN3Z5E');
-
-
             `,
           }}
         />
@@ -129,6 +137,10 @@ class MyDocument extends Document {
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`,
           }}
         />
+        <noscript     dangerouslySetInnerHTML={{
+          __html:` <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKC3PJM"
+                          height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
+        }}/>
         </body>
       </Html>
     )
