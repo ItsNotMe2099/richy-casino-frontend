@@ -31,7 +31,8 @@ export default class PaymentsRepository {
         code: paymentSystemCode,
         redirect_url: redirectUrl,
         amount,
-        ...(data?.extra_data ? {extra_data: data?.extra_data}: {})
+        ...(data?.extra_data ? {extra_data: data?.extra_data}: {}),
+        ...(data?.browser_info ? {browser_info: data?.browser_info}: {})
 
       }
     })
@@ -72,7 +73,8 @@ export default class PaymentsRepository {
         wallet,
         card_holder_name: cardHolder,
       ...(date ? {card_valid_month: date.month, card_valid_year: date.year} : {}),
-        ...(data?.extra_data ? {extra_data: data?.extra_data}: {})
+        ...(data?.extra_data ? {extra_data: data?.extra_data}: {}),
+        ...(data?.browser_info ? {browser_info: data?.browser_info}: {})
       }
     })
     if (res.err) {

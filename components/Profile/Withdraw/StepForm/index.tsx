@@ -23,6 +23,7 @@ import {PaymentCurrencySelected} from 'components/Profile/Wallet/PaymentCurrency
 import PaymentMethodRepository from 'data/repositories/PaymentMethodRepository'
 import {IPaymentMethodField} from 'data/interfaces/IPaymentFields'
 import {PaymentFormExtraFields} from 'components/Profile/Wallet/PaymentFormExtraFields'
+import {BrowserUtils} from 'utils/browser'
 
 
 interface Props {
@@ -36,7 +37,7 @@ interface Props {
 
 export default function StepForm(props: Props) {
   const context = useAppContext()
-  const {t} = useTranslation()
+  const {t, i18n} = useTranslation()
   const [sending, setSending] = useState(false)
   const [error, setError] = useState(null)
   const [fields, setFields] = useState<IPaymentMethodField[]>([])
@@ -76,7 +77,10 @@ export default function StepForm(props: Props) {
         const res = await PaymentsRepository.withdrawCrypto(props.currency.iso, props.paymentSystem.id, props.paymentSystem.systemCode, data.amount, data.address)
         context.showModalProfile(ProfileModalType.paymentHistory, {filter: PaymentSwitchFilterKey.Applications} as PaymentHistoryModalArguments)
       }else{
-        const res = await PaymentsRepository.withdrawFiat(props.currency.iso, props.paymentSystem.id, props.paymentSystem.systemCode,`${window.location.origin}?withdrawal=1`, data.amount, data.address, data.cardHolderName, data.cardExpiry, data)
+        const res = await PaymentsRepository.withdrawFiat(props.currency.iso, props.paymentSystem.id, props.paymentSystem.systemCode,`${window.location.origin}?withdrawal=1`, data.amount, data.address, data.cardHolderName, data.cardExpiry, {
+          ...data,
+          ...(props.paymentSystem?.isBrowserInfoRequired ? {browser_info: BrowserUtils.getDetailsForPayment(i18n.language)} : {}),
+        })
         if(res.url){
           window.location.href = res.url
         }

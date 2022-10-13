@@ -28,6 +28,7 @@ import useDetectKeyboardOpen from 'hooks/useKeyboardOpen'
 import PaymentMethodRepository from 'data/repositories/PaymentMethodRepository'
 import {IPaymentMethodField} from 'data/interfaces/IPaymentFields'
 import {PaymentFormExtraFields} from 'components/Profile/Wallet/PaymentFormExtraFields'
+import {BrowserUtils} from 'utils/browser'
 
 
 interface Props {
@@ -41,7 +42,7 @@ interface Props {
 }
 
 export default function StepFormFiat(props: Props) {
-  const {t} = useTranslation()
+  const {t, i18n} = useTranslation()
   const context = useAppContext()
   const [isKeyboardOpen, keyboardHeight, screenHeight] = useDetectKeyboardOpen()
   const [sending, setSending] = useState(false)
@@ -82,7 +83,10 @@ export default function StepFormFiat(props: Props) {
     setSending(true)
     try {
       const amount = typeof  data.amount === 'string' ? parseFloat(data.amount) : data.amount
-      const res = await PaymentsRepository.depositFiat(currencyIso, props.paymentSystem.id, props.paymentSystem.systemCode, `${window.location.origin}/payment/result`, amount, data)
+      const res = await PaymentsRepository.depositFiat(currencyIso, props.paymentSystem.id, props.paymentSystem.systemCode, `${window.location.origin}/payment/result`, amount, {
+        ...data,
+       ...(props.paymentSystem?.isBrowserInfoRequired ? {browser_info: BrowserUtils.getDetailsForPayment(i18n.language)} : {}),
+      })
       if(res.url){
         window.location.href = res.url
       }
