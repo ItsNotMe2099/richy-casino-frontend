@@ -25,6 +25,9 @@ import {PaymentSystemSelected} from 'components/Profile/Wallet/PaymentSystemSele
 import {ICurrency} from 'data/interfaces/ICurrency'
 import Converter from 'utils/converter'
 import useDetectKeyboardOpen from 'hooks/useKeyboardOpen'
+import PaymentMethodRepository from 'data/repositories/PaymentMethodRepository'
+import {IPaymentMethodField} from 'data/interfaces/IPaymentFields'
+import {PaymentFormExtraFields} from 'components/Profile/Wallet/PaymentFormExtraFields'
 
 
 interface Props {
@@ -43,6 +46,8 @@ export default function StepFormFiat(props: Props) {
   const [isKeyboardOpen, keyboardHeight, screenHeight] = useDetectKeyboardOpen()
   const [sending, setSending] = useState(false)
   const [error, setError] = useState(null)
+  const [fields, setFields] = useState<IPaymentMethodField[]>([])
+
   const initialValues = {
     amount: props.currency && props.currency.iso !== 'USD' ? Converter.convertRateToMin(props.currency.toUsd, 20) : 20
 
@@ -62,6 +67,14 @@ export default function StepFormFiat(props: Props) {
     return undefined
   }
   useEffect(() => {
+    if(!props.paymentSystem.systemCode){
+      return
+    }
+    PaymentMethodRepository.fetchDepositFields(props.paymentSystem.systemCode).then((fields) => {
+      setFields(fields)
+    })
+  }, [])
+  useEffect(() => {
     context.updateCurrencies()
     }, [])
   const handleSubmit = async (data) => {
@@ -69,7 +82,7 @@ export default function StepFormFiat(props: Props) {
     setSending(true)
     try {
       const amount = typeof  data.amount === 'string' ? parseFloat(data.amount) : data.amount
-      const res = await PaymentsRepository.depositFiat(currencyIso, props.paymentSystem.id, props.paymentSystem.systemCode, `${window.location.origin}/payment/result`, amount)
+      const res = await PaymentsRepository.depositFiat(currencyIso, props.paymentSystem.id, props.paymentSystem.systemCode, `${window.location.origin}/payment/result`, amount, data)
       if(res.url){
         window.location.href = res.url
       }
@@ -96,6 +109,7 @@ export default function StepFormFiat(props: Props) {
       {context.isMobile && <PaymentSeparator/>}
       <FormikProvider value={formik}>
           <Form className={styles.form}>
+            <PaymentFormExtraFields fields={fields} sending={sending} defaultCountry={context.countryByIp?.iso}/>
             <PaymentDepositAmountField name={'amount'}  hasOptions currency={props.currency.iso}  currencyObject={props.currency} disabled={sending} validate={Validator.combine([Validator.required, validateMinMax])}
                                        />
 

@@ -29,4 +29,5 @@ export interface IPaymentSystem {
   isWalletRequired: boolean
   isCardDataRequired: boolean
   isRedirectUrlRequired: boolean
+  isBrowserInfoRequired: boolean
 }

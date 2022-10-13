@@ -25,7 +25,7 @@ export default class PaymentMethodRepository {
     }
     return res.data.data?.map(i => Converter.objectKeysToCamelCase(i)) ?? []
   }
-  static async fetchFields(code: string): Promise<IPaymentMethodField[]> {
+  static async fetchWithdrawalFields(code: string): Promise<IPaymentMethodField[]> {
     const res = await request({
       method: 'get',
       url: '/api/finance/payment/withdrawal/fields',
@@ -43,6 +43,25 @@ export default class PaymentMethodRepository {
       items.push({...data[key], key})
     }
     console.log('FieldsItems', items)
+    return items
+  }
+  static async fetchDepositFields(code: string): Promise<IPaymentMethodField[]> {
+    const res = await request({
+      method: 'get',
+      url: '/api/finance/payment/deposit/fields',
+      data: {
+        code
+      }
+    })
+    if (res.err) {
+      return []
+    }
+    const data = res.data?.data as IPaymentMethodFields
+    const keys = Object.keys(data ?? {})
+    const items = []
+    for(const key of keys){
+      items.push({...data[key], key})
+    }
     return items
   }
 }
