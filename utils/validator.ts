@@ -2,7 +2,7 @@ import { FieldValidator } from 'formik/dist/types'
 import Converter from 'utils/converter'
 
 export default class Validator {
-  static emailRe = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+  static emailRe = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,12}$/i
 
   static combine(validators: FieldValidator[]): FieldValidator {
     return (value: any) => {
