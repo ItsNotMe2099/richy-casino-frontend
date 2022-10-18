@@ -21,7 +21,7 @@ export default class PaymentsRepository {
     }
     return res.data?.data ? Converter.objectKeysToCamelCase(res.data?.data) : null
   }
-  static async depositFiat(currencyIso: string, paymentSystemId: number, paymentSystemCode: string, redirectUrl: string, amount: number): Promise<IDepositFiatResponse> {
+  static async depositFiat(currencyIso: string, paymentSystemId: number, paymentSystemCode: string, redirectUrl: string, amount: number, data: any): Promise<IDepositFiatResponse> {
     const res = await request({
       method: 'post',
       url: '/api/finance/payment/deposit/fiat',
@@ -30,7 +30,10 @@ export default class PaymentsRepository {
         type_id: paymentSystemId,
         code: paymentSystemCode,
         redirect_url: redirectUrl,
-        amount
+        amount,
+        ...(data?.extra_data ? {extra_data: data?.extra_data}: {}),
+        ...(data?.browser_info ? {browser_info: data?.browser_info}: {})
+
       }
     })
     if (res.err) {
@@ -70,7 +73,8 @@ export default class PaymentsRepository {
         wallet,
         card_holder_name: cardHolder,
       ...(date ? {card_valid_month: date.month, card_valid_year: date.year} : {}),
-        ...(data ? data : {})
+        ...(data?.extra_data ? {extra_data: data?.extra_data}: {}),
+        ...(data?.browser_info ? {browser_info: data?.browser_info}: {})
       }
     })
     if (res.err) {
