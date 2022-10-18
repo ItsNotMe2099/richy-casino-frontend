@@ -78,6 +78,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState(false)
   const { t, i18n } = useTranslation()
   const currentLangLoaded = useRef(false)
+
   useEffect(() => {
 
 
@@ -107,38 +108,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       i18n.reloadResources( i18n.language, ['common'])
     }
   }, [])
-  useEffect(() => {
-    let ppDetails: any = {
-      clickid: router.query.clickid,
-      sub1: router.query.sub1,
-      sub2: router.query.sub2,
-      sub3: router.query.sub3,
-      sub4:router.query.sub4,
-      sub5: router.query.sub5,
-      sub6: router.query.sub6,
-      pid: router.query.pid,
-      promocode: router.query.promocode
-    }
-    ppDetails = Object.fromEntries(Object.entries(ppDetails).filter(([_, v]) => v != null && !!v))
-    if (Object.keys(ppDetails).length > 0) {
-      nookies.set(null, CookiesType.ppDetails, JSON.stringify(ppDetails), {
-        maxAge: CookiesLifeTime.ppDetails * 60 * 60 * 24,
-        path: '/',
-      })
-    }
-    const cookies = nookies.get(null) ?? {}
 
-    if (!cookies[CookiesType.sessionId]) {
-      const sessionId = uuidv4()
-
-      nookies.set(null, CookiesType.sessionId, sessionId, {
-        maxAge: CookiesLifeTime.sessionId * 60 * 60 * 24,
-        path: '/',
-      })
-
-    }
-
-  }, [])
 
   return (
     <AppWrapper isMobile={pageProps.isMobile} token={getToken()} initialUser={pageProps.initialUser}>
@@ -195,6 +165,25 @@ function MyApp({ Component, pageProps }: AppProps) {
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const props = await App.getInitialProps(appContext)
   const ua = appContext.ctx.req ? appContext.ctx.req?.headers['user-agent'] : navigator.userAgent
+  let ppDetails: any = {
+    clickid: appContext.ctx.query.clickid,
+    sub1: appContext.ctx.query.sub1,
+    sub2: appContext.ctx.query.sub2,
+    sub3: appContext.ctx.query.sub3,
+    sub4: appContext.ctx.query.sub4,
+    sub5: appContext.ctx.query.sub5,
+    sub6: appContext.ctx.query.sub6,
+    pid: appContext.ctx.query.pid,
+    promocode: appContext.ctx.query.promocode
+  }
+  ppDetails = Object.fromEntries(Object.entries(ppDetails).filter(([_, v]) => v != null && !!v))
+  if (Object.keys(ppDetails).length > 0) {
+    nookies.set(appContext.ctx, CookiesType.ppDetails, JSON.stringify(ppDetails), {
+      maxAge: CookiesLifeTime.ppDetails * 60 * 60 * 24,
+      path: '/',
+    })
+  }
+
   if (ua) {
     const { isMobile, isTablet } = getSelectorsByUserAgent(ua)
     const data = getSelectorsByUserAgent(ua)
@@ -215,8 +204,20 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     const acceptLang = getLangFromHeader(appContext.ctx.req.headers['accept-language'])
     const cookies = nookies.get(appContext.ctx)
     const cookie = cookies[CookiesType.language]
-     const prop = await serverSideTranslations( LANGS.includes(cookie ?? acceptLang) ? (cookie ?? acceptLang) :  'en', ['common'])
+    if (!(appContext.ctx.req as any).cookies[CookiesType.sessionId]) {
+      const sessionId = uuidv4()
+
+      nookies.set(appContext.ctx, CookiesType.sessionId, sessionId, {
+        maxAge: CookiesLifeTime.sessionId * 60 * 60 * 24,
+        path: '/',
+      });
+      (appContext.ctx.req as any).cookies[CookiesType.sessionId] = sessionId
+
+    }
+
+    const prop = await serverSideTranslations( LANGS.includes(cookie ?? acceptLang) ? (cookie ?? acceptLang) :  'en', ['common'])
     props.pageProps = {...props.pageProps,...prop}
+
   }else{
     const acceptedLang = getLangFromHeader(navigator.language)
     const cookies = nookies.get(null)
@@ -232,8 +233,6 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     }
   }
 
-  console.log('appContextLocal',
-    props.pageProps)
 
   return props
 }
