@@ -263,7 +263,7 @@ export default function Footer(props: Props) {
           </div>
           <a href={'/img/licenses/cil_license_richy.jpg'} target={'_blank'}
              className={classNames(styles.logoLicense, styles.curacao)} rel="noreferrer">
-            <Image src='/img/licenses/richycuracaointeractivelicenlogo.png' alt='Richy License' width={120} height={120}
+            <Image src='/img/licenses/egaming_curacao_richy.png' alt='Richy License' width={120} height={120}
                    layout={'responsive'} objectFit='contain'/>
           </a>
           <a href={'https://www.responsiblegambling.org'} target={'_blank'}
