@@ -262,7 +262,7 @@ export default function Footer(props: Props) {
             <img src='/img/layout/footer/eighteen.svg' alt=''/>
           </div>
           <div
-             className={classNames(styles.logoLicense, styles.curacao)} rel="noreferrer">
+             className={classNames(styles.logoLicense, styles.curacao)}>
             <Image src='/img/licenses/egaming_curacao_richy.png' alt='Richy License' width={120} height={120}
                    layout={'responsive'} objectFit='contain'/>
           </div>
