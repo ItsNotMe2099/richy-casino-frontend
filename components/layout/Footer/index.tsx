@@ -261,11 +261,11 @@ export default function Footer(props: Props) {
           <div className={styles.eighteen}>
             <img src='/img/layout/footer/eighteen.svg' alt=''/>
           </div>
-          <a href={'/img/licenses/cil_license_richy.jpg'} target={'_blank'}
-             className={classNames(styles.logoLicense, styles.curacao)} rel="noreferrer">
+          <div
+             className={classNames(styles.logoLicense, styles.curacao)}>
             <Image src='/img/licenses/egaming_curacao_richy.png' alt='Richy License' width={120} height={120}
                    layout={'responsive'} objectFit='contain'/>
-          </a>
+          </div>
           <a href={'https://www.responsiblegambling.org'} target={'_blank'}
              className={classNames(styles.logoLicense, styles.rgcrichy)} rel="noreferrer">
             <img src='/img/licenses/rgcrichy.svg' alt='responsiblegambling'/>
