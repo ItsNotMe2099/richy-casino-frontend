@@ -45,6 +45,8 @@ export default function Footer(props: Props) {
     {label: t('footer_menu_bonuses'), link: '/bonuses'},
     {label: t('footer_menu_info'), link: '/info'},
     {label: t('footer_menu_affiliate'), link: 'https://richy.partners', blank: true},
+    {label: t('footer_menu_self_exclusion'), link: '/selfexclusionandcoc'},
+    {label: t('footer_menu_fairness'), link: '/fairness_rng'},
   ]
 
   const items = [
@@ -52,6 +54,7 @@ export default function Footer(props: Props) {
     {label: t('footer_menu_user_agreements'), link: '/user_agreements'},
     {label: t('footer_menu_user_gambling_aware'), link: '/gambling_aware'},
     {label: t('footer_menu_user_kyc_and_aml'), link: '/kyc_and_aml'},
+    {label: t('footer_menu_dispute'), link: '/dispute_resolution'},
   ]
 
   const allItems = options.concat(items)
