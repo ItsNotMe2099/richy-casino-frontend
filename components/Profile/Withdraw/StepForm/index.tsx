@@ -52,19 +52,27 @@ export default function StepForm(props: Props) {
     cardExpiry: ''
   }
   useEffect(() => {
-    if(!props.paymentSystem.systemCode){
+    if (!props.paymentSystem.systemCode) {
       return
     }
     PaymentMethodRepository.fetchWithdrawalFields(props.paymentSystem.systemCode).then((fields) => {
+      /*setFields(
+        ['card_holder', 'card_pan', 'card_cvv', 'card_expires'].map(i => ({
+          key: i,
+          isRequired: false,
+          title: i,
+          type: IPaymentMethodFieldType.String,
+          options: []
+        })))*/
       setFields(fields)
     })
   }, [])
   const validateMinMax = (value: number) => {
     const num = parseFloat(`${value}`)
-    if(min && num < min){
+    if (min && num < min) {
       return t('form_field_validation_amount_less', {number: min})
     }
-    if(max && num > max){
+    if (max && num > max) {
       return t('form_field_validation_amount_greater', {number: max})
     }
     return undefined
@@ -73,15 +81,15 @@ export default function StepForm(props: Props) {
     setError(null)
     setSending(true)
     try {
-      if(props.method.isCrypto){
+      if (props.method.isCrypto) {
         const res = await PaymentsRepository.withdrawCrypto(props.currency.iso, props.paymentSystem.id, props.paymentSystem.systemCode, data.amount, data.address)
         context.showModalProfile(ProfileModalType.paymentHistory, {filter: PaymentSwitchFilterKey.Applications} as PaymentHistoryModalArguments)
-      }else{
-        const res = await PaymentsRepository.withdrawFiat(props.currency.iso, props.paymentSystem.id, props.paymentSystem.systemCode,`${window.location.origin}?withdrawal=1`, data.amount, data.address, data.cardHolderName, data.cardExpiry, {
+      } else {
+        const res = await PaymentsRepository.withdrawFiat(props.currency.iso, props.paymentSystem.id, props.paymentSystem.systemCode, `${window.location.origin}?withdrawal=1`, data.amount, data.address, data.cardHolderName, data.cardExpiry, {
           ...data,
           ...(props.paymentSystem?.isBrowserInfoRequired ? {browser_info: BrowserUtils.getDetailsForPayment(i18n.language)} : {}),
         })
-        if(res.url){
+        if (res.url) {
           window.location.href = res.url
         }
 
@@ -95,8 +103,10 @@ export default function StepForm(props: Props) {
   return (
     <div className={styles.root}>
       <PaymentOptions>
-        <PaymentMethodSelected method={props.method} paymentSystem={props.paymentSystem} onClick={() => props.onSetStep(PaymentStep.Method)}/>
-        {props.currency && <PaymentCurrencySelected currency={props.currency} onClick={() => props.onSetStep(PaymentStep.Currency)}/>}
+        <PaymentMethodSelected method={props.method} paymentSystem={props.paymentSystem}
+                               onClick={() => props.onSetStep(PaymentStep.Method)}/>
+        {props.currency &&
+          <PaymentCurrencySelected currency={props.currency} onClick={() => props.onSetStep(PaymentStep.Currency)}/>}
       </PaymentOptions>
       <PaymentSeparator/>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
@@ -104,29 +114,34 @@ export default function StepForm(props: Props) {
           <Form className={styles.form}>
             <PaymentFormExtraFields fields={fields} sending={sending} defaultCountry={context.countryByIp?.iso}/>
             <div className={styles.label}>
-                {t('withdraw_form_sum')}
+              {t('withdraw_form_sum')}
               <div className={styles.limit}>
                 {t('withdraw_form_limit')} {min}-{max}
               </div>
             </div>
-            <AmountCurrencyField name={'amount'} currency={props.currency.iso} className={styles.input} disabled={sending} validate={Validator.combine([Validator.required, validateMinMax])}/>
-            {(props.method.isCrypto || props.paymentSystem?.isWalletRequired) && <><div className={styles.label}>
-              {t('withdraw_form_address')}
-            </div>
+            <AmountCurrencyField name={'amount'} currency={props.currency.iso} className={styles.input}
+                                 disabled={sending} validate={Validator.combine([Validator.required, validateMinMax])}/>
+            {(props.method.isCrypto || props.paymentSystem?.isWalletRequired) && <>
+              <div className={styles.label}>
+                {t('withdraw_form_address')}
+              </div>
               <InputField name={'address'} disabled={sending} className={styles.input} validate={Validator.required}/>
             </>}
             {!props.method.isCrypto && props.paymentSystem?.isCardDataRequired && <>
-               <div className={styles.label}>
+              <div className={styles.label}>
                 {t('withdraw_form_card_owner')}
               </div>
-              <InputField name={'cardOwnerName'} disabled={sending} className={styles.input} validate={Validator.required}/>
+              <InputField name={'cardOwnerName'} disabled={sending} className={styles.input}
+                          validate={Validator.required}/>
               <div className={styles.label}>
                 {t('withdraw_form_card_expiry')}
               </div>
-              <InputField name={'cardExpiry'} placeholder={'01/25'} disabled={sending} className={styles.input} format={'cardExpiry'} validate={Validator.cardExpiryValidation}/>
+              <InputField name={'cardExpiry'} placeholder={'01/25'} disabled={sending} className={styles.input}
+                          format={'cardExpiry'} validate={Validator.cardExpiryValidation}/>
             </>}
             <FormError error={error}/>
-            <Button type='submit' size='normal' spinner={sending} background='blueGradient500' className={styles.button}>{t('withdraw_form_button_continue')}</Button>
+            <Button type='submit' size='normal' spinner={sending} background='blueGradient500'
+                    className={styles.button}>{t('withdraw_form_button_continue')}</Button>
           </Form>
         )}
       </Formik>

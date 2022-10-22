@@ -11,7 +11,7 @@ import Eye from 'components/svg/Eye'
 import ErrorInput from 'components/ui/Inputs/components/ErrorInput'
 import cx from 'classnames'
 
-type FormatType = 'phone' | 'phoneAndEmail' | 'cardExpiry'
+type FormatType = 'phone' | 'phoneAndEmail' | 'cardExpiry' | 'cardPan' | 'cardCvv'
 
 interface Props extends IField {
   obscure?: boolean
@@ -28,8 +28,10 @@ interface Props extends IField {
 }
 
 export default function InputField(props: Props) {
-  const defaultPhonePattern = '+*[********************]'
-  const defaultCardExpiryPattern = '**/**'
+  const defaultPhonePattern = '+0[00000000000000000000]'
+  const defaultCardExpiryPattern = '00/00'
+  const defaultCardPanPattern = '0000 0000 0000 0000000'
+  const defaultCardCvvPattern = '0000'
   const [focused, setFocus] = useState(false)
   const [obscureShow, setObscureShow] = useState(false)
   const [field, meta, helpers] = useField(props as FieldConfig)
@@ -67,10 +69,18 @@ export default function InputField(props: Props) {
         }
       }
     }
-      if(props.format === 'cardExpiry'){
-        setPattern(defaultCardExpiryPattern)
-        updateValueFromMask()
-      }
+    if(props.format === 'cardExpiry'){
+      setPattern(defaultCardExpiryPattern)
+      updateValueFromMask()
+    }
+    if(props.format === 'cardPan'){
+      setPattern(defaultCardPanPattern)
+      updateValueFromMask()
+    }
+    if(props.format === 'cardCvv'){
+      setPattern(defaultCardCvvPattern)
+      updateValueFromMask()
+    }
   }, [ref.current, field.value])
 
   const updateValueFromMask = () => {
