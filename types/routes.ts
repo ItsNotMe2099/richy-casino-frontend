@@ -79,7 +79,7 @@ export class Routes{
 
   /*     Betting     */
   static get sport(){
-    return '/sport'
+    return '/sports'
   }
 
 }
