@@ -76,4 +76,10 @@ export class Routes{
   static get leaderBoard(){
     return '/#leader-board'
   }
+
+  /*     Betting     */
+  static get sport(){
+    return '/sport'
+  }
+
 }

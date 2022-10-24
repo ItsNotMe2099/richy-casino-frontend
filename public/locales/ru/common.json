@@ -511,5 +511,6 @@
   "footer_menu_dispute":  "Dispute Resolution",
   "2fa_field_cant_see": "Не вижу код",
   "2fa_field_secret_code": "Введите код в приложении",
-  "2fa_copy_secret_code": "Скопировать код"
+  "2fa_copy_secret_code": "Скопировать код",
+  "menu_sport": "Спорт"
 }
