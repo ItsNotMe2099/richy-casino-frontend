@@ -27,6 +27,7 @@ const moduleExports = {
     GAME_POKER_ID: process.env.GAME_POKER_ID,
     GAME_AVIATOR_ID: process.env.GAME_AVIATOR_ID,
     RICHY_PROVIDER_ID: process.env.RICHY_PROVIDER_ID,
+    ROBOTS_FILE: process.env.ROBOTS_FILE
   },
   serverRuntimeConfig: {
     HOST: process.env.HOST,
@@ -39,6 +40,7 @@ const moduleExports = {
     GAME_POKER_ID: process.env.GAME_POKER_ID,
     GAME_AVIATOR_ID: process.env.GAME_AVIATOR_ID,
     RICHY_PROVIDER_ID: process.env.RICHY_PROVIDER_ID,
+    ROBOTS_FILE: process.env.ROBOTS_FILE
   },
   images: {
     domains: ['api-rc.grtestdemo.com', 'api.richy-trk.com'],

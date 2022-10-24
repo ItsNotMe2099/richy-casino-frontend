@@ -30,7 +30,7 @@ interface Props extends IField {
 export default function InputField(props: Props) {
   const defaultPhonePattern = '+0[00000000000000000000]'
   const defaultCardExpiryPattern = '00/00'
-  const defaultCardPanPattern = '0000 0000 0000 0000000'
+  const defaultCardPanPattern = '0000 0000 0000 0000000b gj'
   const defaultCardCvvPattern = '0000'
   const [focused, setFocus] = useState(false)
   const [obscureShow, setObscureShow] = useState(false)
