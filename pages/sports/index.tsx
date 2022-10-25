@@ -8,6 +8,7 @@ import {useEffect, useState} from 'react'
 import {IBettingStartResponse} from 'data/interfaces/IBettingStartResponse'
 import BettingRepository from 'data/repositories/BetttngRepository'
 import ContentLoader from 'components/ui/ContentLoader'
+import classNames from 'classnames'
 
 export default function Betting(){
   const bettingWrapperId = 'betting-wrapper'
@@ -24,7 +25,7 @@ export default function Betting(){
     script.src = betting.scriptUrl
     script.async = true
     script.onload = () => {
-
+      setLoading(false)
       const bt = new (window as any).BTRenderer().initialize({
         brand_id: betting.brandId,
         token: betting.token,
@@ -53,11 +54,12 @@ export default function Betting(){
           console.log('Bet slip state changed')
         }
       })
+
     }
 
     document.body.appendChild(script)
     setBetting(betting)
-    setLoading(false)
+
   }
   useEffect(() => {
     init()
@@ -82,7 +84,7 @@ export default function Betting(){
         }}
       />
         <div className={styles.root} >
-         <div className={styles.wrapper} id={'betting-wrapper'}>
+         <div className={classNames(styles.wrapper, {[styles.hidden]: false})} id={'betting-wrapper'}>
           </div>
           {loading && <ContentLoader style={'block'} isOpen={loading}/>}
         </div>
