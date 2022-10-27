@@ -33,9 +33,9 @@ export default function Betting(){
         onTokenExpired: function () {
           alert('Token expired. Please log in again')
         },
-        betSlipOffsetTop:  appContext.isMobile ? 72 : 100,
+        betSlipOffsetTop:  appContext.isMobile ? 72 : 0,
         betSlipOffsetBottom: appContext.isMobile ? 82 : 0,
-        stickyTop: appContext.isMobile ? 72: 100,
+        stickyTop: appContext.isMobile ? 72: 0,
         themeName: betting.themeName,
         lang: betting.language,
         target: document.getElementById(bettingWrapperId),
