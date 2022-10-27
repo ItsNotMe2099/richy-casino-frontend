@@ -96,7 +96,7 @@ export default function CatalogPage(props: Props) {
       <Button className={styles.buttonLogin} type='submit' size='play' fluid background='blueGradient500' onClick={() => appContext.showModal(ModalType.registration)} spinner={loading}>{t('login_button')}</Button>
 
     </div></div>}
-    {game && <div className={styles.wrapper} style={{visibility: loading ? 'hidden' : 'visible'}}>{(isRichy ? <GameIframeRichy game={game} session={session}/> :
+    {game && !error && <div className={styles.wrapper} style={{visibility: loading ? 'hidden' : 'visible'}}>{(isRichy ? <GameIframeRichy game={game} session={session}/> :
       <GameIframe session={session} error={error}/>)}</div>}
   </>)
   if (appContext.isMobile) {

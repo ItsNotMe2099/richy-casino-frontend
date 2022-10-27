@@ -2,13 +2,14 @@ import styles from './index.module.scss'
 import Layout from 'components/layout/Layout'
 import {NextSeo} from 'next-seo'
 import {useTranslation} from 'next-i18next'
-import { useAppContext } from 'context/state'
+import {useAppContext} from 'context/state'
 import Head from 'next/head'
 import {useEffect, useState} from 'react'
 import {IBettingStartResponse} from 'data/interfaces/IBettingStartResponse'
 import BettingRepository from 'data/repositories/BetttngRepository'
 import ContentLoader from 'components/ui/ContentLoader'
 import classNames from 'classnames'
+import {ModalType} from 'types/enums'
 
 export default function Betting(){
   const bettingWrapperId = 'betting-wrapper'
@@ -41,10 +42,11 @@ export default function Betting(){
           console.log('Route changed')
         },
         onLogin: function () {
-          console.log('Login confirmed')
+          appContext.showModal(ModalType.login)
         },
         onRegister: function () {
-          console.log('Registration confirmed')
+
+          appContext.showModal(ModalType.registration)
         },
         onSessionRefresh: function () {
           console.log('Session refreshed')
