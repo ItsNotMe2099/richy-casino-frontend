@@ -27,13 +27,13 @@
   top: 50%;
   transform: translateY(-50%);
   right: 10px;
-  z-index: 1;
+  z-index: $zIndexGift;
   cursor: pointer;
 
   @media screen and (max-width: $sm-min){
     position: fixed;
     right: 0px;
-    z-index: 1;
+    z-index: $zIndexGift;
     overflow: hidden;
   }
 

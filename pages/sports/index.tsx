@@ -18,6 +18,7 @@ export default function Betting(){
   const appContext = useAppContext()
   const [loading, setLoading] = useState(true)
   const [iframeLoaded, setIframeLoaded] = useState(false)
+  const [betSlipOpened, setBetSlipOpened] = useState(false)
   const [betting, setBetting] = useState<IBettingStartResponse | null>(null)
   const init = async () => {
     const betting =  await BettingRepository.start()
@@ -33,13 +34,13 @@ export default function Betting(){
         onTokenExpired: function () {
           alert('Token expired. Please log in again')
         },
-        betSlipOffsetTop:  appContext.isMobile ? 72 : 0,
+        betSlipOffsetTop:  appContext.isMobile ? 0 : 0,
         betSlipOffsetBottom: appContext.isMobile ? 82 : 0,
         stickyTop: appContext.isMobile ? 72: 0,
         themeName: betting.themeName,
         lang: betting.language,
         target: document.getElementById(bettingWrapperId),
-        betslipZIndex: 1,
+        betslipZIndex: 249,
         onRouteChange: function () {
           console.log('Route changed')
         },
@@ -54,8 +55,17 @@ export default function Betting(){
           console.log('Session refreshed')
           window.location.reload()
         },
-        onBetSlipStateChange: function () {
-          console.log('Bet slip state changed')
+        onBetSlipStateChange:  ({isOpen}: {isOpen: boolean}) => {
+          console.log('Bet slip state changed', isOpen)
+          if(appContext.isMobile){
+            setBetSlipOpened(isOpen)
+            if(isOpen){
+              document.body.classList.add('modal-open')
+            }else{
+
+              document.body.classList.remove('modal-open')
+            }
+          }
         }
       })
 
@@ -67,9 +77,15 @@ export default function Betting(){
   }
   useEffect(() => {
     init()
+    const subscription = appContext.authUpdateState$.subscribe((auth) => {
+      window.location.reload()
+    })
+    return () => {
+      subscription.unsubscribe()
+    }
   }, [])
   return (
-    <Layout hideMenu={appContext.isMobile} fixedHeader={appContext.isMobile}>
+    <Layout hideMenu={appContext.isMobile} fixedHeader={!betSlipOpened && appContext.isMobile}>
       <Head>
         <meta name="twitter:title" content={t('seo_betting_twitter_title')}/>
         <meta name="twitter:description" content={t('seo_betting_twitter_description')}/>
