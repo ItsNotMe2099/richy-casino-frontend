@@ -33,10 +33,12 @@ export default function Betting(){
         onTokenExpired: function () {
           alert('Token expired. Please log in again')
         },
+        betSlipOffsetTop:  appContext.isMobile ? 72 : 100,
+        betSlipOffsetBottom: appContext.isMobile ? 82 : 0,
+        stickyTop: appContext.isMobile ? 72: 100,
         themeName: betting.themeName,
         lang: betting.language,
         target: document.getElementById(bettingWrapperId),
-        betSlipOffsetTop: 0,
         betslipZIndex: 1,
         onRouteChange: function () {
           console.log('Route changed')
@@ -67,7 +69,7 @@ export default function Betting(){
     init()
   }, [])
   return (
-    <Layout>
+    <Layout hideMenu={appContext.isMobile} fixedHeader={appContext.isMobile}>
       <Head>
         <meta name="twitter:title" content={t('seo_betting_twitter_title')}/>
         <meta name="twitter:description" content={t('seo_betting_twitter_description')}/>
@@ -79,10 +81,10 @@ export default function Betting(){
         openGraph={{
           title: t('seo_betting_og_title'),
           description: t('seo_betting_og_description'),
-          site_name: t('seo_betting_og_site_name'),
+          site_name: t('seo_og_site_name'),
           type: 'website',
           locale: 'en_US',
-          url: 'https://richy.casino/betting',
+          url: 'https://richy.casino/sports',
         }}
       />
         <div className={styles.root} >
