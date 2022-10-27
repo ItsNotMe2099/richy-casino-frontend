@@ -58,11 +58,22 @@ $mobile9: 0.4rem;
 $mobile8: 0.3rem;
 
 /* ZIndex */
-$zIndexHeader: 250;
-$zIndexTop: 300;
-$zIndexChat: 260;
-$zIndexDropDown: 150;
-$zIndexMenu: 120;
 $zIndexBonusFooter: 119;
-$zIndexUserFooter: 120;
 $zIndexGift: 119;
+$zIndexUserFooter: 120;
+
+
+$zIndexChatDesktop: 248;
+
+//Betting Slip zIndex: 249
+
+$zIndexMenu: 250;
+$zIndexHeader: 250;
+$zIndexDropDown: 251;
+
+$zIndexChatMobile: 260;
+$zIndexTop: 300;
+
+
+
+

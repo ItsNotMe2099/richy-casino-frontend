@@ -4,7 +4,7 @@ import {NextSeo} from 'next-seo'
 import {useTranslation} from 'next-i18next'
 import {useAppContext} from 'context/state'
 import Head from 'next/head'
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import {IBettingStartResponse} from 'data/interfaces/IBettingStartResponse'
 import BettingRepository from 'data/repositories/BetttngRepository'
 import ContentLoader from 'components/ui/ContentLoader'
@@ -19,69 +19,113 @@ export default function Betting(){
   const [loading, setLoading] = useState(true)
   const [iframeLoaded, setIframeLoaded] = useState(false)
   const [betSlipOpened, setBetSlipOpened] = useState(false)
-  const [betting, setBetting] = useState<IBettingStartResponse | null>(null)
-  const init = async () => {
-    const betting =  await BettingRepository.start()
-    console.log('ScriptUrl', betting)
-    const script = document.createElement('script')
-    script.src = betting.scriptUrl
-    script.async = true
-    script.onload = () => {
-      setLoading(false)
-      const bt = new (window as any).BTRenderer().initialize({
-        brand_id: betting.brandId,
-        token: betting.token,
-        onTokenExpired: function () {
-          alert('Token expired. Please log in again')
-        },
-        betSlipOffsetTop:  appContext.isMobile ? 0 : 0,
-        betSlipOffsetBottom: appContext.isMobile ? 82 : 0,
-        stickyTop: appContext.isMobile ? 72: 0,
-        themeName: betting.themeName,
-        lang: betting.language,
-        target: document.getElementById(bettingWrapperId),
-        betslipZIndex: 249,
-        onRouteChange: function () {
-          console.log('Route changed')
-        },
-        onLogin: function () {
-          appContext.showModal(ModalType.login)
-        },
-        onRegister: function () {
+  const betRendererRef = useRef(null)
+  const scriptLoaded = useRef<boolean>(false)
+  const scriptRef = useRef<any>(null)
+  const bettingRef = useRef<IBettingStartResponse | null>(null)
+  const initBtRenderer = () => {
+    const betting = bettingRef.current
+    betRendererRef.current = new (window as any).BTRenderer().initialize({
+      brand_id: betting.brandId,
+      token: betting.token,
+      onTokenExpired: function () {
+        alert('Token expired. Please log in again')
+      },
+      betSlipOffsetTop:  appContext.isMobile ? 0 : 143,
+      betSlipOffsetBottom: appContext.isMobile ? 82 : 0,
+      stickyTop: appContext.isMobile ? 72: 0,
+      themeName: betting.themeName,
+      lang: betting.language,
+      target: document.getElementById(bettingWrapperId),
+      betslipZIndex: 249,
+      onRouteChange: function () {
+        console.log('Route changed')
+      },
+      onLogin: function () {
+        appContext.showModal(ModalType.login)
+      },
+      onRegister: function () {
 
-          appContext.showModal(ModalType.registration)
-        },
-        onSessionRefresh: function () {
-          console.log('Session refreshed')
-          window.location.reload()
-        },
-        onBetSlipStateChange:  ({isOpen}: {isOpen: boolean}) => {
-          console.log('Bet slip state changed', isOpen)
-          if(appContext.isMobile){
-            setBetSlipOpened(isOpen)
-            if(isOpen){
-              document.body.classList.add('modal-open')
-            }else{
+        appContext.showModal(ModalType.registration)
+      },
+      onSessionRefresh: function () {
+        console.log('Session refreshed')
+        window.location.reload()
+      },
+      onBetSlipStateChange:  ({isOpen}: {isOpen: boolean}) => {
+        console.log('Bet slip state changed', isOpen)
+        if(appContext.isMobile){
+          setBetSlipOpened(isOpen)
+          console.log('UpdateOptions', {
+            ...(isOpen ? {
+              betSlipOffsetBottom: 0,
+            } : {betSlipOffsetBottom: 82})
+          })
+          betRendererRef.current.updateOptions({
+          ...(isOpen ? {
+            betSlipOffsetBottom: 0,
+          } : {betSlipOffsetBottom: 82})
+          })
+          if(isOpen){
+            document.body.classList.add('modal-open')
+          }else{
 
-              document.body.classList.remove('modal-open')
-            }
+            document.body.classList.remove('modal-open')
           }
         }
-      })
+      }
+    })
+  }
+  const killBtRenderer = () => {
+    if(betRendererRef.current){
+      betRendererRef.current.kill()
+    }
+  }
+  const init = async () => {
+    const betting =  await BettingRepository.start()
+    bettingRef.current = betting
+    console.log('ScriptUrl', betting)
+    if((window as any).BTRenderer){
+      initBtRenderer()
+    }else{
+      const script = document.createElement('script')
+      scriptRef.current = script
+      script.src = betting.scriptUrl
+      script.async = true
+      script.onload = () => {
+        scriptLoaded.current = true
+        setLoading(false)
+        initBtRenderer()
 
+      }
+      document.body.appendChild(script)
     }
 
-    document.body.appendChild(script)
-    setBetting(betting)
+
 
   }
   useEffect(() => {
     init()
-    const subscription = appContext.authUpdateState$.subscribe((auth) => {
-      window.location.reload()
+    const subscription1 = appContext.authUpdateState$.subscribe((auth) => {
+      killBtRenderer()
+      init()
+    })
+    const subscription2 = appContext.langChangedState$.subscribe((auth) => {
+      killBtRenderer()
+      init()
+    })
+    const subscription3 = appContext.mainCurrencyChangedState$.subscribe((auth) => {
+      killBtRenderer()
+      init()
     })
     return () => {
-      subscription.unsubscribe()
+      subscription1.unsubscribe()
+      subscription2.unsubscribe()
+      subscription3.unsubscribe()
+      if(scriptRef.current) {
+        scriptRef.current.onload = null
+      }
+      killBtRenderer()
     }
   }, [])
   return (

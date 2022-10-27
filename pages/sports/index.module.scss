@@ -5,8 +5,9 @@
   :global #rightSidebar{
     z-index: 1 !important;
   }
+  margin-right: -16px;
   @media screen and (max-width: $xs-max){
-    margin: 0px -10px;
+    margin: 0px -16px;
   }
 }
 .wrapper{

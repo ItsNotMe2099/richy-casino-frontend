@@ -58,10 +58,16 @@ interface IState {
   snackbar: SnackbarData | null,
   showSnackbar: (text: string, type: SnackbarType) => void
   openSupport: () => void
+  changeLanguage: (code: string) => void,
+  onChangeMainCurrency: (code: string) => void,
   authUpdateState$: Subject<boolean>
+  langChangedState$: Subject<string>
+  mainCurrencyChangedState$: Subject<string>
 }
 
 const authUpdateState$ = new Subject<boolean>()
+const langChangedState$ = new Subject<string>()
+const mainCurrencyChangedState$ = new Subject<string>()
 const defaultValue: IState = {
   countryByIp: null,
   modalArguments: null,
@@ -98,7 +104,11 @@ const defaultValue: IState = {
   snackbar: null,
   showSnackbar: (text, type) => null,
   openSupport: () => null,
+  changeLanguage: (code: string) => null,
+  onChangeMainCurrency: (currencyIso: string)  => null,
   authUpdateState$,
+  langChangedState$,
+  mainCurrencyChangedState$
 }
 const ModalsBottomSheet = [
   ProfileModalType.withdraw,
@@ -242,17 +252,18 @@ export function AppWrapper(props: Props) {
       let newMode = mode
 
       if(router.pathname === Routes.sport) {
-        if (mode === BonusDepositShowMode.Spoiler && bonusShowMode === BonusDepositShowMode.Gift) {
-          newMode = BonusDepositShowMode.Modal
+
+        if (mode === BonusDepositShowMode.Spoiler && (bonusShowMode === BonusDepositShowMode.Gift)) {
+          showModal(ModalType.bonus)
         } else if (mode === BonusDepositShowMode.Spoiler && bonusShowMode === BonusDepositShowMode.Modal) {
+          newMode = BonusDepositShowMode.Gift
+        }else if(mode === BonusDepositShowMode.Spoiler){
           newMode = BonusDepositShowMode.Gift
         }
       }
       console.log('router.pathname', router.pathname, mode, Routes.sport, newMode, bonusShowMode)
       setBonusShowMode(newMode)
-      if(newMode === BonusDepositShowMode.Modal){
-        showModal(ModalType.bonus)
-      }
+
       Cookies.set(CookiesType.bonusDepositShowMode, newMode, { expires: CookiesLifeTime.bonusDepositShowMode })
 
     },
@@ -279,11 +290,18 @@ export function AppWrapper(props: Props) {
         (window as any).LiveChatWidget.call('maximize')
         hideModal()
       }
-    //  if((window as any).Tawk_API){
-    //    (window as any).Tawk_API.maximize()
-    //  }
-    }
+    },
 
+    changeLanguage: async (code: string) => {
+      const res = await i18n.reloadResources(code, ['common'])
+      Cookies.set(CookiesType.language, code, { expires: CookiesLifeTime.language })
+      i18n.changeLanguage(code)
+      langChangedState$.next(code)
+    },
+    onChangeMainCurrency: (currencyIso: string)  => {
+    mainCurrencyChangedState$.next(currencyIso)
+
+    }
   }
 
   useEffect(() => {

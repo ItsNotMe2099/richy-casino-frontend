@@ -3,9 +3,6 @@ import classNames from 'classnames'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import { listenForOutsideClicks } from 'components/hooks/useDetectOutsideClick'
-import { CookiesType } from 'types/enums'
-import Cookies from 'js-cookie'
-import { CookiesLifeTime } from 'types/constants'
 import { usePopper } from 'react-popper'
 import DropDownTriangle from 'components/ui/DropDownTriangle'
 import Converter from 'utils/converter'
@@ -102,10 +99,7 @@ export default function LangSelect(props: Props) {
     setIsActive(!isActive)
   }
   const handleChange = async (item: ILanguage) => {
-   const res = await i18n.reloadResources(item.code, ['common'])
-    Cookies.set(CookiesType.language, item.code, { expires: CookiesLifeTime.language })
-    i18n.changeLanguage(item.code)
-  console.log('changeLanguage11')
+    appContext.changeLanguage(item.code)
   }
 
   const rows = Converter.splitIntoGroups<ILanguage>(items, 5)
