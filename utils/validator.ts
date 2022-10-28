@@ -56,5 +56,16 @@ export default class Validator {
     }
     return undefined
   }
+  static cardCvc(value: string) {
+    return !/^[0-9]{3,4}$/.test(value) && 'form_field_validation_card_cvc'
+  }
+
+  static cardNumber(value: string) {
+    if(!value){
+      return undefined
+    }
+  const cleaned = value.replace(/[^0-9]/g, '')
+    return !(cleaned.length >=13 && cleaned.length <=19) && 'form_field_validation_card_pan'
+  }
 
 }

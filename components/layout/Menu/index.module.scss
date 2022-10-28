@@ -7,7 +7,7 @@
   background: $dark700;
   display: flex;
   align-items: stretch;
-  z-index: 4;
+  z-index: $zIndexMenu;
   position: relative;
 
   @media screen and (max-width: 950px){

@@ -14,6 +14,8 @@ import Button from 'components/ui/Button'
 import UserRepository from 'data/repositories/UserRepository'
 import ProfileModalFooter from 'components/Profile/layout/ProfileModalFooter'
 import FormError from 'components/ui/Form/FormError'
+import {SnackbarType} from 'types/enums'
+import Spinner from 'components/ui/Spinner'
 
 interface Props {
 
@@ -26,6 +28,8 @@ export default function FA(props: Props) {
   const args = context.modalArguments as TwoFaModalArguments
   const [sending, setSending] = useState<boolean>(false)
   const [error, setError] = useState(null)
+  const [secretCode, setSecretCode] = useState<string | null>(null)
+  const [secretCodeSending, setSecretCodeSending] = useState<boolean>(false)
 
   useEffect(() => {
     if (!args.qrUrl) {
@@ -62,7 +66,22 @@ export default function FA(props: Props) {
     }
     setSending(false)
   }
+  const handleShowAsString = async () => {
+    if(secretCodeSending){
+      return
+    }
+    setSecretCodeSending(true)
+   const qrData = await UserRepository.twoFaEnable({asString: true})
+    if(qrData.secretCode) {
+      setSecretCode(qrData.secretCode)
+    }
 
+    setSecretCodeSending(false)
+  }
+  const handleCopySecretCode = () => {
+    navigator.clipboard.writeText(secretCode)
+    context.showSnackbar(t('text_copied'), SnackbarType.success)
+  }
   const formik = useFormik({
     initialValues,
     onSubmit: handleSubmit,
@@ -83,10 +102,16 @@ export default function FA(props: Props) {
             <img ref={imgRef} alt=''/>
             </div>
           </div>
-
-          </div>
-
-
+          {!secretCode && <div className={styles.cantScan} onClick={handleShowAsString}>{secretCodeSending ? <Spinner size={18} color="#fff" secondaryColor="rgba(255,255,255,0.4)"/> :  t('2fa_field_cant_see')}</div>}
+          {secretCode &&
+            <>
+            <div className={styles.secretCodeLabel}>
+              {t('2fa_field_secret_code')}
+            </div>
+            <div className={styles.secretCode} onClick={handleCopySecretCode}>{secretCode}</div>
+              <div className={styles.secretCodeCopy} onClick={handleCopySecretCode}>{t('2fa_copy_secret_code')}</div>
+            </>}
+        </div>
               <div className={styles.confirm}>
                 {t('2fa_field_code')}
               </div>

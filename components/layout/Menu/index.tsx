@@ -39,6 +39,7 @@ export default function Menu(props: Props) {
   const options = [
     {label: t('menu_main'), link: '/'},
     {label: t('menu_casino'), link: Routes.catalog},
+   // {label: t('menu_sport'), link: Routes.sport},
     {label: t('menu_richy'), link: Routes.richyGames},
     {label: t('menu_free_bitcoin'), link: Routes.freeBitcoin},
     {label: t('menu_wheel_of_fortune'), link: '/wheel_of_fortune', onClick: () => appContext.showModal(ModalType.fortune)},

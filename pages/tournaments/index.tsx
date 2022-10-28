@@ -22,12 +22,10 @@ export default function Tournaments() {
         setListActive(i)
       }),
       TournamentRepository.fetchHistory(4, 1, 12).then(i => {
-        console.log('Loadsadasd', i)
         setListFinished(i)
       })]).then(() => setLoading(false))
 
   }, [])
-  console.log('listActive', listActive)
   return (
     <Layout>
       <Head>

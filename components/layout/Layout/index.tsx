@@ -8,22 +8,26 @@ import ErrorBoundary from 'components/ui/ErrorBoundary'
 
 interface Props {
   children?: React.ReactNode
+  hideMenu?: boolean
+  fixedHeader?: boolean
 }
 
-export default function Layout({children}: Props) {
+export default function Layout(props: Props) {
   const appContext = useAppContext()
 
+  const header = (<ErrorBoundary>
+    <Header isSticky={props.fixedHeader}/>
+  </ErrorBoundary>)
   return (
     <div className={styles.root}>
-      <ErrorBoundary>
-      <Header/>
-      </ErrorBoundary>
+      {!props.fixedHeader && header}
       <StickyContainer>
-        <ErrorBoundary>
+        {props.fixedHeader && header}
+        {!props.hideMenu && <ErrorBoundary>
           <Menu/>
-        </ErrorBoundary>
+        </ErrorBoundary>}
         <ErrorBoundary>
-          {children}
+          {props.children}
         </ErrorBoundary>
         <ErrorBoundary>
           <Footer/>

@@ -1,0 +1,17 @@
+@import "scss/index";
+
+.root{
+  margin-top: 20px;
+  :global #rightSidebar{
+    z-index: 1 !important;
+  }
+  margin-right: -16px;
+  @media screen and (max-width: $xs-max){
+    margin: 0px -16px;
+  }
+}
+.wrapper{
+  &.hidden {
+    visibility: hidden;
+  }
+}

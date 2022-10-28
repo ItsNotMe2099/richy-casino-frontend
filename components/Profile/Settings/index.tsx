@@ -157,8 +157,8 @@ export default function Settings(props: Props) {
     setSending2Fa(true)
     try {
       if (enable) {
-        const qrUrl = await UserRepository.twoFaEnable()
-         context.showModalProfile(ProfileModalType.FA, {qrUrl} as TwoFaModalArguments)
+        const qrData = await UserRepository.twoFaEnable()
+         context.showModalProfile(ProfileModalType.FA, {qrUrl: qrData.qrUrl} as TwoFaModalArguments)
       } else {
         await UserRepository.twoFaDisable()
         context.updateUserFromCookies()

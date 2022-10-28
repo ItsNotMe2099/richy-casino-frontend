@@ -65,7 +65,6 @@ export default function SocialButtons(props: Props) {
   const {t} = useTranslation('common')
   const handleTelegram = () => {
 
-    console.log('handleTegramd', window);
     (window as any).Telegram.Login.auth(
       { bot_id: '2110156771', request_access: true },
       async (data) => {
@@ -73,7 +72,6 @@ export default function SocialButtons(props: Props) {
           // authorization failed
           return
         }
-        console.log('TelegramData', data)
        const res = await  AuthRepository.telegramLogin({...data, currency_iso: props.currency})
         if(res.token){
           appContext.setToken(res.token)

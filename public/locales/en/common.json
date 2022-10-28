@@ -508,5 +508,8 @@
   "withdraw_type_title": "Payout method",
   "footer_menu_self_exclusion":  "Self-Exclusion & Code of Conduct",
   "footer_menu_fairness":  "Fairness & RNG Testing Methods",
-  "footer_menu_dispute":  "Dispute Resolution"
+  "footer_menu_dispute":  "Dispute Resolution",
+  "menu_sport": "Sport",
+  "2fa_field_secret_code": "Enter the code in the Google App",
+  "2fa_copy_secret_code": "Copy code"
 }

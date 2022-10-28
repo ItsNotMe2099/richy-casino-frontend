@@ -98,6 +98,7 @@ module.exports = {
     defaultLocale: 'en',
     locales: [...LANGS],
     localeDetection: false,
+    fallbackLng: ['en'],
   },
 }
 

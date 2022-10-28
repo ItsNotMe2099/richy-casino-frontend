@@ -38,7 +38,6 @@ const formatPiecesToMap = (data: IChessGameBoardPiece[]): IBoardPieceMap => {
 }
 export default function Board(props: Props) {
   const gameContext = useChessGameContext()
-  console.log('gameContext.game', gameContext.game)
   const piecesMap = formatPiecesToMap(gameContext.game?.currentBoard?.pieces ?? [])
   const currentPlayer = gameContext.game.currentBoard.players.find(i => i.userId === gameContext.user?.id)
   const opponentPlayer = gameContext.game.currentBoard.players.find(i => i.userId !== gameContext.user?.id)

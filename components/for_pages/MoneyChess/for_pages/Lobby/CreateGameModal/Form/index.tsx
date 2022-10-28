@@ -50,12 +50,10 @@ export default function CreateGameForm(props: Props) {
   }
 
   const handleSubmit = async (data) => {
-    console.log('game created', data)
     setSending(true)
     setError(null)
     try{
       const game = await ChessGameRepository.create({...data, ...getObjectFromChessGameTypeStr(data.time)})
-      console.log('game created', game)
       lobbyContext.hideModal()
     }catch (e){
       console.error(e)

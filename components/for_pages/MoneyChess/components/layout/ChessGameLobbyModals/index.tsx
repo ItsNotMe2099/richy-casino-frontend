@@ -31,7 +31,6 @@ export default function ChessGameLobbyModalContainer(props: Props) {
   const handleClose = () => {
     lobbyContext.hideModal
   }
-  console.log('lobbyContext.modal', lobbyContext.modal)
   return (
     <RemoveScroll enabled={!!lobbyContext.modal}>
       <div aria-hidden="true">

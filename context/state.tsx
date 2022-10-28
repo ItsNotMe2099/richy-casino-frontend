@@ -18,6 +18,9 @@ import {IPaymentMethod} from 'data/interfaces/IPaymentMethod'
 import {ICountry} from 'data/interfaces/ICountry'
 import {useTranslation} from 'next-i18next'
 import {getIsMobile} from 'utils/mobile'
+import {Subject} from 'rxjs'
+import {Routes} from 'types/routes'
+import {useRouter} from 'next/router'
 
 interface IState {
   isMobile: boolean
@@ -55,8 +58,16 @@ interface IState {
   snackbar: SnackbarData | null,
   showSnackbar: (text: string, type: SnackbarType) => void
   openSupport: () => void
+  changeLanguage: (code: string) => void,
+  onChangeMainCurrency: (code: string) => void,
+  authUpdateState$: Subject<boolean>
+  langChangedState$: Subject<string>
+  mainCurrencyChangedState$: Subject<string>
 }
 
+const authUpdateState$ = new Subject<boolean>()
+const langChangedState$ = new Subject<string>()
+const mainCurrencyChangedState$ = new Subject<string>()
 const defaultValue: IState = {
   countryByIp: null,
   modalArguments: null,
@@ -93,6 +104,11 @@ const defaultValue: IState = {
   snackbar: null,
   showSnackbar: (text, type) => null,
   openSupport: () => null,
+  changeLanguage: (code: string) => null,
+  onChangeMainCurrency: (currencyIso: string)  => null,
+  authUpdateState$,
+  langChangedState$,
+  mainCurrencyChangedState$
 }
 const ModalsBottomSheet = [
   ProfileModalType.withdraw,
@@ -124,6 +140,7 @@ export function AppWrapper(props: Props) {
   const [bottomSheet, setBottomSheet] = useState<ModalType | ProfileModalType | null>(null)
   const [modalArguments, setModalArguments] = useState<ModalType | ProfileModalType | null>(null)
   const {t, i18n} = useTranslation()
+  const router = useRouter()
   const langInitdRef = useRef(false)
   const modalRef = useRef<ModalType | ProfileModalType | null>(null)
   const bottomSheetRef = useRef<ModalType | ProfileModalType | null>(null)
@@ -145,7 +162,6 @@ export function AppWrapper(props: Props) {
   const [isMobile, setIsMobile] = useState<boolean>(props.isMobile)
 
   useEffect(() => {
-    console.log('getIsMobile(props.isMobile)', getIsMobile(props.isMobile))
     setIsMobile(getIsMobile(props.isMobile))
   }, [])
   useEffect(() => {
@@ -175,11 +191,7 @@ export function AppWrapper(props: Props) {
     countryByIp,
     initialLoaded: userLoaded && infoLoaded,
     showModal: (type, props: any) => {
-
-      console.log('ShowModal0', type)
       showModal(type, props)
-
-      console.log('ShowModal', type)
     },
     showModalProfile: (type, args: any, skipStack?: boolean) => {
       showModal(type, args)
@@ -201,7 +213,6 @@ export function AppWrapper(props: Props) {
       }
     },
     hideModal: () => {
-      console.log('HideModal', modal)
       hideModal()
     },
     showBottomSheet: (type, props: any) => {
@@ -213,12 +224,14 @@ export function AppWrapper(props: Props) {
     setToken: (token: string) => {
       Cookies.set(CookiesType.accessToken, token, { expires: CookiesLifeTime.accessToken })
       setAuth(true)
+      authUpdateState$.next(true)
     },
     logout: () => {
       Cookies.remove(CookiesType.accessToken)
       setAuth(false)
       setUser(null)
-      console.log('Logout11')
+
+      authUpdateState$.next(false)
     },
     async updateUserFromCookies() {
       return updateUserDetails()
@@ -230,8 +243,20 @@ export function AppWrapper(props: Props) {
     bonusShowMode,
     bonusBannerDetails,
     setBonusShowMode(mode) {
-      setBonusShowMode(mode)
-      Cookies.set(CookiesType.bonusDepositShowMode, mode, { expires: CookiesLifeTime.bonusDepositShowMode })
+      let newMode = mode
+
+      if(router.pathname === Routes.sport) {
+
+        if (mode === BonusDepositShowMode.Spoiler && (bonusShowMode === BonusDepositShowMode.Gift)) {
+          showModal(ModalType.bonus)
+        } else if (mode === BonusDepositShowMode.Spoiler && bonusShowMode === BonusDepositShowMode.Modal) {
+          newMode = BonusDepositShowMode.Gift
+        }else if(mode === BonusDepositShowMode.Spoiler){
+          newMode = BonusDepositShowMode.Gift
+        }
+      }
+      setBonusShowMode(newMode)
+      Cookies.set(CookiesType.bonusDepositShowMode, newMode, { expires: CookiesLifeTime.bonusDepositShowMode })
 
     },
 
@@ -257,11 +282,18 @@ export function AppWrapper(props: Props) {
         (window as any).LiveChatWidget.call('maximize')
         hideModal()
       }
-    //  if((window as any).Tawk_API){
-    //    (window as any).Tawk_API.maximize()
-    //  }
-    }
+    },
 
+    changeLanguage: async (code: string) => {
+      const res = await i18n.reloadResources(code, ['common'])
+      Cookies.set(CookiesType.language, code, { expires: CookiesLifeTime.language })
+      i18n.changeLanguage(code)
+      langChangedState$.next(code)
+    },
+    onChangeMainCurrency: (currencyIso: string)  => {
+    mainCurrencyChangedState$.next(currencyIso)
+
+    }
   }
 
   useEffect(() => {
@@ -291,7 +323,6 @@ export function AppWrapper(props: Props) {
     }
   }, [userLoaded, infoLoaded])
   useEffect(() => {
-    console.log('ChangeLang', i18n.language)
     if(!langInitdRef.current){
       langInitdRef.current = true
 
@@ -350,10 +381,8 @@ export function AppWrapper(props: Props) {
   const updateUserDetails = async () => {
     try {
       const res = await UserRepository.getUser()
-      console.log('getUser', res)
-      setUser(res)
+     setUser(res)
     } catch (e) {
-    console.error('e111',e)
     }
     setUserLoaded(true)
   }
@@ -377,7 +406,7 @@ export function AppWrapper(props: Props) {
         setShowBonus(true)
       }
 
-      if ((runtimeConfig.FAKE_BONUS || isEnabled) && !auth && !Cookies.get(CookiesType.bonusDepositShowMode) && !([ModalType.fortune, ModalType.registration] as ModalType[]).includes(modal as ModalType)) {
+      if ((runtimeConfig.FAKE_BONUS || isEnabled) && !auth && (!Cookies.get(CookiesType.bonusDepositShowMode) || Cookies.get(CookiesType.bonusDepositShowMode) === BonusDepositShowMode.Modal) && !([ModalType.fortune, ModalType.registration] as ModalType[]).includes(modal as ModalType)) {
         setTimeout(() => {
           if(   modalRef.current === ModalType.registration || bottomSheetRef.current === ModalType.registration){
             return

@@ -7,7 +7,6 @@ import {CookiesType} from 'types/enums'
 export const getServerSideTranslation = (context: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>): Promise<SSRConfig> => {
   const acceptLang = getLangFromHeader(context.req.headers['accept-language'])
   const cookie = context.req.cookies[CookiesType.language]
-  console.log('getServerSideTranslation', acceptLang, cookie)
   return serverSideTranslations( cookie ?? acceptLang ?? context.locale ?? 'en', ['common'])
 }
 export const getStaticPropsTranslations = (context): Promise<SSRConfig> => {

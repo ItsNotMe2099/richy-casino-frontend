@@ -1,55 +1,61 @@
 @import "scss/index";
 
-.root{
+.root {
+  &.sticky {
 
+    .top{
+      background: $dark800;
+    }
+    z-index: $zIndexHeader;
+  }
 }
 
-.top{
+.top {
   display: flex;
   padding: 18px 0 23px 0;
   justify-content: space-between;
   align-items: center;
 
-  @media screen and (max-width: 920px){
+  @media screen and (max-width: 920px) {
     padding: 12px 18px;
   }
-  @media screen and (max-width: 380px){
+  @media screen and (max-width: 380px) {
     padding: 12px 10px;
   }
-  @media screen and (max-width: $xs-max){
+  @media screen and (max-width: $xs-max) {
     margin: 0 -10px;
     height: 54px;
   }
-  @media screen and (max-width: $mobile-max){
+  @media screen and (max-width: $mobile-max) {
     height: auto;
     padding: 16px 10px;
 
   }
 }
 
-.left{
+.left {
   display: flex;
   height: 41px;
-  @media screen and (max-width: 920px){
+  @media screen and (max-width: 920px) {
     display: none;
   }
 }
 
-.right{
+.right {
   display: flex;
   align-items: center;
 }
 
-.apps{
-    display: flex;
-    margin-right: 20px;
+.apps {
+  display: flex;
+  margin-right: 20px;
 }
 
-.bonuses{
-    display: flex;
+.bonuses {
+  display: flex;
 }
 
-.bonus{
+.bonus {
   display: block;
   padding: 7px 12px 7px 7px;
   background: $dark700;
@@ -59,12 +65,13 @@
   margin-right: 8px;
   position: relative;
   cursor: pointer;
+
   &:hover {
     background-color: $dark500;
   }
 }
 
-.gift{
+.gift {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,13 +82,13 @@
   border-radius: 6px;
 }
 
-.textGift{
+.textGift {
   @include textStyle14600;
   margin-left: 12px;
   color: $bonus500;
 }
 
-.bitcoin{
+.bitcoin {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,24 +99,24 @@
   box-shadow: 0px 0px 13px rgba(245, 179, 0, 0.5);
 }
 
-.textBitcoin{
+.textBitcoin {
   @include textStyle14600;
   margin-left: 12px;
   color: $balance500;
 }
 
-.wheel{
+.wheel {
   width: 26px;
   height: 40px;
 }
 
-.textWheel{
+.textWheel {
   @include textStyle14600;
   margin-left: 12px;
   color: $tickets500;
 }
 
-.free{
+.free {
   background: #F30058;
   border-radius: 8px 0px 5.5px;
   padding: 2px 4px;
@@ -121,19 +128,21 @@
   left: 0;
 }
 
-.btn{
+.btn {
   margin-right: 8px;
 }
 
-.login{
+.login {
   margin-right: 6px;
-  button{
-  font-weight: 600;
-  font-size: 16px;
-  color: #FFFFFF;
+
+  button {
+    font-weight: 600;
+    font-size: 16px;
+    color: #FFFFFF;
   }
-  @media screen and (max-width: $xs-max){
-    button{
+
+  @media screen and (max-width: $xs-max) {
+    button {
       font-size: $mobile12;
       padding: 9px 12px;
       height: 40px;
@@ -141,43 +150,46 @@
   }
 }
 
-.reg{
+.reg {
   margin-right: 11px;
-  button{
+
+  button {
     font-weight: 600;
     font-size: 16px;
     color: #FFFFFF;
-    img{
+
+    img {
       margin-right: 14px;
-      @media screen and (max-width: $xs-max){
+      @media screen and (max-width: $xs-max) {
         width: 16px;
         margin-right: 5px;
       }
     }
+  }
+
+  @media screen and (max-width: $xs-max) {
+    margin-right: 0;
+    button {
+      padding: 10px 15px;
+      font-size: $mobile12;
+      height: 40px;
     }
-    @media screen and (max-width: $xs-max){
-      margin-right: 0;
-      button{
-        padding: 10px 15px;
-        font-size: $mobile12;
-        height: 40px;
-      }
-    }
+  }
 }
 
-.lang{
-  @media screen and (max-width: $xs-max){
+.lang {
+  @media screen and (max-width: $xs-max) {
     display: none;
   }
 }
 
-.chat{
-  @media screen and (max-width: $xs-max){
+.chat {
+  @media screen and (max-width: $xs-max) {
     display: none !important;
   }
 }
 
-.menu{
+.menu {
   padding: 13px 29px 10px 29px;
   border-radius: 10px;
   background: $dark700;
@@ -185,32 +197,31 @@
   align-items: center;
   position: relative;
   z-index: 100;
-  @media screen and (max-width: 950px){
+  @media screen and (max-width: 950px) {
     border-radius: 0;
     margin: 0 -10px;
     padding: 13px 0 10px 18px;
   }
-  @media screen and (max-width: 920px){
+  @media screen and (max-width: 920px) {
     padding: 0 0 0 18px;
     border: 1px solid #272832;
   }
 
 
-
 }
 
-.logo{
+.logo {
   display: none;
   position: relative;
 
-  @media screen and (min-width: 390px) and (max-width: $xs-max){
+  @media screen and (min-width: 390px) and (max-width: $xs-max) {
     display: flex;
   }
 
 
 }
 
-.logoMobile{
+.logoMobile {
   align-self: center;
 
   position: relative;
@@ -218,29 +229,29 @@
   height: 30px;
 
 
-  @media screen and (max-width: $xs-max){
+  @media screen and (max-width: $xs-max) {
     display: flex;
     align-self: center;
-    svg{
+    svg {
       width: 80px;
     }
   }
-  @media screen and (max-width: $mobile-max){
-    svg{
+  @media screen and (max-width: $mobile-max) {
+    svg {
       height: 30px;
     }
   }
-  @media screen and (min-width: 390px){
+  @media screen and (min-width: 390px) {
     display: none;
   }
 }
 
-.userBtns{
+.userBtns {
   display: flex;
   height: 41px;
   margin-right: 8px;
   grid-gap: 8px;
-  @media screen and (max-width: $xs-max){
+  @media screen and (max-width: $xs-max) {
     height: 40px;
     grid-gap: 6px;
     margin-right: 0;
@@ -248,7 +259,7 @@
   }
 }
 
-.userBonuses{
+.userBonuses {
   border-radius: 8px;
   background-color: $dark700;
   display: flex;
@@ -256,51 +267,55 @@
   grid-gap: 3px 0px;
   padding: 5px 12px;
   cursor: pointer;
-  &:hover{
+
+  &:hover {
     background-color: $dark500;
   }
+
   margin-left: 5px;
-  @media screen and (max-width: $xs-max){
+  @media screen and (max-width: $xs-max) {
     padding: 2px 12px;
   }
 }
 
-.userBonus{
+.userBonus {
   display: flex;
   align-items: center;
-  @media screen and (max-width: $xs-max){
-    img{
+  @media screen and (max-width: $xs-max) {
+    img {
       height: 8px;
     }
   }
 }
 
-.icon{
+.icon {
   display: flex;
   margin-right: 7px;
 }
 
-.amount{
+.amount {
   font-weight: 500;
   font-size: 12px;
-  @media screen and (max-width: $xs-max){
+  @media screen and (max-width: $xs-max) {
     font-size: $mobile8;
   }
 }
 
-.wallet{
+.wallet {
   padding: 12px 15px;
-  @media screen and (max-width: $mobile-max){
+  @media screen and (max-width: $mobile-max) {
     font-weight: 700;
     font-size: $mobile12;
     height: 40px;
   }
-  img{
+
+  img {
     width: 16px;
     margin-right: 12px;
 
 
   }
+
   color: $white;
   font-weight: 700;
   font-size: 13px;
@@ -308,7 +323,6 @@
 }
 
 
-
-.proMenu{
+.proMenu {
 
 }

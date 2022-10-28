@@ -39,6 +39,7 @@ export  const Account = (props: Props) => {
         try {
           await UserRepository.changeDefaultCurrency(props.account.currency)
           await context.updateUserFromCookies()
+          await context.onChangeMainCurrency(props.account.currency)
         }catch (e) {
           context.showSnackbar(e, SnackbarType.error)
         }

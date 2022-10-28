@@ -33,7 +33,6 @@ export default function TournamentPrizes(props: Props) {
     })
   }, [])
   const places = [1, 2, 3, 4, 5, 6].map(i => getAmountAndCurrency(top10, i)).filter(i => !!i)
-  console.log('places', places, top10)
   return (
    <div className={styles.root}>
      <Header

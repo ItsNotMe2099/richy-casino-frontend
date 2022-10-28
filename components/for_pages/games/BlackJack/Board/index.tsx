@@ -25,7 +25,6 @@ export default function Board(props: Props) {
 
   const subscriptionGame = gameContext.gameState$.subscribe((data: ICasinoGameFinishEvent) => {
     setResult(data)
-    console.log('ShowResult1111', data)
     gameContext.setShowResultModal(true)
   })
   const subscriptionRound = gameContext.turnState$.subscribe(async (data: ICasinoGameBlackjackTurn) => {
@@ -44,7 +43,6 @@ export default function Board(props: Props) {
         const splitted = false
        // (splitted ? split : player).getScore
         if(playerScore >= 21){
-          console.log('new Score' ,gameContext)
           await gameContext.newTurn({action: BlackjackBetType.Stand})
         }
 

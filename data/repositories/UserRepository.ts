@@ -5,6 +5,7 @@ import {UserFormData} from 'types/form-data'
 import {IPhoneNewConfirm, IPhoneOldConfirm} from 'data/interfaces/IPhoneConfirm'
 import IUserUpdateResponse from 'data/interfaces/IUserUpdateResponse'
 import {DEFAULT_CURRENCY} from 'types/constants'
+import {ITwoFaResponse} from 'data/interfaces/ITwoFaResponse'
 
 export default class UserRepository {
   static async getUser(token?: string): Promise<IUser | null> {
@@ -68,15 +69,18 @@ export default class UserRepository {
     }
     return res.data?.data
   }
-  static async twoFaEnable(): Promise<any> {
+  static async twoFaEnable({asString}: {asString?: boolean} = {}): Promise<ITwoFaResponse> {
     const res = await request({
       method: 'post',
       url: '/api/user/two-factor/activate',
+      data: {
+      ...(asString ? {asString: '1'} : {})
+      }
     })
     if (res?.err) {
       throw res.err
     }
-    return res.data?.data?.qrUrl
+    return res.data?.data
   }
   static async twoFaConfirm({code, password}): Promise<any> {
     const res = await request({

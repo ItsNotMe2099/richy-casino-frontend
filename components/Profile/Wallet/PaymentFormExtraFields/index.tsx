@@ -23,6 +23,28 @@ export const PaymentFormExtraFields = (props: Props) => {
            <InputField name={'address'} disabled={props.sending} className={styles.input} validate={field.isRequired ? Validator.required : null}/>
          </div>
        }
+       if(field.key === 'card_pan'){
+        return ( <div>
+          <div className={styles.label}>{field.title}</div>
+          <InputField name={field.key} disabled={props.sending} className={styles.input} format={'cardPan'} validate={Validator.combine([...(field.isRequired ? [Validator.required] : []), Validator.cardNumber])}/>
+        </div>)
+       }else if(field.key === 'card_expires'){
+         return ( <div>
+             <div className={styles.label}>{field.title}</div>
+           <InputField name={field.key} placeholder={'MM/YY'} disabled={props.sending} className={styles.input} format={'cardExpiry'} validate={Validator.combine([...(field.isRequired ? [Validator.required] : []), Validator.cardExpiryValidation])}/>
+         </div>)
+       }else if(field.key === 'card_holder'){
+         return ( <div>
+           <div className={styles.label}>{field.title}</div>
+           <InputField name={field.key} disabled={props.sending} className={styles.input} validate={field.isRequired ? Validator.required : null}/>
+         </div>)
+       }else if(field.key === 'card_cvv'){
+         return ( <div>
+           <div className={styles.label}>{field.title}</div>
+           <InputField name={field.key}  disabled={props.sending} className={styles.input} format={'cardCvv'} validate={Validator.combine([...(field.isRequired ? [Validator.required] : []), Validator.cardCvc])}/>
+         </div>)
+       }
+
        switch (field.type){
          case IPaymentMethodFieldType.String:
          case IPaymentMethodFieldType.Number:

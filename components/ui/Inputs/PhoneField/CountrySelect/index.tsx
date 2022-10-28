@@ -65,7 +65,6 @@ const sameWidthWithOffset = {
 export default function CountrySelect(props: Props & FieldConfig) {
   const { t, i18n } = useTranslation()
   const dropdownRef = useRef(null)
-    console.log('CountrSelect', props)
   const [referenceElement, setReferenceElement] = useState(null)
   const [popperElement, setPopperElement] = useState(null)
   const { styles: popperStyles, attributes } = usePopper(referenceElement, popperElement, {

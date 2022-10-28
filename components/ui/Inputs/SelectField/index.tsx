@@ -100,7 +100,6 @@ export  function SelectField<T>(props: Props<T> & FieldConfig){
     e.stopPropagation()
   }
   const onSearch = (e) => {
-    console.log('SetSearch')
     setSearch(e.target.value.trim())
 
   }

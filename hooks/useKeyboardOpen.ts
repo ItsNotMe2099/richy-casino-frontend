@@ -11,7 +11,6 @@ const useDetectKeyboardOpen = (minKeyboardHeight = 200,defaultValue = false) => 
     setScreenHeight(heightRef.current)
     const listener = () => {
       const newState = window.screen.height - minKeyboardHeight > window.visualViewport.height
-      console.log('newState', window.visualViewport.height, window.screen.height - minKeyboardHeight, newState, isKeyboardOpenRef.current)
       if (isKeyboardOpenRef.current != newState) {
         setIsKeyboardOpen(newState)
 

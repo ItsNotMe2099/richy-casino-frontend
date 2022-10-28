@@ -228,7 +228,6 @@ export function ChessGameWrapper(props: Props) {
       }else {
         setGame((game) => ({ ...data.table, currentBoard: data.board}))
         gameRef.current = {...data.table, currentBoard: data.board}
-        console.log('FindUser',data.board, data.board.players.find(i => i.userId === user.id), user)
         setIsMyTurn(getIsMyTurn(data.board.currentTurn, data.board.players.find(i => i.userId === user.id)))
       }
     }

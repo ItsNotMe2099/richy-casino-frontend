@@ -508,5 +508,9 @@
   "withdraw_type_title": "Способ выплаты",
   "footer_menu_self_exclusion":  "Self-Exclusion & Code of Conduct",
   "footer_menu_fairness":  "Fairness & RNG Testing Methods",
-  "footer_menu_dispute":  "Dispute Resolution"
+  "footer_menu_dispute":  "Dispute Resolution",
+  "2fa_field_cant_see": "Не вижу код",
+  "2fa_field_secret_code": "Введите код в приложении",
+  "2fa_copy_secret_code": "Скопировать код",
+  "menu_sport": "Спорт"
 }
