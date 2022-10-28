@@ -13,7 +13,6 @@ interface Props {
 export default function BottomSheetBody(props: Props) {
   const appContext = useAppContext()
   const [isKeyboardOpen, keyboardHeight, screenHeight] = useDetectKeyboardOpen()
-  console.log('isKeyboardOpen', isKeyboardOpen, keyboardHeight, screenHeight)
   return (
     <div className={classNames(styles.root, props.className)}  style={{...(isKeyboardOpen && appContext.isMobile && props.detectKeyboard ? {maxHeight: `${screenHeight as number - 38 - (props.footerHeight ?? 0)}px`} : {})}}>
       {props.children}

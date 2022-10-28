@@ -10,7 +10,6 @@ export  function middleware(req: NextRequest, ev: NextFetchEvent) {
     const acceptLang = req ? getLangFromRequest(req) : null
     url.locale = LANGS.includes(req.cookies.get(CookiesType.language) ?? acceptLang ?? url.locale) ? req.cookies.get(CookiesType.language) ?? acceptLang ?? url.locale : 'en'
     return NextResponse.rewrite(url)
-    console.log(req.nextUrl.locale) // undefined
   }
 }
 export const config = {

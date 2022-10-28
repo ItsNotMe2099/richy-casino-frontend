@@ -50,7 +50,6 @@ export default function ModalLogin(props: Props) {
         appContext.showModal(ModalType.faLogin, {identity: values.authInput, password: values.password} as TwoFaLoginModalArguments)
         return
       }
-      console.log('LoginRef', res)
       const accessToken = res.token
       if (!accessToken) {
         setError(t('api_error_unknown'))

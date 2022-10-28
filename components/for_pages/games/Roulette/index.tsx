@@ -41,7 +41,6 @@ export default function GameRoulette(props: Props) {
   }
   const handleBet = (key: string, chip: IRouletteChip) => {
     gameSound.play(GameSound.Click)
-    console.log('SetBets', {...bets, [key]: [...bets[key] ?? [], chip.value]})
     setBets({...bets, [key]: [...bets[key] ?? [], chip.value]})
   }
   const handleClear = () => {

@@ -4,7 +4,6 @@ interface Props {
 }
 export default function HiddenXs(props: Props): JSX.Element | null {
   const appContext = useAppContext()
-  console.log('IsMobile222', appContext.isMobile)
   if (!appContext.isMobile) {
     return props.children
   }

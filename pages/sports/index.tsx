@@ -1,6 +1,5 @@
 import styles from './index.module.scss'
 import Layout from 'components/layout/Layout'
-import {NextSeo} from 'next-seo'
 import {useTranslation} from 'next-i18next'
 import {useAppContext} from 'context/state'
 import Head from 'next/head'
@@ -39,8 +38,8 @@ export default function Betting(){
       target: document.getElementById(bettingWrapperId),
       betslipZIndex: 249,
       onRouteChange: function () {
-        console.log('Route changed')
-      },
+
+       },
       onLogin: function () {
         appContext.showModal(ModalType.login)
       },
@@ -49,18 +48,13 @@ export default function Betting(){
         appContext.showModal(ModalType.registration)
       },
       onSessionRefresh: function () {
-        console.log('Session refreshed')
         window.location.reload()
       },
       onBetSlipStateChange:  ({isOpen}: {isOpen: boolean}) => {
         console.log('Bet slip state changed', isOpen)
         if(appContext.isMobile){
           setBetSlipOpened(isOpen)
-          console.log('UpdateOptions', {
-            ...(isOpen ? {
-              betSlipOffsetBottom: 0,
-            } : {betSlipOffsetBottom: 82})
-          })
+
           betRendererRef.current.updateOptions({
           ...(isOpen ? {
             betSlipOffsetBottom: 0,
@@ -84,7 +78,6 @@ export default function Betting(){
   const init = async () => {
     const betting =  await BettingRepository.start()
     bettingRef.current = betting
-    console.log('ScriptUrl', betting)
     if((window as any).BTRenderer){
       initBtRenderer()
     }else{
@@ -135,18 +128,6 @@ export default function Betting(){
         <meta name="twitter:description" content={t('seo_betting_twitter_description')}/>
         <meta name="keywords" content={t('seo_betting_keywords')}/>
       </Head>
-      <NextSeo
-        title={t('seo_betting_title')}
-        description={t('seo_betting_description')}
-        openGraph={{
-          title: t('seo_betting_og_title'),
-          description: t('seo_betting_og_description'),
-          site_name: t('seo_og_site_name'),
-          type: 'website',
-          locale: 'en_US',
-          url: 'https://richy.casino/sports',
-        }}
-      />
         <div className={styles.root} >
          <div className={classNames(styles.wrapper, {[styles.hidden]: false})} id={'betting-wrapper'}>
           </div>

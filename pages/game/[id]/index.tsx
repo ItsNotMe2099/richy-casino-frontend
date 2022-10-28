@@ -35,10 +35,8 @@ export default function CatalogPage(props: Props) {
   const [game, setGame] = useState<IGame | null>(null)
   useEffect(() => {
     const handler = event => {
-      console.log('EventData', event.data)
       try {
         const data = JSON.parse(event.data)
-        console.log('iframe event', data)
         if (data?.type === 'loaded') {
           setLoading(false)
         }
@@ -63,18 +61,15 @@ export default function CatalogPage(props: Props) {
       ])
       setSession(session)
       setGame(game)
-      console.log('CheckProvider', `${game?.providerId}` !== runtimeConfig.RICHY_PROVIDER_ID, game.providerId)
       if(`${game?.providerId}` !== runtimeConfig.RICHY_PROVIDER_ID){
         setLoading(false)
       }
     } catch (e) {
       if(e instanceof RequestError && (e as RequestError).code === 403){
-        console.log('AuthError', (e as RequestError).toString())
         appContext.showModal(ModalType.registration)
         setError( (e as RequestError).message)
         setErrorAuth(true)
       }else {
-        console.log('errorHappened', e)
         console.error(e)
         setError(e)
       }

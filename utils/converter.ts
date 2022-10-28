@@ -115,7 +115,6 @@ export default class Converter {
   }
 
   static convertRateToMin(rate: number, mul: number){
-    console.log('convertRateToMin', rate, mul)
     const value = mul / rate
     let round = value
     /*

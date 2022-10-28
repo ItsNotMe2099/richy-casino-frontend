@@ -35,9 +35,6 @@ export default function TournamentListBlock(props: Props) {
   const [isLoading, setIsLoading] = useState(false)
   const [page, setPage] = useState(1)
   const limit = 6
-  if(props.type === 'completed'){
-    console.log('data111', data)
-  }
   const handleShowMore =async () => {
     setIsExpanded(true)
     setIsLoading(true)

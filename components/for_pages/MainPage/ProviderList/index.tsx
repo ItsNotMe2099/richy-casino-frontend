@@ -32,9 +32,8 @@ export default function ProviderMainList(props: Props) {
   const [loading, setLoading] = useState<boolean>(true)
   const limit = 20
   useEffect(() => {
-    console.log('Fetch')
     GameListRepository.fetchProvidersTop3().then(i => {
-      console.log('Data', i)
+
       setLoading(false)
       setData(i)
     })

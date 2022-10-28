@@ -162,7 +162,6 @@ export function AppWrapper(props: Props) {
   const [isMobile, setIsMobile] = useState<boolean>(props.isMobile)
 
   useEffect(() => {
-    console.log('getIsMobile(props.isMobile)', getIsMobile(props.isMobile))
     setIsMobile(getIsMobile(props.isMobile))
   }, [])
   useEffect(() => {
@@ -192,11 +191,7 @@ export function AppWrapper(props: Props) {
     countryByIp,
     initialLoaded: userLoaded && infoLoaded,
     showModal: (type, props: any) => {
-
-      console.log('ShowModal0', type)
       showModal(type, props)
-
-      console.log('ShowModal', type)
     },
     showModalProfile: (type, args: any, skipStack?: boolean) => {
       showModal(type, args)
@@ -218,7 +213,6 @@ export function AppWrapper(props: Props) {
       }
     },
     hideModal: () => {
-      console.log('HideModal', modal)
       hideModal()
     },
     showBottomSheet: (type, props: any) => {
@@ -261,9 +255,7 @@ export function AppWrapper(props: Props) {
           newMode = BonusDepositShowMode.Gift
         }
       }
-      console.log('router.pathname', router.pathname, mode, Routes.sport, newMode, bonusShowMode)
       setBonusShowMode(newMode)
-
       Cookies.set(CookiesType.bonusDepositShowMode, newMode, { expires: CookiesLifeTime.bonusDepositShowMode })
 
     },
@@ -331,7 +323,6 @@ export function AppWrapper(props: Props) {
     }
   }, [userLoaded, infoLoaded])
   useEffect(() => {
-    console.log('ChangeLang', i18n.language)
     if(!langInitdRef.current){
       langInitdRef.current = true
 
@@ -390,10 +381,8 @@ export function AppWrapper(props: Props) {
   const updateUserDetails = async () => {
     try {
       const res = await UserRepository.getUser()
-      console.log('getUser', res)
-      setUser(res)
+     setUser(res)
     } catch (e) {
-    console.error('e111',e)
     }
     setUserLoaded(true)
   }

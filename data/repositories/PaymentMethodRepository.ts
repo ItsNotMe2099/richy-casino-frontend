@@ -42,7 +42,6 @@ export default class PaymentMethodRepository {
     for(const key of keys){
       items.push({...data[key], key})
     }
-    console.log('FieldsItems', items)
     return items
   }
   static async fetchDepositFields(code: string): Promise<IPaymentMethodField[]> {
